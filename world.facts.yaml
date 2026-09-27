@@ -28,6 +28,7 @@ assets:
     "anim/wolf.yml#sniff": clips/anim-wolf-yml-sniff-181ab4fe.json
     "anim/wolf.yml#walk": clips/anim-wolf-yml-walk-2b7543f3.json
     "jade-dragon.js#dragon-rest": clips/jade-dragon-js-dragon-rest-fbc127dd.json
+    "sky-dragons.js#sky-dragon-wave": clips/sky-dragons-js-sky-dragon-wave-cfd68914.json
   metadata:
     "/cdn/moodboard-lowpoly-cozy/music-birch-walk-cozy-unhurried-felt-piano-clarinet-lyrical-three-four-waltz-instrumental-no-vocals-even-dynamics-no-crescendo-loop.mp3": {duration: 161.8065}
     "/cdn/moodboard-lowpoly-cozy/music-brushed-jazz-piano-upright-bass-instrumental-no-vocals-evening-loop.mp3": {duration: 138.8065}
