@@ -35,3 +35,10 @@ No win or loss, no progression, no scores. Keep the house uncluttered: one piece
 
 - 2026-09-27 · owner: "make it always a nice day". Was: 2-hour day/night cycle + 11-minute fair→cloud→rain→clearing weather. Now: sun frozen at 10:30 (FROZEN_HOUR in scripts/lib/data/home-day.js; null restores the cycle) and one fair phase in home-weather.js. Radio forecasts only fire on clouding, so they stay silent.
 - 2026-09-27 · owner: "make the center house a tall winding stone castle with spiral outdoor and indoor staircase and various useful rooms going up inside". Was: the three-room plaster/timber den + rotated wing (restore: version seq 11). Now: castle-keep (scripts/gen/castle-keep.js, numbers in scripts/lib/data/castle.js), round limestone keep r 7 m centred (2, 24, 3), five 4.2 m floors: Great Hall (hearth + radio, table, shelves, clock), Library, Bedchamber, Workshop, Lookout, then battlements with a flag. Inner spiral stair (one turn per floor) in the core; outer stair 1.75 turns up the outside from the east foot (335°) to a parapet gap at 245°. Doors: great door toward the lake (272.5°), back door toward the gateway (97.5°), and the square door moved into the wall at 322.5°. Furniture: scripts/gen/castle-furnish.js (item param), rows under home-root.
+
+## 2026-09-27 — forest home base
+- Home: hexagonal 3-storey cob house at (0, 0.5, -26), scripts/gen/cob-house.js — cellar (-2.5 world), ground, attic, roof deck, one spiral stair round a living tree; front door faces the spawn, garden door faces the lake (4,-76).
+- Grounds: gravel paths front/lake/camp, fishing dock (E to fish, player.state.fish), camp at (-18,-50), fireflies over garden and camp.
+- Roads: cobble roads from the crossroads (0,10) east to Lumenvale (1100,-250) and west to Hearthmere (-1000,-500), bridged over each river; rivers bend round SITES in scripts/forest-terrain.js.
+- Animals: friendly only; press E to pet. Two managers (fauna-ground, fauna-small).
+- Flight: double tap space toggles, space up, shift down, sinking onto ground lands (scripts/lib/data/player.yml fly*).
