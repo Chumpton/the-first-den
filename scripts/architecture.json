@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "basedOnSpecVersion": 203,
-  "updatedAt": "2026-09-27T04:15:37.808Z",
-  "summary": "The First Den is a cozy forest world centered on the Spawn clearing and lakeside home, with roads reaching Lumenvale and Hearthmere. The main place combines configured forest terrain and scatter with authored homes, gardens, outbuildings, wildlife and interactive local life; procedural generators build the structures while managers animate residents and handle interaction.",
+  "basedOnSpecVersion": 218,
+  "updatedAt": "2026-09-27T04:25:15.481Z",
+  "summary": "The First Den is a cozy forest world centered on Spawn and a lakeside home, with roads reaching Lumenvale and Hearthmere. The main place combines configured forest terrain and scatter with authored homes, gardens, outbuildings, wildlife and interactive local life; procedural generators build the structures while managers animate residents and handle interaction.",
   "scriptPaths": [
     "scripts/arrival.js",
     "scripts/camera.js",
@@ -63,11 +63,13 @@
     "scripts/gen/den-furniture.js",
     "scripts/gen/door-pad.js",
     "scripts/gen/far-range.js",
+    "scripts/gen/flower-bed.js",
     "scripts/gen/forest-plant.js",
     "scripts/gen/garden-flagstones.js",
     "scripts/gen/garden-gazebo.js",
     "scripts/gen/garden-shed.js",
     "scripts/gen/garden-tunnel.js",
+    "scripts/gen/grounds-flags.js",
     "scripts/gen/grounds-kit.js",
     "scripts/gen/hearth-civic.js",
     "scripts/gen/hearth-folk.js",
@@ -181,6 +183,7 @@
     "scripts/lib/portal-path.js",
     "scripts/lib/radio-panel.js",
     "scripts/lib/road-solid.js",
+    "scripts/lib/yard-kit.js",
     "scripts/lighting.js",
     "scripts/look-den.js",
     "scripts/lumen-float.js",
@@ -232,17 +235,17 @@
     "scripts/ui.js"
   ],
   "places": [
-    "places/main - sole live place; forest-terrain, configured terrain/site/road marks and seeded forest decoration, with authored cells across Spawn and the distant settlements",
-    "places/main/cells/x0z0.scene - Spawn/home clearing: cob-house and portal, den folk, garden, catio, coop/flock, hives, rain catch, and local managers",
-    "places/main/cells/x0z-1.scene + x-1z-1.scene - nearby wildlife plus the rescue pasture and corn maze; maze triggers/dressing and pasture supplies are split across cells"
+    "places/main - sole live place; forest-terrain, configured terrain/site/road marks and seeded forest decoration, with authored cells across Spawn and distant settlements",
+    "places/main/cells/x0z0.scene - Spawn/home clearing: cob-house and portal, den folk, garden, catio, coop/flock, hives, rain catch and local managers; cob-house now has a seeded roofbloom child",
+    "places/main/cells/x0z-1.scene + x-1z-1.scene - nearby wildlife, rescue pasture and corn maze; maze triggers/dressing and pasture supplies are split across cells"
   ],
   "roots": [
     "world.config.yaml - multiplayer entry/default main place, player/camera templates, lighting, arrival and UI",
     "templates/player.js#player - composed player movement, gait, home interaction and delete-mode behaviors",
     "templates/camera.js#camera - custom first-/third-person camera; 9,000 m far clip for distant mountain range",
     "places/main/config.yaml - forest terrain, Spawn gravity, site/path marks and procedural decoration bindings",
-    "places/main/cells/x0z0.scene#cob-house - procedural cob-house at (0, 0.5, -26), cellar through roof deck",
-    "places/main/cells/x0z0.scene#catio-site + #coop-site + #hive-site - interactive homestead structures and their cat, hen and hive behaviors",
+    "places/main/cells/x0z0.scene#cob-house - procedural multi-level house at (0, 0.5, -26), cellar through roof deck; greenery and roofbloom are child parts",
+    "places/main/cells/x0z0.scene#catio-site + #coop-site + #hive-site - interactive homestead structures and cat, hen and hive behaviors",
     "places/main/cells/x0z-1.scene#pasture-site - fenced rescue pasture with four named horses, gate and yard furnishings",
     "places/main/cells/x0z-1.scene#corn-maze + #maze-start + #maze-heart-zone - maze geometry and timed entry/finish triggers"
   ],
@@ -254,12 +257,12 @@
     "scripts/lib/data/player.yml + scripts/lib/data/ropes.js - player movement, flight and rope tuning used by player behavior",
     "scripts/lib/data/catio.yml + scripts/gen/catio-layout.js - cat roster, perches, links, rest timing and door tuning for catio manager/actors",
     "scripts/lib/data/homestead.yml + scripts/lib/data/pasture.yml - coop/gate/flock and pasture/herd parameters used by their behaviors",
-    "world.facts.yaml + anim/*.yml and clips/ - animation-name to clip registry, including hens, cats and pasture horses"
+    "scripts/lib/yard-kit.js - geometry/material helpers imported by flower-bed and grounds-flags generators"
   ],
   "notableExports": [
     "scripts/forest-terrain.js - GROUND, SITES, LAKE, heightAt(ctx), materialAt(ctx)",
     "scripts/player.js - onSpawn(ctx), onInput(ctx,input), update(ctx,dt); scripts/camera.js - finiteNumber(value,fallback), update(ctx,dt)",
-    "scripts/gen/cob-house.js - HOUSE, holesFor(k), geometry(ctx), collider(ctx)",
+    "scripts/gen/cob-house.js - HOUSE, holesFor(k), geometry(ctx), collider(ctx); geometry dispatches roofbloom/greenery child parts",
     "scripts/catio-cats.js - update(ctx); scripts/catio-door.js - ears.press, onSpawn(ctx), update(ctx); cat actors expose onSpawn and press handling",
     "scripts/coop-flock.js - updateSchedule, update(ctx,dt); scripts/coop-nest.js - ears.press, update(ctx,dt); coop gate updates its automatic swing",
     "scripts/pasture-herd.js - updateSchedule, update(ctx,dt); scripts/pasture-horse.js - onSpawn(ctx), ears.press; pasture gate exposes press/update",
@@ -273,8 +276,8 @@
     "scripts/humanoid-locomotion.js + scripts/camera.js - player yaw/gait channels and camera view/eye/local-player visibility",
     "scripts/fauna-ground.js / scripts/fauna-small.js - movement, animation and pet/follow behavior for their tagged populations",
     "scripts/catio-cats.js - cat perch/route/mode/animation state; catio-cat.js owns each cat's name/coat/pet response; door script owns latch/open motion",
-    "scripts/coop-flock.js - shared flock motion/clip timers in ctx.session; coop-nest.js owns egg count/open timestamp on nest state, coop-gate.js owns gate open pose",
-    "scripts/pasture-herd.js - horse behavior/clip and pet-response state; scripts/sky-dragons.js and road-travellers.js own their spawned actor schedules/routes"
+    "scripts/coop-flock.js - shared flock motion/clip timers in ctx.session; coop-nest.js owns egg count/open timestamp, coop-gate.js owns gate pose",
+    "scripts/den-folk.js - Rikki/Campton phase/route and ctx.session wave cooldown; scripts/secret.js writes each finder's player.state.secrets, with scripts/lib/data/secrets.js defining locations and catalog; scripts/ui.js only reads that state for hint/count"
   ],
   "flows": [
     "places/main/config.yaml terrain generator + seed -> scripts/forest-terrain.js heightAt/materialAt(ctx) -> engine terrain, river channels and forest material bands",
@@ -287,12 +290,12 @@
     "coop-site update -> scripts/coop-flock.js moves tagged coop-bird children and sets anim/coop-hen clips/sounds; coop-gate proximity -> auto-swing; nest press -> egg count, lid motion and feedback",
     "pasture-site manager -> scripts/pasture-herd.js reads nearby players and pasture.yml, moves four horse rows within yard/keep-out bounds; horse press -> petAt and name/story feedback",
     "maze-start/maze-heart-zone trigger entry -> scripts/maze-run.js starts/stops elapsed-time response; secret row press -> scripts/secret.js reward/feedback events",
-    "road-travellers row + road marks + travellers.json -> scripts/road-travellers.js -> route-positioned walker/rider/caravan rows, animation and audio",
-    "sky-dragons manager timer or launch event -> scripts/sky-dragons.js -> temporary procedural jade-dragon rows, wave animation/trail/path; den-folk press/update -> dialogue and daily chores"
+    "den-folk update -> reads den-folk.js chore plan, walks Rikki/Campton through chores and emits wave/chore damageNumber feedback; scripts/ui.js reads player.state.secrets and secrets.js locations for nearby E hint/count",
+    "road-travellers row + road marks + travellers.json -> scripts/road-travellers.js -> route-positioned walker/rider/caravan rows, animation and audio; sky-dragon timer/launch -> temporary dragon rows, while den-folk press/update supplies dialogue and chores"
   ],
   "behaviorFamilies": [
     "places/main/config.yaml decoration layers + scripts/gen/forest-plant.js / valley-mesh.js - seeded forest plants, trees, shrubs, ferns and reeds varied by layer, kind and terrain",
-    "scripts/gen/cob-house.js - procedural multi-level house geometry/collider with cellar, spiral stair and roof deck",
+    "scripts/gen/cob-house.js - procedural multi-level house geometry/collider with cellar, spiral stair and roof deck; distinct greenery and seeded roofbloom parts are non-colliding",
     "scripts/gen/road-bridge.js + scripts/lib/road-solid.js - reusable bridge geometry/collider varied by dimensions and seed",
     "scripts/gen/animal-{bear,deer,fox,wolf}.js + scripts/fauna-ground.js - shared large-fauna manager varied by species, individual state and appearance",
     "scripts/gen/critter-{bird,duck,rabbit,squirrel}.js + scripts/fauna-small.js - shared small-critter manager with species geometry and animation",
@@ -302,14 +305,16 @@
   ],
   "probableOrphans": [
     "scripts/flat-terrain.js - no current place config selects it; main uses forest-terrain",
-    "scripts/jade-dragon.js - no scene row attaches this actor behavior; sky flights use scripts/gen/jade-dragon.js geometry directly"
+    "scripts/jade-dragon.js - no scene row attaches this actor behavior; sky flights use scripts/gen/jade-dragon.js geometry directly",
+    "scripts/gen/flower-bed.js - no current scene or other package file references this generator",
+    "scripts/gen/grounds-flags.js - no current scene or other package file references this generator"
   ],
   "migrationNotes": [
     "forest-terrain.js heightAt/materialAt take a context object; main's river is at sea level y=0, ground is around y=0.5, and Spawn clearing is centered near (0,-3).",
     "Keep places/main/config.yaml material IDs, clear/flatten marks and decoration bindings coordinated; pasture ground/clear are centered at (-38,-73), coop at (27,-28), hive at (31,-46), and maze at (-8,-127).",
     "The active cob-house at (0,0.5,-26) must stay aligned with homeSite/homeClear terrain marks; local levels and openings are defined by HOUSE/holesFor in cob-house.js.",
+    "cob-house/cob-roofbloom is a separate seeded geometry child using cob-house.js params.part=roofbloom; its collider intentionally returns nothing, and its eave vines avoid door faces.",
     "Pasture fence loop dimensions must agree with pasture.yml herd site bounds/keep-outs; its swinging gate collider is leaf-local and must move with the hinged leaf.",
-    "Catio catio-layout perch/link positions are local to the manager's yaw-rotated frame; retain the cat IDs in catio.yml and scene children because the manager resolves those IDs.",
-    "Corn-maze placement, config flatten/path marks, maze-start and maze-heart-zone must stay aligned; the maze heart is both the finish trigger landmark and a secret interactable."
+    "Catio catio-layout perch/link positions are local to the manager's yaw-rotated frame; retain cat IDs in catio.yml and scene children because the manager resolves those IDs; den-folk chore coordinates are world-space route stops."
   ]
 }
