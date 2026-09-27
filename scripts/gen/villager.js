@@ -15,6 +15,7 @@ export function skeleton() {
   }
 }
 const D = { jumper: 'oklch(0.62 0.12 30)', pants: 'oklch(0.45 0.05 250)', scarf: null, apron: null, hat: 'none', hatColor: 'oklch(0.6 0.1 60)', hair: 'oklch(0.45 0.08 50)', skin: 'oklch(0.85 0.06 55)', staff: false, beard: false }
+const dk = (col, d) => col.replace(/oklch\(\s*([\d.]+)/, (_, l) => 'oklch(' + Math.max(0, +l - d).toFixed(3))
 const c = (ctx, col, r = 0.9) => { ctx.albedo(null); ctx.color(col); ctx.roughness(r) }
 export function geometry(ctx) {
   const p = { ...D, ...(ctx.params ?? {}) }, L = ctx.lod, s = L <= 2 ? 10 : L <= 3 ? 7 : 5, rg = L <= 2 ? 7 : 4
@@ -30,11 +31,11 @@ export function geometry(ctx) {
   cyl(ctx, [0, 0.74, 0], [0, 1.24, 0], 0.235, 0.215, s, false)
   sph(ctx, 0, 1.22, 0, 0.215, 0.1, 0.2, s, L <= 2 ? 4 : 2, 0.5)
   if (L <= 3) {
-    ctx.color('oklch(from ' + p.jumper + ' calc(l - 0.07) c h)')
+    ctx.color(dk(p.jumper, 0.07))
     cyl(ctx, [0, 0.7, 0], [0, 0.8, 0], 0.245, 0.245, s, false)
     if (L <= 2) { ctx.color('oklch(0.96 0.02 90)'); for (let i = 0; i < 3; i++) cyl(ctx, [0, 0.93 + i * 0.1, 0], [0, 0.945 + i * 0.1, 0], 0.232 - i * 0.005, 0.231 - i * 0.005, s, false) } // knitted fair-isle stripes
   }
-  if (p.apron) { c(ctx, p.apron, 1); ctx.quad(-0.2, 0.46, -0.25, 0.2, 0.46, -0.25, 0.19, 1.12, -0.24, -0.19, 1.12, -0.24); if (L <= 2) { c(ctx, 'oklch(from ' + p.apron + ' calc(l - 0.1) c h)'); box(ctx, 0, 0.72, -0.262, 0.2, 0.12, 0.01) } }
+  if (p.apron) { c(ctx, p.apron, 1); ctx.quad(-0.2, 0.46, -0.25, 0.2, 0.46, -0.25, 0.19, 1.12, -0.24, -0.19, 1.12, -0.24); if (L <= 2) { c(ctx, dk(p.apron, 0.1)); box(ctx, 0, 0.72, -0.262, 0.2, 0.12, 0.01) } }
   if (p.scarf) {
     c(ctx, p.scarf, 1); cyl(ctx, [0, 1.25, 0], [0, 1.35, 0], 0.15, 0.13, s, true)
     box(ctx, 0.08, 1.08, -0.2, 0.09, 0.32, 0.04, 0, -12)
