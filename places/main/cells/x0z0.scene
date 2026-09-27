@@ -3519,6 +3519,13 @@ waylamp-west-0:
   rotation: {yaw: 215}
   tags: [road-dressing, waylamp, road-west]
   visibleRange: {max: 200}
+wizard-tower:
+  feetPosition: {x: 30.5, y: 0.55, z: -18.5}
+  id: wizard-tower
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 8, height: 22, kind: box, width: 8}
+  tags: [blueprint]
 wolf-2:
   behavior: scripts/fauna-pet.js
   castShadow: true
