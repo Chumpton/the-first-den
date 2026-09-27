@@ -39,6 +39,7 @@ assets:
     "anim/pollinator.yml#butterfly-fly": clips/anim-pollinator-yml-butterfly-fly-da04c7a7.json
     "anim/pollinator.yml#butterfly-sip": clips/anim-pollinator-yml-butterfly-sip-bbbd31a6.json
     "anim/pollinator.yml#dragonfly-fly": clips/anim-pollinator-yml-dragonfly-fly-e1776b30.json
+    "anim/traveller.yml#greet": clips/anim-traveller-yml-greet-8347291a.json
     "anim/traveller.yml#horse-stand": clips/anim-traveller-yml-horse-stand-16bca94f.json
     "anim/traveller.yml#horse-walk": clips/anim-traveller-yml-horse-walk-7d34830c.json
     "anim/traveller.yml#stand": clips/anim-traveller-yml-stand-a2516af3.json
