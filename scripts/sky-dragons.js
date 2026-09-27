@@ -33,7 +33,8 @@ function at(ctx, p, t) {
   const u = t - 0.5, s = Math.sin(TAU * p.k * t + p.ph), sv = Math.sin(TAU * p.kv * t + p.ph * 1.7);
   const x = p.cx + p.dx * u * p.L + (-p.dz) * (p.A * s + p.side), z = p.cz + p.dz * u * p.L + p.dx * (p.A * s + p.side);
   const g = ctx.place.terrain.heightAt(x, z) ?? 0;
-  return { x, y: Math.max(p.y + p.rise + p.B * sv, g + SKY.clearance), z };
+  const yy = Math.max(SKY.height[0], Math.min(SKY.height[1], p.y + p.rise + p.B * sv));
+  return { x, y: Math.max(yy, g + SKY.clearance), z };
 }
 function pose(ctx, p, t) {
   const a = at(ctx, p, t), e = 0.25 / p.dur, b = at(ctx, p, t + e), c = at(ctx, p, t - e);
