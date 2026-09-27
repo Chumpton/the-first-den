@@ -4,6 +4,9 @@ export default {
   total: 7,
   cooldownMs: 6000,
   chime: S + 'sfx-secret-found-magical-harp-sparkle-chime.mp3',
+  // where each one hides — the HUD's E shows only within `near` metres, so you have to stumble right onto it
+  near: 2.6,
+  at: { heart: [-8, 0.5, -127], nest: [-2.5, 7.7, -29.5], gnome: [-6.8, -2.5, -25], fairydoor: [-44, 0.4, -12], frog: [-23.5, 0.5, -55], bottle: [27.5, 0.1, -80], mushrooms: [58, 0.54, -92] },
   list: {
     heart:     { name: 'the heart of the maze', line: 'The giant sunflower showers you in gold.', act: 'petals', sound: S + 'sfx-warm-choir-swell-golden-shimmer.mp3' },
     nest:      { name: 'the golden egg', line: 'Something ancient answers the egg...', act: 'dragons', sound: S + 'sfx-distant-dragon-call-echoing-over-valley.mp3' },
