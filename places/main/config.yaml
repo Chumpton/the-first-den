@@ -168,6 +168,9 @@ terrain:
     lumen-canal-quay: {clearScatter: true, edgeMaterial: yard, edgeWidth: 1.5, falloff: 2, kind: road, material: cobble, points: [[1184.6, -219.2], [1226.9, -203.8], [1267.3, -189.1]], width: 17}
     lumen-gate-approach: {clearScatter: true, edgeMaterial: yard, edgeWidth: 1.5, falloff: 2, kind: road, material: cobble, points: [[922.7, -234.5], [900.8, -232.6], [878.8, -230.7]], width: 14}
     pasture-flock-clear: {center: {x: -22, z: -79}, kind: clear-scatter, shape: {kind: path, points: [[-22.3, -64.5], [-23.2, -78], [-21.5, -86], [-20.5, -93]], width: 8}}
+    corral-flatten: {center: {x: -50, z: -50}, falloff: 3, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 14}}
+    corral-clear: {center: {x: -50, z: -50}, kind: clear-scatter, shape: {kind: circle, radius: 16}}
+    path-corral: {clearScatter: true, edgeMaterial: pebbles, falloff: 2, grade: true, kind: path, material: gravel, noise: 0.4, points: [[-26.2, -62.2], [-30, -61.3], [-35, -60.2], [-40, -58.5], [-43, -56.8]], width: 2.2}
   decorations:
     settings: {enabled: true, budget: 75000, maxDistance: 420, fadeDistance: 25}
     bindings:
