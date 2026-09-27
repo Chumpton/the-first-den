@@ -76,7 +76,8 @@ function step(ctx, row, players, now, rebase, S) {
   const p = row.feetPosition; let dmin = Infinity, near = null;
   for (const q of players) { const d = Math.hypot(q.x - p.x, q.z - p.z); if (d < dmin) { dmin = d; near = q; } }
   if (dmin > T.near) { // far: nobody sees it — its arc advances by timestamp, nothing is placed
-    if (rebase && now >= st.at) { const f = fold(st.s + (st.dir * st.speed * (now - st.at)) / 1000, road.L, st.dir); st.s = r2(f.s); st.dir = f.dir; st.at = now; }
+    if (rebase && now >= st.at) { const f = fold(st.s + (st.dir * st.speed * (now - st.at)) / 1000, road.L, st.dir); st.s = r2(f.s); st.dir = f.dir; st.at = now;
+      const lp = lanePoint(road, f.s, f.dir); row.feetPosition = { x: lp.x, y: groundY(ctx, road, f.s, lp.x, lp.z), z: lp.z }; row.rotation = { yaw: yawOf(lp.fx, lp.fz) }; S.pos[row.id] = null; S.yaw[row.id] = null; }
     S.clip[row.id] = null; return;
   }
   let hold = now < st.at, u = hold ? st.s : st.s + (st.dir * st.speed * (now - st.at)) / 1000;
