@@ -673,14 +673,29 @@ cob-house/cob-roofbloom:
   parent: cob-house
   primitive: {kind: scripted, params: {part: roofbloom}, script: scripts/gen/cob-house.js, seed: 5}
 cob-house/cob-sun-cellar:
-  feetPosition: {x: -2.8, y: -1.2, z: 1.6}
+  feetPosition: {x: 0, y: -3, z: -2.6}
   id: cob-house/cob-sun-cellar
-  light: {color: oklch(0.85 0.1 70), distance: 9, intensity: 14, kind: point}
+  light: {color: oklch(0.96 0.02 240), distance: 13, intensity: 22, kind: point}
   parent: cob-house
 cob-house/house-porch-light:
   feetPosition: {x: 0, y: 2.85, z: 9}
   id: cob-house/house-porch-light
   light: {color: oklch(0.86 0.11 70), distance: 6, intensity: 1.5, kind: point}
+  parent: cob-house
+cob-house/studio-light-gallery:
+  feetPosition: {x: -4.2, y: -2.4, z: 1.2}
+  id: cob-house/studio-light-gallery
+  light: {color: oklch(0.95 0.02 250), distance: 9, intensity: 12, kind: point}
+  parent: cob-house
+cob-house/studio-light-robot:
+  feetPosition: {x: 3.2, y: -2.6, z: -2}
+  id: cob-house/studio-light-robot
+  light: {color: oklch(0.95 0.03 80), distance: 9, intensity: 12, kind: point}
+  parent: cob-house
+cob-house/studio-light-screen:
+  feetPosition: {x: 0, y: -3.6, z: -6.2}
+  id: cob-house/studio-light-screen
+  light: {color: oklch(0.8 0.1 220), distance: 8, intensity: 8, kind: point}
   parent: cob-house
 cob-in-a-art-cottage:
   castShadow: false
@@ -1006,306 +1021,6 @@ cob-in-a-seat:
   receiveShadow: true
   rotation: {yaw: -60}
   tags: [cob-interior, furniture, den-furniture]
-  visibleRange: {max: 200}
-cob-in-b-barrel-0:
-  castShadow: true
-  feetPosition: {x: -3.9500000000000037, y: -2.5, z: -32.841600689897064}
-  id: cob-in-b-barrel-0
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {item: barrel}, script: scripts/gen/castle-furnish.js, seed: 40}
-  receiveShadow: true
-  rotation: {yaw: -150}
-  tags: [cob-interior]
-  visibleRange: {max: 200}
-cob-in-b-barrel-1:
-  castShadow: true
-  feetPosition: {x: 3.950000000000001, y: -2.5, z: -32.841600689897064}
-  id: cob-in-b-barrel-1
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {item: barrel}, script: scripts/gen/castle-furnish.js, seed: 41}
-  receiveShadow: true
-  rotation: {yaw: -210}
-  tags: [cob-interior]
-  visibleRange: {max: 200}
-cob-in-b-barrel-2:
-  castShadow: true
-  feetPosition: {x: -3.9499999999999984, y: -2.5, z: -19.158399310102933}
-  id: cob-in-b-barrel-2
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {item: barrel}, script: scripts/gen/castle-furnish.js, seed: 42}
-  receiveShadow: true
-  rotation: {yaw: -30}
-  tags: [cob-interior]
-  visibleRange: {max: 200}
-cob-in-b-barrel-3:
-  castShadow: true
-  feetPosition: {x: 7.9, y: -2.5, z: -26}
-  id: cob-in-b-barrel-3
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {item: barrel}, script: scripts/gen/castle-furnish.js, seed: 43}
-  receiveShadow: true
-  rotation: {yaw: 90}
-  tags: [cob-interior]
-  visibleRange: {max: 200}
-cob-in-b-barrel-4:
-  castShadow: true
-  feetPosition: {x: -7.9, y: -2.5, z: -26}
-  id: cob-in-b-barrel-4
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {item: barrel}, script: scripts/gen/castle-furnish.js, seed: 44}
-  receiveShadow: true
-  rotation: {yaw: 90}
-  tags: [cob-interior]
-  visibleRange: {max: 200}
-cob-in-b-candle-bench:
-  castShadow: false
-  feetPosition: {x: -5.859402145134426, y: -1.5, z: -21.808782217350895}
-  id: cob-in-b-candle-bench
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: none
-  primitive: {kind: scripted, params: {item: candle, n: 2}, script: scripts/gen/cob-furnish.js, seed: 7}
-  receiveShadow: true
-  rotation: {yaw: -60}
-  tags: [cob-interior]
-  visibleRange: {max: 140}
-cob-in-b-chest:
-  castShadow: true
-  feetPosition: {x: -0.29999999999999954, y: -2.5, z: -18.83}
-  id: cob-in-b-chest
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {item: chest}, script: scripts/gen/castle-furnish.js, seed: 7}
-  receiveShadow: true
-  rotation: {yaw: 0}
-  tags: [cob-interior]
-  visibleRange: {max: 200}
-cob-in-b-crate-a:
-  castShadow: true
-  feetPosition: {x: -1.3, y: -2.5, z: -18.76}
-  id: cob-in-b-crate-a
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {fill: apples, item: crate}, script: scripts/gen/cob-furnish.js, seed: 31}
-  receiveShadow: true
-  rotation: {yaw: 0}
-  tags: [cob-interior]
-  visibleRange: {max: 200}
-cob-in-b-crate-b:
-  castShadow: true
-  feetPosition: {x: -2, y: -2.5, z: -18.76}
-  id: cob-in-b-crate-b
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {fill: potatoes, item: crate}, script: scripts/gen/cob-furnish.js, seed: 32}
-  receiveShadow: true
-  rotation: {yaw: 0}
-  tags: [cob-interior]
-  visibleRange: {max: 200}
-cob-in-b-crate-c:
-  castShadow: true
-  feetPosition: {x: -1.65, y: -2.14, z: -18.76}
-  id: cob-in-b-crate-c
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {fill: onions, item: crate}, script: scripts/gen/cob-furnish.js, seed: 33}
-  receiveShadow: true
-  rotation: {yaw: 0}
-  tags: [cob-interior]
-  visibleRange: {max: 200}
-cob-in-b-crate-d:
-  castShadow: true
-  feetPosition: {x: 5.170023923399333, y: -2.5, z: -31.525255888325766}
-  id: cob-in-b-crate-d
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {fill: carrots, item: crate}, script: scripts/gen/cob-furnish.js, seed: 34}
-  receiveShadow: true
-  rotation: {yaw: -240}
-  tags: [cob-interior]
-  visibleRange: {max: 200}
-cob-in-b-herbs-0:
-  castShadow: false
-  feetPosition: {x: -1.5999999999999996, y: 0.5, z: -19.13}
-  id: cob-in-b-herbs-0
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: none
-  primitive: {kind: scripted, params: {item: herbs, len: 1.6}, script: scripts/gen/cob-furnish.js, seed: 51}
-  receiveShadow: true
-  rotation: {yaw: 0}
-  tags: [cob-interior]
-  visibleRange: {max: 140}
-cob-in-b-herbs-1:
-  castShadow: false
-  feetPosition: {x: -5.949594523999094, y: 0.5, z: -22.565}
-  id: cob-in-b-herbs-1
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: none
-  primitive: {kind: scripted, params: {item: herbs, len: 1.6}, script: scripts/gen/cob-furnish.js, seed: 52}
-  receiveShadow: true
-  rotation: {yaw: -60}
-  tags: [cob-interior]
-  visibleRange: {max: 140}
-cob-in-b-herbs-2:
-  castShadow: false
-  feetPosition: {x: -5.949594523999093, y: 0.5, z: -29.435000000000002}
-  id: cob-in-b-herbs-2
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: none
-  primitive: {kind: scripted, params: {item: herbs, len: 1.6}, script: scripts/gen/cob-furnish.js, seed: 53}
-  receiveShadow: true
-  rotation: {yaw: -120}
-  tags: [cob-interior]
-  visibleRange: {max: 140}
-cob-in-b-herbs-3:
-  castShadow: false
-  feetPosition: {x: -1.2619985265213475e-15, y: 0.5, z: -32.87}
-  id: cob-in-b-herbs-3
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: none
-  primitive: {kind: scripted, params: {item: herbs, len: 1.6}, script: scripts/gen/cob-furnish.js, seed: 54}
-  receiveShadow: true
-  rotation: {yaw: -180}
-  tags: [cob-interior]
-  visibleRange: {max: 140}
-cob-in-b-herbs-4:
-  castShadow: false
-  feetPosition: {x: 5.9495945239990915, y: 0.5, z: -29.435000000000002}
-  id: cob-in-b-herbs-4
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: none
-  primitive: {kind: scripted, params: {item: herbs, len: 1.6}, script: scripts/gen/cob-furnish.js, seed: 55}
-  receiveShadow: true
-  rotation: {yaw: -240}
-  tags: [cob-interior]
-  visibleRange: {max: 140}
-cob-in-b-jars-a:
-  behavior: scripts/cob-piece.js
-  castShadow: true
-  feetPosition: {x: -5.487344431475023, y: -2.5, z: -31.015640646055104}
-  id: cob-in-b-jars-a
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {item: jarshelf, w: 1.5}, script: scripts/gen/cob-furnish.js, seed: 21}
-  receiveShadow: true
-  rotation: {yaw: -120}
-  state: {say: ["Rows of honey, plum jam and pickled beans.", "A jar of summer, saved for winter."], sound: /cdn/moodboard-lowpoly-cozy/sfx-jar-clink.mp3}
-  tags: [cob-interior, interactable]
-  visibleRange: {max: 200}
-cob-in-b-jars-b:
-  castShadow: true
-  feetPosition: {x: -7.0873444314750245, y: -2.5, z: -28.244359353944898}
-  id: cob-in-b-jars-b
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {item: jarshelf, w: 1.5}, script: scripts/gen/cob-furnish.js, seed: 22}
-  receiveShadow: true
-  rotation: {yaw: -120}
-  tags: [cob-interior]
-  visibleRange: {max: 200}
-cob-in-b-jars-c:
-  castShadow: true
-  feetPosition: {x: 1.5999999999999988, y: -2.5, z: -33.26}
-  id: cob-in-b-jars-c
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {item: jarshelf, w: 1.5}, script: scripts/gen/cob-furnish.js, seed: 23}
-  receiveShadow: true
-  rotation: {yaw: -180}
-  tags: [cob-interior]
-  visibleRange: {max: 200}
-cob-in-b-jars-d:
-  castShadow: true
-  feetPosition: {x: -1.6000000000000014, y: -2.5, z: -33.26}
-  id: cob-in-b-jars-d
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {item: jarshelf, w: 1.5}, script: scripts/gen/cob-furnish.js, seed: 24}
-  receiveShadow: true
-  rotation: {yaw: -180}
-  tags: [cob-interior]
-  visibleRange: {max: 200}
-cob-in-b-jars-e:
-  castShadow: true
-  feetPosition: {x: 6.287344431475022, y: -2.5, z: -29.630000000000003}
-  id: cob-in-b-jars-e
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {item: jarshelf, w: 1.5}, script: scripts/gen/cob-furnish.js, seed: 25}
-  receiveShadow: true
-  rotation: {yaw: -240}
-  tags: [cob-interior]
-  visibleRange: {max: 200}
-cob-in-b-lantern:
-  castShadow: false
-  children: [{feetPosition: {x: 0, y: -0.75, z: 0}, id: light, light: {color: "#ffa45c", distance: 10, intensity: 31, kind: point}}]
-  feetPosition: {x: -2.6, y: 0.5, z: -24.6}
-  id: cob-in-b-lantern
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: none
-  primitive: {kind: scripted, params: {drop: 0.5, item: lantern}, script: scripts/gen/cob-furnish.js, seed: 7}
-  receiveShadow: true
-  rotation: {yaw: 0}
-  tags: [cob-interior]
-  visibleRange: {max: 140}
-cob-in-b-rack:
-  castShadow: true
-  feetPosition: {x: 6.321985447626402, y: -2.5, z: -22.35}
-  id: cob-in-b-rack
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {item: rack}, script: scripts/gen/castle-furnish.js, seed: 7}
-  receiveShadow: true
-  rotation: {yaw: 60}
-  tags: [cob-interior]
-  visibleRange: {max: 200}
-cob-in-b-rug-bench:
-  castShadow: false
-  feetPosition: {x: -5.109549882328189, y: -2.495, z: -23.05}
-  id: cob-in-b-rug-bench
-  material: {pbr: true, roughness: 1}
-  physics: none
-  primitive: {kind: scripted, params: {c1: "#b0553a", c2: "#e9d2ad", c3: "#4f3828", item: arearug, l: 1.4, w: 2.4}, script: scripts/gen/cob-furnish.js}
-  receiveShadow: true
-  rotation: {yaw: -60}
-  tags: [cob-interior, rug]
-  visibleRange: {max: 140}
-cob-in-b-rug-jars:
-  castShadow: false
-  feetPosition: {x: -1.1572912251942486e-15, y: -2.495, z: -32.3}
-  id: cob-in-b-rug-jars
-  material: {pbr: true, roughness: 1}
-  physics: none
-  primitive: {kind: scripted, params: {c1: "#efe3c8", c2: "#ba8950", c3: "#5dada9", item: arearug, l: 1.5, w: 2.6}, script: scripts/gen/cob-furnish.js}
-  receiveShadow: true
-  rotation: {yaw: -180}
-  tags: [cob-interior, rug]
-  visibleRange: {max: 140}
-cob-in-b-stool:
-  castShadow: true
-  feetPosition: {x: -5.559402145134426, y: -2.5, z: -21.289166975080228}
-  id: cob-in-b-stool
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {height: 0.48, item: stool, radius: 0.26, wood: oak}, script: scripts/gen/den-furniture.js, seed: 7}
-  receiveShadow: true
-  rotation: {yaw: -60}
-  tags: [cob-interior]
-  visibleRange: {max: 200}
-cob-in-b-workbench:
-  castShadow: true
-  feetPosition: {x: -6.114139350718137, y: -2.5, z: -22.47}
-  id: cob-in-b-workbench
-  material: {color: "#ffffff", pbr: true, roughness: 0.7}
-  physics: static
-  primitive: {kind: scripted, params: {item: workbench}, script: scripts/gen/castle-furnish.js, seed: 7}
-  receiveShadow: true
-  rotation: {yaw: -60}
-  tags: [cob-interior]
   visibleRange: {max: 200}
 cob-in-d-candle:
   castShadow: false
@@ -4321,7 +4036,7 @@ secret-frog:
   tags: [interactable, secret]
 secret-gnome:
   behavior: scripts/secret.js
-  feetPosition: {x: -6.8, y: -2.5, z: -25}
+  feetPosition: {x: -6.4, y: -5.6, z: -24.2}
   id: secret-gnome
   primitive: {kind: scripted, params: {kind: gnome}, script: scripts/gen/secret-trinket.js, seed: 3}
   rotation: 120
@@ -4454,6 +4169,176 @@ stone-wall-west:
   receiveShadow: true
   tags: [deer-fence]
   visibleRange: {max: 220}
+studio-desk:
+  castShadow: false
+  feetPosition: {x: -5.967468245269452, y: -5.6, z: -29.098909236273087}
+  id: studio-desk
+  physics: {body: static, collider: mesh}
+  primitive: {kind: scripted, params: {item: desk}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: -8.349038105676657, y: -5.6, z: -30.473909236273087}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 60}
+studio-desk/monitor:
+  feetPosition: {x: -0.5, y: 1.2, z: -0.29}
+  id: studio-desk/monitor
+  material: {roughness: 0.3, texture: /cdn/value.da87e9bd03798e6b5f353a2ed37b10770502fe194223815ba8dc806cbdf530bc.png, unlit: true}
+  parent: studio-desk
+  primitive: {depth: 0.02, height: 0.57, kind: box, width: 0.98}
+  tags: [art-studio]
+  visibleRange: {max: 60}
+studio-easel:
+  castShadow: false
+  feetPosition: {x: -3.2, y: -5.6, z: -23}
+  id: studio-easel
+  physics: {body: static, collider: mesh}
+  primitive: {kind: scripted, params: {ch: 1.25, cw: 1, cy: 0.95, item: easel}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 0, y: -5.6, z: -26}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 60}
+studio-easel-robot:
+  castShadow: false
+  feetPosition: {x: 3.3, y: -5.6, z: -29.05}
+  id: studio-easel-robot
+  physics: {body: static, collider: mesh}
+  primitive: {kind: scripted, params: {ch: 1.62, cw: 1.3, cy: 0.95, item: easel}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 3.3, y: -5.6, z: -26}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 60}
+studio-easel-robot/canvas:
+  feetPosition: {x: 0, y: 0.95, z: 0}
+  id: studio-easel-robot/canvas
+  material: {roughness: 0.85, texture: /cdn/value.4227fb9f8f3f647b94f045d585bcf20367ce0433607e1e0f5fa3a1e9f12395f6.png}
+  parent: studio-easel-robot
+  primitive: {depth: 0.02, height: 1.62, kind: box, width: 1.3}
+  tags: [art-studio]
+  visibleRange: {max: 60}
+studio-easel/canvas:
+  feetPosition: {x: 0, y: 0.95, z: 0}
+  id: studio-easel/canvas
+  material: {color: oklch(0.97 0.01 90), roughness: 0.95}
+  parent: studio-easel
+  primitive: {depth: 0.02, height: 1.25, kind: box, width: 1}
+  tags: [art-studio]
+studio-frame-abstract:
+  castShadow: false
+  feetPosition: {x: -2.2999999999999994, y: -5.6, z: -18.532566285183165}
+  id: studio-frame-abstract
+  primitive: {kind: scripted, params: {fh: 2, fw: 1.6, item: frame, y: 1.1}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: -2.3, y: -5.6, z: -23.532566285183165}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 60}
+studio-frame-abstract/art:
+  feetPosition: {x: 0, y: 1.19, z: -0.075}
+  id: studio-frame-abstract/art
+  material: {roughness: 0.85, texture: /cdn/value.ac9044d9bf9694b61cd1ffb2d7799b7087cd779a46a0545899e43aa34ad41e38.png}
+  parent: studio-frame-abstract
+  primitive: {depth: 0.02, height: 1.82, kind: box, width: 1.42}
+  tags: [art-studio]
+  visibleRange: {max: 60}
+studio-frame-islands:
+  castShadow: false
+  feetPosition: {x: -5.616987298107782, y: -5.6, z: -20.794039956158038}
+  id: studio-frame-islands
+  primitive: {kind: scripted, params: {fh: 1.52, fw: 1.9, item: frame, y: 1.3}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: -1.2868602791855883, y: -5.6, z: -23.294039956158038}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 60}
+studio-frame-islands/art:
+  feetPosition: {x: 0, y: 1.39, z: -0.075}
+  id: studio-frame-islands/art
+  material: {roughness: 0.85, texture: /cdn/value.79a61c2541c0d6fc813f5904c1a0bc07e54edd7d4cccac2822199724018f1903.png}
+  parent: studio-frame-islands
+  primitive: {depth: 0.02, height: 1.34, kind: box, width: 1.72}
+  tags: [art-studio]
+  visibleRange: {max: 60}
+studio-frame-koi:
+  castShadow: false
+  feetPosition: {x: -7.316987298107781, y: -5.6, z: -23.738526329025127}
+  id: studio-frame-koi
+  primitive: {kind: scripted, params: {fh: 1.62, fw: 1.3, item: frame, y: 1.2}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: -2.9868602791855876, y: -5.6, z: -26.238526329025127}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 60}
+studio-frame-koi/art:
+  feetPosition: {x: 0, y: 1.29, z: -0.075}
+  id: studio-frame-koi/art
+  material: {roughness: 0.85, texture: /cdn/value.7e2bdcaaaa34876e2e96d6cebba04e330ccc04832ca4addfb237a46bc934c272.png}
+  parent: studio-frame-koi
+  primitive: {depth: 0.02, height: 1.44, kind: box, width: 1.12}
+  tags: [art-studio]
+  visibleRange: {max: 60}
+studio-holo:
+  castShadow: false
+  feetPosition: {x: -4.2, y: -5.6, z: -26.4}
+  id: studio-holo
+  physics: {body: static, collider: mesh}
+  primitive: {kind: scripted, params: {item: holo}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 0, y: -5.6, z: -26}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 60}
+studio-lounge:
+  castShadow: false
+  feetPosition: {x: 0, y: -5.6, z: -28.7}
+  id: studio-lounge
+  physics: {body: static, collider: mesh}
+  primitive: {kind: scripted, params: {item: lounge}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 0, y: -5.6, z: -33}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 60}
+studio-robot:
+  castShadow: false
+  feetPosition: {x: 3.3, y: -5.6, z: -27}
+  id: studio-robot
+  physics: {body: static, collider: mesh}
+  primitive: {kind: scripted, params: {item: robotarm}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 3.3, y: -5.6, z: -30}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 60}
+studio-screenwall:
+  castShadow: false
+  feetPosition: {x: -1.37174531950432e-15, y: -5.6, z: -33.467433714816835}
+  id: studio-screenwall
+  primitive: {kind: scripted, params: {hgt: 3, item: screenwall, w: 6, y: 1.1}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: -4.532602201438052e-16, y: -5.6, z: -28.467433714816835}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 60}
+studio-screenwall/screen:
+  feetPosition: {x: 0, y: 1.1, z: -0.135}
+  id: studio-screenwall/screen
+  material: {roughness: 0.3, texture: /cdn/value.790c53760cd177749b0366dfec299224ddacf17e36ce5a94051e9ddfb285aafe.png, unlit: true}
+  parent: studio-screenwall
+  primitive: {depth: 0.02, height: 3, kind: box, width: 6}
+  tags: [art-studio]
+  visibleRange: {max: 60}
+studio-shelf:
+  castShadow: false
+  feetPosition: {x: 6.366987298107778, y: -5.6, z: -29.906921938165308}
+  id: studio-shelf
+  physics: {body: static, collider: mesh}
+  primitive: {kind: scripted, params: {item: shelf, w: 3.6}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 2.0368602791855865, y: -5.6, z: -27.406921938165308}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 60}
+studio-shell:
+  castShadow: false
+  feetPosition: {x: 0, y: -5.6, z: -26}
+  id: studio-shell
+  physics: {body: static, collider: mesh}
+  primitive: {kind: scripted, params: {h: 6.2, item: shell}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 60}
 sun-rays:
   feetPosition: {x: 0, y: {terrain: 0}, z: 0}
   fx: {script: "fx follow=player\npop rays n=?mobile:8|18 on=box(55,6,55).c(16) wrap=110;0;110 life=10..18 v=<-.32,-.9,-.28>*.5 size=.9..2.2 warm=.8..1.1\n  col=hdr(1.4,1.2,.85)*$warm a=0>.3:.05>.7:.05>0 sz=$size r=sprite(soft-disc,add,velocity,60,.8)\npop motes n=?mobile:150|400 on=box(14,4,14).c(3) wrap=28;8;28 life=6..10 v=sdir()*.05 acc=curl(.15)*.2 size=.015..0.03\n  col=hdr(1.6,1.4,1) a=0>.2:.35>.8:.35>0 sz=$size r=sprite(mote,add)"}
