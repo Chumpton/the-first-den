@@ -1,7 +1,7 @@
 atmosphere:
   clouds:
     altitude: 700
-    density: 0.18
+    density: 0.12
     enabled: true
     opacity: 0.7
     speed: 0.7
@@ -19,6 +19,7 @@ atmosphere:
   sky:
     kind: realistic
     model: hosek
+    turbidity: 2.2
   stars:
     density: 0.6
     enabled: true
@@ -50,8 +51,8 @@ terrain:
         density: 50
         items: [{colorJitter: {hue: 0.012, value: 0.06}, kind: scripted, maxDistance: 48, params: {height: 0.19}, randomRotation: true, scale: [0.78, 1.12], script: scripts/gen/valley-meadow.js, seed: 7, useTerrainColor: false, wind: {force: 0.085, scale: 1.3, speed: 0.7}}]
         constraints: {heightRange: [1.2, 115], slopeRange: [0, 0.24]}
-      valleyForest: {constraints: {heightRange: [4, 178], slopeRange: [0, 0.37]}, density: 0.0065, items: [{colorJitter: {hue: 0.015, value: 0.08}, kind: scripted, maxDistance: 820, params: {crown: fir, height: 12, radius: 2.65}, randomRotation: true, scale: [0.78, 1.32], script: scripts/gen/valley-tree.js, seed: 41, useTerrainColor: false, weight: 0.62, wind: {force: 0.28, scale: 2, speed: 0.55}}, {colorJitter: {hue: 0.012, value: 0.06}, kind: scripted, maxDistance: 820, params: {crown: pine, height: 9.6, radius: 2.9}, randomRotation: true, scale: [0.8, 1.26], script: scripts/gen/valley-tree.js, seed: 43, useTerrainColor: false, weight: 0.38, wind: {force: 0.24, scale: 2, speed: 0.45}}]}
-    settings: {budget: 75000, enabled: true, fadeDistance: 22, maxDistance: 840}
+      valleyForest: {constraints: {heightRange: [4, 178], slopeRange: [0, 0.4]}, density: 0.0105, items: [{colorJitter: {hue: 0.015, value: 0.08}, kind: scripted, maxDistance: 700, params: {crown: fir, height: 12, radius: 2.65}, randomRotation: true, scale: [0.78, 1.32], script: scripts/gen/valley-tree.js, seed: 41, useTerrainColor: false, weight: 0.72, wind: {force: 0.28, scale: 2, speed: 0.55}}, {colorJitter: {hue: 0.012, value: 0.06}, kind: scripted, maxDistance: 700, params: {crown: pine, height: 9.6, radius: 2.9}, randomRotation: true, scale: [0.8, 1.26], script: scripts/gen/valley-tree.js, seed: 43, useTerrainColor: false, weight: 0.28, wind: {force: 0.24, scale: 2, speed: 0.45}}]}
+    settings: {budget: 75000, enabled: true, fadeDistance: 22, maxDistance: 720}
   generator: scripts/den-terrain.js
   kind: heightmap
   materials:
