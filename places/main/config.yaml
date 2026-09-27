@@ -50,6 +50,8 @@ terrain:
   marks:
     river: {kind: sea, level: 0, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
     spawnClearing: {kind: flatten, center: {x: 0, z: -3}, height: 0.5, falloff: 6, shape: {kind: circle, radius: 9}, material: lawn}
+    violetRest: {kind: flatten, center: {x: 30.5, z: -7.6}, height: 0.55, falloff: 3, shape: {kind: circle, radius: 5}}
+    violetClear: {kind: clear-scatter, center: {x: 30.5, z: -7.6}, shape: {kind: circle, radius: 7.5}}
     spawnClear: {kind: clear-scatter, center: {x: 0, z: -3}, shape: {kind: circle, radius: 7}}
     road-east-0: {clearScatter: true, edgeMaterial: yard, edgeWidth: 5, falloff: 3, kind: road, material: cobble, points: [[0, 10], [9.9, 11.3], [19.8, 12.6], [29.7, 14], [39.6, 15.3], [49.6, 16.6], [59.5, 17.9], [69.4, 19.3], [79.3, 20.6], [89.2, 21.9], [99.1, 23.2], [109, 24.5], [118.9, 25.9], [128.9, 27.2], [138.8, 28.5], [148.7, 29.8], [157.8, 28.1], [167.5, 25.6], [177.2, 23.2], [186.9, 20.8], [196.6, 18.4], [206.3, 15.9], [216, 13.5], [225.7, 11.1], [235.4, 8.7], [237.3, 8.2]], width: 6}
     road-east-1: {clearScatter: true, edgeMaterial: yard, edgeWidth: 5, falloff: 3, kind: road, material: cobble, points: [[264.5, 1.4], [270.3, -0.1]], width: 6}

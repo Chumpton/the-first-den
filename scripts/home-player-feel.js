@@ -48,7 +48,7 @@ export function onInput(ctx,input) {
   const touched=seat&&seat.d<=dNear?seat.o:nearest;
   if(touched)ctx.emit('haptic',{kind:'soft'},{audience:{player:me.id}});
   if(seat&&seat.d<=dNear){me.parent=seat.o.id;me.feetPosition={x:seat.pt.x,y:seat.pt.y,z:seat.pt.z};me.rotation={yaw:0};me.state.seatedOn=seat.o.id;me.state.seatPoint=seat.pt;return;}
-  if(nearest){wantMount(ctx,nearest);ctx.emit('press',{by:me.id},{to:nearest.id});}
+  if(nearest){wantMount(ctx,nearest);ctx.emit('press',{by:me.id},{to:nearest.state?.pressTo??nearest.id});}
 }
 export function update(ctx,dt) {
   if(dragonRide(ctx)) return;

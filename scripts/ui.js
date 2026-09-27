@@ -18,6 +18,10 @@ export default function (ctx, player) {
   const hud = secretHint(player) + secretCount(player);
   const c = player?.controlling;
   if (player?.state?.deleteMode) return `<div style="position:fixed;left:50%;top:50%;width:10px;height:10px;margin:-5px 0 0 -5px;border:2px solid #ff6b5b;border-radius:50%;pointer-events:none"></div><div style="position:fixed;left:50%;top:22px;transform:translateX(-50%);pointer-events:none;padding:7px 16px;border-radius:999px;background:rgba(120,24,18,.8);border:1px solid rgba(255,160,150,.5);color:#fff1ee;font-family:Georgia,serif;font-size:14px">delete mode · look at a thing · 9 removes it · 8 exits</div>`;
+  if (c?.state?.kind === 'purple-dragon') {
+    const back = c.state?.phase === 'home' || c.state?.phase === 'land';
+    return hud + `<div style="position:fixed;left:50%;bottom:26px;transform:translateX(-50%);pointer-events:none;padding:7px 16px;border-radius:999px;background:rgba(36,20,48,.72);border:1px solid rgba(214,190,255,.35);color:#f3eaff;font-family:Georgia,'Times New Roman',serif;font-size:14px;letter-spacing:.02em;white-space:nowrap">${back ? 'Violet is taking you home…' : 'Violet is flying you round the grounds · mouse looks · E or space: head home'}</div>`;
+  }
   if (!c || c.state?.kind !== 'dragon') return hud;
   const landing = c.state?.mode === 'land';
   const line = landing ? 'landing…' : 'W fly · mouse steer · space up · shift down · E land';

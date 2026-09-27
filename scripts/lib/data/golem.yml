@@ -28,6 +28,7 @@ keepOuts:
     - { name: catio, x: -11, z: -20, r: 11 }
     - { name: coop, x: 27, z: -28, r: 9 }
     - { name: hives, x: 31, z: -46, r: 8 }
+    - { name: violet, x: 30.3, z: -7.6, r: 8 }
     - { name: warden-tower-s, x: 44, z: -7, r: 7 }
     - { name: gazebo, x: -8, z: -42, r: 9 }
     - { name: gate, x: 0, z: 5, r: 6 }

@@ -7,7 +7,7 @@ function yawOf(r) {
   if (typeof r.w === 'number') return Math.atan2(2 * (r.x * r.z + r.w * r.y), 1 - 2 * (r.x * r.x + r.y * r.y)) * 180 / Math.PI;
   return r.yaw ?? 0;
 }
-export function wantMount(ctx, target) { if (target?.tags?.includes('dragon') || target?.tags?.includes('mount')) ctx.self.state.mountWant = { id: target.id, at: ctx.now() }; }
+export function wantMount(ctx, target) { if (target?.tags?.includes('dragon') || target?.tags?.includes('mount')) ctx.self.state.mountWant = { id: target.state?.pressTo ?? target.id, at: ctx.now() }; }
 // true = the dragon owns this tick of the body
 export function dragonRide(ctx) {
   const me = ctx.self, s = me.state;
