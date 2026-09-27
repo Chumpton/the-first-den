@@ -2,7 +2,104 @@
 hearthmere:
   feetPosition: {x: -1000, y: 0.5, z: -500}
   id: hearthmere
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 320, height: 45, kind: box, width: 320}
-  tags: [blueprint]
+  state: {town: Hearthmere}
+  tags: [hearthmere]
+hearthmere/hearth-house-r1:
+  feetPosition: {x: 30.21, y: 0, z: 36}
+  id: hearthmere/hearth-house-r1
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6.4, floors: 2, roof: tile, width: 7.8}, script: scripts/gen/hearth-house.js, seed: 4}
+  rotation: {yaw: 40}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-r2:
+  feetPosition: {x: 17.61, y: 0, z: 43.58}
+  id: hearthmere/hearth-house-r2
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 5.8, floors: 2, roof: thatch, width: 6.6}, script: scripts/gen/hearth-house.js, seed: 5}
+  rotation: {yaw: 22}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-r3:
+  feetPosition: {x: -17.61, y: 0, z: 43.58}
+  id: hearthmere/hearth-house-r3
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6.7, floors: 1, roof: thatch, width: 7.9}, script: scripts/gen/hearth-house.js, seed: 6}
+  rotation: {yaw: -22}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-r4:
+  feetPosition: {x: -31.45, y: 0, z: 34.93}
+  id: hearthmere/hearth-house-r4
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6.1, floors: 2, roof: tile, width: 6.7}, script: scripts/gen/hearth-house.js, seed: 7}
+  rotation: {yaw: -42}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-r5:
+  feetPosition: {x: -41.5, y: 0, z: 22.07}
+  id: hearthmere/hearth-house-r5
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 5.5, floors: 2, roof: thatch, width: 8}, script: scripts/gen/hearth-house.js, seed: 8}
+  rotation: {yaw: -62}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-r6:
+  feetPosition: {x: -42.6, y: 0, z: -19.86}
+  id: hearthmere/hearth-house-r6
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6.4, floors: 1, roof: thatch, width: 6.8}, script: scripts/gen/hearth-house.js, seed: 9}
+  rotation: {yaw: -115}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-r7:
+  feetPosition: {x: -31.45, y: 0, z: -34.93}
+  id: hearthmere/hearth-house-r7
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 5.8, floors: 2, roof: tile, width: 8.1}, script: scripts/gen/hearth-house.js, seed: 10}
+  rotation: {yaw: -138}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-r8:
+  feetPosition: {x: -14.52, y: 0, z: -44.7}
+  id: hearthmere/hearth-house-r8
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6.7, floors: 2, roof: thatch, width: 6.9}, script: scripts/gen/hearth-house.js, seed: 11}
+  rotation: {yaw: -162}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-r9:
+  feetPosition: {x: 6.54, y: 0, z: -46.54}
+  id: hearthmere/hearth-house-r9
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6.1, floors: 1, roof: thatch, width: 8.2}, script: scripts/gen/hearth-house.js, seed: 12}
+  rotation: {yaw: 172}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-w1:
+  feetPosition: {x: -58, y: 0, z: -19}
+  id: hearthmere/hearth-house-w1
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6, floors: 1, roof: thatch, width: 7}, script: scripts/gen/hearth-house.js, seed: 27}
+  rotation: {yaw: 180}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-w2:
+  feetPosition: {x: -56, y: 0, z: 13}
+  id: hearthmere/hearth-house-w2
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 5.5, floors: 2, roof: tile, width: 6.5}, script: scripts/gen/hearth-house.js, seed: 28}
+  rotation: {yaw: 0}
+  tags: [hearth-house]
+  visibleRange: {max: 700}

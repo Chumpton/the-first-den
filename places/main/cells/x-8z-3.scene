@@ -1,0 +1,19 @@
+# spawn-scene v2 yaml x-8z-3
+hearthmere/hearth-house-s1:
+  feetPosition: {x: 16, y: 0, z: 56}
+  id: hearthmere/hearth-house-s1
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6, floors: 2, roof: tile, width: 7}, script: scripts/gen/hearth-house.js, seed: 26}
+  rotation: {yaw: 71.6}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-s2:
+  feetPosition: {x: -46, y: 0, z: 52}
+  id: hearthmere/hearth-house-s2
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6, floors: 1, roof: thatch, width: 7}, script: scripts/gen/hearth-house.js, seed: 31}
+  rotation: {yaw: -106.4}
+  tags: [hearth-house]
+  visibleRange: {max: 700}

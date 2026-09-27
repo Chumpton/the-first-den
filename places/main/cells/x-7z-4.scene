@@ -1,0 +1,91 @@
+# spawn-scene v2 yaml x-7z-4
+hearthmere/hearth-home:
+  feetPosition: {x: 104, y: 0, z: 33}
+  id: hearthmere/hearth-home
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6, floors: 1, interior: home, roof: thatch, width: 7}, script: scripts/gen/hearth-house.js, seed: 25}
+  rotation: {yaw: -8.1}
+  tags: [hearth-house, hearth-enterable]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-bakery:
+  feetPosition: {x: 42.6, y: 0, z: -19.86}
+  id: hearthmere/hearth-house-bakery
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 7, floors: 1, interior: bakery, roof: tile, width: 8}, script: scripts/gen/hearth-house.js, seed: 13}
+  rotation: {yaw: 115}
+  tags: [hearth-house, hearth-enterable]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-m1:
+  feetPosition: {x: 82, y: 0, z: -7}
+  id: hearthmere/hearth-house-m1
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6, floors: 2, roof: tile, width: 7}, script: scripts/gen/hearth-house.js, seed: 21}
+  rotation: {yaw: 180}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-m2:
+  feetPosition: {x: 62, y: 0, z: 19}
+  id: hearthmere/hearth-house-m2
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6, floors: 1, roof: thatch, width: 7.5}, script: scripts/gen/hearth-house.js, seed: 22}
+  rotation: {yaw: 0}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-m3:
+  feetPosition: {x: 85, y: 0, z: 23}
+  id: hearthmere/hearth-house-m3
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 5.5, floors: 2, roof: thatch, width: 6.5}, script: scripts/gen/hearth-house.js, seed: 23}
+  rotation: {yaw: 4.4}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-m4:
+  feetPosition: {x: 112, y: 0, z: 5}
+  id: hearthmere/hearth-house-m4
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6, floors: 1, roof: tile, width: 7}, script: scripts/gen/hearth-house.js, seed: 24}
+  rotation: {yaw: 162.9}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-n1:
+  feetPosition: {x: 44, y: 0, z: -71}
+  id: hearthmere/hearth-house-n1
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6, floors: 2, roof: thatch, width: 7.5}, script: scripts/gen/hearth-house.js, seed: 29}
+  rotation: {yaw: -162.5}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-n2:
+  feetPosition: {x: 68, y: 0, z: -67}
+  id: hearthmere/hearth-house-n2
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 5.5, floors: 1, roof: tile, width: 6.5}, script: scripts/gen/hearth-house.js, seed: 30}
+  rotation: {yaw: 144.8}
+  tags: [hearth-house]
+  visibleRange: {max: 700}
+hearthmere/hearth-house-tavern:
+  feetPosition: {x: 41.5, y: 0, z: 22.07}
+  id: hearthmere/hearth-house-tavern
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 8, floors: 2, interior: tavern, roof: thatch, width: 10}, script: scripts/gen/hearth-house.js, seed: 3}
+  rotation: {yaw: 62}
+  tags: [hearth-house, hearth-enterable]
+  visibleRange: {max: 700}
+hearthmere/hearth-workshop:
+  feetPosition: {x: 60, y: 0, z: -9}
+  id: hearthmere/hearth-workshop
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {depth: 7, floors: 2, interior: workshop, roof: thatch, width: 8}, script: scripts/gen/hearth-house.js, seed: 20}
+  rotation: {yaw: 180}
+  tags: [hearth-house, hearth-enterable]
+  visibleRange: {max: 700}
