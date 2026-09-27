@@ -1,4 +1,4 @@
-// Tiny low lawn life, 4–14 cm tall. params.kind: "tuft" (a few blades), "clover" (trefoil patch), "daisy", "buttercup", "violet".
+// Tiny low lawn life, 4–14 cm tall. params.kind: "tuft" (a few blades), "clover" (trefoil patch), "daisy", "buttercup", "violet", "tulip", "rose" (params.hue tints tulip/rose).
 // A small clump per instance; feet at 0. No collider.
 import { blob } from './critter-mesh.js';
 const TAU = Math.PI * 2;
@@ -22,5 +22,20 @@ export function geometry(ctx) {
   if (k === 'daisy') for (let i = 0; i < n; i++) flower(ctx, (rnd() - 0.5) * 0.14, 0.06 + rnd() * 0.06, (rnd() - 0.5) * 0.14, 'oklch(0.97 0.01 90)', 'oklch(0.85 0.16 90)', 0.018, 8);
   if (k === 'buttercup') for (let i = 0; i < n; i++) flower(ctx, (rnd() - 0.5) * 0.14, 0.08 + rnd() * 0.06, (rnd() - 0.5) * 0.14, 'oklch(0.88 0.17 95)', 'oklch(0.8 0.15 80)', 0.014, 5);
   if (k === 'violet') for (let i = 0; i < n; i++) flower(ctx, (rnd() - 0.5) * 0.12, 0.05 + rnd() * 0.04, (rnd() - 0.5) * 0.12, 'oklch(0.6 0.16 300)', 'oklch(0.9 0.1 95)', 0.013, 5);
+  if (k === 'tulip') { const hue = p.hue ?? 25, m = lo ? 1 : 1 + Math.floor(rnd() * 3);
+    for (let i = 0; i < m; i++) { const x = (rnd() - 0.5) * 0.12, z = (rnd() - 0.5) * 0.12, h = 0.1 + rnd() * 0.05, a0 = rnd() * TAU;
+      ctx.color('oklch(0.58 0.11 140)'); blade(ctx, x, z, h, 0.005, a0);
+      for (const s of [0, Math.PI]) { const la = a0 + s + 0.4, lx = Math.cos(la) * 0.05, lz = Math.sin(la) * 0.05; ctx.tri(x, 0, z, x + lx, h * 0.55, z + lz, x + lz * 0.35, h * 0.7, z - lx * 0.35); ctx.tri(x, 0, z, x + lz * 0.35, h * 0.7, z - lx * 0.35, x + lx, h * 0.55, z + lz); }
+      ctx.color(`oklch(${(0.62 + rnd() * 0.1).toFixed(3)} 0.2 ${(hue + (rnd() - 0.5) * 16).toFixed(0)})`);
+      const r = 0.018, c = 0.034;
+      for (let j = 0; j < 4; j++) { const a = a0 + j / 4 * TAU, b = a + TAU / 4, px = Math.cos(a) * r, pz = Math.sin(a) * r, qx = Math.cos(b) * r, qz = Math.sin(b) * r, ox = (px + qx) * 0.75, oz = (pz + qz) * 0.75;
+        ctx.tri(x, h, z, x + px, h + c * 0.4, z + pz, x + ox, h + c, z + oz); ctx.tri(x, h, z, x + ox, h + c, z + oz, x + qx, h + c * 0.4, z + qz);
+        ctx.tri(x, h, z, x + ox, h + c, z + oz, x + px, h + c * 0.4, z + pz); ctx.tri(x, h, z, x + qx, h + c * 0.4, z + qz, x + ox, h + c, z + oz); } } }
+  if (k === 'rose') { const hue = p.hue ?? 5; ctx.color('oklch(0.42 0.08 145)');
+    for (let i = 0; i < (lo ? 2 : 5); i++) { const a = rnd() * TAU, d = 0.03 + rnd() * 0.06; blob(ctx, [Math.cos(a) * d, 0.05 + rnd() * 0.04, Math.sin(a) * d], [0.045, 0.03, 0.045], { seg: 5, rings: 2 }); }
+    const m = lo ? 1 : 2 + Math.floor(rnd() * 2);
+    for (let i = 0; i < m; i++) { const x = (rnd() - 0.5) * 0.12, z = (rnd() - 0.5) * 0.12, h = 0.1 + rnd() * 0.04, L = 0.5 + rnd() * 0.12;
+      ctx.color(`oklch(${L.toFixed(3)} 0.19 ${(hue + (rnd() - 0.5) * 14).toFixed(0)})`); blob(ctx, [x, h, z], [0.024, 0.02, 0.024], { seg: 6, rings: 3 });
+      ctx.color(`oklch(${(L - 0.12).toFixed(3)} 0.17 ${hue})`); blob(ctx, [x, h + 0.014, z], [0.012, 0.01, 0.012], { seg: 5, rings: 2 }); } }
 }
 export function collider() { return null; }
