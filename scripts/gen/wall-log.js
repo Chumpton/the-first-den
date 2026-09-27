@@ -14,7 +14,14 @@ export function geometry(ctx) {
   ctx.flat(); ctx.albedo('scripts/tex-valley-bark.js'); ctx.color('oklch(0.62 0.05 60)'); ctx.roughness(0.95);
   const rings = []; for (let i = 0; i <= seg; i++) rings.push(ringAt(-L / 2 + L * i / seg, r * (1 - i * 0.05), n, rnd));
   for (let i = 0; i < seg; i++) for (let j = 0; j < n; j++) { const jj = (j + 1) % n, a = rings[i][j], b = rings[i + 1][j], c = rings[i + 1][jj], d = rings[i][jj]; ctx.quad(...a, ...d, ...c, ...b); }
-  ctx.albedo(null); ctx.color('oklch(0.8 0.06 70)'); cap(ctx, rings[0], true); cap(ctx, rings[seg], false);
+  ctx.albedo(null); ctx.color('oklch(0.8 0.06 70)');
+  if (ctx.params.hollow) { // params.hollow: a rotted-out bore — rim annulus at each end, a dark inner tube a little way in
+    const k = 0.62, inner = (rg) => rg.map((p) => [p[0], r + (p[1] - r) * k, p[2] * k]), i0 = inner(rings[0]), i1 = inner(rings[seg]);
+    for (let j = 0; j < n; j++) { const jj = (j + 1) % n;
+      ctx.quad(...rings[0][j], ...rings[0][jj], ...i0[jj], ...i0[j]); ctx.quad(...rings[seg][j], ...i1[j], ...i1[jj], ...rings[seg][jj]); }
+    ctx.color('oklch(0.32 0.04 55)');
+    for (let j = 0; j < n; j++) { const jj = (j + 1) % n; ctx.quad(...i0[j], ...i0[jj], ...i1[jj], ...i1[j]); }
+  } else { cap(ctx, rings[0], true); cap(ctx, rings[seg], false); }
   if (lod >= 3) return;
   const MOSS = ['oklch(0.70 0.10 128)', 'oklch(0.76 0.11 120)', 'oklch(0.64 0.09 136)'];
   for (let i = 0; i < 4; i++) { ctx.color(MOSS[i % 3]); const x = -L / 2 + L * (0.12 + rnd() * 0.76); lump(ctx, x, r * 1.9, (rnd() - 0.5) * r * 0.5, r * (0.5 + rnd() * 0.4), r * 0.28, r * 0.7); }

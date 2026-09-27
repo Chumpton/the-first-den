@@ -2,6 +2,8 @@ import { ring, loft, cap } from "./valley-mesh.js";
 // The forest's plant kit, one script: params.kind = broadleaf | sapling | shrub | fern | reed | log. Feet at the ground, +Y up.
 const TAU = Math.PI * 2;
 const LEAF = ["#2f5a2e", "#3c6e34", "#4f8a3c", "#6a9f45"], SUNLIT = "#8fbf55";
+// params.leaf picks a crown palette: default deep forest green; "spring" is a lighter deciduous green (limes, beech)
+const LEAVES = { spring: { leaf: ["#557f35", "#6a9640", "#82ad4c", "#9cc35d"], sun: "#b8d772", bark: "#a3927c" } };
 // a lumpy low-poly ball, flat-shaded: a lat-long sphere with seeded radial noise
 function blob(ctx, cx, cy, cz, rx, ry, rz, seg, colors) {
   const lat = Math.max(3, seg - 2), pts = [];
@@ -30,17 +32,18 @@ const kinds = {
   broadleaf(ctx, lod) {
     const h = Number(ctx.params.height ?? 26), r = Number(ctx.params.radius ?? 6), n = lod >= 4 ? 5 : 8, seg = lod >= 4 ? 5 : lod >= 3 ? 6 : 8;
     const bole = h * (0.5 + ctx.random() * 0.1), tr = h * 0.022;
-    bark(ctx); ctx.color("#8b7a66");
+    const pal = LEAVES[ctx.params.leaf], L4 = pal ? pal.leaf : LEAF, SUN = pal ? pal.sun : SUNLIT;
+    bark(ctx); ctx.color(pal ? pal.bark : "#8b7a66");
     const base = ring(0, 0, 0, tr * 1.9, tr * 1.9, n), a = ring(0, 0.8, 0, tr * 1.15, tr * 1.15, n), b = ring(0, bole, 0, tr * 0.8, tr * 0.8, n), c = ring(0, h * 0.8, 0, tr * 0.35, tr * 0.35, n);
     cap(ctx, base, false); loft(ctx, base, a); loft(ctx, a, b); loft(ctx, b, c);
     if (lod < 3) for (let i = 0; i < 4; i++) { const th = i / 4 * TAU + ctx.random(), y0 = bole * (0.95 + i * 0.08), L = r * 0.75; limb(ctx, [0, y0, 0], [Math.cos(th) * L, y0 + L * 0.7, Math.sin(th) * L], tr * 0.45, tr * 0.12, 5); }
     ctx.albedo("scripts/tex-valley-canopy.js"); ctx.flat(); ctx.roughness(0.9);
     const clumps = lod >= 4 ? 3 : lod >= 3 ? 6 : 10;
-    blob(ctx, 0, h - r * 0.55, 0, r * 0.7, r * 0.55, r * 0.7, seg, [LEAF[1], LEAF[2], LEAF[3], SUNLIT]);
+    blob(ctx, 0, h - r * 0.55, 0, r * 0.7, r * 0.55, r * 0.7, seg, [L4[1], L4[2], L4[3], SUN]);
     for (let i = 0; i < clumps; i++) {
       const th = i / clumps * TAU * 1.6 + ctx.random() * 0.8, t = ctx.random(), d = r * (0.45 + t * 0.45), y = bole + r * 0.35 + (h - bole - r * 0.9) * ctx.random();
       const s = r * (0.42 + ctx.random() * 0.2);
-      blob(ctx, Math.cos(th) * d, y, Math.sin(th) * d, s, s * 0.72, s, seg, [LEAF[0], LEAF[1], LEAF[2], LEAF[3]]);
+      blob(ctx, Math.cos(th) * d, y, Math.sin(th) * d, s, s * 0.72, s, seg, [L4[0], L4[1], L4[2], L4[3]]);
     }
   },
   sapling(ctx, lod) {

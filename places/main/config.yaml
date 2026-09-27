@@ -185,13 +185,16 @@ terrain:
           - {kind: scripted, script: scripts/gen/wildflowers.js, params: {hue: 255, chroma: 0.16, light: 0.62, height: 0.18, heads: 4}, seed: 93, weight: 0.2, scale: [0.7, 1], randomRotation: true, maxDistance: 45, wind: {force: 0.3, scale: 1, speed: 1.1}}
           - {kind: scripted, script: scripts/gen/wildflowers.js, params: {hue: 300, chroma: 0.17, light: 0.66, height: 0.18, heads: 4}, seed: 94, weight: 0.2, scale: [0.7, 1], randomRotation: true, maxDistance: 45, wind: {force: 0.3, scale: 1, speed: 1.1}}
       canopy:
-        density: 0.0065
+        density: 0.006
         constraints: {heightRange: [0.3, 5]}
         items:
-          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 28, radius: 6.5}, seed: 1, weight: 0.3, scale: [0.8, 1.2], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.18, scale: 2, speed: 0.4}}
-          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 24, radius: 5.5}, seed: 2, weight: 0.25, scale: [0.85, 1.25], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.18, scale: 2, speed: 0.4}}
-          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 32, radius: 7}, seed: 3, weight: 0.2, scale: [0.8, 1.15], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.16, scale: 2, speed: 0.35}}
-          - {kind: scripted, script: scripts/gen/valley-tree.js, params: {crown: fir, height: 26, radius: 4}, seed: 41, weight: 0.25, scale: [0.8, 1.2], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.015, value: 0.08}, wind: {force: 0.2, scale: 2, speed: 0.45}}
+          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 28, radius: 6.5}, seed: 1, weight: 0.2, scale: [0.8, 1.25], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.18, scale: 2, speed: 0.4}}
+          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 24, radius: 5.5}, seed: 2, weight: 0.15, scale: [0.8, 1.25], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.18, scale: 2, speed: 0.4}}
+          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 32, radius: 7}, seed: 3, weight: 0.12, scale: [0.8, 1.2], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.16, scale: 2, speed: 0.35}}
+          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, leaf: spring, height: 20, radius: 5.2}, seed: 4, weight: 0.18, scale: [0.8, 1.25], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.02, value: 0.08}, wind: {force: 0.2, scale: 2, speed: 0.45}}
+          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, leaf: spring, height: 16, radius: 4.4}, seed: 5, weight: 0.12, scale: [0.8, 1.25], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.02, value: 0.08}, wind: {force: 0.22, scale: 2, speed: 0.5}}
+          - {kind: scripted, script: scripts/gen/valley-tree.js, params: {crown: fir, height: 26, radius: 4}, seed: 41, weight: 0.13, scale: [0.8, 1.25], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.015, value: 0.08}, wind: {force: 0.2, scale: 2, speed: 0.45}}
+          - {kind: scripted, script: scripts/gen/valley-tree.js, params: {crown: fir, height: 20, radius: 3.4}, seed: 42, weight: 0.1, scale: [0.8, 1.25], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.015, value: 0.08}, wind: {force: 0.2, scale: 2, speed: 0.45}}
       ancients:
         density: 0.00045
         constraints: {heightRange: [0.3, 5], slopeRange: [0, 0.15]}
@@ -237,7 +240,8 @@ terrain:
         density: 0.001
         constraints: {heightRange: [0.3, 5], slopeRange: [0, 0.1]}
         items:
-          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: log, length: 6, radius: 0.35}, seed: 51, scale: [0.7, 1.4], randomRotation: true, maxDistance: 120}
+          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: log, length: 6, radius: 0.35}, seed: 51, weight: 0.6, scale: [0.7, 1.4], randomRotation: true, maxDistance: 120}
+          - {kind: scripted, script: scripts/gen/wall-log.js, params: {length: 3.4, radius: 0.36, hollow: true}, seed: 52, weight: 0.4, scale: [0.8, 1.25], randomRotation: true, maxDistance: 100}
       reeds:
         density: 0.5
         items:
