@@ -69,7 +69,7 @@ terrain:
     campSite: {center: {x: -18, z: -50}, falloff: 5, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 6}}
     campClear: {center: {x: -18, z: -50}, kind: clear-scatter, shape: {kind: circle, radius: 8}}
     lakeClear: {center: {x: 4, z: -76}, kind: clear-scatter, shape: {kind: circle, radius: 24}}
-    pathFront: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[0, 10], [0.5, 2], [-1, -8], [0, -16.5]], width: 2.2, edgeMaterial: yard, falloff: 3.5}
+    pathFront: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[0.25, 7], [0, -16.5]], width: 5, edgeMaterial: yard, falloff: 3.5}
     pathLake: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[0, -35.5], [1.5, -40], [5, -45], [6, -50]], width: 2, edgeMaterial: yard, falloff: 3.5}
     pathCamp: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[1.5, -40], [-6, -43], [-13, -47], [-16, -49]], width: 1.6, edgeMaterial: yard, falloff: 3.5}
     lumenvaleClear: {center: {x: 1100, z: -250}, kind: clear-scatter, shape: {kind: circle, radius: 190}}
