@@ -8,7 +8,10 @@ assets:
     "anim/coop-hen.yml#peck": clips/anim-coop-hen-yml-peck-f34d15be.json
     "anim/coop-hen.yml#scratch": clips/anim-coop-hen-yml-scratch-e1d7fc5b.json
     "anim/coop-hen.yml#walk": clips/anim-coop-hen-yml-walk-70d0cb2a.json
+    "anim/courier.yml#greet": clips/anim-courier-yml-greet-2e8d98ca.json
+    "anim/courier.yml#horse-canter": clips/anim-courier-yml-horse-canter-6dbd5c64.json
     "anim/courier.yml#horse-idle": clips/anim-courier-yml-horse-idle-94498487.json
+    "anim/courier.yml#horse-walk": clips/anim-courier-yml-horse-walk-fa1a06bc.json
     "anim/courier.yml#pat": clips/anim-courier-yml-pat-f55a715a.json
     "anim/courier.yml#stand": clips/anim-courier-yml-stand-a8b8e8a3.json
     "anim/critter-bird.yml#flap": clips/anim-critter-bird-yml-flap-a9bd53ee.json
