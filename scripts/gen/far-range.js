@@ -55,7 +55,7 @@ export function geometry(ctx) {
       const t = SS(0.02, 0.22, f); // low flanks under forest, bluing into rock
       ctx.color(`oklch(${(0.4 + t * 0.12).toFixed(3)} ${(0.045 - t * 0.017).toFixed(3)} ${(170 + t * 75).toFixed(0)})`);
     }
-    const tl = 0.3 + n * 0.08, dens = SS(tl, tl - 0.09, f) * SS(1.5, 0.8, slope) * SS(-0.06, 0.02, f); // the forest climbs the flanks and stops under the rock
+    const tl = 0.36 + n * 0.07, dens = SS(tl, tl - 0.09, f) * SS(1.5, 0.8, slope) * SS(-0.06, 0.02, f); // the forest climbs the flanks and stops under the rock
     if (dens > 0.35 && snow < 0.3) ctx.color(`oklch(${(0.34 + ctx.random() * 0.04).toFixed(3)} 0.055 ${(148 + n * 20).toFixed(0)})`);
     ctx.quad(x0, a, z0, x0, b, z1, x1, c, z1, x1, d, z0);
     const per = ctx.lod <= 2 ? 3 : ctx.lod === 3 ? 1 : 0;
