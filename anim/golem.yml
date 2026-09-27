@@ -1,0 +1,31 @@
+walk:
+  duration: 2.4
+  tracks:
+    legL: { pitch: [18, -18, 18] }
+    legR: { pitch: [-18, 18, -18] }
+    armL: { pitch: [-10, 10, -10], roll: [0, 2, 0] }
+    armR: { pitch: [10, -10, 10], roll: [0, -2, 0] }
+    hips: { y: [0, -0.05, 0, -0.05, 0], roll: [-2, 2, -2] }
+    spine: { roll: [3, -3, 3], yaw: [-4, 4, -4], pitch: [-4, -4, -4] }
+    head: { yaw: [3, -3, 3], roll: [-2, 2, -2] }
+idle:
+  duration: 5
+  tracks:
+    spine: { pitch: [0, 2.5, 0, 2.5, 0], roll: [0, 0, 1, 0, 0] }
+    hips: { y: [0, 0.02, 0, 0.02, 0] }
+    head: { yaw: [0, 0, 22, 22, 0, -18, -18, 0], pitch: [0, 0, 3, 3, 0, 0, 0, 0] }
+    armL: { pitch: [0, 2, 0, 2, 0], roll: [0, 1.5, 0, 1.5, 0] }
+    armR: { pitch: [0, 2, 0, 2, 0], roll: [0, -1.5, 0, -1.5, 0] }
+look:
+  duration: 4
+  tracks:
+    head: { yaw: [0, 34, 38, 36, 0], pitch: [0, 5, 6, 5, 0] }
+    spine: { yaw: [0, 10, 12, 10, 0] }
+    armL: { pitch: [0, 3, 3, 3, 0] }
+bow:
+  duration: 2.6
+  tracks:
+    head: { pitch: [0, -28, -30, -28, 0] }
+    spine: { pitch: [0, -9, -10, -9, 0] }
+    armL: { pitch: [0, 6, 6, 6, 0] }
+    armR: { pitch: [0, 6, 6, 6, 0] }
