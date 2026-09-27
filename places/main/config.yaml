@@ -46,6 +46,7 @@ terrain:
       grass:
         - grass
       forest: [valleyForest]
+      upland: [valleyForest]
     layers:
       grass:
         density: 50
