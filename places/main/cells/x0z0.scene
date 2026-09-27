@@ -2268,6 +2268,13 @@ treehouse-guest-lamp:
   feetPosition: {x: -19.2, y: 10.1, z: -27.5}
   id: treehouse-guest-lamp
   light: {color: oklch(0.8 0.14 340), distance: 7, intensity: 1.4, kind: point}
+treehouse-guest-rug:
+  feetPosition: {x: -18, y: 7.535, z: -29}
+  id: treehouse-guest-rug
+  material: {roughness: 1, texture: /cdn/value.ad55d97d454e6fcb9f16bc433d473512355e0701d7632c36bb7f42563dae1bd7.png}
+  primitive: {height: 0.012, kind: cylinder, radialSegments: 48, radiusBottom: 3.05, radiusTop: 3.05}
+  receiveShadow: true
+  tags: [treehouse]
 treehouse-guest-tapestry:
   feetPosition: {x: -15.81, y: 8.35, z: -31.68}
   id: treehouse-guest-tapestry
