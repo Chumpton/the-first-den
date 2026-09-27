@@ -4,15 +4,15 @@
 export const HOUSE = {
   R: 9.2, T: 0.5, B: -3.0, G: 0.4, A: 3.8, D: 7.2, wallBottom: -3.25, wallTop: 5.25,
   eaveR: 10.1, eaveY: 4.75, deckR: 4.8, roofT: 0.45, hole: 1.6, rail: 1.7, trunkR: 0.35, stepR: 1.55,
-  rise: 0.2, run: 0.28, treads: 16, flightW: 1.0,
-  // straight flights: bottom point, run direction, which floor they start on
+  rise: 0.2, run: 0.21, treads: 17, flightW: 1.0,
+  // straight flights hugging the front and back walls: bottom point, run direction, floor they start on
   flights: [
-    { x: 3.7, z: 2.3, dx: 0, dz: -1, y: -3.0 },
-    { x: -2.5, z: 2.3, dx: 0, dz: -1, y: 0.4 },
-    { x: -3.08, z: 1.5, dx: 1, dz: 0, y: 3.8 },
+    { x: 4.62, z: 6.4, dx: -1, dz: 0, y: -3.0 },
+    { x: 4.62, z: -6.4, dx: -1, dz: 0, y: 0.4 },
+    { x: -1.8, z: 3.3, dx: 1, dz: 0, y: 3.8 },
   ],
-  // floor openings [x0, z0, x1, z1] and the side left open for arrival
-  hatchG: [3.15, -2.25, 4.25, 1.0], hatchA: [-3.05, -2.25, -1.95, 1.0], hatchD: [-2.3, 0.95, 1.42, 2.05],
+  // floor openings [x0, z0, x1, z1]
+  hatchG: [1.05, 5.9, 4.62, 6.9], hatchA: [1.05, -6.9, 4.62, -5.9], hatchD: [-1.8, 2.8, 1.8, 3.8],
   trunkHole: 0.42, doorW: 1.6, doorH: 2.5,
 };
 const H = HOUSE, D2R = Math.PI / 180, COS30 = Math.cos(30 * D2R), TAN30 = Math.tan(30 * D2R);
@@ -290,7 +290,7 @@ function build(ctx, collide) {
   floorSlab(ctx, H.A, 0.3, AI + 0.1, [TH, H.hatchB ?? H.hatchA], plankTop, beams, collide);
   floorSlab(ctx, H.D, H.roofT, H.deckR * COS30, [TH, H.hatchD], plankTop, beams, collide);
   for (const F of H.flights) flight(ctx, F, collide, stone, beams);
-  beams(); hatchRail(ctx, H.G, H.hatchG, "z0", collide); hatchRail(ctx, H.A, H.hatchA, "z0", collide); hatchRail(ctx, H.D, H.hatchD, "x1", collide);
+  beams(); hatchRail(ctx, H.G, H.hatchG, "x0", collide); hatchRail(ctx, H.A, H.hatchA, "x0", collide); hatchRail(ctx, H.D, H.hatchD, "x1", collide);
   beams(); deckRail(ctx, collide);
   // door thresholds and the two steps up to each door — solid, so the doorway walks
   for (const k of [1, 4]) {
