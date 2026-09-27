@@ -68,6 +68,30 @@ ember-roost/water:
   parent: ember-roost
   primitive: {kind: scripted, params: {part: water}, script: scripts/gen/ember-roost.js}
   visibleRange: {max: 250}
+farm-alpaca-1:
+  feetPosition: {x: -48, y: 0.5, z: 68}
+  id: farm-alpaca-1
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-alpaca.js, seed: 25}
+  rotation: {yaw: -60}
+  state: {species: alpaca, yaw: -60}
+  tags: [farm-flock-alpaca, alpaca, farm-animal]
+  visibleRange: {max: 110}
+farm-alpaca-2:
+  feetPosition: {x: -50.5, y: 0.5, z: 72}
+  id: farm-alpaca-2
+  primitive: {kind: scripted, params: {coat: oklch(0.91 0.03 82), snout: oklch(0.6 0.04 60)}, script: scripts/gen/animal-alpaca.js, seed: 26}
+  rotation: {yaw: 150}
+  state: {species: alpaca, yaw: 150}
+  tags: [farm-flock-alpaca, alpaca, farm-animal]
+  visibleRange: {max: 110}
+farm-alpaca-3:
+  feetPosition: {x: -45.5, y: 0.5, z: 71}
+  id: farm-alpaca-3
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-alpaca.js, seed: 27}
+  rotation: {yaw: 30}
+  state: {species: alpaca, yaw: 30}
+  tags: [farm-flock-alpaca, alpaca, farm-animal]
+  visibleRange: {max: 110}
 folk-crowd:
   behavior: scripts/folk-crowd.js
   feetPosition: {x: 0, y: 0.4140134773960745, z: 128}
@@ -264,10 +288,63 @@ orchard-east/cider-barrels-2:
 pasture-west:
   feetPosition: {x: -41, y: 0.5, z: 70}
   id: pasture-west
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 40, height: 3, kind: box, width: 24}
-  tags: [blueprint]
+  rotation: {yaw: 0}
+  state: {piece: pasture-west}
+  tags: [farm, pasture]
+pasture-west/farmhouse:
+  castShadow: true
+  feetPosition: {x: 8, y: -0.06, z: -4}
+  id: pasture-west/farmhouse
+  parent: pasture-west
+  physics: static
+  primitive: {kind: scripted, params: {h: 2.6, hue: 25, r: 3.4, roof: 1.6, sx: 1.25, trim: 130}, script: scripts/gen/hex-cottage.js, seed: 31}
+  rotation: {yaw: 90}
+  visibleRange: {max: 260}
+pasture-west/farmhouse-barrels:
+  castShadow: false
+  feetPosition: {x: 3.2, y: 0, z: 0.5}
+  id: pasture-west/farmhouse-barrels
+  parent: pasture-west
+  physics: static
+  primitive: {kind: scripted, params: {item: barrels, n: 2}, script: scripts/gen/farm-props.js, seed: 4}
+  rotation: {yaw: 0}
+  visibleRange: {max: 140}
+pasture-west/feed-rack:
+  castShadow: false
+  feetPosition: {x: -10, y: 0, z: 4.5}
+  id: pasture-west/feed-rack
+  parent: pasture-west
+  physics: static
+  primitive: {kind: scripted, params: {kind: rack}, script: scripts/gen/pasture-yard.js}
+  rotation: {yaw: 90}
+  visibleRange: {max: 140}
+pasture-west/pen-alpaca:
+  behavior: scripts/pasture-flock.js
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: pasture-west/pen-alpaca
+  parent: pasture-west
+  physics: static
+  primitive: {kind: scripted, params: {closed: true, flockTag: farm-flock-alpaca, gates: [{open: 0, seg: 1, t: 0.5, w: 2.4}], items: [{k: rack, x: -10, z: 4.5}, {k: trough, x: -4, z: 5}], points: [[-12, -5], [-2, -5], [-2, 7], [-12, 7]], post: 2.5, style: pen}, script: scripts/gen/farm-fence.js}
+  visibleRange: {max: 160}
+pasture-west/pen-sheep:
+  behavior: scripts/pasture-flock.js
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: pasture-west/pen-sheep
+  parent: pasture-west
+  physics: static
+  primitive: {kind: scripted, params: {closed: true, flockTag: farm-flock-sheep, gates: [{open: 0, seg: 1, t: 0.5, w: 2.4}], items: [{k: trough, x: -4, z: -17.5}], points: [[-12, -20], [-2, -20], [-2, -9], [-12, -9]], post: 2.5, style: pen}, script: scripts/gen/farm-fence.js}
+  visibleRange: {max: 160}
+pasture-west/trough-b:
+  castShadow: false
+  feetPosition: {x: -4, y: 0, z: 5}
+  id: pasture-west/trough-b
+  parent: pasture-west
+  physics: static
+  primitive: {kind: scripted, params: {kind: trough}, script: scripts/gen/pasture-yard.js}
+  rotation: {yaw: 0}
+  visibleRange: {max: 140}
 royal-armoury:
   children: [{castShadow: false, feetPosition: {x: 0, y: 4.3, z: -4.72}, id: plaque, material: {color: oklch(0.32 0.1 262)}, primitive: {depth: 0.06, height: 0.62, kind: box, width: 3.4}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:300px;letter-spacing:12px\">ROYAL ARMOURY</div>", visibleRange: {max: 90}}]
   feetPosition: {x: 16.5, y: 0.5, z: 169.5}

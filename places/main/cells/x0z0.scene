@@ -2725,6 +2725,38 @@ farm-east/scarecrow:
   parent: farm-east
   primitive: {kind: scripted, params: {item: scarecrow}, script: scripts/gen/farm-props.js, seed: 4}
   rotation: {yaw: 160}
+farm-sheep-1:
+  feetPosition: {x: -50, y: 0.5, z: 53}
+  id: farm-sheep-1
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-sheep.js, seed: 21}
+  rotation: {yaw: 40}
+  state: {species: sheep, yaw: 40}
+  tags: [farm-flock-sheep, sheep, farm-animal]
+  visibleRange: {max: 110}
+farm-sheep-2:
+  feetPosition: {x: -47, y: 0.5, z: 57}
+  id: farm-sheep-2
+  primitive: {kind: scripted, params: {wool: oklch(0.93 0.02 85)}, script: scripts/gen/animal-sheep.js, seed: 22}
+  rotation: {yaw: -120}
+  state: {species: sheep, yaw: -120}
+  tags: [farm-flock-sheep, sheep, farm-animal]
+  visibleRange: {max: 110}
+farm-sheep-3:
+  feetPosition: {x: -51, y: 0.5, z: 58.5}
+  id: farm-sheep-3
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-sheep.js, seed: 23}
+  rotation: {yaw: 170}
+  state: {species: sheep, yaw: 170}
+  tags: [farm-flock-sheep, sheep, farm-animal]
+  visibleRange: {max: 110}
+farm-sheep-4:
+  feetPosition: {x: -46.5, y: 0.5, z: 52.5}
+  id: farm-sheep-4
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-sheep.js, seed: 24}
+  rotation: {yaw: 80}
+  state: {species: sheep, yaw: 80}
+  tags: [farm-flock-sheep, sheep, farm-animal]
+  visibleRange: {max: 110}
 farm-west:
   feetPosition: {x: -46, y: 0.5, z: 28}
   id: farm-west
@@ -4552,6 +4584,24 @@ pasture-sign:
   rotation: {yaw: 180}
   tags: [pasture]
   ui: "<div face=\"front\" at=\"0.5 0.27\" width=\"1.6m\" offset=\"0.03m\" class=\"flex items-center justify-center\" style=\"height:420px;font-family:serif;color:#f4ecd8;font-size:150px;font-weight:700;letter-spacing:6px;text-shadow:0 4px 0 #3e5a3a\">Rescue Pasture</div>"
+pasture-west/bales:
+  castShadow: false
+  feetPosition: {x: 1.5, y: 0, z: -14}
+  id: pasture-west/bales
+  parent: pasture-west
+  physics: static
+  primitive: {kind: scripted, params: {kind: bales}, script: scripts/gen/pasture-yard.js}
+  rotation: {yaw: 15}
+  visibleRange: {max: 140}
+pasture-west/trough-a:
+  castShadow: false
+  feetPosition: {x: -4, y: 0, z: -17.5}
+  id: pasture-west/trough-a
+  parent: pasture-west
+  physics: static
+  primitive: {kind: scripted, params: {kind: trough}, script: scripts/gen/pasture-yard.js}
+  rotation: {yaw: 90}
+  visibleRange: {max: 140}
 path-lamp-pathCamp-0:
   castShadow: true
   feetPosition: {x: -3.0210785403721756, y: {terrain: 0}, z: -39.3679747306148}
