@@ -2303,15 +2303,6 @@ garden-paths:
   receiveShadow: true
   tags: [garden, garden-paths]
   visibleRange: {max: 180}
-garden-paths-front:
-  feetPosition: {x: 5, y: 0.5, z: -14}
-  id: garden-paths-front
-  material: {pbr: true}
-  physics: static
-  primitive: {kind: scripted, params: {hubs: [], origin: [5, -14], paths: [[[0.3, -16.3], [2.6, -14.4], [4.3, -14.15], [10.3, -14.15]]], width: 1.05}, script: scripts/gen/garden-flagstones.js, seed: 22}
-  receiveShadow: true
-  tags: [garden, garden-paths]
-  visibleRange: {max: 180}
 garden-shed:
   castShadow: true
   children: [{feetPosition: {x: 0, y: 1.9, z: 0}, id: lamp, light: {color: oklch(0.85 0.1 70), distance: 6, intensity: 4, kind: point}}]
@@ -2372,11 +2363,11 @@ grand-gate-light-w:
   light: {color: oklch(0.85 0.12 70), distance: 9, intensity: 2, kind: point}
 grounds-arch-front:
   children: [{feetPosition: {x: 0, y: 2.3499999999999996, z: 0}, light: {color: oklch(0.85 0.1 70), distance: 8, intensity: 2, kind: point}}]
-  feetPosition: {x: -0.62, y: {terrain: 0}, z: -11.8}
+  feetPosition: {x: 0, y: 0.5, z: -11.8}
   id: grounds-arch-front
   physics: static
   primitive: {kind: scripted, params: {blossom: oklch(0.92 0.06 350), height: 2.9, span: 3}, script: scripts/gen/vine-arch.js, seed: 1}
-  rotation: {lookAt: {x: -0.35, y: 0.5, z: -14}}
+  rotation: {yaw: 0}
   tags: [grounds]
 grounds-arch-glasshouse:
   children: [{feetPosition: {x: 0, y: 2.1500000000000004, z: 0}, light: {color: oklch(0.85 0.1 70), distance: 8, intensity: 2, kind: point}}]
@@ -2526,7 +2517,7 @@ grounds-fence-rope:
 grounds-plan:
   feetPosition: {x: 0, y: 0.5, z: -35}
   id: grounds-plan
-  primitive: {kind: scripted, params: {hubs: [[-13, 22.1, 1.6], [13.6, 16.5, 1.6]], walks: [[[-3.5, 26.8], [-8, 23.2], [-13, 22.1], [-17.4, 20.6], [-20.6, 17.6]], [[-17.4, 20.6], [-17.5, 15], [-17.4, 10.5], [-15.2, 7.8], [-13.2, 4], [-13, 0.2], [-16.25, -0.45]], [[10.8, 18.8], [13.6, 16.5], [14.6, 9], [14.4, 2], [16.06, -3.1]], [[6.2, -15], [11.86, -19.35]], [[3.5, 26.8], [7, 23], [10.8, 18.8]], [[0, -0.5], [1.5, -5], [5, -10], [6.2, -15]], [[1.5, -5], [-6, -8], [-13, -12], [-16, -14]], [[1, -1], [7, -2.4], [14.2, -2.6]], [[-1, -1], [-7.4, 0.3], [-13, 0.2]]], width: 1.4}, script: scripts/gen/grounds-flags.js, seed: 7}
+  primitive: {kind: scripted, params: {hubs: [[-13, 22.1, 1.6], [13.6, 16.5, 1.6]], walks: [[[-4.7, 25.9], [-8, 23.2], [-13, 22.1], [-17.4, 20.6], [-20.6, 17.6]], [[-17.4, 20.6], [-17.5, 15], [-17.4, 10.5], [-15.2, 7.8], [-13.2, 4], [-13, 0.2], [-16.25, -0.45]], [[13.6, 16.5], [14.6, 9], [14.4, 2], [16.06, -3.1]], [[6.2, -15], [11.86, -19.35]], [[0, -0.5], [1.5, -5], [5, -10], [6.2, -15]], [[1.5, -5], [-6, -8], [-13, -12], [-16, -14]], [[1, -1], [7, -2.4], [14.2, -2.6]], [[-1, -1], [-7.4, 0.3], [-13, 0.2]], [[4.7, 19.8], [10.2, 19.8], [11.6, 16.6]]], width: 1.4}, script: scripts/gen/grounds-flags.js, seed: 7}
   tags: [grounds]
 grounds-round-door-l:
   feetPosition: {x: -3.4, y: {terrain: 0}, z: -15.6}
@@ -2728,7 +2719,7 @@ home-garden:
   visibleRange: {max: 160}
 home-garden/bed-0:
   castShadow: true
-  feetPosition: {x: 7, y: 0, z: 26.4}
+  feetPosition: {x: 10.6, y: 0, z: 27.199999618530274}
   id: home-garden/bed-0
   material: {pbr: true}
   parent: home-garden
@@ -2737,7 +2728,7 @@ home-garden/bed-0:
   visibleRange: {max: 160}
 home-garden/bed-1:
   castShadow: true
-  feetPosition: {x: 9.2, y: 0, z: 26.4}
+  feetPosition: {x: 12.799999809265136, y: 0, z: 27.199999618530274}
   id: home-garden/bed-1
   material: {pbr: true}
   parent: home-garden
@@ -2746,7 +2737,7 @@ home-garden/bed-1:
   visibleRange: {max: 160}
 home-garden/bed-2:
   castShadow: true
-  feetPosition: {x: 11.4, y: 0, z: 26.4}
+  feetPosition: {x: 14.999999618530273, y: 0, z: 27.199999618530274}
   id: home-garden/bed-2
   material: {pbr: true}
   parent: home-garden
@@ -2755,7 +2746,7 @@ home-garden/bed-2:
   visibleRange: {max: 160}
 home-garden/bed-3:
   castShadow: true
-  feetPosition: {x: 7, y: 0, z: 31.6}
+  feetPosition: {x: 10.6, y: 0, z: 32.400000381469724}
   id: home-garden/bed-3
   material: {pbr: true}
   parent: home-garden
@@ -2764,7 +2755,7 @@ home-garden/bed-3:
   visibleRange: {max: 160}
 home-garden/bed-4:
   castShadow: true
-  feetPosition: {x: 9.2, y: 0, z: 31.6}
+  feetPosition: {x: 12.799999809265136, y: 0, z: 32.400000381469724}
   id: home-garden/bed-4
   material: {pbr: true}
   parent: home-garden
@@ -2773,7 +2764,7 @@ home-garden/bed-4:
   visibleRange: {max: 160}
 home-garden/bed-5:
   castShadow: true
-  feetPosition: {x: 11.4, y: 0, z: 31.6}
+  feetPosition: {x: 14.999999618530273, y: 0, z: 32.400000381469724}
   id: home-garden/bed-5
   material: {pbr: true}
   parent: home-garden
@@ -2810,12 +2801,13 @@ home-garden/flowers-0:
   visibleRange: {max: 160}
 home-garden/flowers-1:
   castShadow: false
-  feetPosition: {x: -2.2, y: 0, z: 23.5}
+  feetPosition: {x: -5, y: 0, z: 22.5}
   id: home-garden/flowers-1
   material: {pbr: true}
   parent: home-garden
   primitive: {kind: scripted, params: {count: 30, kind: flowerbed, rx: 1.7, rz: 1.1}, script: scripts/gen/grounds-kit.js, seed: 61}
   rotation: {yaw: 37}
+  scale: 0.6
   visibleRange: {max: 160}
 home-garden/flowers-2:
   castShadow: false
@@ -2872,7 +2864,7 @@ home-garden/lantern-0:
   visibleRange: {max: 140}
 home-garden/lantern-1:
   castShadow: false
-  feetPosition: {x: 4.164526529584764, y: 0, z: 40.62064874784215}
+  feetPosition: {x: 7, y: 0, z: 41}
   id: home-garden/lantern-1
   material: {pbr: true}
   parent: home-garden
@@ -2912,7 +2904,7 @@ home-garden/lantern-13:
   visibleRange: {max: 140}
 home-garden/lantern-2:
   castShadow: false
-  feetPosition: {x: 0.1535917224292742, y: 0, z: 35.81740225201728}
+  feetPosition: {x: -3, y: 0, z: 32.5}
   id: home-garden/lantern-2
   material: {pbr: true}
   parent: home-garden
@@ -2920,7 +2912,7 @@ home-garden/lantern-2:
   visibleRange: {max: 140}
 home-garden/lantern-3:
   castShadow: false
-  feetPosition: {x: 2.7742730575302623, y: 0, z: 30.36836294771296}
+  feetPosition: {x: 7, y: 0, z: 28.5}
   id: home-garden/lantern-3
   material: {pbr: true}
   parent: home-garden
@@ -2928,7 +2920,7 @@ home-garden/lantern-3:
   visibleRange: {max: 140}
 home-garden/lantern-4:
   castShadow: false
-  feetPosition: {x: -0.31481961448595497, y: 0, z: 25.49665171954265}
+  feetPosition: {x: -3, y: 0, z: 30.4}
   id: home-garden/lantern-4
   material: {pbr: true}
   parent: home-garden
@@ -2976,7 +2968,7 @@ home-garden/lantern-9:
   visibleRange: {max: 140}
 home-garden/veg-fence:
   castShadow: false
-  feetPosition: {x: 9, y: 0, z: 29}
+  feetPosition: {x: 12.6, y: 0, z: 29.8}
   id: home-garden/veg-fence
   material: {pbr: true}
   parent: home-garden
@@ -2985,7 +2977,7 @@ home-garden/veg-fence:
   visibleRange: {max: 180}
 home-garden/wheelbarrow:
   castShadow: true
-  feetPosition: {x: 14.6, y: 0, z: 32}
+  feetPosition: {x: 18.200000381469728, y: 0, z: 32.8}
   id: home-garden/wheelbarrow
   material: {pbr: true}
   parent: home-garden
@@ -3237,7 +3229,7 @@ path-lamp-pathFront-0:
   tags: [path-lamp]
 path-lamp-pathFront-1:
   castShadow: true
-  feetPosition: {x: 1.5039036939035033, y: {terrain: 0}, z: -8.037742075737157}
+  feetPosition: {x: 5, y: 0.5, z: -5.5}
   id: path-lamp-pathFront-1
   physics: static
   primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
