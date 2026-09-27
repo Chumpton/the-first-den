@@ -4454,7 +4454,7 @@ studio-planters:
   feetPosition: {x: 0, y: -5.6, z: -26}
   id: studio-planters
   physics: {body: static, collider: mesh}
-  primitive: {kind: scripted, params: {item: planters, r: 2.35, skip: [270]}, script: scripts/gen/art-studio.js}
+  primitive: {kind: scripted, params: {h: 0.7, item: planters, r0: 0.85, r1: 1.9}, script: scripts/gen/art-studio.js}
   receiveShadow: true
   tags: [cob-interior, art-studio]
   visibleRange: {max: 45}
@@ -4520,7 +4520,7 @@ studio-rug-tree:
   castShadow: false
   feetPosition: {x: 0, y: -5.6, z: -26}
   id: studio-rug-tree
-  primitive: {kind: scripted, params: {item: rug, r0: 0.75, r1: 2.95}, script: scripts/gen/art-studio.js}
+  primitive: {kind: scripted, params: {item: rug, r0: 1.85, r1: 3.35}, script: scripts/gen/art-studio.js}
   receiveShadow: true
   tags: [cob-interior, art-studio]
   visibleRange: {max: 45}
