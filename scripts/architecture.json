@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "basedOnSpecVersion": 721,
-  "updatedAt": "2026-09-27T17:29:16.365Z",
-  "summary": "The First Den is a forest world centered on Spawn, with a lived-in home, lake and creek activities, Tower Gardens, and a market town connected to district squares by newly dressed cobbled lanes. Authored cell scenes place interactive systems and procedural structure families; terrain marks grade, clear, and surface their sites and routes. Garden Market and the royal quarter have blueprint anchors alongside new generator families and shared kits.",
+  "basedOnSpecVersion": 762,
+  "updatedAt": "2026-09-27T17:41:06.166Z",
+  "summary": "The First Den is a forest world centered on Spawn, with a lived-in home, lake and creek activities, Tower Gardens, market districts, and a royal city beneath a hilltop castle. Authored cell scenes combine interactive behaviors, roster-driven NPC crowds, and procedural structure families; terrain marks grade, clear, and surface their sites and connecting routes.",
   "scriptPaths": [
     "scripts/alchemy-bench.js",
     "scripts/alchemy-player.js",
@@ -41,7 +41,9 @@
     "scripts/fish-pose.js",
     "scripts/fishing-tackle.js",
     "scripts/flat-terrain.js",
+    "scripts/folk-crowd.js",
     "scripts/forest-terrain.js",
+    "scripts/garden-crowd.js",
     "scripts/garden-plot.js",
     "scripts/garden-station.js",
     "scripts/gen/alchemy-bench.js",
@@ -93,6 +95,7 @@
     "scripts/gen/firepit.js",
     "scripts/gen/fishing-pier.js",
     "scripts/gen/flower-bed.js",
+    "scripts/gen/folk.js",
     "scripts/gen/forecourt.js",
     "scripts/gen/forest-plant.js",
     "scripts/gen/garden-district.js",
@@ -186,8 +189,10 @@
     "scripts/gen/road-rail.js",
     "scripts/gen/roost-dragon.js",
     "scripts/gen/rope-bridge.js",
+    "scripts/gen/royal-castle.js",
     "scripts/gen/royal-cathedral.js",
     "scripts/gen/royal-district.js",
+    "scripts/gen/royal-house.js",
     "scripts/gen/royal-statue.js",
     "scripts/gen/secret-trinket.js",
     "scripts/gen/shore-kit.js",
@@ -219,6 +224,8 @@
     "scripts/gen/valley-mesh.js",
     "scripts/gen/valley-outcrop.js",
     "scripts/gen/valley-tree.js",
+    "scripts/gen/village-kit.js",
+    "scripts/gen/villager.js",
     "scripts/gen/vine-arch.js",
     "scripts/gen/wall-log.js",
     "scripts/gen/warden-cloak.js",
@@ -337,6 +344,7 @@
     "scripts/road-rest.js",
     "scripts/road-travellers.js",
     "scripts/rowboat.js",
+    "scripts/royal-guard.js",
     "scripts/sage-dragon.js",
     "scripts/secret.js",
     "scripts/sky-dragons.js",
@@ -383,30 +391,31 @@
     "scripts/travel.js",
     "scripts/treasure-chest.js",
     "scripts/ui.js",
+    "scripts/village-crowd.js",
     "scripts/warden-crystal.js",
     "scripts/wild-mushroom.js",
     "scripts/wizard-portal.js",
     "scripts/zipline.js"
   ],
   "places": [
-    "places/main - forest world linking Spawn/home and lake, creek sites, camps/corral, market town, Hearthmere and Lumenvale",
-    "places/main/cells/x0z0.scene - Spawn hub: tree-centered home/studio, creek, activities, Tower Gardens at (57,-26), and town-bound lane/signpost branches",
+    "places/main - forest world linking Spawn/home and lake, creek sites, camps/corral, market town, Garden Market, royal city/castle and hilltop village",
+    "places/main/cells/x0z0.scene - Spawn hub: tree-centered home/studio, creek, activities and Tower Gardens at (57,-26); includes blueprint farm anchors east/west",
     "places/main/cells/x0z-1.scene - lake/islet, maze, blossom walk and camps; dock/rowboat fishing reaches lake and creek mouth",
-    "places/main/cells/x0z1.scene - market square around z≈100, hall/Ember, crowd, alleys and rampart with openings onto new lanes; royal-district blueprint at (0,190)",
-    "places/main/cells/x-1z1.scene - Garden Market blueprint at (-82,78) and ring signpost; terrain is flattened/cleared for the district",
-    "places/main/cells/x1z1.scene - cobbled ring lane and signpost linking the three-squares route",
-    "places/main/cells/x0z2.scene - royal-castle and royal-cathedral blueprint anchors north of the market town",
-    "places/main/config.yaml - forest terrain/water, site/path/clearing marks and seeded vegetation; adds Garden Market flatten/clear and market-to-square/ring route marks"
+    "places/main/cells/x0z1.scene - market square and folk crowd near z≈128; royal city at z≈150-200 with avenue, guard NPCs, houses and plaza",
+    "places/main/cells/x-1z1.scene - Garden Market at (-82,78), its roster-driven gardeners, ring signpost and district ground",
+    "places/main/cells/x1z1.scene - hilltop village at (172,90): green, six cottages, hall, well, firepit, garden, paths and village-crowd manager",
+    "places/main/cells/x0z2.scene - royal castle on plateau centered near (0,263.5), with gate/stair/keep/towers/walls and surrounding royal houses",
+    "places/main/config.yaml - forest terrain/water, site/path/clearing marks and seeded vegetation; grades royal moat/avenue, castle plateau/stair cut and hill trail/village paths"
   ],
   "roots": [
     "world.config.yaml - world entry: main place, player/camera templates, arrival, input actions and UI",
     "templates/player.js#player - player root with movement, locomotion, home interaction, delete, travel, alchemy and mount handlers",
     "templates/camera.js#camera - custom first-/third-person camera; camera behavior accounts for controlled mounts and seated rowboat",
-    "places/main/config.yaml + scripts/forest-terrain.js - configured terrain, height/material interface and landscape marks",
+    "places/main/config.yaml + scripts/forest-terrain.js - configured terrain, height/material interface, water and landscape marks",
     "places/main/cells/x0z0.scene#cob-house - Spawn's tree-centered multilevel home and below-floor art studio",
-    "places/main/cells/x0z0.scene#garden-greenhouse / garden-bed-* / garden-pump / garden-seeds - Tower Gardens structure and crop cycle",
-    "places/main/cells/x0z1.scene#town-crowd / #town-dragon / #town-square / #town-rampart - citizens, Ember and active market civic/district geometry",
-    "places/main/cells/x-1z1.scene#garden-district and x0z1.scene#royal-district - blueprint anchors, not the new procedural district meshes"
+    "places/main/cells/x0z0.scene#garden-greenhouse / garden-bed-* / garden-pump - Tower Gardens structure and crop cycle",
+    "places/main/cells/x1z1.scene#village-crowd - hilltop roster-driven villager manager; child village homes and shared green are authored in scene",
+    "places/main/cells/x0z1.scene#folk-crowd / royal-guard-* / royal-castle (x0z2) - market/royal NPCs and now-built royal district and castle"
   ],
   "shared": [
     "scripts/forest-terrain.js - main heightAt(ctx)/materialAt(ctx) contract for terrain and terrain-relative placements",
@@ -415,8 +424,8 @@
     "scripts/lib/home-interaction.js + scripts/lib/data/home-feel.js - player press targeting and interaction tuning",
     "scripts/lib/dragon-rider.js - mount/seat/dismount coordination shared by Violet, rowboat, courier horse and zipline trolley",
     "scripts/lib/town-kit.js - geometry/material helpers reused by town civic, lane, Garden Market, rampart and town-link builders",
-    "scripts/lib/royal-kit.js - white-stone/slate/gold geometry and arch/tower helpers for royal-district, royal-cathedral, royal-house and royal-statue builders",
-    "scripts/lib/data/{garden,mushrooms,rowboat,tower-gardens}.js and scripts/lib/data/{garden-district,town-links}.json - activity tuning plus Garden Market layout and town-link data"
+    "scripts/lib/royal-kit.js - white-stone/slate/gold geometry and arch/tower helpers for royal-district, cathedral, house and statue builders",
+    "scripts/lib/village-mesh.js - low-level mesh kit shared by hex-cottage, village-kit and villager; scripts/lib/data/{folk,garden-crowd,village-crowd}.yml supply NPC rosters/tuning"
   ],
   "notableExports": [
     "scripts/forest-terrain.js - GROUND, SITES, LAKE, heightAt(ctx), materialAt(ctx)",
@@ -424,9 +433,9 @@
     "scripts/ui.js - default(ctx, player), HUD for travel, courier, secrets, alchemy, mushrooms, boat fishing and garden state",
     "scripts/rowboat.js - ears.press, onSpawn(ctx), onControlEnd(ctx,player), onInput(ctx,input), update(ctx,dt); scripts/fish-pose.js - present()",
     "scripts/garden-plot.js - grow(ctx,p), onSpawn(ctx), ears.press; scripts/garden-station.js - onSpawn(ctx), ears.press",
-    "scripts/wild-mushroom.js - ears.press, vanish(ctx), regrow(ctx)",
-    "scripts/gen/garden-district.js, royal-district.js, royal-cathedral.js, hex-cottage.js - geometry(ctx); solid builders also export collider(ctx)",
-    "scripts/gen/town-link.js - geometry(ctx), collider(ctx); scripts/gen/town-banner.js - geometry(ctx), collider()"
+    "scripts/folk-crowd.js, garden-crowd.js, village-crowd.js - scheduled update and ears.press handlers for spawned district NPC groups; scripts/royal-guard.js - onSpawn(ctx), ears.press",
+    "scripts/gen/folk.js - WHO, heightOf(who), skeleton(ctx), geometry(ctx); scripts/gen/villager.js - skeleton(), geometry(ctx)",
+    "scripts/gen/royal-castle.js, royal-house.js, village-kit.js - geometry(ctx), collider(ctx); scripts/gen/royal-district.js - geometry(ctx), collider(ctx)"
   ],
   "ownership": [
     "scripts/player.js + scripts/lib/data/player.yml - movement intent, velocity, jump, flight, rope and camera mode; movement scratch remains in ctx.session",
@@ -434,8 +443,8 @@
     "scripts/rowboat.js + scripts/lib/data/rowboat.js - boat rider/fishing phase and child rod/bobber/line/catch; local movement scratch in ctx.session.rowboat; fish count/fishGet on rider",
     "scripts/garden-plot.js + scripts/lib/data/garden.js - bed crop/stage/wet/grow timer/golden state; player.state.garden owns seeds, selected crop, watering-can charges and harvest basket",
     "scripts/wild-mushroom.js + scripts/lib/data/mushrooms.js - each patch's picked/regrow state; picked inventory is player state",
-    "scripts/pasture-flock.js + pasture-flock.yml - west-pasture manager's flock goals, movement/clip state and grazing sounds",
-    "scripts/town-crowd.js + town-crowd.yml; scripts/town-dragon.js - spawned townspeople movement/press responses; Ember action and roar timers",
+    "scripts/folk-crowd.js + scripts/lib/data/folk.yml; scripts/garden-crowd.js + garden-crowd.yml - district roster/person dialogue, movement and animation scratch; manager session state is transient",
+    "scripts/village-crowd.js + scripts/lib/data/village-crowd.yml - villager roster, roles/dialogue and walking/garden/sit behavior; individual NPC state and manager scratch are separate",
     "scripts/horse-summon.js + scripts/steed.js and scripts/corral-horses.js + corral data - summoned mount/rider and corral horse behavior"
   ],
   "flows": [
@@ -449,8 +458,8 @@
     "garden seed crate/pump press -> scripts/garden-station.js -> player.state.garden seeds/can; garden-bed press -> scripts/garden-plot.js plants, spends water, schedules growth, harvests to basket/HUD",
     "greenhouse garden beds (gh:true) -> garden-plot growth behavior, which keeps watered greenhouse beds wet; Tower Gardens layout/geometry use garden data and tg builders",
     "wild-mushroom scene patches -> scripts/wild-mushroom.js press/pick and timed regrow -> mushroom inventory/HUD in scripts/ui.js",
-    "town-crowd.yml roster -> scripts/town-crowd.js citizens; town scene + town data -> square/house/hall/fountain/festoon/alleys and rampart builders",
-    "main config link-* path/bed/clear marks -> terrain paving and cleared route; town-link scene rows in x0z0/x0z1/x1z1/x-1z1 -> lamp lanes and finger-post geometry, while child-row UI supplies sign text"
+    "folk.yml + garden-crowd.yml -> folk-crowd.js / garden-crowd.js spawn and animate district characters from their generator/clip sets; E press selects nearby NPC dialogue",
+    "village-crowd manager + village-crowd.yml -> villager generator and anim/villager.yml clips; villager role/position and press dialogue drive walking, gardening and sitting; config paths grade village routes"
   ],
   "behaviorFamilies": [
     "places/main/config.yaml decoration layers + scripts/gen/forest-plant.js / valley-mesh.js - seeded forest flora varied by layer, kind and terrain",
@@ -460,22 +469,19 @@
     "scripts/gen/town-square.js + town-kit - town/civic geometry varied by kind, palette, seed and placement; town-banner adds dragon/lion heraldic cloth",
     "scripts/gen/town-link.js + scripts/lib/data/town-links.json - lamped lane, signpost/finger and name-plaque forms varied by kind and placed text; terrain config provides matching paving paths",
     "scripts/gen/garden-district.js + scripts/lib/data/garden-district.json - Garden Market ground, fountain, stalls, dressing and pondwater vary by item and authored layout",
-    "scripts/gen/royal-district.js + royal-cathedral.js + royal-statue.js + royal-kit.js - white-stone/slate royal walls, avenue, cathedral and knight geometry vary by part and dimensions; hex-cottage uses village-mesh for hill-village homes"
+    "scripts/gen/folk.js + folk.yml/anim/folk.yml and gen/villager.js + village-crowd.yml/anim/villager.yml - rostered animated people vary by role, outfit, dialogue, route and district; royal-house/castle + village-kit build their respective settlement families"
   ],
   "probableOrphans": [
     "scripts/flat-terrain.js - no current place config selects it; main uses forest-terrain",
     "scripts/jade-dragon.js - no scene behavior row attaches this actor script; scripts/gen/jade-dragon.js geometry may still be used",
-    "scripts/gen/garden-garb.js - crown/skirt geometry builder has no current scene or template references",
-    "scripts/gen/garden-wear.js - hat/apron/basket wear builder has no current scene or template references",
-    "scripts/gen/hex-cottage.js - generator has no current scene/template reference",
-    "scripts/gen/royal-cathedral.js and scripts/gen/royal-statue.js - builders exist but current cathedral/royal-quarter scene rows are blueprint anchors",
-    "scripts/gen/garden-district.js and scripts/gen/royal-district.js - district builder files are not yet attached to their blueprint scene anchors"
+    "scripts/gen/garden-garb.js and scripts/gen/garden-wear.js - builders have no current scene or template references",
+    "scripts/gen/royal-cathedral.js and scripts/gen/royal-statue.js - no current scene attachments found; the royal-city/castle scenes use other builders"
   ],
   "migrationNotes": [
     "forest-terrain heightAt/materialAt take a context object; main river is at sea level y=0, ground around y=0.5, Spawn clearing near (0,-3).",
-    "Keep terrain material IDs, clear/flatten marks and decoration bindings coordinated with scene placements; Spawn/home near (0,-27), corral (-50,-50), Tower Gardens centered (57,-26), market square z≈100, Garden Market (-82,78), royal quarter z≈190.",
-    "Terrain path marks grade/materialize routes and clear scatter; scene road/link builders draw visible paving and do not replace terrain jobs. Keep link-* marks aligned with town-link lanes and rampart openings.",
-    "The cob-house studio is below the main house floor; art-studio piece origins use feet on studio floor and face -Z; preserve the sunk-studio dry terrain pocket.",
+    "Keep terrain material IDs, clear/flatten marks and decoration bindings coordinated with scene placements; routes are terrain-config marks while scene builders supply visible structures and paving.",
+    "The royal moat is at z≈155.8 with water level 0; royal district is centered z≈186; castle plateau centered (0,263.5) at y=14 with stair cut near z=229-245.5.",
+    "Hill village datum is world (172,20,90); village-kit/hex-cottage child coordinates are local to its root; plateau and path heights/grades are set in main config.",
     "Tower Gardens beds and structures use ground feet at y=0.5; greenhouse is centered (58,-33), garden stations/bed coordinates share the tower-gardens data datum, and greenhouse beds stay wet during timed growth.",
     "Rowboat bow is local +Z; it is kinematic and constrained by terrain depth/open-water range. Fish animation masks from Spine so seated legs stay put; release/leave clears fishing children and rider animation."
   ]
