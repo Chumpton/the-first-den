@@ -4449,6 +4449,16 @@ studio-partition:
   rotation: {lookAt: {x: 0.8999999999999999, y: -5.6, z: -32.9}}
   tags: [cob-interior, art-studio]
   visibleRange: {max: 45}
+studio-pixel:
+  behavior: [scripts/studio-cat.js, scripts/catio-cat.js]
+  feetPosition: {x: 3.4, y: -5.6, z: -24}
+  id: studio-pixel
+  primitive: {kind: scripted, params: {coat: ginger}, script: scripts/gen/cat.js}
+  rotation: {yaw: 200}
+  scale: 0.85
+  state: {coat: ginger, name: Pixel, pitch: 1.08}
+  tags: [art-studio, studio-cat, interactable]
+  visibleRange: {max: 40}
 studio-planters:
   castShadow: false
   feetPosition: {x: 0, y: -5.6, z: -26}
