@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "basedOnSpecVersion": 142,
-  "updatedAt": "2026-09-27T03:47:30.705Z",
-  "summary": "The First Den is a cozy forest world centered on a live, multi-level cob house and its lakeside clearing, with authored roads leading toward Lumenvale and Hearthmere. Procedural terrain and woodland scatter sit alongside authored settlements, wildlife, small critters, and road travellers; shared managers animate these actors while the player/camera and home-interaction behaviors provide the common controls.",
+  "basedOnSpecVersion": 157,
+  "updatedAt": "2026-09-27T03:57:51.253Z",
+  "summary": "The First Den is a cozy forest world centered on the Spawn clearing and lakeside home, with authored roads reaching Lumenvale and Hearthmere. One live main place combines generated terrain and vegetation with authored buildings, wildlife, road actors, home interactions, and now daily den folk plus scheduled sky-dragon flights; shared managers and procedural builders provide most moving life and reusable geometry.",
   "scriptPaths": [
     "scripts/arrival.js",
     "scripts/camera.js",
@@ -12,6 +12,7 @@
     "scripts/critter-press.js",
     "scripts/delete-mode.js",
     "scripts/den-can.js",
+    "scripts/den-folk.js",
     "scripts/den-piece.js",
     "scripts/den-plant.js",
     "scripts/den-terrain.js",
@@ -88,6 +89,7 @@
     "scripts/gen/lumen-house.js",
     "scripts/gen/lumen-kit.js",
     "scripts/gen/lumen-tower.js",
+    "scripts/gen/pasture-fence.js",
     "scripts/gen/road-bridge.js",
     "scripts/gen/road-dressing.js",
     "scripts/gen/rope-bridge.js",
@@ -121,6 +123,7 @@
     "scripts/lib/cob-layout.js",
     "scripts/lib/data/castle.js",
     "scripts/lib/data/den-blanket.js",
+    "scripts/lib/data/den-folk.js",
     "scripts/lib/data/dragon.js",
     "scripts/lib/data/fauna-small.js",
     "scripts/lib/data/hearth-folk.js",
@@ -155,6 +158,7 @@
     "scripts/player.js",
     "scripts/road-rest.js",
     "scripts/road-travellers.js",
+    "scripts/sky-dragons.js",
     "scripts/square-door.js",
     "scripts/templates/camera.js",
     "scripts/templates/den-catalog.js",
@@ -191,85 +195,85 @@
     "scripts/ui.js"
   ],
   "places": [
-    "places/main - sole live place; forest-terrain height/material generator, clearing and settlement marks, woodland scatter, roads and gravity",
-    "places/main/cells/x0z0.scene - spawn clearing, active cob-house, home/grounds, local wildlife, critters, road sign and traveller manager",
-    "places/main/cells/ - 56 authored cells including roads, bridges and roadside dressing, Lumenvale/Hearthmere districts, and fauna populations; objects.scene has 44 placed rows"
+    "places/main - sole live place; forest-terrain generator, spawn/gravity, site and road marks, and seeded forest decoration",
+    "places/main/cells/x0z0.scene - Spawn/home clearing, cob-house and garden, local fauna, Rikki/Campton, road-traveller and sky-dragon managers; pasture-site is currently a blueprint marker",
+    "places/main/cells/ - 56 authored cells of roads, bridges, roadside dressing, Lumenvale/Hearthmere districts and fauna; objects.scene holds 44 placed rows"
   ],
   "roots": [
-    "world.config.yaml - multiplayer world entry, default main place, player/camera, lighting, arrival behavior and UI",
-    "templates/player.js#player - player behavior stack: movement, gait, home interaction and delete mode",
-    "templates/camera.js#camera - custom first-person/third-person camera rig",
-    "places/main/config.yaml - forest terrain, spawn/gravity, site/path marks and procedural decorations",
-    "places/main/cells/x0z0.scene#cob-house - active procedural cob house at (0, 0.5, -26), with cellar through roof deck",
-    "places/main/cells/x0z0.scene#fauna-ground + #fauna-small - single managers for the large and small local fauna families",
-    "places/main/cells/x0z0.scene#road-travellers - dynamic road-actor manager; roster and appearance data in travellers.json",
-    "places/main/cells/x0z0.scene#square-door - authored portal/door assembly and transition behavior"
+    "world.config.yaml - multiplayer entry/default main place, player and camera templates, lighting, arrival and UI",
+    "templates/player.js#player - composed player movement, gait, home interaction and delete-mode behaviors",
+    "templates/camera.js#camera - custom first-/third-person camera rig",
+    "places/main/config.yaml - forest terrain, spawn/gravity, site/path marks and procedural decoration bindings",
+    "places/main/cells/x0z0.scene#cob-house - active procedural cob-house at (0, 0.5, -26), cellar through roof deck",
+    "places/main/cells/x0z0.scene#fauna-ground + #fauna-small - local large-fauna and small-critter managers",
+    "places/main/cells/x0z0.scene#road-travellers + #sky-dragons - route actors and scheduled overhead flights",
+    "places/main/cells/x0z0.scene#square-door - authored door assembly and square transition behavior"
   ],
   "shared": [
-    "scripts/forest-terrain.js - main heightAt/materialAt contract used by configured terrain and terrain-relative placements",
-    "scripts/gen/forest-plant.js + scripts/gen/valley-mesh.js - procedural vegetation builders reused across forest decoration layers",
-    "scripts/lib/road-solid.js - solid geometry helpers shared by road bridge and roadside dressing generators",
-    "scripts/lib/home-interaction.js + scripts/lib/data/home-feel.js - shared press targeting/tuning used by player home interactions",
-    "scripts/lib/data/player.yml + scripts/lib/data/camera.yml - movement/flight/rope and camera tuning consumed by their respective behaviors",
-    "scripts/lib/data/fauna-ground.json + scripts/lib/data/fauna-small.js - species/animation tuning consumed by large- and small-fauna managers",
-    "scripts/lib/data/travellers.json - road routes roster, traveller kinds, movement tuning and appearance/audio consumed by road-travellers.js",
-    "world.facts.yaml + anim/*.yml + clips/*.json - authored animation clip index and clip data for fauna and traveller animation"
+    "scripts/forest-terrain.js - configured main heightAt/materialAt contract for terrain and terrain-relative placements",
+    "scripts/gen/forest-plant.js + scripts/gen/valley-mesh.js - shared seeded forest vegetation builders across decoration layers",
+    "scripts/lib/road-solid.js - shared solid geometry for road bridges and roadside dressing",
+    "scripts/lib/home-interaction.js + scripts/lib/data/home-feel.js - player press targeting and home-interaction tuning",
+    "scripts/lib/data/player.yml + scripts/lib/data/ropes.js + camera tuning data - movement/flight/rope and view behavior settings",
+    "scripts/lib/data/fauna-ground.json + scripts/lib/data/fauna-small.js - large/small fauna species and animation tuning",
+    "scripts/lib/data/travellers.json + anim/traveller.yml - road roster/routes/kinds and traveler animation clips",
+    "scripts/lib/data/dragon.js - dragon spine/trail dimensions shared by jade-dragon geometry and sky-dragon motion"
   ],
   "notableExports": [
-    "scripts/forest-terrain.js - exports GROUND, SITES, LAKE, heightAt(ctx), materialAt(ctx)",
-    "scripts/player.js - exports onSpawn(ctx), onInput(ctx,input), update(ctx,dt)",
-    "scripts/camera.js - exports finiteNumber(value,fallback), update(ctx,dt)",
-    "scripts/gen/cob-house.js - exports HOUSE, holesFor(k), geometry(ctx), collider(ctx)",
-    "scripts/fauna-ground.js - exports scheduled update(ctx) for rows tagged fauna-ground",
-    "scripts/fauna-small.js - exports scheduled update(ctx) for small critters",
-    "scripts/road-travellers.js - exports updateSchedule and update(ctx) for dynamic road actors",
-    "scripts/gen/animal-bear.js, animal-deer.js, animal-fox.js, animal-wolf.js - species geometry/collider generators; scripts/gen/critter-*.js build small species"
+    "scripts/forest-terrain.js - GROUND, SITES, LAKE, heightAt(ctx), materialAt(ctx)",
+    "scripts/player.js - onSpawn(ctx), onInput(ctx,input), update(ctx,dt)",
+    "scripts/camera.js - finiteNumber(value,fallback), update(ctx,dt)",
+    "scripts/gen/cob-house.js - HOUSE, holesFor(k), geometry(ctx), collider(ctx)",
+    "scripts/fauna-ground.js + scripts/fauna-small.js - scheduled updates for tagged fauna families",
+    "scripts/road-travellers.js - updateSchedule, update(ctx) for dynamic road actors",
+    "scripts/sky-dragons.js - updateSchedule, onSpawn(ctx), launch(ctx), roar(ctx), update(ctx), launch event ear",
+    "scripts/gen/jade-dragon.js - radiusAt(z), centreY(z), skeleton(), weightsAt(z), geometry(ctx), collider(ctx); scripts/gen/pasture-fence.js - geometry(ctx), collider(ctx)"
   ],
   "ownership": [
-    "places/main/config.yaml + scripts/forest-terrain.js - terrain seed, material/site marks, forest scatter, and derived ground height/material",
-    "places/main/cells/*.scene - authored row IDs, placements, transforms, tags and initial state, including houses, roads, and fixed animals/critters",
-    "scripts/player.js + scripts/lib/data/player.yml - movement intent, velocity, jump, flight and rope-climb behavior; scratch intent/timing stays in ctx.session, flying/camera mode are mirrored to player state",
-    "scripts/humanoid-locomotion.js - player yaw and gait channels; scripts/camera.js owns camera eye/view and local-player visibility",
-    "scripts/fauna-ground.js - movement/modes/follow, notice and pet response for tagged ground animals; species tuning lives in fauna-ground.json",
-    "scripts/fauna-small.js - small-critter animation and behavior state for fauna-small manager row; species data in fauna-small.js",
-    "scripts/road-travellers.js - dynamic traveller rows, route position, lane placement, gait/audio and session scheduling; roster/kind settings in travellers.json",
-    "scripts/delete-mode.js + scripts/ui.js - delete-mode interaction state and its HUD; UI also shows conditional dragon status"
+    "places/main/config.yaml + scripts/forest-terrain.js - terrain seed, material/site marks, forest scatter, derived ground height/material",
+    "places/main/cells/*.scene - authored row IDs, positions, tags and initial state for fixed buildings, roads and actors",
+    "scripts/player.js + scripts/lib/data/player.yml - movement intent, velocity, jump, flight and rope behavior; scratch timing in ctx.session, shared flight/cam toggles on player state",
+    "scripts/humanoid-locomotion.js + scripts/camera.js - player yaw/gait channels; camera view/eye and local-player visibility",
+    "scripts/fauna-ground.js / scripts/fauna-small.js - behavior and animation for their tagged animal populations",
+    "scripts/road-travellers.js - dynamic traveler rows, route progress, placement, animation/audio and scheduling; roster values in travellers.json",
+    "scripts/sky-dragons.js - manager sequence/timers/live IDs and spawned sky-dragon path state; sky-dragons.yml owns flight, color, sound and timing parameters",
+    "scripts/den-folk.js - NPC phase, plans, tasks and dialogue cursor in each Rikki/Campton state; den-folk.js data supplies individual routines and lines"
   ],
   "flows": [
-    "places/main/config.yaml terrain.generator + seed -> scripts/forest-terrain.js heightAt/materialAt(ctx) -> engine terrain, river channels and forest material bands",
-    "places/main/config.yaml site/path marks + decorations -> terrain clear/grade/material features and seeded forest vegetation via scripts/gen/forest-plant.js / valley-tree.js",
-    "road marks in places/main/config.yaml -> cobbled route corridors and scatter clearings; authored cells add bridges, road dressing, signs and rest features toward Lumenvale/Hearthmere",
-    "move/look/jump/camView input -> scripts/player.js -> movement/velocity, jump, double-tap flight and camMode; place gravity applies to the character body",
-    "movement near configured rope coordinates -> scripts/player.js + lib/data/ropes.js -> climb/slide velocity and deck step-in; tuning from player.yml",
-    "move/look input -> scripts/humanoid-locomotion.js -> player yaw/gait; player body + camMode -> scripts/camera.js -> first/third-person view and local visibility",
-    "interact input -> scripts/home-player-feel.js + lib/home-interaction.js -> nearest aligned interactable press; fauna pet press writes petAt/petBy for fauna-ground manager response",
-    "scene fauna rows tagged fauna-ground + species state -> scripts/fauna-ground.js -> wander/follow/notice/pet reactions and species clips from anim/*.yml",
-    "scene critter rows + scripts/critter-press.js -> small-fauna behavior/press; scripts/fauna-small.js manager reads tagged population and plays species clips",
-    "road-travellers row + road marks + travellers.json roster -> scripts/road-travellers.js -> spawn/rebase/move dynamic walker, rider and caravan rows, animation/audio from anim/traveller.yml",
-    "square-door approach/passage triggers -> scripts/square-door.js -> portal link/door transition; authored frame and sign rows provide the assembly",
-    "dragon controls/state -> conditional scripts/player.js/camera.js/scripts/ui.js integrations; current x0z0 dragon scene row is a blueprint placeholder, not a live actor"
+    "places/main/config.yaml terrain generator + seed -> scripts/forest-terrain.js heightAt/materialAt(ctx) -> engine terrain, river channels and forest material bands",
+    "places/main/config.yaml site/path marks + decorations -> terrain clear/grade/material features and seeded forest vegetation builders",
+    "road marks in places/main/config.yaml -> route corridors; authored cells add bridges, dressing, signs and rest features toward Lumenvale/Hearthmere",
+    "move/look/jump/camView input -> scripts/player.js -> movement, jump, flight and camMode; place gravity applies to player body",
+    "movement near rope coordinates -> scripts/player.js + lib/data/ropes.js -> climb/slide velocity and deck step-in",
+    "move/look input -> scripts/humanoid-locomotion.js -> yaw/gait; player body + camMode -> scripts/camera.js -> view and local visibility",
+    "interact input -> scripts/home-player-feel.js + lib/home-interaction.js -> nearest aligned press; fauna pet press writes petAt/petBy for fauna-ground response",
+    "tagged fauna rows + manager -> fauna-ground/fauna-small -> movement, follow/pet behavior and species clips from anim/*.yml",
+    "road-travellers row + road marks + travellers.json -> scripts/road-travellers.js -> route-positioned walker/rider/caravan rows, animation and audio",
+    "sky-dragons manager timer or sky-dragons:launch event -> scripts/sky-dragons.js -> 1–3 scripted jade-dragon geometry rows, looping spine wave, trail and flight path; expires rows and schedules next flight",
+    "press on den-folk NPC -> scripts/den-folk.js dialogue damageNumber; update cycles sit → findPath walk → chore animation → home, with humanoid-locomotion handling gait",
+    "square-door approach/passage triggers -> scripts/square-door.js -> portal link/door transition; authored frame and sign rows assemble it"
   ],
   "behaviorFamilies": [
-    "places/main/config.yaml decoration layers + scripts/gen/forest-plant.js / valley-mesh.js - seeded forest plants, trees, shrubs, ferns and reeds varied by layer, kind and terrain binding",
-    "scripts/gen/cob-house.js - authored procedural hexagonal multi-level house geometry/collider with cellar, spiral stair and roof deck; active at spawn",
+    "places/main/config.yaml decoration layers + scripts/gen/forest-plant.js / valley-mesh.js - seeded plants, trees, shrubs, ferns and reeds varied by layer, kind and terrain binding",
+    "scripts/gen/cob-house.js - authored procedural hexagonal multi-level house geometry/collider with cellar, spiral stair and roof deck",
     "scripts/gen/road-bridge.js + scripts/lib/road-solid.js - reusable bridge geometry/collider varied by dimensions and seed",
     "scripts/gen/road-dressing.js + scripts/lib/road-solid.js - roadside lamps, milestones, rest furnishings and sign arms varied by kind/direction/length",
-    "scripts/gen/animal-{bear,deer,fox,wolf}.js + scripts/fauna-ground.js - large animal bodies share a manager, varied by species, individual state and appearance parameters",
-    "scripts/gen/critter-{bird,duck,rabbit,squirrel}.js + scripts/fauna-small.js - small critter family uses shared management with species-specific geometry and animation",
-    "scripts/road-travellers.js + scripts/gen/traveller-{walker,rider,caravan}.js - route-driven travelers share one road manager and animation set, varied by kind, route, roster parameters and speed",
-    "templates/player.js - player behaviors compose movement, humanoid gait, home interaction and delete mode; camera is a separate custom rig"
+    "scripts/gen/animal-{bear,deer,fox,wolf}.js + scripts/fauna-ground.js - large animals share manager behavior, varied by species, individual state and appearance",
+    "scripts/gen/critter-{bird,duck,rabbit,squirrel}.js + scripts/fauna-small.js - shared small-critter manager with species-specific geometry and animation",
+    "scripts/road-travellers.js + scripts/gen/traveller-{walker,rider,caravan}.js - route-driven travelers share manager/animation, varied by kind, route, roster and speed",
+    "scripts/sky-dragons.js + scripts/gen/jade-dragon.js - manager-spawned long dragons share procedural spine mesh and wave flight, varied by palette, scale, route and flight tuning"
   ],
   "probableOrphans": [
-    "scripts/flat-terrain.js - no current place config selects it; main uses scripts/forest-terrain.js",
-    "scripts/gen/jade-dragon.js - no current scene/template uses its geometry; current dragon row is a blueprint box",
-    "scripts/jade-dragon.js - no scene row attaches this actor behavior; player/camera/UI retain conditional dragon integrations"
+    "scripts/flat-terrain.js - no current place config selects it; main uses forest-terrain",
+    "scripts/jade-dragon.js - no scene row attaches this actor behavior; sky flights use scripts/gen/jade-dragon.js geometry directly",
+    "scripts/gen/pasture-fence.js + scripts/lib/data/pasture.yml - rescue-pasture builder/tuning have no active scene or code consumer; x0z0 currently has only pasture-site blueprint marker"
   ],
   "migrationNotes": [
-    "forest-terrain.js heightAt/materialAt take a context object; main's river is at sea level y=0, ground is around y=0.5, and the spawn clearing is centered near (0,-3).",
+    "forest-terrain.js heightAt/materialAt take a context object; main's river is at sea level y=0, ground is around y=0.5, and the Spawn clearing is centered near (0,-3).",
     "Keep places/main/config.yaml material IDs and decoration bindings coordinated; terrain marks include home/settlement clearings and cobble/gravel/yard road corridors.",
-    "The active cob-house placement (0, 0.5, -26) must stay aligned with the homeSite/homeClear terrain marks; its local levels and openings are defined by HOUSE/holesFor in cob-house.js.",
+    "The active cob-house placement (0, 0.5, -26) must stay aligned with homeSite/homeClear terrain marks; local levels and openings are defined by HOUSE/holesFor in cob-house.js.",
     "Road marks and authored bridge/dressing cells are coordinated over long routes; bridge origins are at road level y=0.5 and bridge length runs along local Z.",
-    "scripts/player.js keeps high-frequency movement, flight and rope scratch in ctx.session; player.state.flying/camMode are shared toggles, while flyTapWindow is milliseconds.",
-    "Large fauna and road travelers are manager-driven rows; keep their tags, manager row, state schema, and species/roster data in sync. Small critters instead use per-row critter-press behavior plus the fauna-small manager."
+    "scripts/player.js keeps high-frequency movement, flight and rope scratch in ctx.session; player.state.flying/camMode are shared toggles, and flyTapWindow is milliseconds.",
+    "The sky-dragon manager uses scripts/gen/jade-dragon.js as dynamic primitive geometry, not the separate scripts/jade-dragon.js actor behavior; pasture-site is still a blueprint marker, not an assembled pasture."
   ]
 }
