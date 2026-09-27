@@ -1,11 +1,17 @@
 # spawn-scene v2 yaml x0z0
 alchemy-bench:
-  feetPosition: {x: 7, y: 0.5, z: -58}
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-gentle-potion-bubbling-loop.mp3, gain: 0.15, loop: true, maxDistance: 18, spatial: true}
+  behavior: scripts/alchemy-bench.js
+  children: [{feetPosition: {x: 0.08, y: 1.15, z: 0.93}, fx: {script: "fx\npop bub rate=flick(.6,.3)*9 on=disc(.14) life=.6..1.1 v=up(.25..0.45) size=.012..0.025 acc=curl(.6)*.2 tint=<.4,1.6,1.5>..<1.4,.5,1.6> col=$tint a=0>.1:.9>.8:.6>0 sz=$size r=sprite(soft-disc,add)\npop wisp rate=3 on=disc(.12) life=1.2..2 v=up(.2) size=.06..0.1 acc=buoy(.3)+curl(.4)*.3+drag(.8) col=<.6,.9,.9> a=0>.2:.18>0 sz=$size*(.6>2) r=sprite(smoke-puff,alpha)"}, id: bubbles}, {feetPosition: {x: 0, y: 1.47, z: 1.29}, id: sign, material: {color: "#343c43", roughness: 0.95}, primitive: {depth: 0.02, height: 0.26, kind: box, width: 0.62}, ui: "<div face=\"front\" style=\"width:620px;height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:14px solid #ba8950;box-sizing:border-box;background:#343c43;color:#f2e6cf;font-family:Georgia,serif\"><div style=\"font-size:78px;letter-spacing:6px\">ALCHEMY</div><div style=\"font-size:40px;opacity:.85\">brew with harvest · E</div></div>"}]
+  feetPosition: {x: 3.39, y: 0.8999999761581421, z: -57.9}
   id: alchemy-bench
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 2, height: 2.2, kind: box, width: 4}
-  tags: [blueprint]
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {}, script: scripts/gen/alchemy-bench.js}
+  rotation: {yaw: -90}
+  state: {act: Brew}
+  tags: [interactable, alchemy-bench]
+  visibleRange: {max: 80}
 amb-bees-quad:
   audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-bees-buzzing-flower-garden-loop.mp3, gain: 0.14, loop: true, maxDistance: 16, spatial: true}
   feetPosition: {x: 13, y: 1.5, z: -11}
@@ -1830,6 +1836,17 @@ cob-in-g-tv:
   rotation: {yaw: 120}
   tags: [cob-interior]
   visibleRange: {max: 60}
+compost-corner:
+  behavior: scripts/compost-tumbler.js
+  children: [{feetPosition: {x: -0.35, y: 0.43, z: 0}, id: drum, material: {pbr: true}, pivot: center, primitive: {kind: scripted, params: {part: drum}, script: scripts/gen/compost-corner.js}, visibleRange: {max: 80}}]
+  feetPosition: {x: 20.7, y: 0.16554359124795281, z: -59.7}
+  id: compost-corner
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {part: base}, script: scripts/gen/compost-corner.js}
+  state: {act: Spin}
+  tags: [interactable, compost-corner]
+  visibleRange: {max: 80}
 coop-gate:
   behavior: scripts/coop-gate.js
   castShadow: true
