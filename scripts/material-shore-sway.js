@@ -7,7 +7,7 @@ export function material(ctx) {
   m.vertexColors = true; m.roughness = 0.9; m.metalness = 0;
   const k = clamp(positionLocal.y.sub(base).div(h), 0, 1), bend = k.mul(k);
   const t = time.mul(speed).add(positionWorld.x.mul(0.45)).add(positionWorld.z.mul(0.3));
-  const gust = t.sin().mul(reach).add(t.mul(2.7).add(1.3).sin().mul(reach).mul(0.3)).add(reach * 0.6);
+  const gust = t.sin().mul(reach).add(t.mul(2.7).add(1.3).sin().mul(reach).mul(0.3)).add(reach.mul(0.6));
   const side = t.mul(1.6).add(0.8).sin().mul(reach).mul(0.35);
   m.positionNode = positionLocal.add(vec3(gust.mul(bend), 0, side.mul(bend)));
   return m;
