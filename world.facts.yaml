@@ -20,6 +20,7 @@ assets:
     "anim/critter-squirrel.yml#hop": clips/anim-critter-squirrel-yml-hop-06d5add8.json
     "anim/critter-squirrel.yml#idle": clips/anim-critter-squirrel-yml-idle-e7f19fa3.json
     "anim/critter-squirrel.yml#sit": clips/anim-critter-squirrel-yml-sit-32f1a00f.json
+    "anim/deer.yml#alert": clips/anim-deer-yml-alert-5438d344.json
     "anim/deer.yml#graze": clips/anim-deer-yml-graze-2d27b1c3.json
     "anim/deer.yml#walk": clips/anim-deer-yml-walk-0c41543f.json
     "anim/fox.yml#sniff": clips/anim-fox-yml-sniff-459554f1.json
