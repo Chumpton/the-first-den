@@ -40,7 +40,7 @@ terrain:
     - {id: mud, albedo: cdn/texture-terrain-wet-riverbank-mud-realistic.png, tint: oklch(0.95 0.02 70), textureScale: 2.5, pbr: true, antiTiling: stochastic, normalStrength: 0.4, roughnessIntensity: 0.6}
     - {id: pebbles, albedo: cdn/texture-terrain-river-pebbles-realistic.png, tint: oklch(0.97 0.01 80), textureScale: 2, pbr: true, antiTiling: stochastic, normalStrength: 0.6, roughnessIntensity: 0.55}
   marks:
-    river: {kind: sea, level: 0, floorMaterial: pebbles, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
+    river: {kind: sea, level: 0, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
     spawnClearing: {kind: flatten, center: {x: 0, z: -3}, height: 0.5, falloff: 6, shape: {kind: circle, radius: 9}, material: moss}
     spawnClear: {kind: clear-scatter, center: {x: 0, z: -3}, shape: {kind: circle, radius: 7}}
   decorations:
