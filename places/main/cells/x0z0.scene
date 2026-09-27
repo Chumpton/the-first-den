@@ -34,13 +34,59 @@ campton:
   physics: none
   state: {name: Campton, turnTo: movement, who: campton}
   tags: [interactable, den-folk, npc]
+catio-door:
+  behavior: scripts/catio-door.js
+  feetPosition: {x: -11.86957978657736, y: 0.63, z: -16.658715254844534}
+  id: catio-door
+  physics: kinematic
+  primitive: {kind: scripted, params: {part: door}, script: scripts/gen/catio.js}
+  rotation: {yaw: 120}
+  state: {baseYaw: 120, center: {x: -12.23009248846958, y: 0.6, z: -16.28314157129579}, open: false}
+  tags: [catio, catio-door, interactable]
+catio-marmalade:
+  behavior: scripts/catio-cat.js
+  feetPosition: {x: -10.617971265349082, y: 1.05, z: -18.310865704891008}
+  id: catio-marmalade
+  primitive: {kind: scripted, params: {coat: ginger}, script: scripts/gen/cat.js}
+  rotation: {yaw: 120}
+  scale: 0.85
+  state: {coat: ginger, name: Marmalade, pitch: 1}
+  tags: [catio, catio-cat, interactable]
+catio-patches:
+  behavior: scripts/catio-cat.js
+  feetPosition: {x: -15.046932049383596, y: 2.2199999999999998, z: -19.622050807568876}
+  id: catio-patches
+  primitive: {kind: scripted, params: {coat: calico}, script: scripts/gen/cat.js}
+  rotation: {yaw: 120}
+  scale: 0.85
+  state: {coat: calico, name: Patches, pitch: 1.2}
+  tags: [catio, catio-cat, interactable]
 catio-site:
-  feetPosition: {x: -10, y: 0.5, z: -17}
+  behavior: scripts/catio-cats.js
+  feetPosition: {x: -12.967175976009694, y: 0.5, z: -18.85980762113533}
   id: catio-site
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 4, height: 2.6, kind: box, width: 5}
-  tags: [blueprint]
+  physics: static
+  primitive: {kind: scripted, params: {part: shell, tunLen: 4.5}, script: scripts/gen/catio.js, seed: 7}
+  rotation: {yaw: 120}
+  state: {yaw: 120}
+  tags: [catio]
+catio-site/catio-sign:
+  feetPosition: {x: -2.575, y: 2.12, z: -0.65}
+  id: catio-site/catio-sign
+  material: {color: oklch(0.7 0.09 70), roughness: 0.8}
+  parent: catio-site
+  primitive: {depth: 0.03, height: 0.24, kind: box, width: 0.86}
+  rotation: {yaw: 90}
+  ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#b98a52;border:10px solid #4f3828;border-radius:18px;color:#2f2117;font-family:serif;font-style:italic;font-weight:700;font-size:130px;letter-spacing:4px\">The Catio</div>"
+catio-sootie:
+  behavior: scripts/catio-cat.js
+  feetPosition: {x: -14.156739670518927, y: 1.21, z: -17.48019237886467}
+  id: catio-sootie
+  primitive: {kind: scripted, params: {coat: black}, script: scripts/gen/cat.js}
+  rotation: {yaw: 120}
+  scale: 0.85
+  state: {coat: black, name: Sootie, pitch: 1.12}
+  tags: [catio, catio-cat, interactable]
 cob-door-front:
   behavior: scripts/cob-door.js
   feetPosition: {x: 0, y: 0.5, z: -18.282566285183165}
