@@ -100,7 +100,7 @@ function hippie(c) {
   // a hanging bead curtain frame beside the door and a peace-sign wind chime by the window
   for (let i = 0; i < 9; i++) { const a = 1.2 + i * 0.07, col = quilt[i % quilt.length]; mat(c, col, 0.4); for (let s = 0; s < 10; s++) { const [x, z] = at(0, a, 0.06); gem(c, x, 2.6 - s * 0.2, z, 0.02, 0.02, 0.02, 4); } }
 }
-export function geometry(c) { c.flat(); if (c.params.style === "hippie") hippie(c); else office(c); }
+export function geometry(c) { c.flat(); if ((c.lod ?? 1) >= 4) return; if (c.params.style === "hippie") hippie(c); else office(c); }
 export function collider(c) {
   const { ob } = frame(c);
   if (c.params.style === "hippie") { ob(3, -1.25, 1.25, 0, 1.6, 0, 0.45); ob(1, -1.1, 1.1, 0, 0.5, 0, 0.8); ob(4, -1.3, 1.3, 0, 0.45, 0, 0.5); ob(2, 0.95, 1.5, 0.05, 0.55, 0, 0.45); return; }
