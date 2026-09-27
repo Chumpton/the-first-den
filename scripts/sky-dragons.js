@@ -38,9 +38,9 @@ function at(ctx, p, t) {
 function pose(ctx, p, t) {
   const a = at(ctx, p, t), e = 0.25 / p.dur, b = at(ctx, p, t + e), c = at(ctx, p, t - e);
   const dx = b.x - c.x, dy = b.y - c.y, dz = b.z - c.z, h = Math.hypot(dx, dz) || 1;
-  // curvature sign → bank into the turn
-  const ux = dx / h, uz = dz / h, lat = ((b.x + c.x - 2 * a.x) * -uz + (b.z + c.z - 2 * a.z) * ux) / (e * e * p.L * p.L / 4000);
-  const rollDeg = Math.max(-SKY.maxBank, Math.min(SKY.maxBank, -lat * SKY.bank * 10));
+  // lateral acceleration (m/s², +left of travel) → bank into the turn
+  const ux = dx / h, uz = dz / h, dt = 0.25, lat = ((b.x + c.x - 2 * a.x) * uz + (b.z + c.z - 2 * a.z) * -ux) / (dt * dt);
+  const rollDeg = Math.max(-SKY.maxBank, Math.min(SKY.maxBank, Math.atan2(lat, 9.8) / R * SKY.bank));
   return { pos: a, rot: { yaw: Math.atan2(-dx, -dz) / R, pitch: Math.atan2(dy, h) / R, roll: rollDeg } };
 }
 function schedule(ctx) {
