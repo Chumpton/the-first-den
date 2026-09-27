@@ -1,0 +1,30 @@
+idle:
+  duration: 3.2
+  tracks:
+    earL: { roll: [0, 0, 0, -14, 0, 0, 0, 0], pitch: [0, 0, 0, 0, 0, 8, 0, 0] }
+    earR: { roll: [0, 0, 0, 0, 0, 0, 14, 0] }
+    head: { pitch: [0, 3, 0, 0, 3, 0, 0, 0], yaw: [0, 0, 10, 10, 0, 0, -10, 0] }
+hop:
+  duration: 0.42
+  tracks:
+    root: { y: [0, 0.1, 0.12, 0.04, 0], pitch: [8, -12, -6, 10, 8] }
+    legB: { pitch: [25, -55, -35, 15, 25] }
+    legF: { pitch: [-20, 30, 45, -10, -20] }
+    earL: { pitch: [0, 18, 22, 6, 0] }
+    earR: { pitch: [0, 18, 22, 6, 0] }
+graze:
+  duration: 1.6
+  tracks:
+    root: { pitch: [-14, -14, -14, -14, -14] }
+    head: { pitch: [-38, -32, -38, -32, -38] }
+    earL: { pitch: [20, 20, 22, 20, 20], roll: [-10, -10, -12, -10, -10] }
+    earR: { pitch: [20, 20, 22, 20, 20], roll: [10, 10, 12, 10, 10] }
+sit:
+  duration: 2
+  tracks:
+    root: { pitch: [32, 32, 32] }
+    head: { pitch: [-28, -24, -28] }
+    legB: { pitch: [-30, -30, -30] }
+    legF: { pitch: [20, 20, 20] }
+    earL: { pitch: [-6, -9, -6] }
+    earR: { pitch: [-6, -9, -6] }
