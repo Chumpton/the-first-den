@@ -60,6 +60,7 @@ assets:
     "anim/wolf.yml#walk": clips/anim-wolf-yml-walk-2b7543f3.json
     "catio-cats.js#catio-drink": clips/catio-cats-js-catio-drink-f6084608.json
     "catio-cats.js#catio-groom": clips/catio-cats-js-catio-groom-c7882924.json
+    "catio-cats.js#catio-groom~71ad3821": clips/catio-cats-js-catio-groom-71ad3821-12697595.json
     "catio-cats.js#catio-jump": clips/catio-cats-js-catio-jump-e0b2242e.json
     "catio-cats.js#catio-jump~df8a4e5f": clips/catio-cats-js-catio-jump-df8a4e5f-2e864a2d.json
     "catio-cats.js#catio-loaf": clips/catio-cats-js-catio-loaf-ca371ba0.json
@@ -67,7 +68,9 @@ assets:
     "catio-cats.js#catio-nap": clips/catio-cats-js-catio-nap-50286c11.json
     "catio-cats.js#catio-nap~abdcf46c": clips/catio-cats-js-catio-nap-abdcf46c-538544d2.json
     "catio-cats.js#catio-sit": clips/catio-cats-js-catio-sit-c9c66052.json
+    "catio-cats.js#catio-sit~8f66d688": clips/catio-cats-js-catio-sit-8f66d688-8af72bec.json
     "catio-cats.js#catio-walk": clips/catio-cats-js-catio-walk-d650142f.json
+    "catio-cats.js#catio-walk~8e024152": clips/catio-cats-js-catio-walk-8e024152-9cfc4e62.json
     "corral-horses.js#corral-graze": clips/corral-horses-js-corral-graze-8a2dea3a.json
     "corral-horses.js#corral-nicker": clips/corral-horses-js-corral-nicker-2c758b35.json
     "corral-horses.js#corral-stand": clips/corral-horses-js-corral-stand-cbf0229f.json
@@ -90,7 +93,9 @@ assets:
     "pasture-flock.js#flock-sheep-walk": clips/pasture-flock-js-flock-sheep-walk-a2bf84ec.json
     "pasture-flock.js#flock-sheep-walk~290fa3c": clips/pasture-flock-js-flock-sheep-walk-290fa3c-2905f50e.json
     "pasture-herd.js#pasture-graze": clips/pasture-herd-js-pasture-graze-92f77e93.json
+    "pasture-herd.js#pasture-graze~25128a19": clips/pasture-herd-js-pasture-graze-25128a19-74815158.json
     "pasture-herd.js#pasture-nicker": clips/pasture-herd-js-pasture-nicker-8747fd6a.json
+    "pasture-herd.js#pasture-nicker~a2b70c9c": clips/pasture-herd-js-pasture-nicker-a2b70c9c-07425c69.json
     "pasture-herd.js#pasture-stand": clips/pasture-herd-js-pasture-stand-55b19bea.json
     "pasture-herd.js#pasture-stand~28424d52": clips/pasture-herd-js-pasture-stand-28424d52-53269f73.json
     "pasture-herd.js#pasture-trot": clips/pasture-herd-js-pasture-trot-1e431357.json
