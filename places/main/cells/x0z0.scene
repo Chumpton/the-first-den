@@ -4221,6 +4221,12 @@ tower-skirt:
   rotation: {yaw: 90}
   tags: [tower-grounds]
   visibleRange: {max: 90}
+town-road:
+  feetPosition: {x: 0, y: {terrain: 0}, z: 45}
+  id: town-road
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 56, height: 0.3, kind: box, width: 8}
 trade-road:
   feetPosition: {x: 0, y: 0.5, z: 13}
   id: trade-road
