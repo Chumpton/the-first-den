@@ -2,8 +2,20 @@
 // Telescoping scale bands (each band's back lip flares over the next) keep the skin closed while the spine bends.
 import { DRAGON } from '../lib/data/dragon.js';
 const SP = DRAGON.spine.spacing, NB = DRAGON.spine.bones, TAIL = 10.9;
-const JADE = 'oklch(0.78 0.13 150)', DORSAL = 'oklch(0.55 0.12 155)', FLANK = 'oklch(0.84 0.11 148)',
-  BELLY = 'oklch(0.93 0.06 140)', BELLY2 = 'oklch(0.88 0.07 120)', MANE = 'oklch(0.47 0.11 158)', CREAM = 'oklch(0.94 0.04 90)';
+// Colour variants: params { hue, chroma, light } re-hue the jade palette (hue = the body's hue, jade 150; chroma a scale;
+// light a lightness lift). No params = the original jade strings exactly.
+const BASE = { JADE: [0.78, 0.13, 150], DORSAL: [0.55, 0.12, 155], FLANK: [0.84, 0.11, 148], BELLY: [0.93, 0.06, 140],
+  BELLY2: [0.88, 0.07, 120], MANE: [0.47, 0.11, 158], WHISKER: [0.9, 0.07, 130] };
+const ok = ([l, c, h]) => `oklch(${l} ${c} ${h})`;
+let JADE, DORSAL, FLANK, BELLY, BELLY2, MANE, WHISKER;
+const CREAM = 'oklch(0.94 0.04 90)';
+function palette(p = {}) {
+  const re = p.hue != null, dh = re ? p.hue - 150 : 0, ck = p.chroma ?? 1, dl = p.light ?? 0;
+  const C = {};
+  for (const k in BASE) { const [l, c, h] = BASE[k]; C[k] = re || ck !== 1 || dl ? ok([+Math.min(0.97, l + dl).toFixed(3), +(c * ck).toFixed(3), +(((h + dh) % 360 + 360) % 360).toFixed(1)]) : ok(BASE[k]); }
+  ({ JADE, DORSAL, FLANK, BELLY, BELLY2, MANE, WHISKER } = C);
+}
+palette();
 export function radiusAt(z) {
   if (z < -0.8) return 0.42 + (z + 1.7) / 0.9 * 0.08;
   if (z < 0) return 0.5 + (z + 0.8) / 0.8 * 0.06;
@@ -58,6 +70,7 @@ function tube(ctx, pts, radii, sides, cap = true) {
 const mx = (p) => [-p[0], p[1], p[2]];
 export function geometry(ctx) {
   const lod = ctx.lod, sides = lod >= 4 ? 6 : lod >= 3 ? 8 : 10, step = lod >= 5 ? 2.4 : lod >= 4 ? 1.2 : lod >= 3 ? 0.6 : 0.3;
+  palette(ctx.params || {});
   ctx.flat(); ctx.roughness(0.72);
   // body: telescoping bands from the neck to the tail
   let band = 0;
@@ -132,7 +145,7 @@ export function geometry(ctx) {
     for (let i = 0; i < 4; i++) { const z = -2.2 + i * 0.22; T(ctx, [0, 0.97 - i * 0.02, z], [0, 0.95, z + 0.25], [0, 1.35 - i * 0.03, z + 0.55]); }
     if (lod <= 2) {
       // whiskers: long barbels curling back
-      ctx.color('oklch(0.9 0.07 130)');
+      ctx.color(WHISKER);
       const w = [[0.2, 0.5, -3.32], [0.55, 0.47, -3.22], [0.95, 0.36, -2.85], [1.22, 0.22, -2.25], [1.3, 0.15, -1.6]], wr = [0.035, 0.03, 0.022, 0.014, 0.004];
       tube(ctx, w, wr, 3); tube(ctx, w.map(mx), wr, 3);
     }

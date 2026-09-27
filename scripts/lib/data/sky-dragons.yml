@@ -1,0 +1,33 @@
+# Sky dragons: every tuned number for scripts/sky-dragons.js (seconds, metres, degrees).
+every: [70, 150]          # seconds between flights
+count: [1, 3]             # dragons per flight
+duration: [25, 40]        # seconds per crossing
+speed: [20, 26]           # m/s along the crossing line (length = speed * duration)
+home: { x: 0, z: -26 }    # the house; every path's centre lies near it
+pass: [35, 110]           # the crossing line's closest approach to home (m)
+height: [55, 95]          # cruise altitude (world y)
+clearance: 40             # never lower than this above the ground under it
+sway: [40, 70]            # S-curve half-width (m)
+waves: [1.0, 1.6]         # S-curve periods across a crossing
+bob: [4, 9]               # vertical swell (m)
+bank: 0.9                 # roll per unit lateral curvature, clamped to maxBank
+maxBank: 28
+followLag: [1.6, 3.4]     # seconds each follower trails the one ahead
+followSide: [18, 30]      # metres each follower sits to the side
+followRise: [-8, 8]
+scale: [3.6, 4.4]         # the jade geometry is ~15 m long; 4x reads from the house
+step: 2                   # manager update every N ticks
+# body wave: yaw per spine bone in a travelling wave, a little pitch
+wave: { period: 2.4, amp: 13, grow: 0.7, phase: 0.62, lift: 3, neck: 6, head: -6 }
+sound:
+  loop: /cdn/moodboard-lowpoly-cozy/sfx-sky-dragon-distant-wind-whoosh-loop.mp3
+  gain: 0.35
+  range: 420
+  roar: /cdn/moodboard-lowpoly-cozy/sfx-sky-dragon-distant-soft-roar.mp3
+  roarGain: 0.55
+  roarRange: 700
+  roarAt: 0.45            # fraction of the crossing
+palettes:
+  jade:  { hue: 150, chroma: 1.0,  light: 0.0,  spark: [1.1, 2.2, 1.4] }
+  gold:  { hue: 78,  chroma: 1.15, light: 0.02, spark: [2.4, 1.8, 0.7] }
+  azure: { hue: 228, chroma: 0.75, light: 0.06, spark: [1.2, 1.7, 2.6] }
