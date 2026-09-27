@@ -49,7 +49,11 @@ terrain:
     - {albedo: cdn/texture-terrain-short-fine-mown-lawn-grass-realistic.png, antiTiling: stochastic, id: lawn, macro: {hue: 0.012, scale: 50, value: 0.07}, normalStrength: 0.35, pbr: true, roughnessIntensity: 0.9, textureScale: 2.2, tint: oklch(0.96 0.02 130)}
     - {albedo: cdn/texture-terrain-pale-limestone-cobblestone-road.png, antiTiling: stochastic, id: cobblepale, normalStrength: 0.6, pbr: true, roughnessIntensity: 0.8, textureScale: 2.5, tint: oklch(0.97 0.01 85)}
   marks:
-    river: {kind: sea, level: 0, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
+    # the sea stands everywhere but a dry 20x20 m square round the cob house, so the sunk studio under it stays dry
+    river: {kind: sea, level: 0, reach: {shape: rectangle, width: 8000, depth: 4000, center: {x: 0, z: -2036}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
+    river-s: {kind: sea, level: 0, reach: {shape: rectangle, width: 8000, depth: 4000, center: {x: 0, z: 1984}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
+    river-w: {kind: sea, level: 0, reach: {shape: rectangle, width: 3990, depth: 20, center: {x: -2005, z: -26}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
+    river-e: {kind: sea, level: 0, reach: {shape: rectangle, width: 3990, depth: 20, center: {x: 2005, z: -26}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
     spawnClearing: {kind: flatten, center: {x: 0, z: -3}, height: 0.5, falloff: 6, shape: {kind: circle, radius: 9}, material: lawn}
     violetRest: {kind: flatten, center: {x: 30.5, z: -7.6}, height: 0.55, falloff: 3, shape: {kind: circle, radius: 5}}
     violetClear: {kind: clear-scatter, center: {x: 30.5, z: -7.6}, shape: {kind: circle, radius: 7.5}}
