@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "basedOnSpecVersion": 419,
-  "updatedAt": "2026-09-27T06:50:41.262Z",
-  "summary": "The First Den is a forest world centered on Spawn, with the owner's home and grounds connected by authored highways to the cities of Lumenvale and Hearthmere. Terrain configuration and procedural city builders shape the wider world; shared player interactions, mounts, courier rides and a player travel list connect its places.",
+  "basedOnSpecVersion": 437,
+  "updatedAt": "2026-09-27T07:08:44.416Z",
+  "summary": "The First Den is a forest world centered on Spawn, with the owner's home and grounds, lake and wizard tower connected by authored highways to Lumenvale and Hearthmere. Terrain marks and procedural builders shape the landscape and cities; shared player interactions, mounts, courier rides and travel connect its places.",
   "scriptPaths": [
     "scripts/arrival.js",
     "scripts/camera.js",
@@ -283,11 +283,12 @@
     "scripts/wizard-portal.js"
   ],
   "places": [
-    "places/main - single configured forest world: Spawn/home, lake and wizard tower, highways, Lumenvale to the east and walled Hearthmere to the west",
-    "places/main/cells/x0z0.scene - Spawn hub: home and grounds, creek, lake/dock, wizard tower, Violet and mount pads, rowboat",
-    "places/main/cells/objects.scene - shared placements including road dressing and the Hearthmere/Lumenvale authored city structures",
+    "places/main - the configured forest world: Spawn/home, lake and wizard tower, highways, Lumenvale east and walled Hearthmere west",
+    "places/main/cells/x0z0.scene - Spawn hub: home and grounds, creek, lake/dock, wizard tower, Violet and mount pads, rowboat; also contains blueprint layout boxes for several grounds additions",
+    "places/main/cells/x0z-1.scene - neighboring shore/forest cell with fox and fauna, maze and deer fencing; shore-dressing is a blueprint placeholder",
+    "places/main/cells/objects.scene - shared placements including road dressing and authored Hearthmere/Lumenvale city structures",
     "places/main/cells/*.scene - fixed structures, actors and relationships distributed across main's streamed cells",
-    "places/main/config.yaml - forest terrain plus path/clearing/flattening marks and decoration bindings; grades road corridors and city approaches"
+    "places/main/config.yaml - forest terrain, path/clearing/flattening marks and decoration bindings; grades road corridors and city approaches"
   ],
   "roots": [
     "world.config.yaml - world defaults, player/camera templates, input actions, lighting, arrival and UI",
@@ -315,7 +316,8 @@
     "scripts/courier.js - update(ctx,dt), ears.press and ears.courierRide; scripts/travel.js - onInput(ctx,input)",
     "scripts/lib/dragon-rider.js - wantMount(ctx,target), dragonRide(ctx); scripts/home-player-feel.js - player interaction handlers",
     "scripts/ui.js - HUD including courier picker/status and travel list; templates/player.js#player attaches scripts/travel.js",
-    "scripts/purple-dragon.js - Violet mount behavior; scripts/gen/purple-dragon.js - dragon geometry/collider; scripts/rowboat.js - boat behavior"
+    "scripts/purple-dragon.js - Violet mount behavior; scripts/gen/purple-dragon.js - dragon geometry/collider; scripts/rowboat.js - boat behavior",
+    "scripts/gen/grand-gate.js - geometry(ctx), collider(ctx); scripts/grand-gate-leaf.js - update(ctx,dt); world.facts.yaml maps anim/fox.yml#alert to its authored clip"
   ],
   "ownership": [
     "places/main/config.yaml + scripts/forest-terrain.js - terrain seed/material/site marks, scatter and derived ground height/material; marks grade roads, lawns, creek and clearings",
@@ -339,7 +341,7 @@
     "horse press -> scripts/courier.js ears.press -> player.state.courierPick and greeting; home-player-feel handles city/cancel input and emits courierRide to horse",
     "courierRide -> scripts/courier.js reads road-<city> terrain mark at ride time -> route movement and ground sampling -> rider dropAt at gate; place.state.courier informs nearby UI",
     "player presses J / destination action -> scripts/travel.js onInput -> travel data destination, terrain height and teleport; scripts/ui.js displays list/status and emits travelGo",
-    "fairy-keeper + pollinator-keeper -> scripts/fairies.js and scripts/pollinators.js -> tuning/tagged rows, terrain-following flight, clips, greetings and effects"
+    "grand-gate-leaf-a/b proximity -> scripts/grand-gate-leaf.js -> each kinematic leaf swings on its own keyed ctx.session.leaf state and emits wrought-iron open/close sounds; scripts/gen/grand-gate.js supplies leaf geometry/collider"
   ],
   "behaviorFamilies": [
     "places/main/config.yaml decoration layers + scripts/gen/forest-plant.js / valley-mesh.js - seeded forest plants, trees, shrubs, ferns, reeds and lawn flora varied by layer, kind and terrain",
@@ -349,7 +351,7 @@
     "scripts/gen/animal-{bear,deer,fox,wolf}.js + fauna-ground.js and scripts/gen/critter-{bird,duck,rabbit,squirrel}.js + fauna-small.js - shared large/small fauna behavior varied by species, geometry and animation",
     "scripts/gen/hearth-city.js + scripts/lib/data/hearth-city.js - Hearthmere wall, gatehouse, keep, districts, avenue and canal; layout and district data drive a single assembled city builder",
     "scripts/gen/lumen-grand.js - Lumenvale grand structures, canal and procedural lots varied by kind, parameters and layout",
-    "scripts/lib/dragon-rider.js - shared mount seating and step-off used by Violet, rowboat and courier horse; mount-specific seat/drop state varies"
+    "scripts/gen/grand-gate.js + scripts/grand-gate-leaf.js - limestone gate frame and independently swinging wrought-iron leaves varied by width, direction and leaf state"
   ],
   "probableOrphans": [
     "scripts/flat-terrain.js - no current place config selects it; main uses forest-terrain",
@@ -361,6 +363,6 @@
     "Configured terrain path marks grade/materialize roads and clear scatter; scene path generators draw visible paving and do not replace the terrain jobs.",
     "The den-creek follows authored river points through Spawn under creek-bridge-avenue toward the back pond; keep den-creek-banks and creek-banks dressing aligned separately.",
     "Courier routes read road-<city> marks at ride time; keep COURIER city keys/road names, road mark names and destination centers coordinated. Courier owns place.state.courier while horse is away.",
-    "dragon-rider expects targets tagged dragon or mount (pressTo may redirect); mounted target supplies seat/seatYaw/thirdPerson/dropAt. Travel destinations use x/z plus terrain-derived landing height unless an explicit y is set."
+    "Grand-gate-leaf-a and -b share ctx.session.leaf as a map keyed by row id; preserve separate swing state for each leaf. x0z0/x0z-1 rows tagged blueprint use engine/blueprint with physics none and are layout placeholders, not functional scene geometry."
   ]
 }
