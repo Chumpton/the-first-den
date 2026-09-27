@@ -1,8 +1,8 @@
 // Ember: a big bronze-gold dragon lying curled on a roost ledge. Origin = ledge floor centre, head toward −Z (over the front edge),
 // torso along +Z offset to +X, tail curling round the right flank and hanging down the front face. Wings modelled folded;
 // the behaviour opens them by yawing wingR/wingL about the shoulder. params.colors { body: [l,c,h], … } re-paints any part.
-const DEF = { body: [0.7, 0.13, 70], body2: [0.64, 0.13, 62], dorsal: [0.47, 0.1, 48], belly: [0.9, 0.08, 90], belly2: [0.83, 0.09, 80],
-  membrane: [0.72, 0.12, 52], horn: [0.93, 0.03, 85], eye: [0.87, 0.17, 100], claw: [0.9, 0.03, 85], fin: [0.56, 0.12, 40] };
+const DEF = { body: [0.78, 0.14, 76], body2: [0.72, 0.14, 68], dorsal: [0.58, 0.12, 56], belly: [0.9, 0.08, 90], belly2: [0.83, 0.09, 80],
+  membrane: [0.78, 0.12, 60], horn: [0.93, 0.03, 85], eye: [0.87, 0.17, 100], claw: [0.9, 0.03, 85], fin: [0.64, 0.14, 48] };
 const ok = (a) => `oklch(${a[0]} ${a[1]} ${a[2]})`;
 const sub = (a, b) => [a[0] - b[0], a[1] - b[1], a[2] - b[2]], add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
 const mul = (a, s) => [a[0] * s, a[1] * s, a[2] * s], dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
@@ -78,7 +78,7 @@ export function skeleton() {
 export function geometry(ctx) {
   C = { ...DEF, ...(ctx.params?.colors ?? {}) };
   const lod = ctx.lod ?? 1; N = [12, 12, 10, 8, 6, 5][lod] ?? 8;
-  ctx.smooth(); ctx.roughness(0.42); ctx.metalness(0.32);
+  ctx.smooth(); ctx.roughness(0.42); ctx.metalness(0.15);
   // torso, lying belly-down
   tube(ctx, [P0(CX, 1.0, -2.2, 0.5, 0.5, 'chest'), P0(CX, 0.95, -1.75, 0.88, 0.8, 'chest'), P0(CX, 0.88, -1.0, 1.08, 0.86, 'chest'),
     P0(CX, 0.86, -0.1, 1.14, 0.85, { chest: 0.5, root: 0.5 }), P0(CX, 0.85, 0.8, 1.12, 0.84, 'root'), P0(CX, 0.8, 1.6, 1.0, 0.78, 'root'),
