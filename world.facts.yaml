@@ -61,31 +61,45 @@ assets:
     "catio-cats.js#catio-drink": clips/catio-cats-js-catio-drink-f6084608.json
     "catio-cats.js#catio-groom": clips/catio-cats-js-catio-groom-c7882924.json
     "catio-cats.js#catio-jump": clips/catio-cats-js-catio-jump-e0b2242e.json
+    "catio-cats.js#catio-jump~df8a4e5f": clips/catio-cats-js-catio-jump-df8a4e5f-2e864a2d.json
     "catio-cats.js#catio-loaf": clips/catio-cats-js-catio-loaf-ca371ba0.json
+    "catio-cats.js#catio-loaf~78438c64": clips/catio-cats-js-catio-loaf-78438c64-28ed077b.json
     "catio-cats.js#catio-nap": clips/catio-cats-js-catio-nap-50286c11.json
+    "catio-cats.js#catio-nap~abdcf46c": clips/catio-cats-js-catio-nap-abdcf46c-538544d2.json
     "catio-cats.js#catio-sit": clips/catio-cats-js-catio-sit-c9c66052.json
     "catio-cats.js#catio-walk": clips/catio-cats-js-catio-walk-d650142f.json
     "corral-horses.js#corral-graze": clips/corral-horses-js-corral-graze-8a2dea3a.json
     "corral-horses.js#corral-nicker": clips/corral-horses-js-corral-nicker-2c758b35.json
     "corral-horses.js#corral-stand": clips/corral-horses-js-corral-stand-cbf0229f.json
+    "corral-horses.js#corral-stand~28424d52": clips/corral-horses-js-corral-stand-28424d52-2d588b8c.json
     "corral-horses.js#corral-swish": clips/corral-horses-js-corral-swish-cef382ed.json
+    "corral-horses.js#corral-swish~1a62a451": clips/corral-horses-js-corral-swish-1a62a451-c4913ae4.json
     "corral-horses.js#corral-walk": clips/corral-horses-js-corral-walk-f92e3b1c.json
+    "corral-horses.js#corral-walk~acdbabbc": clips/corral-horses-js-corral-walk-acdbabbc-2e37ffb0.json
     "humanoid-locomotion.js#sit": clips/humanoid-locomotion-js-sit-7d6a6bbe.json
     "jade-dragon.js#dragon-rest": clips/jade-dragon-js-dragon-rest-fbc127dd.json
     "pasture-flock.js#flock-alpaca-graze": clips/pasture-flock-js-flock-alpaca-graze-e8ca71f9.json
+    "pasture-flock.js#flock-alpaca-graze~13b9b410": clips/pasture-flock-js-flock-alpaca-graze-13b9b410-eb15fbe3.json
     "pasture-flock.js#flock-alpaca-stand": clips/pasture-flock-js-flock-alpaca-stand-1d6e3b1c.json
     "pasture-flock.js#flock-alpaca-walk": clips/pasture-flock-js-flock-alpaca-walk-8e2bf6cd.json
     "pasture-flock.js#flock-sheep-graze": clips/pasture-flock-js-flock-sheep-graze-5b8cd30a.json
+    "pasture-flock.js#flock-sheep-graze~70708e97": clips/pasture-flock-js-flock-sheep-graze-70708e97-910d4e6b.json
     "pasture-flock.js#flock-sheep-stand": clips/pasture-flock-js-flock-sheep-stand-37444caf.json
+    "pasture-flock.js#flock-sheep-stand~a8cb6808": clips/pasture-flock-js-flock-sheep-stand-a8cb6808-55d3cbdd.json
     "pasture-flock.js#flock-sheep-walk": clips/pasture-flock-js-flock-sheep-walk-a2bf84ec.json
+    "pasture-flock.js#flock-sheep-walk~290fa3c": clips/pasture-flock-js-flock-sheep-walk-290fa3c-2905f50e.json
     "pasture-herd.js#pasture-graze": clips/pasture-herd-js-pasture-graze-92f77e93.json
     "pasture-herd.js#pasture-nicker": clips/pasture-herd-js-pasture-nicker-8747fd6a.json
     "pasture-herd.js#pasture-stand": clips/pasture-herd-js-pasture-stand-55b19bea.json
+    "pasture-herd.js#pasture-stand~28424d52": clips/pasture-herd-js-pasture-stand-28424d52-53269f73.json
     "pasture-herd.js#pasture-trot": clips/pasture-herd-js-pasture-trot-1e431357.json
+    "pasture-herd.js#pasture-trot~a2c27da6": clips/pasture-herd-js-pasture-trot-a2c27da6-ebf832c9.json
     "pasture-herd.js#pasture-walk": clips/pasture-herd-js-pasture-walk-aaad8e4f.json
+    "pasture-herd.js#pasture-walk~acdbabbc": clips/pasture-herd-js-pasture-walk-acdbabbc-e9713b35.json
     "purple-dragon.js#purple-flap": clips/purple-dragon-js-purple-flap-55d8cc7f.json
     "purple-dragon.js#purple-glide": clips/purple-dragon-js-purple-glide-e404fe3d.json
     "purple-dragon.js#purple-rest": clips/purple-dragon-js-purple-rest-2ac74eaa.json
+    "purple-dragon.js#purple-rest~369c3dc8": clips/purple-dragon-js-purple-rest-369c3dc8-28ac62d5.json
     "sage-dragon.js#sage-rear": clips/sage-dragon-js-sage-rear-251f5b0e.json
     "sage-dragon.js#sage-snap": clips/sage-dragon-js-sage-snap-5231b324.json
     "sage-dragon.js#sage-wave": clips/sage-dragon-js-sage-wave-d29b7611.json
