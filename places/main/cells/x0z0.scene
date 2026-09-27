@@ -2882,51 +2882,51 @@ grounds-arch-front:
   tags: [grounds]
 grounds-arch-gate:
   children: [{feetPosition: {x: 0, y: 3.05, z: 0}, id: lamp, light: {color: oklch(0.85 0.1 75), distance: 9, intensity: 1.6, kind: point}}]
-  feetPosition: {x: 0.1, y: {terrain: 0}, z: 3.4}
+  feetPosition: {x: 0.19, y: 0.5, z: 3.4}
   id: grounds-arch-gate
   physics: {body: static}
   primitive: {kind: scripted, params: {blossom: oklch(0.9 0.08 330), depth: 0.7, frame: stone, height: 3.6, span: 5.4}, script: scripts/gen/vine-arch.js}
-  rotation: {yaw: 0}
+  rotation: {yaw: 1}
   tags: [grounds]
 grounds-arch-glasshouse:
   children: [{feetPosition: {x: 0, y: 2.1500000000000004, z: 0}, light: {color: oklch(0.85 0.1 70), distance: 8, intensity: 2, kind: point}}]
-  feetPosition: {x: 8.26, y: {terrain: 0}, z: -51.59}
+  feetPosition: {x: 8.264, y: 0.5, z: -51.586}
   id: grounds-arch-glasshouse
   physics: static
   primitive: {kind: scripted, params: {blossom: oklch(0.95 0.02 90), frame: stone, span: 2.3}, script: scripts/gen/vine-arch.js, seed: 6}
-  rotation: {lookAt: {x: 11.86, y: 0.5, z: -54.35}}
+  rotation: {yaw: -52.45}
   tags: [grounds]
 grounds-arch-rope:
   children: [{feetPosition: {x: 0, y: 2.1500000000000004, z: 0}, light: {color: oklch(0.85 0.1 70), distance: 8, intensity: 2, kind: point}}]
-  feetPosition: {x: -5.6, y: {terrain: 0}, z: -8.65}
+  feetPosition: {x: -5.6, y: 0.5, z: -10.9}
   id: grounds-arch-rope
   physics: static
   primitive: {kind: scripted, params: {blossom: oklch(0.95 0.02 90), span: 2.3}, script: scripts/gen/vine-arch.js, seed: 2}
-  rotation: {yaw: 61}
+  rotation: {yaw: 69.4}
   tags: [grounds]
 grounds-arch-studio:
   children: [{feetPosition: {x: 0, y: 2.1500000000000004, z: 0}, light: {color: oklch(0.85 0.1 70), distance: 8, intensity: 2, kind: point}}]
-  feetPosition: {x: -13.1, y: {terrain: 0}, z: -32.8}
+  feetPosition: {x: -13.105, y: 0.5, z: -32.8}
   id: grounds-arch-studio
   physics: static
   primitive: {kind: scripted, params: {blossom: oklch(0.9 0.07 300), span: 2.3}, script: scripts/gen/vine-arch.js, seed: 4}
-  rotation: {lookAt: {x: -13, y: 0.5, z: -36}}
+  rotation: {yaw: -3}
   tags: [grounds]
 grounds-arch-treehouse:
   children: [{feetPosition: {x: 0, y: 2.1500000000000004, z: 0}, light: {color: oklch(0.85 0.1 70), distance: 8, intensity: 2, kind: point}}]
-  feetPosition: {x: -19.3, y: {terrain: 0}, z: -16.2}
+  feetPosition: {x: -19.31, y: 0.5, z: -16.19}
   id: grounds-arch-treehouse
   physics: static
   primitive: {kind: scripted, params: {blossom: oklch(0.9 0.08 330), frame: stone, span: 2.3}, script: scripts/gen/vine-arch.js, seed: 3}
-  rotation: {lookAt: {x: -21.5, y: 0.5, z: -18.3}}
+  rotation: {yaw: 46.8}
   tags: [grounds]
 grounds-arch-workshop:
   children: [{feetPosition: {x: 0, y: 2.1500000000000004, z: 0}, light: {color: oklch(0.85 0.1 70), distance: 8, intensity: 2, kind: point}}]
-  feetPosition: {x: 14.5, y: {terrain: 0}, z: -31.5}
+  feetPosition: {x: 14.443, y: 0.5, z: -31.498}
   id: grounds-arch-workshop
   physics: static
   primitive: {kind: scripted, params: {blossom: oklch(0.93 0.08 70), span: 2.3}, script: scripts/gen/vine-arch.js, seed: 5}
-  rotation: {lookAt: {x: 14.4, y: 0.5, z: -35}}
+  rotation: {yaw: 1.64}
   tags: [grounds]
 grounds-bed-front:
   feetPosition: {x: 5.3, y: 0.5, z: -11.2}
@@ -2941,7 +2941,7 @@ grounds-bed-glass-a:
   rotation: {yaw: -25}
   tags: [grounds]
 grounds-bed-glass-b:
-  feetPosition: {x: 7.4, y: {terrain: 0}, z: -48.4}
+  feetPosition: {x: 7.7, y: 0.5, z: -48.5}
   id: grounds-bed-glass-b
   primitive: {kind: scripted, params: {edge: stone, palette: meadow, shape: round, w: 1.5}, script: scripts/gen/flower-bed.js, seed: 21}
   rotation: {yaw: -25}
@@ -2959,7 +2959,7 @@ grounds-bed-hubw:
   rotation: {yaw: -12}
   tags: [grounds]
 grounds-bed-rope:
-  feetPosition: {x: -8.2, y: {terrain: 0}, z: -12.6}
+  feetPosition: {x: -7.4, y: 0.5, z: -14.1}
   id: grounds-bed-rope
   primitive: {kind: scripted, params: {d: 0.8, edge: stone, palette: cool, w: 2}, script: scripts/gen/flower-bed.js, seed: 13}
   rotation: {yaw: -24}
@@ -2971,13 +2971,13 @@ grounds-bed-studio-a:
   rotation: {yaw: 0}
   tags: [grounds]
 grounds-bed-studio-b:
-  feetPosition: {x: -11.6, y: {terrain: 0}, z: -34.6}
+  feetPosition: {x: -11.3, y: 0.5, z: -34.6}
   id: grounds-bed-studio-b
   primitive: {kind: scripted, params: {d: 0.7, edge: timber, palette: meadow, w: 1.8}, script: scripts/gen/flower-bed.js, seed: 16}
   rotation: {yaw: 90}
   tags: [grounds]
 grounds-bed-treehouse:
-  feetPosition: {x: -18.2, y: {terrain: 0}, z: -13.7}
+  feetPosition: {x: -19.4, y: 0.4723336280306893, z: -13}
   id: grounds-bed-treehouse
   primitive: {kind: scripted, params: {edge: stone, palette: moon, shape: round, w: 1.6}, script: scripts/gen/flower-bed.js, seed: 14}
   rotation: {yaw: 0}
@@ -3022,13 +3022,13 @@ grounds-fence-east:
   primitive: {kind: scripted, params: {h: 0.8, segs: [[[0, 0], [0.8, -5.4], [0.6, -9.6]]], style: rail}, script: scripts/gen/yard-fence.js, seed: 9}
   tags: [grounds]
 grounds-fence-front:
-  feetPosition: {x: 9.6, y: {terrain: 0}, z: -16.8}
+  feetPosition: {x: 9.41, y: 0.5, z: -17.03}
   id: grounds-fence-front
   physics: static
-  primitive: {kind: scripted, params: {h: 0.8, segs: [[[0, 0], [2.4, -0.8]]], style: picket}, script: scripts/gen/yard-fence.js, seed: 10}
+  primitive: {kind: scripted, params: {h: 0.8, segs: [[[0, 0], [1.93, -1.59]]], style: picket}, script: scripts/gen/yard-fence.js, seed: 10}
   tags: [grounds]
 grounds-fence-rope:
-  feetPosition: {x: -4.6, y: {terrain: 0}, z: -11.6}
+  feetPosition: {x: -4.39, y: 0.5, z: -12.16}
   id: grounds-fence-rope
   physics: static
   primitive: {kind: scripted, params: {h: 0.8, segs: [[[0, 0], [-3.6, -1.4], [-6.6, -2.3]]], style: rail}, script: scripts/gen/yard-fence.js, seed: 7}
