@@ -17,6 +17,24 @@ hearthmere/hearth-house-s2:
   rotation: {yaw: -106.4}
   tags: [hearth-house]
   visibleRange: {max: 700}
+hearthmere/hearth-lanterns-south-1:
+  castShadow: false
+  feetPosition: {x: -6.77, y: 0, z: 52.16}
+  id: hearthmere/hearth-lanterns-south-1
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 2}
+  rotation: {yaw: 146.3}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-south-2:
+  castShadow: false
+  feetPosition: {x: -13, y: 0, z: 61}
+  id: hearthmere/hearth-lanterns-south-2
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: 143.1}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
 hearthmere/hearth-plot-0:
   feetPosition: {x: -70, y: 0, z: 92}
   id: hearthmere/hearth-plot-0

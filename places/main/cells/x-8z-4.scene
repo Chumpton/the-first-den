@@ -112,6 +112,357 @@ hearthmere/hearth-house-w2:
   rotation: {yaw: 0}
   tags: [hearth-house]
   visibleRange: {max: 700}
+hearthmere/hearth-lanterns-ring-0:
+  castShadow: false
+  feetPosition: {x: 37.67, y: 0, z: 4.96}
+  id: hearthmere/hearth-lanterns-ring-0
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: -7.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-1:
+  castShadow: false
+  feetPosition: {x: 35.11, y: 0, z: 14.54}
+  id: hearthmere/hearth-lanterns-ring-1
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 2}
+  rotation: {yaw: -22.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-10:
+  castShadow: false
+  feetPosition: {x: -35.11, y: 0, z: 14.54}
+  id: hearthmere/hearth-lanterns-ring-10
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: -157.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-11:
+  castShadow: false
+  feetPosition: {x: -37.67, y: 0, z: 4.96}
+  id: hearthmere/hearth-lanterns-ring-11
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 2}
+  rotation: {yaw: -172.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-12:
+  castShadow: false
+  feetPosition: {x: -37.67, y: 0, z: -4.96}
+  id: hearthmere/hearth-lanterns-ring-12
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: 172.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-13:
+  castShadow: false
+  feetPosition: {x: -35.11, y: 0, z: -14.54}
+  id: hearthmere/hearth-lanterns-ring-13
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 2}
+  rotation: {yaw: 157.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-14:
+  castShadow: false
+  feetPosition: {x: -30.15, y: 0, z: -23.13}
+  id: hearthmere/hearth-lanterns-ring-14
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: 142.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-15:
+  castShadow: false
+  feetPosition: {x: -23.13, y: 0, z: -30.15}
+  id: hearthmere/hearth-lanterns-ring-15
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 2}
+  rotation: {yaw: 127.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-16:
+  castShadow: false
+  feetPosition: {x: -14.54, y: 0, z: -35.11}
+  id: hearthmere/hearth-lanterns-ring-16
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: 112.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-17:
+  castShadow: false
+  feetPosition: {x: -4.96, y: 0, z: -37.67}
+  id: hearthmere/hearth-lanterns-ring-17
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 2}
+  rotation: {yaw: 97.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-18:
+  castShadow: false
+  feetPosition: {x: 4.96, y: 0, z: -37.67}
+  id: hearthmere/hearth-lanterns-ring-18
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: 82.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-19:
+  castShadow: false
+  feetPosition: {x: 14.54, y: 0, z: -35.11}
+  id: hearthmere/hearth-lanterns-ring-19
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 2}
+  rotation: {yaw: 67.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-2:
+  castShadow: false
+  feetPosition: {x: 30.15, y: 0, z: 23.13}
+  id: hearthmere/hearth-lanterns-ring-2
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: -37.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-20:
+  castShadow: false
+  feetPosition: {x: 23.13, y: 0, z: -30.15}
+  id: hearthmere/hearth-lanterns-ring-20
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: 52.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-21:
+  castShadow: false
+  feetPosition: {x: 30.15, y: 0, z: -23.13}
+  id: hearthmere/hearth-lanterns-ring-21
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 2}
+  rotation: {yaw: 37.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-22:
+  castShadow: false
+  feetPosition: {x: 35.11, y: 0, z: -14.54}
+  id: hearthmere/hearth-lanterns-ring-22
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: 22.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-23:
+  castShadow: false
+  feetPosition: {x: 37.67, y: 0, z: -4.96}
+  id: hearthmere/hearth-lanterns-ring-23
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 2}
+  rotation: {yaw: 7.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-3:
+  castShadow: false
+  feetPosition: {x: 23.13, y: 0, z: 30.15}
+  id: hearthmere/hearth-lanterns-ring-3
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 2}
+  rotation: {yaw: -52.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-4:
+  castShadow: false
+  feetPosition: {x: 14.54, y: 0, z: 35.11}
+  id: hearthmere/hearth-lanterns-ring-4
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: -67.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-5:
+  castShadow: false
+  feetPosition: {x: 4.96, y: 0, z: 37.67}
+  id: hearthmere/hearth-lanterns-ring-5
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 2}
+  rotation: {yaw: -82.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-6:
+  castShadow: false
+  feetPosition: {x: -4.96, y: 0, z: 37.67}
+  id: hearthmere/hearth-lanterns-ring-6
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: -97.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-7:
+  castShadow: false
+  feetPosition: {x: -14.54, y: 0, z: 35.11}
+  id: hearthmere/hearth-lanterns-ring-7
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 2}
+  rotation: {yaw: -112.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-8:
+  castShadow: false
+  feetPosition: {x: -23.13, y: 0, z: 30.15}
+  id: hearthmere/hearth-lanterns-ring-8
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: -127.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-ring-9:
+  castShadow: false
+  feetPosition: {x: -30.15, y: 0, z: 23.13}
+  id: hearthmere/hearth-lanterns-ring-9
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 2}
+  rotation: {yaw: -142.5}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-south-0:
+  castShadow: false
+  feetPosition: {x: -1.86, y: 0, z: 42.64}
+  id: hearthmere/hearth-lanterns-south-0
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: 158.2}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-tree-0:
+  castShadow: false
+  feetPosition: {x: 13.81, y: 0, z: 3.7}
+  id: hearthmere/hearth-lanterns-tree-0
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 10, h1: 4.5, len: 22, posts: end, sag: 1.6}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: -15}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-tree-1:
+  castShadow: false
+  feetPosition: {x: 10.11, y: 0, z: 10.11}
+  id: hearthmere/hearth-lanterns-tree-1
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 10, h1: 4.5, len: 22, posts: end, sag: 1.6}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: -45}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-tree-10:
+  castShadow: false
+  feetPosition: {x: 10.11, y: 0, z: -10.11}
+  id: hearthmere/hearth-lanterns-tree-10
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 10, h1: 4.5, len: 22, posts: end, sag: 1.6}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: 45}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-tree-11:
+  castShadow: false
+  feetPosition: {x: 13.81, y: 0, z: -3.7}
+  id: hearthmere/hearth-lanterns-tree-11
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 10, h1: 4.5, len: 22, posts: end, sag: 1.6}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: 15}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-tree-2:
+  castShadow: false
+  feetPosition: {x: 3.7, y: 0, z: 13.81}
+  id: hearthmere/hearth-lanterns-tree-2
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 10, h1: 4.5, len: 22, posts: end, sag: 1.6}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: -75}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-tree-3:
+  castShadow: false
+  feetPosition: {x: -3.7, y: 0, z: 13.81}
+  id: hearthmere/hearth-lanterns-tree-3
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 10, h1: 4.5, len: 22, posts: end, sag: 1.6}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: -105}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-tree-4:
+  castShadow: false
+  feetPosition: {x: -10.11, y: 0, z: 10.11}
+  id: hearthmere/hearth-lanterns-tree-4
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 10, h1: 4.5, len: 22, posts: end, sag: 1.6}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: -135}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-tree-5:
+  castShadow: false
+  feetPosition: {x: -13.81, y: 0, z: 3.7}
+  id: hearthmere/hearth-lanterns-tree-5
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 10, h1: 4.5, len: 22, posts: end, sag: 1.6}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: -165}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-tree-6:
+  castShadow: false
+  feetPosition: {x: -13.81, y: 0, z: -3.7}
+  id: hearthmere/hearth-lanterns-tree-6
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 10, h1: 4.5, len: 22, posts: end, sag: 1.6}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: 165}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-tree-7:
+  castShadow: false
+  feetPosition: {x: -10.11, y: 0, z: -10.11}
+  id: hearthmere/hearth-lanterns-tree-7
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 10, h1: 4.5, len: 22, posts: end, sag: 1.6}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: 135}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-tree-8:
+  castShadow: false
+  feetPosition: {x: -3.7, y: 0, z: -13.81}
+  id: hearthmere/hearth-lanterns-tree-8
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 10, h1: 4.5, len: 22, posts: end, sag: 1.6}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: 105}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-tree-9:
+  castShadow: false
+  feetPosition: {x: 3.7, y: 0, z: -13.81}
+  id: hearthmere/hearth-lanterns-tree-9
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 10, h1: 4.5, len: 22, posts: end, sag: 1.6}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: 75}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-west-0:
+  castShadow: false
+  feetPosition: {x: -43.82, y: 0, z: -1.46}
+  id: hearthmere/hearth-lanterns-west-0
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 1}
+  rotation: {yaw: 76}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
+hearthmere/hearth-lanterns-west-1:
+  castShadow: false
+  feetPosition: {x: -55.82, y: 0, z: -4.46}
+  id: hearthmere/hearth-lanterns-west-1
+  parent: hearthmere
+  primitive: {kind: scripted, params: {h0: 4.6, h1: 4.6, len: 9, posts: both}, script: scripts/gen/hearth-lanterns.js, seed: 2}
+  rotation: {yaw: 76}
+  tags: [hearth-lanterns]
+  visibleRange: {max: 200}
 hearthmere/hearth-temple:
   feetPosition: {x: -80, y: 0, z: -8}
   id: hearthmere/hearth-temple
