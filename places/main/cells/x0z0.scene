@@ -2543,12 +2543,14 @@ firepit:
   primitive: {depth: 6, height: 1, kind: box, width: 6}
   tags: [blueprint]
 fishing-pier:
-  feetPosition: {x: 16, y: 0.3, z: -62}
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-pond-frogs-croaking-ambience-loop.mp3, gain: 0.15, loop: true, maxDistance: 18, spatial: true}
+  feetPosition: {x: 21, y: 0, z: -59.8}
   id: fishing-pier
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 14, height: 3, kind: box, width: 4}
-  tags: [blueprint]
+  physics: static
+  primitive: {kind: scripted, params: {headDepth: 1.8, headHalf: 2.8, kind: pier, length: 11}, script: scripts/gen/fishing-pier.js, seed: 7}
+  rotation: {yaw: 15}
+  tags: [pond, fishing-pier]
+  visibleRange: {max: 80}
 forecourt-market:
   feetPosition: {x: -6, y: 0.5, z: 17}
   id: forecourt-market

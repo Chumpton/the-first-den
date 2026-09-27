@@ -121,6 +121,26 @@ deer-gate-182-light:
   feetPosition: {x: -8.512763762580065, y: {terrain: 3.4}, z: -113.9561395453749}
   id: deer-gate-182-light
   light: {color: oklch(0.85 0.12 75), distance: 9, intensity: 1.5, kind: point}
+fishing-pier/lamp:
+  feetPosition: {x: -3.21, y: 1.7, z: -12.65}
+  id: fishing-pier/lamp
+  light: {color: "#ffc27a", distance: 7, intensity: 2, kind: point}
+  parent: fishing-pier
+fishing-pier/lap:
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-gentle-lake-water-lapping-pier-loop.mp3, gain: 0.15, loop: true, maxDistance: 18, spatial: true}
+  feetPosition: {x: 0, y: 0.2, z: -12}
+  id: fishing-pier/lap
+  parent: fishing-pier
+fishing-pier/tackle:
+  behavior: scripts/fishing-tackle.js
+  feetPosition: {x: 0.9, y: 0.45, z: -12.3}
+  id: fishing-pier/tackle
+  parent: fishing-pier
+  primitive: {kind: scripted, params: {kind: tackle}, script: scripts/gen/fishing-pier.js}
+  rotation: {yaw: 10}
+  state: {act: Cast}
+  tags: [interactable, fishing-tackle]
+  visibleRange: {max: 80}
 fox-lakewood:
   behavior: scripts/fauna-pet.js
   castShadow: true
@@ -301,6 +321,148 @@ pasture-trough:
   primitive: {kind: scripted, params: {kind: trough}, script: scripts/gen/pasture-yard.js}
   rotation: {yaw: 90}
   tags: [pasture]
+pond-islet:
+  feetPosition: {x: -7.96, y: 0, z: -78.68}
+  id: pond-islet
+  physics: static
+  primitive: {kind: scripted, params: {kind: islet}, script: scripts/gen/fishing-pier.js, seed: 4}
+  tags: [pond]
+  visibleRange: {max: 80}
+pond-pad-0:
+  behavior: scripts/lilypad.js
+  feetPosition: {x: 14.33, y: 0.04, z: -73.59}
+  id: pond-pad-0
+  physics: static
+  primitive: {kind: scripted, params: {flower: false, kind: pad, r: 0.9, rot: 0}, script: scripts/gen/fishing-pier.js}
+  rotation: {yaw: 0}
+  state: {baseY: 0.04, dip: 0.12}
+  tags: [pond, lilypad]
+  visibleRange: {max: 80}
+pond-pad-1:
+  behavior: scripts/lilypad.js
+  feetPosition: {x: 13.66, y: 0.04, z: -76.64}
+  id: pond-pad-1
+  physics: static
+  primitive: {kind: scripted, params: {flower: false, kind: pad, r: 1, rot: 53}, script: scripts/gen/fishing-pier.js}
+  rotation: {yaw: 67}
+  state: {baseY: 0.04, dip: 0.12}
+  tags: [pond, lilypad]
+  visibleRange: {max: 80}
+pond-pad-2:
+  behavior: scripts/lilypad.js
+  feetPosition: {x: 12.4, y: 0.04, z: -79.62}
+  id: pond-pad-2
+  physics: static
+  primitive: {kind: scripted, params: {flower: true, kind: pad, r: 0.96, rot: 106}, script: scripts/gen/fishing-pier.js}
+  rotation: {yaw: 134}
+  state: {baseY: 0.04, dip: 0.12}
+  tags: [pond, lilypad]
+  visibleRange: {max: 80}
+pond-pad-3:
+  behavior: scripts/lilypad.js
+  feetPosition: {x: 10.39, y: 0.04, z: -81.97}
+  id: pond-pad-3
+  physics: static
+  primitive: {kind: scripted, params: {flower: false, kind: pad, r: 0.82, rot: 159}, script: scripts/gen/fishing-pier.js}
+  rotation: {yaw: 201}
+  state: {baseY: 0.04, dip: 0.12}
+  tags: [pond, lilypad]
+  visibleRange: {max: 80}
+pond-pad-4:
+  behavior: scripts/lilypad.js
+  feetPosition: {x: 7.77, y: 0.04, z: -83.25}
+  id: pond-pad-4
+  physics: static
+  primitive: {kind: scripted, params: {flower: false, kind: pad, r: 0.81, rot: 212}, script: scripts/gen/fishing-pier.js}
+  rotation: {yaw: 268}
+  state: {baseY: 0.04, dip: 0.12}
+  tags: [pond, lilypad]
+  visibleRange: {max: 80}
+pond-pad-5:
+  behavior: scripts/lilypad.js
+  feetPosition: {x: 4.94, y: 0.04, z: -83.48}
+  id: pond-pad-5
+  physics: static
+  primitive: {kind: scripted, params: {flower: false, kind: pad, r: 0.82, rot: 265}, script: scripts/gen/fishing-pier.js}
+  rotation: {yaw: 335}
+  state: {baseY: 0.04, dip: 0.12}
+  tags: [pond, lilypad]
+  visibleRange: {max: 80}
+pond-pad-6:
+  behavior: scripts/lilypad.js
+  feetPosition: {x: 1.84, y: 0.04, z: -82.94}
+  id: pond-pad-6
+  physics: static
+  primitive: {kind: scripted, params: {flower: true, kind: pad, r: 0.93, rot: 318}, script: scripts/gen/fishing-pier.js}
+  rotation: {yaw: 42}
+  state: {baseY: 0.04, dip: 0.12}
+  tags: [pond, lilypad]
+  visibleRange: {max: 80}
+pond-pad-7:
+  behavior: scripts/lilypad.js
+  feetPosition: {x: -1.02, y: 0.04, z: -81.94}
+  id: pond-pad-7
+  physics: static
+  primitive: {kind: scripted, params: {flower: false, kind: pad, r: 0.84, rot: 11}, script: scripts/gen/fishing-pier.js}
+  rotation: {yaw: 109}
+  state: {baseY: 0.04, dip: 0.12}
+  tags: [pond, lilypad]
+  visibleRange: {max: 80}
+pond-pad-8:
+  behavior: scripts/lilypad.js
+  feetPosition: {x: -3.98, y: 0.04, z: -80.55}
+  id: pond-pad-8
+  physics: static
+  primitive: {kind: scripted, params: {flower: false, kind: pad, r: 0.99, rot: 64}, script: scripts/gen/fishing-pier.js}
+  rotation: {yaw: 176}
+  state: {baseY: 0.04, dip: 0.12}
+  tags: [pond, lilypad]
+  visibleRange: {max: 80}
+pond-pouch:
+  behavior: scripts/pond-seed.js
+  feetPosition: {x: -9.11, y: 0.55, z: -78.33000000000001}
+  id: pond-pouch
+  primitive: {kind: scripted, params: {kind: pouch}, script: scripts/gen/fishing-pier.js}
+  rotation: {yaw: 70}
+  state: {act: Open, amount: 5, kind: pouch}
+  tags: [pond, interactable]
+  visibleRange: {max: 80}
+pond-seed-1:
+  behavior: scripts/pond-seed.js
+  feetPosition: {x: 13.66, y: 0.1, z: -76.64}
+  id: pond-seed-1
+  physics: {body: static, trigger: true}
+  primitive: {kind: scripted, params: {kind: seed}, script: scripts/gen/fishing-pier.js}
+  state: {amount: 1, kind: seed}
+  tags: [pond, pond-seed]
+  visibleRange: {max: 80}
+pond-seed-3:
+  behavior: scripts/pond-seed.js
+  feetPosition: {x: 10.39, y: 0.1, z: -81.97}
+  id: pond-seed-3
+  physics: {body: static, trigger: true}
+  primitive: {kind: scripted, params: {kind: seed}, script: scripts/gen/fishing-pier.js}
+  state: {amount: 1, kind: seed}
+  tags: [pond, pond-seed]
+  visibleRange: {max: 80}
+pond-seed-5:
+  behavior: scripts/pond-seed.js
+  feetPosition: {x: 4.94, y: 0.1, z: -83.48}
+  id: pond-seed-5
+  physics: {body: static, trigger: true}
+  primitive: {kind: scripted, params: {kind: seed}, script: scripts/gen/fishing-pier.js}
+  state: {amount: 1, kind: seed}
+  tags: [pond, pond-seed]
+  visibleRange: {max: 80}
+pond-seed-7:
+  behavior: scripts/pond-seed.js
+  feetPosition: {x: -1.02, y: 0.1, z: -81.94}
+  id: pond-seed-7
+  physics: {body: static, trigger: true}
+  primitive: {kind: scripted, params: {kind: seed}, script: scripts/gen/fishing-pier.js}
+  state: {amount: 1, kind: seed}
+  tags: [pond, pond-seed]
+  visibleRange: {max: 80}
 secret-bottle:
   behavior: scripts/secret.js
   feetPosition: {x: 27.5, y: 0.1, z: -80}
