@@ -2736,6 +2736,12 @@ road-travellers:
   physics: none
   state: {}
   tags: [manager]
+sage-dragon:
+  behavior: scripts/sage-dragon.js
+  feetPosition: {x: 0, y: {terrain: 2}, z: -44}
+  id: sage-dragon
+  state: {}
+  tags: [sage-dragon]
 secret-fairydoor:
   behavior: scripts/secret.js
   feetPosition: {x: -44, y: 0.4, z: -12}
