@@ -1,0 +1,8 @@
+# spawn-scene v2 yaml x9z-2
+lumenvale:
+  feetPosition: {x: 1100, y: 0.5, z: -250}
+  id: lumenvale
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 320, height: 50, kind: box, width: 320}
+  tags: [blueprint]
