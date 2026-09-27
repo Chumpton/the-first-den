@@ -1,0 +1,21 @@
+# Dune the German Shepherd — every tuned number for scripts/dune.js
+walk: 1.4          # m/s along the walks
+trot: 3.0          # m/s to a treat / a greeting
+stride: { walk: 1.4, trot: 3.0 }   # m/s at clip speed 1 (walk 0.8 s, trot 0.55 s)
+turnRate: 280      # deg/s
+wake: 60           # m — no player nearer and he sleeps
+sleepSeconds: 5
+arrive: 0.6        # m to a waypoint
+fall: -4
+reverseChance: 0.12
+pause: { chance: 0.45, min: 3, max: 8, poses: [sit, sniff, idle] }
+greet: { radius: 5, cooldown: 60, stop: 1.3, hold: 2.5, giveUp: 8 }
+treat: { ahead: 3.5, chest: 1.2, peak: 1.0, flight: 0.7, life: 14, eat: 1.5, happy: 1.4, reach: 0.62, sitBy: 1.1, sit: 5, max: 4, cooldown: 0.4 }
+stuck: { seconds: 4, metres: 0.4 }
+sounds:
+  bark: /cdn/moodboard-lowpoly-cozy/sfx-friendly-dog-bark-single.mp3
+  crunch: /cdn/moodboard-lowpoly-cozy/sfx-dog-crunching-treat.mp3
+  toss: /cdn/moodboard-lowpoly-cozy/sfx-small-treat-toss-whoosh.mp3
+hearts: { text: "Dune ♥", color: "oklch(0.7 0.2 20)" }
+# property loop [x, z], each leg checked clear with traverseCheck (sundial, birdbath and veg-fence stepped around)
+waypoints: [[-0.8, -10], [-6, -10.6], [-13, -11.6], [-17.4, -14.4], [-17.4, -20], [-17.4, -24.5], [-15.2, -27.2], [-13.2, -31], [-13, -35.2], [-8, -37.5], [0, -37], [5, -36.5], [12, -34.5], [14.4, -31], [14.6, -26], [12.2, -19], [11.8, -16.6], [5, -16.6], [1.8, -16.4]]
