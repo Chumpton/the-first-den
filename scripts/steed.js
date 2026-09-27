@@ -15,13 +15,13 @@ function getOff(ctx) {
   const p = self.feetPosition, lx = -Math.cos(m.yaw * D2R), lz = Math.sin(m.yaw * D2R);   // horse's left
   const x = p.x + lx * 1.6, z = p.z + lz * 1.6;
   s.dropAt = { x, y: ctx.place.terrain.heightAt(x, z) ?? p.y, z, yaw: m.yaw };
-  s.rider = null; self.controller = null; m.speed = 0; self.audio = null;
+  s.rider = null; self.controller = null; m.speed = 0; self.audio = null; s.offAt = ctx.now();
   clip(ctx, 'horse-idle');
   ctx.emit('playSound', { clip: S.snort, position: p, volume: 0.5, maxDistance: 20 });
-  ctx.after(S.vanishAfter, 'vanish');
+  s.offAt = ctx.now();
 }
 export function vanish(ctx) {
-  if (ctx.self.state.rider) return;
+  if (ctx.self.state.rider || ctx.self.state.gone) return; ctx.self.state.gone = true;
   const p = ctx.self.feetPosition;
   ctx.emit('fx', { position: p, script: `fx
 pop dust burst=16 on=disc(.8) life=.6..1 v=up(.6..1.2)+sdir()*.8 size=.25..0.45 acc=buoy(.3)+drag(1.4) col=<.72,.64,.52> a=0>.35:.3>.7:.15>0 sz=$size*(.6>2) r=sprite(smoke-puff,alpha)` });
@@ -44,7 +44,7 @@ export function onInput(ctx, input) {
 export function update(ctx, dt) {
   const self = ctx.self, s = self.state, m = mind(ctx), p = self.feetPosition;
   if (!p) return;
-  if (s.rider && !here(ctx, s.rider)) { s.rider = null; self.controller = null; self.audio = null; ctx.after(0.5, 'vanish'); }
+  if (s.rider && !here(ctx, s.rider)) { s.rider = null; self.controller = null; self.audio = null; s.offAt = ctx.now(); }
   const riding = !!s.rider, inp = riding ? m.in : { x: 0, z: 0, run: false };
   const run = inp.run && inp.z > 0.1;
   const target = inp.z > 0.1 ? (run ? S.gallop : S.walk) : inp.z < -0.1 ? -S.reverse : 0;
@@ -67,5 +67,7 @@ export function update(ctx, dt) {
   if (gait !== m.gait) { m.gait = gait; clip(ctx, gait, gait === 'horse-canter' ? 1.2 : Math.max(0.7, sp / S.walk)); }
   const snd = !riding || sp < 0.3 ? '' : gait === 'horse-canter' ? S.hooves : S.walkHooves;
   if (snd !== m.sound) { m.sound = snd; self.audio = snd ? { clip: snd, loop: true, gain: snd === S.hooves ? 0.35 : 0.25, spatial: true, maxDistance: 25 } : null; }
+  if (!riding && s.offAt && ctx.now() - s.offAt > S.vanishAfter * 1000) { vanish(ctx); return; }
+  if (!riding && !s.offAt && sp < 0.02) { s.offAt = ctx.now(); }
   if (!riding && sp < 0.02) ctx.sleep(0.5);
 }
