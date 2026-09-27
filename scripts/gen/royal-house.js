@@ -100,13 +100,13 @@ export function geometry(ctx) {
   if (kind === 'bank') { hip(ctx, P, w, d, H, lod); portico(ctx, P, w, d, H, lod); }
   else if (kind === 'armoury') { stone(ctx); box(P, -w / 2, H, -d / 2, w / 2, H + 0.6, d / 2); crenels(P, -w / 2, w / 2, H + 0.6, -d / 2, -d / 2 + 0.5, 0.9, 0.7, 1); crenels(P, -w / 2, w / 2, H + 0.6, d / 2 - 0.5, d / 2, 0.9, 0.7, 1);
     slate(ctx); lathe(P, [[Math.min(w, d) * 0.42, H + 0.6], [0, H + 5]], 4, 0, 0, 0);
-    for (const s of [-1, 1]) tower(ctx, P, s * w / 2, -d / 2, 1.6, 0, H + 2, { roof: 4.5 });
+    for (const s of [-1, 1]) tower(ctx, P, s * w / 2, -d / 2, 1.6, 0, H + 2, { cone: 3.5 });
     gold(ctx); blob(P, 0, G0 + 0.9, -d / 2 - 0.2, 0.9, 1.1, 0.12, 6); paint(ctx, null, RC.blue, 0.6); blob(P, 0, G0 + 0.9, -d / 2 - 0.26, 0.7, 0.9, 0.1, 6); }
   else gable(ctx, P, w, d, H, lod);
   if (kind === 'hall') { const z0 = -d / 2 - 0.3, th = H + 5; stone(ctx); box(P, -2, 0, z0, 2, th, z0 + 4); crenels(P, -2.2, 2.2, th, z0 - 0.2, z0 + 0.3, 0.7, 0.55, 0.8);
     slate(ctx); lathe(P, [[2.9, th], [2.9, th + 0.4], [0, th + 7]], 4, 0, 0, z0 + 2); gold(ctx); lathe(P, [[0.15, th + 6.8], [0, th + 8]], 4, 0, 0, z0 + 2);
     win(ctx, XF(P, 0, 0, z0 - 0.001), 0, H - 1, 1.4, 3, 'ped', lod, false); if (lod <= 2) { gold(ctx); lathe(XF(P, 0, 0, z0 - 0.05, 0), [[1, H + 2.4], [1, H + 2.5], [0, H + 2.5]], 12, 0, 0, 0); } }
-  if (turret) tower(ctx, P, turret * (w / 2 + 0.4), -d / 2 - 0.4, 1.7, 2.5, H + 1.8, { roof: 5.5 });
+  if (turret) tower(ctx, P, turret * (w / 2 + 0.4), -d / 2 - 0.4, 1.7, 0, H + 1.8, { cone: 4 });
   if (kind !== 'bank') sign(ctx, P, w / 2 - 1.4, d, 4.0, lod, kind);
 }
 export function collider(ctx) {
