@@ -13,7 +13,7 @@ function puff(ctx, cx, cy, cz, rx, ry, rz, n, R) {
   for (let i = 0; i < n; i++) { const j = (i + 1) % n; T(ctx, A[j], A[i], bot, o); Q(ctx, A[i], A[j], B[j], B[i], o); T(ctx, B[i], B[j], top, o); }
 }
 function flat(ctx, x, y, z, s, a) { const c = Math.cos(a) * s, d = Math.sin(a) * s; ctx.quad(x - c, y, z - d, x - d, y, z + c, x + c, y, z + d, x + d, y, z - c); }
-function tree(ctx, lod, t, idx) {
+export function tree(ctx, lod, t, idx) {
   const [x, z, gy, kind, sc = 1] = t, R = rnd(idx * 17 + 3), cols = BLOSSOM[kind];
   const top = [x + (R() - 0.5) * 0.35, gy + 1.45 * sc, z + (R() - 0.5) * 0.35];
   paint(ctx, 'walnut', 'oklch(0.6 0.04 50)', 0.95);
