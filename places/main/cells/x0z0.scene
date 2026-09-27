@@ -3160,6 +3160,16 @@ path-lamp-pathLake-0:
   primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
   rotation: {lookAt: {x: 1.2168871427900494, y: 0, z: -39.30685128452787}}
   tags: [path-lamp]
+picnic-creekside:
+  castShadow: true
+  children: [{feetPosition: {x: 0, y: 2.1, z: 0}, light: {color: oklch(0.85 0.12 70), distance: 7, intensity: 1.4, kind: point}}]
+  feetPosition: {x: -21.9, y: 0.42, z: -24.4}
+  id: picnic-creekside
+  physics: {body: static, collider: mesh}
+  primitive: {kind: scripted, params: {r: 2.4}, script: scripts/gen/picnic-set.js, seed: 7}
+  receiveShadow: true
+  rotation: {yaw: 70}
+  tags: [grounds, picnic]
 pollinator-keeper:
   behavior: scripts/pollinators.js
   feetPosition: {x: 0, y: 0.5, z: -30}
