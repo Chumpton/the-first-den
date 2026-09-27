@@ -1,0 +1,6 @@
+# Wizard watchtower portals (world coords; tower at (30.5, 0.579, -18.5), door west, yaw 90).
+# top = observatory deck, west side, facing the house; bottom = the flag walk outside the door, facing the house.
+top: { x: 27.32, y: 18.14, z: -18.78, yaw: 90 }
+bottom: { x: 25.0, y: 0.6, z: -18.5, yaw: 73.3 }
+cooldownMs: 2000
+sound: /cdn/moodboard-lowpoly-cozy/sfx-wizard-portal-whoosh-chime.mp3
