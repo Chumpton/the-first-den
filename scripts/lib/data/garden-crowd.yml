@@ -1,0 +1,113 @@
+# The Garden Market's crowd (scripts/garden-crowd.js): world x/z. A new gardener is one roster row.
+fountain: {x: -82, z: 78, rimR: 3.3, sitR: 3.6, avoidR: 7.4}
+bounds: {x0: -100, x1: -64, z0: 60, z1: 96}
+stalls:                      # footprints walkers skip: stalls, beds, pond, shops, hives, kiosk (world x/z, w along x, d along z)
+  - {x: -75.2, z: 60.8, w: 4, d: 4}
+  - {x: -75.2, z: 66.8, w: 4, d: 4}
+  - {x: -89, z: 67.5, w: 4, d: 4}
+  - {x: -89.6, z: 62.5, w: 4, d: 4}
+  - {x: -64, z: 79.2, w: 4, d: 4}
+  - {x: -69.6, z: 76.2, w: 4, d: 4}
+  - {x: -94.6, z: 83, w: 4, d: 4}
+  - {x: -69.5, z: 89.2, w: 4, d: 4}
+  - {x: -98.5, z: 66.5, w: 11, d: 8}
+  - {x: -97, z: 95, w: 8, d: 7}
+  - {x: -66.5, z: 95, w: 8, d: 7}
+  - {x: -101, z: 88, w: 4, d: 6}
+  - {x: -88.5, z: 91, w: 4, d: 4}
+  - {x: -75.5, z: 91, w: 3, d: 3}
+  - {x: -69.5, z: 64.5, w: 5, d: 3}
+fountainDais: {half: 4, rise: 0}
+visibleRange: 100
+turnRate: 7
+reach: 4
+pressSecs: 4
+models:
+  rikki: {model: cdn/value.4e8cfc46aa686457318bd415e398a96e69d57ec5cacb0ad4d18f00a2cdbd4bed.png.glb, layout: {maxExtents: {y: 1.85}, minExtents: {y: 1.85}}, top: 1.74}
+  campton: {model: "https://www.spawn.co/magic/character-character-54ug69f6.glb?animations=Idle,Walk,Run", top: 1.74}
+audio:
+  murmur: {clip: /cdn/moodboard-lowpoly-cozy/sfx-town-square-crowd-murmur-loop.mp3, gain: 0.12, loop: true, spatial: true, maxDistance: 30}
+walk:
+  speed: [0.9, 1.2]
+  kidSpeed: [1.4, 1.8]
+  kidRun: 3.6
+  kidRunChance: 0.3
+  restSecs: [4, 10]
+  gestureChance: 0.4
+  gestures: [cdn/clip-point.glb, cdn/clip-nod-yes.glb, cdn/clip-waving-single-hand-loop.glb]
+  gestureSecs: 2.4
+  clearR: 8
+  spotClear: 2.5
+  stuckSecs: 2
+tag: {r: 8.6, wobble: 0.9, lead: 0.45, run: 3.5, flee: 4.3, fleeDist: 4.5, chase: 4.4, directDist: 5, tagDist: 1.2, freezeSecs: 1.6, flipChance: 0.35, cry: "Tag!"}
+groups:
+  g1: {at: [-84.5, 86.2], r: 0.9}
+chat:
+  secs: [2.5, 6]
+  clips: [cdn/clip-talk-loop.glb, null, cdn/clip-laugh-loop.glb, cdn/clip-nod-yes.glb, null]
+sit:
+  secs: [4, 10]
+  clips: [cdn/clip-sit-loop.glb]
+vendor:
+  secs: [3, 7]
+  clips: [cdn/clip-talk-loop.glb, null, cdn/clip-waving-single-hand-loop.glb, cdn/clip-point.glb, null]
+  callRange: 6
+  callEverySecs: 35
+  calls: ["Fresh-cut sweet peas!", "Carrots, still with the soil on!", "Honey from our own hives!", "Seeds for spring, a penny a packet!", "Pumpkins, big as a barrow!"]
+busker: {secs: [5, 9], clips: [cdn/clip-clap-loop.glb]}
+lines: ["Lovely day in the garden, isn't it?"]
+kidLines: ["Hello!"]
+roster:
+  - id: garden-rosie
+    model: rikki
+    name: Rosie
+    role: vendor
+    at: [-89, 67.5]
+    face: [-84, 67.5]
+    scale: 0.97
+    wear: [{item: hat, col: "oklch(0.7 0.15 8)", flower: "oklch(0.88 0.07 45)"}, {item: apron, col: "oklch(0.84 0.07 350)"}]
+    lines: ["Sweet peas, peonies, a bit of lavender: take a sniff, it's free.", "I pick them at dawn, before the bees wake up.", "A posy for the house? The den could use some colour."]
+  - id: garden-hob
+    model: campton
+    name: Hob
+    role: vendor
+    at: [-75.2, 66.8]
+    face: [-80.2, 66.8]
+    scale: 1.03
+    wear: [{item: hat, col: "oklch(0.55 0.1 140)"}, {item: apron, col: "oklch(0.6 0.08 60)"}]
+    lines: ["Carrots this long, and I didn't even sing to them. Much.", "Cabbages keep all winter if you're kind to them.", "Soil's rich down here. The river does half the work."]
+  - id: garden-mabel
+    model: rikki
+    name: Mabel
+    role: vendor
+    at: [-64, 79.2]
+    face: [-64, 84]
+    scale: 1.0
+    wear: [{item: hat, col: "oklch(0.8 0.13 85)", flower: "oklch(0.97 0.03 90)"}, {item: apron, col: "oklch(0.88 0.08 90)"}]
+    lines: ["Clover honey, straight from the hives in the corner.", "The bees are friendly if you move slow. Mostly.", "One jar for your tea, one for your toast, that's the rule."]
+  - id: garden-fern
+    model: campton
+    name: Fern
+    role: walk
+    at: [-78, 72]
+    scale: 0.98
+    wear: [{item: hat, col: "oklch(0.62 0.11 150)"}, {item: basket, col: "oklch(0.68 0.13 128)"}]
+    lines: ["I keep these beds. Weeds don't stand a chance.", "Mind the lily pads, the frogs are napping.", "The wisteria takes years to bloom like that. Worth it."]
+  - id: garden-tansy
+    model: rikki
+    name: Tansy
+    role: chat
+    group: g1
+    slot: 20
+    scale: 0.95
+    wear: [{item: hat, col: "oklch(0.68 0.13 300)", flower: "oklch(0.7 0.15 8)"}, {item: basket, col: "oklch(0.7 0.14 45)"}]
+    lines: ["I came for one pumpkin. I have four apples and a fern now.", "The flower-house is warm as a kitten inside.", "Have you tried Mabel's honey? Don't. You'll never stop."]
+  - id: garden-olwen
+    model: campton
+    name: Olwen
+    role: chat
+    group: g1
+    slot: 200
+    scale: 1.02
+    wear: [{item: hat, col: "oklch(0.7 0.12 250)"}, {item: basket, col: "oklch(0.6 0.17 12)"}]
+    lines: ["Walked over from the market square. Much quieter here.", "Sit under the pear tree a while. Best shade in town.", "The roses on the arches were planted by my gran."]
