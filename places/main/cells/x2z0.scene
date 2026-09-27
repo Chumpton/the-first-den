@@ -15,3 +15,12 @@ bridge-e1:
   rotation: {lookAt: {x: 297.5, y: 0.5, z: -6.9}}
   tags: [road-bridge]
   visibleRange: {max: 700}
+milestone-east-1:
+  feetPosition: {x: 237.0826491084941, y: {terrain: 0}, z: 12.186574143905569}
+  id: milestone-east-1
+  physics: static
+  primitive: {kind: scripted, params: {kind: milestone}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: 236.11557457123146, y: 0.5, z: 8.511690902307512}}
+  tags: [road-dressing, milestone, road-east]
+  ui: "<div face=\"front\" offset=\"0.004m\" style=\"width:480px;height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Georgia,serif;color:#4f3828;text-align:center\"><div style=\"font-size:78px\">Lumenvale</div><div style=\"font-size:120px;font-weight:bold\">0.8 km</div></div>"
+  visibleRange: {max: 150}
