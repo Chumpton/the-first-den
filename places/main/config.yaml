@@ -179,6 +179,21 @@ terrain:
     town-lane: {clearScatter: true, edgeMaterial: gravel, falloff: 3.5, grade: true, kind: path, material: cobblepale, noise: 0.5, points: [[0, 12], [0, 17], [1.33, 26.4], [4.0, 32.8], [5.19, 37.8], [3.95, 42.8], [0, 48.5], [-3.95, 54.2], [-5.19, 59.2], [-4.0, 64.2], [-1.33, 70.5], [0, 80]], width: 7}
     town-square: {center: {x: 0, z: 100}, edgeMaterial: gravel, falloff: 4, height: 0.55, kind: flatten, material: cobblepale, shape: {depth: 46, kind: rectangle, width: 46}}
     town-clear: {center: {x: 0, z: 110}, kind: clear-scatter, shape: {depth: 70, kind: rectangle, width: 80}}
+    link-east: {clearScatter: true, edgeMaterial: gravel, falloff: 2, grade: false, kind: path, material: cobblepale, noise: 0.4, points: [[22, 104.25], [30, 104.25], [40, 103], [48, 97], [55, 89], [59, 86]], width: 4.5}
+    link-east-bed: {center: {x: 0, z: 0}, falloff: 4, height: 0.5, kind: flatten, shape: {kind: path, points: [[22, 104.25], [30, 104.25], [40, 103], [48, 97], [55, 89], [59, 86]], width: 6}}
+    link-east-clear: {center: {x: 0, z: 0}, kind: clear-scatter, shape: {kind: path, points: [[22, 104.25], [30, 104.25], [40, 103], [48, 97], [55, 89], [59, 86]], width: 10}}
+    link-west: {clearScatter: true, edgeMaterial: gravel, falloff: 2, grade: false, kind: path, material: cobblepale, noise: 0.4, points: [[-22, 105], [-30, 105], [-40, 103.5], [-48, 97], [-55, 89], [-59, 86]], width: 4.5}
+    link-west-bed: {center: {x: 0, z: 0}, falloff: 4, height: 0.5, kind: flatten, shape: {kind: path, points: [[-22, 105], [-30, 105], [-40, 103.5], [-48, 97], [-55, 89], [-59, 86]], width: 6}}
+    link-west-clear: {center: {x: 0, z: 0}, kind: clear-scatter, shape: {kind: path, points: [[-22, 105], [-30, 105], [-40, 103.5], [-48, 97], [-55, 89], [-59, 86]], width: 10}}
+    link-arch-east: {clearScatter: true, edgeMaterial: gravel, falloff: 2, grade: false, kind: path, material: cobblepale, noise: 0.4, points: [[2.5, 24], [12, 25.5], [26, 29], [42, 34], [58, 40.5], [71, 47], [78, 51.5], [82, 55]], width: 4.5}
+    link-arch-east-bed: {center: {x: 0, z: 0}, falloff: 4, height: 0.5, kind: flatten, shape: {kind: path, points: [[2.5, 24], [12, 25.5], [26, 29], [42, 34], [58, 40.5], [71, 47], [78, 51.5], [82, 55]], width: 6}}
+    link-arch-east-clear: {center: {x: 0, z: 0}, kind: clear-scatter, shape: {kind: path, points: [[2.5, 24], [12, 25.5], [26, 29], [42, 34], [58, 40.5], [71, 47], [78, 51.5], [82, 55]], width: 10}}
+    link-arch-west: {clearScatter: true, edgeMaterial: gravel, falloff: 2, grade: false, kind: path, material: cobblepale, noise: 0.4, points: [[-2.5, 24], [-12, 25.5], [-26, 29], [-42, 34], [-58, 40.5], [-71, 47], [-78, 51.5], [-82, 55]], width: 4.5}
+    link-arch-west-bed: {center: {x: 0, z: 0}, falloff: 4, height: 0.5, kind: flatten, shape: {kind: path, points: [[-2.5, 24], [-12, 25.5], [-26, 29], [-42, 34], [-58, 40.5], [-71, 47], [-78, 51.5], [-82, 55]], width: 6}}
+    link-arch-west-clear: {center: {x: 0, z: 0}, kind: clear-scatter, shape: {kind: path, points: [[-2.5, 24], [-12, 25.5], [-26, 29], [-42, 34], [-58, 40.5], [-71, 47], [-78, 51.5], [-82, 55]], width: 10}}
+    link-ring: {clearScatter: true, edgeMaterial: gravel, falloff: 2, grade: false, kind: path, material: cobblepale, noise: 0.4, points: [[82, 101], [80, 110], [72, 124], [58, 138], [40, 148], [20, 152], [0, 153], [-20, 152], [-40, 148], [-58, 138], [-72, 124], [-80, 110], [-82, 101]], width: 4.5}
+    link-ring-bed: {center: {x: 0, z: 0}, falloff: 4, height: 0.5, kind: flatten, shape: {kind: path, points: [[82, 101], [80, 110], [72, 124], [58, 138], [40, 148], [20, 152], [0, 153], [-20, 152], [-40, 148], [-58, 138], [-72, 124], [-80, 110], [-82, 101]], width: 6}}
+    link-ring-clear: {center: {x: 0, z: 0}, kind: clear-scatter, shape: {kind: path, points: [[82, 101], [80, 110], [72, 124], [58, 138], [40, 148], [20, 152], [0, 153], [-20, 152], [-40, 148], [-58, 138], [-72, 124], [-80, 110], [-82, 101]], width: 10}}
     garden-flat: {center: {x: 57, z: -26}, falloff: 3, height: 0.5, kind: flatten, material: yard, shape: {kind: path, points: [[43, -26], [71, -26]], width: 26}}
     garden-clear: {center: {x: 57, z: -26}, kind: clear-scatter, shape: {kind: path, points: [[41, -26], [73, -26]], width: 30}}
   decorations:

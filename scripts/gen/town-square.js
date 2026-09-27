@@ -73,7 +73,7 @@ function tree(ctx, P, rnd, lod) {
   const cl = [[0, 3.0, 0, 2.1, 1.9], [0.9, 3.3, 0.5, 1.4, 1.5], [-0.8, 3.4, -0.4, 1.4, 1.5], [0.1, 4.2, -0.1, 1.5, 1.4], [-0.3, 3.3, 0.9, 1.2, 1.2]];
   for (let i = 0; i < (lod <= 2 ? cl.length : 2); i++) { const [x, y, z, r, h] = cl[i]; paint(ctx, 'leaf', i % 2 ? 'oklch(0.9 0.07 135)' : 'oklch(0.94 0.06 125)', 0.9); blob(P, x, y, z, r, h, r, lod <= 2 ? 7 : 5, rnd); }
 }
-function lamp(ctx, P, x, z, lod, sa, y = 0) { // sa: which way the arm reaches (±1 along x, default toward x = 0); y: the post's ground
+export function lamp(ctx, P, x, z, lod, sa, y = 0) { // sa: which way the arm reaches (±1 along x, default toward x = 0); y: the post's ground
   const s = sa ? Math.sign(sa) : (x < 0 ? 1 : -1), H = 4.2;
   paint(ctx, 'lime', COL.lime, 0.9); box(P, x - 0.28, y - 0.3, z - 0.28, x + 0.28, y + 0.45, z + 0.28);
   paint(ctx, null, COL.iron, 0.45, 0.7);

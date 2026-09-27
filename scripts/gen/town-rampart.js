@@ -1,6 +1,7 @@
 // Town rampart: the low weathered limestone retaining wall wrapped outside the alley hedge, plus the service-yard
 // dressing in the band between hedge and wall (docks, barrels, crates, hay bales, hay storage, woodpiles).
 // One row, feet at world y 0 like town-alleys: x/z local to the row, every y is world height (sampled at placement).
+// pts [x, z, y, post, open]: open = 1 leaves the segment from this point to the next unbuilt (a lane gap).
 // params: { h, t, pts: [[x, z, y, pier?], …] (one open run), items: [{ k, x, z, y, yaw, … }] }
 import { TEX } from "../lib/town-kit.js";
 const STONE = ["#ddd4c2", "#d2c9b5", "#c6bca7", "#d8cfbb", "#bdb39e"], MOSS = "#98a473", MORTAR = "#a89e8a";
@@ -41,7 +42,7 @@ function wall(ctx, p, lod) {
   ctx.albedo(TEX.ashlar); ctx.roughness(0.95); ctx.flat();
   for (let i = 0; i + 1 < pts.length; i++) {
     const [ax, az, ay] = pts[i], [bx, bz, by] = pts[i + 1], dx = bx - ax, dz = bz - az, L = Math.hypot(dx, dz);
-    if (L < 0.01) continue;
+    if (L < 0.01 || pts[i][4]) continue; // a 5th flag opens the segment (a lane passes)
     frame(ax, 0, az, Math.atan2(-dz, dx) * 180 / Math.PI);
     const gy = (t) => ay + (by - ay) * t, base = -0.3;
     if (lod >= 4) { ctx.color(STONE[1]); box(ctx, L / 2, (ay + by) / 2 + (H + base) / 2, 0, L, H - base, T); continue; }
@@ -153,7 +154,7 @@ export function collider(ctx) {
   const p = ctx.params, H = Number(p.h ?? 0.95), T = Number(p.t ?? 0.55), pts = p.pts || [];
   for (let i = 0; i + 1 < pts.length; i++) {
     const [ax, az, ay] = pts[i], [bx, bz, by] = pts[i + 1], dx = bx - ax, dz = bz - az, L = Math.hypot(dx, dz);
-    if (L < 0.01) continue;
+    if (L < 0.01 || pts[i][4]) continue; // a 5th flag opens the segment (a lane passes)
     frame(ax, 0, az, Math.atan2(-dz, dx) * 180 / Math.PI);
     box(ctx, L / 2, (ay + by) / 2 + (H + 0.12 + 0.3) / 2 - 0.3, 0, L, H + 0.42, T + 0.14, true);
   }
