@@ -55,7 +55,18 @@ export function geometry(ctx) {
       const t = SS(0.02, 0.22, f); // low flanks under forest, bluing into rock
       ctx.color(`oklch(${(0.4 + t * 0.12).toFixed(3)} ${(0.045 - t * 0.017).toFixed(3)} ${(170 + t * 75).toFixed(0)})`);
     }
+    const tl = 0.3 + n * 0.08, dens = SS(tl, tl - 0.09, f) * SS(1.5, 0.8, slope) * SS(-0.06, 0.02, f); // the forest climbs the flanks and stops under the rock
+    if (dens > 0.35 && snow < 0.3) ctx.color(`oklch(${(0.34 + ctx.random() * 0.04).toFixed(3)} 0.055 ${(148 + n * 20).toFixed(0)})`);
     ctx.quad(x0, a, z0, x0, b, z1, x1, c, z1, x1, d, z0);
+    const per = ctx.lod <= 2 ? 3 : ctx.lod === 3 ? 1 : 0;
+    for (let k = 0; k < per && dens > 0.05; k++) {
+      if (ctx.random() > dens * 0.9) continue;
+      const s = ctx.random(), t = ctx.random(), gy = a * (1 - s) * (1 - t) + b * (1 - s) * t + c * s * t + d * s * (1 - t) - 4;
+      const tx = x0 + s * dx, tz = z0 + t * dz, th = Math.max(16, dx * 0.55) * (0.65 + ctx.random() * 0.6), tr = th * 0.28, rot = ctx.random() * 6.28;
+      ctx.color(`oklch(${(0.3 + ctx.random() * 0.07).toFixed(3)} ${(0.05 + ctx.random() * 0.03).toFixed(3)} ${(145 + ctx.random() * 25).toFixed(0)})`);
+      const p = [0, 1, 2].map((q) => [tx + Math.cos(rot + q * 2.094) * tr, gy, tz + Math.sin(rot + q * 2.094) * tr]);
+      for (let q = 0; q < 3; q++) { const A = p[q], B = p[(q + 1) % 3]; ctx.tri(A[0], A[1], A[2], tx, gy + th, tz, B[0], B[1], B[2]); ctx.tri(A[0], A[1], A[2], B[0], B[1], B[2], tx, gy + th, tz); }
+    }
   }
 }
 export function collider() { return null; }
