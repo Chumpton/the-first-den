@@ -2080,6 +2080,13 @@ creek-stones:
   receiveShadow: true
   tags: [creek, decor]
   visibleRange: {max: 60}
+creekside:
+  feetPosition: {x: 8, y: 0.5, z: -1}
+  id: creekside
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 8, height: 6, kind: box, width: 20}
+  tags: [blueprint]
 critter-bird-f1-1:
   castShadow: false
   feetPosition: {x: 0, y: 30, z: -30}
