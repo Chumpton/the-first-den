@@ -4,7 +4,7 @@
 // Origin = the plunge foot at water level (y 0 = lake surface); front (−Z) is the way the water falls.
 import { TAU, TEX, paint } from '../lib/yard-kit.js';
 import { Q, T, box, solid } from '../lib/road-solid.js';
-const ROCK = 'oklch(0.93 0.02 85)', MOSS = 'oklch(0.9 0.05 128)', DARK = 'oklch(0.3 0.02 230)';
+const ROCK = 'oklch(0.86 0.025 80)', MOSS = 'oklch(0.78 0.09 132)', DARK = 'oklch(0.3 0.02 230)';
 // tiers: centre, radii, ledge top; the water sits 0.04 above
 const TIERS = [
   { cx: 0, cz: 2.0, rx: 0.95, rz: 0.85, top: 2.3 },
@@ -28,7 +28,7 @@ const BOULDERS = [
 function rnd(seed) { let s = seed * 9301 + 49297; return () => { s = (s * 9301 + 49297) % 233280; return s / 233280; }; }
 // a lumpy boulder: a lat-long ball, jittered, faces sorted to rock or moss by how much they face the sky
 function boulder(faces, b, i, lod) {
-  const [cx, cy, cz, rx, ry, rz] = b, r = rnd(i * 17 + 3), n = lod <= 2 ? 8 : 5, m = lod <= 2 ? 5 : 3;
+  const [cx, cy, cz, rx, ry, rz] = b, r = rnd(i * 17 + 3), n = lod <= 1 ? 11 : lod <= 2 ? 8 : 5, m = lod <= 1 ? 6 : lod <= 2 ? 5 : 3;
   const P = [];
   for (let k = 0; k <= m; k++) {
     const ph = -Math.PI / 2 + (k / m) * Math.PI, row = [];
@@ -42,8 +42,8 @@ function boulder(faces, b, i, lod) {
   const o = [cx, cy, cz];
   for (let k = 0; k < m; k++) for (let j = 0; j < n; j++) {
     const jj = (j + 1) % n, a = P[k][j], bb = P[k][jj], c = P[k + 1][jj], d = P[k + 1][j];
-    const up = (a[1] + bb[1] + c[1] + d[1]) / 4 - cy > ry * 0.45;
-    faces.push({ moss: up && r() > 0.25, q: [a, bb, c, d], o });
+    const up = (a[1] + bb[1] + c[1] + d[1]) / 4 - cy > ry * 0.62;
+    faces.push({ moss: up && r() > 0.35, q: [a, bb, c, d], o });
   }
 }
 function ledgeLoop(t, y, s, lod, seed) {
