@@ -1,0 +1,13 @@
+{
+  "cooldownMs": 2000,
+  "castDistance": 8,
+  "biteMin": 2,
+  "biteMax": 5,
+  "waterY": 0,
+  "fish": [
+    { "name": "perch", "weight": 40, "color": "#f2d38a" },
+    { "name": "trout", "weight": 32, "color": "#f4b8a0" },
+    { "name": "pike", "weight": 20, "color": "#b9d98f" },
+    { "name": "golden carp", "weight": 6, "color": "#ffd24a", "rare": true }
+  ]
+}
