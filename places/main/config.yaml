@@ -69,6 +69,8 @@ terrain:
     grounds-campClear: {kind: clear-scatter, center: {x: -18, z: -50}, shape: {kind: circle, radius: 11}}
     path-grounds-rope: {clearScatter: true, edgeMaterial: yard, falloff: 3, grade: true, kind: path, material: yard, points: [[-1.2, -9], [-4, -10.3], [-8, -11.8], [-13, -12.9], [-17.4, -14.4], [-20.6, -17.4]], width: 2}
     quadGardenFlat: {kind: flatten, center: {x: 13, z: -8.5}, height: 0.5, shape: {kind: path, points: [[8, -8.6], [18, -8.4]], width: 10.4}, falloff: 1.6}
+    picnicFlat: {kind: flatten, center: {x: -21.9, z: -24.4}, height: 0.42, falloff: 1.8, shape: {kind: circle, radius: 2.9}, material: lawn}
+    picnicClear: {kind: clear-scatter, center: {x: -21.9, z: -24.4}, shape: {kind: circle, radius: 3.4}}
     grounds-flat-rope: {kind: flatten, center: {x: -18, z: -15.5}, height: 0.5, shape: {kind: path, points: [[-15.5, -13.8], [-17.4, -14.4], [-20.9, -17.7]], width: 3}, falloff: 2.5}
     grounds-flat-glass: {kind: flatten, center: {x: 9, z: -51.2}, height: 0.5, shape: {kind: path, points: [[5.8, -49.8], [9.2, -51.4], [12.2, -52.4]], width: 4.5}, falloff: 3}
     campSite: {center: {x: -18, z: -50}, falloff: 5, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 6}}
