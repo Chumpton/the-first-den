@@ -2456,6 +2456,13 @@ fireflies-camp:
   fx: {script: "fx\npop flies n=?mobile:10|24 on=box(18,2.5,18).c(1.2) life=4..8 v=sdir()*.15 size=.035..0.06 acc=curl(.4)*.6+drag(.8) blink=0..6.28 col=hdr(2.8,3.4,.9) a=(0>.15:1>.85:1>0)*(.5+.5*sin($age*3.4+$blink))^3 sz=$size r=sprite(soft-disc,add)"}
   id: fireflies-camp
   tags: [fireflies]
+fishing-pier:
+  feetPosition: {x: 16, y: 0.3, z: -62}
+  id: fishing-pier
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 14, height: 3, kind: box, width: 4}
+  tags: [blueprint]
 forecourt-market:
   feetPosition: {x: -6, y: 0.5, z: 17}
   id: forecourt-market
