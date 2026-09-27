@@ -1,0 +1,5 @@
+# spawn-scene v2 yaml x-1z0
+river-sound:
+  audio: {bus: Ambience, clip: /cdn/moodboard-realistic-gritty/sfx-gentle-forest-river-flowing-over-stones-loop.mp3, gain: 0.5, loop: true, maxDistance: 60, spatial: true}
+  feetPosition: {x: -69, y: 0.2, z: 40}
+  id: river-sound

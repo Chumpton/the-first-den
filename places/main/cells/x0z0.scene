@@ -1,4 +1,8 @@
 # spawn-scene v2 yaml x0z0
+forest-ambience:
+  audio: {bus: Ambience, clip: /cdn/moodboard-realistic-gritty/sfx-sunny-forest-birdsong-leaves-rustling-ambience-loop.mp3, gain: 0.18, loop: true, spatial: false}
+  feetPosition: {x: 0, y: 1, z: 0}
+  id: forest-ambience
 home-portal-stonework/home-portal-birch-left:
   overrides:
     feetPosition: {x: -3.7, y: 0.32795834792951695, z: 1.8}
@@ -110,3 +114,7 @@ square-door/sign:
   id: square-door/sign
   parent: square-door
   text: {color: oklch(0.35 0.03 250), content: to the square, size: 0.28}
+sunbeams:
+  feetPosition: {x: 0, y: 0.5, z: 0}
+  fx: {script: "fx follow=camera\npop motes n=?mobile:60|160 on=box(24,8,24).c(3) wrap=24;8;24 life=4..7 v=up(.02..0.08)+sdir()*.05 size=.02..0.04 acc=curl(.2)*.2 col=hdr(1.6,1.4,.9) a=0>.3:.6>.7:.5>0 sz=$size r=sprite(mote,add)"}
+  id: sunbeams
