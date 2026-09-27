@@ -18,6 +18,354 @@ cob-house/cob-sun-cellar:
   id: cob-house/cob-sun-cellar
   light: {color: oklch(0.85 0.1 70), distance: 9, intensity: 14, kind: point}
   parent: cob-house
+critter-bird-f1-1:
+  castShadow: false
+  feetPosition: {x: 0, y: 30, z: -30}
+  id: critter-bird-f1-1
+  primitive: {kind: scripted, params: {variant: finch}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 0, kind: bird, slot: 0}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f1-2:
+  castShadow: false
+  feetPosition: {x: 1, y: 30, z: -30}
+  id: critter-bird-f1-2
+  primitive: {kind: scripted, params: {variant: finch}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 0, kind: bird, slot: 1}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f1-3:
+  castShadow: false
+  feetPosition: {x: 2, y: 30, z: -30}
+  id: critter-bird-f1-3
+  primitive: {kind: scripted, params: {variant: finch}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 0, kind: bird, slot: 2}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f1-4:
+  castShadow: false
+  feetPosition: {x: 3, y: 30, z: -30}
+  id: critter-bird-f1-4
+  primitive: {kind: scripted, params: {variant: finch}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 0, kind: bird, slot: 3}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f1-5:
+  castShadow: false
+  feetPosition: {x: 4, y: 30, z: -30}
+  id: critter-bird-f1-5
+  primitive: {kind: scripted, params: {variant: finch}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 0, kind: bird, slot: 4}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f1-6:
+  castShadow: false
+  feetPosition: {x: 5, y: 30, z: -30}
+  id: critter-bird-f1-6
+  primitive: {kind: scripted, params: {variant: finch}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 0, kind: bird, slot: 5}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f2-1:
+  castShadow: false
+  feetPosition: {x: -10, y: 36, z: -20}
+  id: critter-bird-f2-1
+  primitive: {kind: scripted, params: {variant: bluebird}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 1, kind: bird, slot: 0}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f2-2:
+  castShadow: false
+  feetPosition: {x: -9, y: 36, z: -20}
+  id: critter-bird-f2-2
+  primitive: {kind: scripted, params: {variant: bluebird}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 1, kind: bird, slot: 1}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f2-3:
+  castShadow: false
+  feetPosition: {x: -8, y: 36, z: -20}
+  id: critter-bird-f2-3
+  primitive: {kind: scripted, params: {variant: bluebird}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 1, kind: bird, slot: 2}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f2-4:
+  castShadow: false
+  feetPosition: {x: -7, y: 36, z: -20}
+  id: critter-bird-f2-4
+  primitive: {kind: scripted, params: {variant: bluebird}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 1, kind: bird, slot: 3}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f2-5:
+  castShadow: false
+  feetPosition: {x: -6, y: 36, z: -20}
+  id: critter-bird-f2-5
+  primitive: {kind: scripted, params: {variant: bluebird}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 1, kind: bird, slot: 4}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f2-6:
+  castShadow: false
+  feetPosition: {x: -5, y: 36, z: -20}
+  id: critter-bird-f2-6
+  primitive: {kind: scripted, params: {variant: bluebird}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 1, kind: bird, slot: 5}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f2-7:
+  castShadow: false
+  feetPosition: {x: -4, y: 36, z: -20}
+  id: critter-bird-f2-7
+  primitive: {kind: scripted, params: {variant: bluebird}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 1, kind: bird, slot: 6}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f3-1:
+  castShadow: false
+  feetPosition: {x: 12, y: 27, z: -45}
+  id: critter-bird-f3-1
+  primitive: {kind: scripted, params: {variant: robin}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 2, kind: bird, slot: 0}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f3-2:
+  castShadow: false
+  feetPosition: {x: 13, y: 27, z: -45}
+  id: critter-bird-f3-2
+  primitive: {kind: scripted, params: {variant: robin}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 2, kind: bird, slot: 1}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f3-3:
+  castShadow: false
+  feetPosition: {x: 14, y: 27, z: -45}
+  id: critter-bird-f3-3
+  primitive: {kind: scripted, params: {variant: robin}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 2, kind: bird, slot: 2}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f3-4:
+  castShadow: false
+  feetPosition: {x: 15, y: 27, z: -45}
+  id: critter-bird-f3-4
+  primitive: {kind: scripted, params: {variant: robin}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 2, kind: bird, slot: 3}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-f3-5:
+  castShadow: false
+  feetPosition: {x: 16, y: 27, z: -45}
+  id: critter-bird-f3-5
+  primitive: {kind: scripted, params: {variant: robin}, script: scripts/gen/critter-bird.js}
+  scale: 1.6
+  state: {flock: 2, kind: bird, slot: 4}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 160}
+critter-bird-single-1:
+  castShadow: false
+  feetPosition: {x: 4.9803708901653145, y: 8.2, z: -24.187293240373954}
+  id: critter-bird-single-1
+  primitive: {kind: scripted, params: {variant: robin}, script: scripts/gen/critter-bird.js}
+  rotation: {yaw: 65.02069775015116}
+  scale: 1.7
+  state: {i: 0, kind: bird, mode: perch, perches: [[4.9803708901653145, 8.2, -24.187293240373954], [3.747665940288702, 8.2, -22.2523340597113], [3.245314017740486e-16, 8.2, -20.7], [-4.060035548530583, 8.2, -22.59322566866134], [-5.119406879332061, 8.2, -24.628259060956637], [-4.589934640057525, 8.2, -28.65], [-9.735942053221457e-16, 8.2, -31.3], [4.589934640057523, 8.2, -28.650000000000002]], until: 0}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 150}
+critter-bird-single-2:
+  castShadow: false
+  feetPosition: {x: -4.060035548530583, y: 8.2, z: -22.59322566866134}
+  id: critter-bird-single-2
+  primitive: {kind: scripted, params: {variant: bluebird}, script: scripts/gen/critter-bird.js}
+  rotation: {yaw: 95.20015301182866}
+  scale: 1.7
+  state: {i: 3, kind: bird, mode: perch, perches: [[4.9803708901653145, 8.2, -24.187293240373954], [3.747665940288702, 8.2, -22.2523340597113], [3.245314017740486e-16, 8.2, -20.7], [-4.060035548530583, 8.2, -22.59322566866134], [-5.119406879332061, 8.2, -24.628259060956637], [-4.589934640057525, 8.2, -28.65], [-9.735942053221457e-16, 8.2, -31.3], [4.589934640057523, 8.2, -28.650000000000002]], until: 0}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 150}
+critter-bird-single-3:
+  castShadow: false
+  feetPosition: {x: -9.735942053221457e-16, y: 8.2, z: -31.3}
+  id: critter-bird-single-3
+  primitive: {kind: scripted, params: {variant: finch}, script: scripts/gen/critter-bird.js}
+  rotation: {yaw: 177.1358732599765}
+  scale: 1.7
+  state: {i: 6, kind: bird, mode: perch, perches: [[4.9803708901653145, 8.2, -24.187293240373954], [3.747665940288702, 8.2, -22.2523340597113], [3.245314017740486e-16, 8.2, -20.7], [-4.060035548530583, 8.2, -22.59322566866134], [-5.119406879332061, 8.2, -24.628259060956637], [-4.589934640057525, 8.2, -28.65], [-9.735942053221457e-16, 8.2, -31.3], [4.589934640057523, 8.2, -28.650000000000002]], until: 0}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 150}
+critter-bird-single-4:
+  castShadow: false
+  feetPosition: {x: -19, y: 0.5, z: -50}
+  id: critter-bird-single-4
+  primitive: {kind: scripted, params: {variant: robin}, script: scripts/gen/critter-bird.js}
+  rotation: {yaw: 107.28228933177888}
+  scale: 1.7
+  state: {i: 0, kind: bird, mode: perch, perches: [[-19, 0.5, -50], [-13, 0.5, -49.5], [-14, 0.49345741694349976, -55], [-18.5, 0.5, -54.5], [-16, 0.5, -47.5]], until: 0}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 150}
+critter-bird-single-5:
+  castShadow: false
+  feetPosition: {x: -14, y: 0.49345741694349976, z: -55}
+  id: critter-bird-single-5
+  primitive: {kind: scripted, params: {variant: finch}, script: scripts/gen/critter-bird.js}
+  rotation: {yaw: 72.87717319093645}
+  scale: 1.7
+  state: {i: 2, kind: bird, mode: perch, perches: [[-19, 0.5, -50], [-13, 0.5, -49.5], [-14, 0.49345741694349976, -55], [-18.5, 0.5, -54.5], [-16, 0.5, -47.5]], until: 0}
+  tags: [fauna-small, critter, songbird]
+  visibleRange: {max: 150}
+critter-rabbit-01:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: 56.89975133945251, y: 0.3924892762962529, z: -5.0898431148854115}
+  id: critter-rabbit-01
+  primitive: {kind: scripted, script: scripts/gen/critter-rabbit.js, seed: 1}
+  rotation: {yaw: 140.35551376640797}
+  scale: 1.206472799074836
+  state: {kind: rabbit, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+critter-rabbit-02:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: -15.731584471371692, y: 0.4782716313245697, z: -21.83586770132608}
+  id: critter-rabbit-02
+  primitive: {kind: scripted, script: scripts/gen/critter-rabbit.js, seed: 2}
+  rotation: {yaw: 253.32299304194748}
+  scale: 1.3624602691223846
+  state: {kind: rabbit, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+critter-rabbit-05:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: 53.94113819526963, y: 0.5764147348175753, z: -39.384717509889946}
+  id: critter-rabbit-05
+  primitive: {kind: scripted, script: scripts/gen/critter-rabbit.js, seed: 5}
+  rotation: {yaw: 261.8840108625591}
+  scale: 1.419410562911071
+  state: {kind: rabbit, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+critter-rabbit-06:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: -38.091669925750395, y: 0.3306209738648409, z: -14.16739125184468}
+  id: critter-rabbit-06
+  primitive: {kind: scripted, script: scripts/gen/critter-rabbit.js, seed: 6}
+  rotation: {yaw: 193.60441038385034}
+  scale: 1.2933300833730028
+  state: {kind: rabbit, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+critter-rabbit-09:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: 60.64397238218838, y: 0.6401201158287445, z: -59.492671048326145}
+  id: critter-rabbit-09
+  primitive: {kind: scripted, script: scripts/gen/critter-rabbit.js, seed: 9}
+  rotation: {yaw: 75.6539343483746}
+  scale: 1.4185875987121837
+  state: {kind: rabbit, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+critter-rabbit-10:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: -4.44684550193243, y: 0.38604967499598564, z: 53.93637490177417}
+  id: critter-rabbit-10
+  primitive: {kind: scripted, script: scripts/gen/critter-rabbit.js, seed: 10}
+  rotation: {yaw: 204.85971646383405}
+  scale: 1.3142668670136484
+  state: {kind: rabbit, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+critter-squirrel-01:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: 13.712208915788956, y: 0.5, z: -21.773973011299482}
+  id: critter-squirrel-01
+  primitive: {kind: scripted, script: scripts/gen/critter-squirrel.js, seed: 1}
+  rotation: {yaw: 326.6390844248235}
+  scale: 1.2655203318642454
+  state: {kind: squirrel, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+critter-squirrel-02:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: 7.850916160711202, y: 0.6971519825039817, z: 10.908156266595945}
+  id: critter-squirrel-02
+  primitive: {kind: scripted, script: scripts/gen/critter-squirrel.js, seed: 2}
+  rotation: {yaw: 27.847127420827746}
+  scale: 1.3409550433396362
+  state: {kind: squirrel, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+critter-squirrel-03:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: 24.306455615091842, y: 0.361905490248522, z: 52.71658665573477}
+  id: critter-squirrel-03
+  primitive: {kind: scripted, script: scripts/gen/critter-squirrel.js, seed: 3}
+  rotation: {yaw: 244.97231405228376}
+  scale: 1.4383748692972587
+  state: {kind: squirrel, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+critter-squirrel-07:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: -12.513025488737053, y: 0.3825905331338433, z: 59.01018867035302}
+  id: critter-squirrel-07
+  primitive: {kind: scripted, script: scripts/gen/critter-squirrel.js, seed: 7}
+  rotation: {yaw: 35.01363283954561}
+  scale: 1.2592266375012697
+  state: {kind: squirrel, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+critter-squirrel-10:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: 14.387683773712856, y: 0.5, z: -30.084688703483195}
+  id: critter-squirrel-10
+  primitive: {kind: scripted, script: scripts/gen/critter-squirrel.js, seed: 10}
+  rotation: {yaw: 61.82703179307282}
+  scale: 1.4697926680441016
+  state: {kind: squirrel, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+critter-squirrel-11:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: -53.731524602363386, y: 0.5460609505757285, z: -3.655692349666708}
+  id: critter-squirrel-11
+  primitive: {kind: scripted, script: scripts/gen/critter-squirrel.js, seed: 11}
+  rotation: {yaw: 219.37303838320076}
+  scale: 1.4183385566691868
+  state: {kind: squirrel, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+critter-squirrel-12:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: 13.098959753987101, y: 0.5675223553799362, z: 2.9333575540813968}
+  id: critter-squirrel-12
+  primitive: {kind: scripted, script: scripts/gen/critter-squirrel.js, seed: 12}
+  rotation: {yaw: 208.1445079576224}
+  scale: 1.2470721251238137
+  state: {kind: squirrel, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+fauna-small:
+  behavior: scripts/fauna-small.js
+  feetPosition: {x: 18, y: 0.5, z: -30}
+  id: fauna-small
+  state: {}
+  tags: [manager]
 fireflies:
   feetPosition: {x: 0, y: 0.5, z: -40}
   fx: {script: "fx\npop flies n=?mobile:30|70 on=box(70,3,70).c(1.5) life=5..9 v=sdir()*.15 size=.035..0.06 acc=curl(.35)*.6+drag(.8) blink=0..6.28 col=hdr(2.6,3.4,.9) a=(0>.15:1>.85:1>0)*(.5+.5*sin($age*3+$blink))^3 sz=$size r=sprite(soft-disc,add)"}

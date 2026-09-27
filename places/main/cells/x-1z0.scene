@@ -1,4 +1,24 @@
 # spawn-scene v2 yaml x-1z0
+critter-rabbit-08:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: -81.57509740781596, y: 0.7404271103346219, z: -63.2760435357085}
+  id: critter-rabbit-08
+  primitive: {kind: scripted, script: scripts/gen/critter-rabbit.js, seed: 8}
+  rotation: {yaw: 34.19849418103695}
+  scale: 1.2113518273318187
+  state: {kind: rabbit, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+critter-squirrel-06:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: -68.82689798661603, y: 0.5320912910511192, z: 0.12826567667156397}
+  id: critter-squirrel-06
+  primitive: {kind: scripted, script: scripts/gen/critter-squirrel.js, seed: 6}
+  rotation: {yaw: 28.74785704538226}
+  scale: 1.2247081187996083
+  state: {kind: squirrel, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
 river-sound:
   audio: {bus: Ambience, clip: /cdn/moodboard-realistic-gritty/sfx-gentle-forest-river-flowing-over-stones-loop.mp3, gain: 0.5, loop: true, maxDistance: 60, spatial: true}
   feetPosition: {x: -69, y: 0.2, z: 40}

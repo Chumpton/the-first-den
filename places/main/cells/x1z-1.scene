@@ -1,0 +1,11 @@
+# spawn-scene v2 yaml x1z-1
+critter-squirrel-04:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: 73.86099072643579, y: 0.39021566360957555, z: -72.41132262198624}
+  id: critter-squirrel-04
+  primitive: {kind: scripted, script: scripts/gen/critter-squirrel.js, seed: 4}
+  rotation: {yaw: 276.40217727050185}
+  scale: 1.399602786549367
+  state: {kind: squirrel, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}

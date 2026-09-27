@@ -1,1 +1,91 @@
 # spawn-scene v2 yaml objects
+critter-duck-1:
+  castShadow: false
+  feetPosition: {x: 10.86066101375036, y: 0.02, z: -76}
+  id: critter-duck-1
+  primitive: {kind: scripted, params: {sex: drake}, script: scripts/gen/critter-duck.js}
+  rotation: {yaw: 35.40284869261086}
+  scale: 1.25
+  state: {kind: duck, mode: paddle}
+  tags: [fauna-small, critter]
+  visibleRange: {max: 170}
+critter-duck-2:
+  castShadow: false
+  feetPosition: {x: 5.64550574437143, y: 0.02, z: -70.94661039700215}
+  id: critter-duck-2
+  primitive: {kind: scripted, params: {sex: drake}, script: scripts/gen/critter-duck.js}
+  rotation: {yaw: 5.7853577099740505}
+  scale: 1.25
+  state: {kind: duck, mode: paddle}
+  tags: [fauna-small, critter]
+  visibleRange: {max: 170}
+critter-duck-3:
+  castShadow: false
+  feetPosition: {x: -2.0436638795772692, y: 0.02, z: -71.59724513998998}
+  id: critter-duck-3
+  primitive: {kind: scripted, params: {sex: drake}, script: scripts/gen/critter-duck.js}
+  rotation: {yaw: 354.15135263465345}
+  scale: 1.25
+  state: {kind: duck, mode: paddle}
+  tags: [fauna-small, critter]
+  visibleRange: {max: 170}
+critter-duck-4:
+  castShadow: false
+  feetPosition: {x: -3.288024363666328, y: 0.02, z: -81.27380788051623}
+  id: critter-duck-4
+  primitive: {kind: scripted, params: {sex: hen}, script: scripts/gen/critter-duck.js}
+  rotation: {yaw: 96.88772533088923}
+  scale: 1.25
+  state: {kind: duck, mode: paddle}
+  tags: [fauna-small, critter]
+  visibleRange: {max: 170}
+critter-duck-5:
+  castShadow: false
+  feetPosition: {x: 7.227967471759703, y: 0.02, z: -86.02148361784894}
+  id: critter-duck-5
+  primitive: {kind: scripted, params: {sex: hen}, script: scripts/gen/critter-duck.js}
+  rotation: {yaw: 124.97176473028958}
+  scale: 1.25
+  state: {kind: duck, mode: paddle}
+  tags: [fauna-small, critter]
+  visibleRange: {max: 170}
+critter-rabbit-03:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: -46.29081586185729, y: 0.5591710450379459, z: -73.65147024351704}
+  id: critter-rabbit-03
+  primitive: {kind: scripted, script: scripts/gen/critter-rabbit.js, seed: 3}
+  rotation: {yaw: 248.82529363967478}
+  scale: 1.1786471975408497
+  state: {kind: rabbit, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+critter-rabbit-04:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: -38.053361939896156, y: 0.47478819658843824, z: -76.67358898079279}
+  id: critter-rabbit-04
+  primitive: {kind: scripted, script: scripts/gen/critter-rabbit.js, seed: 4}
+  rotation: {yaw: 327.7064470387995}
+  scale: 1.4071554080350326
+  state: {kind: rabbit, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+critter-rabbit-07:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: -63.4963973186765, y: 0.9149848316147944, z: -73.21287457479085}
+  id: critter-rabbit-07
+  primitive: {kind: scripted, script: scripts/gen/critter-rabbit.js, seed: 7}
+  rotation: {yaw: 271.4416097290814}
+  scale: 1.3542644098959864
+  state: {kind: rabbit, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
+critter-squirrel-09:
+  behavior: scripts/critter-press.js
+  feetPosition: {x: 37.84026751486909, y: 0.5838630918925767, z: -108.45757704138884}
+  id: critter-squirrel-09
+  primitive: {kind: scripted, script: scripts/gen/critter-squirrel.js, seed: 9}
+  rotation: {yaw: 104.21439819037914}
+  scale: 1.3798328587668949
+  state: {kind: squirrel, mode: idle, until: 0}
+  tags: [fauna-small, interactable, critter]
+  visibleRange: {max: 150}
