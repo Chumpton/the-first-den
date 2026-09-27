@@ -24,13 +24,22 @@ inputs:
     courierLumen: {keys: ['1']}
     courierHearth: {keys: ['2']}
     courierCancel: {keys: ['3']}
+    travelMenu: {keys: [j]}
+    travelClose: {keys: [escape]}
+    travelGo: {}
+    travelHome: {keys: ['1']}
+    travelLumen: {keys: ['2']}
+    travelHearth: {keys: ['3']}
+    travelTower: {keys: ['4']}
+    travelDock: {keys: ['5']}
+    travelGate: {keys: ['6']}
   axes:
     moveX:
       keys: a/d
     moveZ:
       keys: s/w
   touch:
-    surfaces: {default: {buttons: [{action: interact, label: USE, size: primary, slot: 1}, {action: jump, label: JUMP, slot: 2}, {action: descend, label: DOWN, slot: 3}], look: true, orientation: any, pinch: false, sticks: [{x: moveX, y: moveZ, zone: left}]}}
+    surfaces: {default: {buttons: [{action: interact, label: USE, size: primary, slot: 1}, {action: jump, label: JUMP, slot: 2}, {action: descend, label: DOWN, slot: 3}, {action: travelMenu, label: TRAVEL, slot: 4}], look: true, orientation: any, pinch: false, sticks: [{x: moveX, y: moveZ, zone: left}]}}
 player: templates/player.js#player
 name: The First Den
 description: A warm little home above a lake, with room for whatever you make next.
