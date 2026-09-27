@@ -1,5 +1,6 @@
 # spawn-scene v2 yaml x14z20
 far-range-a3:
+  audience: all
   castShadow: false
   feetPosition: {x: 1847, y: 0, z: 2612}
   id: far-range-a3

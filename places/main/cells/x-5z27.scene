@@ -1,5 +1,6 @@
 # spawn-scene v2 yaml x-5z27
 far-range-a4:
+  audience: all
   castShadow: false
   feetPosition: {x: -622, y: 0, z: 3500}
   id: far-range-a4
