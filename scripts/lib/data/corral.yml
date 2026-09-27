@@ -1,0 +1,21 @@
+# The riding corral north of the rescue pasture. Loops and spots are LOCAL to the `corral` row's feet (-50, 0.5, -50).
+walk: 0.85
+turnRate: 85
+lead: 2.0
+wake: 220
+notice: 2.6
+rest: { everyMin: 22, everyMax: 45, forMin: 4, forMax: 9 }
+drink: { everyMin: 18, everyMax: 40, for: 8 }
+whinny: { clip: /cdn/moodboard-lowpoly-cozy/sfx-horse-soft-whinny.mp3, min: 35, max: 95, volume: 0.4, range: 45 }
+horses:
+  - { id: corral-horse-hazel, name: Hazel, coat: bay, scale: 1.02, pitch: 1.0, role: walk, at: [0.6, 3.5], yaw: 180, loop: { kind: circle, c: [-4, 3.5], r: 4.6, dir: 1 }, story: "learning to walk the ring on a loose rein" }
+  - { id: corral-horse-willow, name: Willow, coat: dapple, scale: 0.98, pitch: 0.95, role: walk, at: [6.4, 2.0], yaw: -90, loop: { kind: path, pts: [[6.6, 2.0], [9.7, 2.0], [9.7, 7.2], [6.6, 7.2]] }, story: "stretching her legs before a ride" }
+  - { id: corral-horse-tansy, name: Tansy, coat: piebald, scale: 0.94, pitch: 1.12, role: stand, at: [3.0, -5.25], yaw: 0, story: "never far from the water trough" }
+clips:
+  swish:
+    duration: 4.2
+    tracks:
+      neck: { pitch: [6, 8, 6, 4, 6] }
+      head: { pitch: [-4, -2, -6, -3, -4], yaw: [0, 6, 0, -5, 0] }
+      tail: { pitch: [10, 16, 10, 18, 10, 12, 10], roll: [0, 36, -30, 28, -34, 20, 0] }
+      legBL: { pitch: [0, -9, -9, -9, 0] }
