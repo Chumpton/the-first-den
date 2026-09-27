@@ -32,6 +32,16 @@ hw-east-lamps-6:
   primitive: {kind: scripted, params: {lamps: [[0, 0, 0, 0.109, 0.994], [24.78, 0.05, 6.68, -0.089, -0.996]]}, script: scripts/gen/road-lamps.js}
   tags: [highway-lamps]
   visibleRange: {max: 180}
+lumen-gatehouse:
+  castShadow: true
+  feetPosition: {x: 920.6849543434857, y: {terrain: 0}, z: -234.31196630542152}
+  id: lumen-gatehouse
+  physics: static
+  primitive: {kind: scripted, params: {kind: gate}, script: scripts/gen/lumen-grand.js}
+  receiveShadow: true
+  rotation: {yaw: 95}
+  tags: [lumenvale, lumen-grand]
+  visibleRange: {max: 2500}
 lumenvale/lumen-banner-0:
   feetPosition: {x: -159.23155400126862, y: 0, z: 23.79731519186734}
   id: lumenvale/lumen-banner-0

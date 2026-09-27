@@ -1,4 +1,24 @@
 # spawn-scene v2 yaml x9z-2
+lumen-grand-wall:
+  castShadow: true
+  feetPosition: {x: 1100, y: {terrain: 0}, z: -250}
+  id: lumen-grand-wall
+  physics: static
+  primitive: {kind: scripted, params: {kind: wall}, script: scripts/gen/lumen-grand.js}
+  receiveShadow: true
+  rotation: {yaw: 0}
+  tags: [lumenvale, lumen-grand]
+  visibleRange: {max: 2500}
+lumen-statue-ring:
+  castShadow: false
+  feetPosition: {x: 1100, y: {terrain: 0}, z: -250}
+  id: lumen-statue-ring
+  physics: static
+  primitive: {kind: scripted, params: {kind: statues}, script: scripts/gen/lumen-grand.js}
+  receiveShadow: true
+  rotation: {yaw: 0}
+  tags: [lumenvale, lumen-grand]
+  visibleRange: {max: 250}
 lumenvale:
   feetPosition: {x: 1100, y: 0.5, z: -250}
   id: lumenvale

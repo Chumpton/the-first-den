@@ -1,4 +1,14 @@
 # spawn-scene v2 yaml x9z-3
+lumen-keep:
+  castShadow: true
+  feetPosition: {x: 1095, y: {terrain: 0}, z: -368}
+  id: lumen-keep
+  physics: static
+  primitive: {kind: scripted, params: {kind: keep}, script: scripts/gen/lumen-grand.js}
+  receiveShadow: true
+  rotation: {yaw: 0}
+  tags: [lumenvale, lumen-grand]
+  visibleRange: {max: 3000}
 lumenvale/lumen-tower-3:
   feetPosition: {x: 71.99221228489239, y: 0, z: -85.79697762932555}
   id: lumenvale/lumen-tower-3

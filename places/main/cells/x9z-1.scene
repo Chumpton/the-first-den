@@ -1,4 +1,14 @@
 # spawn-scene v2 yaml x9z-1
+lumen-cathedral:
+  castShadow: true
+  feetPosition: {x: 1109.2385087312518, y: {terrain: 0}, z: -144.40336200227497}
+  id: lumen-cathedral
+  physics: static
+  primitive: {kind: scripted, params: {kind: cathedral}, script: scripts/gen/lumen-grand.js}
+  receiveShadow: true
+  rotation: {yaw: 4.999999999999998}
+  tags: [lumenvale, lumen-grand]
+  visibleRange: {max: 2500}
 lumenvale/lumen-tower-2:
   feetPosition: {x: 85.79697762932554, y: 0, z: 71.99221228489239}
   id: lumenvale/lumen-tower-2
