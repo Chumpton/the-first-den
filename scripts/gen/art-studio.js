@@ -44,7 +44,7 @@ const paint = (ctx, col, rough = 0.6, metal = 0, tex = null) => { ctx.albedo(tex
 function shell(ctx, p) {
   const AI = p.ai ?? 7.468, H = p.h ?? 6.2, lod = ctx.lod ?? 1;
   const hex = (ap, k) => { const a = (60 * k) * Math.PI / 180, r = ap / Math.cos(Math.PI / 6); return [Math.cos(a) * r, Math.sin(a) * r]; };
-  for (const [y, ap, h, d, e] of [[H - 0.28, AI - 0.02, 0.05, 0.14, [2.2, 2.6, 3.0]], [0.02, AI - 0.02, 0.03, 0.05, [0.9, 2.2, 2.6]]]) {
+  for (const [y, ap, h, d, e] of [[H - 0.28, AI - 0.02, 0.05, 0.14, [3.2, 2.4, 1.5]], [0.02, AI - 0.02, 0.03, 0.05, [0.9, 2.2, 2.6]]]) {
     for (let k = 0; k < 6; k++) {
       const a = hex(ap, k), b = hex(ap, k + 1), a2 = hex(ap - d, k), b2 = hex(ap - d, k + 1);
       paint(ctx, WHITE, 0.5); ctx.emissive(...e);
@@ -74,7 +74,7 @@ function shell(ctx, p) {
         const f = 0.2 + i * 0.35, x = a[0] + (b[0] - a[0]) * f, z = a[2] + (b[2] - a[2]) * f;
         paint(ctx, STEEL, 0.35, 0.8); rod(ctx, [x, H - 0.06, z], [x, H - 0.3, z], 0.012, 5);
         cyl(ctx, x, H - 0.52, z, 0.07, 0.24, 10, 0.09);
-        paint(ctx, "oklch(0.98 0.02 90)"); ctx.emissive(4, 3.7, 3.1); cyl(ctx, x, H - 0.53, z, 0.055, 0.012, 10);
+        paint(ctx, "oklch(0.98 0.02 90)"); ctx.emissive(4, 3.1, 2.0); cyl(ctx, x, H - 0.53, z, 0.055, 0.012, 10);
       }
     }
   }
@@ -223,22 +223,175 @@ function lounge(ctx, p) {
   const cush = ["oklch(0.75 0.14 60)", "oklch(0.68 0.14 330)", "oklch(0.8 0.1 150)"];
   cush.forEach((c, i) => { paint(ctx, c, 1); cbox(ctx, -1 + i * 1.0, 0.41, 0.2, 0.42, 0.38, 0.12); });
 }
+
+// ---- dressing (lived-in lab) ----
+const LEAF = ["oklch(0.52 0.13 145)", "oklch(0.62 0.15 135)", "oklch(0.45 0.11 150)"];
+// a leaf: a diamond card leaning out from p along dir
+function leaf(ctx, p, dir, s) { const up = [0, 1, 0], side = crs(dir, up), sl = Math.hypot(...side) || 1, sd = side.map((v) => v / sl);
+  const tip = [p[0] + dir[0] * s, p[1] + dir[1] * s + s * 0.2, p[2] + dir[2] * s], m = [p[0] + dir[0] * s * 0.5, p[1] + dir[1] * s * 0.5 + s * 0.12, p[2] + dir[2] * s * 0.5];
+  const a = [m[0] + sd[0] * s * 0.28, m[1], m[2] + sd[2] * s * 0.28], b = [m[0] - sd[0] * s * 0.28, m[1], m[2] - sd[2] * s * 0.28];
+  ctx.tri(...p, ...a, ...tip); ctx.tri(...p, ...tip, ...b); ctx.tri(...tip, ...a, ...p); ctx.tri(...b, ...tip, ...p); }
+// a braided round rug: concentric coils in alternating wool tones, a hole in the middle for what stands there
+function rug(ctx, p) {
+  const r0 = p.r0 ?? 0, r1 = p.r1 ?? 2.5, n = 40, cols = p.cols ?? ["oklch(0.72 0.07 60)", "oklch(0.58 0.09 45)", "oklch(0.82 0.04 85)", "oklch(0.5 0.06 150)"];
+  let r = r0, i = 0;
+  while (r < r1 - 0.01) { const r2 = Math.min(r1, r + 0.11), y = 0.006 + (i % 2) * 0.003; paint(ctx, cols[i % cols.length], 1);
+    for (let k = 0; k < n; k++) { const a = k / n * 6.2832, b = (k + 1) / n * 6.2832; Q(ctx, [Math.cos(a) * r, y, Math.sin(a) * r], [Math.cos(b) * r, y, Math.sin(b) * r], [Math.cos(b) * r2, y, Math.sin(b) * r2], [Math.cos(a) * r2, y, Math.sin(a) * r2], [0, 1, 0]); }
+    r = r2; i++; }
+  paint(ctx, "oklch(0.45 0.06 45)", 1); // the bound edge
+  for (let k = 0; k < n; k++) { const a = k / n * 6.2832, b = (k + 1) / n * 6.2832; Q(ctx, [Math.cos(a) * r1, 0, Math.sin(a) * r1], [Math.cos(b) * r1, 0, Math.sin(b) * r1], [Math.cos(b) * r1, 0.012, Math.sin(b) * r1], [Math.cos(a) * r1, 0.012, Math.sin(a) * r1], [Math.cos((a + b) / 2), 0, Math.sin((a + b) / 2)]); }
+}
+// the planter ring round the tree: walnut boxes on the hex's face centres, ferns, snake plants, a few blooms. Origin = the house centre.
+function planters(ctx, p) {
+  const R = p.r ?? 2.35, skip = p.skip ?? [270];
+  for (const deg of [30, 90, 150, 210, 270, 330]) {
+    if (skip.includes(deg)) continue;
+    const a = deg * Math.PI / 180, c = [Math.cos(a) * R, Math.sin(a) * R], t = [-Math.sin(a), 0, Math.cos(a)], n = [Math.cos(a), 0, Math.sin(a)];
+    const W = 1.15, D = 0.55, Hh = 0.5, P = (u, v, y) => [c[0] + t[0] * u + n[0] * v, y, c[1] + t[2] * u + n[2] * v];
+    paint(ctx, WALNUT, 0.55, 0, PLANK);
+    for (const [u0, u1, v0, v1] of [[-W / 2, W / 2, -D / 2, -D / 2 + 0.05], [-W / 2, W / 2, D / 2 - 0.05, D / 2], [-W / 2, -W / 2 + 0.05, -D / 2, D / 2], [W / 2 - 0.05, W / 2, -D / 2, D / 2]]) {
+      const pts = [P(u0, v0, 0), P(u1, v0, 0), P(u1, v1, 0), P(u0, v1, 0)];
+      const top = pts.map((q) => [q[0], Hh, q[2]]);
+      Q(ctx, ...top, [0, 1, 0]); for (let i = 0; i < 4; i++) { const j = (i + 1) % 4, m = [(pts[i][0] + pts[j][0]) / 2 - (c[0]), 0, (pts[i][2] + pts[j][2]) / 2 - c[1]]; Q(ctx, pts[i], pts[j], top[j], top[i], m); }
+    }
+    paint(ctx, STEEL, 0.4, 0.8); for (const u of [-W / 2 + 0.06, W / 2 - 0.06]) { const q = P(u, 0, 0); cbox(ctx, q[0], 0, q[2], 0.04, 0.04, 0.04); }
+    paint(ctx, "oklch(0.3 0.04 50)", 1); Q(ctx, P(-W / 2 + 0.05, -D / 2 + 0.05, Hh - 0.06), P(W / 2 - 0.05, -D / 2 + 0.05, Hh - 0.06), P(W / 2 - 0.05, D / 2 - 0.05, Hh - 0.06), P(-W / 2 + 0.05, D / 2 - 0.05, Hh - 0.06), [0, 1, 0]);
+    // a fern at each end, snake plant blades in the middle, a few blooms
+    for (const u of [-0.3, 0.3]) { const o = P(u, 0, Hh - 0.06); for (let i = 0; i < 9; i++) { const aa = i / 9 * 6.28 + deg, d = [Math.cos(aa) * 0.9, 0.35, Math.sin(aa) * 0.9]; ctx.albedo(null); ctx.color(LEAF[i % 3]); leaf(ctx, o, d, 0.42); } }
+    const o = P(0, 0, Hh - 0.06); ctx.color("oklch(0.5 0.1 140)");
+    for (let i = 0; i < 6; i++) { const aa = i * 1.1 + deg, x = o[0] + Math.cos(aa) * 0.07, z = o[2] + Math.sin(aa) * 0.07, h = 0.45 + (i % 3) * 0.15; ctx.tri(x - 0.035, o[1], z, x + 0.035, o[1], z, x + Math.cos(aa) * 0.06, o[1] + h, z + Math.sin(aa) * 0.06); ctx.tri(x + 0.035, o[1], z, x - 0.035, o[1], z, x + Math.cos(aa) * 0.06, o[1] + h, z + Math.sin(aa) * 0.06); }
+    const bl = ["oklch(0.75 0.16 30)", "oklch(0.9 0.12 95)", "oklch(0.7 0.15 330)"];
+    for (let i = 0; i < 4; i++) { const q = P(-0.45 + i * 0.3, (i % 2 ? 0.14 : -0.14), Hh + 0.12 + (i % 2) * 0.06); paint(ctx, bl[(i + deg) % 3], 0.8); cbox(ctx, q[0], q[1], q[2], 0.07, 0.05, 0.07); }
+  }
+}
+// an industrial rubber mat: ribbed black, hazard-yellow edge
+function mat(ctx, p) {
+  const W = p.w ?? 2.8, D = p.d ?? 2.2;
+  paint(ctx, "oklch(0.8 0.15 90)", 0.7); box(ctx, -W / 2, 0, -D / 2, W / 2, 0.012, D / 2);
+  paint(ctx, "oklch(0.2 0.01 250)", 0.9); box(ctx, -W / 2 + 0.06, 0, -D / 2 + 0.06, W / 2 - 0.06, 0.016, D / 2 - 0.06);
+  paint(ctx, "oklch(0.26 0.01 250)", 0.85); for (let x = -W / 2 + 0.2; x < W / 2 - 0.15; x += 0.14) box(ctx, x, 0.016, -D / 2 + 0.1, x + 0.05, 0.022, D / 2 - 0.1);
+}
+// a floor cable track: a low grey ramp, a yellow stripe, running len along -Z
+function cable(ctx, p) {
+  const L = p.len ?? 3, w = 0.16;
+  paint(ctx, "oklch(0.35 0.01 250)", 0.8);
+  Q(ctx, [-w / 2, 0, 0], [-w / 4, 0.03, 0], [-w / 4, 0.03, -L], [-w / 2, 0, -L], [-1, 3, 0]);
+  Q(ctx, [w / 4, 0.03, 0], [w / 2, 0, 0], [w / 2, 0, -L], [w / 4, 0.03, -L], [1, 3, 0]);
+  paint(ctx, "oklch(0.8 0.15 90)", 0.7); Q(ctx, [-w / 4, 0.03, 0], [w / 4, 0.03, 0], [w / 4, 0.03, -L], [-w / 4, 0.03, -L], [0, 1, 0]);
+}
+// a hanging pothos: a steel cord from the ceiling, a white pot, vines trailing down. Origin = the floor under it.
+function pothos(ctx, p) {
+  const top = p.top ?? 6.1, y = top - (p.drop ?? 1.8);
+  paint(ctx, STEEL, 0.4, 0.8); rod(ctx, [0, y + 0.3, 0], [0, top, 0], 0.008, 4);
+  for (let i = 0; i < 3; i++) { const a = i * 2.094; rod(ctx, [Math.cos(a) * 0.14, y + 0.22, Math.sin(a) * 0.14], [0, y + 0.55, 0], 0.005, 3); }
+  paint(ctx, WHITE, 0.5); cyl(ctx, 0, y, 0, 0.11, 0.24, 10, 0.16);
+  ctx.albedo(null);
+  for (let v = 0; v < 7; v++) { const a = v * 0.9 + (p.seed ?? 0), L = 0.6 + ((v * 37) % 10) / 10 * 1.2, segs = Math.round(L / 0.12);
+    for (let j = 0; j < segs; j++) { const f = j / segs, r = 0.14 + f * 0.1, x = Math.cos(a + f * 0.6) * r, z = Math.sin(a + f * 0.6) * r, yy = y + 0.22 - f * L;
+      ctx.color(LEAF[(v + j) % 3]); leaf(ctx, [x, yy, z], [Math.cos(a + j), -0.3, Math.sin(a + j)], 0.1); } }
+}
+// a floating wall shelf with props. Back at z = 0, props face -Z. kind: supplies | gadgets | figures | canvases
+function floatshelf(ctx, p) {
+  const W = p.w ?? 1.0, y = p.y ?? 1.5, kind = p.kind ?? "supplies", D = 0.28;
+  paint(ctx, WALNUT, 0.5, 0, PLANK); box(ctx, -W / 2, y - 0.04, -D, W / 2, y, 0);
+  paint(ctx, "oklch(0.98 0.02 80)"); ctx.emissive(2.2, 1.7, 1.0); box(ctx, -W / 2 + 0.05, y - 0.046, -D + 0.02, W / 2 - 0.05, y - 0.04, -D + 0.05); ctx.emissive(null);
+  const cols = ["oklch(0.7 0.2 25)", "oklch(0.8 0.15 90)", "oklch(0.62 0.13 220)", "oklch(0.6 0.2 300)", "oklch(0.72 0.16 150)"];
+  if (kind === "supplies") { // brush jars, stacked sketchbooks, paint tubes
+    paint(ctx, "oklch(0.9 0.02 210)", 0.1); cyl(ctx, -W / 2 + 0.15, y, -0.14, 0.05, 0.14, 8);
+    paint(ctx, WALNUT, 0.6); for (let i = 0; i < 5; i++) rod(ctx, [-W / 2 + 0.15, y + 0.02, -0.14], [-W / 2 + 0.1 + i * 0.025, y + 0.3, -0.14 + (i % 2) * 0.04], 0.005, 3);
+    for (let i = 0; i < 4; i++) { paint(ctx, cols[i], 0.8); cbox(ctx, 0.02, y + i * 0.03, -0.14, 0.3, 0.028, 0.22); }
+    for (let i = 0; i < 5; i++) { paint(ctx, cols[(i + 2) % 5], 0.4); cbox(ctx, W / 2 - 0.3 + i * 0.05, y, -0.12, 0.035, 0.12, 0.035); }
+  } else if (kind === "gadgets") { // a vr headset, a camera, a little speaker
+    paint(ctx, "oklch(0.25 0.01 250)", 0.4); cbox(ctx, -W / 4, y, -0.14, 0.22, 0.1, 0.12); paint(ctx, "oklch(0.6 0.12 220)"); ctx.emissive(0.3, 0.8, 1.6); cbox(ctx, -W / 4, y + 0.03, -0.205, 0.18, 0.04, 0.005); ctx.emissive(null);
+    paint(ctx, "oklch(0.2 0 0)", 0.5); cbox(ctx, 0.08, y, -0.14, 0.14, 0.09, 0.08); cyl(ctx, 0.08, y + 0.02, -0.18, 0.035, 0.05, 8);
+    paint(ctx, "oklch(0.85 0.02 80)", 0.8); cyl(ctx, W / 2 - 0.15, y, -0.14, 0.07, 0.18, 12);
+  } else if (kind === "figures") { // reference figurines: a wooden manikin, a bust, a skull
+    paint(ctx, "oklch(0.78 0.07 70)", 0.7); rod(ctx, [-W / 3, y, -0.14], [-W / 3, y + 0.05, -0.14], 0.05, 6); rod(ctx, [-W / 3, y + 0.05, -0.14], [-W / 3, y + 0.2, -0.14], 0.012, 4); rod(ctx, [-W / 3, y + 0.2, -0.14], [-W / 3, y + 0.34, -0.14], 0.03, 6); cyl(ctx, -W / 3, y + 0.35, -0.14, 0.025, 0.05, 6);
+    rod(ctx, [-W / 3, y + 0.31, -0.14], [-W / 3 + 0.09, y + 0.24, -0.14], 0.01, 4); rod(ctx, [-W / 3, y + 0.31, -0.14], [-W / 3 - 0.07, y + 0.4, -0.14], 0.01, 4);
+    paint(ctx, "oklch(0.95 0.01 90)", 0.8); cbox(ctx, 0, y, -0.14, 0.12, 0.06, 0.12); cyl(ctx, 0, y + 0.06, -0.14, 0.05, 0.12, 8, 0.03); cyl(ctx, 0, y + 0.17, -0.14, 0.065, 0.1, 8, 0.05);
+    paint(ctx, "oklch(0.9 0.03 85)", 0.7); cyl(ctx, W / 3, y, -0.14, 0.07, 0.1, 8, 0.08); paint(ctx, "oklch(0.2 0 0)"); cbox(ctx, W / 3 - 0.03, y + 0.05, -0.215, 0.025, 0.025, 0.005); cbox(ctx, W / 3 + 0.03, y + 0.05, -0.215, 0.025, 0.025, 0.005);
+  } else { // canvas mockups leaning at the wall
+    for (let i = 0; i < 3; i++) { const w = 0.34 - i * 0.06, h = 0.42 - i * 0.07, x = -W / 2 + 0.22 + i * 0.3;
+      paint(ctx, "oklch(0.8 0.04 70)", 0.8); box(ctx, x - w / 2, y, -0.06 - i * 0.05, x + w / 2, y + h, -0.03 - i * 0.05);
+      paint(ctx, cols[(i * 2) % 5], 0.9); box(ctx, x - w / 2 + 0.02, y + 0.02, -0.064 - i * 0.05, x + w / 2 - 0.02, y + h - 0.02, -0.06 - i * 0.05); }
+  }
+}
+// a pegboard tool wall with hand tools, and hard tool cases stacked under it. Back at z = 0.
+function toolrack(ctx, p) {
+  const W = p.w ?? 1.4;
+  paint(ctx, "oklch(0.75 0.03 70)", 0.9); box(ctx, -W / 2, 0.9, -0.03, W / 2, 2.2, 0);
+  paint(ctx, "oklch(0.4 0.03 60)", 1); for (let x = -W / 2 + 0.08; x < W / 2; x += 0.1) for (let y = 0.98; y < 2.15; y += 0.1) box(ctx, x - 0.006, y - 0.006, -0.031, x + 0.006, y + 0.006, -0.03);
+  const tools = [["oklch(0.7 0.17 50)", 0.3], ["oklch(0.3 0 0)", 0.22], ["oklch(0.6 0.2 25)", 0.26], ["oklch(0.55 0.13 250)", 0.34], ["oklch(0.8 0.15 90)", 0.2]];
+  tools.forEach(([c, h], i) => { const x = -W / 2 + 0.2 + i * (W - 0.4) / 4; paint(ctx, ALU, 0.3, 0.9); cbox(ctx, x, 1.55, -0.05, 0.02, h, 0.015); paint(ctx, c, 0.5); cbox(ctx, x, 1.55 + h, -0.05, 0.05, 0.12, 0.03); });
+  paint(ctx, "oklch(0.3 0.01 250)", 0.5); rod(ctx, [-W / 2 + 0.15, 1.2, -0.06], [W / 2 - 0.15, 1.2, -0.06], 0.012, 4);
+  for (let i = 0; i < 6; i++) { paint(ctx, ["oklch(0.5 0.12 150)", "oklch(0.7 0.17 50)", "oklch(0.3 0.01 250)"][i % 3], 0.5); cbox(ctx, -W / 2 + 0.15 + i * 0.2, 1.08, -0.06, 0.03, 0.12, 0.03); }
+  // cases
+  const cs = [["oklch(0.7 0.17 50)", 0.6, 0.22], ["oklch(0.25 0.01 250)", 0.55, 0.26], ["oklch(0.8 0.15 90)", 0.45, 0.2]]; let y = 0;
+  for (const [c, w, h] of cs) { paint(ctx, c, 0.45); cbox(ctx, -0.1, y, -0.25, w, h, 0.4); paint(ctx, ALU, 0.3, 0.9); cbox(ctx, -0.1, y + h * 0.55, -0.455, 0.12, 0.03, 0.02); y += h; }
+}
+// a low storage bench / bookcase to tuck under the stair: cubbies with books, bins, a cushion on top. Back at z = 0.
+function bench(ctx, p) {
+  const W = p.w ?? 2.4, Hh = 0.6, D = 0.42, n = Math.round(W / 0.6);
+  paint(ctx, WALNUT, 0.5, 0, PLANK); box(ctx, -W / 2, Hh - 0.04, -D, W / 2, Hh, 0); box(ctx, -W / 2, 0, -D, W / 2, 0.06, 0); box(ctx, -W / 2, 0, -0.03, W / 2, Hh, 0);
+  for (let i = 0; i <= n; i++) { const x = -W / 2 + i * W / n; box(ctx, x - 0.02, 0, -D, x + 0.02, Hh, 0); }
+  const cols = ["oklch(0.6 0.15 25)", "oklch(0.55 0.1 250)", "oklch(0.75 0.12 90)", "oklch(0.5 0.1 150)", "oklch(0.85 0.03 80)"];
+  for (let i = 0; i < n; i++) { const x0 = -W / 2 + i * W / n + 0.04, w = W / n - 0.08;
+    if (i % 2) { paint(ctx, "oklch(0.8 0.04 80)", 1); cbox(ctx, x0 + w / 2, 0.06, -D / 2, w - 0.04, 0.44, D - 0.06); paint(ctx, WALNUT, 0.6); cbox(ctx, x0 + w / 2, 0.36, -D + 0.02, 0.12, 0.04, 0.02); }
+    else { let x = x0 + 0.01; let j = 0; while (x < x0 + w - 0.05) { const bw = 0.035 + (j % 3) * 0.012, bh = 0.3 + ((j * 7) % 4) * 0.035; paint(ctx, cols[(i + j) % 5], 0.8); box(ctx, x, 0.06, -D + 0.04, x + bw, 0.06 + bh, -0.05); x += bw + 0.004; j++; } }
+  }
+  paint(ctx, "oklch(0.55 0.08 40)", 1); box(ctx, -W / 2 + 0.05, Hh, -D + 0.02, W / 2 - 0.05, Hh + 0.07, -0.02);
+}
+// the paint corner under the front easel: a drop cloth with folds and splatter, paint cans, a palette on a stool. Origin = the easel's feet.
+function paintcorner(ctx, p) {
+  paint(ctx, "oklch(0.9 0.03 85)", 1); const R = 1.4;
+  for (let k = 0; k < 10; k++) { const a = k / 10 * 6.28, b = (k + 1) / 10 * 6.28, ra = R * (0.85 + (k % 3) * 0.08), rb = R * (0.85 + ((k + 1) % 3) * 0.08); ctx.tri(0, 0.008, 0.2, Math.cos(b) * rb, 0.008 + (k % 2) * 0.02, 0.2 + Math.sin(b) * rb, Math.cos(a) * ra, 0.008 + ((k + 1) % 2) * 0.02, 0.2 + Math.sin(a) * ra); }
+  const sp = ["oklch(0.65 0.2 25)", "oklch(0.8 0.15 90)", "oklch(0.6 0.12 200)", "oklch(0.55 0.2 300)"];
+  for (let i = 0; i < 14; i++) { const a = i * 2.4, r = 0.3 + (i % 5) * 0.2, s = 0.04 + (i % 3) * 0.03; paint(ctx, sp[i % 4], 0.9); cbox(ctx, Math.cos(a) * r, 0.03, 0.2 + Math.sin(a) * r, s, 0.003, s * 1.3); }
+  for (let i = 0; i < 4; i++) { const x = -0.9 + i * 0.22, z = 0.75 + (i % 2) * 0.18; paint(ctx, ALU, 0.3, 0.8); cyl(ctx, x, 0.02, z, 0.09, 0.18, 10); paint(ctx, sp[i], 0.5); cyl(ctx, x, 0.2, z, 0.085, 0.005, 10); }
+  paint(ctx, WALNUT, 0.5); cyl(ctx, 0.85, 0, 0.55, 0.16, 0.02, 8); for (const a of [0, 2.1, 4.2]) rod(ctx, [0.85 + Math.cos(a) * 0.14, 0, 0.55 + Math.sin(a) * 0.14], [0.85 + Math.cos(a) * 0.1, 0.6, 0.55 + Math.sin(a) * 0.1], 0.015, 4);
+  cyl(ctx, 0.85, 0.6, 0.55, 0.17, 0.04, 12);
+  paint(ctx, "oklch(0.75 0.08 70)", 0.6); cyl(ctx, 0.85, 0.64, 0.55, 0.15, 0.012, 12);
+  for (let i = 0; i < 6; i++) { const a = i; paint(ctx, sp[i % 4], 0.7); cyl(ctx, 0.85 + Math.cos(a) * 0.09, 0.652, 0.55 + Math.sin(a) * 0.09, 0.022, 0.008, 6); }
+}
+// a warm arc lamp: marble foot, a steel arc, a brass shade glowing. The shade hangs at -Z.
+function arclamp(ctx) {
+  paint(ctx, "oklch(0.93 0.01 90)", 0.2); cyl(ctx, 0, 0, 0, 0.2, 0.12, 12);
+  paint(ctx, STEEL, 0.3, 0.9); let prev = [0, 0.12, 0]; for (let i = 1; i <= 8; i++) { const a = i / 8 * Math.PI * 0.62, q = [0, 0.12 + Math.sin(a) * 1.9, -(1 - Math.cos(a)) * 1.45]; rod(ctx, prev, q, 0.018, 6); prev = q; }
+  paint(ctx, "oklch(0.72 0.12 80)", 0.3, 0.9); cyl(ctx, prev[0], prev[1] - 0.35, prev[2], 0.26, 0.28, 14, 0.06);
+  paint(ctx, "oklch(0.98 0.05 85)"); ctx.emissive(4, 2.8, 1.4); cyl(ctx, prev[0], prev[1] - 0.34, prev[2], 0.22, 0.01, 14);
+}
+// neon art: a glowing brush-stroke squiggle and a heart, on a clear backer. Back at z = 0.
+function neon(ctx, p) {
+  const s = p.s ?? 1.6, y0 = p.y ?? 0; paint(ctx, "oklch(0.9 0.02 210)", 0.1); ctx.color("oklch(0.9 0.02 210)", 0.18); box(ctx, -s * 0.6, y0 - 0.1, -0.02, s * 0.6, y0 + s * 0.5, 0);
+  const col = [["oklch(0.8 0.18 350)", [3.4, 0.7, 2.2]], ["oklch(0.85 0.14 200)", [0.5, 2.4, 3.4]], ["oklch(0.9 0.15 80)", [3.4, 2.4, 0.6]]];
+  for (let l = 0; l < 3; l++) { const [c, e] = col[l]; ctx.albedo(null); ctx.color(c); ctx.emissive(...e); let prev = null;
+    for (let i = 0; i <= 18; i++) { const f = i / 18, q = [(-0.5 + f) * s, y0 + s * 0.2 + Math.sin(f * 9 + l * 1.7) * s * 0.1 * (1 + l * 0.3) + l * 0.06, -0.05]; if (prev) rod(ctx, prev, q, 0.013, 4); prev = q; } }
+  ctx.emissive(null);
+}
+// a slatted walnut partition on a steel foot: it zones the desk from the lounge
+function partition(ctx, p) {
+  const W = p.w ?? 1.8, Hh = 2.0; paint(ctx, STEEL, 0.35, 0.8); box(ctx, -W / 2, 0, -0.2, W / 2, 0.05, 0.2);
+  paint(ctx, WALNUT, 0.5, 0, PLANK); for (let x = -W / 2 + 0.04; x < W / 2; x += 0.11) box(ctx, x - 0.03, 0.05, -0.03, x + 0.03, Hh, 0.03);
+  paint(ctx, STEEL, 0.35, 0.8); box(ctx, -W / 2, Hh, -0.035, W / 2, Hh + 0.03, 0.035);
+  ctx.albedo(null); ctx.color(LEAF[1]); for (let i = 0; i < 10; i++) leaf(ctx, [-W / 2 + 0.1 + i * 0.17, Hh + 0.03, 0], [0.2, -0.8, (i % 2 ? 1 : -1) * 0.4], 0.14);
+}
 export function geometry(ctx) {
   const p = ctx.params ?? {}, item = p.item;
   ctx.flat();
-  const fn = { shell, screenwall, easel, frame, robotarm, holo, desk, shelf, lounge }[item];
+  const fn = { shell, screenwall, easel, frame, robotarm, holo, desk, shelf, lounge, rug, planters, mat, cable, pothos, floatshelf, toolrack, bench, paintcorner, arclamp, neon, partition }[item];
   if (!fn) return;
   fn(ctx, p);
 }
 export function collider(ctx) {
-  const item = ctx.params?.item;
+  const item = ctx.params?.item, p2w = () => ctx.params?.w ?? 2.4;
+  if (item === "planters") { for (const deg of [30, 90, 150, 210, 270, 330]) { if ((ctx.params?.skip ?? [270]).includes(deg)) continue; const a = deg * Math.PI / 180, R = ctx.params?.r ?? 2.35; const c = [Math.cos(a) * R, Math.sin(a) * R]; box(ctx, c[0] - 0.4, 0, c[1] - 0.4, c[0] + 0.4, 0.5, c[1] + 0.4); } return; }
   if (item === "shell") {
     // the root bench is a seat you can step onto
     const hex = (ap, k) => { const a = (60 * k) * Math.PI / 180, r = ap / Math.cos(Math.PI / 6); return [Math.cos(a) * r, Math.sin(a) * r]; };
     for (let k = 0; k < 6; k++) { const a = hex(0.9, k), b = hex(0.9, k + 1), c = hex(1.52, k + 1), d = hex(1.52, k); Q(ctx, [a[0], 0.45, a[1]], [b[0], 0.45, b[1]], [c[0], 0.45, c[1]], [d[0], 0.45, d[1]], [0, 1, 0]); Q(ctx, [d[0], 0, d[1]], [c[0], 0, c[1]], [c[0], 0.45, c[1]], [d[0], 0.45, d[1]], [c[0] + d[0], 0, c[1] + d[1]]); }
     return;
   }
-  const B = { robotarm: [0.9, 0.5, 0.9, 0, 0], holo: [1.1, 0.62, 1.1, 0, 0], desk: [2.2, 0.95, 0.8, 0, 0], shelf: [3.6, 2.2, 0.5, 0, 0.25], lounge: [3.5, 0.5, 0.95, 0, 0], easel: [1.0, 1.2, 0.6, 0, 0.3] }[item];
+  const B = { robotarm: [0.9, 0.5, 0.9, 0, 0], holo: [1.1, 0.62, 1.1, 0, 0], desk: [2.2, 0.95, 0.8, 0, 0], shelf: [3.6, 2.2, 0.5, 0, 0.25], lounge: [3.5, 0.5, 0.95, 0, 0], easel: [1.0, 1.2, 0.6, 0, 0.3], toolrack: [0.65, 0.68, 0.42, -0.1, -0.25], bench: [p2w(), 0.6, 0.42, 0, -0.21], partition: [1.8, 2.0, 0.1, 0, 0], arclamp: [0.4, 0.12, 0.4, 0, 0] }[item];
   if (!B) return null;
   const [w, h, d, ox, oz] = B; box(ctx, ox - w / 2, 0, oz - d / 2, ox + w / 2, h, oz + d / 2);
 }
