@@ -167,7 +167,7 @@ export function update(ctx) {
     ctx.sleep(Math.max(1, (s.nextAt - now) / 1000));
     return;
   }
-  const arc = ((now - (s.greet ? s.greet.t0 : f.t0)) / 1000) * SAGE.speed;
+  const arc = (((s.greet ? s.greet.t0 : now) - f.t0) / 1000) * SAGE.speed;
   if (!s.greet && arc > f.total) { land(ctx); ctx.sleep(Math.max(1, (s.nextAt - now) / 1000)); return; }
   const o = pose(ctx, arc, f.total);
   if (greet(ctx, d, s.flight, arc, o)) return;
