@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "basedOnSpecVersion": 390,
-  "updatedAt": "2026-09-27T06:29:50.487Z",
-  "summary": "The First Den is a forest world centered on Spawn: a multi-level cob home and its grounds sit within configured terrain, authored settlements and routes toward Lumenvale and Hearthmere. Shared terrain, builder and interaction modules support the scenery and residents; Violet and the lake rowboat add mountable flight and boating to the player experience.",
+  "basedOnSpecVersion": 419,
+  "updatedAt": "2026-09-27T06:50:41.262Z",
+  "summary": "The First Den is a forest world centered on Spawn, with the owner's home and grounds connected by authored highways to the cities of Lumenvale and Hearthmere. Terrain configuration and procedural city builders shape the wider world; shared player interactions, mounts, courier rides and a player travel list connect its places.",
   "scriptPaths": [
     "scripts/arrival.js",
     "scripts/camera.js",
@@ -15,6 +15,7 @@
     "scripts/coop-flock.js",
     "scripts/coop-gate.js",
     "scripts/coop-nest.js",
+    "scripts/courier.js",
     "scripts/critter-press.js",
     "scripts/delete-mode.js",
     "scripts/den-can.js",
@@ -83,6 +84,7 @@
     "scripts/gen/grand-gate.js",
     "scripts/gen/grounds-flags.js",
     "scripts/gen/grounds-kit.js",
+    "scripts/gen/hearth-city.js",
     "scripts/gen/hearth-civic.js",
     "scripts/gen/hearth-folk.js",
     "scripts/gen/hearth-house.js",
@@ -124,6 +126,7 @@
     "scripts/gen/lib-quadruped.js",
     "scripts/gen/lumen-civic.js",
     "scripts/gen/lumen-folk.js",
+    "scripts/gen/lumen-grand.js",
     "scripts/gen/lumen-house.js",
     "scripts/gen/lumen-kit.js",
     "scripts/gen/lumen-tower.js",
@@ -185,6 +188,7 @@
     "scripts/lib/data/den-folk.js",
     "scripts/lib/data/dragon.js",
     "scripts/lib/data/fauna-small.js",
+    "scripts/lib/data/hearth-city.js",
     "scripts/lib/data/hearth-folk.js",
     "scripts/lib/data/hillside.js",
     "scripts/lib/data/home-day.js",
@@ -205,6 +209,7 @@
     "scripts/lib/data/rowboat.js",
     "scripts/lib/data/secrets.js",
     "scripts/lib/data/square-door.js",
+    "scripts/lib/data/travel.js",
     "scripts/lib/data/window-garden.js",
     "scripts/lib/dragon-clips.js",
     "scripts/lib/dragon-rider.js",
@@ -272,71 +277,69 @@
     "scripts/tex-valley-gravel.js",
     "scripts/tex-valley-shoreline.js",
     "scripts/tower-warden.js",
+    "scripts/travel.js",
     "scripts/ui.js",
     "scripts/warden-crystal.js",
     "scripts/wizard-portal.js"
   ],
   "places": [
-    "places/main - live forest place: configured terrain, river, vegetation, Spawn/home grounds and authored routes toward Lumenvale and Hearthmere",
-    "places/main/cells/x0z0.scene - Spawn hub: cob house, creek and grounds, lake/dock, wizard tower, Violet with four mount pads, rowboat, and west-road courier-post blueprint",
-    "places/main/cells/x0z-1.scene + x-1z0.scene - neighboring structures and actors, including outlying tower/warden placements",
-    "places/main/cells/objects.scene - shared authored object placements for main",
-    "places/main/cells/x-1z-1.scene + x1z-1.scene + x1z0.scene + x0z-1.scene + x0z1.scene - neighboring authored environment, route and wildlife placements",
-    "places/main/config.yaml - atmosphere, terrain/materials, site and clearing marks, pale-cobble east/west highways and procedural decoration bindings"
+    "places/main - single configured forest world: Spawn/home, lake and wizard tower, highways, Lumenvale to the east and walled Hearthmere to the west",
+    "places/main/cells/x0z0.scene - Spawn hub: home and grounds, creek, lake/dock, wizard tower, Violet and mount pads, rowboat",
+    "places/main/cells/objects.scene - shared placements including road dressing and the Hearthmere/Lumenvale authored city structures",
+    "places/main/cells/*.scene - fixed structures, actors and relationships distributed across main's streamed cells",
+    "places/main/config.yaml - forest terrain plus path/clearing/flattening marks and decoration bindings; grades road corridors and city approaches"
   ],
   "roots": [
-    "world.config.yaml - world entry/default place, player and camera templates, lighting, arrival and UI",
-    "templates/player.js#player - player movement, gait, home interaction and delete-mode behaviors",
+    "world.config.yaml - world defaults, player/camera templates, input actions, lighting, arrival and UI",
+    "templates/player.js#player - player movement, locomotion, home interaction, delete mode and travel behaviors",
     "templates/camera.js#camera - custom first-/third-person camera",
-    "places/main/config.yaml - forest terrain, Spawn gravity, river, site/path marks and seeded vegetation",
-    "places/main/cells/x0z0.scene#cob-house - procedural multi-level home around the tree, with cellar through roof deck",
-    "places/main/cells/x0z0.scene#grounds-plan + #grand-avenue - visible flagstone paths connect plaza, home grounds and outbuildings",
-    "places/main/cells/x0z0.scene#purple-dragon-blueprint - Violet's resting home by the wizard tower; four nearby press pads target her",
-    "places/main/cells/x0z0.scene#lake-rowboat - kinematic mountable boat at the lake dock"
+    "places/main/config.yaml - forest terrain, river, site/path marks, clearing and seeded vegetation",
+    "places/main/cells/x0z0.scene#cob-house - procedural multi-level home around the tree, cellar through roof deck",
+    "places/main/cells/x0z0.scene#purple-dragon-blueprint and #lake-rowboat - Violet's mount home and the lake's mountable boat",
+    "scripts/gen/hearth-city.js and scripts/gen/lumen-grand.js - procedural builder entry points used by authored city rows"
   ],
   "shared": [
     "scripts/forest-terrain.js - main heightAt/materialAt(ctx) contract for terrain and terrain-relative placements",
     "scripts/gen/forest-plant.js + scripts/gen/valley-mesh.js - seeded vegetation builders reused by decoration layers",
     "scripts/lib/road-solid.js - shared solid geometry for bridges and roadside features",
-    "scripts/lib/yard-kit.js - geometry/material primitives reused by yard and garden generators",
     "scripts/lib/home-interaction.js + scripts/lib/data/home-feel.js - player press targeting and interaction tuning",
-    "scripts/lib/data/player.yml + scripts/lib/data/ropes.js - player movement, flight and rope tuning",
-    "scripts/lib/dragon-rider.js - shared mount/seat/step-off logic; dragon and rowboat use mount input, seat placement and camera restoration",
-    "scripts/lib/data/dragon.js + scripts/lib/dragon-clips.js and scripts/lib/data/purple-dragon.js + purple-dragon-clips.js - separate tuning and animation clips for jade and Violet dragons"
+    "scripts/lib/dragon-rider.js - mount request, seat, dismount and camera handoff shared by Violet, rowboat and courier horse",
+    "scripts/lib/data/hearth-city.js - Hearthmere district, avenue, canal and layout data consumed by hearth-city builder",
+    "scripts/lib/data/travel.js - shared destination list/tuning read by travel behavior and UI",
+    "scripts/lib/data/courier.js - courier row IDs, city routes/destinations and ride tuning read by courier, player interaction and UI"
   ],
   "notableExports": [
     "scripts/forest-terrain.js - GROUND, SITES, LAKE, heightAt(ctx), materialAt(ctx)",
     "scripts/player.js - onSpawn(ctx), onInput(ctx,input), update(ctx,dt); scripts/camera.js - finiteNumber(value,fallback), update(ctx,dt)",
-    "scripts/gen/cob-house.js - HOUSE, holesFor, geometry(ctx), collider(ctx); scripts/gen/cob-furnish.js - DEFAULTS, geometry(ctx), collider(ctx)",
-    "scripts/gen/wizard-tower.js - TOWER, geometry(ctx), collider(ctx); scripts/wizard-portal.js - onTriggerEnter(ctx,other)",
-    "scripts/purple-dragon.js - Violet mount behavior; scripts/gen/purple-dragon.js - dragon geometry/collider; scripts/lib/data/purple-dragon.js - PD tuning",
-    "scripts/rowboat.js - mountable boat behavior; scripts/lib/data/rowboat.js - BOAT tuning",
-    "scripts/lib/dragon-rider.js - wantMount(ctx,target), dragonRide(ctx); scripts/home-player-feel.js - player home/interact feel handlers",
-    "scripts/gen/road-lamps.js, road-rail.js, courier-horse.js, courier-post.js - procedural highway/courier geometry builders"
+    "scripts/gen/hearth-city.js - geometry(ctx), collider(ctx); scripts/gen/lumen-grand.js - geometry(ctx), collider(ctx)",
+    "scripts/courier.js - update(ctx,dt), ears.press and ears.courierRide; scripts/travel.js - onInput(ctx,input)",
+    "scripts/lib/dragon-rider.js - wantMount(ctx,target), dragonRide(ctx); scripts/home-player-feel.js - player interaction handlers",
+    "scripts/ui.js - HUD including courier picker/status and travel list; templates/player.js#player attaches scripts/travel.js",
+    "scripts/purple-dragon.js - Violet mount behavior; scripts/gen/purple-dragon.js - dragon geometry/collider; scripts/rowboat.js - boat behavior"
   ],
   "ownership": [
-    "places/main/config.yaml + scripts/forest-terrain.js - terrain seed/material/site marks, scatter, and derived ground height/material; marks grade paths, lawns, creek and clearings",
-    "places/main/cells/*.scene - authored row IDs, locations, tags, initial state and fixed structure/actor relationships",
+    "places/main/config.yaml + scripts/forest-terrain.js - terrain seed/material/site marks, scatter and derived ground height/material; marks grade roads, lawns, creek and clearings",
+    "places/main/cells/*.scene - authored row IDs, positions, tags, initial state and fixed structure/actor relationships",
     "scripts/player.js + scripts/lib/data/player.yml - player movement intent, velocity, jump, flight and rope behavior; high-frequency scratch in ctx.session",
-    "scripts/humanoid-locomotion.js + scripts/camera.js - player yaw/gait channels and camera view/eye/local-player visibility",
-    "scripts/fauna-ground.js / scripts/fauna-small.js, scripts/fairies.js, scripts/pollinators.js - movement/activity and animation state for their tagged populations",
-    "scripts/dune.js; scripts/tower-warden.js + wardens.yml; scripts/stone-golem.js + golem.yml - Dune lifecycle, warden patrol/greetings, and Mossback patrol/interaction state respectively",
-    "scripts/purple-dragon.js + scripts/lib/data/purple-dragon.js - Violet's phase, flight/rider/home state and tuning; scripts/rowboat.js + rowboat.js data - boat motion and interaction tuning",
-    "scripts/lib/dragon-rider.js - shared mount request/seat/dismount handoff and temporary third-person camera state; mounted entity owns its rider/seat/drop data"
+    "scripts/home-player-feel.js - player seat/mount requests and courier picker state courierPick; scripts/lib/dragon-rider.js coordinates mountWant, mountedOn and rider seating handoff",
+    "scripts/courier.js + scripts/lib/data/courier.js - horse route/ride phase, rider, seat, dropAt and return; place.state.courier announces busy city/rider",
+    "scripts/travel.js + scripts/lib/data/travel.js - player travelOpen/travelAt and destination definitions; UI renders but does not own these states",
+    "scripts/purple-dragon.js + scripts/lib/data/purple-dragon.js - Violet flight/rider/home state; scripts/rowboat.js + rowboat data - boat motion and interaction tuning",
+    "scripts/ui.js - rendered HUD presentation from player state, place courier state and shared destination/tuning data"
   ],
   "flows": [
     "places/main/config.yaml terrain generator + seed -> scripts/forest-terrain.js heightAt/materialAt(ctx) -> engine terrain, river channels and forest material bands",
-    "places/main/config.yaml site/path/river marks + decoration layers -> terrain clearing, grading, lawn material and seeded forest/lawn vegetation; scene rows separately draw paths and structures",
-    "road-east/road-west marks in places/main/config.yaml -> pale-cobble terrain road corridors and scatter clearing toward Lumenvale/Hearthmere; authored cells provide discrete road dressing",
+    "places/main/config.yaml site/path/river marks + decoration layers -> terrain clearing, grading, lawn material and seeded vegetation; scene rows separately draw visible roads and structures",
+    "road-east/road-west and city path marks -> graded terrain corridors and scatter clearing; authored cells place road fences, lamps, bridges and city geometry",
     "move/look/jump/camView input -> scripts/player.js -> movement, jump, flight and camMode; place gravity applies to player body",
-    "movement near rope coordinates -> scripts/player.js + lib/data/ropes.js -> climb/slide velocity and deck step-in; player body/camMode -> camera view and visibility",
-    "interact press -> scripts/home-player-feel.js + lib/home-interaction.js -> nearest aligned press; pet press writes petAt/petBy for fauna, catio and pasture responses",
-    "player mount request -> scripts/lib/dragon-rider.js wantMount -> mount rider/seat state and parent transform; mount rider logic handles step-off and restores camMode",
-    "four violet-pad-* pressTo purple-dragon-blueprint -> player mount request -> scripts/purple-dragon.js Violet rest/ride/tour/landing phases; scripts/lib/purple-dragon-clips.js supplies rest, flap and glide animation",
-    "mounted player input -> scripts/rowboat.js + scripts/lib/data/rowboat.js -> kinematic rowboat movement, turn, water behavior and near-shore dismount",
-    "Dune press ear + scripts/dune.js update -> treat queue/spawn and Dune roam, eat, wag and pet responses using dog clips",
-    "fairy-keeper + pollinator-keeper -> scripts/fairies.js and scripts/pollinators.js read tuning and tagged rows -> terrain-following flight, activity clips, greetings and effects",
-    "player enters wizard-portal-up/down trigger -> scripts/wizard-portal.js reads state.to + wizard-tower.yml -> teleport to tower deck/outside door, player wizardPortalAt cooldown and portal FX"
+    "interact press -> scripts/home-player-feel.js -> nearest seat/mount or aligned press; pet press writes petAt/petBy for fauna and other responders",
+    "player mountWant -> scripts/lib/dragon-rider.js -> mounted entity seat/rider state and parent transform; mount behavior controls step-off and camera restoration",
+    "violet-pad pressTo -> scripts/purple-dragon.js -> Violet rest/ride/tour/landing phases; dragon-rider seats player and purple-dragon-clips supplies animation",
+    "mounted player input -> scripts/rowboat.js + rowboat data -> boat motion, water handling and shore dismount",
+    "horse press -> scripts/courier.js ears.press -> player.state.courierPick and greeting; home-player-feel handles city/cancel input and emits courierRide to horse",
+    "courierRide -> scripts/courier.js reads road-<city> terrain mark at ride time -> route movement and ground sampling -> rider dropAt at gate; place.state.courier informs nearby UI",
+    "player presses J / destination action -> scripts/travel.js onInput -> travel data destination, terrain height and teleport; scripts/ui.js displays list/status and emits travelGo",
+    "fairy-keeper + pollinator-keeper -> scripts/fairies.js and scripts/pollinators.js -> tuning/tagged rows, terrain-following flight, clips, greetings and effects"
   ],
   "behaviorFamilies": [
     "places/main/config.yaml decoration layers + scripts/gen/forest-plant.js / valley-mesh.js - seeded forest plants, trees, shrubs, ferns, reeds and lawn flora varied by layer, kind and terrain",
@@ -344,9 +347,9 @@
     "scripts/gen/road-bridge.js + scripts/lib/road-solid.js - reusable bridge geometry/collider varied by dimensions and seed",
     "scripts/gen/deer-fence.js - perimeter runs and gates vary by points, width and style; stone style builds coursed limestone wall, coping, moss/ivy and piers",
     "scripts/gen/animal-{bear,deer,fox,wolf}.js + fauna-ground.js and scripts/gen/critter-{bird,duck,rabbit,squirrel}.js + fauna-small.js - shared large/small fauna behavior varied by species, geometry and animation",
-    "scripts/gen/flower-bed.js + lawn-sprig.js + garden-statue.js - garden dressing varied by shape, dimensions, palette and plant/statue kind",
-    "scripts/gen/grand-avenue.js, grand-gate.js + grand-gate-leaf.js and warden-tower.js + tower-warden.js - repeated avenue/gate/tower structures and proximity/patrol actors varied by dimensions, orientation and actor",
-    "scripts/lib/dragon-rider.js - shared mount seating and step-off used by dragon/boat mounts; behavior and seat/drop state vary by mount"
+    "scripts/gen/hearth-city.js + scripts/lib/data/hearth-city.js - Hearthmere wall, gatehouse, keep, districts, avenue and canal; layout and district data drive a single assembled city builder",
+    "scripts/gen/lumen-grand.js - Lumenvale grand structures, canal and procedural lots varied by kind, parameters and layout",
+    "scripts/lib/dragon-rider.js - shared mount seating and step-off used by Violet, rowboat and courier horse; mount-specific seat/drop state varies"
   ],
   "probableOrphans": [
     "scripts/flat-terrain.js - no current place config selects it; main uses forest-terrain",
@@ -354,10 +357,10 @@
   ],
   "migrationNotes": [
     "forest-terrain.js heightAt/materialAt take a context object; main's river is at sea level y=0, ground is around y=0.5, and Spawn clearing is centered near (0,-3).",
-    "Keep places/main/config.yaml material IDs, clear/flatten marks and decoration bindings coordinated with scene placement; Spawn/home grounds are around (0,-27), while picnic, quad garden and wizard tower are separate sites.",
-    "Configured terrain path marks grade/materialize terrain and clear scatter; scene path generators such as grounds-plan draw visible flagstone and do not replace those terrain jobs.",
-    "The den-creek follows authored river points through Spawn under creek-bridge-avenue toward the back pond; den-creek-banks and creek-banks scene dressing are separate and should track that course.",
-    "road-east and road-west are long terrain paths ending near z=-235 and z=-465, respectively, with cobblepale material and separate verge clearing; keep their points aligned if editing highway dressing.",
-    "dragon-rider accepts targets tagged dragon or mount (pressTo can redirect to the mount); mounted target state supplies seat/seatYaw/thirdPerson/dropAt, so preserve this interface for Violet and rowboat."
+    "Keep places/main/config.yaml material IDs, clear/flatten marks and decoration bindings coordinated with scene placement; Spawn/home grounds are around (0,-27), while picnic, quad garden, wizard tower and cities are separate sites.",
+    "Configured terrain path marks grade/materialize roads and clear scatter; scene path generators draw visible paving and do not replace the terrain jobs.",
+    "The den-creek follows authored river points through Spawn under creek-bridge-avenue toward the back pond; keep den-creek-banks and creek-banks dressing aligned separately.",
+    "Courier routes read road-<city> marks at ride time; keep COURIER city keys/road names, road mark names and destination centers coordinated. Courier owns place.state.courier while horse is away.",
+    "dragon-rider expects targets tagged dragon or mount (pressTo may redirect); mounted target supplies seat/seatYaw/thirdPerson/dropAt. Travel destinations use x/z plus terrain-derived landing height unless an explicit y is set."
   ]
 }
