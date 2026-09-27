@@ -1,0 +1,69 @@
+# The districts' folk: 20 authored characters (scripts/gen/folk.js params.who), one manager (scripts/folk-crowd.js).
+# Clips live in anim/folk.yml. A new person is one roster row; a new district is one districts row.
+clips: anim/folk.yml
+visibleRange: 110            # m: bodies and name tags
+nameSize: 0.22
+nameLift: 0.28               # m over the model's own height
+reach: 3.5                   # E: nearest folk to the presser within this answers
+pressSecs: 4
+waveSecs: 1.6                # a wave before the talk gesture when pressed
+wakeRadius: 120              # a district with no player this near stands still
+turnRate: 6
+speed: [0.9, 1.25]           # m/s walking
+restSecs: [3, 9]             # idle between errands
+stuckSecs: 3                 # moved < stuckDist in this long: pick another goal
+stuckDist: 0.35
+talkChance: 0.35             # a rest spent gesturing instead of idling
+spawnLift: 0.05
+hold: [witch, apprentice, fisher, shepherdess, watch]   # right hand keeps its pole upright
+districts:
+  market: { box: [-19, 19, 81, 119], avoid: market }
+  magic: { at: [82, 78], r: 16 }
+  garden: { at: [-82, 78], r: 16 }
+  royal: { at: [0, 196], r: 14 }
+avoid:
+  market:                    # from town-crowd.yml: fountain disc + the three market islands (+margin)
+    circle: [0, 100, 7.2]
+    rects: [[-16.2, 100.3, 8.4, 13.4], [15.8, 99.6, 8.4, 17.4], [-14.2, 85.5, 10.4, 11.4]]
+roster:
+  - { id: folk-smith, who: smith, name: Brom the Smith, district: market, at: [-6, 112] }
+  - { id: folk-baker, who: baker, name: Dora the Baker, district: market, at: [6, 90] }
+  - { id: folk-merchant, who: merchant, name: Master Pell, district: market, at: [8, 116] }
+  - { id: folk-kid, who: kid, name: Scamp, district: market, at: [-4, 84] }
+  - { id: folk-ranger, who: ranger, name: Wren, district: market, at: [3, 110] }
+  - { id: folk-bard, who: bard, name: Lark the Bard, district: fountain, at: [-5.5, 102], y: 0.45, faceAway: [0, 100] }
+  - { id: folk-fisher, who: fisher, name: Old Gill, district: dock, at: [4.3, -60], y: 0.92, faceWater: true }
+  - { id: folk-witch, who: witch, name: Granny Nettle, district: magic, at: [78, 72] }
+  - { id: folk-apprentice, who: apprentice, name: Tobin, district: magic, at: [86, 82] }
+  - { id: folk-alchemist, who: alchemist, name: Vesper, district: magic, at: [88, 72] }
+  - { id: folk-tinkerer, who: tinkerer, name: Cogsworth, district: magic, at: [76, 84] }
+  - { id: folk-beekeeper, who: beekeeper, name: Hester, district: garden, at: [-86, 72] }
+  - { id: folk-flowergirl, who: flowergirl, name: Posy, district: garden, at: [-78, 82] }
+  - { id: folk-gardener, who: gardener, name: Old Rook, district: garden, at: [-88, 84] }
+  - { id: folk-shepherdess, who: shepherdess, name: Elsie, district: garden, at: [-76, 72] }
+  - { id: folk-herald, who: herald, name: Herald Quill, district: royal, at: [0, 188] }
+  - { id: folk-knight, who: knight, name: Sir Aldric, district: royal, at: [-6, 196] }
+  - { id: folk-lady, who: lady, name: Lady Rosalind, district: royal, at: [5, 200] }
+  - { id: folk-cleric, who: cleric, name: Brother Anselm, district: royal, at: [-3, 204] }
+  - { id: folk-watch, who: watch, name: Warden Hobb, district: royal, at: [8, 190] }
+lines:
+  smith: ["Mind the sparks, friend.", "A good hinge outlives the door.", "Bring me iron and I'll bring you a blade."]
+  herald: ["Hear ye! The crown bids you welcome!", "Proclamation: the fair runs all week.", "The King's road is open to all."]
+  baker: ["Fresh loaves, still warm!", "Up since three, kneading.", "Try the honey bun. You'll be back."]
+  witch: ["Heh heh, lost, dearie?", "Newt eyes are dear this season.", "My broom's older than your grandmother."]
+  apprentice: ["I almost cast a fireball today!", "Master says the staff chooses you.", "Is it glowing? It's supposed to glow."]
+  knight: ["The realm is safe while I stand.", "Keep to the road after dark.", "Honour first, lunch second."]
+  merchant: ["Everything has a price, dear friend.", "Silk from the south, finest you'll find.", "Coin's heavy today. Business is good."]
+  beekeeper: ["Slow movements, the bees are sleepy.", "Clover honey this month.", "They only sting the rude ones."]
+  flowergirl: ["A daisy for you? Only a copper!", "I picked these at dawn.", "Roses for the lady in your life?"]
+  fisher: ["Shh. They're biting.", "Caught one THIS big last spring.", "The lake gives when she wants to."]
+  bard: ["A song for a coin!", "I'm composing a ballad about you.", "Three chords and the truth."]
+  gardener: ["Talk to your tomatoes. They listen.", "Rain's coming Thursday. I feel it in my knees.", "Weeds are just flowers nobody loves."]
+  ranger: ["Wolves by the north woods. Stay sharp.", "Tracks lead east of the lake.", "The forest remembers."]
+  cleric: ["Blessings of the dawn upon you.", "The bells ring at noon.", "Peace be on your travels."]
+  kid: ["Bet you can't catch me!", "I found a shiny button!", "Is it true you've got a dragon?"]
+  lady: ["Such a charming little town.", "Do mind my hem, darling.", "The ball is on Saturday. You'll come?"]
+  alchemist: ["Don't touch that. Really.", "Almost gold. Almost.", "Smells like progress!"]
+  tinkerer: ["Hand me that sprocket?", "It clicks, it whirs, it mostly works.", "Built a clockwork mouse once. It ran off."]
+  shepherdess: ["Have you seen a lost lamb?", "My flock grazes by the west pasture.", "Wool's soft this year."]
+  watch: ["All's well. So far.", "Lantern's lit, eyes are open.", "Move along, citizen. Kindly."]
