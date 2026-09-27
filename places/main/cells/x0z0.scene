@@ -2699,9 +2699,9 @@ far-haze-ring:
   castShadow: false
   feetPosition: {x: 0, y: -60, z: -26}
   id: far-haze-ring
-  material: {kind: scripted, params: {base: 0.55, ease: 1.6, floor: 0, glow: 0.95, hazeColor: oklch(0.9 0.02 230), top: 380}, script: scripts/material-haze-ring.js}
+  material: {kind: scripted, params: {base: 0.72, ease: 1.35, floor: 40, glow: 1, hazeColor: oklch(0.9 0.02 230), top: 620}, script: scripts/material-haze-ring.js}
   physics: none
-  primitive: {kind: scripted, params: {height: 480, radius: 1850}, script: scripts/gen/haze-ring.js}
+  primitive: {kind: scripted, params: {height: 720, radius: 1850}, script: scripts/gen/haze-ring.js}
   receiveShadow: false
   tags: [backdrop, far-haze]
   visibleRange: {max: 40000}
