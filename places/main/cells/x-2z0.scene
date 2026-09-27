@@ -7,3 +7,20 @@ bridge-w0:
   rotation: {lookAt: {x: -288.5, y: 0.5, z: -16.1}}
   tags: [road-bridge]
   visibleRange: {max: 700}
+milestone-west-1:
+  feetPosition: {x: -220.71743667970833, y: {terrain: 0}, z: -7.617789682959357}
+  id: milestone-west-1
+  physics: static
+  primitive: {kind: scripted, params: {kind: milestone}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -221.403912456956, y: 0.5, z: -3.880310451277632}}
+  tags: [road-dressing, milestone, road-west]
+  ui: "<div face=\"front\" offset=\"0.004m\" style=\"width:480px;height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Georgia,serif;color:#4f3828;text-align:center\"><div style=\"font-size:78px\">Hearthmere</div><div style=\"font-size:120px;font-weight:bold\">0.9 km</div></div>"
+  visibleRange: {max: 150}
+waylamp-west-4:
+  feetPosition: {x: -215.24168837464507, y: {terrain: 0}, z: 1.3184388559488291}
+  id: waylamp-west-4
+  physics: static
+  primitive: {kind: scripted, params: {hue: 195, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {yaw: 35}
+  tags: [road-dressing, waylamp, road-west]
+  visibleRange: {max: 200}

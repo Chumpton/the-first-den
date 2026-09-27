@@ -1,0 +1,45 @@
+# spawn-scene v2 yaml x-4z0
+rest-bench-west:
+  behavior: scripts/road-rest.js
+  feetPosition: {x: -550.0642701463094, y: {terrain: 0}, z: -60.227669394746115}
+  id: rest-bench-west
+  physics: static
+  primitive: {kind: scripted, params: {kind: bench}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -550.6899932574094, y: 0.5, z: -55.06545372817083}}
+  state: {say: "You sit a while. Birdsong, warm stone, halfway there.", sound: /cdn/moodboard-lowpoly-cozy/sfx-wooden-bench-creak-sigh.mp3}
+  tags: [road-dressing, interactable, road-west]
+  visibleRange: {max: 180}
+rest-well-west:
+  behavior: scripts/road-rest.js
+  feetPosition: {x: -554.9364985935183, y: {terrain: 0}, z: -62.121833554601274}
+  id: rest-well-west
+  physics: static
+  primitive: {kind: scripted, params: {kind: well}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -550.6899932574094, y: 0.5, z: -55.06545372817083}}
+  state: {say: "Cold, clear water. You feel refreshed.", sound: /cdn/moodboard-lowpoly-cozy/sfx-well-bucket-water-splash.mp3}
+  tags: [road-dressing, interactable, road-west]
+  visibleRange: {max: 200}
+waylamp-west-10:
+  feetPosition: {x: -570.627868429789, y: {terrain: 0}, z: -53.34664715173015}
+  id: waylamp-west-10
+  physics: static
+  primitive: {kind: scripted, params: {hue: 195, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {yaw: 35}
+  tags: [road-dressing, waylamp, road-west]
+  visibleRange: {max: 200}
+waylamp-west-8:
+  feetPosition: {x: -480.2672958597014, y: {terrain: 0}, z: -50.9887725630087}
+  id: waylamp-west-8
+  physics: static
+  primitive: {kind: scripted, params: {hue: 85, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {yaw: 305}
+  tags: [road-dressing, waylamp, road-west]
+  visibleRange: {max: 200}
+waylamp-west-9:
+  feetPosition: {x: -525.0002717768901, y: {terrain: 0}, z: -56.19131248104888}
+  id: waylamp-west-9
+  physics: static
+  primitive: {kind: scripted, params: {hue: 195, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {yaw: 170}
+  tags: [road-dressing, waylamp, road-west]
+  visibleRange: {max: 200}
