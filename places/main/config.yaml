@@ -126,11 +126,15 @@ terrain:
     garden-clear-back: {center: {x: -1, z: -43}, kind: clear-scatter, shape: {kind: ellipse, radiusX: 13.5, radiusZ: 8.5}}
     garden-clear-shed: {center: {x: 10.5, z: -32.5}, kind: clear-scatter, shape: {depth: 4.5, kind: rectangle, width: 5}}
     garden-clear-front: {center: {x: 5.5, z: -13}, kind: clear-scatter, shape: {depth: 6, kind: rectangle, width: 12}}
+    mazeGround: {center: {x: -8, z: -127}, falloff: 4, height: 0.5, kind: flatten, material: litter, shape: {kind: circle, radius: 24}}
+    mazeClear: {center: {x: -8, z: -127}, kind: clear-scatter, shape: {kind: circle, radius: 28}}
+    pathMaze: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[-16, -49], [-26, -62], [-30, -80], [-25, -97], [-14, -106], [-8, -112]], width: 2, edgeMaterial: yard, falloff: 3.5}
+    verge-pathMaze: {center: {x: -26, z: -62}, kind: clear-scatter, shape: {kind: path, points: [[-16, -49], [-26, -62], [-30, -80], [-25, -97], [-14, -106], [-8, -112]], width: 9}}
   decorations:
     settings: {enabled: true, budget: 75000, maxDistance: 420, fadeDistance: 25}
     bindings:
-      litter: [canopy, midstory, shrubs, ferns, logs, wildflowers]
-      moss: [canopy, midstory, shrubs, ferns, ground, wildflowers]
+      litter: [canopy, ancients, midstory, shrubs, ferns, logs, wildflowers]
+      moss: [canopy, ancients, midstory, shrubs, ferns, ground, wildflowers]
       mud: [reeds]
       yard: [ground, ferns, wildflowers]
     layers:
@@ -142,6 +146,12 @@ terrain:
           - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 24, radius: 5.5}, seed: 2, weight: 0.25, scale: [0.85, 1.25], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.18, scale: 2, speed: 0.4}}
           - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 32, radius: 7}, seed: 3, weight: 0.2, scale: [0.8, 1.15], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.16, scale: 2, speed: 0.35}}
           - {kind: scripted, script: scripts/gen/valley-tree.js, params: {crown: fir, height: 26, radius: 4}, seed: 41, weight: 0.25, scale: [0.8, 1.2], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.015, value: 0.08}, wind: {force: 0.2, scale: 2, speed: 0.45}}
+      ancients:
+        density: 0.00045
+        constraints: {heightRange: [0.3, 5], slopeRange: [0, 0.15]}
+        items:
+          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 54, radius: 11}, seed: 81, weight: 0.5, scale: [0.9, 1.15], randomRotation: true, maxDistance: 900, colorJitter: {hue: 0.015, value: 0.08}, wind: {force: 0.1, scale: 3, speed: 0.25}}
+          - {kind: scripted, script: scripts/gen/valley-tree.js, params: {crown: fir, height: 62, radius: 7}, seed: 82, weight: 0.5, scale: [0.9, 1.2], randomRotation: true, maxDistance: 900, colorJitter: {hue: 0.015, value: 0.06}, wind: {force: 0.1, scale: 3, speed: 0.25}}
       midstory:
         density: 0.011
         constraints: {heightRange: [0.3, 5]}
