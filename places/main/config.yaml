@@ -55,18 +55,31 @@ terrain:
     road-west-2: {clearScatter: true, edgeMaterial: litter, edgeWidth: 1.5, falloff: 3, kind: road, material: cobble, points: [[-704.1, -116.1], [-708.8, -124.9], [-713.4, -133.8], [-718, -142.6], [-719.9, -146.2]], width: 6}
     road-west-3: {clearScatter: true, edgeMaterial: litter, edgeWidth: 1.5, falloff: 3, kind: road, material: cobble, points: [[-733.8, -172.8], [-738.5, -181.6], [-743.1, -190.5], [-747.7, -199.3], [-752.4, -208.2]], width: 6}
     road-west-4: {clearScatter: true, edgeMaterial: litter, edgeWidth: 1.5, falloff: 3, kind: road, material: cobble, points: [[-772.8, -247.2], [-777.4, -256], [-782.1, -264.9], [-786.7, -273.7], [-790.4, -282], [-792.5, -291.7], [-794.6, -301.5], [-796.8, -311.3], [-798.9, -321.1], [-801, -330.8], [-803.1, -340.6], [-805.2, -350.4], [-807.3, -360.1], [-809.4, -369.9], [-811.6, -379.7], [-813.7, -389.5], [-815.8, -399.2], [-817.9, -409], [-820, -418.8], [-822.1, -428.6], [-824.2, -438.3], [-826.3, -448.1], [-828.5, -457.9], [-830, -465]], width: 6}
-    homeSite: {center: {x: 0, z: -27}, falloff: 8, height: 0.5, kind: flatten, material: moss, shape: {kind: circle, radius: 15}}
-    homeClear: {center: {x: 0, z: -30}, kind: clear-scatter, shape: {kind: circle, radius: 22}}
+    homeSite: {center: {x: 0, z: -27}, falloff: 8, height: 0.5, kind: flatten, material: moss, shape: {kind: circle, radius: 18}}
+    homeClear: {center: {x: 0, z: -30}, kind: clear-scatter, shape: {kind: circle, radius: 26}}
     campSite: {center: {x: -18, z: -50}, falloff: 5, height: 0.5, kind: flatten, material: moss, shape: {kind: circle, radius: 6}}
     campClear: {center: {x: -18, z: -50}, kind: clear-scatter, shape: {kind: circle, radius: 8}}
     lakeClear: {center: {x: 4, z: -76}, kind: clear-scatter, shape: {kind: circle, radius: 24}}
-    pathFront: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[0, 10], [0.5, 2], [-1, -8], [0, -19.5]], width: 2.2}
-    pathLake: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[0, -32.5], [1.5, -38], [5, -44], [6, -50]], width: 2}
-    pathCamp: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[1.5, -38], [-6, -42], [-13, -47], [-16, -49]], width: 1.6}
+    pathFront: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[0, 10], [0.5, 2], [-1, -8], [0, -16.5]], width: 2.2}
+    pathLake: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[0, -35.5], [1.5, -40], [5, -45], [6, -50]], width: 2}
+    pathCamp: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[1.5, -40], [-6, -43], [-13, -47], [-16, -49]], width: 1.6}
     lumenvaleClear: {center: {x: 1100, z: -250}, kind: clear-scatter, shape: {kind: circle, radius: 190}}
     hearthmereClear: {center: {x: -1000, z: -500}, kind: clear-scatter, shape: {kind: circle, radius: 190}}
-    cobCellar: {kind: hole, points: [[6.25, -26], [3.13, -20.59], [-3.12, -20.59], [-6.25, -26], [-3.13, -31.41], [3.13, -31.41]]}
+    cobCellar: {kind: hole, points: [[9.2, -26], [4.6, -18.03], [-4.6, -18.03], [-9.2, -26], [-4.6, -33.97], [4.6, -33.97]]}
     campGround: {center: {x: -18, z: -50}, falloff: 6, height: 0.5, kind: flatten, material: litter, shape: {kind: circle, radius: 6}}
+    verge-road-east-0: {center: {x: 0, z: 10}, kind: clear-scatter, shape: {kind: path, points: [[0, 10], [9.9, 11.3], [19.8, 12.6], [29.7, 14], [39.6, 15.3], [49.6, 16.6], [59.5, 17.9], [69.4, 19.3], [79.3, 20.6], [89.2, 21.9], [99.1, 23.2], [109, 24.5], [118.9, 25.9], [128.9, 27.2], [138.8, 28.5], [148.7, 29.8], [157.8, 28.1], [167.5, 25.6], [177.2, 23.2], [186.9, 20.8], [196.6, 18.4], [206.3, 15.9], [216, 13.5], [225.7, 11.1], [235.4, 8.7], [237.3, 8.2]], width: 16}}
+    verge-road-east-1: {center: {x: 264.5, z: 1.4}, kind: clear-scatter, shape: {kind: path, points: [[264.5, 1.4], [270.3, -0.1]], width: 16}}
+    verge-road-east-2: {center: {x: 297.5, z: -6.9}, kind: clear-scatter, shape: {kind: path, points: [[297.5, -6.9], [307.2, -9.3], [316.9, -11.7], [326.6, -14.1], [334.3, -16.1]], width: 16}}
+    verge-road-east-3: {center: {x: 361.1, z: -24.5}, kind: clear-scatter, shape: {kind: path, points: [[361.1, -24.5], [370.4, -28.2], [379.7, -31.9], [389, -35.6], [398.3, -39.3], [407.6, -43], [416.9, -46.7], [426.1, -50.5], [435.4, -54.2], [444.7, -57.9], [454, -61.6], [463.3, -65.3], [472.6, -69], [481.8, -72.7], [491.1, -76.5], [500.4, -80.2], [509.7, -83.9], [519, -87.6], [528.3, -91.3], [537.6, -95], [546.8, -98.7], [556.1, -102.4], [565.4, -106.2], [574.7, -109.9], [584, -113.6], [593.3, -117.3], [602, -120.4], [611.8, -122.4], [621.6, -124.3]], width: 16}}
+    verge-road-east-4: {center: {x: 647.1, z: -129.4}, kind: clear-scatter, shape: {kind: path, points: [[647.1, -129.4], [656.9, -131.4], [666.7, -133.3], [676.5, -135.3], [686.3, -137.3], [696.1, -139.2], [705.9, -141.2], [715.7, -143.1], [725.5, -145.1], [735.3, -147.1], [745.1, -149], [754.9, -151], [764.7, -152.9], [774.5, -154.9], [784.3, -156.9], [794.2, -158.8], [803.4, -162.1], [811.9, -167.4], [820.4, -172.7], [828.8, -178], [837.3, -183.3], [845.8, -188.6], [854.3, -193.9], [862.8, -199.2], [871.2, -204.5], [879.7, -209.8], [888.2, -215.1], [896.7, -220.4], [905.2, -225.7], [913.6, -231], [920, -235]], width: 16}}
+    verge-road-west-0: {center: {x: 0, z: 10}, kind: clear-scatter, shape: {kind: path, points: [[0, 10], [-10, 9.5], [-20, 9], [-30, 8.5], [-40, 8], [-49.9, 7.5], [-59.9, 7], [-69.9, 6.5], [-79.9, 6], [-89.9, 5.5], [-99.9, 5], [-109.9, 4.5], [-119.9, 4], [-129.8, 3.5], [-139.8, 3], [-149.8, 2.5], [-159.8, 2], [-169.8, 1.5], [-179.8, 1], [-189.8, 0.5], [-199.8, 0], [-207.9, -1.4], [-217.7, -3.2], [-227.5, -5], [-237.4, -6.8], [-247.2, -8.6], [-257.1, -10.4], [-264.9, -11.8]], width: 16}}
+    verge-road-west-1: {center: {x: -288.5, z: -16.1}, kind: clear-scatter, shape: {kind: path, points: [[-288.5, -16.1], [-298.4, -17.9], [-308.2, -19.7], [-318.1, -21.5], [-327.9, -23.3], [-337.7, -25], [-347.6, -26.8], [-357.4, -28.6], [-367.3, -30.4], [-377.1, -32.2], [-386.9, -34], [-396.8, -35.8], [-406.6, -37.6], [-416.5, -39.4], [-426, -40.7], [-435.9, -41.8], [-445.8, -43], [-455.8, -44.1], [-465.7, -45.3], [-475.6, -46.4], [-485.6, -47.6], [-495.5, -48.7], [-505.4, -49.9], [-515.4, -51], [-525.3, -52.2], [-535.2, -53.3], [-545.2, -54.4], [-555.1, -55.6], [-565, -56.7], [-575, -57.9], [-584.9, -59], [-594.8, -60.2], [-604.8, -61.3], [-614.7, -62.5], [-624.6, -63.6], [-634.6, -64.8], [-644.5, -65.9], [-654.4, -67.1], [-664.4, -68.2], [-674.3, -69.3], [-681.9, -73.5], [-686.5, -82.4], [-690.2, -89.5]], width: 16}}
+    verge-road-west-2: {center: {x: -704.1, z: -116.1}, kind: clear-scatter, shape: {kind: path, points: [[-704.1, -116.1], [-708.8, -124.9], [-713.4, -133.8], [-718, -142.6], [-719.9, -146.2]], width: 16}}
+    verge-road-west-3: {center: {x: -733.8, z: -172.8}, kind: clear-scatter, shape: {kind: path, points: [[-733.8, -172.8], [-738.5, -181.6], [-743.1, -190.5], [-747.7, -199.3], [-752.4, -208.2]], width: 16}}
+    verge-road-west-4: {center: {x: -772.8, z: -247.2}, kind: clear-scatter, shape: {kind: path, points: [[-772.8, -247.2], [-777.4, -256], [-782.1, -264.9], [-786.7, -273.7], [-790.4, -282], [-792.5, -291.7], [-794.6, -301.5], [-796.8, -311.3], [-798.9, -321.1], [-801, -330.8], [-803.1, -340.6], [-805.2, -350.4], [-807.3, -360.1], [-809.4, -369.9], [-811.6, -379.7], [-813.7, -389.5], [-815.8, -399.2], [-817.9, -409], [-820, -418.8], [-822.1, -428.6], [-824.2, -438.3], [-826.3, -448.1], [-828.5, -457.9], [-830, -465]], width: 16}}
+    verge-pathFront: {center: {x: 0, z: 10}, kind: clear-scatter, shape: {kind: path, points: [[0, 10], [0.5, 2], [-1, -8], [0, -16.5]], width: 9}}
+    verge-pathLake: {center: {x: 0, z: -35.5}, kind: clear-scatter, shape: {kind: path, points: [[0, -35.5], [1.5, -40], [5, -45], [6, -50]], width: 9}}
+    verge-pathCamp: {center: {x: 1.5, z: -40}, kind: clear-scatter, shape: {kind: path, points: [[1.5, -40], [-6, -43], [-13, -47], [-16, -49]], width: 9}}
   decorations:
     settings: {enabled: true, budget: 75000, maxDistance: 420, fadeDistance: 25}
     bindings:
@@ -75,7 +88,7 @@ terrain:
       mud: [reeds]
     layers:
       canopy:
-        density: 0.011
+        density: 0.0065
         constraints: {heightRange: [0.3, 5]}
         items:
           - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 28, radius: 6.5}, seed: 1, weight: 0.3, scale: [0.8, 1.2], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.18, scale: 2, speed: 0.4}}
@@ -83,7 +96,7 @@ terrain:
           - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 32, radius: 7}, seed: 3, weight: 0.2, scale: [0.8, 1.15], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.16, scale: 2, speed: 0.35}}
           - {kind: scripted, script: scripts/gen/valley-tree.js, params: {crown: fir, height: 26, radius: 4}, seed: 41, weight: 0.25, scale: [0.8, 1.2], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.015, value: 0.08}, wind: {force: 0.2, scale: 2, speed: 0.45}}
       midstory:
-        density: 0.018
+        density: 0.011
         constraints: {heightRange: [0.3, 5]}
         items:
           - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: sapling, height: 6}, seed: 11, weight: 0.4, scale: [0.7, 1.4], randomRotation: true, maxDistance: 200, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.25, scale: 1.5, speed: 0.6}}
@@ -107,7 +120,7 @@ terrain:
         items:
           - {kind: scripted, script: scripts/gen/valley-meadow.js, params: {height: 0.22}, seed: 7, scale: [0.8, 1.2], randomRotation: true, maxDistance: 32, colorJitter: {hue: 0.012, value: 0.08}, wind: {force: 0.08, scale: 1.3, speed: 0.7}}
       logs:
-        density: 0.0015
+        density: 0.001
         constraints: {heightRange: [0.3, 5], slopeRange: [0, 0.1]}
         items:
           - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: log, length: 6, radius: 0.35}, seed: 51, scale: [0.7, 1.4], randomRotation: true, maxDistance: 120}
