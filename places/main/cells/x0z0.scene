@@ -3195,14 +3195,17 @@ lake-dock/reeds-2:
   parent: lake-dock
   primitive: {kind: scripted, params: {count: 26, h: 1.9971976284498794, kind: reeds, r: 1}, script: scripts/gen/grounds-kit.js, seed: 33}
   visibleRange: {max: 150}
-lake-dock/rowboat:
-  feetPosition: {x: 2.3, y: 0, z: -5.8}
-  id: lake-dock/rowboat
+lake-rowboat:
+  behavior: scripts/rowboat.js
+  castShadow: true
+  feetPosition: {x: 1.9, y: -0.02, z: -60}
+  id: lake-rowboat
   material: {pbr: true}
-  parent: lake-dock
-  physics: static
+  physics: kinematic
   primitive: {kind: scripted, params: {kind: boat}, script: scripts/gen/grounds-kit.js, seed: 5}
-  rotation: {yaw: 3}
+  receiveShadow: true
+  rotation: {yaw: 0}
+  tags: [interactable, mount, boat]
   visibleRange: {max: 200}
 lawn-flowers-coop-walk:
   feetPosition: {x: 21.03, y: {terrain: 0}, z: -21.55}
