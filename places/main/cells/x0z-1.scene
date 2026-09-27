@@ -1,11 +1,22 @@
 # spawn-scene v2 yaml objects
+blossom-torii:
+  castShadow: true
+  feetPosition: {x: -15, y: 0.5, z: -104}
+  id: blossom-torii
+  physics: static
+  primitive: {kind: scripted, params: {o: [-15, -104], oy: 0.5, part: shrine, torii: {c: [-16.2, -104.2], d: [0.7739393512981074, -0.6332231056075425], gy: 0.4459583369687363, half: 2.35}, toro: [-12.8, -103.2, 0.4970308053737634, 0.6857295109062863]}, script: scripts/gen/blossom-walk.js, seed: 2}
+  receiveShadow: true
+  tags: [north-shore, blossom-walk]
+  visibleRange: {max: 130}
 blossom-walk:
+  castShadow: true
   feetPosition: {x: -3, y: 0.5, z: -106}
   id: blossom-walk
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 10, height: 5, kind: box, width: 18}
-  tags: [blueprint]
+  physics: static
+  primitive: {kind: scripted, params: {benches: [[-9.3, -106.9, 0.5, 0.7853981633974483], [-20.3, -105, 0.46404562465753335, 0.6857295109062863]], o: [-3, -106], oy: 0.5, part: grove, patches: [[-6.4, -103.2, 1, 0.5], [-9, -102.6, 0.8, 0.5], [-12.3, -101.8, 0.9, 0.483], [-10.4, -105.4, 0.7, 0.5], [-4.2, -106.3, 0.6, 0.5], [-18.8, -108.8, 0.9, 0.5], [-21, -105.6, 0.8, 0.496], [-15.8, -110, 0.7, 0.5], [-21.9, -102.6, 0.8, 0.338], [-15.6, -101.2, 0.7, 0.405], [-7.8, -107.6, 0.6, 0.5], [-1.4, -100.6, 0.6, 0.357]], trees: [[-7, -104.6, 0.5, cherry, 0.95], [-9.9, -101.3, 0.41, apple, 0.9], [-12.6, -100.4, 0.299, cherry, 0.85], [-10.4, -104.3, 0.5, cherry, 0.8], [-16, -100.2, 0.284, apple, 0.8], [-19.8, -108, 0.5, cherry, 0.8], [-21.6, -101.4, 0.326, cherry, 0.72]]}, script: scripts/gen/blossom-walk.js, seed: 1}
+  receiveShadow: true
+  tags: [north-shore, blossom-walk]
+  visibleRange: {max: 130}
 corn-maze:
   feetPosition: {x: -8, y: 0.5, z: -127}
   id: corn-maze
