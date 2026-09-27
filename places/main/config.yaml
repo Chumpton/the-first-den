@@ -206,6 +206,19 @@ terrain:
     royalAvenue: {kind: path, points: [[0, 144], [0, 150]], width: 11, grade: false, material: cobblepale, clearScatter: true, falloff: 1}
     garden-flat: {center: {x: 57, z: -26}, falloff: 3, height: 0.5, kind: flatten, material: yard, shape: {kind: path, points: [[43, -26], [71, -26]], width: 26}}
     garden-clear: {center: {x: 57, z: -26}, kind: clear-scatter, shape: {kind: path, points: [[41, -26], [73, -26]], width: 30}}
+    villagePlateau: {kind: flatten, center: {x: 172, z: 90}, height: 20, falloff: 35, falloffCurve: linear, shape: {kind: circle, radius: 27}, material: lawn, edgeMaterial: lawn}
+    villageClear: {kind: clear-scatter, center: {x: 172, z: 90}, shape: {kind: circle, radius: 27}}
+    hillTrail: {kind: path, grade: true, maxGrade: 0.2, clearScatter: true, material: gravel, edgeMaterial: pebbles, falloff: 1.5, width: 3.5, points: [[105.5, 80], [108, 80], [112.9, 76.9], [116.7, 71.0], [121.0, 65.7], [125.8, 61.1], [123.9, 66.7], [122.6, 72.3], [121.9, 77.9], [121.9, 83.4], [122.5, 88.8], [123.7, 94.0], [125.4, 99.0], [127.5, 103.6], [127.4, 98.3], [127.9, 93.2], [129.0, 88.3], [130.6, 83.6], [132.6, 79.3], [135.1, 75.4], [138.0, 71.9], [137.1, 76.3], [136.7, 80.6], [136.9, 84.9], [137.5, 89.0], [138.6, 92.8], [140.1, 96.4], [142.0, 99.7], [141.9, 96.2], [142.1, 92.8], [142.7, 89.5], [143.6, 86.3], [144.9, 83.4], [146.4, 80.7], [145.9, 83.5], [145.6, 86.4], [145.6, 89.2], [146, 92]]}
+    hillTrailClear: {kind: clear-scatter, center: {x: 130, z: 85}, shape: {kind: path, points: [[105.5, 80], [108, 80], [112.9, 76.9], [116.7, 71.0], [121.0, 65.7], [125.8, 61.1], [123.9, 66.7], [122.6, 72.3], [121.9, 77.9], [121.9, 83.4], [122.5, 88.8], [123.7, 94.0], [125.4, 99.0], [127.5, 103.6], [127.4, 98.3], [127.9, 93.2], [129.0, 88.3], [130.6, 83.6], [132.6, 79.3], [135.1, 75.4], [138.0, 71.9], [137.1, 76.3], [136.7, 80.6], [136.9, 84.9], [137.5, 89.0], [138.6, 92.8], [140.1, 96.4], [142.0, 99.7], [141.9, 96.2], [142.1, 92.8], [142.7, 89.5], [143.6, 86.3], [144.9, 83.4], [146.4, 80.7], [145.9, 83.5], [145.6, 86.4], [145.6, 89.2], [146, 92]], width: 8.5}}
+    villageLoop: {kind: path, grade: false, clearScatter: true, material: pebbles, edgeMaterial: lawn, falloff: 0.8, width: 2.2, points: [[184.0, 90.0], [182.4, 96.0], [178.0, 100.4], [172.0, 102.0], [166.0, 100.4], [161.6, 96.0], [160.0, 90.0], [161.6, 84.0], [166.0, 79.6], [172.0, 78.0], [178.0, 79.6], [182.4, 84.0], [184.0, 90.0]]}
+    villageLane0: {kind: path, grade: false, clearScatter: true, material: pebbles, edgeMaterial: lawn, falloff: 0.6, width: 1.6, points: [[182.2, 102.6], [179.6, 99.3]]}
+    villageLane1: {kind: path, grade: false, clearScatter: true, material: pebbles, edgeMaterial: lawn, falloff: 0.6, width: 1.6, points: [[169.5, 106.0], [170.1, 101.9]]}
+    villageLane2: {kind: path, grade: false, clearScatter: true, material: pebbles, edgeMaterial: lawn, falloff: 0.6, width: 1.6, points: [[159.4, 100.2], [162.7, 97.6]]}
+    villageLane3: {kind: path, grade: false, clearScatter: true, material: pebbles, edgeMaterial: lawn, falloff: 0.6, width: 1.6, points: [[159.4, 79.8], [162.7, 82.4]]}
+    villageLane4: {kind: path, grade: false, clearScatter: true, material: pebbles, edgeMaterial: lawn, falloff: 0.6, width: 1.6, points: [[169.5, 74.0], [170.1, 78.1]]}
+    villageLane5: {kind: path, grade: false, clearScatter: true, material: pebbles, edgeMaterial: lawn, falloff: 0.6, width: 1.6, points: [[182.2, 77.4], [179.6, 80.7]]}
+    villageLaneHall: {kind: path, grade: false, clearScatter: true, material: pebbles, edgeMaterial: lawn, falloff: 0.6, width: 2.2, points: [[189.8, 90], [184, 90]]}
+    villageLaneGate: {kind: path, grade: false, clearScatter: true, material: pebbles, edgeMaterial: lawn, falloff: 0.8, width: 2.6, points: [[146, 92], [153, 91.5], [160, 91]]}
   decorations:
     settings: {enabled: true, budget: 75000, maxDistance: 420, fadeDistance: 25}
     bindings:
