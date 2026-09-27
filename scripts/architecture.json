@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "basedOnSpecVersion": 606,
-  "updatedAt": "2026-09-27T08:03:54.992Z",
-  "summary": "The First Den is a forest world centered on Spawn, where the owner's home and garden connect to lake, creek, activity sites, a north market town, and roads to Hearthmere and Lumenvale. Authored scene rows anchor places and actors; terrain marks, procedural builders, shared data kits, and manager behaviors provide landscape, structures, crowds, and animals.",
+  "basedOnSpecVersion": 652,
+  "updatedAt": "2026-09-27T16:38:17.831Z",
+  "summary": "The First Den is a forest world centered on Spawn, where the owner's tree-centered home connects to a lake, creek, activity sites, a north market town, and roads to Hearthmere and Lumenvale. Authored scene rows anchor places and actors; terrain marks, procedural builders, shared data kits, and manager behaviors provide landscape, structures, crowds, and animals. The home now includes a high-tech art studio below its main rooms, while the town square has expanded civic dressing and festoons.",
   "scriptPaths": [
     "scripts/alchemy-bench.js",
     "scripts/alchemy-player.js",
@@ -49,6 +49,7 @@
     "scripts/gen/animal-fox.js",
     "scripts/gen/animal-sheep.js",
     "scripts/gen/animal-wolf.js",
+    "scripts/gen/art-studio.js",
     "scripts/gen/blossom-walk.js",
     "scripts/gen/castle-decor.js",
     "scripts/gen/castle-furnish.js",
@@ -179,6 +180,7 @@
     "scripts/gen/tower-dais.js",
     "scripts/gen/tower-skirt.js",
     "scripts/gen/town-alleys.js",
+    "scripts/gen/town-banner.js",
     "scripts/gen/town-festoon.js",
     "scripts/gen/town-fountain.js",
     "scripts/gen/town-hall.js",
@@ -287,6 +289,7 @@
     "scripts/lumen-folk.js",
     "scripts/mailbox.js",
     "scripts/mandala-crystal.js",
+    "scripts/material-banner-wave.js",
     "scripts/material-den-sway.js",
     "scripts/material-falls-water.js",
     "scripts/material-far-range.js",
@@ -358,11 +361,11 @@
   ],
   "places": [
     "places/main - forest world joining Spawn/home, lake and creek sites, camp/corral, and roads to Hearthmere and Lumenvale",
-    "places/main/cells/x0z0.scene - Spawn hub: home and garden, creekside/waterfall, activities, corral at (-50,-50), orchard, and town-lane entry",
+    "places/main/cells/x0z0.scene - Spawn hub: cob-house home/garden and underground studio, creek/waterfall, activities, corral at (-50,-50), orchard, and outbuildings",
     "places/main/cells/x0z-1.scene - lake shore/islet, maze, north-shore blossom walk, camps and lookout; islet-life has pulsing runes and a treasure chest",
-    "places/main/cells/x0z1.scene - market town around the fountain and square, with houses/shops, crowd manager, town hall and Ember's roost",
+    "places/main/cells/x0z1.scene - market town at z≈100: square, regrouped market islands, stepped fountain, hall/Ember, crowd, walled alleys and festoons",
     "places/main/cells/objects.scene - shared authored road and city placements; remaining cells stream structures and actors",
-    "places/main/config.yaml - forest terrain, water, site/path/clearing marks, road grading and seeded vegetation layers",
+    "places/main/config.yaml - forest terrain, water, site/path/clearing marks, road grading and seeded vegetation; includes clear, flatten and path marks for outbuildings",
     "places/main/cells/x-1z0.scene + x1z0.scene - western/eastern highway verge with distributed trail-stop and flower-basket lamp placements",
     "places/main/cells/x-8z-4.scene - Hearthmere town placements among the streamed city cells"
   ],
@@ -371,9 +374,9 @@
     "templates/player.js#player - player root with movement, locomotion, home interaction, delete, travel, alchemy and horse-summon behaviors",
     "templates/camera.js#camera - custom first-/third-person camera root",
     "places/main/config.yaml + scripts/forest-terrain.js - configured forest terrain, height/material interface and landscape marks",
-    "places/main/cells/x0z0.scene#cob-house - Spawn's tree-centered multilevel home and furnishings",
+    "places/main/cells/x0z0.scene#cob-house - Spawn's tree-centered multilevel home with below-floor art studio; scripts/gen/cob-house.js defines the shell/stair geometry",
     "places/main/cells/x0z0.scene#corral - horse-ring manager and corral site; three named corral horses use pasture-horse behavior",
-    "places/main/cells/x0z1.scene#town-crowd, #town-dragon - managed market-town citizens and Ember actor at the hall roost",
+    "places/main/cells/x0z1.scene#town-crowd, #town-dragon, #town-square, #town-festoon - managed citizens/Ember and the authored market-town square dressing",
     "scripts/gen/hearth-city.js + scripts/gen/lumen-grand.js - procedural structure roots for Hearthmere and Lumenvale"
   ],
   "shared": [
@@ -384,7 +387,7 @@
     "scripts/lib/dragon-rider.js - mount/seat/dismount coordination shared by Violet, rowboat, courier horse and zipline trolley",
     "scripts/lib/town-kit.js - town geometry/material helpers reused by town house, hall, square, fountain and festoon builders",
     "scripts/lib/bloom-kit.js - flower/fern/mushroom geometry and seeded helpers reused by garden and landscape builders",
-    "scripts/lib/data/corral.yml, scripts/lib/data/steed.js, town/courier/travel data - tuning and rosters consumed by their corresponding actors, managers, builders and UI"
+    "scripts/lib/data/corral.yml, scripts/lib/data/steed.js, town/courier/travel data - tuning and rosters consumed by corresponding actors, managers, builders and UI"
   ],
   "notableExports": [
     "scripts/forest-terrain.js - GROUND, SITES, LAKE, heightAt(ctx), materialAt(ctx)",
@@ -393,18 +396,18 @@
     "scripts/alchemy-player.js - onInput(ctx,input), update(ctx); scripts/alchemy-bench.js - ears.press",
     "scripts/town-crowd.js - updateSchedule, update(ctx,dt), ears.press; scripts/pasture-flock.js - update(ctx)",
     "scripts/town-dragon.js - onSpawn(ctx), updateSchedule, update(ctx,dt); scripts/corral-horses.js - corral horse-manager behavior",
-    "scripts/horse-summon.js + scripts/steed.js - player horse spawn/input behavior and summoned steed behavior",
-    "scripts/gen/town-{square,house,hall,fountain}.js, scripts/gen/corral.js, scripts/gen/orchard.js - procedural geometry/collider builders for town and new sites"
+    "scripts/gen/art-studio.js - geometry(ctx), collider(ctx); params.item selects below-house studio pieces",
+    "scripts/gen/town-banner.js - geometry(ctx), collider(); scripts/material-banner-wave.js - material(ctx); town-square/house/hall/fountain/festoon expose geometry and applicable collider builders"
   ],
   "ownership": [
-    "places/main/config.yaml + scripts/forest-terrain.js - terrain seed/material bands, water/site/path marks, clearings, grading and scatter layers",
-    "places/main/cells/*.scene - authored IDs, transforms, tags, initial state, parent-child relationships and fixed placements",
     "scripts/player.js + scripts/lib/data/player.yml - movement intent, velocity, jump, flight, rope and camera mode; movement scratch remains in ctx.session",
     "scripts/alchemy-player.js + alchemy data - player harvest spending, alchemy panel/toast, buff expiry and speedMul; player consumes speedMul",
     "scripts/pond-seed.js + fishing-tackle.js + pond data - player seeds/gotSeeds and fish count; seed visibility/respawn and fishing cast/catch state",
     "scripts/pasture-flock.js + pasture-flock.yml - west-pasture manager's flock goals, movement/clip state and grazing sounds for tagged sheep/alpaca rows",
-    "scripts/town-crowd.js + town-crowd.yml; scripts/town-dragon.js - spawned townspeople and their movement/press responses; Ember's action and roar timers",
-    "scripts/horse-summon.js + scripts/steed.js + steed data; scripts/corral-horses.js + corral data - summoned mount/rider state and corral horses' managed poses/behavior"
+    "scripts/town-crowd.js + town-crowd.yml - spawned townspeople and their movement/press responses; sitting NPC placement accounts for fountain dais rise",
+    "scripts/town-dragon.js - Ember's action and roar timers; scripts/gen/roost-dragon.js supplies rig geometry and skeleton",
+    "scripts/horse-summon.js + scripts/steed.js + steed data; scripts/corral-horses.js + corral data - summoned mount/rider state and corral horses' managed poses/behavior",
+    "scripts/square-door.js - square-door hinge open/currentYaw and root near-player count; scene hinge state supplies closed/open yaw, leaf id and opening width"
   ],
   "flows": [
     "places/main/config.yaml terrain generator + seed -> scripts/forest-terrain.js heightAt/materialAt(ctx) -> engine terrain, river channels and forest material bands",
@@ -416,18 +419,18 @@
     "west-pasture manager + pasture-flock.yml -> tagged sheep/alpaca target positions and species clips; animation clips are registered in world.facts.yaml",
     "corral site + corral data -> scripts/corral-horses.js coordinates tagged corral horses and their graze/nicker/stand/swish/walk clips registered in world.facts.yaml",
     "town-crowd.yml roster -> town-crowd.js seeds townspeople under the square manager; citizen pressTo routes press to manager -> nearest person turns/answers",
-    "town-dragon.js schedule -> Ember skeleton/pose actions and roar/FX emissions; scripts/gen/roost-dragon.js supplies rig geometry and skeleton",
-    "creekside parent scene rows -> shared creekside geometry and GPU sway/turn materials; pond-falls builders + water material/FX/audio complete the cascade",
+    "town scene rows + town.json -> town-square/house/hall/fountain/festoon and town-alleys builders; town-crowd seating positions use fountainDais rise",
+    "town-hall drape/flag rows -> town-banner geometry and material-banner-wave shader; ax/ay orient the GPU wave from fixed edge to free edge",
     "travel input/actions -> scripts/travel.js + travel data -> player travel state/teleport; scripts/ui.js renders destinations and emits travelGo"
   ],
   "behaviorFamilies": [
     "places/main/config.yaml decoration layers + scripts/gen/forest-plant.js / valley-mesh.js - seeded forest flora varied by layer, kind and terrain",
-    "scripts/gen/cob-house.js + scripts/gen/cob-furnish.js - tree-centered multilevel home and furnishing family varied by item, dimensions, palette and seed",
+    "scripts/gen/cob-house.js + scripts/gen/cob-furnish.js - tree-centered multilevel home and furnishing family varied by item, dimensions, palette and seed; art-studio builder supplies specialized lower-level workroom props",
     "scripts/gen/road-bridge.js + scripts/lib/road-solid.js - bridge geometry/collider varied by dimensions and seed; terrain roads separately supply edges and shoulders",
     "scripts/gen/deer-fence.js - perimeter runs/gates vary by points, width and style",
     "animal builders + fauna behaviors; pasture and corral managers - varied species with manager-driven flock/herd motion and registered clips",
     "scripts/gen/hearth-city.js + hearth-city data; scripts/gen/lumen-grand.js - procedural structure roots for Hearthmere and Lumenvale",
-    "scripts/gen/{town-square,town-house,town-hall,town-fountain,town-festoon}.js + town-kit - market buildings/stalls, civic structures and dressing varied by kind, palette, seed and placement",
+    "scripts/gen/{town-square,town-house,town-hall,town-fountain,town-festoon,town-alleys,town-banner}.js + town-kit - market/civic structures, alleys, flags and square dressing varied by kind, palette, seed and placement",
     "scripts/gen/{blossom-walk,orchard,corral,islet-life,zip-landing}.js and bloom-kit - reusable landscape/site props varied by parts, points, species, seed and site parameters"
   ],
   "probableOrphans": [
@@ -438,8 +441,8 @@
     "forest-terrain heightAt/materialAt take a context object; main river is at sea level y=0, ground is around y=0.5, and Spawn clearing is centered near (0,-3).",
     "Keep terrain material IDs, clear/flatten marks and decoration bindings coordinated with scene placement; Spawn/home grounds are near (0,-27), corral is centered at (-50,-50), and town lane/square clearings run north to z=100.",
     "Terrain path marks grade/materialize routes and clear scatter; scene road/path builders draw visible paving and do not replace terrain jobs. Keep road marks and site dressing aligned.",
-    "The west-pasture flock manager discovers rows by pasture-flock tag and keeps goals inside its fence polygon; preserve matching actor tags, fence points, manager site and registered species clip names.",
-    "Corral horse clips are registered under corral-horses.js in world.facts.yaml; preserve those names and the manager's corral tags/data when changing horses or animation assignments.",
-    "Zipline state.a/state.b are world endpoints and s/sag tuning is in metres; it seats through dragon-rider and drops the rider at the configured end, so retain endpoint/seat/drop coordination."
+    "The cob-house studio is below the main house floor: art-studio piece origins use feet on its studio floor and face -Z; preserve the small dry terrain pocket around the house for the sunk studio.",
+    "Town square builders use local coordinates around the row at (0,0.55,100), while town-world data, square paving wear, alleys/walls and market props must stay aligned to that shared datum; seated crowd elevation includes fountainDais.rise.",
+    "Town banner cloth uses a fixed hoist/rod edge and shader params ax/ay define wave direction; preserve flag versus drape geometry orientation and matching material parameters. Revised animal/dragon clips coexist with source-name aliases in world.facts.yaml, so preserve registered clip keys when changing assignments."
   ]
 }
