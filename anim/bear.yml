@@ -1,0 +1,29 @@
+walk:
+  duration: 1
+  tracks:
+    legFL: { pitch: [18, 0, -18, 0, 18] }
+    legBR: { pitch: [18, 0, -18, 0, 18] }
+    legFR: { pitch: [-18, 0, 18, 0, -18] }
+    legBL: { pitch: [-18, 0, 18, 0, -18] }
+    neck: { pitch: [-3, 2, -3, 2, -3], yaw: [-4, 0, 4, 0, -4] }
+    root: { y: [0, 0.025, 0, 0.025, 0], roll: [3, 0, -3, 0, 3] }
+sniff:
+  duration: 5
+  tracks:
+    neck: { pitch: [0, -18, -18, 10, 16, 10, 0] }
+    head: { pitch: [0, -10, -10, 15, 22, 15, 0], yaw: [0, 10, -10, 0, 6, -6, 0] }
+alert:
+  duration: 2.5
+  tracks:
+    neck: { pitch: [12, 16, 12] }
+    head: { pitch: [8, 14, 8], yaw: [0, 6, 0] }
+pet:
+  duration: 2
+  tracks:
+    root: { pitch: [30, 30], y: [-0.44, -0.44] }
+    legFL: { pitch: [-30, -30] }
+    legFR: { pitch: [-30, 30, 10, 30, -30] }
+    legBL: { pitch: [55, 55] }
+    legBR: { pitch: [55, 55] }
+    neck: { pitch: [-20, -16, -20] }
+    head: { pitch: [-8, -2, -8], roll: [0, 12, 12, -12, 0] }

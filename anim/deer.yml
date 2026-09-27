@@ -1,0 +1,32 @@
+walk:
+  duration: 1
+  tracks:
+    legFL: { pitch: [20, 0, -20, 0, 20] }
+    legBR: { pitch: [20, 0, -20, 0, 20] }
+    legFR: { pitch: [-20, 0, 20, 0, -20] }
+    legBL: { pitch: [-20, 0, 20, 0, -20] }
+    neck: { pitch: [2, -3, 2, -3, 2] }
+    head: { pitch: [-2, 2, -2, 2, -2] }
+    tail: { pitch: [5, 12, 5, 12, 5] }
+    root: { y: [0, 0.02, 0, 0.02, 0], roll: [1.5, 0, -1.5, 0, 1.5] }
+graze:
+  duration: 6
+  tracks:
+    neck: { pitch: [-5, -82, -88, -82, -88, -5, -5] }
+    head: { pitch: [0, -25, -18, -25, -18, 4, 0], yaw: [0, 0, 6, -6, 0, 12, 0] }
+    legFL: { pitch: [0, 6, 6, 6, 6, 0, 0] }
+    legFR: { pitch: [0, 6, 6, 6, 6, 0, 0] }
+    tail: { pitch: [5, 15, 5, 5, 22, 5, 5] }
+alert:
+  duration: 2.5
+  tracks:
+    neck: { pitch: [12, 15, 12] }
+    head: { pitch: [-6, -3, -6], yaw: [0, 5, 0] }
+    tail: { pitch: [35, 42, 35] }
+pet:
+  duration: 2
+  tracks:
+    neck: { pitch: [0, -30, -22, -30, 0] }
+    head: { pitch: [0, -10, 5, -10, 0], roll: [0, 12, -10, 12, 0] }
+    tail: { pitch: [20, 55, 20, 55, 20, 55, 20, 55, 20] }
+    root: { y: [0, 0.02, 0, 0.02, 0] }

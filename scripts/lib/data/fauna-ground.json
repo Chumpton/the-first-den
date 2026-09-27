@@ -1,0 +1,10 @@
+{
+  "deer": { "walk": 1.2, "trot": 2.4, "run": 5.0, "stride": 1.3, "idle": "graze", "notice": 6, "startle": 4, "idleMin": 4, "idleMax": 10, "heart": 1.1,
+    "sound": "/cdn/moodboard-lowpoly-cozy/sfx-soft-deer-happy-snort-nuzzle.mp3" },
+  "wolf": { "walk": 1.3, "trot": 2.8, "run": 4.0, "stride": 1.1, "idle": "sniff", "notice": 6, "startle": 0, "idleMin": 3, "idleMax": 8, "heart": 0.8,
+    "sound": "/cdn/moodboard-lowpoly-cozy/sfx-friendly-wolf-happy-whine-yip.mp3" },
+  "bear": { "walk": 0.9, "trot": 1.8, "run": 2.5, "stride": 1.0, "idle": "sniff", "notice": 6, "startle": 0, "idleMin": 5, "idleMax": 12, "heart": 1.2,
+    "sound": "/cdn/moodboard-lowpoly-cozy/sfx-gentle-bear-content-rumble-grunt.mp3" },
+  "fox": { "walk": 1.0, "trot": 2.4, "run": 4.0, "stride": 0.6, "idle": "sniff", "notice": 6, "startle": 0, "idleMin": 3, "idleMax": 8, "heart": 0.5,
+    "sound": "/cdn/moodboard-lowpoly-cozy/sfx-cute-fox-happy-chirp-yip.mp3" }
+}
