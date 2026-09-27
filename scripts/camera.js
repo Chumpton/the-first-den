@@ -49,12 +49,12 @@ export function update(ctx, dt) {
   if (target.state?.kind === PD.kind) { dragonChase(ctx, target, dt); return }
   if (ctx.self.state.pdHead != null) { const s = ctx.self.state; s.pdHead = null; s.pdYawOff = 0; s.pdPitchOff = 0 }
   // 7 flips player.state.camMode (scripts/player.js); third person pulls the eye back over the shoulder.
-  const third = target.state?.camMode === 'third' && target.state?.kind !== 'dragon'
+  const third = (target.state?.camMode === 'third' || target.state?.kind === 'boat') && target.state?.kind !== 'dragon'
   ctx.self.hideLocalPlayer = !third
 
   // Seated (the body rides a seat: its parent is the chair or the couch), the eye drops to a sitter's and the feet are read
   // in the world, since a rider's own feet are the seat's.
-  const eyeHeight = finiteNumber(CAMERA.eyeHeight, 1.6) * finiteNumber(target.effectiveScale.y, 1) * (target.parent ? 0.72 : 1)
+  const eyeHeight = finiteNumber(CAMERA.eyeHeight, 1.6) * finiteNumber(target.effectiveScale?.y, 1) * (target.parent ? 0.72 : 1) * (target.state?.kind === 'boat' ? 0.8 : 1)
   const pos = target.worldFeetPosition ?? target.feetPosition
   // Riding the jade dragon (it is the controlled target): the eye is the saddle's, turned with the dragon.
   if (target.state?.kind === 'dragon') {
