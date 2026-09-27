@@ -1,0 +1,12 @@
+# spawn-scene v2 yaml x-5z27
+far-range-a4:
+  castShadow: false
+  feetPosition: {x: -622, y: 0, z: 3500}
+  id: far-range-a4
+  material: {kind: scripted, params: {}, script: scripts/material-far-range.js}
+  physics: none
+  primitive: {kind: scripted, params: {depth: 1428, height: 1083, peaks: 5, width: 3400}, script: scripts/gen/far-range.js, seed: 51}
+  receiveShadow: false
+  rotation: {lookAt: {x: 0, y: 0, z: -26}}
+  tags: [far-range, backdrop]
+  visibleRange: {max: 40000}
