@@ -49,7 +49,7 @@ export function geometry(ctx) {
     if (snow > 0.5) {
       const l = 0.9 + 0.07 * snow; ctx.color(`oklch(${l.toFixed(3)} 0.012 245)`);
     } else if (f > 0.22) {
-      const l = 0.42 + ctx.random() * 0.08 + snow * 0.25 + (f - 0.22) * 0.1;
+      const l = 0.43 + ctx.random() * 0.045 + snow * 0.25 + (f - 0.22) * 0.1;
       ctx.color(`oklch(${l.toFixed(3)} 0.035 ${(245 + n * 30).toFixed(0)})`);
     } else {
       const t = SS(0.02, 0.22, f); // low flanks under forest, bluing into rock
