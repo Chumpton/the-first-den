@@ -2672,6 +2672,17 @@ fairy-poppy:
   scale: 1.6
   state: {name: Poppy, pitch: 1.3}
   tags: [fairy]
+far-haze-ring:
+  audience: all
+  castShadow: false
+  feetPosition: {x: 0, y: -60, z: -26}
+  id: far-haze-ring
+  material: {kind: scripted, params: {base: 0.55, ease: 1.6, floor: 0, glow: 0.95, hazeColor: oklch(0.9 0.02 230), top: 380}, script: scripts/material-haze-ring.js}
+  physics: none
+  primitive: {kind: scripted, params: {height: 480, radius: 1850}, script: scripts/gen/haze-ring.js}
+  receiveShadow: false
+  tags: [backdrop, far-haze]
+  visibleRange: {max: 40000}
 fauna-ground:
   behavior: scripts/fauna-ground.js
   feetPosition: {x: 0, y: {terrain: 0}, z: 0}
