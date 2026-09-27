@@ -39,6 +39,7 @@ export function onInput(ctx, input) {
   // Written as intent, never straight into velocity: a key is a level (full or nothing) and a body
   // that jumps to 6 m/s the tick a key lands overshoots every tap; the ease makes a tap a nudge.
   const walk = walkOf(ctx)
+  if (input.pressed.camView) ctx.self.state.camMode = ctx.self.state.camMode === 'third' ? 'first' : 'third'
   // Flight: a second space press inside flyTapWindow toggles it. Aloft, space rises, shift sinks.
   if (input.pressed.jump) {
     const now = ctx.now()

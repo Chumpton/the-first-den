@@ -11,6 +11,7 @@
 import CAMERA from './lib/data/camera.yml'
 import { DRAGON } from './lib/data/dragon.js'
 import { rotate } from 'builtin/vec3'
+import { raycast } from 'builtin/physics'
 
 const RAD_TO_DEG = 180 / Math.PI
 
@@ -20,10 +21,11 @@ export function finiteNumber(value, fallback) {
 
 export function update(ctx, dt) {
   // The eye sits inside the body, so the body is not drawn for its owner (everyone else still sees it).
-  ctx.self.hideLocalPlayer = true
-
   const target = ctx.self.target
   if (!target) return
+  // 7 flips player.state.camMode (scripts/player.js); third person pulls the eye back over the shoulder.
+  const third = target.state?.camMode === 'third' && target.state?.kind !== 'dragon'
+  ctx.self.hideLocalPlayer = !third
 
   // Seated (the body rides a seat: its parent is the chair or the couch), the eye drops to a sitter's and the feet are read
   // in the world, since a rider's own feet are the seat's.
@@ -38,4 +40,14 @@ export function update(ctx, dt) {
   // The presented facing (radians) as the one rotation grammar (degrees) — undefined before the first frame.
   const view = ctx.self.view
   if (view) ctx.self.rotation = { yaw: view.yaw * RAD_TO_DEG, pitch: view.pitch * RAD_TO_DEG }
+  if (third && view) {
+    const head = ctx.self.feetPosition
+    const rot = { yaw: view.yaw * RAD_TO_DEG, pitch: view.pitch * RAD_TO_DEG }
+    const back = rotate(rot, { x: 0, y: 0, z: 1 }), side = rotate(view.yaw * RAD_TO_DEG, { x: 1, y: 0, z: 0 })
+    const want = finiteNumber(CAMERA.thirdDistance, 4.2), sh = finiteNumber(CAMERA.thirdShoulder, 0.55), lift = finiteNumber(CAMERA.thirdLift, 0.35)
+    const origin = { x: head.x + side.x * sh, y: head.y + lift, z: head.z + side.z * sh }
+    const hit = raycast(ctx, origin, back, { distance: want + 0.3, ignoreEntities: [target.id], physicsOnly: true })
+    const d = hit ? Math.max(0.4, hit.distance - 0.3) : want
+    ctx.self.feetPosition = { x: origin.x + back.x * d, y: origin.y + back.y * d, z: origin.z + back.z * d }
+  }
 }

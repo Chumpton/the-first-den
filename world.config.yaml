@@ -18,6 +18,7 @@ inputs:
       keys:
         - space
     descend: {keys: [shift]}
+    camView: {keys: ['7']}
   axes:
     moveX:
       keys: a/d
