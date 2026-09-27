@@ -407,10 +407,10 @@ function wainscot(ctx, k, lod) {
   const spans = door ? [[-L, -gapW], [gapW, L]] : [[-L, L]];
   ctx.albedo(TX.stone); ctx.roughness(0.95); ctx.metalness(0);
   if (lod >= 3) {
-    ctx.color("oklch(0.8 0.02 70)");
+    ctx.color("oklch(0.95 0.02 75)");
     for (const [u0, u1] of spans) obox(ctx, atF(n, t, (u0 + u1) / 2, AO + 0.035, 0), t, n, u1 - u0, 0.46, 0.07);
   } else {
-    const cols = ["oklch(0.8 0.02 70)", "oklch(0.7 0.03 55)", "oklch(0.86 0.015 90)", "oklch(0.68 0.02 240)", "oklch(0.76 0.035 45)", "oklch(0.62 0.02 60)"];
+    const cols = ["oklch(0.97 0.015 80)", "oklch(0.92 0.03 60)", "oklch(0.99 0.01 95)", "oklch(0.93 0.025 240)", "oklch(0.95 0.035 50)", "oklch(0.88 0.02 70)"];
     for (const [u0, u1] of spans) for (const [ry, rh, off] of [[0.03, 0.22, 0], [0.26, 0.2, 0.2]]) {
       let u = u0 + off * ctx.random();
       while (u < u1 - 0.12) {
@@ -421,7 +421,7 @@ function wainscot(ctx, k, lod) {
       }
     }
   }
-  ctx.color("oklch(0.9 0.015 80)");
+  ctx.color("oklch(0.99 0.01 85)");
   for (const [u0, u1] of spans) {
     obox(ctx, atF(n, t, (u0 + u1) / 2, AO + 0.04, 0.46), t, n, u1 - u0, 0.06, 0.14);
     obox(ctx, atF(n, t, (u0 + u1) / 2, AO + 0.02, 0.52), t, n, u1 - u0, 0.03, 0.09);
