@@ -1,4 +1,82 @@
 # spawn-scene v2 yaml x0z0
+avenue-bed-door-e:
+  feetPosition: {x: 3.2, y: {terrain: 0}, z: -13.4}
+  id: avenue-bed-door-e
+  primitive: {kind: scripted, params: {d: 0.9, edge: stone, palette: warm, w: 2.8}, script: scripts/gen/flower-bed.js}
+  rotation: {yaw: 90}
+  tags: [grounds]
+  visibleRange: {max: 110}
+avenue-bed-door-w:
+  feetPosition: {x: -3.2, y: {terrain: 0}, z: -13.4}
+  id: avenue-bed-door-w
+  primitive: {kind: scripted, params: {d: 0.9, edge: stone, palette: warm, w: 2.8}, script: scripts/gen/flower-bed.js}
+  rotation: {yaw: -90}
+  tags: [grounds]
+  visibleRange: {max: 110}
+avenue-bed-gate-e:
+  feetPosition: {x: 3.2, y: {terrain: 0}, z: 0.6}
+  id: avenue-bed-gate-e
+  primitive: {kind: scripted, params: {d: 0.9, edge: stone, palette: meadow, w: 3}, script: scripts/gen/flower-bed.js}
+  rotation: {yaw: 90}
+  tags: [grounds]
+  visibleRange: {max: 110}
+avenue-bed-gate-w:
+  feetPosition: {x: -3.2, y: {terrain: 0}, z: 0.6}
+  id: avenue-bed-gate-w
+  primitive: {kind: scripted, params: {d: 0.9, edge: stone, palette: meadow, w: 3}, script: scripts/gen/flower-bed.js}
+  rotation: {yaw: -90}
+  tags: [grounds]
+  visibleRange: {max: 110}
+avenue-fountain:
+  feetPosition: {x: 0, y: 0.5, z: -5.5}
+  fx: {script: "fx\npop pour rate=40 on=point() life=.5..0.7 v=<0,-.3,-.9>*(.8..1.1) size=.03..0.05 acc=grav()*.9 col=hdr(1.3,1.5,1.7) a=.7>0 r=sprite(soft-disc,add)\npop ripple rate=6 on=disc(1.2).c(.53) life=1..1.6 size=.1 sz=$size*(1>4) col=<.8,.9,1> a=.35>0 r=sprite(soft-disc,alpha)"}
+  id: avenue-fountain
+  physics: static
+  primitive: {kind: scripted, params: {kind: fountain}, script: scripts/gen/garden-statue.js}
+  rotation: 180
+  tags: [grounds]
+avenue-statue-door-e:
+  feetPosition: {x: 3.4, y: {terrain: 0}, z: -11}
+  id: avenue-statue-door-e
+  physics: static
+  primitive: {kind: scripted, params: {kind: maiden}, script: scripts/gen/garden-statue.js}
+  rotation: 90
+  tags: [grounds]
+avenue-statue-door-w:
+  feetPosition: {x: -3.4, y: {terrain: 0}, z: -11}
+  id: avenue-statue-door-w
+  physics: static
+  primitive: {kind: scripted, params: {kind: maiden}, script: scripts/gen/garden-statue.js}
+  rotation: -90
+  tags: [grounds]
+avenue-statue-e:
+  feetPosition: {x: 3.4, y: {terrain: 0}, z: 3.1}
+  id: avenue-statue-e
+  physics: static
+  primitive: {kind: scripted, params: {kind: maiden}, script: scripts/gen/garden-statue.js}
+  rotation: 90
+  tags: [grounds]
+avenue-statue-w:
+  feetPosition: {x: -3.4, y: {terrain: 0}, z: 3.1}
+  id: avenue-statue-w
+  physics: static
+  primitive: {kind: scripted, params: {kind: maiden}, script: scripts/gen/garden-statue.js}
+  rotation: -90
+  tags: [grounds]
+avenue-urn-plaza-e:
+  feetPosition: {x: 3.3, y: {terrain: 0}, z: -2.3}
+  id: avenue-urn-plaza-e
+  physics: static
+  primitive: {kind: scripted, params: {kind: urn}, script: scripts/gen/garden-statue.js}
+  rotation: 0
+  tags: [grounds]
+avenue-urn-plaza-w:
+  feetPosition: {x: -3.3, y: {terrain: 0}, z: -2.3}
+  id: avenue-urn-plaza-w
+  physics: static
+  primitive: {kind: scripted, params: {kind: urn}, script: scripts/gen/garden-statue.js}
+  rotation: 0
+  tags: [grounds]
 bee-0:
   castShadow: false
   feetPosition: {x: 1.6, y: 1.1, z: -11.6}
@@ -2242,6 +2320,12 @@ garden-tunnel:
   receiveShadow: true
   tags: [garden, garden-tunnel]
   visibleRange: {max: 220}
+grand-avenue:
+  feetPosition: {x: 0, y: 0.5, z: 0}
+  id: grand-avenue
+  primitive: {kind: scripted, params: {plaza: [-5.5, 4.4], w: 4.4, z0: 4.4, z1: -16.3}, script: scripts/gen/grand-avenue.js, seed: 21}
+  receiveShadow: true
+  tags: [grounds]
 grand-gate:
   feetPosition: {x: 0.25, y: 0.5, z: 5}
   id: grand-gate
@@ -2322,7 +2406,7 @@ grounds-arch-workshop:
   rotation: {lookAt: {x: 14.4, y: 0.5, z: -35}}
   tags: [grounds]
 grounds-bed-front:
-  feetPosition: {x: 2, y: {terrain: 0}, z: -11.6}
+  feetPosition: {x: 6.4, y: {terrain: 0}, z: -11.2}
   id: grounds-bed-front
   primitive: {kind: scripted, params: {d: 0.8, edge: stone, palette: cool, w: 2.2}, script: scripts/gen/flower-bed.js, seed: 11}
   rotation: {yaw: 90}
@@ -2429,7 +2513,7 @@ grounds-fence-rope:
 grounds-plan:
   feetPosition: {x: 0, y: 0.5, z: -35}
   id: grounds-plan
-  primitive: {kind: scripted, params: {hubs: [[-13, 22.1, 1.6], [13.6, 16.5, 1.6]], walks: [[[-1.2, 26], [-4, 24.7], [-8, 23.2], [-13, 22.1], [-17.4, 20.6], [-20.6, 17.6]], [[-17.4, 20.6], [-17.5, 15], [-17.4, 10.5], [-15.2, 7.8], [-13.2, 4], [-13, 0.2], [-16.25, -0.45]], [[10.8, 18.8], [13.6, 16.5], [14.6, 9], [14.4, 2], [16.06, -3.1]], [[6.2, -15], [11.86, -19.35]]], width: 1.4}, script: scripts/gen/grounds-flags.js, seed: 7}
+  primitive: {kind: scripted, params: {hubs: [[-13, 22.1, 1.6], [13.6, 16.5, 1.6]], walks: [[[-3.5, 26.8], [-8, 23.2], [-13, 22.1], [-17.4, 20.6], [-20.6, 17.6]], [[-17.4, 20.6], [-17.5, 15], [-17.4, 10.5], [-15.2, 7.8], [-13.2, 4], [-13, 0.2], [-16.25, -0.45]], [[10.8, 18.8], [13.6, 16.5], [14.6, 9], [14.4, 2], [16.06, -3.1]], [[6.2, -15], [11.86, -19.35]], [[3.5, 26.8], [7, 23], [10.8, 18.8]], [[0, -0.5], [1.5, -5], [5, -10], [6.2, -15]], [[1.5, -5], [-6, -8], [-13, -12], [-16, -14]], [[1, -1], [7, -2.4], [14.2, -2.6]], [[-1, -1], [-7.4, 0.3], [-13, 0.2]]], width: 1.4}, script: scripts/gen/grounds-flags.js, seed: 7}
   tags: [grounds]
 grounds-round-door-l:
   feetPosition: {x: -3.4, y: {terrain: 0}, z: -15.6}
