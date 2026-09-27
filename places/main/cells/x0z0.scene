@@ -2749,6 +2749,226 @@ fox-meadow:
   state: {home: {x: 30, z: 32}, mode: idle, range: 20, scale: 1, sp: fox, until: 0, yaw: 105}
   tags: [fauna-ground, interactable, animal, fox]
   visibleRange: {max: 180}
+garden-bed-g00:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 49.6, y: 0.5, z: -34.8}
+  id: garden-bed-g00
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.2, item: bed, w: 3.4}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.2, gh: true, stage: 0, w: 3.4, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-g01:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 53.8, y: 0.5, z: -34.8}
+  id: garden-bed-g01
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.2, item: bed, w: 3.4}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.2, gh: true, stage: 0, w: 3.4, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-g02:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 58, y: 0.5, z: -34.8}
+  id: garden-bed-g02
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.2, item: bed, w: 3.4}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.2, gh: true, stage: 0, w: 3.4, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-g03:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 62.2, y: 0.5, z: -34.8}
+  id: garden-bed-g03
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.2, item: bed, w: 3.4}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.2, gh: true, stage: 0, w: 3.4, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-g10:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 49.6, y: 0.5, z: -31.2}
+  id: garden-bed-g10
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.2, item: bed, w: 3.4}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.2, gh: true, stage: 0, w: 3.4, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-g11:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 53.8, y: 0.5, z: -31.2}
+  id: garden-bed-g11
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.2, item: bed, w: 3.4}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.2, gh: true, stage: 0, w: 3.4, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-g12:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 58, y: 0.5, z: -31.2}
+  id: garden-bed-g12
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.2, item: bed, w: 3.4}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.2, gh: true, stage: 0, w: 3.4, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-g13:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 62.2, y: 0.5, z: -31.2}
+  id: garden-bed-g13
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.2, item: bed, w: 3.4}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.2, gh: true, stage: 0, w: 3.4, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-o00:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 47, y: 0.5, z: -26}
+  id: garden-bed-o00
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.4, item: bed, w: 3}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.4, gh: false, stage: 0, w: 3, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-o01:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 51.5, y: 0.5, z: -26}
+  id: garden-bed-o01
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.4, item: bed, w: 3}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.4, gh: false, stage: 0, w: 3, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-o02:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 56, y: 0.5, z: -26}
+  id: garden-bed-o02
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.4, item: bed, w: 3}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.4, gh: false, stage: 0, w: 3, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-o03:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 60.5, y: 0.5, z: -26}
+  id: garden-bed-o03
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.4, item: bed, w: 3}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.4, gh: false, stage: 0, w: 3, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-o10:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 47, y: 0.5, z: -22}
+  id: garden-bed-o10
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.4, item: bed, w: 3}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.4, gh: false, stage: 0, w: 3, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-o11:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 51.5, y: 0.5, z: -22}
+  id: garden-bed-o11
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.4, item: bed, w: 3}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.4, gh: false, stage: 0, w: 3, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-o12:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 56, y: 0.5, z: -22}
+  id: garden-bed-o12
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.4, item: bed, w: 3}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.4, gh: false, stage: 0, w: 3, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-o13:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 60.5, y: 0.5, z: -22}
+  id: garden-bed-o13
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.4, item: bed, w: 3}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.4, gh: false, stage: 0, w: 3, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-o20:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 47, y: 0.5, z: -18}
+  id: garden-bed-o20
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.4, item: bed, w: 3}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.4, gh: false, stage: 0, w: 3, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-o21:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 51.5, y: 0.5, z: -18}
+  id: garden-bed-o21
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.4, item: bed, w: 3}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.4, gh: false, stage: 0, w: 3, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-o22:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 56, y: 0.5, z: -18}
+  id: garden-bed-o22
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.4, item: bed, w: 3}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.4, gh: false, stage: 0, w: 3, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
+garden-bed-o23:
+  behavior: scripts/garden-plot.js
+  castShadow: true
+  feetPosition: {x: 60.5, y: 0.5, z: -18}
+  id: garden-bed-o23
+  physics: static
+  primitive: {kind: scripted, params: {d: 1.4, item: bed, w: 3}, script: scripts/gen/garden-plot.js}
+  receiveShadow: true
+  state: {crop: null, d: 1.4, gh: false, stage: 0, w: 3, wet: false}
+  tags: [interactable, garden-bed]
+  visibleRange: {max: 110}
 garden-beds-bp:
   feetPosition: {x: 58, y: 0.5, z: -22}
   id: garden-beds-bp
@@ -2798,19 +3018,94 @@ garden-paths:
   tags: [garden, garden-paths]
   visibleRange: {max: 180}
 garden-pump:
+  behavior: scripts/garden-station.js
   feetPosition: {x: 44.5, y: 0.5, z: -27}
   id: garden-pump
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 1, height: 1.6, kind: box, width: 1}
-  tags: [blueprint]
+  physics: static
+  primitive: {kind: scripted, params: {item: pump}, script: scripts/gen/garden-plot.js}
+  rotation: {yaw: 90}
+  state: {station: pump}
+  tags: [interactable]
+  visibleRange: {max: 100}
 garden-seeds:
   feetPosition: {x: 44.5, y: 0.5, z: -19.5}
   id: garden-seeds
-  material: {kind: scripted, script: engine/blueprint}
+  physics: static
+  primitive: {kind: scripted, params: {item: stall}, script: scripts/gen/garden-plot.js}
+  rotation: {yaw: 90}
+  visibleRange: {max: 120}
+garden-seeds/garden-seed-cabbage:
+  behavior: scripts/garden-station.js
+  castShadow: false
+  feetPosition: {x: -0.25, y: 0.92, z: -0.12}
+  id: garden-seeds/garden-seed-cabbage
+  parent: garden-seeds
   physics: none
-  primitive: {depth: 1.6, height: 2.4, kind: box, width: 3}
-  tags: [blueprint]
+  primitive: {kind: scripted, params: {item: crate, kind: cabbage}, script: scripts/gen/garden-plot.js}
+  scale: 0.75
+  state: {crop: cabbage, station: seed}
+  tags: [interactable]
+  visibleRange: {max: 60}
+garden-seeds/garden-seed-carrot:
+  behavior: scripts/garden-station.js
+  castShadow: false
+  feetPosition: {x: -1.25, y: 0.92, z: -0.12}
+  id: garden-seeds/garden-seed-carrot
+  parent: garden-seeds
+  physics: none
+  primitive: {kind: scripted, params: {item: crate, kind: carrot}, script: scripts/gen/garden-plot.js}
+  scale: 0.75
+  state: {crop: carrot, station: seed}
+  tags: [interactable]
+  visibleRange: {max: 60}
+garden-seeds/garden-seed-pumpkin:
+  behavior: scripts/garden-station.js
+  castShadow: false
+  feetPosition: {x: 1.25, y: 0.92, z: -0.12}
+  id: garden-seeds/garden-seed-pumpkin
+  parent: garden-seeds
+  physics: none
+  primitive: {kind: scripted, params: {item: crate, kind: pumpkin}, script: scripts/gen/garden-plot.js}
+  scale: 0.75
+  state: {crop: pumpkin, station: seed}
+  tags: [interactable]
+  visibleRange: {max: 60}
+garden-seeds/garden-seed-strawberry:
+  behavior: scripts/garden-station.js
+  castShadow: false
+  feetPosition: {x: -0.75, y: 0.92, z: -0.12}
+  id: garden-seeds/garden-seed-strawberry
+  parent: garden-seeds
+  physics: none
+  primitive: {kind: scripted, params: {item: crate, kind: strawberry}, script: scripts/gen/garden-plot.js}
+  scale: 0.75
+  state: {crop: strawberry, station: seed}
+  tags: [interactable]
+  visibleRange: {max: 60}
+garden-seeds/garden-seed-sunflower:
+  behavior: scripts/garden-station.js
+  castShadow: false
+  feetPosition: {x: 0.75, y: 0.92, z: -0.12}
+  id: garden-seeds/garden-seed-sunflower
+  parent: garden-seeds
+  physics: none
+  primitive: {kind: scripted, params: {item: crate, kind: sunflower}, script: scripts/gen/garden-plot.js}
+  scale: 0.75
+  state: {crop: sunflower, station: seed}
+  tags: [interactable]
+  visibleRange: {max: 60}
+garden-seeds/garden-seed-tomato:
+  behavior: scripts/garden-station.js
+  castShadow: false
+  feetPosition: {x: 0.25, y: 0.92, z: -0.12}
+  id: garden-seeds/garden-seed-tomato
+  parent: garden-seeds
+  physics: none
+  primitive: {kind: scripted, params: {item: crate, kind: tomato}, script: scripts/gen/garden-plot.js}
+  scale: 0.75
+  state: {crop: tomato, station: seed}
+  tags: [interactable]
+  visibleRange: {max: 60}
 garden-shed:
   castShadow: true
   children: [{feetPosition: {x: 0, y: 1.9, z: 0}, id: lamp, light: {color: oklch(0.85 0.1 70), distance: 6, intensity: 4, kind: point}}]
