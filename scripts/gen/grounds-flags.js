@@ -1,7 +1,17 @@
 // laid limestone flag walks + hub rings, moss in the joints. params: { walks: [[[x,z],...],...], hubs: [[x,z,R],...], width } 
 import { paint, T, Q, TAU } from '../lib/yard-kit.js';
+// Catmull-Rom: round every bend into a gentle curve, 1 sample per ~0.8 m
+function cr(l) {
+  if (l.length < 3) return l;
+  const o = [l[0]];
+  for (let i = 0; i < l.length - 1; i++) {
+    const p0 = l[Math.max(0, i - 1)], p1 = l[i], p2 = l[i + 1], p3 = l[Math.min(l.length - 1, i + 2)], n = Math.max(2, Math.ceil(Math.hypot(p2[0] - p1[0], p2[1] - p1[1]) / 0.8));
+    for (let k = 1; k <= n; k++) { const t = k / n, t2 = t * t, t3 = t2 * t; o.push([0, 1].map((j) => 0.5 * (2 * p1[j] + (-p0[j] + p2[j]) * t + (2 * p0[j] - 5 * p1[j] + 4 * p2[j] - p3[j]) * t2 + (-p0[j] + 3 * p1[j] - 3 * p2[j] + p3[j]) * t3))); }
+  }
+  return o;
+}
 export function geometry(ctx) {
-  const p = ctx.params || {}, lod = ctx.lod || 1, W = p.width ?? 1.6, walks = p.walks || [], hubs = p.hubs || [];
+  const p = ctx.params || {}, lod = ctx.lod || 1, W = p.width ?? 1.6, walks = (p.walks || []).map((l) => p.smooth ? cr(l) : l), hubs = p.hubs || [];
   ctx.flat();
   const rnd = () => ctx.random(), flags = [];
   const near = (x, z, g, m) => flags.some((f) => f.g !== g && Math.hypot(f.x - x, f.z - z) < m);
