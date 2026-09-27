@@ -323,7 +323,29 @@ function candle(ctx, p, fine) {
     P(ctx, '#ffd27a'); glow(ctx, 3.6, 2.0, 0.55); lathe(ctx, [[0.02 + ch, 0.01], [0.035 + ch, 0.012], [0.06 + ch, 0.001]], 4, x, z, false); ctx.emissive(null);
   }
 }
-const ITEMS = { counter, stove, jarshelf, sofa, planter, pot, hanging, herbs, lantern, crate, bed, desk, lamp, nightstand, candle };
+// flat area rug, w (x) × l (z), origin centre of its underside: border c2, field c1, accent lines c3
+function arearug(ctx, p, fine) {
+  const w = p.w, l = p.l, t = 0.012, b = Math.min(w, l) * 0.08, y = t + 0.001;
+  const top = (x0, z0, x1, z1, yy) => ctx.quad(x0, yy, z0, x0, yy, z1, x1, yy, z1, x1, yy, z0);
+  P(ctx, p.c2); box(ctx, 0, 0, 0, w, t, l);
+  P(ctx, p.c1); top(-w / 2 + b, -l / 2 + b, w / 2 - b, l / 2 - b, y);
+  if (!fine) return;
+  P(ctx, p.c3); const e = b * 0.35;
+  for (const k of [0.6, 1.9]) { const i = b * k; top(-w / 2 + i, -l / 2 + i, w / 2 - i, -l / 2 + i + e, y + 0.001); top(-w / 2 + i, l / 2 - i - e, w / 2 - i, l / 2 - i, y + 0.001); top(-w / 2 + i, -l / 2 + i, -w / 2 + i + e, l / 2 - i, y + 0.001); top(w / 2 - i - e, -l / 2 + i, w / 2 - i, l / 2 - i, y + 0.001); }
+  const r = Math.min(w, l) * 0.22, cy = y + 0.002;
+  ctx.quad(0, cy, -r, -r * 0.8, cy, 0, 0, cy, r, r * 0.8, cy, 0);
+  P(ctx, p.c2); const r2 = r * 0.45; ctx.quad(0, cy + 0.001, -r2, -r2 * 0.8, cy + 0.001, 0, 0, cy + 0.001, r2, r2 * 0.8, cy + 0.001, 0);
+}
+// walnut picture frame, origin at the canvas centre, back on z = 0 (the wall); the canvas is the row's textured child box
+function painting(ctx, p, fine) {
+  const w = p.w, h = p.h, f = 0.07, d = 0.045;
+  P(ctx, 'walnut');
+  box(ctx, 0, h / 2, -d / 2, w + 2 * f, f, d); box(ctx, 0, -h / 2 - f, -d / 2, w + 2 * f, f, d);
+  box(ctx, -w / 2 - f / 2, -h / 2, -d / 2, f, h, d); box(ctx, w / 2 + f / 2, -h / 2, -d / 2, f, h, d);
+  P(ctx, '#3a2a1e'); box(ctx, 0, -h / 2, -0.006, w, h, 0.012);
+  if (fine) { P(ctx, 'brass'); const g = 0.012; box(ctx, 0, h / 2 - g, -d + 0.004, w, g, 0.008); box(ctx, 0, -h / 2, -d + 0.004, w, g, 0.008); box(ctx, -w / 2 + g / 2, -h / 2, -d + 0.004, g, h, 0.008); box(ctx, w / 2 - g / 2, -h / 2, -d + 0.004, g, h, 0.008); }
+}
+const ITEMS = { counter, stove, jarshelf, sofa, planter, pot, hanging, herbs, lantern, crate, bed, desk, lamp, nightstand, candle, arearug, painting };
 export const DEFAULTS = {
   counter: { len: 2.4, d: 0.62, h: 0.9, sink: false, pots: false },
   stove: { w: 1.3, d: 0.95, pipe: 3.1 },
@@ -340,19 +362,24 @@ export const DEFAULTS = {
   lamp: { h: 1.4 },
   nightstand: { w: 0.45, d: 0.4, h: 0.55 },
   candle: { n: 1 },
+  arearug: { w: 2.6, l: 1.8, c1: '#b0553a', c2: '#efe3c8', c3: '#4f3828' },
+  painting: { w: 1.2, h: 0.9 },
 };
 const dims = (it, p) => ({
   counter: [p.len, p.h, p.d], stove: [p.w, 1.16, p.d], jarshelf: [p.w, p.h, p.d], sofa: [p.width, p.seat + 0.3, p.depth],
   planter: [p.len, p.h, p.d], pot: [p.r * 2.1, p.r * 1.6 + 0.07, p.r * 2.1], crate: [p.w, p.h, p.d], bed: [p.w, 0.6, p.l],
   desk: [p.w, p.h, p.d], nightstand: [p.w, p.h, p.d], lamp: [0.32, p.h, 0.32],
+  arearug: [p.w, 0.013, p.l],
 })[it];
-const HULL_PAINT = { counter: '#9baf84', stove: '#f0c9a0', jarshelf: '#8a6444', sofa: '#7d9a5a', planter: '#8aa672', pot: '#c97a52', crate: '#c9a27a', bed: '#9baf84', desk: '#8a6444', nightstand: '#8a6444', lamp: '#e9dcc0' };
+const HULL_PAINT = { arearug: '#b98a60', counter: '#9baf84', stove: '#f0c9a0', jarshelf: '#8a6444', sofa: '#7d9a5a', planter: '#8aa672', pot: '#c97a52', crate: '#c9a27a', bed: '#9baf84', desk: '#8a6444', nightstand: '#8a6444', lamp: '#e9dcc0' };
 export function geometry(ctx) {
   const it = ITEMS[ctx.params.item] ? ctx.params.item : 'crate', p = { ...DEFAULTS[it], ...ctx.params };
   ctx.flat(); ctx.roughness(0.8);
   if (ctx.lod >= 4) {
     const d = dims(it, p);
     if (!d) { if (it === 'lantern' || it === 'candle') { P(ctx, '#ffe2a8'); glow(ctx, 1.3, 0.85, 0.35); box(ctx, 0, p.drop > 0 ? -p.drop - 0.34 : 0, 0, 0.2, 0.3, 0.2); ctx.emissive(null); } else { P(ctx, '#6a9f45'); box(ctx, 0, -(p.drop || 0.3) - 0.3, 0, 0.3, 0.3, 0.3); } return; }
+    if (it === 'painting') { P(ctx, 'walnut'); box(ctx, 0, -p.h / 2 - 0.07, -0.02, p.w + 0.14, p.h + 0.14, 0.04); return; }
+    if (it === 'arearug') { P(ctx, p.c1); box(ctx, 0, 0, 0, p.w, 0.013, p.l); return; }
     P(ctx, HULL_PAINT[it]); box(ctx, 0, 0, 0, d[0], d[1], d[2]);
     if (it === 'stove') { P(ctx, 'iron'); box(ctx, 0, 1.1, 0.12, 0.2, p.pipe - 1.1, 0.2); }
     return;
@@ -361,7 +388,7 @@ export function geometry(ctx) {
 }
 export function collider(ctx) {
   const it = ctx.params.item, p = { ...DEFAULTS[it], ...ctx.params }, d = dims(it, p);
-  if (!d || it === 'lamp') return null;
+  if (!d || it === 'lamp' || it === 'arearug' || it === 'painting') return null;
   if (it === 'bed') return { kind: 'box', width: p.w, height: 0.6, depth: p.l };
   return { kind: 'box', width: d[0], height: d[1], depth: d[2] };
 }
