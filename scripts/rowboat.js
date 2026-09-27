@@ -69,6 +69,7 @@ export function update(ctx, dt) {
   if (s.rider && !riderHere(ctx, s.rider)) { s.rider = null; self.controller = null; self.audio = null; }
   m.t += dt;
   const rowing = !!s.rider;
+  if (!rowing && Math.abs(m.speed) < 0.05) { const r = self.rotation; m.yaw = typeof r === 'number' ? r : typeof r?.w === 'number' ? Math.atan2(2 * (r.x * r.z + r.w * r.y), 1 - 2 * (r.x * r.x + r.y * r.y)) / D2R : (r?.yaw ?? m.yaw); }
   const inp = rowing ? m.in : { x: 0, z: 0 };
   const target = inp.z > 0.1 ? B.speed : inp.z < -0.1 ? -B.reverse : 0;
   m.speed += clamp(target - m.speed, -(target === 0 ? B.drag : B.accel) * dt, (target === 0 ? B.drag : B.accel) * dt);
