@@ -2637,12 +2637,70 @@ fireflies-camp:
   id: fireflies-camp
   tags: [fireflies]
 firepit:
-  feetPosition: {x: -7, y: 0.3, z: -4}
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-small-wood-hearth-crackle-loop.mp3, gain: 0.15, loop: true, maxDistance: 18, spatial: true}
+  feetPosition: {x: -22, y: 0.30382150557920384, z: -0.6}
+  fx: {script: "fx\npop coals n=10 on=disc(.3) size=.07..0.15 tint=<2.6,1,.28>..<1.2,.35,.09> sz=$size*flick(.5,.12) col=$tint*flick(.8,.3) a=.9 r=sprite(soft-disc,add)\npop flame rate=flick(.45,.2)*55 on=disc(.22) life=.5..0.95 v=up(1.6)+cone(24)*(.35..0.9) size=.24..0.44 acc=curl(.5)*1.3+buoy(2.4)+drag(1.5)\n  sz=$size*(.5>.25:1>.7:.72>.14) col=hdr(4.8,3.6,1.5)>.3:hdr(3.4,1.5,.35)>.65:hdr(1.9,.55,.12)>hdr(.7,.14,.03) a=0>.12:1>.75:.85>0 rot=spin(.2) r=sprite(flame-wisp,add)\npop embers rate=5 on=disc(.22) life=.7..1.5 v=up(2.4)+cone(32)*(.4..1.3) size=.02..0.05 acc=curl(.8)*1.1+grav()*.45+drag(.5)\n  sz=$size*(1>.7:.8>.3) col=hdr(5,2.8,.8)>.6:hdr(2.4,.8,.15)>hdr(1,.22,.04) a=(0>.08:1>.65:.9>0)*flick(11,.35) r=sprite(ember,add,velocity,.02)\npop smoke on=@flame?.22 inh=p;v:$v*.4 life=1.8..3.2 size=.16..0.26 acc=buoy(.9)+curl(.35)*.5+drag(.8) sz=$size*(.7>3.4) col=<.3,.28,.26>><.15,.15,.16> a=0>.25:.3>.7:.21>0 rot=spin(.15) r=sprite(smoke-puff,alpha)\npop hearth n=1 at=disc(.22).c(.45) glo=fire()*(#flame/40)~ r=light(<1,.55,.24>,$glo*16,9)"}
   id: firepit
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 6, height: 1, kind: box, width: 6}
-  tags: [blueprint]
+  physics: static
+  primitive: {kind: scripted, params: {kind: pit}, script: scripts/gen/firepit.js}
+  tags: [firepit]
+  visibleRange: {max: 80}
+firepit-bench:
+  feetPosition: {x: -22, y: 0.32347426886699127, z: 1.4499999999999997}
+  id: firepit-bench
+  physics: static
+  primitive: {kind: scripted, params: {kind: bench, seat: 0.45, width: 1.8}, script: scripts/gen/firepit.js}
+  rotation: {yaw: 0}
+  tags: [den-furniture, firepit-seat]
+  visibleRange: {max: 80}
+firepit-stool-0:
+  feetPosition: {x: -20.16759938946748, y: 0.3052000534083316, z: 0.06693927948505396}
+  id: firepit-stool-0
+  physics: static
+  primitive: {kind: scripted, params: {kind: stump, seat: 0.45, seed: 2, width: 0.45}, script: scripts/gen/firepit.js}
+  rotation: {yaw: 70}
+  tags: [den-furniture, firepit-seat]
+  visibleRange: {max: 80}
+firepit-stool-1:
+  feetPosition: {x: -20.232699815278533, y: 0.29448977210188243, z: -1.424105610394364}
+  id: firepit-stool-1
+  physics: static
+  primitive: {kind: scripted, params: {kind: stump, seat: 0.45, seed: 3, width: 0.45}, script: scripts/gen/firepit.js}
+  rotation: {yaw: 114.99999999999999}
+  tags: [den-furniture, firepit-seat]
+  visibleRange: {max: 80}
+firepit-stool-2:
+  feetPosition: {x: -21.333060720514947, y: 0.29326285796848883, z: -2.4324006105325213}
+  id: firepit-stool-2
+  physics: static
+  primitive: {kind: scripted, params: {kind: stump, seat: 0.45, seed: 4, width: 0.45}, script: scripts/gen/firepit.js}
+  rotation: {yaw: 160.00000000000003}
+  tags: [den-furniture, firepit-seat]
+  visibleRange: {max: 80}
+firepit-stool-3:
+  feetPosition: {x: -22.824105610394362, y: 0.3016557920982639, z: -2.3673001847214676}
+  id: firepit-stool-3
+  physics: static
+  primitive: {kind: scripted, params: {kind: stump, seat: 0.45, seed: 5, width: 0.45}, script: scripts/gen/firepit.js}
+  rotation: {yaw: -155.00000000000006}
+  tags: [den-furniture, firepit-seat]
+  visibleRange: {max: 80}
+firepit-stool-4:
+  feetPosition: {x: -23.83240061053252, y: 0.31724287445539523, z: -1.2669392794850542}
+  id: firepit-stool-4
+  physics: static
+  primitive: {kind: scripted, params: {kind: stump, seat: 0.45, seed: 6, width: 0.45}, script: scripts/gen/firepit.js}
+  rotation: {yaw: -110}
+  tags: [den-furniture, firepit-seat]
+  visibleRange: {max: 80}
+firepit-stool-5:
+  feetPosition: {x: -23.83240061053252, y: 0.3240050270311343, z: 0.06693927948505429}
+  id: firepit-stool-5
+  physics: static
+  primitive: {kind: scripted, params: {kind: stump, seat: 0.45, seed: 7, width: 0.45}, script: scripts/gen/firepit.js}
+  rotation: {yaw: -69.99999999999999}
+  tags: [den-furniture, firepit-seat]
+  visibleRange: {max: 80}
 fishing-pier:
   audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-pond-frogs-croaking-ambience-loop.mp3, gain: 0.15, loop: true, maxDistance: 18, spatial: true}
   feetPosition: {x: 21, y: 0, z: -59.8}
@@ -2872,6 +2930,30 @@ grand-gate-light-w:
   feetPosition: {x: -2.425, y: 4.4, z: 5}
   id: grand-gate-light-w
   light: {color: oklch(0.85 0.12 70), distance: 9, intensity: 2, kind: point}
+grotto:
+  feetPosition: {x: -28.3, y: 0.5, z: -55.3}
+  id: grotto
+  physics: static
+  primitive: {kind: scripted, params: {kind: hollow}, script: scripts/gen/grotto.js}
+  rotation: {yaw: -90}
+  tags: [grotto]
+  visibleRange: {max: 80}
+grotto-chest:
+  behavior: scripts/grotto-chest.js
+  feetPosition: {x: -33.8, y: 0.56, z: -55.3}
+  fx: {script: "fx\npop flies n=10 on=box(1.4,.5,1.6).c(1) size=.025..0.04 acc=curl(.4)*.6+drag(1) col=hdr(2.2,2.6,.9) a=(.2>.9>.2)*flick(1.3,.8) sz=$size r=sprite(mote,add)"}
+  id: grotto-chest
+  physics: static
+  primitive: {kind: scripted, params: {kind: chest}, script: scripts/gen/grotto.js}
+  rotation: {yaw: -90}
+  state: {act: Open, lidPitch: 0, open: false}
+  tags: [interactable, grotto-chest]
+  visibleRange: {max: 60}
+grotto-chest/lid:
+  feetPosition: {x: 0, y: 0.3, z: 0.21}
+  id: grotto-chest/lid
+  parent: grotto-chest
+  primitive: {kind: scripted, params: {kind: lid}, script: scripts/gen/grotto.js}
 grounds-arch-front:
   children: [{feetPosition: {x: 0, y: 3.05, z: 0}, light: {color: oklch(0.85 0.1 70), distance: 8, intensity: 2, kind: point}}]
   feetPosition: {x: 0, y: 0.5, z: -10.2}
