@@ -275,8 +275,8 @@ function deckRail(ctx, collide) {
 function build(ctx, collide) {
   const lod = collide ? 1 : Number(ctx.lod ?? 1);
   const P = (tx, col, rough) => () => { if (collide) return; ctx.albedo(tx); ctx.color(col); ctx.roughness(rough); };
-  const cobOut = P(TX.cob, "oklch(0.95 0.03 75)", 0.95), limeIn = P(TX.lime, "oklch(0.97 0.02 85)", 0.9), stone = P(TX.stone, "oklch(0.93 0.02 80)", 0.95);
-  const plankTop = P(TX.plank, "oklch(0.95 0.03 75)", 0.75), beams = P(TX.timber, "oklch(0.88 0.04 65)", 0.85), flags = P(TX.flags, "oklch(0.94 0.02 80)", 0.9);
+  const cobOut = P(TX.cob, "oklch(0.95 0.03 75)", 0.95), limeIn = P(TX.lime, "oklch(0.80 0.05 75)", 0.9), stone = P(TX.stone, "oklch(0.93 0.02 80)", 0.95);
+  const plankTop = P(TX.plank, "oklch(0.95 0.03 75)", 0.75), plankIn = P(TX.plank, "oklch(0.52 0.06 55)", 0.7), beams = P(TX.timber, "oklch(0.88 0.04 65)", 0.85), flags = P(TX.flags, "oklch(0.94 0.02 80)", 0.9);
   if (!collide) ctx.flat();
   if (lod >= 4) {
     // far: the hex drum, the roof and the crown
@@ -292,8 +292,8 @@ function build(ctx, collide) {
   }
   const th = H.trunkHole, TH = [-th, -th, th, th];
   floorSlab(ctx, H.B, 0.25, AI + 0.1, [], flags, flags, collide);
-  floorSlab(ctx, H.G, 0.3, AI + 0.1, [TH, H.hatchG], plankTop, beams, collide);
-  floorSlab(ctx, H.A, 0.3, AI + 0.1, [TH, H.hatchB ?? H.hatchA], plankTop, beams, collide);
+  floorSlab(ctx, H.G, 0.3, AI + 0.1, [TH, H.hatchG], plankIn, beams, collide);
+  floorSlab(ctx, H.A, 0.3, AI + 0.1, [TH, H.hatchB ?? H.hatchA], plankIn, beams, collide);
   floorSlab(ctx, H.D, H.roofT, H.deckR * COS30, [TH, H.hatchD], plankTop, beams, collide);
   for (const F of H.flights) flight(ctx, F, collide, stone, beams);
   beams(); hatchRail(ctx, H.G, H.hatchG, "x0", collide); hatchRail(ctx, H.A, H.hatchA, "x0", collide); hatchRail(ctx, H.D, H.hatchD, "x1", collide);
