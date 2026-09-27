@@ -1873,6 +1873,13 @@ garden-tunnel:
   receiveShadow: true
   tags: [garden, garden-tunnel]
   visibleRange: {max: 220}
+grounds-plan:
+  feetPosition: {x: 0, y: 0.5, z: -35}
+  id: grounds-plan
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 45, height: 3, kind: box, width: 50}
+  tags: [blueprint]
 hive-site:
   audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-honeybee-hive-soft-hum-loop.mp3, gain: 0.12, loop: true, maxDistance: 12, spatial: true}
   castShadow: true
