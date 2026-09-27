@@ -2,38 +2,39 @@
 // its feet on the studio floor, its front facing -Z (wall pieces: back against the wall at z = 0 … +depth).
 const STEEL = "oklch(0.3 0.01 250)", ALU = "oklch(0.82 0.01 250)", WHITE = "oklch(0.97 0.005 250)", WALNUT = "oklch(0.62 0.07 55)";
 const PLANK = "cdn/texture-honey-oak-floor-planks.png";
+function sub(a, b) { return [a[0] - b[0], a[1] - b[1], a[2] - b[2]]; }
+function crs(a, b) { return [a[1] * b[2] - a[2] * b[1], a[2] * b[0] - a[0] * b[2], a[0] * b[1] - a[1] * b[0]]; }
+// a quad / tri wound so its face looks along n
+function Q(ctx, a, b, c, d, n) { const f = crs(sub(b, a), sub(c, a)); if (f[0] * n[0] + f[1] * n[1] + f[2] * n[2] >= 0) ctx.quad(...a, ...b, ...c, ...d); else ctx.quad(...d, ...c, ...b, ...a); }
+function T(ctx, a, b, c, n) { const f = crs(sub(b, a), sub(c, a)); if (f[0] * n[0] + f[1] * n[1] + f[2] * n[2] >= 0) ctx.tri(...a, ...b, ...c); else ctx.tri(...c, ...b, ...a); }
 function box(ctx, x0, y0, z0, x1, y1, z1) {
-  ctx.quad(x0, y1, z0, x0, y1, z1, x1, y1, z1, x1, y1, z0);
-  ctx.quad(x0, y0, z0, x1, y0, z0, x1, y0, z1, x0, y0, z1);
-  ctx.quad(x0, y0, z1, x1, y0, z1, x1, y1, z1, x0, y1, z1);
-  ctx.quad(x1, y0, z0, x0, y0, z0, x0, y1, z0, x1, y1, z0);
-  ctx.quad(x1, y0, z1, x1, y0, z0, x1, y1, z0, x1, y1, z1);
-  ctx.quad(x0, y0, z0, x0, y0, z1, x0, y1, z1, x0, y1, z0);
+  Q(ctx, [x0, y1, z0], [x1, y1, z0], [x1, y1, z1], [x0, y1, z1], [0, 1, 0]);
+  Q(ctx, [x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1], [0, -1, 0]);
+  Q(ctx, [x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1], [0, 0, 1]);
+  Q(ctx, [x0, y0, z0], [x1, y0, z0], [x1, y1, z0], [x0, y1, z0], [0, 0, -1]);
+  Q(ctx, [x1, y0, z0], [x1, y0, z1], [x1, y1, z1], [x1, y1, z0], [1, 0, 0]);
+  Q(ctx, [x0, y0, z0], [x0, y0, z1], [x0, y1, z1], [x0, y1, z0], [-1, 0, 0]);
 }
 const cbox = (ctx, cx, y0, cz, w, h, d) => box(ctx, cx - w / 2, y0, cz - d / 2, cx + w / 2, y0 + h, cz + d / 2);
-// a cylinder along Y
+// a cylinder along Y (r at the bottom, r2 at the top)
 function cyl(ctx, cx, y0, cz, r, h, n = 12, r2 = r) {
   for (let i = 0; i < n; i++) {
-    const a = (i / n) * Math.PI * 2, b = ((i + 1) / n) * Math.PI * 2;
+    const a = (i / n) * Math.PI * 2, b = ((i + 1) / n) * Math.PI * 2, m = (a + b) / 2;
     const p = (ang, rr, y) => [cx + Math.cos(ang) * rr, y, cz + Math.sin(ang) * rr];
-    ctx.quad(...p(a, r, y0), ...p(a, r2, y0 + h), ...p(b, r2, y0 + h), ...p(b, r, y0));
-    ctx.tri(cx, y0 + h, cz, ...p(b, r2, y0 + h), ...p(a, r2, y0 + h));
-    ctx.tri(cx, y0, cz, ...p(a, r, y0), ...p(b, r, y0));
+    Q(ctx, p(a, r, y0), p(a, r2, y0 + h), p(b, r2, y0 + h), p(b, r, y0), [Math.cos(m), 0, Math.sin(m)]);
+    T(ctx, [cx, y0 + h, cz], p(b, r2, y0 + h), p(a, r2, y0 + h), [0, 1, 0]);
+    T(ctx, [cx, y0, cz], p(a, r, y0), p(b, r, y0), [0, -1, 0]);
   }
 }
-// a cylinder between two points (arms, legs)
+// a tube between two points (arms, legs, rails)
 function rod(ctx, a, b, r, n = 8) {
-  const d = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], L = Math.hypot(...d); if (L < 1e-4) return;
-  const f = d.map((v) => v / L); let s = [f[1] * 0 - f[2] * 1, f[2] * 0 - f[0] * 0, f[0] * 1 - f[1] * 0];
+  const d = sub(b, a), L = Math.hypot(...d); if (L < 1e-4) return;
+  const f = d.map((v) => v / L); let s = crs(f, [0, 1, 0]);
   if (Math.hypot(...s) < 1e-3) s = [1, 0, 0]; const sl = Math.hypot(...s); s = s.map((v) => v / sl);
-  const u = [f[1] * s[2] - f[2] * s[1], f[2] * s[0] - f[0] * s[2], f[0] * s[1] - f[1] * s[0]];
-  const P = (o, ang) => [o[0] + (s[0] * Math.cos(ang) + u[0] * Math.sin(ang)) * r, o[1] + (s[1] * Math.cos(ang) + u[1] * Math.sin(ang)) * r, o[2] + (s[2] * Math.cos(ang) + u[2] * Math.sin(ang)) * r];
-  for (let i = 0; i < n; i++) { const A = (i / n) * 6.2832, B = ((i + 1) / n) * 6.2832; ctx.quad(...P(a, A), ...P(a, B), ...P(b, B), ...P(b, A)); }
-}
-// a picture on a -Z facing plane: a quad with 0..1 uvs
-function picture(ctx, x0, y0, x1, y1, z, uvs) {
-  ctx.quad(x1, y0, z, x0, y0, z, x0, y1, z, x1, y1, z);
-  uvs.push(1, 0, 0, 0, 0, 1, 1, 1);
+  const u = crs(f, s);
+  const dir = (ang) => [s[0] * Math.cos(ang) + u[0] * Math.sin(ang), s[1] * Math.cos(ang) + u[1] * Math.sin(ang), s[2] * Math.cos(ang) + u[2] * Math.sin(ang)];
+  const P = (o, ang) => { const q = dir(ang); return [o[0] + q[0] * r, o[1] + q[1] * r, o[2] + q[2] * r]; };
+  for (let i = 0; i < n; i++) { const A = (i / n) * 6.2832, B = ((i + 1) / n) * 6.2832; Q(ctx, P(a, A), P(a, B), P(b, B), P(b, A), dir((A + B) / 2)); }
 }
 const paint = (ctx, col, rough = 0.6, metal = 0, tex = null) => { ctx.albedo(tex); ctx.color(col); ctx.roughness(rough); ctx.metalness(metal); ctx.emissive(null); };
 
@@ -47,9 +48,9 @@ function shell(ctx, p) {
     for (let k = 0; k < 6; k++) {
       const a = hex(ap, k), b = hex(ap, k + 1), a2 = hex(ap - d, k), b2 = hex(ap - d, k + 1);
       paint(ctx, WHITE, 0.5); ctx.emissive(...e);
-      ctx.quad(a[0], y, a[1], b[0], y, b[1], b2[0], y, b2[1], a2[0], y, a2[1]);
-      ctx.quad(a2[0], y, a2[1], b2[0], y, b2[1], b2[0], y + h, b2[1], a2[0], y + h, a2[1]);
-      ctx.quad(a[0], y + h, a[1], a2[0], y + h, a2[1], b2[0], y + h, b2[1], b[0], y + h, b[1]);
+      Q(ctx, [a[0], y, a[1]], [b[0], y, b[1]], [b2[0], y, b2[1]], [a2[0], y, a2[1]], [0, -1, 0]);
+      Q(ctx, [a2[0], y, a2[1]], [b2[0], y, b2[1]], [b2[0], y + h, b2[1]], [a2[0], y + h, a2[1]], [-(a2[0] + b2[0]), 0, -(a2[1] + b2[1])]);
+      Q(ctx, [a[0], y + h, a[1]], [a2[0], y + h, a2[1]], [b2[0], y + h, b2[1]], [b[0], y + h, b[1]], [0, 1, 0]);
     }
   }
   ctx.emissive(null);
@@ -83,19 +84,19 @@ function shell(ctx, p) {
   for (let k = 0; k < 6; k++) {
     const a0 = hex(R0 * Math.cos(Math.PI / 6), k), a1 = hex(R0 * Math.cos(Math.PI / 6), k + 1), b0 = hex(R1 * Math.cos(Math.PI / 6), k), b1 = hex(R1 * Math.cos(Math.PI / 6), k + 1);
     paint(ctx, WALNUT, 0.45, 0, PLANK);
-    ctx.quad(a0[0], y, a0[1], a1[0], y, a1[1], b1[0], y, b1[1], b0[0], y, b0[1]);
-    ctx.quad(b0[0], y - 0.08, b0[1], b1[0], y - 0.08, b1[1], b1[0], y, b1[1], b0[0], y, b0[1]);
+    Q(ctx, [a0[0], y, a0[1]], [a1[0], y, a1[1]], [b1[0], y, b1[1]], [b0[0], y, b0[1]], [0, 1, 0]);
+    Q(ctx, [b0[0], y - 0.08, b0[1]], [b1[0], y - 0.08, b1[1]], [b1[0], y, b1[1]], [b0[0], y, b0[1]], [b0[0] + b1[0], 0, b0[1] + b1[1]]);
     paint(ctx, "oklch(0.25 0.01 250)", 0.5);
     const c0 = hex((R1 - 0.12) * Math.cos(Math.PI / 6), k), c1 = hex((R1 - 0.12) * Math.cos(Math.PI / 6), k + 1);
-    ctx.quad(c0[0], 0, c0[1], c1[0], 0, c1[1], c1[0], y - 0.08, c1[1], c0[0], y - 0.08, c0[1]);
+    Q(ctx, [c0[0], 0, c0[1]], [c1[0], 0, c1[1]], [c1[0], y - 0.08, c1[1]], [c0[0], y - 0.08, c0[1]], [c0[0] + c1[0], 0, c0[1] + c1[1]]);
     paint(ctx, WHITE); ctx.emissive(0.6, 2.0, 2.4);
     const e0 = hex((R1 - 0.1) * Math.cos(Math.PI / 6), k), e1 = hex((R1 - 0.1) * Math.cos(Math.PI / 6), k + 1);
-    ctx.quad(e0[0], 0.04, e0[1], e1[0], 0.04, e1[1], e1[0], 0.07, e1[1], e0[0], 0.07, e0[1]);
+    Q(ctx, [e0[0], 0.04, e0[1]], [e1[0], 0.04, e1[1]], [e1[0], 0.07, e1[1]], [e0[0], 0.07, e0[1]], [e0[0] + e1[0], 0, e0[1] + e1[1]]);
     ctx.emissive(null);
   }
   // a floor inlay: a thin brass hex ring at 3.4 m, the studio's compass
   paint(ctx, "oklch(0.78 0.1 80)", 0.3, 0.9);
-  for (let k = 0; k < 6; k++) { const a = hex(3.4, k), b = hex(3.4, k + 1), a2 = hex(3.34, k), b2 = hex(3.34, k + 1); ctx.quad(a[0], 0.004, a[1], a2[0], 0.004, a2[1], b2[0], 0.004, b2[1], b[0], 0.004, b[1]); }
+  for (let k = 0; k < 6; k++) { const a = hex(3.4, k), b = hex(3.4, k + 1), a2 = hex(3.34, k), b2 = hex(3.34, k + 1); Q(ctx, [a[0], 0.004, a[1]], [a2[0], 0.004, a2[1]], [b2[0], 0.004, b2[1]], [b[0], 0.004, b[1]], [0, 1, 0]); }
 }
 // the video wall: 3×2 bezel-less panels, one picture across them, on a floating black frame. Back at z = 0.
 function screenwall(ctx, p) {
@@ -109,9 +110,7 @@ function screenwall(ctx, p) {
   paint(ctx, "oklch(0.1 0 0)", 0.3);
   for (const x of [-W / 6, W / 6]) box(ctx, x - 0.006, y0, -0.131, x + 0.006, y0 + Hh, -0.12);
   box(ctx, -W / 2, y0 + Hh / 2 - 0.006, -0.131, W / 2, y0 + Hh / 2 + 0.006, -0.12);
-  const before = ctx.vertexCount?.() ?? null;
-  ctx.albedo(p.tex); ctx.color("oklch(1 0 0)"); ctx.roughness(0.25); ctx.emissive(0.7, 0.7, 0.7);
-  return { tail: [-W / 2, y0, W / 2, y0 + Hh, -0.125] };
+
 }
 // an easel: aluminium A-frame, a stretched canvas at a lean, a paint tray. Canvas faces -Z.
 function easel(ctx, p) {
@@ -128,7 +127,6 @@ function easel(ctx, p) {
   // stretcher bars behind the canvas
   paint(ctx, "oklch(0.8 0.04 70)", 0.8);
   box(ctx, -cw / 2, cy, 0.02, cw / 2, cy + ch, 0.06);
-  return { tail: [-cw / 2, cy, cw / 2, cy + ch, 0.018], lean: true };
 }
 // a framed print on the wall: thin black frame, white mat, backlit edge. Back at z = 0.
 function frame(ctx, p) {
@@ -139,7 +137,6 @@ function frame(ctx, p) {
   box(ctx, -w / 2 - 0.03, y0 - 0.03, -0.07, w / 2 + 0.03, y0 + h + 0.03, -0.03);
   paint(ctx, "oklch(0.98 0.005 90)", 0.9);
   box(ctx, -w / 2 + 0.01, y0 + 0.01, -0.072, w / 2 - 0.01, y0 + h - 0.01, -0.07);
-  return { tail: [-w / 2 + 0.09, y0 + 0.09, w / 2 - 0.09, y0 + h - 0.09, -0.074] };
 }
 // the robot arm on its plinth, brush to the canvas at -Z. Six joints, painted safety orange.
 function robotarm(ctx, p) {
@@ -167,8 +164,8 @@ function holo(ctx, p) {
   for (let i = 0; i < 22; i++) {
     const a = i * 0.9, r = 0.12 + (i % 5) * 0.06, y = 0.9 + i * 0.045, s = 0.1 + (i % 3) * 0.05;
     const x = Math.cos(a) * r, z = Math.sin(a) * r, tx = -Math.sin(a) * s, tz = Math.cos(a) * s;
-    ctx.albedo(null); ctx.color(i % 4 === 0 ? "oklch(0.85 0.12 330)" : "oklch(0.88 0.1 200)", 0.55); ctx.emissive(i % 4 === 0 ? [2.4, 0.9, 2.4] : [0.6, 2.2, 2.8]);
-    ctx.quad(x - tx, y - s, z - tz, x + tx, y - s * 0.3, z + tz, x + tx * 0.4, y + s, z + tz * 0.4, x - tx * 0.6, y + s * 0.4, z - tz * 0.6);
+    ctx.albedo(null); ctx.color(i % 4 === 0 ? "oklch(0.85 0.12 330)" : "oklch(0.88 0.1 200)", 0.55); if (i % 4 === 0) ctx.emissive(2.4, 0.9, 2.4); else ctx.emissive(0.6, 2.2, 2.8);
+    Q(ctx, [x - tx, y - s, z - tz], [x + tx, y - s * 0.3, z + tz], [x + tx * 0.4, y + s, z + tz * 0.4], [x - tx * 0.6, y + s * 0.4, z - tz * 0.6], [x, 0, z]); Q(ctx, [x - tx, y - s, z - tz], [x + tx, y - s * 0.3, z + tz], [x + tx * 0.4, y + s, z + tz * 0.4], [x - tx * 0.6, y + s * 0.4, z - tz * 0.6], [-x, 0, -z]);
   }
   ctx.emissive(null);
 }
@@ -193,7 +190,6 @@ function desk(ctx, p) {
   // the stool at +Z
   paint(ctx, STEEL, 0.35, 0.8); cyl(ctx, 0, 0, 0.85, 0.22, 0.03, 12); cyl(ctx, 0, 0.03, 0.85, 0.03, 0.62, 8);
   paint(ctx, "oklch(0.25 0.02 40)", 0.6); cyl(ctx, 0, 0.65, 0.85, 0.2, 0.06, 14);
-  return { tail: [-0.99, top + 0.25, -0.01, top + 0.82, -0.2805] };
 }
 // the supply wall: a steel shelving run with neon paint cans, rolled paper, a 3D printer glowing on the low shelf
 function shelf(ctx, p) {
@@ -232,23 +228,14 @@ export function geometry(ctx) {
   ctx.flat();
   const fn = { shell, screenwall, easel, frame, robotarm, holo, desk, shelf, lounge }[item];
   if (!fn) return;
-  const r = fn(ctx, p);
-  if (r?.tail && p.tex) {
-    // the picture last: its quad carries 0..1 uvs, every face before it takes planar ones
-    const [x0, y0, x1, y1, z] = r.tail;
-    ctx.albedo(p.tex); ctx.color("oklch(1 0 0)"); ctx.roughness(p.glow ? 0.25 : 0.8); ctx.metalness(0);
-    ctx.emissive(p.glow ? [p.glow, p.glow, p.glow] : null);
-    ctx.quad(x1, y0, z, x0, y0, z, x0, y1, z, x1, y1, z);
-    ctx.emissive(null);
-    return { uvProjection: "planar" };
-  }
+  fn(ctx, p);
 }
 export function collider(ctx) {
   const item = ctx.params?.item;
   if (item === "shell") {
     // the root bench is a seat you can step onto
     const hex = (ap, k) => { const a = (60 * k) * Math.PI / 180, r = ap / Math.cos(Math.PI / 6); return [Math.cos(a) * r, Math.sin(a) * r]; };
-    for (let k = 0; k < 6; k++) { const a = hex(0.9, k), b = hex(0.9, k + 1), c = hex(1.52, k + 1), d = hex(1.52, k); ctx.quad(a[0], 0.45, a[1], b[0], 0.45, b[1], c[0], 0.45, c[1], d[0], 0.45, d[1]); ctx.quad(d[0], 0, d[1], c[0], 0, c[1], c[0], 0.45, c[1], d[0], 0.45, d[1]); }
+    for (let k = 0; k < 6; k++) { const a = hex(0.9, k), b = hex(0.9, k + 1), c = hex(1.52, k + 1), d = hex(1.52, k); Q(ctx, [a[0], 0.45, a[1]], [b[0], 0.45, b[1]], [c[0], 0.45, c[1]], [d[0], 0.45, d[1]], [0, 1, 0]); Q(ctx, [d[0], 0, d[1]], [c[0], 0, c[1]], [c[0], 0.45, c[1]], [d[0], 0.45, d[1]], [c[0] + d[0], 0, c[1] + d[1]]); }
     return;
   }
   const B = { robotarm: [0.9, 0.5, 0.9, 0, 0], holo: [1.1, 0.62, 1.1, 0, 0], desk: [2.2, 0.95, 0.8, 0, 0], shelf: [3.6, 2.2, 0.5, 0, 0.25], lounge: [3.5, 0.5, 0.95, 0, 0], easel: [1.0, 1.2, 0.6, 0, 0.3] }[item];
