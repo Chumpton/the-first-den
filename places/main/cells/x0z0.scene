@@ -3399,12 +3399,15 @@ square-door/sign:
   parent: square-door
   text: {color: oklch(0.35 0.03 250), content: to the square, size: 0.28}
 stone-golem:
-  feetPosition: {x: 24, y: 0.5, z: -18}
+  behavior: scripts/stone-golem.js
+  children: [{feetPosition: {x: 0, y: 4.6, z: 0}, id: nametag, text: {color: oklch(0.95 0.03 90), content: Mossback, size: 0.35}}]
+  feetPosition: {x: 24, y: {terrain: 0}, z: -18}
   id: stone-golem
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 1.8, height: 4.2, kind: box, width: 2.4}
-  tags: [blueprint]
+  physics: {body: character, collider: capsule, height: 4.1, radius: 0.95}
+  primitive: {kind: scripted, params: {glow: 1}, script: scripts/gen/stone-golem.js, seed: 7}
+  rotation: {yaw: 0}
+  state: {act: Greet, home: {x: 24, z: -18}, name: Mossback}
+  tags: [golem, interactable, creature]
 sunbeams:
   feetPosition: {x: 0, y: 0.5, z: 0}
   fx: {script: "fx follow=camera\npop motes n=?mobile:60|160 on=box(24,8,24).c(3) wrap=24;8;24 life=4..7 v=up(.02..0.08)+sdir()*.05 size=.02..0.04 acc=curl(.2)*.2 col=hdr(1.6,1.4,.9) a=0>.3:.6>.7:.5>0 sz=$size r=sprite(mote,add)"}
