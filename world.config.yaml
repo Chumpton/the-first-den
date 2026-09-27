@@ -35,6 +35,7 @@ inputs:
     travelTower: {keys: ['4']}
     travelDock: {keys: ['5']}
     travelGate: {keys: ['6']}
+    fish: {keys: ['2']}
   axes:
     moveX:
       keys: a/d
