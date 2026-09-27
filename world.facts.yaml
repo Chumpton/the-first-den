@@ -40,6 +40,7 @@ assets:
     "anim/fairy.yml#flutter": clips/anim-fairy-yml-flutter-1dc0bc8b.json
     "anim/folk.yml#idle": clips/anim-folk-yml-idle-661641c2.json
     "anim/folk.yml#idleHold": clips/anim-folk-yml-idlehold-757e6f1b.json
+    "anim/folk.yml#talk": clips/anim-folk-yml-talk-bdc4157e.json
     "anim/folk.yml#talkHold": clips/anim-folk-yml-talkhold-a7eaac9f.json
     "anim/folk.yml#walk": clips/anim-folk-yml-walk-9e5b2431.json
     "anim/folk.yml#walkHold": clips/anim-folk-yml-walkhold-d2f5a43c.json
