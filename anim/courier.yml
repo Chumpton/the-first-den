@@ -1,0 +1,61 @@
+# Tomas the Courier and his chestnut (scripts/courier.js, channel body).
+stand:
+  duration: 3.5
+  tracks:
+    legL: { pitch: [0, 0] }
+    legR: { pitch: [0, 0] }
+    armL: { pitch: [0, 3, 0] }
+    armR: { pitch: [8, 10, 8] }
+    root: { y: [0, 0.008, 0] }
+    head: { yaw: [0, 10, 0, -14, 0], pitch: [0, 0] }
+pat:
+  duration: 2.4
+  tracks:
+    legL: { pitch: [0, 0] }
+    legR: { pitch: [0, 0] }
+    armL: { pitch: [0, 0] }
+    armR: { pitch: [8, 62, 70, 60, 70, 60, 70, 8], roll: [0, -18, -22, -18, -22, -18, -22, 0] }
+    root: { y: [0, 0] }
+    head: { yaw: [0, -30, -32, -30, -32, -30, -10, 0], pitch: [0, 8, 8, 8, 8, 6, 0, 0] }
+greet:
+  duration: 1.6
+  tracks:
+    legL: { pitch: [0, 0] }
+    legR: { pitch: [0, 0] }
+    armL: { pitch: [0, 95, 100, 95, 0], roll: [0, -10, 10, -10, 0] }
+    armR: { pitch: [8, 8] }
+    root: { y: [0, 0] }
+    head: { pitch: [0, -12, 0, -8, 0], yaw: [0, 0] }
+horse-idle:
+  duration: 7
+  tracks:
+    legFL: { pitch: [0, 0] }
+    legFR: { pitch: [0, 0] }
+    legBL: { pitch: [0, 0, 0, 0, 0, 0, 0, 0] }
+    legBR: { pitch: [0, 0, 7, 7, 7, 7, 0, 0] }
+    root: { y: [0, 0, -0.015, -0.015, -0.015, -0.015, 0, 0], roll: [0, 0, 1.6, 1.6, 1.6, 1.6, 0, 0] }
+    neck: { pitch: [0, 3, 7, 5, 1, -2, 0, 0] }
+    head: { pitch: [0, -3, 0, 2, 0, 0, 0, 0], yaw: [0, 6, 9, 2, -6, -4, 0, 0] }
+    tail: { yaw: [-14, 18, -6, 16, -20, 8, 14, -14] }
+horse-walk:
+  duration: 0.9
+  tracks:
+    legFL: { pitch: [22, 0, -22, 0, 22] }
+    legBL: { pitch: [0, -22, 0, 22, 0] }
+    legFR: { pitch: [-22, 0, 22, 0, -22] }
+    legBR: { pitch: [0, 22, 0, -22, 0] }
+    neck: { pitch: [3, -3, 3, -3, 3] }
+    head: { pitch: [-2, 2, -2, 2, -2], yaw: [0, 0] }
+    tail: { yaw: [-7, 7, -7] }
+    root: { y: [-0.02, 0, -0.02, 0, -0.02], roll: [1, 0, -1, 0, 1] }
+horse-canter:
+  duration: 0.62
+  tracks:
+    legFL: { pitch: [30, -8, -36, 4, 30] }
+    legFR: { pitch: [18, -22, -30, 14, 18] }
+    legBL: { pitch: [-26, 22, 36, -6, -26] }
+    legBR: { pitch: [-14, 32, 24, -16, -14] }
+    root: { y: [0, 0.07, 0.02, -0.04, 0], roll: [0, 0] }
+    neck: { pitch: [-7, 4, 7, -3, -7] }
+    head: { pitch: [4, -3, -5, 2, 4], yaw: [0, 0] }
+    tail: { yaw: [-6, 6, -6] }
