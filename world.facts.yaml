@@ -67,6 +67,10 @@ assets:
     "catio-cats.js#catio-walk": clips/catio-cats-js-catio-walk-d650142f.json
     "humanoid-locomotion.js#sit": clips/humanoid-locomotion-js-sit-7d6a6bbe.json
     "jade-dragon.js#dragon-rest": clips/jade-dragon-js-dragon-rest-fbc127dd.json
+    "pasture-flock.js#flock-alpaca-graze": clips/pasture-flock-js-flock-alpaca-graze-e8ca71f9.json
+    "pasture-flock.js#flock-alpaca-walk": clips/pasture-flock-js-flock-alpaca-walk-8e2bf6cd.json
+    "pasture-flock.js#flock-sheep-graze": clips/pasture-flock-js-flock-sheep-graze-5b8cd30a.json
+    "pasture-flock.js#flock-sheep-stand": clips/pasture-flock-js-flock-sheep-stand-37444caf.json
     "pasture-herd.js#pasture-graze": clips/pasture-herd-js-pasture-graze-92f77e93.json
     "pasture-herd.js#pasture-nicker": clips/pasture-herd-js-pasture-nicker-8747fd6a.json
     "pasture-herd.js#pasture-stand": clips/pasture-herd-js-pasture-stand-55b19bea.json
