@@ -27,7 +27,7 @@ function splitRail(c, a, b, w) {
 function area(pts) { let A = 0; for (let i = 0; i < pts.length; i++) { const p = pts[i], q = pts[(i + 1) % pts.length]; A += p[0] * q[1] - q[0] * p[1]; } return A / 2; }
 // fence runs: [[a, b], …] with the gate gap cut out; also the gate's two posts and hinge frame
 function runs(P) {
-  const pts = P.points, g = P.gate || { edge: -1 }, out = [];
+  const pts = P.points || [], g = P.gate || { edge: -1 }, out = [];
   let gate = null;
   for (let i = 0; i < pts.length; i++) {
     const a = pts[i], b = pts[(i + 1) % pts.length];
