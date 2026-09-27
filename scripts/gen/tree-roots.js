@@ -29,11 +29,11 @@ export function geometry(ctx) {
   const n = lod <= 2 ? 14 : 8;
   lathe(ctx, [[TR + 0.5, -0.12], [TR + 0.27, 0.3], [TR + 0.09, 0.62], [TR * 0.82, 0.86], [TR * 0.66, 1.15], [TR * 0.63, 1.45]], n, [0, 0, 0], 0.2);
   const ridges = (p.roots || []).map(([a, reach, w]) => root(ctx, a, reach, w, TR * 0.8, lod, R));
-  if (lod >= 4) return;
+  if (lod >= 5) return;
   // moss on the roots' shoulders and in the collar's lap
   for (const rg of ridges) for (let i = 1; i < rg.length - 2; i += lod <= 2 ? 1 : 2) if (R() < 0.7) { const [x, y, z, W] = rg[i]; mossPad(ctx, x, y - 0.05, z, W * (0.35 + R() * 0.25), lod); }
   for (let i = 0; i < (lod <= 2 ? 9 : 5); i++) { const a = R() * Math.PI * 2, r = TR + 0.2 + R() * 0.2; mossPad(ctx, Math.cos(a) * r, 0.2 + R() * 0.3, Math.sin(a) * r, 0.25 + R() * 0.15, lod, 'oklch(0.7 0.12 128)'); }
-  if (lod >= 3) return;
+  if (lod >= 4) return;
   for (const [a, r, sz] of p.ferns || []) for (let j = 0; j < 3; j++) {
     const aa = a + (j - 1) * 0.16, rr = r + (R() - 0.5) * 0.6;
     fernClump(ctx, [Math.cos(aa) * rr, 0.02, Math.sin(aa) * rr], sz * (0.8 + R() * 0.4), lod, R, `oklch(${0.56 + R() * 0.08} 0.13 ${132 + R() * 12})`);

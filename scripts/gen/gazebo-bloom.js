@@ -19,7 +19,6 @@ function helix(k, turns, r, y0, y1, n, ph) {
 }
 export function geometry(ctx) {
   const lod = ctx.lod || 1, Rn = rng(ctx.seed || 5); ctx.flat();
-  if (lod >= 5) return;
   // wisteria: gnarled trunks up the back posts, then a rope along the eaves
   if (lod <= 3) {
     flat(ctx, 'oklch(0.42 0.05 55)', 0.95);
@@ -36,11 +35,11 @@ export function geometry(ctx) {
     for (let i = 0; i < n; i++) {
       const t = (i + 0.5 + (Rn() - 0.5) * 0.4) / n, p = lerp(V(2.5, k, EAVE - 0.14), V(2.5, k + 1, EAVE - 0.14), t);
       const len = door ? 0.18 + Rn() * 0.1 : 0.32 + Rn() * 0.32;
-      if (lod <= 3) raceme(ctx, p, len, 0.07 + Rn() * 0.02, Rn() - 0.5, lod);
+      if (lod <= 4) raceme(ctx, p, len, 0.07 + Rn() * 0.02, Rn() - 0.5, lod);
       if (lod <= 2 || i % 2 === 0) { flat(ctx, `oklch(${0.56 + Rn() * 0.08} 0.12 ${128 + Rn() * 14})`, 0.95); gem(ctx, p[0], p[1] + 0.08, p[2], 0.16 + Rn() * 0.06, 0.08, 0.06, lod <= 2 ? 6 : 4); }
     }
   }
-  if (lod >= 4) return;
+  if (lod >= 5) return;
   // climbing roses: stem spiral, leaves, blooms
   let bi = 0;
   for (const k of ROSES) {
