@@ -182,23 +182,13 @@ function birch(e, p, lod) {
   loft(e, st.map((s, i) => { const c = at(s * H); return ring(c[0], c[1] - (i ? 0 : 0.3), c[2], rs[i], rs[i], 7); }), true, false);
   if (lod >= 4) return;
   // branches + weeping leaf clumps
-  const clumps = [];
   for (let b = 0; b < 6; b++) {
     const s = 0.45 + b * 0.09, base = at(s * H), a = R() * TAU, L = 1.4 + R() * 1.4;
     const tip = [base[0] + Math.cos(a) * L, base[1] + 0.9 + R() * 0.6, base[2] + Math.sin(a) * L - 0.6];
     const r = 0.05;
     e.paint("birch");
     loft(e, [ring(base[0], base[1], base[2], r, r, 5), ring(tip[0], tip[1], tip[2], r * 0.4, r * 0.4, 5)], true, false);
-    clumps.push(tip);
   }
-  clumps.push(at(H));
-  clumps.push(at(H * 0.86));
-  clumps.forEach((c, i) => {
-    const col = `oklch(${(0.66 + R() * 0.1).toFixed(3)} 0.13 ${118 + Math.round(R() * 14)})`;
-    const hang = 2.2 + R() * 1.2;
-    rock(e, { x: c[0], z: c[2], rx: 1.0 + R() * 0.4, rz: 1.0 + R() * 0.4, h: hang, sink: 0, seed: 70 + i + (p.v || 0) * 13, n: 7, moss: -2 });
-    // shift the clump so it hangs from the branch tip: drawn as rock at y 0..hang; offset below
-  });
 }
 // leaf clumps reuse rock() drawn at feet y 0; birchClumps draws them in place instead
 function birchCrown(e, p) {
@@ -246,7 +236,7 @@ function fern(e, p) {
       const s = k / seg, d = L * s, y = Math.sin(Math.PI * s * 0.85) * L * rise + 0.02;
       const w = (0.2 * Math.sin(Math.PI * Math.min(1, s * 1.1)) + 0.015) * (k % 2 ? 0.55 : 1);
       const c = [ca * d, y, sa * d], l = [c[0] - sa * w, y - w * 0.3, c[2] + ca * w], r = [c[0] + sa * w, y - w * 0.3, c[2] - ca * w];
-      if (prev) { e.q(prev[1], prev[0], c, c); e.t(prev[0], l, c); e.t(prev[0], c, r); e.t(prev[0], r, prev[2]); e.t(prev[0], prev[1], l); }
+      if (prev) { e.q(prev[1], prev[0], c, l); e.q(prev[0], prev[2], r, c); }
       prev = [c, l, r];
     }
   }
@@ -322,7 +312,7 @@ export function geometry(ctx) {
     case "knoll": knoll(e, lod); break;
     case "falls": falls(ctx, e, p.wl ?? -0.2); break;
     case "pine": pine(e, p, lod); break;
-    case "birch": birch(e, { ...p }, 5); if (lod < 4) birchCrown(e, p); break;
+    case "birch": birch(e, p, lod); if (lod < 4) birchCrown(e, p); break;
     case "reeds": reeds(e, p); break;
     case "fern": fern(e, p); break;
     case "lilies": lilies(e, p); break;
