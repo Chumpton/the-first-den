@@ -61,8 +61,19 @@ export function geometry(ctx) {
   paint(ctx, 'ashlar', COL.lime, 0.9);
   for (const [sx, sz] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) box(P, sx < 0 ? -TW : TW - 1.1, belfry, sz < 0 ? -TD : TD - 1.1, sx < 0 ? -TW + 1.1 : TW, shaftTop, sz < 0 ? -TD + 1.1 : TD);
   box(P, -TW, shaftTop - 0.7, -TD, TW, shaftTop, TD);
-  paint(ctx, null, 'oklch(0.22 0.02 60)', 0.9); box(P, -TW + 1.0, belfry, -TD + 1.0, TW - 1.0, shaftTop - 0.7, TD - 1.0);
-  if (lod <= 3) { paint(ctx, 'brass', 'oklch(0.85 0.06 75)', 0.35, 0.9); lathe(P, [[0.95, belfry + 0.2], [0.85, belfry + 0.45], [0.6, belfry + 1.2], [0.55, belfry + 1.55], [0.15, belfry + 1.7], [0, belfry + 1.7]], 12, 0, 0, -TD + 0.55); }
+  // open belfry: a dim ceiling, an oak headstock on two cheeks, the bronze bell hung in the open with its clapper
+  paint(ctx, null, 'oklch(0.3 0.03 60)', 0.9); P.quad(-TW + 1.1, shaftTop - 0.705, -TD + 1.1, TW - 1.1, shaftTop - 0.705, -TD + 1.1, TW - 1.1, shaftTop - 0.705, TD - 1.1, -TW + 1.1, shaftTop - 0.705, TD - 1.1);
+  { const by = shaftTop - 1.15, br = 1.05, n = lod <= 2 ? 20 : 10;
+    paint(ctx, 'walnut', COL.walnut, 0.85); for (const s of [-1, 1]) obox(P, s * (TW - 1.35), belfry, 0, 0.3, by - belfry + 0.35, 0.5);
+    if (lod <= 3) { obox(P, 0, by, 0, 2 * TW - 2.4, 0.32, 0.36); paint(ctx, null, COL.iron, 0.5, 0.6); for (const s of [-1, 1]) obox(P, s * 0.3, by - 0.2, 0, 0.1, 0.25, 0.4); }
+    paint(ctx, 'brass', 'oklch(0.78 0.08 62)', 0.3, 0.9);
+    lathe(P, [[br * 1.02, by - 1.75], [br, by - 1.62], [br * 0.9, by - 1.55], [br * 0.72, by - 1.25], [br * 0.6, by - 0.75], [br * 0.56, by - 0.35], [br * 0.42, by - 0.15], [0.16, by - 0.06], [0, by - 0.06]], n, 0, 0, 0);
+    if (lod <= 2) { paint(ctx, null, 'oklch(0.4 0.05 60)', 0.5, 0.7); lathe(P, [[0, by - 1.35], [0.16, by - 1.3], [0.18, by - 1.2], [0.05, by - 1.1], [0.04, by - 0.2], [0, by - 0.2]], 8, 0, 0, 0); paint(ctx, 'brass', 'oklch(0.85 0.08 75)', 0.3, 0.9); lathe(P, [[br * 0.9, by - 1.52], [br * 0.93, by - 1.47], [br * 0.86, by - 1.47]], n, 0, 0, 0); } }
+  // heraldic banner pole on the apron, south-east of the steps, and the iron rods the hall drapes hang from
+  { paint(ctx, 'ashlar', COL.lime, 0.9); box(P, 6.8, -0.3, -9.3, 8.2, 0.55, -7.9); if (lod <= 3) box(P, 7.0, 0.55, -9.1, 8.0, 0.8, -8.1);
+    paint(ctx, null, 'oklch(0.34 0.02 60)', 0.45, 0.7); lathe(P, [[0.14, 0.8], [0.11, 1.4], [0.09, 10], [0.07, 14.3], [0, 14.3]], lod <= 2 ? 10 : 6, 7.5, 0, -8.6);
+    paint(ctx, 'brass', 'oklch(0.85 0.1 82)', 0.3, 0.9); lathe(P, [[0, 14.25], [0.16, 14.35], [0.18, 14.5], [0.12, 14.62], [0.04, 14.7], [0.03, 15.05], [0, 15.1]], 8, 7.5, 0, -8.6);
+    if (lod <= 3) { paint(ctx, null, COL.iron, 0.5, 0.6); for (const s of [-1, 1]) { beam(P, [s * 5.1 - s * 0.62, 7.98, -HD - 0.33], [s * 5.1 + s * 0.62, 7.98, -HD - 0.33], 0.05, 0.05); for (const d of [-0.55, 0.55]) beam(P, [s * 5.1 + d, 7.98, -HD - 0.33], [s * 5.1 + d, 7.98, -HD + 0.05], 0.04, 0.04); lathe(P, [[0, -0.07], [0.07, 0], [0, 0.07]], 6, s * 5.1 + s * 0.66, 7.98, -HD - 0.33); } } }
   // corbelled ledge and the roost
   paint(ctx, 'ashlar', 'oklch(0.92 0.025 78)', 0.9);
   if (lod <= 3) { const n = 7; for (let i = 0; i < n; i++) { const x = -TW + (i + 0.5) * 2 * TW / n; for (const s of [-1, 1]) { const A = [[x - 0.25, shaftTop, s * TD], [x + 0.25, shaftTop, s * TD], [x + 0.25, shaftTop + 1.1, s * LD], [x - 0.25, shaftTop + 1.1, s * LD]]; solid(P, A, A.map(([a, b, c]) => [a, b, c - s * 0.01 - s * 0.0])), obox(P, x, shaftTop + 0.1, s * (TD + 0.25), 0.5, 1.0, 0.5); } } for (let i = 0; i < 5; i++) { const z = -TD + (i + 0.5) * 2 * TD / 5; for (const s of [-1, 1]) obox(P, s * (TW + 0.35), shaftTop + 0.1, z, 0.7, 1.0, 0.5); } }
@@ -83,6 +94,7 @@ export function collider(ctx) {
   const top = ctx.params.roostY ?? 21.45, P = ctx;
   box(P, -HW - 0.2, -0.5, -HD - 0.2, HW + 0.2, G + U + 2, HD + 0.2);
   box(P, -4.6, -0.2, -HD - 1.3, 4.6, 0.45, -HD);
+  box(P, 6.8, -0.3, -9.3, 8.2, 0.8, -7.9); box(P, 7.35, 0.8, -8.75, 7.65, 14.3, -8.45);
   box(P, -TW, G + U + 2, -TD, TW, top - LEDGE, TD);
   box(P, -LW, top - LEDGE - 0.6, -LD, LW, top, LD);
   const ph = 0.8, t = 0.3;
