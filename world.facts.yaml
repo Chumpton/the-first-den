@@ -33,6 +33,7 @@ assets:
     "anim/wolf.yml#alert": clips/anim-wolf-yml-alert-0ed44828.json
     "anim/wolf.yml#sniff": clips/anim-wolf-yml-sniff-181ab4fe.json
     "anim/wolf.yml#walk": clips/anim-wolf-yml-walk-2b7543f3.json
+    "catio-cats.js#catio-groom": clips/catio-cats-js-catio-groom-c7882924.json
     "catio-cats.js#catio-loaf": clips/catio-cats-js-catio-loaf-ca371ba0.json
     "catio-cats.js#catio-nap": clips/catio-cats-js-catio-nap-50286c11.json
     "catio-cats.js#catio-sit": clips/catio-cats-js-catio-sit-c9c66052.json
