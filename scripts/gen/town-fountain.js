@@ -52,7 +52,7 @@ function planter(ctx, P, cx, cz, lod) {
   for (let i = 0; i < 22; i++) { paint(ctx, null, FLOWERS[i % FLOWERS.length], 0.8); const a = rnd() * TAU, r = 0.25 + rnd() * 0.4; blob(P, cx + Math.cos(a) * r, t + 0.12 + rnd() * 0.22 + (r < 0.4 ? 0.2 : 0), cz + Math.sin(a) * r, 0.07, 0.06, 0.07, 4, rnd); }
 }
 function lion(ctx, P, a, lod) { // a lion mask on the pedestal, its mouth a bronze pipe pouring outward
-  const F = XF(P, Math.cos(a) * SPOUT.r, SPOUT.y, Math.sin(a) * SPOUT.r, Math.PI / 2 - a);
+  const F = XF(P, Math.cos(a) * SPOUT.r, SPOUT.y, Math.sin(a) * SPOUT.r, -Math.PI / 2 - a);
   let s = a * 1000 + 7; const rnd = () => (s = (s * 9301 + 49297) % 233280) / 233280;
   paint(ctx, 'lime', 'oklch(0.9 0.03 78)', 0.9);
   blob(F, 0, -0.28, 0.06, 0.3, 0.56, 0.12, lod <= 2 ? 8 : 5, rnd); // mane

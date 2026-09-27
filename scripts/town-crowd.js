@@ -27,7 +27,7 @@ function homeYaw(e, h) {
 function seed(ctx, have) {
   for (const e of C.roster) {
     if (have.has(e.id) || ctx.getObject(e.id)) continue
-    const M = C.models[e.model], h = home(e), y = (ctx.place.terrain.heightAt(h[0], h[1]) ?? 0.5) + 0.25
+    const M = C.models[e.model], h = home(e), y = (ctx.place.terrain.heightAt(h[0], h[1]) ?? 0.5) + 0.25 + (e.role === 'sit' ? (C.fountainDais?.rise ?? 0) : 0)
     const spec = {
       id: e.id, tags: ['town-crowd', 'npc', 'interactable'], behavior: ['scripts/humanoid-locomotion.js'],
       feetPosition: { x: h[0], y, z: h[1] }, rotation: { yaw: homeYaw(e, h) }, scale: e.scale ?? 1,
