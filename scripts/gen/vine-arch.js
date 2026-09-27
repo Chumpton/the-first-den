@@ -1,5 +1,6 @@
 // a timber (or limestone) arch draped in climbing vine and blossom, a lantern under the crown.
-// passage runs along local Z; posts stand at x = ±span/2. params: { span, height, depth, frame: "oak"|"stone", blossom: oklch }
+// passage runs along local Z; posts stand at x = ±span/2. params: { span, height, depth, frame: "oak"|"stone", blossom: oklch,
+//   lush: true (ivy masses, climbing roses, drooping wisteria), lanterns: N (small hanging lanterns along the crown, emissive only) }
 // the lantern's light is a child row at y = lanternY(params) (see LANTERN_DROP)
 import { paint, beam, obox, blob, leaf, gem, lathe, box, nrm, crs, TAU } from '../lib/yard-kit.js';
 export const LANTERN_DROP = 0.55;
@@ -84,6 +85,37 @@ export function geometry(ctx) {
   } else { // far: a leafy band over the crown
     paint(ctx, 'leaf', leafCol[0], 0.85);
     for (const sx of [-1, 0, 1]) { const [x, y] = sx ? [sx * hx, d.spring - 0.3] : [0, d.height - 0.05]; blob(ctx, x, y - 0.2, 0, 0.3, 0.4, d.depth * 0.7 + 0.15, 4); }
+  }
+  // lush: ivy masses along the vine, climbing roses on them, wisteria racemes drooping off the crown
+  if (p.lush && lod <= 3) {
+    const seg = lod <= 2 ? 5 : 4, step = lod <= 2 ? 2 : 3;
+    for (let i = 0; i < path.length; i += step) {
+      const [x, y] = path[i], onPost = Math.abs(Math.abs(x) - hx) < 0.01 && y < d.spring - 0.05;
+      paint(ctx, 'leaf', leafCol[i % 3], 0.85);
+      blob(ctx, x + (onPost ? Math.sign(x) * 0.05 : 0), y - 0.2, (rnd() - 0.5) * 0.15, 0.26 + rnd() * 0.1, 0.3 + rnd() * 0.12, hz + 0.14, seg, rnd);
+      if (lod <= 2 && rnd() < 0.7) for (let r = 0; r < 2; r++) {
+        paint(ctx, null, r ? 'oklch(0.62 0.2 18)' : blossom, 0.7);
+        gem(ctx, x + (rnd() - 0.5) * 0.4, y - 0.05 + (rnd() - 0.5) * 0.3, (rnd() < 0.5 ? -1 : 1) * (hz + 0.12), 0.06, 0.04, 0.03, 5);
+      }
+    }
+    const nr = lod <= 2 ? 11 : 6, lil = ['oklch(0.86 0.07 300)', 'oklch(0.76 0.11 300)', 'oklch(0.66 0.13 295)'];
+    for (const z of [-hz - 0.05, hz + 0.05]) for (let i = 0; i < nr; i++) {
+      const tt = 0.08 + (i + rnd() * 0.5) / nr * 0.84, [x, y] = crown(d, tt), L = 0.35 + rnd() * 0.3, zz = z + (rnd() - 0.5) * 0.12;
+      paint(ctx, null, lil[i % 3], 0.8);
+      lathe(ctx, [[0, y - 0.05 - L], [0.05, y - 0.05 - L * 0.55], [0.075, y - 0.12], [0.03, y - 0.02]], lod <= 2 ? 5 : 4, x, zz);
+    }
+  }
+  // extra hanging lanterns along the crown (emissive, no lights)
+  const nl = lod <= 3 ? (p.lanterns | 0) : 0;
+  for (let i = 0; i < nl; i++) {
+    const tt = (i + 1) / (nl + 1); if (Math.abs(tt - 0.5) < 0.05) continue;
+    const [x, y] = crown(d, tt), cy = y - 0.42;
+    paint(ctx, 'brass', 'oklch(0.9 0.05 80)', 0.45, 0.7);
+    beam(ctx, [x, y - 0.06, 0], [x, cy + 0.14, 0], 0.012, 0.012);
+    gem(ctx, x, cy + 0.13, 0, 0.07, 0.07, 0.01, 4);
+    ctx.albedo(null); ctx.color('oklch(0.97 0.06 80)'); ctx.roughness(0.2); ctx.metalness(0); ctx.emissive(2.6, 1.5, 0.55);
+    gem(ctx, x, cy, 0, 0.06, 0.12, 0.1, 5);
+    ctx.emissive(null);
   }
   // lantern: chain, brass cap, warm glass
   const ly = lanternY(p);
