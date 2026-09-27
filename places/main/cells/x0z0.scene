@@ -2121,6 +2121,13 @@ outbuilding-workshop/outbuilding-workshop-light:
   id: outbuilding-workshop/outbuilding-workshop-light
   light: {color: oklch(0.85 0.1 70), distance: 7, intensity: 1.2, kind: point}
   parent: outbuilding-workshop
+pasture-site:
+  feetPosition: {x: -10, y: 0.5, z: -62}
+  id: pasture-site
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 20, height: 2, kind: box, width: 28}
+  tags: [blueprint]
 path-lamp-pathCamp-0:
   castShadow: true
   feetPosition: {x: -3.0210785403721756, y: {terrain: 0}, z: -39.3679747306148}
