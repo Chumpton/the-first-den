@@ -1,5 +1,19 @@
 // The den's HUD: empty unless you ride the jade dragon, then one compact line at the bottom centre.
 import SEC from './lib/data/secrets.js';
+import { COURIER as CR } from './lib/data/courier.js';
+// Tomas the Courier: the city picker by his horse, the rider's line while riding, and 'on the road' for everyone else near his post.
+const CPILL = 'position:fixed;left:50%;transform:translateX(-50%);padding:8px 16px;border-radius:14px;background:rgba(40,28,14,.78);border:1px solid rgba(242,214,160,.45);color:#f7eedd;font-family:Georgia,serif;font-size:14px;white-space:nowrap';
+const CBTN = 'pointer-events:auto;cursor:pointer;margin:0 4px;padding:6px 12px;border-radius:10px;border:1px solid rgba(255,220,150,.6);background:rgba(120,78,30,.85);color:#fff3d8;font-family:Georgia,serif;font-size:14px';
+function courierHud(ctx, player) {
+  const st = player?.state || {}, f = player?.feetPosition, road = ctx.place?.state?.courier;
+  if (st.mountedOn === CR.horse) return `<div style="${CPILL};bottom:24px;pointer-events:none">Riding to ${road?.city || 'the city'} with Tomas · Space gets off <button style="${CBTN}" onclick="sendAction('${CR.cancel.action}')">Get off</button></div>`;
+  if (!f) return '';
+  const d = Math.hypot(f.x - CR.manHome.x, f.z - CR.manHome.z);
+  if (road?.busy && d < CR.busyReach) return `<div style="${CPILL};bottom:24px;pointer-events:none">Tomas is on the road to ${road.city} · back soon</div>`;
+  if (!st.courierPick || d > CR.uiReach) return '';
+  const b = (a, k, label) => `<button style="${CBTN}" onclick="sendAction('${a}')">[${k}] ${label}</button>`;
+  return `<div style="${CPILL};bottom:24px;pointer-events:none;text-align:center"><div style="margin-bottom:6px;color:#ffe2a8">Tomas the Courier: “Where to, traveller?”</div>${Object.values(CR.cities).map((c) => b(c.action, c.key, 'Ride to ' + c.name)).join('')}${b(CR.cancel.action, CR.cancel.key, 'Cancel')}</div>`;
+}
 function secretHint(player) {
   const f = player?.feetPosition; if (!f || player.controlling) return '';
   const found = Array.isArray(player.state?.secrets) ? player.state.secrets : [];
@@ -15,7 +29,7 @@ function secretCount(player) {
   return n ? `<div style="position:fixed;left:18px;bottom:18px;pointer-events:none;padding:5px 12px;border-radius:999px;background:rgba(40,28,10,.55);color:#ffe7a8;font-family:Georgia,serif;font-size:13px">✦ ${n}/${SEC.total} secrets</div>` : '';
 }
 export default function (ctx, player) {
-  const hud = secretHint(player) + secretCount(player);
+  const hud = secretHint(player) + secretCount(player) + courierHud(ctx, player);
   const c = player?.controlling;
   if (player?.state?.deleteMode) return `<div style="position:fixed;left:50%;top:50%;width:10px;height:10px;margin:-5px 0 0 -5px;border:2px solid #ff6b5b;border-radius:50%;pointer-events:none"></div><div style="position:fixed;left:50%;top:22px;transform:translateX(-50%);pointer-events:none;padding:7px 16px;border-radius:999px;background:rgba(120,24,18,.8);border:1px solid rgba(255,160,150,.5);color:#fff1ee;font-family:Georgia,serif;font-size:14px">delete mode · look at a thing · 9 removes it · 8 exits</div>`;
   if (c?.state?.kind === 'purple-dragon') {

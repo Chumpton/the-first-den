@@ -26,7 +26,7 @@ export function dragonRide(ctx) {
   if (d && d.state?.rider === me.id) return true;
   if (s.camBeforeMount) { s.camMode = s.camBeforeMount; s.camBeforeMount = null; }
   const drop = d?.state?.dropAt;
-  if (drop) { me.parent = null; s.mountedOn = null; me.feetPosition = { x: drop.x, y: drop.y + 0.05, z: drop.z }; me.velocity = { x: 0, y: 0, z: 0 }; return true; }
+  if (drop) { me.parent = null; s.mountedOn = null; me.feetPosition = { x: drop.x, y: drop.y + 0.05, z: drop.z }; if (drop.yaw != null) me.rotation = { yaw: drop.yaw }; me.velocity = { x: 0, y: 0, z: 0 }; return true; }
   const q = d ? (d.worldFeetPosition || d.feetPosition) : (me.worldFeetPosition || me.feetPosition);
   const y = (yawOf(d?.rotation) * Math.PI) / 180, rx = Math.cos(y), rz = -Math.sin(y);
   const x = q.x + rx * D.stepOff, z = q.z + rz * D.stepOff;

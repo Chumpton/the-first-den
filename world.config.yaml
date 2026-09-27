@@ -21,6 +21,9 @@ inputs:
     camView: {keys: ['7']}
     deleteMode: {keys: ['8']}
     deleteThing: {keys: ['9']}
+    courierLumen: {keys: ['1']}
+    courierHearth: {keys: ['2']}
+    courierCancel: {keys: ['3']}
   axes:
     moveX:
       keys: a/d

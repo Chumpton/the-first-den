@@ -3,6 +3,13 @@ import { HOME } from './lib/data/home.js';
 import { nearestInteractable } from './lib/home-interaction.js';
 import { sitPointsOf } from './gen/den-furniture.js';
 import { dragonRide, wantMount } from './lib/dragon-rider.js';
+import { COURIER } from './lib/data/courier.js';
+// The courier's picker (player.state.courierPick, set by the horse's press ear): 1/2 or a HUD button picks a city, 3 cancels.
+function courierPick(ctx,input){const me=ctx.self,pk=me.state.courierPick;if(!pk)return false;
+  const f=me.feetPosition,h=COURIER.manHome;if(Math.hypot(f.x-h.x,f.z-h.z)>COURIER.pickReach){me.state.courierPick=null;return false;}
+  if(input.pressed[COURIER.cancel.action]){me.state.courierPick=null;return true;}
+  for(const [k,c] of Object.entries(COURIER.cities)) if(input.pressed[c.action]){me.state.courierPick=null;me.state.mountWant={id:COURIER.horse,at:ctx.now()};ctx.emit('courierRide',{by:me.id,city:k},{to:COURIER.horse});return true;}
+  return false;}
 function scratch(ctx) { const s=(ctx.session.homeWalk??={}); return s[ctx.self.id]??=( {distance:0,last:null} ); }
 function inside(p,poly) { let hit=false; for(let i=0,j=poly.length-1;i<poly.length;j=i++) { const a=poly[i],b=poly[j]; if((a[1]>p.z)!==(b[1]>p.z) && p.x<(b[0]-a[0])*(p.z-a[1])/(b[1]-a[1])+a[0]) hit=!hit; } return hit; }
 function floorKind(ctx,p) {
@@ -40,8 +47,9 @@ function standUp(ctx){
 }
 export function onInput(ctx,input) {
   const me=ctx.self;
-  if(me.state.mountedOn){if(input.pressed.interact)ctx.emit('press',{by:me.id},{to:me.state.mountedOn});return;}
+  if(me.state.mountedOn){const off=me.state.mountedOn===COURIER.horse&&(input.pressed.jump||input.pressed[COURIER.cancel.action]);if(input.pressed.interact||off)ctx.emit('press',{by:me.id},{to:me.state.mountedOn});return;}
   if(me.state.seatedOn){if(input.pressed.interact||input.pressed.jump)standUp(ctx);return;}
+  if(courierPick(ctx,input)) return;
   if(!input.pressed.interact) return;
   const nearest=nearestInteractable(ctx,me,input),seat=nearestSeat(ctx,me),p=me.worldFeetPosition||me.feetPosition;
   const q=nearest&&(nearest.worldFeetPosition||nearest.feetPosition),dNear=q?Math.hypot(q.x-p.x,q.z-p.z):Infinity;
