@@ -21,8 +21,8 @@ export function mazeWalls({ n = 11, cell = 3, seed = 7, plaza = 1 } = {}) {
     if (r < n - 1 && !open[r][c].s && !(inPlaza(r, c) && inPlaza(r + 1, c))) walls.push([x(c), z(r + 1), x(c + 1), z(r + 1)]);
     if (c < n - 1 && !open[r][c].e && !(inPlaza(r, c) && inPlaza(r, c + 1))) walls.push([x(c + 1), z(r), x(c + 1), z(r + 1)]);
   }
-  // border: the gate is the middle cell of the north (-Z) edge, facing the lake
-  for (let c = 0; c < n; c++) { if (c !== mid) walls.push([x(c), -H, x(c + 1), -H]); walls.push([x(c), H, x(c + 1), H]); }
+  // border: the gate is the middle cell of the +Z edge, facing the lake
+  for (let c = 0; c < n; c++) { walls.push([x(c), -H, x(c + 1), -H]); if (c !== mid) walls.push([x(c), H, x(c + 1), H]); }
   for (let r = 0; r < n; r++) { walls.push([-H, z(r), -H, z(r + 1)]); walls.push([H, z(r), H, z(r + 1)]); }
-  return { walls, H, gate: [0, -H], heart: [0, 0] };
+  return { walls, H, gate: [0, H], heart: [0, 0] };
 }
