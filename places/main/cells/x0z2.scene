@@ -13,3 +13,18 @@ royal-cathedral:
   physics: none
   primitive: {depth: 44, height: 34, kind: box, width: 26}
   tags: [blueprint]
+royal-cathedral-nave:
+  children: [{feetPosition: {x: 0, y: 5, z: 10.5}, id: altar-light, light: {color: "#ffc98a", distance: 22, intensity: 25, kind: point}}, {feetPosition: {x: 0, y: 12, z: 0}, id: nave-light, light: {color: "#fff1d8", distance: 34, intensity: 30, kind: point}}]
+  feetPosition: {x: -34, y: 0.5, z: 196}
+  id: royal-cathedral-nave
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/royal-cathedral.js, seed: 1}
+  rotation: {yaw: -90}
+  visibleRange: {max: 900}
+royal-fountain:
+  audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-stone-fountain-splash-loop.mp3, gain: 0.15, loop: true, maxDistance: 30, spatial: true}
+  feetPosition: {x: 0, y: 0.5, z: 196}
+  id: royal-fountain
+  physics: static
+  primitive: {kind: scripted, params: {part: fountain}, script: scripts/gen/royal-district.js, seed: 3}
+  visibleRange: {max: 250}

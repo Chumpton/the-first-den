@@ -44,6 +44,19 @@ link-west/light:
   id: link-west/light
   light: {color: oklch(0.85 0.1 70), distance: 11, intensity: 3, kind: point}
   parent: link-west
+royal-avenue:
+  castShadow: false
+  feetPosition: {x: 0, y: 0.5, z: 190}
+  id: royal-avenue
+  physics: static
+  primitive: {kind: scripted, params: {part: avenue}, script: scripts/gen/royal-district.js, seed: 3}
+  visibleRange: {max: 300}
+royal-bridge:
+  feetPosition: {x: 0, y: 0.5, z: 190}
+  id: royal-bridge
+  physics: static
+  primitive: {kind: scripted, params: {part: bridge}, script: scripts/gen/royal-district.js, seed: 3}
+  visibleRange: {max: 400}
 royal-district:
   feetPosition: {x: 0, y: 0.5, z: 190}
   id: royal-district
@@ -51,6 +64,32 @@ royal-district:
   physics: none
   primitive: {depth: 72, height: 8, kind: box, width: 110}
   tags: [blueprint]
+royal-gate:
+  feetPosition: {x: 0, y: 0.5, z: 190}
+  id: royal-gate
+  physics: static
+  primitive: {kind: scripted, params: {part: gate}, script: scripts/gen/royal-district.js, seed: 3}
+  visibleRange: {max: 900}
+royal-hero-east:
+  feetPosition: {x: 8.6, y: 3.7, z: 149.5}
+  id: royal-hero-east
+  physics: static
+  primitive: {kind: scripted, params: {side: 1}, script: scripts/gen/royal-statue.js, seed: 2}
+  rotation: {yaw: 0}
+  visibleRange: {max: 900}
+royal-hero-west:
+  feetPosition: {x: -8.6, y: 3.7, z: 149.5}
+  id: royal-hero-west
+  physics: static
+  primitive: {kind: scripted, params: {side: -1}, script: scripts/gen/royal-statue.js, seed: 1}
+  rotation: {yaw: 0}
+  visibleRange: {max: 900}
+royal-walls:
+  feetPosition: {x: 0, y: 0.5, z: 190}
+  id: royal-walls
+  physics: static
+  primitive: {kind: scripted, params: {part: walls}, script: scripts/gen/royal-district.js, seed: 3}
+  visibleRange: {max: 900}
 sign-link-east:
   castShadow: false
   feetPosition: {x: 44, y: 0.5847130529688586, z: 108}
