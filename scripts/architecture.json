@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "basedOnSpecVersion": 321,
-  "updatedAt": "2026-09-27T05:49:44.527Z",
-  "summary": "The First Den is a forest world centered on Spawn and the lakeside home, with authored grounds and roads extending to Lumenvale and Hearthmere. The main place combines configured terrain and vegetation with scene-authored settlements, paths, perimeter walls, wildlife and residents; procedural generators build the setting while behavior scripts animate its actors, including four tower wardens.",
+  "basedOnSpecVersion": 361,
+  "updatedAt": "2026-09-27T06:18:08.371Z",
+  "summary": "The First Den is a forest world centered on the Spawn grounds, now anchored by a three-storey cob house around a living tree. Main combines configured forest terrain and vegetation with authored settlements, garden paths, residents and structures; procedural builders make the houses and grounds while actor, portal and interaction scripts own their behavior.",
   "scriptPaths": [
     "scripts/arrival.js",
     "scripts/camera.js",
@@ -128,7 +128,9 @@
     "scripts/gen/maze-dressing.js",
     "scripts/gen/pasture-fence.js",
     "scripts/gen/pasture-yard.js",
+    "scripts/gen/picnic-set.js",
     "scripts/gen/pollinator.js",
+    "scripts/gen/quad-garden.js",
     "scripts/gen/rain-catch.js",
     "scripts/gen/road-bridge.js",
     "scripts/gen/road-dressing.js",
@@ -150,6 +152,7 @@
     "scripts/gen/warden-staff.js",
     "scripts/gen/warden-tower.js",
     "scripts/gen/wildflowers.js",
+    "scripts/gen/wizard-tower.js",
     "scripts/gen/yard-fence.js",
     "scripts/gen/yard-furnish.js",
     "scripts/grand-gate-leaf.js",
@@ -259,57 +262,56 @@
     "scripts/tex-valley-shoreline.js",
     "scripts/tower-warden.js",
     "scripts/ui.js",
-    "scripts/warden-crystal.js"
+    "scripts/warden-crystal.js",
+    "scripts/wizard-portal.js"
   ],
   "places": [
-    "places/main - sole live place; forest terrain, configured site/path/river marks and seeded vegetation support authored settlements and routes to Lumenvale and Hearthmere",
-    "places/main/cells/x0z0.scene - Spawn/home grounds: cob-house, garden, creek and its bank dressing, stone perimeter wall, avenue/plaza, south/east warden towers and home actors",
-    "places/main/cells/x0z-1.scene + x-1z0.scene - north and west warden towers/wardens share these neighboring cells with the corn maze, fauna and pasture routes",
+    "places/main - the live forest place: configured terrain and seeded vegetation support Spawn, neighboring settlements and routes toward Lumenvale and Hearthmere",
+    "places/main/cells/x0z0.scene - Spawn and home grounds: cob house/interior, paths and plaza, creek, garden, picnic, wizard tower, gates, golem and residents",
+    "places/main/cells/x0z-1.scene + x-1z0.scene - north/west neighboring structures and actors, including the outlying tower/warden placements",
     "places/main/cells/objects.scene - shared authored object placements for main",
-    "places/main/cells/x-1z-1.scene - neighboring authored fauna and environment placements",
-    "places/main/cells/x1z-1.scene + x1z0.scene + x0z1.scene - remaining neighboring authored cells around Spawn",
-    "places/main/config.yaml - creek river/material and creek-bank path marks plus four tower clearing marks; terrain and decoration bindings",
-    "places/main/cells/x0z0.scene + x0z-1.scene + x-1z0.scene - four tower/warden pairs: north Rowan, east Ash, south Briar and west Willow"
+    "places/main/cells/x-1z-1.scene + x1z-1.scene + x1z0.scene + x0z-1.scene + x0z1.scene - neighboring authored environment, route and wildlife placements",
+    "places/main/config.yaml - atmosphere, forest terrain, sites, grading/clearing marks, path and river corridors, and procedural decoration bindings"
   ],
   "roots": [
-    "world.config.yaml - multiplayer entry/default main place, player and camera templates, lighting, arrival and UI",
+    "world.config.yaml - world entry/default place, player and camera templates, lighting, arrival and UI",
     "templates/player.js#player - composed player movement, gait, home interaction and delete-mode behaviors",
-    "templates/camera.js#camera - custom first-/third-person camera with long far clip",
-    "places/main/config.yaml - forest terrain, atmosphere/clouds, Spawn gravity, site/path/river marks and procedural vegetation bindings",
-    "places/main/cells/x0z0.scene#cob-house - multi-level home at (0, 0.5, -26), cellar through roof deck, with generated greenery and roofbloom child parts",
-    "places/main/cells/x0z0.scene#grounds-plan + #grand-avenue - authored flagstone network links avenue/plaza to house grounds and outbuildings; grounds-plan itself is non-colliding",
-    "places/main/cells/x0z0.scene#grand-gate - frame with two proximity-driven kinematic leaves at the front approach",
-    "places/main/cells/x0z0.scene#warden-tower-e/#warden-tower-s + neighboring north/west tower rows - four procedural lookout towers topped by crystal lights and paired staffed wardens"
+    "templates/camera.js#camera - custom first-/third-person camera",
+    "places/main/config.yaml - forest terrain, atmosphere, Spawn gravity, site/path/river marks and procedural vegetation",
+    "places/main/cells/x0z0.scene#cob-house - procedural multi-level home around the tree, with cellar, ground/upper/attic floors and roof deck",
+    "places/main/cells/x0z0.scene#grounds-plan + #grand-avenue - visible flagstone paths link the plaza, home grounds and outbuildings",
+    "places/main/cells/x0z0.scene#picnic-creekside + #quad-garden - creekside patio hangout and four-quarter kitchen garden on the Spawn lawns",
+    "places/main/cells/x0z0.scene#wizard-tower - procedural east-lawn watchtower with attached lights/plaque, floating runes and paired portal triggers"
   ],
   "shared": [
     "scripts/forest-terrain.js - main heightAt/materialAt(ctx) contract for terrain and terrain-relative placements",
     "scripts/gen/forest-plant.js + scripts/gen/valley-mesh.js - seeded forest vegetation builders reused by decoration layers",
-    "scripts/lib/road-solid.js - shared solid geometry for bridges and roadside features; deer-fence builds its own runs and stone-wall variant",
-    "scripts/lib/yard-kit.js - geometry/material primitives reused by yard-fence, yard-furnish, vine-arch and flower-bed generators",
+    "scripts/lib/road-solid.js - shared solid geometry for bridges and roadside features",
+    "scripts/lib/yard-kit.js - geometry/material primitives reused by yard and garden generators",
     "scripts/lib/home-interaction.js + scripts/lib/data/home-feel.js - player press targeting and home interaction tuning",
-    "scripts/lib/data/player.yml + scripts/lib/data/ropes.js - player movement, flight and rope tuning used by player behavior",
-    "scripts/lib/data/dune.yml, fairies.yml, pollinators.yml, golem.yml, wardens.yml - route, activity, appearance and greeting tuning consumed by actor/manager scripts",
-    "scripts/gen/warden-tower.js + scripts/warden-crystal.js - tower geometry and breathing crystal behavior reused by four lookout towers"
+    "scripts/lib/data/player.yml + scripts/lib/data/ropes.js - player movement, flight and rope tuning",
+    "scripts/lib/data/dune.yml, fairies.yml, pollinators.yml, golem.yml, wardens.yml - actor route/activity/appearance tuning consumed by behavior scripts",
+    "scripts/gen/warden-tower.js + scripts/warden-crystal.js - tower geometry and breathing crystal reused by the four lookout towers"
   ],
   "notableExports": [
     "scripts/forest-terrain.js - GROUND, SITES, LAKE, heightAt(ctx), materialAt(ctx)",
     "scripts/player.js - onSpawn(ctx), onInput(ctx,input), update(ctx,dt); scripts/camera.js - finiteNumber(value,fallback), update(ctx,dt)",
-    "scripts/gen/grand-avenue.js - geometry(ctx), collider(); scripts/gen/grand-gate.js - geometry(ctx), collider(ctx)",
-    "scripts/gen/garden-statue.js - geometry(ctx), collider(ctx); scripts/gen/lawn-sprig.js - geometry(ctx), collider()",
-    "scripts/gen/animal-dog.js - P, skeleton(), geometry(ctx); scripts/dune.js - updateSchedule, update(ctx), ears.press",
-    "scripts/fairies.js + scripts/pollinators.js - updateSchedule, update(ctx) manager entry points",
+    "scripts/gen/cob-house.js - HOUSE, holesFor, geometry(ctx), collider(ctx); scripts/gen/cob-furnish.js - DEFAULTS, geometry(ctx), collider(ctx)",
+    "scripts/gen/picnic-set.js - geometry(ctx), collider(ctx); scripts/gen/quad-garden.js - geometry(ctx), collider(ctx)",
+    "scripts/gen/wizard-tower.js - TOWER, cen, rad, WIN, hatRing, geometry(ctx), collider(ctx); scripts/wizard-portal.js - onTriggerEnter(ctx,other)",
+    "scripts/gen/grounds-flags.js, scripts/gen/deer-fence.js, scripts/gen/lawn-sprig.js - geometry(ctx), collider(ctx) (lawn-sprig is non-colliding)",
     "scripts/stone-golem.js - updateSchedule, legal(ctx,x,z), update(ctx,dt), ears.press; scripts/grand-gate-leaf.js - update(ctx,dt)",
-    "scripts/gen/creek-banks.js - geometry(ctx), collider(); scripts/gen/deer-fence.js - geometry(ctx), collider(); scripts/gen/warden-tower.js - PLAT, RISE, TH0, rAt, LAST_A, stairStep, ROOF_POSTS, geometry(ctx), collider(); scripts/tower-warden.js - updateSchedule, onSpawn(ctx), update(ctx,dt), ears"
+    "scripts/fairies.js + scripts/pollinators.js - updateSchedule, update(ctx) manager entry points; scripts/dune.js - updateSchedule, update(ctx), ears.press"
   ],
   "ownership": [
-    "places/main/config.yaml + scripts/forest-terrain.js - terrain seed/material/site marks, scatter and derived ground height/material; configured marks lay lawns, paths, creek and clearings",
+    "places/main/config.yaml + scripts/forest-terrain.js - terrain seed/material/site marks, scatter and derived ground height/material; marks grade paths, lawns, creek and clearings",
     "places/main/cells/*.scene - authored row IDs, locations, tags, initial state and fixed structure/actor relationships",
-    "scripts/player.js + scripts/lib/data/player.yml - movement intent, velocity, jump, flight and rope behavior; high-frequency scratch in ctx.session",
+    "scripts/player.js + scripts/lib/data/player.yml - player movement intent, velocity, jump, flight and rope behavior; high-frequency scratch in ctx.session",
     "scripts/humanoid-locomotion.js + scripts/camera.js - player yaw/gait channels and camera view/eye/local-player visibility",
-    "scripts/fauna-ground.js / scripts/fauna-small.js, scripts/fairies.js, scripts/pollinators.js - movement/activity and animation state for tagged wildlife populations",
-    "scripts/dune.js - Dune's waypoint, roam/greet/treat state and spawned treat lifecycle; per-tick scratch in ctx.session, tuning in dune.yml",
-    "scripts/tower-warden.js + scripts/lib/data/wardens.yml - each warden's ring patrol, look/greet state, one-greeting-per-approach tracking and spoken-line cooldown",
-    "scripts/stone-golem.js + scripts/grand-gate-leaf.js - Mossback locomotion/interactions and each gate leaf's open flag; gate state uses shared center, openBy and lead fields"
+    "scripts/fauna-ground.js / scripts/fauna-small.js, scripts/fairies.js, scripts/pollinators.js - movement/activity and animation state for their tagged populations",
+    "scripts/dune.js; scripts/tower-warden.js + wardens.yml; scripts/stone-golem.js + golem.yml - Dune lifecycle, warden patrol/greetings, and Mossback patrol/interaction state respectively",
+    "scripts/grand-gate-leaf.js - each gate leaf's open flag and hinge rotation; paired leaves coordinate through shared center/openBy/lead state",
+    "scripts/wizard-portal.js + scripts/lib/data/wizard-tower.yml - portal destination/cooldown behavior and coordinates; triggering player owns wizardPortalAt cooldown timestamp"
   ],
   "flows": [
     "places/main/config.yaml terrain generator + seed -> scripts/forest-terrain.js heightAt/materialAt(ctx) -> engine terrain, river channels and forest material bands",
@@ -318,33 +320,33 @@
     "move/look/jump/camView input -> scripts/player.js -> movement, jump, flight and camMode; place gravity applies to player body",
     "movement near rope coordinates -> scripts/player.js + lib/data/ropes.js -> climb/slide velocity and deck step-in; player body/camMode -> camera view and visibility",
     "interact press -> scripts/home-player-feel.js + lib/home-interaction.js -> nearest aligned press; pet press writes petAt/petBy for fauna, catio and pasture responses",
-    "Dune press ear -> scripts/dune.js treats queue -> update spawns/animates dog-treat row; Dune moves, eats, wags and responds to pet state using dog clips",
-    "fairy-keeper + pollinator-keeper updates -> scripts/fairies.js and scripts/pollinators.js read their data and tagged rows -> terrain-following flight, activity clips, greetings and effects",
-    "stone-golem press ear + update -> scripts/stone-golem.js reads golem.yml and writes locomotion/clip/glow state; tagged Mossback follows bounded lawn patrol",
-    "warden rows in scene + scripts/lib/data/wardens.yml -> scripts/tower-warden.js update -> ring patrol/look/greeting; nearby players trigger staff flash, chime and greeting effect, while press ear speaks a line",
-    "player proximity -> scripts/grand-gate-leaf.js update on each leaf -> open/openBy state and hinge rotation; lead leaf emits gate creak/thud sounds",
-    "configured creek-banks path mark -> creek bed/bank terrain materials; x0z0.scene creek-banks row + scripts/gen/creek-banks.js -> authored bank rocks, reeds, ferns and tufts; grounds-plan draws separate paths"
+    "Dune press ear + scripts/dune.js update -> treat queue/spawn and Dune roam, eat, wag and pet responses using dog clips",
+    "fairy-keeper + pollinator-keeper -> scripts/fairies.js and scripts/pollinators.js read tuning and tagged rows -> terrain-following flight, activity clips, greetings and effects",
+    "stone-golem press ear + update -> scripts/stone-golem.js reads golem.yml keep-outs -> Mossback legal bounded-lawn patrol, greeting/bow and locomotion state",
+    "warden scene rows + wardens.yml -> scripts/tower-warden.js update -> ring patrol/look/greeting; nearby players trigger staff flash/chime/effect and press ear speaks a line",
+    "player proximity -> scripts/grand-gate-leaf.js on each gate leaf -> open state/hinge rotation; lead leaf emits gate creak/thud sounds",
+    "player enters wizard-portal-up or wizard-portal-down trigger -> scripts/wizard-portal.js reads state.to + wizard-tower.yml -> teleport to tower deck/outside door, player wizardPortalAt cooldown and portal FX"
   ],
   "behaviorFamilies": [
     "places/main/config.yaml decoration layers + scripts/gen/forest-plant.js / valley-mesh.js - seeded forest plants, trees, shrubs, ferns, reeds and lawn flora varied by layer, kind and terrain",
-    "scripts/gen/cob-house.js - procedural multi-level house geometry/collider with cellar, spiral stair and roof deck; greenery and seeded roofbloom parts are non-colliding",
+    "scripts/gen/cob-house.js + scripts/gen/cob-furnish.js - tree-centered multi-level cob home and its furnishing family; parameters select item, dimensions, palette and seeded detail",
     "scripts/gen/road-bridge.js + scripts/lib/road-solid.js - reusable bridge geometry/collider varied by dimensions and seed",
     "scripts/gen/deer-fence.js - perimeter runs and gates vary by points, width and style; stone style builds coursed limestone wall, coping, moss/ivy and piers",
-    "scripts/gen/animal-{bear,deer,fox,wolf}.js + scripts/fauna-ground.js and scripts/gen/critter-{bird,duck,rabbit,squirrel}.js + scripts/fauna-small.js - shared large/small fauna behavior varied by species, geometry, animation and individual state",
-    "scripts/gen/flower-bed.js + scripts/gen/lawn-sprig.js + scripts/gen/garden-statue.js - home-garden dressing varied by shape, dimensions, palette and plant/statue kind",
-    "scripts/gen/pollinator.js + scripts/pollinators.js - bees, butterflies and dragonflies share flight/activity management, varied by species, variants, beds and tuning",
-    "scripts/gen/grand-avenue.js, grand-gate.js + grand-gate-leaf.js and scripts/gen/warden-tower.js + scripts/tower-warden.js - repeated avenue/gate/tower structures and shared proximity/patrol actors vary by dimensions, orientation and per-tower configuration"
+    "scripts/gen/animal-{bear,deer,fox,wolf}.js + scripts/fauna-ground.js and scripts/gen/critter-{bird,duck,rabbit,squirrel}.js + scripts/fauna-small.js - shared large/small fauna behavior varied by species, geometry and animation",
+    "scripts/gen/flower-bed.js + scripts/gen/lawn-sprig.js + scripts/gen/garden-statue.js - garden dressing varied by shape, dimensions, palette and plant/statue kind",
+    "scripts/gen/picnic-set.js + scripts/gen/quad-garden.js - authored one-off west-lawn picnic and east-lawn kitchen-garden assemblies, parameterized by patio/garden dimensions and details",
+    "scripts/gen/grand-avenue.js, grand-gate.js + grand-gate-leaf.js and scripts/gen/warden-tower.js + scripts/tower-warden.js - repeated avenue/gate/tower structures and proximity/patrol actors varied by dimensions, orientation and per-actor tuning"
   ],
   "probableOrphans": [
     "scripts/flat-terrain.js - no current place config selects it; main uses forest-terrain",
-    "scripts/jade-dragon.js - no scene behavior row attaches this actor script; scene managers may still use separate scripts/gen/jade-dragon.js geometry"
+    "scripts/jade-dragon.js - no scene behavior row attaches this actor script; separate scripts/gen/jade-dragon.js geometry may still be used"
   ],
   "migrationNotes": [
     "forest-terrain.js heightAt/materialAt take a context object; main's river is at sea level y=0, ground is around y=0.5, and Spawn clearing is centered near (0,-3).",
-    "Keep places/main/config.yaml material IDs, clear/flatten marks and decoration bindings coordinated; Spawn/home grounds are centered near (0,-27), outbuildings and pasture use separate site marks.",
-    "Configured terrain path marks grade/materialize terrain and clear scatter; scene path generators such as grounds-plan draw visible flagstone paths and do not replace those terrain jobs.",
-    "The den-creek follows its authored river points through Spawn under creek-bridge-avenue toward the back pond; the 4.2 m den-creek-banks path and creek-banks scene dressing are separate and should track that course.",
-    "Deer-fence run pts are local ground points; style: stone changes the wall geometry and collider, while legacy runs/gates retain the timber-wire default. Tower wardens' state.center is the platform centre and must stay aligned with their tower positions.",
-    "Dune, fairy and pollinator clips map from anim/*.yml in world.facts.yaml; warden uses its configured greeting clip and staff attachment, while tower crystals use their own onSpawn bob behavior. Grand-gate leaves share center, openBy and lead state."
+    "Keep places/main/config.yaml material IDs, clear/flatten marks and decoration bindings coordinated with scene placement; Spawn/home grounds are around (0,-27), while picnic (-11.6,-6.4), quad garden (13,-8.5) and wizard tower (30.5,-18.5) each have associated terrain marks/clearance.",
+    "Configured terrain path marks grade/materialize terrain and clear scatter; scene path generators such as grounds-plan and grounds-walk-coop-hive draw visible flagstone and do not replace those terrain jobs.",
+    "The den-creek follows its authored river points through Spawn under creek-bridge-avenue toward the back pond; the den-creek-banks path and creek-banks scene dressing are separate and should track that course.",
+    "Deer-fence run pts are local ground points; style: stone changes wall geometry and collider while legacy runs/gates retain timber-wire default. Tower wardens' state.center is the platform centre and must stay aligned with their tower.",
+    "Wizard portal row state.to chooses top/bottom destination from scripts/lib/data/wizard-tower.yml; wizardPortalAt cooldown is stored on the entering player's state. Keep coordinates in the data file aligned with portal trigger placements and tower door/deck."
   ]
 }
