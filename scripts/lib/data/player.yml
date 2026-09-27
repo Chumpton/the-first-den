@@ -6,3 +6,7 @@ turnSmoothing: 0.06
 turnSpeed: 900
 turnTo: movement
 walkSpeed: 3.8
+flySpeed: 16
+flyClimb: 9
+flyEase: 6
+flyTapWindow: 320

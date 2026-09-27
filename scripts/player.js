@@ -38,13 +38,26 @@ export function onInput(ctx, input) {
   // Where the keys point, at walking speed — the INTENT update() eases the body toward every tick.
   // Written as intent, never straight into velocity: a key is a level (full or nothing) and a body
   // that jumps to 6 m/s the tick a key lands overshoots every tap; the ease makes a tap a nudge.
-  walkOf(ctx).moveIntent = {
-    x: (facingCos * nx - facingSin * nz) * PLAYER.walkSpeed,
-    z: -(facingSin * nx + facingCos * nz) * PLAYER.walkSpeed,
+  const walk = walkOf(ctx)
+  // Flight: a second space press inside flyTapWindow toggles it. Aloft, space rises, shift sinks.
+  if (input.pressed.jump) {
+    const now = ctx.now()
+    if (now - (walk.lastJumpAt ?? -1e9) < PLAYER.flyTapWindow) {
+      walk.flying = !walk.flying
+      walk.lastJumpAt = -1e9
+      ctx.self.state.flying = walk.flying
+      ctx.emit('playSound', { clip: walk.flying ? '/cdn/moodboard-lowpoly-cozy/sfx-soft-magical-whoosh-lift-off.mp3' : '/cdn/moodboard-lowpoly-cozy/sfx-soft-magical-whoosh-descend.mp3', position: ctx.self.feetPosition, volume: 0.5 })
+    } else walk.lastJumpAt = now
+  }
+  walk.climb = (input.held.jump ? 1 : 0) - (input.held.descend ? 1 : 0)
+  const speed = walk.flying ? PLAYER.flySpeed : PLAYER.walkSpeed
+  walk.moveIntent = {
+    x: (facingCos * nx - facingSin * nz) * speed,
+    z: -(facingSin * nx + facingCos * nz) * speed,
   }
 
   // The jump is your y; x and z stay what the body did last tick (y reads 0 on the ground).
-  if (input.pressed.jump && ctx.self.grounded) {
+  if (!walk.flying && input.pressed.jump && ctx.self.grounded) {
     const v = ctx.self.velocity
     ctx.self.velocity = { x: v.x, y: PLAYER.jumpSpeed, z: v.z }
   }
@@ -60,7 +73,17 @@ export function update(ctx, dt) {
   // (both m/s², lib/data/player.yml). One capped step per tick, so a held key reaches walkSpeed in
   // walkSpeed / acceleration seconds and a release stops in walkSpeed / deceleration; a body stopped
   // by a wall reads 0 and pushes again from there.
-  const intent = walkOf(ctx).moveIntent ?? { x: 0, z: 0 }
+  const walk = walkOf(ctx)
+  const intent = walk.moveIntent ?? { x: 0, z: 0 }
+  if (walk.flying) {
+    // Sinking onto the ground lands you.
+    if (ctx.self.grounded && (walk.climb ?? 0) < 0) { walk.flying = false; ctx.self.state.flying = false }
+    else {
+      const e = Math.min(1, PLAYER.flyEase * dt), vy = (walk.climb ?? 0) * PLAYER.flyClimb
+      ctx.self.velocity = { x: v.x + (intent.x - v.x) * e, y: v.y + (vy - v.y) * e, z: v.z + (intent.z - v.z) * e }
+      return
+    }
+  }
   const along = intent.x * v.x + intent.z * v.z > 0 || (v.x === 0 && v.z === 0 && (intent.x !== 0 || intent.z !== 0))
   const step = (along ? PLAYER.acceleration : PLAYER.deceleration) * dt
   const dx = intent.x - v.x
