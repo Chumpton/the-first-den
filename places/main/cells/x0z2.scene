@@ -1,17 +1,18 @@
 # spawn-scene v2 yaml x0z2
+royal-bank:
+  children: [{castShadow: false, feetPosition: {x: 0, y: 8.15, z: -10.06}, id: plaque, material: {color: oklch(0.32 0.1 262)}, primitive: {depth: 0.06, height: 0.62, kind: box, width: 6}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:300px;letter-spacing:12px\">BANK OF THE CROWN</div>", visibleRange: {max: 90}}]
+  feetPosition: {x: 33.5, y: 0.5, z: 196}
+  id: royal-bank
+  physics: static
+  primitive: {kind: scripted, params: {d: 13, floors: 3, kind: bank, w: 18}, script: scripts/gen/royal-house.js, seed: 6}
+  rotation: {yaw: 90}
+  visibleRange: {max: 500}
 royal-castle:
   feetPosition: {x: 0, y: 0.5, z: 258}
   id: royal-castle
   material: {kind: scripted, script: engine/blueprint}
   physics: none
   primitive: {depth: 64, height: 40, kind: box, width: 90}
-  tags: [blueprint]
-royal-cathedral:
-  feetPosition: {x: -34, y: 0.5, z: 196}
-  id: royal-cathedral
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 44, height: 34, kind: box, width: 26}
   tags: [blueprint]
 royal-cathedral-nave:
   children: [{feetPosition: {x: 0, y: 5, z: 10.5}, id: altar-light, light: {color: "#ffc98a", distance: 22, intensity: 25, kind: point}}, {feetPosition: {x: 0, y: 12, z: 0}, id: nave-light, light: {color: "#fff1d8", distance: 34, intensity: 30, kind: point}}]
@@ -28,3 +29,43 @@ royal-fountain:
   physics: static
   primitive: {kind: scripted, params: {part: fountain}, script: scripts/gen/royal-district.js, seed: 3}
   visibleRange: {max: 250}
+royal-hall-knights:
+  children: [{castShadow: false, feetPosition: {x: 0, y: 4.3, z: -4.22}, id: plaque, material: {color: oklch(0.32 0.1 262)}, primitive: {depth: 0.06, height: 0.62, kind: box, width: 3.4}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:300px;letter-spacing:12px\">KNIGHTS' HALL</div>", visibleRange: {max: 90}}]
+  feetPosition: {x: 48, y: 0.5, z: 217}
+  id: royal-hall-knights
+  physics: static
+  primitive: {kind: scripted, params: {d: 8, floors: 3, kind: hall, w: 12}, script: scripts/gen/royal-house.js, seed: 11}
+  rotation: {yaw: 0}
+  visibleRange: {max: 500}
+royal-house-ne1:
+  children: []
+  feetPosition: {x: 16, y: 0.5, z: 217.5}
+  id: royal-house-ne1
+  physics: static
+  primitive: {kind: scripted, params: {d: 8, floors: 3, kind: house, turret: 1, w: 10}, script: scripts/gen/royal-house.js, seed: 9}
+  rotation: {yaw: 0}
+  visibleRange: {max: 500}
+royal-house-ne2:
+  children: []
+  feetPosition: {x: 32, y: 0.5, z: 217}
+  id: royal-house-ne2
+  physics: static
+  primitive: {kind: scripted, params: {d: 8, floors: 4, kind: house, w: 12}, script: scripts/gen/royal-house.js, seed: 10}
+  rotation: {yaw: 0}
+  visibleRange: {max: 500}
+royal-house-nw1:
+  children: []
+  feetPosition: {x: -16, y: 0.5, z: 217.5}
+  id: royal-house-nw1
+  physics: static
+  primitive: {kind: scripted, params: {d: 8, floors: 3, kind: house, turret: -1, w: 10}, script: scripts/gen/royal-house.js, seed: 7}
+  rotation: {yaw: 0}
+  visibleRange: {max: 500}
+royal-house-nw2:
+  children: []
+  feetPosition: {x: -32, y: 0.5, z: 217}
+  id: royal-house-nw2
+  physics: static
+  primitive: {kind: scripted, params: {d: 8, floors: 4, kind: house, w: 12}, script: scripts/gen/royal-house.js, seed: 8}
+  rotation: {yaw: 0}
+  visibleRange: {max: 500}

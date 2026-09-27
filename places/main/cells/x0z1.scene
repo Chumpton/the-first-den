@@ -44,6 +44,14 @@ link-west/light:
   id: link-west/light
   light: {color: oklch(0.85 0.1 70), distance: 11, intensity: 3, kind: point}
   parent: link-west
+royal-armoury:
+  children: [{castShadow: false, feetPosition: {x: 0, y: 4.3, z: -4.72}, id: plaque, material: {color: oklch(0.32 0.1 262)}, primitive: {depth: 0.06, height: 0.62, kind: box, width: 3.4}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:300px;letter-spacing:12px\">ROYAL ARMOURY</div>", visibleRange: {max: 90}}]
+  feetPosition: {x: 16.5, y: 0.5, z: 169.5}
+  id: royal-armoury
+  physics: static
+  primitive: {kind: scripted, params: {d: 9, floors: 3, kind: armoury, w: 10}, script: scripts/gen/royal-house.js, seed: 2}
+  rotation: {yaw: 90}
+  visibleRange: {max: 500}
 royal-avenue:
   castShadow: false
   feetPosition: {x: 0, y: 0.5, z: 190}
@@ -57,19 +65,76 @@ royal-bridge:
   physics: static
   primitive: {kind: scripted, params: {part: bridge}, script: scripts/gen/royal-district.js, seed: 3}
   visibleRange: {max: 400}
-royal-district:
-  feetPosition: {x: 0, y: 0.5, z: 190}
-  id: royal-district
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 72, height: 8, kind: box, width: 110}
-  tags: [blueprint]
 royal-gate:
   feetPosition: {x: 0, y: 0.5, z: 190}
   id: royal-gate
   physics: static
   primitive: {kind: scripted, params: {part: gate}, script: scripts/gen/royal-district.js, seed: 3}
   visibleRange: {max: 900}
+royal-guard-1:
+  behavior: [scripts/royal-guard.js]
+  children: [{feetPosition: {x: 0, y: 2.2, z: 0}, id: tag, text: {color: "#ffe39a", content: Sergeant Aldric, size: 0.22}}]
+  feetPosition: {x: -4.4, y: 0.61, z: 159.2}
+  id: royal-guard-1
+  layout: {maxExtents: {y: 1.9}, minExtents: {y: 1.9}}
+  model: "https://www.spawn.co/magic/character-character-54ug69f6.glb?animations=Idle,Walk,Run"
+  physics: character
+  rotation: {yaw: 0}
+  state: {lines: [Welcome to the royal city. Keep to the avenue., The King holds court on the hill beyond the plaza.], name: Sergeant Aldric}
+  tags: [npc, interactable, royal-guard]
+  visibleRange: {max: 120}
+royal-guard-2:
+  behavior: [scripts/royal-guard.js]
+  children: [{feetPosition: {x: 0, y: 2.2, z: 0}, id: tag, text: {color: "#ffe39a", content: Guardsman Tomas, size: 0.22}}]
+  feetPosition: {x: 4.4, y: 0.61, z: 159.2}
+  id: royal-guard-2
+  layout: {maxExtents: {y: 1.9}, minExtents: {y: 1.9}}
+  model: "https://www.spawn.co/magic/character-character-54ug69f6.glb?animations=Idle,Walk,Run"
+  physics: character
+  rotation: {yaw: 0}
+  state: {lines: ["Mind the moat, friend. The swans bite.", The Golden Lion pours the best ale inside the walls.], name: Guardsman Tomas}
+  tags: [npc, interactable, royal-guard]
+  visibleRange: {max: 120}
+royal-guard-3:
+  behavior: [scripts/royal-guard.js]
+  children: [{feetPosition: {x: 0, y: 2.2, z: 0}, id: tag, text: {color: "#ffe39a", content: Guardswoman Elsbeth, size: 0.22}}]
+  feetPosition: {x: -4.4, y: 0.61, z: 151.4}
+  id: royal-guard-3
+  layout: {maxExtents: {y: 1.9}, minExtents: {y: 1.9}}
+  model: "https://www.spawn.co/magic/character-character-54ug69f6.glb?animations=Idle,Walk,Run"
+  physics: character
+  rotation: {yaw: 0}
+  state: {lines: [Those two in stone? Heroes of the old wars., "No blades drawn past the bridge, by order of the crown."], name: Guardswoman Elsbeth}
+  tags: [npc, interactable, royal-guard]
+  visibleRange: {max: 120}
+royal-guard-4:
+  behavior: [scripts/royal-guard.js]
+  children: [{feetPosition: {x: 0, y: 2.2, z: 0}, id: tag, text: {color: "#ffe39a", content: Guardsman Piet, size: 0.22}}]
+  feetPosition: {x: 4.4, y: 0.61, z: 151.4}
+  id: royal-guard-4
+  layout: {maxExtents: {y: 1.9}, minExtents: {y: 1.9}}
+  model: "https://www.spawn.co/magic/character-character-54ug69f6.glb?animations=Idle,Walk,Run"
+  physics: character
+  rotation: {yaw: 0}
+  state: {lines: [The cathedral bells ring at noon. Worth hearing., "Bank of the Crown is on the plaza, east side."], name: Guardsman Piet}
+  tags: [npc, interactable, royal-guard]
+  visibleRange: {max: 120}
+royal-hall-mages:
+  children: [{castShadow: false, feetPosition: {x: 0, y: 4.3, z: -5.22}, id: plaque, material: {color: oklch(0.32 0.1 262)}, primitive: {depth: 0.06, height: 0.62, kind: box, width: 3.4}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:300px;letter-spacing:12px\">MAGES' GUILD</div>", visibleRange: {max: 90}}]
+  feetPosition: {x: 33, y: 0.5, z: 172}
+  id: royal-hall-mages
+  physics: static
+  primitive: {kind: scripted, params: {d: 10, floors: 4, kind: hall, w: 14}, script: scripts/gen/royal-house.js, seed: 5}
+  rotation: {yaw: 180}
+  visibleRange: {max: 500}
+royal-hall-masons:
+  children: [{castShadow: false, feetPosition: {x: 0, y: 4.3, z: -5.22}, id: plaque, material: {color: oklch(0.32 0.1 262)}, primitive: {depth: 0.06, height: 0.62, kind: box, width: 3.4}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:300px;letter-spacing:12px\">GUILD OF MASONS</div>", visibleRange: {max: 90}}]
+  feetPosition: {x: -33, y: 0.5, z: 172}
+  id: royal-hall-masons
+  physics: static
+  primitive: {kind: scripted, params: {d: 10, floors: 4, kind: hall, w: 14}, script: scripts/gen/royal-house.js, seed: 3}
+  rotation: {yaw: 180}
+  visibleRange: {max: 500}
 royal-hero-east:
   feetPosition: {x: 8.6, y: 3.7, z: 149.5}
   id: royal-hero-east
@@ -84,6 +149,22 @@ royal-hero-west:
   primitive: {kind: scripted, params: {side: -1}, script: scripts/gen/royal-statue.js, seed: 1}
   rotation: {yaw: 0}
   visibleRange: {max: 900}
+royal-house-sw:
+  children: []
+  feetPosition: {x: -48, y: 0.5, z: 172}
+  id: royal-house-sw
+  physics: static
+  primitive: {kind: scripted, params: {d: 10, floors: 3, kind: house, turret: 1, w: 10}, script: scripts/gen/royal-house.js, seed: 4}
+  rotation: {yaw: 180}
+  visibleRange: {max: 500}
+royal-tavern:
+  children: [{castShadow: false, feetPosition: {x: 0, y: 4.3, z: -4.72}, id: plaque, material: {color: oklch(0.32 0.1 262)}, primitive: {depth: 0.06, height: 0.62, kind: box, width: 3.4}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:300px;letter-spacing:12px\">THE GOLDEN LION</div>", visibleRange: {max: 90}}]
+  feetPosition: {x: -16.5, y: 0.5, z: 169.5}
+  id: royal-tavern
+  physics: static
+  primitive: {kind: scripted, params: {d: 9, floors: 3, kind: tavern, w: 10}, script: scripts/gen/royal-house.js, seed: 1}
+  rotation: {yaw: -90}
+  visibleRange: {max: 500}
 royal-walls:
   feetPosition: {x: 0, y: 0.5, z: 190}
   id: royal-walls
