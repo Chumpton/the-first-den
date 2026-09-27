@@ -219,6 +219,12 @@ terrain:
     villageLane5: {kind: path, grade: false, clearScatter: true, material: pebbles, edgeMaterial: lawn, falloff: 0.6, width: 1.6, points: [[182.2, 77.4], [179.6, 80.7]]}
     villageLaneHall: {kind: path, grade: false, clearScatter: true, material: pebbles, edgeMaterial: lawn, falloff: 0.6, width: 2.2, points: [[189.8, 90], [184, 90]]}
     villageLaneGate: {kind: path, grade: false, clearScatter: true, material: pebbles, edgeMaterial: lawn, falloff: 0.8, width: 2.6, points: [[146, 92], [153, 91.5], [160, 91]]}
+    mountainTarn: {at: {x: 82, z: 78}, bedMaterial: pebbles, depth: 2.6, kind: lake, level: 0.3, liquid: {caustics: 0.3, clarity: 0.72, color: oklch(0.56 0.08 185), crestFoam: 0, kind: water, refraction: 0.25, shoreFoam: 0.06, turbulence: 0.02, waves: 0.01}, radius: 15}
+    tarnClear: {center: {x: 82, z: 78}, kind: clear-scatter, shape: {kind: circle, radius: 25}}
+    tarnShore: {clearScatter: true, edgeMaterial: pebbles, falloff: 1.2, grade: true, kind: path, material: gravel, noise: 0.3, points: [[95.79, 89.57], [92.32, 92.74], [88.16, 94.91], [83.57, 95.93], [78.87, 95.73], [74.39, 94.31], [70.43, 91.79], [67.26, 88.32], [65.09, 84.16], [64.07, 79.57], [64.27, 74.87], [65.69, 70.39], [68.21, 66.43], [71.68, 63.26], [75.84, 61.09], [80.43, 60.07], [85.13, 60.27], [89.61, 61.69], [92.32, 63.26]], width: 2.5}
+    tarnLinkNorth: {clearScatter: true, edgeMaterial: pebbles, falloff: 1.2, grade: true, kind: path, material: gravel, noise: 0.3, points: [[82, 55], [82, 58], [82, 60]], width: 2.5}
+    tarnLinkSouth: {clearScatter: true, edgeMaterial: pebbles, falloff: 1.2, grade: true, kind: path, material: gravel, noise: 0.3, points: [[82, 101], [82, 98], [82, 96]], width: 2.5}
+    tarnLinkWest: {clearScatter: true, edgeMaterial: pebbles, falloff: 1.2, grade: true, kind: path, material: gravel, noise: 0.3, points: [[59, 86], [62, 85.3], [65.09, 84.16]], width: 2.5}
   decorations:
     settings: {enabled: true, budget: 75000, maxDistance: 420, fadeDistance: 25}
     bindings:
