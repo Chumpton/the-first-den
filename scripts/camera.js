@@ -58,7 +58,7 @@ export function update(ctx, dt) {
 
   // Seated (the body rides a seat: its parent is the chair or the couch), the eye drops to a sitter's and the feet are read
   // in the world, since a rider's own feet are the seat's.
-  const eyeHeight = finiteNumber(CAMERA.eyeHeight, 1.6) * finiteNumber(target.effectiveScale?.y, 1) * (target.parent ? 0.72 : 1) * (target.state?.kind === 'boat' ? 0.8 : 1)
+  const eyeHeight = finiteNumber(CAMERA.eyeHeight, 1.6) * finiteNumber(target.effectiveScale?.y, 1) * (target.parent ? 0.72 : 1) * (target.state?.kind === 'boat' ? 0.8 : target.state?.kind === 'horse' ? 1.5 : 1)
   const pos = target.worldFeetPosition ?? target.feetPosition
   // Riding the jade dragon (it is the controlled target): the eye is the saddle's, turned with the dragon.
   if (target.state?.kind === 'dragon') {
