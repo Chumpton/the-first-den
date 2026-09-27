@@ -4,42 +4,6 @@ furniture-stool/furniture-stool-blanket:
     feetPosition: {x: 0, y: 0.275, z: -0.008}
     parent: home-root/furniture-stool
   template: templates/den-furniture.js#blanket
-home-architecture-wing/home-floor-board:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-wing/home-floor-board
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  physics: static
-  primitive: {kind: scripted, params: {room: board}, script: scripts/gen/home-architecture-floor.js}
-  receiveShadow: true
-  rotation: {w: 1, x: 0, y: 0, z: 0}
-  state: {floorY: 24, polygon: [[0, 0], [5, 0], [5, 5], [0, 5]], room: board}
-  tags: [home-architecture, floor]
-home-architecture-wing/home-floor-spare:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-wing/home-floor-spare
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  physics: static
-  primitive: {kind: scripted, params: {room: spare}, script: scripts/gen/home-architecture-floor.js}
-  receiveShadow: true
-  rotation: {w: 1, x: 0, y: 0, z: 0}
-  state: {floorY: 24, polygon: [[0, 5], [5, 5], [5, 9], [0, 9]], room: spare}
-  tags: [home-architecture, floor]
-home-architecture-wing/home-foundation-wing:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-wing/home-foundation-wing
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  physics: static
-  primitive: {kind: scripted, params: {room: wing}, script: scripts/gen/home-architecture-foundation.js}
-  receiveShadow: true
-  rotation: {w: 1, x: 0, y: 0, z: 0}
-  state: {floorY: 24, groundY: 23.55}
-  tags: [home-architecture, foundation]
 home-portal-lantern-left/home-portal-lantern-left-light:
   feetPosition: {x: 0, y: 0.03, z: 0}
   id: home-portal-lantern-left/home-portal-lantern-left-light

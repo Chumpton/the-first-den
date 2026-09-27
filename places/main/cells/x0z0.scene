@@ -1,11 +1,14 @@
 # spawn-scene v2 yaml x0z0
 castle-keep:
-  feetPosition: {x: 4, y: 23.55, z: 1}
+  castShadow: true
+  feetPosition: {x: 2, y: 24, z: 3}
   id: castle-keep
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {height: 25, kind: cylinder, radialSegments: 24, radiusBottom: 7, radiusTop: 7}
-  tags: [castle]
+  material: {color: "#ffffff", pbr: true, roughness: 0.93}
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/castle-keep.js, seed: 7}
+  receiveShadow: true
+  state: {role: the stone keep that replaced the den}
+  tags: [castle, castle-keep]
 den-life-butterflies:
   overrides:
     feetPosition: {x: 7.5, y: {terrain: 0}, z: -11}
@@ -1795,451 +1798,6 @@ hillside-rear-west-16:
     tags: [hillside, hillside-rock, rear-west]
     visibleRange: {max: 125}
   template: templates/home-garden.js#rock
-home-architecture-work:
-  blueprint: {category: Architecture, icon: house, label: "Three-room lake den · shell"}
-  feetPosition: {x: 6.7, y: 0, z: 1.3}
-  id: home-architecture-work
-  parent: home-root
-  rotation: {w: 1, x: 0, y: 0, z: 0}
-  state: {area: 88.5, blueprintReplaced: true, chimneyTopY: 30.06, doorHinges: [home-front-door-hinge, home-spare-door-hinge], doorLeaves: [home-front-door, home-spare-door], drawableCount: 40, eaveY: 27.25, floorY: 24, materials: "buttercream lime plaster · walnut · honey oak · hand-laid charcoal shingles · clear teal glass", meshVertexMaximum: 10548, peakY: 28.85, revision: crafted-02, roofRidgeY: 29.07116413116455, rooms: 3, roots: {den: home-architecture-work/home-architecture-den, wing: home-architecture-work/home-architecture-den/home-architecture-wing}, shellReady: true, wingYaw: 45}
-  tags: [home-architecture, architecture-root]
-home-architecture-work/home-architecture-den:
-  feetPosition: {x: -6.7, y: 0, z: -1.3}
-  id: home-architecture-work/home-architecture-den
-  parent: home-architecture-work
-  rotation: {w: 1, x: 0, y: 0, z: 0}
-  state: {floorY: 24, polygon: [[0, 0], [5, 0], [9.2, 4.2], [6, 6], [0, 6]], room: den}
-  tags: [home-architecture, room-root]
-home-architecture-work/home-architecture-den/home-architecture-wing:
-  feetPosition: {x: 4.464466094067262, y: 0, z: -0.5355339059327378}
-  id: home-architecture-work/home-architecture-den/home-architecture-wing
-  parent: home-architecture-work/home-architecture-den
-  rotation: {w: 0.9238795042037964, x: 0, y: 0.3826834261417389, z: 0}
-  state: {board: [[0, 0], [5, 0], [5, 5], [0, 5]], floorY: 24, rooms: [board, spare], spare: [[0, 5], [5, 5], [5, 9], [0, 9]], yaw: 45}
-  tags: [home-architecture, wing-root]
-home-architecture-work/home-architecture-den/home-architecture-wing/home-spare-door-frame:
-  feetPosition: {x: 0, y: 0, z: 6.43}
-  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-spare-door-frame
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  rotation: {yaw: -90}
-  state: {fixedYaw: -90, opening: 1.2}
-  tags: [home-architecture, door-frame]
-home-architecture-work/home-architecture-den/home-architecture-wing/home-trusses-wing:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-trusses-wing
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  primitive: {kind: scripted, params: {frame: wing}, script: scripts/gen/home-architecture-timber.js}
-  receiveShadow: true
-  tags: [home-architecture, timber, truss]
-home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-front-glass:
-  castShadow: false
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-front-glass
-  material: {color: "#ffffff", depthWrite: false, metalness: 0, pbr: true, roughness: 0.12}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  physics: static
-  primitive: {kind: scripted, params: {run: wing-front}, script: scripts/gen/home-architecture-glass.js}
-  receiveShadow: false
-  state: {doors: [], run: wing-front, wallThickness: 0.2, windows: [{a: 0.7, b: 4.3, sill: 0.82, top: 2.67}]}
-  tags: [home-architecture, glazing]
-home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-front-joinery:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-front-joinery
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  primitive: {kind: scripted, params: {run: wing-front}, script: scripts/gen/home-architecture-joinery.js}
-  receiveShadow: true
-  state: {doors: [], run: wing-front, wallThickness: 0.2, windows: [{a: 0.7, b: 4.3, sill: 0.82, top: 2.67}]}
-  tags: [home-architecture, timber, joinery]
-home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-front-plaster:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-front-plaster
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  physics: static
-  primitive: {kind: scripted, params: {run: wing-front}, script: scripts/gen/home-architecture-walls.js}
-  receiveShadow: true
-  state: {doors: [], run: wing-front, wallThickness: 0.2, windows: [{a: 0.7, b: 4.3, sill: 0.82, top: 2.67}]}
-  tags: [home-architecture, wall]
-home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-partition-joinery:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-partition-joinery
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  primitive: {kind: scripted, params: {run: wing-partition}, script: scripts/gen/home-architecture-joinery.js}
-  receiveShadow: true
-  state: {doors: [], run: wing-partition, wallThickness: 0.2, windows: []}
-  tags: [home-architecture, timber, joinery]
-home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-partition-plaster:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-partition-plaster
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  physics: static
-  primitive: {kind: scripted, params: {run: wing-partition}, script: scripts/gen/home-architecture-walls.js}
-  receiveShadow: true
-  state: {doors: [], run: wing-partition, wallThickness: 0.2, windows: []}
-  tags: [home-architecture, wall]
-home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-rear-glass:
-  castShadow: false
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-rear-glass
-  material: {color: "#ffffff", depthWrite: false, metalness: 0, pbr: true, roughness: 0.12}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  physics: static
-  primitive: {kind: scripted, params: {run: wing-rear}, script: scripts/gen/home-architecture-glass.js}
-  receiveShadow: false
-  state: {doors: [], run: wing-rear, wallThickness: 0.2, windows: [{a: 0.75, b: 4.3, sill: 0.86, top: 2.64}]}
-  tags: [home-architecture, glazing]
-home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-rear-joinery:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-rear-joinery
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  primitive: {kind: scripted, params: {run: wing-rear}, script: scripts/gen/home-architecture-joinery.js}
-  receiveShadow: true
-  state: {doors: [], run: wing-rear, wallThickness: 0.2, windows: [{a: 0.75, b: 4.3, sill: 0.86, top: 2.64}]}
-  tags: [home-architecture, timber, joinery]
-home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-rear-plaster:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-rear-plaster
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  physics: static
-  primitive: {kind: scripted, params: {run: wing-rear}, script: scripts/gen/home-architecture-walls.js}
-  receiveShadow: true
-  state: {doors: [], run: wing-rear, wallThickness: 0.2, windows: [{a: 0.75, b: 4.3, sill: 0.86, top: 2.64}]}
-  tags: [home-architecture, wall]
-home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-right-glass:
-  castShadow: false
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-right-glass
-  material: {color: "#ffffff", depthWrite: false, metalness: 0, pbr: true, roughness: 0.12}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  physics: static
-  primitive: {kind: scripted, params: {run: wing-right}, script: scripts/gen/home-architecture-glass.js}
-  receiveShadow: false
-  state: {doors: [{a: 6.45, b: 7.55, kind: square, top: 2.4}], run: wing-right, wallThickness: 0.2, windows: [{a: 0.75, b: 3.6, sill: 0.85, top: 2.65}]}
-  tags: [home-architecture, glazing]
-home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-right-joinery:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-right-joinery
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  primitive: {kind: scripted, params: {run: wing-right}, script: scripts/gen/home-architecture-joinery.js}
-  receiveShadow: true
-  state: {doors: [{a: 6.45, b: 7.55, kind: square, top: 2.4}], run: wing-right, wallThickness: 0.2, windows: [{a: 0.75, b: 3.6, sill: 0.85, top: 2.65}]}
-  tags: [home-architecture, timber, joinery]
-home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-right-plaster:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-right-plaster
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  physics: static
-  primitive: {kind: scripted, params: {run: wing-right}, script: scripts/gen/home-architecture-walls.js}
-  receiveShadow: true
-  state: {doors: [{a: 6.45, b: 7.55, kind: square, top: 2.4}], run: wing-right, wallThickness: 0.2, windows: [{a: 0.75, b: 3.6, sill: 0.85, top: 2.65}]}
-  tags: [home-architecture, wall]
-home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-shared-joinery:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-shared-joinery
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  primitive: {kind: scripted, params: {run: wing-shared}, script: scripts/gen/home-architecture-joinery.js}
-  receiveShadow: true
-  state: {doors: [{a: 2.55, b: 4.15, kind: board, top: 2.5}, {a: 5.25, b: 6.45, kind: spare, top: 2.4}], run: wing-shared, wallThickness: 0.2, windows: []}
-  tags: [home-architecture, timber, joinery]
-home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-shared-plaster:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-shared-plaster
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing
-  physics: static
-  primitive: {kind: scripted, params: {run: wing-shared}, script: scripts/gen/home-architecture-walls.js}
-  receiveShadow: true
-  state: {doors: [{a: 2.55, b: 4.15, kind: board, top: 2.5}, {a: 5.25, b: 6.45, kind: spare, top: 2.4}], run: wing-shared, wallThickness: 0.2, windows: []}
-  tags: [home-architecture, wall]
-home-architecture-work/home-architecture-den/home-chimney:
-  castShadow: true
-  feetPosition: {x: 0.6, y: 0, z: 5.1}
-  id: home-architecture-work/home-architecture-den/home-chimney
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  physics: static
-  primitive: {kind: scripted, script: scripts/gen/home-architecture-chimney.js}
-  receiveShadow: true
-  state: {capY: 30.06, planCenter: [0.6, 5.1], shaftBottomY: 27.18}
-  tags: [home-architecture, chimney]
-home-architecture-work/home-architecture-den/home-chimney/home-chimney-smoke:
-  overrides:
-    feetPosition: {x: 0, y: 6.02, z: 0}
-    parent: home-architecture-work/home-architecture-den/home-chimney
-  template: templates/home-atmosphere.js#chimneySmoke
-home-architecture-work/home-architecture-den/home-den-back-glass:
-  castShadow: false
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-den-back-glass
-  material: {color: "#ffffff", depthWrite: false, metalness: 0, pbr: true, roughness: 0.12}
-  parent: home-architecture-work/home-architecture-den
-  physics: static
-  primitive: {kind: scripted, params: {run: den-back}, script: scripts/gen/home-architecture-glass.js}
-  receiveShadow: false
-  state: {doors: [], run: den-back, wallThickness: 0.2, windows: [{a: 2.05, b: 4.2, sill: 0.9, top: 2.55}]}
-  tags: [home-architecture, glazing]
-home-architecture-work/home-architecture-den/home-den-back-joinery:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-den-back-joinery
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  primitive: {kind: scripted, params: {run: den-back}, script: scripts/gen/home-architecture-joinery.js}
-  receiveShadow: true
-  state: {doors: [], run: den-back, wallThickness: 0.2, windows: [{a: 2.05, b: 4.2, sill: 0.9, top: 2.55}]}
-  tags: [home-architecture, timber, joinery]
-home-architecture-work/home-architecture-den/home-den-back-plaster:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-den-back-plaster
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  physics: static
-  primitive: {kind: scripted, params: {run: den-back}, script: scripts/gen/home-architecture-walls.js}
-  receiveShadow: true
-  state: {doors: [], run: den-back, wallThickness: 0.2, windows: [{a: 2.05, b: 4.2, sill: 0.9, top: 2.55}]}
-  tags: [home-architecture, wall]
-home-architecture-work/home-architecture-den/home-den-front-glass:
-  castShadow: false
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-den-front-glass
-  material: {color: "#ffffff", depthWrite: false, metalness: 0, pbr: true, roughness: 0.12}
-  parent: home-architecture-work/home-architecture-den
-  physics: static
-  primitive: {kind: scripted, params: {run: den-front}, script: scripts/gen/home-architecture-glass.js}
-  receiveShadow: false
-  state: {doors: [{a: 3.04, b: 4.14, kind: front, top: 2.4}], run: den-front, wallThickness: 0.2, windows: [{a: 0.35, arch: true, b: 2.65, sill: 0.85, spring: 2.04, top: 2.85}]}
-  tags: [home-architecture, glazing]
-home-architecture-work/home-architecture-den/home-den-front-joinery:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-den-front-joinery
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  primitive: {kind: scripted, params: {run: den-front}, script: scripts/gen/home-architecture-joinery.js}
-  receiveShadow: true
-  state: {doors: [{a: 3.04, b: 4.14, kind: front, top: 2.4}], run: den-front, wallThickness: 0.2, windows: [{a: 0.35, arch: true, b: 2.65, sill: 0.85, spring: 2.04, top: 2.85}]}
-  tags: [home-architecture, timber, joinery]
-home-architecture-work/home-architecture-den/home-den-front-plaster:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-den-front-plaster
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  physics: static
-  primitive: {kind: scripted, params: {run: den-front}, script: scripts/gen/home-architecture-walls.js}
-  receiveShadow: true
-  state: {doors: [{a: 3.04, b: 4.14, kind: front, top: 2.4}], run: den-front, wallThickness: 0.2, windows: [{a: 0.35, arch: true, b: 2.65, sill: 0.85, spring: 2.04, top: 2.85}]}
-  tags: [home-architecture, wall]
-home-architecture-work/home-architecture-den/home-den-hip-wall-joinery:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-den-hip-wall-joinery
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  primitive: {kind: scripted, params: {run: den-hip-wall}, script: scripts/gen/home-architecture-joinery.js}
-  receiveShadow: true
-  state: {doors: [], run: den-hip-wall, wallThickness: 0.2, windows: []}
-  tags: [home-architecture, timber, joinery]
-home-architecture-work/home-architecture-den/home-den-hip-wall-plaster:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-den-hip-wall-plaster
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  physics: static
-  primitive: {kind: scripted, params: {run: den-hip-wall}, script: scripts/gen/home-architecture-walls.js}
-  receiveShadow: true
-  state: {doors: [], run: den-hip-wall, wallThickness: 0.2, windows: []}
-  tags: [home-architecture, wall]
-home-architecture-work/home-architecture-den/home-den-left-joinery:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-den-left-joinery
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  primitive: {kind: scripted, params: {run: den-left}, script: scripts/gen/home-architecture-joinery.js}
-  receiveShadow: true
-  state: {doors: [], run: den-left, wallThickness: 0.2, windows: []}
-  tags: [home-architecture, timber, joinery]
-home-architecture-work/home-architecture-den/home-den-left-plaster:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-den-left-plaster
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  physics: static
-  primitive: {kind: scripted, params: {run: den-left}, script: scripts/gen/home-architecture-walls.js}
-  receiveShadow: true
-  state: {doors: [], run: den-left, wallThickness: 0.2, windows: []}
-  tags: [home-architecture, wall]
-home-architecture-work/home-architecture-den/home-floor-den:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-floor-den
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  physics: static
-  primitive: {kind: scripted, params: {room: den}, script: scripts/gen/home-architecture-floor.js}
-  receiveShadow: true
-  rotation: {w: 1, x: 0, y: 0, z: 0}
-  state: {floorY: 24, polygon: [[0, 0], [5, 0], [9.2, 4.2], [6, 6], [0, 6]], room: den}
-  tags: [home-architecture, floor]
-home-architecture-work/home-architecture-den/home-foundation-den:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-foundation-den
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  physics: static
-  primitive: {kind: scripted, params: {room: den}, script: scripts/gen/home-architecture-foundation.js}
-  receiveShadow: true
-  rotation: {w: 1, x: 0, y: 0, z: 0}
-  state: {floorY: 24, groundY: 23.55}
-  tags: [home-architecture, foundation]
-home-architecture-work/home-architecture-den/home-roof-den-0:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-roof-den-0
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  physics: static
-  primitive: {kind: scripted, params: {facet: 0, frame: den}, script: scripts/gen/home-architecture-roof.js}
-  receiveShadow: true
-  state: {eaveY: 27.25, facet: 0, frame: den, joinedValley: true}
-  tags: [home-architecture, roof]
-home-architecture-work/home-architecture-den/home-roof-den-1:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-roof-den-1
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  physics: static
-  primitive: {kind: scripted, params: {facet: 1, frame: den}, script: scripts/gen/home-architecture-roof.js}
-  receiveShadow: true
-  state: {eaveY: 27.25, facet: 1, frame: den, joinedValley: true}
-  tags: [home-architecture, roof]
-home-architecture-work/home-architecture-den/home-roof-den-2:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-roof-den-2
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  physics: static
-  primitive: {kind: scripted, params: {facet: 2, frame: den}, script: scripts/gen/home-architecture-roof.js}
-  receiveShadow: true
-  state: {eaveY: 27.25, facet: 2, frame: den, joinedValley: true}
-  tags: [home-architecture, roof]
-home-architecture-work/home-architecture-den/home-roof-den-3:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-roof-den-3
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  physics: static
-  primitive: {kind: scripted, params: {facet: 3, frame: den}, script: scripts/gen/home-architecture-roof.js}
-  receiveShadow: true
-  state: {eaveY: 27.25, facet: 3, frame: den, joinedValley: true}
-  tags: [home-architecture, roof]
-home-architecture-work/home-architecture-den/home-roof-joinery:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-roof-joinery
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  primitive: {kind: scripted, script: scripts/gen/home-architecture-roof-trim.js}
-  receiveShadow: true
-  tags: [home-architecture, roof, joinery]
-home-architecture-work/home-architecture-den/home-roof-wing-0:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-roof-wing-0
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  physics: static
-  primitive: {kind: scripted, params: {facet: 0, frame: wing}, script: scripts/gen/home-architecture-roof.js}
-  receiveShadow: true
-  state: {eaveY: 27.25, facet: 0, frame: wing, joinedValley: true}
-  tags: [home-architecture, roof]
-home-architecture-work/home-architecture-den/home-roof-wing-1:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-roof-wing-1
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  physics: static
-  primitive: {kind: scripted, params: {facet: 1, frame: wing}, script: scripts/gen/home-architecture-roof.js}
-  receiveShadow: true
-  state: {eaveY: 27.25, facet: 1, frame: wing, joinedValley: true}
-  tags: [home-architecture, roof]
-home-architecture-work/home-architecture-den/home-trusses-den:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-architecture-work/home-architecture-den/home-trusses-den
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-architecture-work/home-architecture-den
-  primitive: {kind: scripted, params: {frame: den}, script: scripts/gen/home-architecture-timber.js}
-  receiveShadow: true
-  tags: [home-architecture, timber, truss]
-home-front-door:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-front-door
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-front-door-hinge
-  physics: kinematic
-  pivot: {x: 0, y: 0, z: 0}
-  primitive: {kind: scripted, params: {height: 2.35, width: 1.08}, script: scripts/gen/home-architecture-door.js}
-  receiveShadow: true
-  rotation: {w: 1, x: 0, y: 0, z: 0}
-  state: {colliderBounds: {max: [0, 2.385, 0.038], min: [-1.08, 0.035, -0.038]}, height: 2.35, hinge: home-front-door-hinge, localDrawBounds: {max: [0.0245, 2.385, 0.1705], min: [-1.08, 0.035, -0.1705]}, width: 1.08}
-  tags: [home-architecture, door-leaf]
-home-front-door-hinge:
-  behavior: scripts/home-door.js
-  blueprint: {category: Architecture, icon: door-open, label: "Oak entry door · lake entrance"}
-  feetPosition: {x: 3.05, y: 0, z: -0.045}
-  id: home-front-door-hinge
-  parent: home-architecture-work/home-architecture-den
-  pivot: {x: 0, y: 0, z: 0}
-  rotation: {yaw: 180}
-  state: {closedYaw: 180, currentYaw: 90, leafId: home-front-door, open: true, openYaw: 90, openingWidth: 1.1, ready: true}
-  tags: [home-architecture, door-hinge, interactable]
-home-front-door/handle-label-back:
-  overrides:
-    feetPosition: {x: -0.65, y: 1.33, z: 0.3}
-    parent: home-front-door
-    state.hinge: home-front-door-hinge
-    state.side: 1
-    state.verb: Open
-  template: templates/home-door-label.js#handleLabel
-home-front-door/handle-label-front:
-  overrides:
-    feetPosition: {x: -0.65, y: 1.33, z: -0.3}
-    parent: home-front-door
-    state.hinge: home-front-door-hinge
-    state.side: -1
-    state.verb: Open
-  template: templates/home-door-label.js#handleLabel
 home-furnishing-work/furniture-rug:
   castShadow: false
   feetPosition: {x: 0.26, y: 0, z: -0.245}
@@ -2429,103 +1987,604 @@ home-portal/spot-arch-landing:
   state: {landingRadius: 2.1, purpose: "the flagstone landing in front of the arch, where a player stands before stepping through"}
   tags: [marker, spot]
 home-root:
-  feetPosition: {x: -3, y: 24, z: -3}
+  feetPosition: {x: 2, y: 24, z: 3}
   id: home-root
-  state: {boardArea: 25, build: in progress, denArea: 43.5, floorY: 24, spareArea: 20, wingYaw: 45}
+  rotation: {yaw: 0}
+  state: {boardArea: 25, build: castle, denArea: 43.5, floorY: 24, spareArea: 20, wingYaw: 45}
   tags: [home, house]
-home-root/den-curtain-left:
-  overrides:
-    feetPosition: {x: 2.02, y: 0.78, z: 5.7}
-    parent: home-root
-    rotation: {yaw: 0}
-  template: templates/den-life.js#curtain
-home-root/den-curtain-right:
-  overrides:
-    feetPosition: {x: 4.12, y: 0.78, z: 5.7}
-    parent: home-root
-    rotation: {yaw: 0}
-  template: templates/den-life.js#curtain
-home-root/den-curtain-rod:
-  overrides:
-    feetPosition: {x: 3.07, y: 2.66, z: 5.7}
-    parent: home-root
-    rotation: {yaw: 0}
-  template: templates/den-life.js#curtainRod
+home-root/castle-anvil-3:
+  castShadow: true
+  feetPosition: {x: -3.44396959073927, y: 12.6, z: -1.6059493946146572}
+  id: home-root/castle-anvil-3
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: anvil}, script: scripts/gen/castle-furnish.js, seed: 585}
+  receiveShadow: true
+  rotation: {yaw: -115}
+  tags: [castle, castle-furniture]
+home-root/castle-banner-0:
+  castShadow: true
+  feetPosition: {x: 2.9650000000000003, y: 0.6, z: -5.135530644441721}
+  id: home-root/castle-banner-0
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {color: oklch(0.62 0.08 195), item: banner}, script: scripts/gen/castle-furnish.js, seed: 893}
+  receiveShadow: true
+  rotation: {yaw: -210}
+  tags: [castle, castle-furniture]
+home-root/castle-banner-2:
+  castShadow: true
+  feetPosition: {x: -1.0893233278415706e-15, y: 9, z: -5.93}
+  id: home-root/castle-banner-2
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: banner}, script: scripts/gen/castle-furnish.js, seed: 863}
+  receiveShadow: true
+  rotation: {yaw: -180}
+  tags: [castle, castle-furniture]
+home-root/castle-banner-4:
+  castShadow: true
+  feetPosition: {x: -2.0281794499212156, y: 17, z: 5.572377241260437}
+  id: home-root/castle-banner-4
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {color: oklch(0.62 0.08 195), h: 1.9, item: banner}, script: scripts/gen/castle-furnish.js, seed: 703}
+  receiveShadow: true
+  rotation: {yaw: -20}
+  tags: [castle, castle-furniture]
+home-root/castle-barrel-0:
+  castShadow: true
+  feetPosition: {x: -4.980370890165314, y: 0, z: 1.812706759626045}
+  id: home-root/castle-barrel-0
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: barrel}, script: scripts/gen/castle-furnish.js, seed: 690}
+  receiveShadow: true
+  rotation: {yaw: -70}
+  tags: [castle, castle-furniture]
+home-root/castle-barrel-3a:
+  castShadow: true
+  feetPosition: {x: -3.613305274337834, y: 12.6, z: -4.01298205757793}
+  id: home-root/castle-barrel-3a
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: barrel}, script: scripts/gen/castle-furnish.js, seed: 768}
+  receiveShadow: true
+  rotation: {yaw: -138}
+  tags: [castle, castle-furniture]
+home-root/castle-barrel-3b:
+  castShadow: true
+  feetPosition: {x: -2.550000000000002, y: 12.6, z: -4.416729559300635}
+  id: home-root/castle-barrel-3b
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: barrel}, script: scripts/gen/castle-furnish.js, seed: 750}
+  receiveShadow: true
+  rotation: {yaw: -150}
+  tags: [castle, castle-furniture]
+home-root/castle-barrel-3c:
+  castShadow: true
+  feetPosition: {x: 4.9803708901653145, y: 12.6, z: 1.8127067596260442}
+  id: home-root/castle-barrel-3c
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: barrel}, script: scripts/gen/castle-furnish.js, seed: 550}
+  receiveShadow: true
+  rotation: {yaw: 70}
+  tags: [castle, castle-furniture]
+home-root/castle-bed-2:
+  castShadow: true
+  feetPosition: {x: -4.443057770090071, y: 8.4, z: 3.728168136181929}
+  id: home-root/castle-bed-2
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: bed}, script: scripts/gen/castle-furnish.js, seed: 720}
+  receiveShadow: true
+  rotation: {yaw: -50}
+  tags: [castle, castle-furniture]
+home-root/castle-bench-1a:
+  castShadow: true
+  feetPosition: {x: -2.7137539077005637, y: 4.2, z: -1.6957416455462555}
+  id: home-root/castle-bench-1a
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: bench, w: 1.4}, script: scripts/gen/castle-furnish.js, seed: 532}
+  receiveShadow: true
+  rotation: {yaw: -122}
+  tags: [castle, castle-furniture]
+home-root/castle-bench-1b:
+  castShadow: true
+  feetPosition: {x: -3.9434236471273816, y: 4.2, z: -2.4641245786844026}
+  id: home-root/castle-bench-1b
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: bench, w: 1.4}, script: scripts/gen/castle-furnish.js, seed: 677}
+  receiveShadow: true
+  rotation: {yaw: -122}
+  tags: [castle, castle-furniture]
+home-root/castle-bench-2:
+  castShadow: true
+  feetPosition: {x: 4.676537180435967, y: 8.4, z: -2.7000000000000024}
+  id: home-root/castle-bench-2
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: bench, w: 1.3}, script: scripts/gen/castle-furnish.js, seed: 870}
+  receiveShadow: true
+  rotation: {yaw: -240}
+  tags: [castle, castle-furniture]
+home-root/castle-bench-4a:
+  castShadow: true
+  feetPosition: {x: -5.34744757120448, y: 16.8, z: 0.7515347451843528}
+  id: home-root/castle-bench-4a
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: bench}, script: scripts/gen/castle-furnish.js, seed: 712}
+  receiveShadow: true
+  rotation: {yaw: -82}
+  tags: [castle, castle-furniture]
+home-root/castle-bench-4b:
+  castShadow: true
+  feetPosition: {x: 3.471053092307313, y: 16.8, z: 4.136639992842482}
+  id: home-root/castle-bench-4b
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: bench}, script: scripts/gen/castle-furnish.js, seed: 590}
+  receiveShadow: true
+  rotation: {yaw: 40}
+  tags: [castle, castle-furniture]
+home-root/castle-bookcase-1-130:
+  castShadow: true
+  feetPosition: {x: -3.6960287556976015, y: 4.2, z: 4.404755547934124}
+  id: home-root/castle-bookcase-1-130
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: bookcase}, script: scripts/gen/castle-furnish.js, seed: 705}
+  receiveShadow: true
+  rotation: {yaw: -40}
+  tags: [castle, castle-furniture]
+home-root/castle-bookcase-1-180:
+  castShadow: true
+  feetPosition: {x: -5.75, y: 4.2, z: 7.041719095097281e-16}
+  id: home-root/castle-bookcase-1-180
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: bookcase}, script: scripts/gen/castle-furnish.js, seed: 755}
+  receiveShadow: true
+  rotation: {yaw: -90}
+  tags: [castle, castle-furniture]
+home-root/castle-bookcase-1-255:
+  castShadow: true
+  feetPosition: {x: -1.4882095093394936, y: 4.2, z: -5.554073501162143}
+  id: home-root/castle-bookcase-1-255
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: bookcase}, script: scripts/gen/castle-furnish.js, seed: 830}
+  receiveShadow: true
+  rotation: {yaw: -165}
+  tags: [castle, castle-furniture]
+home-root/castle-bookcase-1-330:
+  castShadow: true
+  feetPosition: {x: 4.979646071760521, y: 4.2, z: -2.8750000000000027}
+  id: home-root/castle-bookcase-1-330
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: bookcase}, script: scripts/gen/castle-furnish.js, seed: 905}
+  receiveShadow: true
+  rotation: {yaw: -240}
+  tags: [castle, castle-furniture]
+home-root/castle-bookcase-2:
+  castShadow: true
+  feetPosition: {x: -4.979646071760522, y: 8.4, z: -2.8750000000000004}
+  id: home-root/castle-bookcase-2
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {h: 2, item: bookcase, w: 1.2}, script: scripts/gen/castle-furnish.js, seed: 785}
+  receiveShadow: true
+  rotation: {yaw: -120}
+  tags: [castle, castle-furniture]
+home-root/castle-chest-2:
+  castShadow: true
+  feetPosition: {x: -2.4896444401366784, y: 8.4, z: 2.089059731481253}
+  id: home-root/castle-chest-2
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: chest}, script: scripts/gen/castle-furnish.js, seed: 465}
+  receiveShadow: true
+  rotation: {yaw: -230}
+  tags: [castle, castle-furniture]
+home-root/castle-chest-3:
+  castShadow: true
+  feetPosition: {x: 4.060035548530584, y: 12.6, z: 3.406774331338658}
+  id: home-root/castle-chest-3
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: chest}, script: scripts/gen/castle-furnish.js, seed: 570}
+  receiveShadow: true
+  rotation: {yaw: 50}
+  tags: [castle, castle-furniture]
+home-root/castle-flag-5:
+  castShadow: true
+  feetPosition: {x: 2.1500000000000004, y: 21, z: 3.723909236273086}
+  id: home-root/castle-flag-5
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: flag}, script: scripts/gen/castle-furnish.js, seed: 490}
+  receiveShadow: true
+  rotation: {yaw: 30}
+  tags: [castle, castle-furniture]
+home-root/castle-maptable-4:
+  castShadow: true
+  feetPosition: {x: 1.9500000000000004, y: 16.8, z: -3.3774990747593105}
+  id: home-root/castle-maptable-4
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {candle: true, d: 1, item: table, map: true, w: 1.8}, script: scripts/gen/castle-furnish.js, seed: 690}
+  receiveShadow: true
+  rotation: {yaw: -210}
+  tags: [castle, castle-furniture]
+home-root/castle-plaque-1:
+  castShadow: true
+  feetPosition: {x: -2.041860255654242, y: 6.95, z: 5.609964946091873}
+  id: home-root/castle-plaque-1
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: plaque}, script: scripts/gen/castle-furnish.js, seed: 707}
+  receiveShadow: true
+  rotation: {yaw: -20}
+  tags: [castle, castle-furniture]
+  ui: "<div face=\"front\" width=\"1.0m\" style=\"height:300px;display:flex;align-items:center;justify-content:center;color:#f2e6cf;font-family:Georgia,serif;font-size:130px;letter-spacing:6px\">LIBRARY</div>"
+home-root/castle-plaque-2:
+  castShadow: true
+  feetPosition: {x: -2.041860255654242, y: 11.15, z: 5.609964946091873}
+  id: home-root/castle-plaque-2
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: plaque}, script: scripts/gen/castle-furnish.js, seed: 707}
+  receiveShadow: true
+  rotation: {yaw: -20}
+  tags: [castle, castle-furniture]
+  ui: "<div face=\"front\" width=\"1.0m\" style=\"height:300px;display:flex;align-items:center;justify-content:center;color:#f2e6cf;font-family:Georgia,serif;font-size:130px;letter-spacing:6px\">BEDCHAMBER</div>"
+home-root/castle-plaque-3:
+  castShadow: true
+  feetPosition: {x: -2.041860255654242, y: 15.350000000000001, z: 5.609964946091873}
+  id: home-root/castle-plaque-3
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: plaque}, script: scripts/gen/castle-furnish.js, seed: 707}
+  receiveShadow: true
+  rotation: {yaw: -20}
+  tags: [castle, castle-furniture]
+  ui: "<div face=\"front\" width=\"1.0m\" style=\"height:300px;display:flex;align-items:center;justify-content:center;color:#f2e6cf;font-family:Georgia,serif;font-size:130px;letter-spacing:6px\">WORKSHOP</div>"
+home-root/castle-plaque-4:
+  castShadow: true
+  feetPosition: {x: -2.041860255654242, y: 19.55, z: 5.609964946091873}
+  id: home-root/castle-plaque-4
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: plaque}, script: scripts/gen/castle-furnish.js, seed: 707}
+  receiveShadow: true
+  rotation: {yaw: -20}
+  tags: [castle, castle-furniture]
+  ui: "<div face=\"front\" width=\"1.0m\" style=\"height:300px;display:flex;align-items:center;justify-content:center;color:#f2e6cf;font-family:Georgia,serif;font-size:130px;letter-spacing:6px\">LOOKOUT</div>"
+home-root/castle-rack-3:
+  castShadow: true
+  feetPosition: {x: 2.9000000000000004, y: 12.6, z: -5.0229473419497435}
+  id: home-root/castle-rack-3
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: rack}, script: scripts/gen/castle-furnish.js, seed: 880}
+  receiveShadow: true
+  rotation: {yaw: -210}
+  tags: [castle, castle-furniture]
+home-root/castle-rug-1:
+  castShadow: true
+  feetPosition: {x: -3.3073875750100616, y: 4.2, z: -2.0666851305094984}
+  id: home-root/castle-rug-1
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {color: oklch(0.6 0.08 195), item: rug, rx: 1.5, rz: 1.3}, script: scripts/gen/castle-furnish.js, seed: 602}
+  receiveShadow: true
+  rotation: {yaw: -122}
+  tags: [castle, castle-furniture]
+home-root/castle-rug-2:
+  castShadow: true
+  feetPosition: {x: 0.3399073967158658, y: 8.4, z: -3.8851593225578074}
+  id: home-root/castle-rug-2
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: rug, rx: 1.6, rz: 1.1}, script: scripts/gen/castle-furnish.js, seed: 665}
+  receiveShadow: true
+  rotation: {yaw: -185}
+  tags: [castle, castle-furniture]
+home-root/castle-table-1:
+  castShadow: true
+  feetPosition: {x: -3.3073875750100616, y: 4.2, z: -2.0666851305094984}
+  id: home-root/castle-table-1
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {books: true, candle: true, d: 0.85, item: table, w: 1.6}, script: scripts/gen/castle-furnish.js, seed: 602}
+  receiveShadow: true
+  rotation: {yaw: -122}
+  tags: [castle, castle-furniture]
+home-root/castle-telescope-4:
+  castShadow: true
+  feetPosition: {x: -0.639578341878253, y: 16.8, z: -4.858079820731671}
+  id: home-root/castle-telescope-4
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: telescope}, script: scripts/gen/castle-furnish.js, seed: 752}
+  receiveShadow: true
+  rotation: {yaw: -352.5}
+  tags: [castle, castle-furniture]
+home-root/castle-telescope-5:
+  castShadow: true
+  feetPosition: {x: 2.4000000000000004, y: 21, z: -4.156921938165305}
+  id: home-root/castle-telescope-5
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: telescope}, script: scripts/gen/castle-furnish.js, seed: 780}
+  receiveShadow: true
+  rotation: {yaw: -390}
+  tags: [castle, castle-furniture]
+home-root/castle-torch-0a:
+  castShadow: true
+  feetPosition: {x: 2.9850000000000003, y: 2.2, z: 5.170171660593098}
+  id: home-root/castle-torch-0a
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: torch}, script: scripts/gen/castle-furnish.js, seed: 657}
+  receiveShadow: true
+  rotation: {yaw: 30}
+  tags: [castle, castle-furniture]
+home-root/castle-torch-0a/castle-torch-0a/light:
+  feetPosition: {x: 0, y: 0.6, z: -0.3}
+  id: home-root/castle-torch-0a/castle-torch-0a/light
+  light: {color: oklch(0.85 0.1 65), decay: 2, distance: 11, intensity: 7, kind: point, shadow: {enabled: false}}
+  parent: home-root/castle-torch-0a
+  tags: [castle, castle-light]
+home-root/castle-torch-0b:
+  castShadow: true
+  feetPosition: {x: -2.041860255654241, y: 2.2, z: -5.609964946091873}
+  id: home-root/castle-torch-0b
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: torch}, script: scripts/gen/castle-furnish.js, seed: 847}
+  receiveShadow: true
+  rotation: {yaw: -160}
+  tags: [castle, castle-furniture]
+home-root/castle-torch-0b/castle-torch-0b/light:
+  feetPosition: {x: 0, y: 0.6, z: -0.3}
+  id: home-root/castle-torch-0b/castle-torch-0b/light
+  light: {color: oklch(0.85 0.1 65), decay: 2, distance: 11, intensity: 7, kind: point, shadow: {enabled: false}}
+  parent: home-root/castle-torch-0b
+  tags: [castle, castle-light]
+home-root/castle-torch-1a:
+  castShadow: true
+  feetPosition: {x: 5.609964946091873, y: 6.4, z: 2.041860255654242}
+  id: home-root/castle-torch-1a
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: torch}, script: scripts/gen/castle-furnish.js, seed: 617}
+  receiveShadow: true
+  rotation: {yaw: 70}
+  tags: [castle, castle-furniture]
+home-root/castle-torch-1a/castle-torch-1a/light:
+  feetPosition: {x: 0, y: 0.6, z: -0.3}
+  id: home-root/castle-torch-1a/castle-torch-1a/light
+  light: {color: oklch(0.85 0.1 65), decay: 2, distance: 11, intensity: 7, kind: point, shadow: {enabled: false}}
+  parent: home-root/castle-torch-1a
+  tags: [castle, castle-light]
+home-root/castle-torch-1b:
+  castShadow: true
+  feetPosition: {x: -3.6754990076941785, y: 6.4, z: -4.704424199032131}
+  id: home-root/castle-torch-1b
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: torch}, script: scripts/gen/castle-furnish.js, seed: 829}
+  receiveShadow: true
+  rotation: {yaw: -142}
+  tags: [castle, castle-furniture]
+home-root/castle-torch-1b/castle-torch-1b/light:
+  feetPosition: {x: 0, y: 0.6, z: -0.3}
+  id: home-root/castle-torch-1b/castle-torch-1b/light
+  light: {color: oklch(0.85 0.1 65), decay: 2, distance: 11, intensity: 7, kind: point, shadow: {enabled: false}}
+  parent: home-root/castle-torch-1b
+  tags: [castle, castle-light]
+home-root/castle-torch-2a:
+  castShadow: true
+  feetPosition: {x: 2.9850000000000003, y: 10.600000000000001, z: 5.170171660593098}
+  id: home-root/castle-torch-2a
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: torch}, script: scripts/gen/castle-furnish.js, seed: 657}
+  receiveShadow: true
+  rotation: {yaw: 30}
+  tags: [castle, castle-furniture]
+home-root/castle-torch-2a/castle-torch-2a/light:
+  feetPosition: {x: 0, y: 0.6, z: -0.3}
+  id: home-root/castle-torch-2a/castle-torch-2a/light
+  light: {color: oklch(0.85 0.1 65), decay: 2, distance: 11, intensity: 7, kind: point, shadow: {enabled: false}}
+  parent: home-root/castle-torch-2a
+  tags: [castle, castle-light]
+home-root/castle-torch-2b:
+  castShadow: true
+  feetPosition: {x: -4.8903377044052805, y: 10.600000000000001, z: -3.4242513250157454}
+  id: home-root/castle-torch-2b
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: torch}, script: scripts/gen/castle-furnish.js, seed: 812}
+  receiveShadow: true
+  rotation: {yaw: -125}
+  tags: [castle, castle-furniture]
+home-root/castle-torch-2b/castle-torch-2b/light:
+  feetPosition: {x: 0, y: 0.6, z: -0.3}
+  id: home-root/castle-torch-2b/castle-torch-2b/light
+  light: {color: oklch(0.85 0.1 65), decay: 2, distance: 11, intensity: 7, kind: point, shadow: {enabled: false}}
+  parent: home-root/castle-torch-2b
+  tags: [castle, castle-light]
+home-root/castle-torch-3a:
+  castShadow: true
+  feetPosition: {x: -0.5203197842035197, y: 14.8, z: 5.947282347607721}
+  id: home-root/castle-torch-3a
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: torch}, script: scripts/gen/castle-furnish.js, seed: 692}
+  receiveShadow: true
+  rotation: {yaw: -5}
+  tags: [castle, castle-furniture]
+home-root/castle-torch-3a/castle-torch-3a/light:
+  feetPosition: {x: 0, y: 0.6, z: -0.3}
+  id: home-root/castle-torch-3a/castle-torch-3a/light
+  light: {color: oklch(0.85 0.1 65), decay: 2, distance: 11, intensity: 7, kind: point, shadow: {enabled: false}}
+  parent: home-root/castle-torch-3a
+  tags: [castle, castle-light]
+home-root/castle-torch-3b:
+  castShadow: true
+  feetPosition: {x: -4.8903377044052805, y: 14.8, z: -3.4242513250157454}
+  id: home-root/castle-torch-3b
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: torch}, script: scripts/gen/castle-furnish.js, seed: 812}
+  receiveShadow: true
+  rotation: {yaw: -125}
+  tags: [castle, castle-furniture]
+home-root/castle-torch-3b/castle-torch-3b/light:
+  feetPosition: {x: 0, y: 0.6, z: -0.3}
+  id: home-root/castle-torch-3b/castle-torch-3b/light
+  light: {color: oklch(0.85 0.1 65), decay: 2, distance: 11, intensity: 7, kind: point, shadow: {enabled: false}}
+  parent: home-root/castle-torch-3b
+  tags: [castle, castle-light]
+home-root/castle-torch-4a:
+  castShadow: true
+  feetPosition: {x: 5.97, y: 19, z: 0}
+  id: home-root/castle-torch-4a
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: torch}, script: scripts/gen/castle-furnish.js, seed: 597}
+  receiveShadow: true
+  rotation: {yaw: 90}
+  tags: [castle, castle-furniture]
+home-root/castle-torch-4a/castle-torch-4a/light:
+  feetPosition: {x: 0, y: 0.6, z: -0.3}
+  id: home-root/castle-torch-4a/castle-torch-4a/light
+  light: {color: oklch(0.85 0.1 65), decay: 2, distance: 11, intensity: 7, kind: point, shadow: {enabled: false}}
+  parent: home-root/castle-torch-4a
+  tags: [castle, castle-light]
+home-root/castle-torch-4b:
+  castShadow: true
+  feetPosition: {x: -3.6754990076941785, y: 19, z: -4.704424199032131}
+  id: home-root/castle-torch-4b
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: torch}, script: scripts/gen/castle-furnish.js, seed: 829}
+  receiveShadow: true
+  rotation: {yaw: -142}
+  tags: [castle, castle-furniture]
+home-root/castle-torch-4b/castle-torch-4b/light:
+  feetPosition: {x: 0, y: 0.6, z: -0.3}
+  id: home-root/castle-torch-4b/castle-torch-4b/light
+  light: {color: oklch(0.85 0.1 65), decay: 2, distance: 11, intensity: 7, kind: point, shadow: {enabled: false}}
+  parent: home-root/castle-torch-4b
+  tags: [castle, castle-light]
+home-root/castle-workbench-3:
+  castShadow: true
+  feetPosition: {x: -4.719838450625191, y: 12.6, z: 2.7249999999999996}
+  id: home-root/castle-workbench-3
+  material: {color: "#ffffff", pbr: true, roughness: 0.85}
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: workbench}, script: scripts/gen/castle-furnish.js, seed: 695}
+  receiveShadow: true
+  rotation: {yaw: -60}
+  tags: [castle, castle-furniture]
 home-root/furniture-chair-0:
   overrides:
-    feetPosition: {x: 7.2221825406947975, y: 0, z: 0.24228355337246466}
+    feetPosition: {x: 3.1071593225578074, y: 0, z: 1.1179073967158668}
     parent: home-root
     rotation: {yaw: -45}
     state: {authoredDepth: 0.55, authoredWidth: 0.55, front: "-z", role: chair, room: board, seatHeight: 0.479, u: 1.4, v: 2.5}
   template: templates/den-furniture.js#chair
 home-root/furniture-chair-1:
   overrides:
-    feetPosition: {x: 8.777817459305203, y: 0, z: -1.3133513652379403}
+    feetPosition: {x: 4.663159322557807, y: 0, z: -0.4380926032841332}
     parent: home-root
     rotation: {yaw: 135}
     state: {authoredDepth: 0.55, authoredWidth: 0.55, front: "-z", role: chair, room: board, seatHeight: 0.479, u: 3.6, v: 2.5}
   template: templates/den-furniture.js#chair
 home-root/furniture-chair-2:
   overrides:
-    feetPosition: {x: 7.2221825406947975, y: 0, z: -1.3133513652379403}
+    feetPosition: {x: 3.1071593225578074, y: 0, z: -0.4380926032841332}
     parent: home-root
     rotation: {yaw: 225}
     state: {authoredDepth: 0.55, authoredWidth: 0.55, front: "-z", role: chair, room: board, seatHeight: 0.479, u: 2.5, v: 1.4}
   template: templates/den-furniture.js#chair
 home-root/furniture-chair-3:
   overrides:
-    feetPosition: {x: 8.777817459305203, y: 0, z: 0.24228355337246466}
+    feetPosition: {x: 4.663159322557807, y: 0, z: 1.1179073967158668}
     parent: home-root
     rotation: {yaw: 45}
     state: {authoredDepth: 0.55, authoredWidth: 0.55, front: "-z", role: chair, room: board, seatHeight: 0.479, u: 2.5, v: 3.6}
   template: templates/den-furniture.js#chair
 home-root/furniture-hearth:
   overrides:
-    feetPosition: {x: 0.64, y: 0, z: 5.1}
+    feetPosition: {x: -5.36, y: 0, z: 6.564106843429813e-16}
     parent: home-root
     primitive: {kind: scripted, params: {height: 3.2, item: hearth, mantelExtension: 0.2}, script: scripts/gen/den-furniture.js, seed: 17}
+    rotation: {yaw: 0}
   template: templates/den-furniture.js#hearth
 home-root/furniture-hearth/furniture-hearth-fire:
   overrides:
     feetPosition: {x: 0.21, y: 0.3, z: 0}
     parent: home-root/furniture-hearth
   template: templates/home-atmosphere.js#hearthFire
-home-root/furniture-pendant-board:
-  overrides:
-    children.warm-light: {light: {color: "#eee2d3", decay: 2, distance: 5.2, intensity: 1.6, kind: point, shadow: {enabled: true}}}
-    feetPosition: {x: 8, y: 2.569999933242798, z: -0.5355339059327378}
-    parent: home-root
-    rotation: {yaw: 45}
-    state.lightLocalY: 0.08
-    state.lightY: 26.65
-    state.role: pendant
-    state.room: board
-  template: templates/den-furniture.js#pendant
-home-root/furniture-pendant-den:
-  overrides:
-    children.warm-light: {light: {color: "#eee2d3", decay: 2, distance: 5.2, intensity: 1.6, kind: point, shadow: {enabled: true}}}
-    feetPosition: {x: 2.1, y: 2.52, z: 2}
-    parent: home-root
-    state.lightLocalY: 0.08
-    state.lightY: 26.6
-    state.role: pendant
-    state.room: den
-  template: templates/den-furniture.js#pendant
-home-root/furniture-pendant-spare:
-  overrides:
-    children.warm-light: {light: {color: "#eee2d3", decay: 2, distance: 5.2, intensity: 1.6, kind: point, shadow: {enabled: true}}}
-    feetPosition: {x: 11.181980515339465, y: 2.62, z: 2.6464466094067265}
-    parent: home-root
-    rotation: {yaw: 45}
-    state.lightLocalY: 0.08
-    state.lightY: 26.7
-    state.role: pendant
-    state.room: spare
-  template: templates/den-furniture.js#pendant
 home-root/furniture-shelf-0:
   overrides:
-    feetPosition: {x: 0.305, y: 0.52, z: 2.34}
+    feetPosition: {x: 4.213244437154379, y: 0.52, z: 3.5353318532759657}
     parent: home-root
+    rotation: {yaw: 140}
     state.capacityLength: 3.12
     state.occupiedLength: 0
     state.role: display-shelf
@@ -2566,8 +2625,9 @@ home-root/furniture-shelf-0/slot-shelf-0-d:
   tags: [marker, shelf-slot]
 home-root/furniture-shelf-1:
   overrides:
-    feetPosition: {x: 0.305, y: 1.27, z: 2.34}
+    feetPosition: {x: 4.213244437154379, y: 1.27, z: 3.5353318532759657}
     parent: home-root
+    rotation: {yaw: 140}
     state.capacityLength: 3.12
     state.occupiedLength: 0
     state.role: display-shelf
@@ -2608,8 +2668,9 @@ home-root/furniture-shelf-1/slot-shelf-1-d:
   tags: [marker, shelf-slot]
 home-root/furniture-shelf-2:
   overrides:
-    feetPosition: {x: 0.305, y: 2.02, z: 2.34}
+    feetPosition: {x: 4.213244437154379, y: 2.02, z: 3.5353318532759657}
     parent: home-root
+    rotation: {yaw: 140}
     state.capacityLength: 3.12
     state.occupiedLength: 0
     state.role: display-shelf
@@ -2650,13 +2711,13 @@ home-root/furniture-shelf-2/slot-shelf-2-d:
   tags: [marker, shelf-slot]
 home-root/furniture-stool:
   overrides:
-    feetPosition: {x: 1.9, y: 0, z: 4.54}
+    feetPosition: {x: -4.228616793536588, y: 0, z: -1.5390906449655088}
     parent: home-root
-    rotation: {yaw: -16}
+    rotation: {yaw: 0}
   template: templates/den-furniture.js#stool
 home-root/furniture-table:
   overrides:
-    feetPosition: {x: 8, y: 0, z: -0.5355339059327378}
+    feetPosition: {x: 3.8851593225578074, y: 0, z: 0.33990739671586684}
     parent: home-root
     rotation: {yaw: 45}
     state: {closedBoxOnly: true, radius: 0.8, role: board-table, room: board, topHeight: 0.74, u: 2.5, v: 2.5}
@@ -2668,33 +2729,15 @@ home-root/furniture-table/furniture-table-box:
     primitive: {kind: scripted, params: {depth: 0.21, height: 0.078, item: box, tone: moss, width: 0.285}, script: scripts/gen/den-furniture.js, seed: 17}
     rotation: {yaw: 13}
   template: templates/den-furniture.js#box
-home-root/garden-door-lantern:
-  blueprint: {category: Home garden, icon: lamp-wall-up, label: Little brass candle lantern}
-  castShadow: true
-  feetPosition: {x: 2.8, y: 2.72, z: -0.18}
-  id: home-root/garden-door-lantern
-  material: {pbr: true, roughness: 0.91}
-  parent: home-root
-  physics: none
-  primitive: {kind: scripted, script: scripts/gen/home-garden-lantern.js, seed: 61}
-  receiveShadow: true
-  state: {flame: modeled emissive candle, mounting: "front plaster pier, outside glazing", planXMax: 2.93, planXMin: 2.67}
-  tags: [home-garden, garden-lantern]
-home-root/garden-door-lantern/garden-door-lantern-light:
-  feetPosition: {x: 0, y: 0.025, z: -0.18}
-  id: home-root/garden-door-lantern/garden-door-lantern-light
-  light: {color: oklch(0.83 0.12 68), distance: 3.8, intensity: 1, kind: point, shadow: {enabled: false}}
-  parent: home-root/garden-door-lantern
-  tags: [home-garden, garden-practical]
 home-root/home-clock:
   overrides:
-    feetPosition: {x: 5.528661727905273, y: 2.1461567878723145, z: 0.7337227463722229}
+    feetPosition: {x: -4.990089879275273, y: 2.3, z: -3.240602258339411}
     parent: home-root
-    rotation: {yaw: 135}
+    rotation: {yaw: -123}
   template: templates/home-devices.js#clock
 home-root/home-furnishing-work:
   blueprint: {category: "First Den · Furniture", icon: circle, label: Plain oval woven rug}
-  feetPosition: {x: 3, y: 0, z: 3.5}
+  feetPosition: {x: 3.8851593225578074, y: 0, z: 0.33990739671586684}
   id: home-root/home-furnishing-work
   parent: home-root
   state: {installed: true, planBounds: {x: [1.85, 4.67], z: [1.76, 4.75]}, role: rug-assembly}
@@ -2708,221 +2751,6 @@ home-root/home-radio:
     state: {mantelContactY: 25.119, powered: true, role: shelf-radio, station: 0, support: hearth mantel}
     ui: "<div face=\"front\" emissive width=\"0.49m\" offset=\"-0.009m\" style=\"height:264px;padding-top:49px;display:flex;justify-content:flex-end;color:#f2e6cf;font-family:Georgia,serif\"><div style=\"width:150px;text-align:center\"><div style=\"font-size:20px;line-height:26px;color:#e8bc77\">{{ state.stationName }}</div><div style=\"font-size:11px;line-height:16px;letter-spacing:1px\">{{ state.frequency }} FM</div><div style=\"margin-top:6px;font-size:14px;line-height:19px;color:#f2e6cf\">{{ state.songTitle }}</div><div style=\"font-size:10px;line-height:14px;letter-spacing:1px;color:{{ state.indicator }}\">{{ state.broadcastLabel }}</div><div style=\"margin-top:8px;display:flex;gap:4px;justify-content:center\"><button id=\"power\" style=\"background:#403429;color:#f2e6cf;border:1px solid #a88550;padding:7px 3px;font-size:12px;font-family:Georgia,serif\">Power</button><button id=\"tune\" style=\"background:#403429;color:#f2e6cf;border:1px solid #a88550;padding:7px 3px;font-size:12px;font-family:Georgia,serif\">Tune</button><button id=\"next\" style=\"background:#403429;color:#f2e6cf;border:1px solid #a88550;padding:7px 3px;font-size:12px;font-family:Georgia,serif\">Next</button></div><div style=\"margin-top:4px;font-size:10px;line-height:14px;letter-spacing:1px;color:#c4a778\">{{ state.songNumber | pad 2 }} / {{ state.songCount | pad 2 }}</div></div></div>"
   template: templates/home-devices.js#radio
-home-root/home-sconce-board:
-  overrides:
-    children: [{feetPosition: {x: 0, y: 0.145, z: -0.24}, id: home-sconce-board-light, light: {color: "#eee2d3", decay: 0.5, distance: 3.8, intensity: 0.23, kind: point, shadow: {enabled: true}}, template: templates/home-sconce.js#warmPool}]
-    feetPosition: {x: 11.00449671326164, y: 2.0199999999999996, z: -0.9237355288041527}
-    parent: home-root
-    rotation: {yaw: 135}
-    state.along: 4.35
-    state.fixtureMinY: 26.02
-    state.projection: 0.1725
-    state.wall: wing-right
-  template: templates/home-sconce.js#sconce
-home-root/home-sconce-den-back:
-  overrides:
-    children: [{feetPosition: {x: 0, y: 0.145, z: -0.24}, id: home-sconce-den-back-light, light: {color: "#eee2d3", decay: 0.5, distance: 3.8, intensity: 0.23, kind: point, shadow: {enabled: true}}, template: templates/home-sconce.js#warmPool}]
-    feetPosition: {x: 1.45, y: 2.0199999999999996, z: 5.899}
-    parent: home-root
-    rotation: {yaw: 0}
-    state.along: 1.45
-    state.fixtureMinY: 26.02
-    state.projection: 0.1725
-    state.wall: den-back
-  template: templates/home-sconce.js#sconce
-home-root/home-sconce-den-hip:
-  overrides:
-    children: [{feetPosition: {x: 0, y: 0.145, z: -0.24}, id: home-sconce-den-hip-light, light: {color: "#eee2d3", decay: 0.5, distance: 3.8, intensity: 0.23, kind: point, shadow: {enabled: true}}, template: templates/home-sconce.js#warmPool}]
-    feetPosition: {x: 7.550483614797111, y: 2.0199999999999996, z: 5.011970870750421}
-    parent: home-root
-    rotation: {yaw: 29.35775354279127}
-    state.along: 1.8357559750685821
-    state.fixtureMinY: 26.02
-    state.projection: 0.1725
-    state.wall: den-hip-wall
-  template: templates/home-sconce.js#sconce
-home-root/home-sconce-spare:
-  overrides:
-    children: [{feetPosition: {x: 0, y: 0.145, z: -0.24}, id: home-sconce-spare-light, light: {color: "#eee2d3", decay: 0.5, distance: 3.8, intensity: 0.23, kind: point, shadow: {enabled: true}}, template: templates/home-sconce.js#warmPool}]
-    feetPosition: {x: 11.853024850685497, y: 2.0199999999999996, z: -0.07520739138029553}
-    parent: home-root
-    rotation: {yaw: 135}
-    state.along: 5.55
-    state.fixtureMinY: 26.02
-    state.projection: 0.1725
-    state.wall: wing-right
-  template: templates/home-sconce.js#sconce
-home-root/note-board:
-  overrides:
-    feetPosition: {x: 9.696661, y: 1.32, z: 1.161099}
-    parent: home-root
-    rotation: {yaw: 45}
-    state.words: game night with friends?
-  template: templates/den-furniture.js#note
-home-root/note-couch:
-  overrides:
-    feetPosition: {x: 4.62, y: 1.35, z: 5.9}
-    parent: home-root
-    rotation: {yaw: 0}
-    state.words: "a couch here, facing the lake?"
-  template: templates/den-furniture.js#note
-home-root/note-reading:
-  overrides:
-    feetPosition: {x: 7.11452, y: 1.3, z: 5.25767}
-    parent: home-root
-    rotation: {yaw: 29.36}
-    state.words: a reading nook for rainy days?
-  template: templates/den-furniture.js#note
-home-root/note-spare:
-  overrides:
-    feetPosition: {x: 8.933, y: 1.32, z: 2.236}
-    parent: home-root
-    rotation: {yaw: 225}
-    state.words: an art studio?
-  template: templates/den-furniture.js#note
-home-root/room-board:
-  feetPosition: {x: 8, y: 0, z: -0.536}
-  id: home-root/room-board
-  parent: home-root
-  physics: none
-  rotation: {yaw: 45}
-  state: {area: 25, floor: [[4.464, -0.536], [8, -4.071], [11.536, -0.536], [8, 3]], purpose: "the board-game room: round oak table and four chairs; keep the metre behind the chairs clear", room: board}
-  tags: [marker, room]
-home-root/room-den:
-  feetPosition: {x: 3.717, y: 0, z: 3.166}
-  id: home-root/room-den
-  parent: home-root
-  physics: none
-  rotation: {yaw: 0}
-  state: {area: 43.5, floor: [[0, 0], [5, 0], [9.2, 4.2], [6, 6], [0, 6]], purpose: "the den: the living room where the owner arrives; hearth, shelves, rug, picture window, front door", room: den}
-  tags: [marker, room]
-home-root/room-spare:
-  feetPosition: {x: 11.182, y: 0, z: 2.646}
-  id: home-root/room-spare
-  parent: home-root
-  physics: none
-  rotation: {yaw: 45}
-  state: {area: 20, floor: [[8, 3], [11.536, -0.536], [14.364, 2.293], [10.828, 5.828]], purpose: "the spare room: empty on purpose, for what the owner brings", room: spare}
-  tags: [marker, room]
-home-root/spot-den-bookshelf:
-  feetPosition: {x: 5.3, y: 0, z: 5.74}
-  id: home-root/spot-den-bookshelf
-  parent: home-root
-  physics: none
-  rotation: {yaw: 0}
-  state: {footprint: {depth: 0.3, width: 0.9}, purpose: "a bookshelf against the rear wall, right of the window", room: den}
-  tags: [marker, spot]
-home-root/spot-den-cat:
-  feetPosition: {x: 1.62, y: 0, z: 5.45}
-  id: home-root/spot-den-cat
-  parent: home-root
-  physics: none
-  rotation: {yaw: 0}
-  state: {footprint: {depth: 0.64, width: 0.64}, purpose: "a cat bed beside the hearth, in its warmth", room: den}
-  tags: [marker, spot]
-home-root/spot-den-couch:
-  feetPosition: {x: 3.3, y: 0, z: 5.35}
-  id: home-root/spot-den-couch
-  parent: home-root
-  physics: none
-  rotation: {yaw: 0}
-  state: {footprint: {depth: 0.9, width: 2}, purpose: "a couch or a loveseat: back to the rear window, facing the picture window across the rug", room: den}
-  tags: [marker, spot]
-home-root/spot-den-reading:
-  feetPosition: {x: 7.33, y: 0, z: 4.621}
-  id: home-root/spot-den-reading
-  parent: home-root
-  physics: none
-  rotation: {yaw: 29.36}
-  state: {footprint: {depth: 0.9, width: 0.9}, purpose: "a reading armchair and a small side table under the hip-wall sconce, facing into the den", room: den}
-  tags: [marker, spot]
-home-root/spot-den-reading-lamp:
-  feetPosition: {x: 7.87, y: 0, z: 4.316}
-  id: home-root/spot-den-reading-lamp
-  parent: home-root
-  physics: none
-  rotation: {yaw: 29.36}
-  state: {footprint: {depth: 0.44, width: 0.44}, purpose: a floor lamp at the reading chair's right hand, room: den}
-  tags: [marker, spot]
-home-root/spot-den-reading-table:
-  feetPosition: {x: 6.7, y: 0, z: 4.975}
-  id: home-root/spot-den-reading-table
-  parent: home-root
-  physics: none
-  rotation: {yaw: 29.36}
-  state: {footprint: {depth: 0.46, width: 0.46}, purpose: a small side table at the reading chair's left hand, room: den}
-  tags: [marker, spot]
-home-root/spot-spare-bed:
-  feetPosition: {x: 11.111, y: 0, z: 1.586}
-  id: home-root/spot-spare-bed
-  parent: home-root
-  physics: none
-  rotation: {yaw: 225}
-  state: {footprint: {depth: 2.1, width: 1.6}, purpose: "a bed: headboard on the partition wall, foot toward the rear window", room: spare}
-  tags: [marker, spot]
-home-root/spot-spare-desk:
-  feetPosition: {x: 10.305, y: 0, z: 4.796}
-  id: home-root/spot-spare-desk
-  parent: home-root
-  physics: none
-  rotation: {yaw: -45}
-  state: {footprint: {depth: 0.6, width: 1.2}, purpose: "a desk against the wall past the door, clear of the bed", room: spare}
-  tags: [marker, spot]
-home-root/spot-spare-easel:
-  feetPosition: {x: 11.96, y: 0, z: 3.707}
-  id: home-root/spot-spare-easel
-  parent: home-root
-  physics: none
-  rotation: {yaw: 45}
-  state: {footprint: {depth: 0.6, width: 0.7}, purpose: "an easel by the rear window, its painter clear of the bed and the side door", room: spare}
-  tags: [marker, spot]
-home-root/spot-terrace:
-  feetPosition: {x: 5.525, y: 0, z: -3.152}
-  id: home-root/spot-terrace
-  parent: home-root
-  physics: none
-  rotation: {yaw: 45}
-  state: {footprint: {depth: 0.7, width: 1.6}, purpose: "a bench or a little table on the terrace in front of the board-room window, facing the lake", room: terrace}
-  tags: [marker, spot]
-home-spare-door:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-spare-door
-  material: {color: "#ffffff", pbr: true, roughness: 0.83}
-  parent: home-spare-door-hinge
-  physics: kinematic
-  pivot: {x: 0, y: 0, z: 0}
-  primitive: {kind: scripted, params: {height: 2.35, width: 1.18}, script: scripts/gen/home-architecture-door.js}
-  receiveShadow: true
-  rotation: {w: 1, x: 0, y: 0, z: 0}
-  state: {colliderBounds: {max: [0, 2.385, 0.038], min: [-1.18, 0.035, -0.038]}, height: 2.35, hinge: home-spare-door-hinge, localDrawBounds: {max: [0.0245, 2.385, 0.1705], min: [-1.18, 0.035, -0.1705]}, width: 1.18}
-  tags: [home-architecture, door-leaf]
-home-spare-door-hinge:
-  behavior: scripts/home-door.js
-  blueprint: {category: Architecture, icon: door-open, label: "Oak room door · right hinge"}
-  feetPosition: {x: 0.01, y: 0, z: 0}
-  id: home-spare-door-hinge
-  parent: home-architecture-work/home-architecture-den/home-architecture-wing/home-spare-door-frame
-  pivot: {x: 0, y: 0, z: 0}
-  rotation: {w: 1, x: 0, y: 0, z: 0}
-  state: {closedYaw: 0, currentYaw: -100, leafId: home-spare-door, open: true, openYaw: -100, openingWidth: 1.2, ready: true}
-  tags: [home-architecture, door-hinge, interactable]
-home-spare-door/handle-label-back:
-  overrides:
-    feetPosition: {x: -0.75, y: 1.33, z: 0.3}
-    parent: home-spare-door
-    state.hinge: home-spare-door-hinge
-    state.side: 1
-    state.verb: Close
-  template: templates/home-door-label.js#handleLabel
-home-spare-door/handle-label-front:
-  overrides:
-    feetPosition: {x: -0.75, y: 1.33, z: -0.3}
-    parent: home-spare-door
-    state.hinge: home-spare-door-hinge
-    state.side: -1
-    state.verb: Close
-  template: templates/home-door-label.js#handleLabel
 home-valley-air:
   overrides:
     feetPosition: {x: -8, y: 26, z: -9}
@@ -2933,263 +2761,6 @@ home-weather-controller:
   id: home-weather-controller
   state: {epoch: 0, solarEpoch: -2700000}
   tags: [weather, home-weather-controller]
-home-window-garden:
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: home-window-garden
-  state: {contract: scripts/lib/data/window-garden.js, windows: [{center: {x: -1.5, y: 25.85, z: -3}, normal: {x: 0, z: -1}, sill: 24.85, tangent: {x: 1, z: 0}, width: 2.3, windowId: den-front}, {center: {x: 0.125, y: 25.725, z: 3}, normal: {x: 0, z: 1}, sill: 24.9, tangent: {x: 1, z: 0}, width: 2.1500000000000004, windowId: den-back}, {center: {x: 3.232233047033631, y: 25.745, z: -5.303300858899107}, normal: {x: -0.7071067811865476, z: -0.7071067811865476}, sill: 24.82, tangent: {x: 0.7071067811865476, z: -0.7071067811865476}, width: 3.5999999999999996, windowId: wing-front}, {center: {x: 6.537957249080741, y: 25.75, z: -5.533110562784735}, normal: {x: 0.7071067811865476, z: -0.7071067811865476}, sill: 24.85, tangent: {x: 0.7071067811865476, z: 0.7071067811865476}, width: 2.85, windowId: wing-right-1}, {center: {x: 9.98510280736516, y: 25.74, z: -2.0859650045003155}, normal: {x: 0.7071067811865476, z: -0.7071067811865476}, sill: 24.88, tangent: {x: 0.7071067811865476, z: 0.7071067811865476}, width: 1.9000000000000004, windowId: wing-right-2}, {center: {x: 9.613871747242223, y: 25.75, z: 1.0429825022501573}, normal: {x: 0.7071067811865476, z: 0.7071067811865476}, sill: 24.86, tangent: {x: 0.7071067811865476, z: -0.7071067811865476}, width: 3.55, windowId: wing-rear}]}
-  tags: [window-garden-root]
-home-window-garden/window-garden-den-back-daisies:
-  overrides:
-    feetPosition: {x: 0.22499999999999998, y: {terrain: 0}, z: 5.25}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {flowerHeight: 0.35, flowerVariation: 0.07, flowers: 3, grassHeight: 0.25, grassVariation: 0.05, kind: meadow, rx: 0.27, rz: 0.23, tufts: 7}, script: scripts/gen/home-garden-planting.js, seed: 316}
-    state.facadeDistance: 2.25
-    state.groundAtPlant: 23.55
-    state.windowId: den-back
-    tags: [window-garden, den-back]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#planting
-home-window-garden/window-garden-den-back-fern:
-  overrides:
-    feetPosition: {x: -1.025, y: {terrain: 0}, z: 5.369999999999999}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 315}
-    state.facadeDistance: 2.3699999999999997
-    state.groundAtPlant: 23.55
-    state.windowId: den-back
-    tags: [window-garden, den-back]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#planting
-home-window-garden/window-garden-den-back-stone:
-  overrides:
-    feetPosition: {x: -0.42500000000000004, y: {terrain: 0}, z: 5.05}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {d: 0.64, h: 0.32, w: 0.82}, script: scripts/gen/home-garden-rock.js, seed: 314}
-    state.facadeDistance: 2.05
-    state.groundAtPlant: 23.55
-    state.windowId: den-back
-    tags: [window-garden, den-back]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#rock
-home-window-garden/window-garden-den-front-birch:
-  overrides:
-    feetPosition: {x: -5.8, y: {terrain: 0}, z: -6.3}
-    parent: home-window-garden
-    physics: static
-    primitive: {kind: scripted, params: {height: 3.8, spread: 1.05}, script: scripts/gen/home-garden-birch.js, seed: 401}
-    state.facadeDistance: 3.3
-    state.groundAtPlant: 23.482198409250024
-    state.windowId: den-front
-    tags: [window-garden, den-front]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#birch
-home-window-garden/window-garden-den-front-daisies:
-  overrides:
-    feetPosition: {x: -0.25, y: {terrain: 0}, z: -6.35}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {flowerHeight: 0.35, flowerVariation: 0.07, flowers: 3, grassHeight: 0.25, grassVariation: 0.05, kind: meadow, rx: 0.27, rz: 0.23, tufts: 7}, script: scripts/gen/home-garden-planting.js, seed: 303}
-    state.facadeDistance: 3.35
-    state.groundAtPlant: 23.55
-    state.windowId: den-front
-    tags: [window-garden, den-front]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#planting
-home-window-garden/window-garden-den-front-fern:
-  overrides:
-    feetPosition: {x: -1.5, y: {terrain: 0}, z: -6.47}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 302}
-    state.facadeDistance: 3.4699999999999998
-    state.groundAtPlant: 23.55
-    state.windowId: den-front
-    tags: [window-garden, den-front]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#planting
-home-window-garden/window-garden-den-front-stone:
-  overrides:
-    feetPosition: {x: -0.9, y: {terrain: 0}, z: -6.15}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {d: 0.64, h: 0.32, w: 0.82}, script: scripts/gen/home-garden-rock.js, seed: 301}
-    state.facadeDistance: 3.15
-    state.groundAtPlant: 23.55
-    state.windowId: den-front
-    tags: [window-garden, den-front]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#rock
-home-window-garden/window-garden-wing-front-birch:
-  overrides:
-    feetPosition: {x: 4.681801948466053, y: {terrain: 0}, z: -11.349063838044088}
-    parent: home-window-garden
-    physics: static
-    primitive: {kind: scripted, params: {height: 4.3, spread: 1.1}, script: scripts/gen/home-garden-birch.js, seed: 419}
-    state.facadeDistance: 3.25
-    state.groundAtPlant: 23.55
-    state.windowId: wing-front
-    tags: [window-garden, wing-front]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#birch
-home-window-garden/window-garden-wing-front-daisies:
-  overrides:
-    feetPosition: {x: 1.676598128423226, y: {terrain: 0}, z: -8.555992052357226}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {flowerHeight: 0.35, flowerVariation: 0.07, flowers: 3, grassHeight: 0.25, grassVariation: 0.05, kind: meadow, rx: 0.27, rz: 0.23, tufts: 7}, script: scripts/gen/home-garden-planting.js, seed: 329}
-    state.facadeDistance: 3.4000000000000004
-    state.groundAtPlant: 23.55
-    state.windowId: wing-front
-    tags: [window-garden, wing-front]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#planting
-home-window-garden/window-garden-wing-front-fern:
-  overrides:
-    feetPosition: {x: 0.7078618381976565, y: {terrain: 0}, z: -7.756961389616427}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 328}
-    state.facadeDistance: 3.52
-    state.groundAtPlant: 23.55
-    state.windowId: wing-front
-    tags: [window-garden, wing-front]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#planting
-home-window-garden/window-garden-wing-front-stone:
-  overrides:
-    feetPosition: {x: 1.3584000768892799, y: {terrain: 0}, z: -7.954951288348661}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {d: 0.64, h: 0.32, w: 0.82}, script: scripts/gen/home-garden-rock.js, seed: 327}
-    state.facadeDistance: 3.2
-    state.groundAtPlant: 23.55
-    state.windowId: wing-front
-    tags: [window-garden, wing-front]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#rock
-home-window-garden/window-garden-wing-rear-birch:
-  overrides:
-    feetPosition: {x: 15.05859396237864, y: {terrain: 0}, z: -0.44194173824159266}
-    parent: home-window-garden
-    physics: static
-    primitive: {kind: scripted, params: {height: 3.6, spread: 1}, script: scripts/gen/home-garden-birch.js, seed: 443}
-    state.facadeDistance: 2.8
-    state.groundAtPlant: 23.55
-    state.windowId: wing-rear
-    tags: [window-garden, wing-rear]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#birch
-home-window-garden/window-garden-wing-rear-daisies:
-  overrides:
-    feetPosition: {x: 11.452349378327247, y: {terrain: 0}, z: 2.6693280989792165}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {flowerHeight: 0.35, flowerVariation: 0.07, flowers: 3, grassHeight: 0.25, grassVariation: 0.05, kind: meadow, rx: 0.27, rz: 0.23, tufts: 7}, script: scripts/gen/home-garden-planting.js, seed: 368}
-    state.facadeDistance: 2.45
-    state.groundAtPlant: 23.55
-    state.windowId: wing-rear
-    tags: [window-garden, wing-rear]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#planting
-home-window-garden/window-garden-wing-rear-fern:
-  overrides:
-    feetPosition: {x: 10.653318715586447, y: {terrain: 0}, z: 3.638064389204787}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 367}
-    state.facadeDistance: 2.57
-    state.groundAtPlant: 23.55
-    state.windowId: wing-rear
-    tags: [window-garden, wing-rear]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#planting
-home-window-garden/window-garden-wing-rear-stone:
-  overrides:
-    feetPosition: {x: 10.851308614318683, y: {terrain: 0}, z: 2.9875261505131636}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {d: 0.64, h: 0.32, w: 0.82}, script: scripts/gen/home-garden-rock.js, seed: 366}
-    state.facadeDistance: 2.25
-    state.groundAtPlant: 23.55
-    state.windowId: wing-rear
-    tags: [window-garden, wing-rear]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#rock
-home-window-garden/window-garden-wing-right-1-daisies:
-  overrides:
-    feetPosition: {x: 8.235013523928455, y: {terrain: 0}, z: -7.08874548139514}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {flowerHeight: 0.35, flowerVariation: 0.07, flowers: 3, grassHeight: 0.25, grassVariation: 0.05, kind: meadow, rx: 0.27, rz: 0.23, tufts: 7}, script: scripts/gen/home-garden-planting.js, seed: 342}
-    state.facadeDistance: 2.3000000000000003
-    state.groundAtPlant: 23.55
-    state.windowId: wing-right-1
-    tags: [window-garden, wing-right-1]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#planting
-home-window-garden/window-garden-wing-right-1-fern:
-  overrides:
-    feetPosition: {x: 7.435982861187657, y: {terrain: 0}, z: -8.05748177162071}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 341}
-    state.facadeDistance: 2.42
-    state.groundAtPlant: 23.55
-    state.windowId: wing-right-1
-    tags: [window-garden, wing-right-1]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#planting
-home-window-garden/window-garden-wing-right-1-stone:
-  overrides:
-    feetPosition: {x: 7.63397275991989, y: {terrain: 0}, z: -7.406943532929087}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {d: 0.64, h: 0.32, w: 0.82}, script: scripts/gen/home-garden-rock.js, seed: 340}
-    state.facadeDistance: 2.1
-    state.groundAtPlant: 23.55
-    state.windowId: wing-right-1
-    tags: [window-garden, wing-right-1]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#rock
-home-window-garden/window-garden-wing-right-2-daisies:
-  overrides:
-    feetPosition: {x: 12.389265863399423, y: {terrain: 0}, z: -2.9344931419241727}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {flowerHeight: 0.35, flowerVariation: 0.07, flowers: 3, grassHeight: 0.25, grassVariation: 0.05, kind: meadow, rx: 0.27, rz: 0.23, tufts: 7}, script: scripts/gen/home-garden-planting.js, seed: 355}
-    state.facadeDistance: 2.3000000000000003
-    state.groundAtPlant: 23.55
-    state.windowId: wing-right-2
-    tags: [window-garden, wing-right-2]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#planting
-home-window-garden/window-garden-wing-right-2-fern:
-  overrides:
-    feetPosition: {x: 11.590235200658624, y: {terrain: 0}, z: -3.9032294321497423}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 354}
-    state.facadeDistance: 2.42
-    state.groundAtPlant: 23.55
-    state.windowId: wing-right-2
-    tags: [window-garden, wing-right-2]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#planting
-home-window-garden/window-garden-wing-right-2-stone:
-  overrides:
-    feetPosition: {x: 11.788225099390857, y: {terrain: 0}, z: -3.2526911934581193}
-    parent: home-window-garden
-    physics: none
-    primitive: {kind: scripted, params: {d: 0.64, h: 0.32, w: 0.82}, script: scripts/gen/home-garden-rock.js, seed: 353}
-    state.facadeDistance: 2.1
-    state.groundAtPlant: 23.55
-    state.windowId: wing-right-2
-    tags: [window-garden, wing-right-2]
-    visibleRange: {max: 95}
-  template: templates/home-garden.js#rock
 spare-door-plaque:
   children: [{castShadow: false, feetPosition: {x: 0, y: 2.62, z: -0.1125}, id: plaque-frame, material: {color: "#432716", pbr: true, roughness: 0.7}, physics: none, primitive: {depth: 0.025, height: 0.21, kind: box, width: 0.8}, receiveShadow: true}, {castShadow: false, feetPosition: {x: 0, y: 2.65, z: -0.129}, id: plaque-panel, material: {color: "#6e4428", pbr: true, roughness: 0.62}, physics: none, primitive: {depth: 0.008, height: 0.15, kind: box, width: 0.74}, receiveShadow: true}, {feetPosition: {x: 0, y: 2.725, z: -0.1345}, id: plaque-face, vector: "<svg viewBox='0 0 300 62' width='0.7m'><text x='150' y='50' text-anchor='middle' font-family='display' font-size='62' fill='#f1dfb8'>the square</text></svg>", visibleRange: {max: 14, min: 0}}]
   feetPosition: {x: 5.3889, y: 24, z: 0.3889}
@@ -3217,9 +2788,9 @@ spruce-woods-west:
 square-door:
   behavior: scripts/square-door.js
   children: [{castShadow: false, feetPosition: {x: 0, y: 0, z: 0.05}, id: glass, material: {color: "#000000", depthWrite: false, opacity: 0, transparent: true}, physics: none, primitive: {depth: 0.02, height: 2.42, kind: box, width: 1.12}, receiveShadow: false, visible: false}, {behavior: scripts/square-door.js, feetPosition: {x: 0, y: 0, z: 0.05}, id: passage, physics: {body: static, trigger: true}, primitive: {depth: 0.3, height: 2.2, kind: box, width: 0.9}, state: {kind: passage}, visible: false}, {behavior: scripts/square-door.js, feetPosition: {x: 0, y: -0.1, z: -1.6}, id: approach, physics: {body: static, trigger: true}, primitive: {depth: 3.2, height: 3, kind: box, width: 3}, state: {kind: approach}, visible: false}]
-  feetPosition: {x: 9.95, y: 24, z: -2.121}
+  feetPosition: {x: 6.839455375776533, y: 24, z: -0.7134447169531972}
   physics: none
-  rotation: {yaw: 135}
+  rotation: {yaw: 127.5}
   state: {link: "@@squaresrc/the-square +main#den-door", near: 0, role: side-door-to-the-square}
   tags: [portal, den-side-door]
 square-door-hinge:
