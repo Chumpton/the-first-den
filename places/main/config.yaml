@@ -39,12 +39,14 @@ terrain:
     - {id: moss, albedo: cdn/texture-terrain-forest-moss-and-grass-realistic.png, tint: oklch(0.95 0.03 135), textureScale: 3.5, pbr: true, antiTiling: stochastic, macro: {hue: 0.012, scale: 50, value: 0.07}, normalStrength: 0.35, roughnessIntensity: 0.9}
     - {id: mud, albedo: cdn/texture-terrain-wet-riverbank-mud-realistic.png, tint: oklch(0.95 0.02 70), textureScale: 2.5, pbr: true, antiTiling: stochastic, normalStrength: 0.4, roughnessIntensity: 0.6}
     - {id: pebbles, albedo: cdn/texture-terrain-river-pebbles-realistic.png, tint: oklch(0.97 0.01 80), textureScale: 2, pbr: true, antiTiling: stochastic, normalStrength: 0.6, roughnessIntensity: 0.55}
+    - {id: cobble, albedo: cdn/texture-terrain-mossy-cobblestone-road-realistic.png, tint: oklch(0.95 0.01 80), textureScale: 2.5, pbr: true, antiTiling: stochastic, normalStrength: 0.6, roughnessIntensity: 0.8}
+    - {id: gravel, albedo: cdn/texture-terrain-garden-gravel-path-realistic.png, tint: oklch(0.96 0.02 80), textureScale: 2, pbr: true, antiTiling: stochastic, normalStrength: 0.5, roughnessIntensity: 0.85}
   marks:
     river: {kind: sea, level: 0, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
     spawnClearing: {kind: flatten, center: {x: 0, z: -3}, height: 0.5, falloff: 6, shape: {kind: circle, radius: 9}, material: moss}
     spawnClear: {kind: clear-scatter, center: {x: 0, z: -3}, shape: {kind: circle, radius: 7}}
   decorations:
-    settings: {enabled: true, budget: 110000, maxDistance: 520, fadeDistance: 25}
+    settings: {enabled: true, budget: 75000, maxDistance: 420, fadeDistance: 25}
     bindings:
       litter: [canopy, midstory, shrubs, ferns, logs]
       moss: [canopy, midstory, shrubs, ferns, ground]
@@ -54,10 +56,10 @@ terrain:
         density: 0.011
         constraints: {heightRange: [0.3, 5]}
         items:
-          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 28, radius: 6.5}, seed: 1, weight: 0.3, scale: [0.8, 1.2], randomRotation: true, maxDistance: 520, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.18, scale: 2, speed: 0.4}}
-          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 24, radius: 5.5}, seed: 2, weight: 0.25, scale: [0.85, 1.25], randomRotation: true, maxDistance: 520, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.18, scale: 2, speed: 0.4}}
-          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 32, radius: 7}, seed: 3, weight: 0.2, scale: [0.8, 1.15], randomRotation: true, maxDistance: 520, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.16, scale: 2, speed: 0.35}}
-          - {kind: scripted, script: scripts/gen/valley-tree.js, params: {crown: fir, height: 26, radius: 4}, seed: 41, weight: 0.25, scale: [0.8, 1.2], randomRotation: true, maxDistance: 520, colorJitter: {hue: 0.015, value: 0.08}, wind: {force: 0.2, scale: 2, speed: 0.45}}
+          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 28, radius: 6.5}, seed: 1, weight: 0.3, scale: [0.8, 1.2], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.18, scale: 2, speed: 0.4}}
+          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 24, radius: 5.5}, seed: 2, weight: 0.25, scale: [0.85, 1.25], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.18, scale: 2, speed: 0.4}}
+          - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: broadleaf, height: 32, radius: 7}, seed: 3, weight: 0.2, scale: [0.8, 1.15], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.16, scale: 2, speed: 0.35}}
+          - {kind: scripted, script: scripts/gen/valley-tree.js, params: {crown: fir, height: 26, radius: 4}, seed: 41, weight: 0.25, scale: [0.8, 1.2], randomRotation: true, maxDistance: 420, colorJitter: {hue: 0.015, value: 0.08}, wind: {force: 0.2, scale: 2, speed: 0.45}}
       midstory:
         density: 0.018
         constraints: {heightRange: [0.3, 5]}
@@ -66,19 +68,19 @@ terrain:
           - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: sapling, height: 8}, seed: 12, weight: 0.3, scale: [0.7, 1.3], randomRotation: true, maxDistance: 200, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.25, scale: 1.5, speed: 0.6}}
           - {kind: scripted, script: scripts/gen/valley-tree.js, params: {crown: pine, height: 8, radius: 2.2}, seed: 43, weight: 0.3, scale: [0.7, 1.3], randomRotation: true, maxDistance: 200, colorJitter: {hue: 0.015, value: 0.08}, wind: {force: 0.24, scale: 2, speed: 0.5}}
       shrubs:
-        density: 0.06
+        density: 0.045
         constraints: {heightRange: [0.25, 5]}
         items:
           - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: shrub, height: 1.3}, seed: 21, weight: 0.6, scale: [0.7, 1.5], randomRotation: true, maxDistance: 90, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.3, scale: 1, speed: 0.8}}
           - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: shrub, height: 1.1, berry: true}, seed: 22, weight: 0.4, scale: [0.7, 1.3], randomRotation: true, maxDistance: 90, colorJitter: {hue: 0.015, value: 0.08}, wind: {force: 0.3, scale: 1, speed: 0.8}}
       ferns:
-        density: 0.35
+        density: 0.2
         constraints: {heightRange: [0.25, 5]}
         items:
           - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: fern, size: 0.9}, seed: 31, weight: 0.6, scale: [0.6, 1.4], randomRotation: true, maxDistance: 45, colorJitter: {hue: 0.02, value: 0.12}, wind: {force: 0.35, scale: 1, speed: 1}}
           - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: fern, size: 0.6}, seed: 32, weight: 0.4, scale: [0.7, 1.3], randomRotation: true, maxDistance: 45, colorJitter: {hue: 0.02, value: 0.12}, wind: {force: 0.35, scale: 1, speed: 1}}
       ground:
-        density: 6
+        density: 3
         constraints: {heightRange: [0.3, 5]}
         items:
           - {kind: scripted, script: scripts/gen/valley-meadow.js, params: {height: 0.22}, seed: 7, scale: [0.8, 1.2], randomRotation: true, maxDistance: 32, colorJitter: {hue: 0.012, value: 0.08}, wind: {force: 0.08, scale: 1.3, speed: 0.7}}
