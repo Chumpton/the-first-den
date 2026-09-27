@@ -148,7 +148,7 @@ function aqueduct(ctx, col) {
   const B = XF(P, 24, 0, 0, -Math.PI / 2); // frame x = local +z, the run north over the ring lane and the moat
   pt('ashlar', ST, 0.9);
   archWall(ctx, P, 2.9, 22.3, -0.5, Y1, -1.2, 1.2, A, vn, vous);
-  archWall(ctx, B, 1.7, 19.8, -2.5, Y1, -1.2, 1.2, [{ c: 5.45, r: 3.75, s: 4.8 }, { c: 12.65, r: 1.85, s: 6.8 }, { c: 17.95, r: 1.85, s: 6.8 }], vn, vous);
+  archWall(ctx, B, 1.7, 19.8, -2.5, Y1, -1.2, 1.2, [{ c: 5.45, r: 3.75, s: 6.2 }, { c: 12.65, r: 1.85, s: 6.8 }, { c: 17.95, r: 1.85, s: 6.8 }], vn, vous);
   // castellum where the channel turns north
   box(P, 22.3, -0.5, -1.7, 25.7, Y1 + 0.3, 1.7);
   pt('ashlar', ST2, 0.9);
