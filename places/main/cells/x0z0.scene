@@ -9,7 +9,6 @@ cob-house:
   castShadow: true
   feetPosition: {x: 0, y: 0.5, z: -26}
   id: cob-house
-  material: {kind: scripted, script: scripts/gen/cob-house.js}
   physics: {body: static, collider: mesh}
   primitive: {kind: scripted, script: scripts/gen/cob-house.js}
   receiveShadow: true
