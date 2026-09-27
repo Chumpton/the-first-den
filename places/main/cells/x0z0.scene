@@ -24,6 +24,13 @@ camp-spot/tent:
   primitive: {kind: scripted, params: {kind: tent}, script: scripts/gen/grounds-kit.js, seed: 9}
   rotation: {yaw: 185}
   visibleRange: {max: 220}
+catio-site:
+  feetPosition: {x: -10, y: 0.5, z: -17}
+  id: catio-site
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 4, height: 2.6, kind: box, width: 5}
+  tags: [blueprint]
 cob-door-front:
   behavior: scripts/cob-door.js
   feetPosition: {x: 0, y: 0.5, z: -18.282566285183165}
