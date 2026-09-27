@@ -570,3 +570,10 @@ warden-tower-n:
   receiveShadow: true
   rotation: {yaw: 165.7064418869526}
   tags: [grounds, warden-tower]
+west-pasture:
+  feetPosition: {x: -15, y: 0.5, z: -75}
+  id: west-pasture
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 18, height: 4, kind: box, width: 22}
+  tags: [blueprint]
