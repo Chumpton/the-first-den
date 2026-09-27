@@ -11,6 +11,16 @@ cob-house:
   material: {kind: scripted, script: engine/blueprint}
   physics: none
   primitive: {height: 9, kind: cylinder, radialSegments: 6, radiusBottom: 6, radiusTop: 6}
+fireflies:
+  feetPosition: {x: 0, y: 0.5, z: -40}
+  fx: {script: "fx\npop flies n=?mobile:30|70 on=box(70,3,70).c(1.5) life=5..9 v=sdir()*.15 size=.035..0.06 acc=curl(.35)*.6+drag(.8) blink=0..6.28 col=hdr(2.6,3.4,.9) a=(0>.15:1>.85:1>0)*(.5+.5*sin($age*3+$blink))^3 sz=$size r=sprite(soft-disc,add)"}
+  id: fireflies
+  tags: [fireflies]
+fireflies-camp:
+  feetPosition: {x: -18, y: 0.5, z: -50}
+  fx: {script: "fx\npop flies n=?mobile:10|24 on=box(18,2.5,18).c(1.2) life=4..8 v=sdir()*.15 size=.035..0.06 acc=curl(.4)*.6+drag(.8) blink=0..6.28 col=hdr(2.8,3.4,.9) a=(0>.15:1>.85:1>0)*(.5+.5*sin($age*3.4+$blink))^3 sz=$size r=sprite(soft-disc,add)"}
+  id: fireflies-camp
+  tags: [fireflies]
 forest-ambience:
   audio: {bus: Ambience, clip: /cdn/moodboard-realistic-gritty/sfx-sunny-forest-birdsong-leaves-rustling-ambience-loop.mp3, gain: 0.18, loop: true, spatial: false}
   feetPosition: {x: 0, y: 1, z: 0}
@@ -91,7 +101,7 @@ lake-dock:
 square-door:
   behavior: scripts/square-door.js
   children: [{castShadow: false, feetPosition: {x: 0, y: 0, z: 0.05}, id: glass, material: {color: "#000000", depthWrite: false, opacity: 0, transparent: true}, physics: none, primitive: {depth: 0.02, height: 2.42, kind: box, width: 1.12}, receiveShadow: false, visible: false}, {behavior: scripts/square-door.js, feetPosition: {x: 0, y: 0, z: 0.05}, id: passage, physics: {body: static, trigger: true}, primitive: {depth: 0.3, height: 2.2, kind: box, width: 0.9}, state: {kind: passage}, visible: false}, {behavior: scripts/square-door.js, feetPosition: {x: 0, y: -0.1, z: -1.6}, id: approach, physics: {body: static, trigger: true}, primitive: {depth: 3.2, height: 3, kind: box, width: 3}, state: {kind: approach}, visible: false}]
-  feetPosition: {x: 0, y: 0.5, z: -8}
+  feetPosition: {x: -6, y: 0.5, z: -5}
   physics: none
   rotation: {yaw: 180}
   state: {link: "@@squaresrc/the-square +main#den-door", near: 0, role: side-door-to-the-square}
