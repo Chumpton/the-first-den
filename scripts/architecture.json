@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "basedOnSpecVersion": 652,
-  "updatedAt": "2026-09-27T16:38:17.831Z",
-  "summary": "The First Den is a forest world centered on Spawn, where the owner's tree-centered home connects to a lake, creek, activity sites, a north market town, and roads to Hearthmere and Lumenvale. Authored scene rows anchor places and actors; terrain marks, procedural builders, shared data kits, and manager behaviors provide landscape, structures, crowds, and animals. The home now includes a high-tech art studio below its main rooms, while the town square has expanded civic dressing and festoons.",
+  "basedOnSpecVersion": 661,
+  "updatedAt": "2026-09-27T16:50:24.181Z",
+  "summary": "The First Den is a forest world centered on Spawn, where the owner's tree-centered home connects to a lake, creek, activity sites, a north market town, and roads to Hearthmere and Lumenvale. Authored scene rows anchor places and actors; terrain marks, procedural builders, shared data kits, and manager behaviors provide landscape, structures, crowds, and animals. The home includes an underground art studio where Pixel, a ginger cat, roams using catio animation clips.",
   "scriptPaths": [
     "scripts/alchemy-bench.js",
     "scripts/alchemy-player.js",
@@ -92,6 +92,7 @@
     "scripts/gen/forecourt.js",
     "scripts/gen/forest-plant.js",
     "scripts/gen/garden-flagstones.js",
+    "scripts/gen/garden-garb.js",
     "scripts/gen/garden-gazebo.js",
     "scripts/gen/garden-shed.js",
     "scripts/gen/garden-statue.js",
@@ -316,6 +317,7 @@
     "scripts/square-door.js",
     "scripts/steed.js",
     "scripts/stone-golem.js",
+    "scripts/studio-cat.js",
     "scripts/templates/camera.js",
     "scripts/templates/den-catalog.js",
     "scripts/templates/den-furniture.js",
@@ -361,7 +363,7 @@
   ],
   "places": [
     "places/main - forest world joining Spawn/home, lake and creek sites, camp/corral, and roads to Hearthmere and Lumenvale",
-    "places/main/cells/x0z0.scene - Spawn hub: cob-house home/garden and underground studio, creek/waterfall, activities, corral at (-50,-50), orchard, and outbuildings",
+    "places/main/cells/x0z0.scene - Spawn hub: cob-house home/garden and underground studio, catio, Pixel the studio cat, creek/waterfall, activities, corral at (-50,-50), orchard, and outbuildings",
     "places/main/cells/x0z-1.scene - lake shore/islet, maze, north-shore blossom walk, camps and lookout; islet-life has pulsing runes and a treasure chest",
     "places/main/cells/x0z1.scene - market town at z≈100: square, regrouped market islands, stepped fountain, hall/Ember, crowd, walled alleys and festoons",
     "places/main/cells/objects.scene - shared authored road and city placements; remaining cells stream structures and actors",
@@ -374,10 +376,10 @@
     "templates/player.js#player - player root with movement, locomotion, home interaction, delete, travel, alchemy and horse-summon behaviors",
     "templates/camera.js#camera - custom first-/third-person camera root",
     "places/main/config.yaml + scripts/forest-terrain.js - configured forest terrain, height/material interface and landscape marks",
-    "places/main/cells/x0z0.scene#cob-house - Spawn's tree-centered multilevel home with below-floor art studio; scripts/gen/cob-house.js defines the shell/stair geometry",
+    "places/main/cells/x0z0.scene#cob-house - Spawn's tree-centered multilevel home with below-floor art studio; scripts/gen/cob-house.js defines shell/stair geometry",
+    "places/main/cells/x0z0.scene#studio-pixel - Pixel actor root, with studio-cat.js roaming update and catio-cat.js press interaction",
     "places/main/cells/x0z0.scene#corral - horse-ring manager and corral site; three named corral horses use pasture-horse behavior",
-    "places/main/cells/x0z1.scene#town-crowd, #town-dragon, #town-square, #town-festoon - managed citizens/Ember and the authored market-town square dressing",
-    "scripts/gen/hearth-city.js + scripts/gen/lumen-grand.js - procedural structure roots for Hearthmere and Lumenvale"
+    "places/main/cells/x0z1.scene#town-crowd, #town-dragon, #town-square, #town-festoon - managed citizens/Ember and the authored market-town square dressing"
   ],
   "shared": [
     "scripts/forest-terrain.js - main heightAt(ctx)/materialAt(ctx) contract for terrain and terrain-relative placements",
@@ -387,7 +389,7 @@
     "scripts/lib/dragon-rider.js - mount/seat/dismount coordination shared by Violet, rowboat, courier horse and zipline trolley",
     "scripts/lib/town-kit.js - town geometry/material helpers reused by town house, hall, square, fountain and festoon builders",
     "scripts/lib/bloom-kit.js - flower/fern/mushroom geometry and seeded helpers reused by garden and landscape builders",
-    "scripts/lib/data/corral.yml, scripts/lib/data/steed.js, town/courier/travel data - tuning and rosters consumed by corresponding actors, managers, builders and UI"
+    "scripts/lib/data/catio.yml - cat rest, movement, jump, pet and clip tuning shared by catio cats and Pixel; town, courier, travel and animal data tune their corresponding systems"
   ],
   "notableExports": [
     "scripts/forest-terrain.js - GROUND, SITES, LAKE, heightAt(ctx), materialAt(ctx)",
@@ -397,21 +399,20 @@
     "scripts/town-crowd.js - updateSchedule, update(ctx,dt), ears.press; scripts/pasture-flock.js - update(ctx)",
     "scripts/town-dragon.js - onSpawn(ctx), updateSchedule, update(ctx,dt); scripts/corral-horses.js - corral horse-manager behavior",
     "scripts/gen/art-studio.js - geometry(ctx), collider(ctx); params.item selects below-house studio pieces",
-    "scripts/gen/town-banner.js - geometry(ctx), collider(); scripts/material-banner-wave.js - material(ctx); town-square/house/hall/fountain/festoon expose geometry and applicable collider builders"
+    "scripts/studio-cat.js - updateSchedule, update(ctx); scripts/gen/garden-garb.js - geometry(ctx), params.item selects crown or skirt mesh"
   ],
   "ownership": [
     "scripts/player.js + scripts/lib/data/player.yml - movement intent, velocity, jump, flight, rope and camera mode; movement scratch remains in ctx.session",
-    "scripts/alchemy-player.js + alchemy data - player harvest spending, alchemy panel/toast, buff expiry and speedMul; player consumes speedMul",
-    "scripts/pond-seed.js + fishing-tackle.js + pond data - player seeds/gotSeeds and fish count; seed visibility/respawn and fishing cast/catch state",
+    "scripts/alchemy-player.js, scripts/pond-seed.js, fishing-tackle.js + activity data - harvest spending/buff, seeds/gotSeeds, fish count and cast/catch state",
     "scripts/pasture-flock.js + pasture-flock.yml - west-pasture manager's flock goals, movement/clip state and grazing sounds for tagged sheep/alpaca rows",
     "scripts/town-crowd.js + town-crowd.yml - spawned townspeople and their movement/press responses; sitting NPC placement accounts for fountain dais rise",
     "scripts/town-dragon.js - Ember's action and roar timers; scripts/gen/roost-dragon.js supplies rig geometry and skeleton",
     "scripts/horse-summon.js + scripts/steed.js + steed data; scripts/corral-horses.js + corral data - summoned mount/rider state and corral horses' managed poses/behavior",
-    "scripts/square-door.js - square-door hinge open/currentYaw and root near-player count; scene hinge state supplies closed/open yaw, leaf id and opening width"
+    "scripts/square-door.js - square-door hinge open/currentYaw and root near-player count; scene hinge state supplies closed/open yaw, leaf id and opening width",
+    "scripts/studio-cat.js - studio-pixel's path segments, floor/bench mode, rest timers, pet response and current animation; catio-cat.js handles its press interaction"
   ],
   "flows": [
-    "places/main/config.yaml terrain generator + seed -> scripts/forest-terrain.js heightAt/materialAt(ctx) -> engine terrain, river channels and forest material bands",
-    "terrain site/path marks + decoration layers -> grading, clearing, ground materials and seeded vegetation; scene rows independently draw roads and structures",
+    "places/main/config.yaml terrain generator + seed -> scripts/forest-terrain.js heightAt/materialAt(ctx) -> engine terrain, river channels and forest material bands; site/path marks + decoration layers grade, clear and seed vegetation",
     "move/look/jump/camView input -> scripts/player.js -> movement, jump, flight and camMode; templates/player.js attaches home interaction, travel, alchemy and horse handlers",
     "Z input -> scripts/horse-summon.js spawns a session steed using steed data and courier-horse geometry -> scripts/steed.js controls the horse and rider",
     "player presses mandala-crystal -> harvest; alchemy-bench press -> alchemyOpen -> alchemy-player brew spends harvest and sets buff -> scripts/ui.js presents panel/status",
@@ -421,21 +422,23 @@
     "town-crowd.yml roster -> town-crowd.js seeds townspeople under the square manager; citizen pressTo routes press to manager -> nearest person turns/answers",
     "town scene rows + town.json -> town-square/house/hall/fountain/festoon and town-alleys builders; town-crowd seating positions use fountainDais rise",
     "town-hall drape/flag rows -> town-banner geometry and material-banner-wave shader; ax/ay orient the GPU wave from fixed edge to free edge",
-    "travel input/actions -> scripts/travel.js + travel data -> player travel state/teleport; scripts/ui.js renders destinations and emits travelGo"
+    "travel input/actions -> scripts/travel.js + travel data -> player travel state/teleport; scripts/ui.js renders destinations and emits travelGo",
+    "studio-pixel scene row -> scripts/studio-cat.js schedules floor walks and bench jumps/rests using catio.yml and its clips registered in world.facts.yaml; catio-cat.js handles presses"
   ],
   "behaviorFamilies": [
     "places/main/config.yaml decoration layers + scripts/gen/forest-plant.js / valley-mesh.js - seeded forest flora varied by layer, kind and terrain",
     "scripts/gen/cob-house.js + scripts/gen/cob-furnish.js - tree-centered multilevel home and furnishing family varied by item, dimensions, palette and seed; art-studio builder supplies specialized lower-level workroom props",
     "scripts/gen/road-bridge.js + scripts/lib/road-solid.js - bridge geometry/collider varied by dimensions and seed; terrain roads separately supply edges and shoulders",
     "scripts/gen/deer-fence.js - perimeter runs/gates vary by points, width and style",
-    "animal builders + fauna behaviors; pasture and corral managers - varied species with manager-driven flock/herd motion and registered clips",
+    "animal builders + fauna behaviors; pasture/corral managers coordinate herds; catio-cats.js and studio-cat.js apply cat poses and roaming, with Pixel using catio clips",
     "scripts/gen/hearth-city.js + hearth-city data; scripts/gen/lumen-grand.js - procedural structure roots for Hearthmere and Lumenvale",
     "scripts/gen/{town-square,town-house,town-hall,town-fountain,town-festoon,town-alleys,town-banner}.js + town-kit - market/civic structures, alleys, flags and square dressing varied by kind, palette, seed and placement",
     "scripts/gen/{blossom-walk,orchard,corral,islet-life,zip-landing}.js and bloom-kit - reusable landscape/site props varied by parts, points, species, seed and site parameters"
   ],
   "probableOrphans": [
     "scripts/flat-terrain.js - no current place config selects it; main uses forest-terrain",
-    "scripts/jade-dragon.js - no scene behavior row attaches this actor script; scripts/gen/jade-dragon.js geometry may still be used"
+    "scripts/jade-dragon.js - no scene behavior row attaches this actor script; scripts/gen/jade-dragon.js geometry may still be used",
+    "scripts/gen/garden-garb.js - crown/skirt geometry builder has no current scene or template references"
   ],
   "migrationNotes": [
     "forest-terrain heightAt/materialAt take a context object; main river is at sea level y=0, ground is around y=0.5, and Spawn clearing is centered near (0,-3).",
@@ -443,6 +446,6 @@
     "Terrain path marks grade/materialize routes and clear scatter; scene road/path builders draw visible paving and do not replace terrain jobs. Keep road marks and site dressing aligned.",
     "The cob-house studio is below the main house floor: art-studio piece origins use feet on its studio floor and face -Z; preserve the small dry terrain pocket around the house for the sunk studio.",
     "Town square builders use local coordinates around the row at (0,0.55,100), while town-world data, square paving wear, alleys/walls and market props must stay aligned to that shared datum; seated crowd elevation includes fountainDais.rise.",
-    "Town banner cloth uses a fixed hoist/rod edge and shader params ax/ay define wave direction; preserve flag versus drape geometry orientation and matching material parameters. Revised animal/dragon clips coexist with source-name aliases in world.facts.yaml, so preserve registered clip keys when changing assignments."
+    "Town banner cloth uses a fixed hoist/rod edge and shader params ax/ay define wave direction; preserve flag versus drape geometry orientation and matching material parameters. Animal and studio-cat clips may have source-name aliases in world.facts.yaml; Pixel's studio path uses floor y=-5.6, bench seat y=0.45, and its ring/seat radii are 3.15/2.07."
   ]
 }
