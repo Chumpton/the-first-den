@@ -27,7 +27,7 @@ function setClip(ctx, row, sp, name) {
 export function update(ctx) {
   const now = ctx.now(), S = site(ctx);
   if (S.pts.length < 3) { ctx.sleep(10); return; }
-  const rows = ctx.query({ tags: ['pasture-flock'], center: ctx.self.worldFeetPosition || ctx.self.feetPosition, radius: 40 });
+  const rows = ctx.query({ tags: [ctx.self.primitive?.params?.flockTag || 'pasture-flock'], center: ctx.self.worldFeetPosition || ctx.self.feetPosition, radius: 40 });
   let next = now + 10000;
   for (const row of rows) {
     const s = row.state, sp = s.species || 'sheep', T = FLOCK.species[sp];
