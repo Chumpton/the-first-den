@@ -2217,6 +2217,45 @@ sunbeams:
   feetPosition: {x: 0, y: 0.5, z: 0}
   fx: {script: "fx follow=camera\npop motes n=?mobile:60|160 on=box(24,8,24).c(3) wrap=24;8;24 life=4..7 v=up(.02..0.08)+sdir()*.05 size=.02..0.04 acc=curl(.2)*.2 col=hdr(1.6,1.4,.9) a=0>.3:.6>.7:.5>0 sz=$size r=sprite(mote,add)"}
   id: sunbeams
+treehouse-a:
+  castShadow: true
+  feetPosition: {x: -27, y: 0.28518751604034187, z: -18}
+  id: treehouse-a
+  physics: static
+  primitive: {kind: scripted, params: {deckY: 7.214812483959658, door: 0, gaps: [-0.8850668158886104, 0], seed: 3}, script: scripts/gen/treehouse.js}
+  receiveShadow: true
+  tags: [treehouse]
+treehouse-a-glow:
+  feetPosition: {x: -25.7, y: 9.1, z: -18}
+  id: treehouse-a-glow
+  light: {color: oklch(0.85 0.1 70), distance: 6, intensity: 1.4, kind: point}
+treehouse-b:
+  castShadow: true
+  feetPosition: {x: -18, y: 0.4999151732982104, z: -29}
+  id: treehouse-b
+  physics: static
+  primitive: {kind: scripted, params: {deckY: 7.00008482670179, door: 5.398118491290976, gaps: [2.256525837701183], seed: 7}, script: scripts/gen/treehouse.js}
+  receiveShadow: true
+  tags: [treehouse]
+treehouse-b-glow:
+  feetPosition: {x: -16.7, y: 9.1, z: -29}
+  id: treehouse-b-glow
+  light: {color: oklch(0.85 0.1 70), distance: 6, intensity: 1.4, kind: point}
+treehouse-bridge:
+  castShadow: true
+  feetPosition: {x: -25.10028662922821, y: 7.5, z: -20.321871897609963}
+  id: treehouse-bridge
+  physics: static
+  primitive: {kind: scripted, params: {length: 8.212670403551895, sag: 0.55}, script: scripts/gen/rope-bridge.js}
+  rotation: {lookAt: {x: -25.733524419485473, y: 7.5, z: -19.547914598406642}}
+  tags: [treehouse]
+treehouse-rope:
+  castShadow: true
+  feetPosition: {x: -23.35, y: 7.5, z: -18}
+  id: treehouse-rope
+  primitive: {kind: scripted, params: {length: 6.935969923049752, rope: true}, script: scripts/gen/rope-bridge.js}
+  rotation: 90
+  tags: [treehouse, climb-rope]
 waylamp-east-0:
   feetPosition: {x: 35.209477844110445, y: {terrain: 0}, z: 10.689127905552567}
   id: waylamp-east-0

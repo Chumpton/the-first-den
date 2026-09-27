@@ -114,6 +114,9 @@ terrain:
     clear-outbuilding-glasshouse: {center: {x: 14, z: -56}, kind: clear-scatter, shape: {kind: circle, radius: 9}}
     path-outbuilding-glasshouse: {edgeMaterial: yard, falloff: 3.5, grade: true, kind: path, material: pebbles, points: [[0, -36.5], [5.807394578115757, -42.961091867173636], [11.614789156231515, -52.42218373434727]], width: 1.8}
     verge-outbuilding-glasshouse: {center: {x: 5.807394578115757, z: -42.961091867173636}, kind: clear-scatter, shape: {kind: path, points: [[0, -36.5], [5.807394578115757, -42.961091867173636], [11.614789156231515, -52.42218373434727]], width: 9}}
+    clear-treehouse-a: {center: {x: -27, z: -18}, kind: clear-scatter, shape: {kind: circle, radius: 7}}
+    clear-treehouse-b: {center: {x: -18, z: -29}, kind: clear-scatter, shape: {kind: circle, radius: 7}}
+    clear-treehouse-span: {center: {x: -22.5, z: -23.5}, kind: clear-scatter, shape: {kind: path, points: [[-27, -18], [-18, -29]], width: 8}}
   decorations:
     settings: {enabled: true, budget: 75000, maxDistance: 420, fadeDistance: 25}
     bindings:
