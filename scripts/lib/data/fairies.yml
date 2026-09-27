@@ -1,0 +1,8 @@
+# the three property fairies (scripts/fairies.js)
+home: { x: 0, z: -30 }
+roam: 42            # how far from home they wander
+speed: [2.2, 3.8]
+height: [1.4, 3.6]
+visitPlayer: 0.35   # chance the next hop drifts over to a nearby player
+greetRange: 14
+twinkle: /cdn/moodboard-painterly-fantasy/sfx-fairy-tiny-giggle-chime.mp3
