@@ -54,6 +54,8 @@ terrain:
     violetRest: {kind: flatten, center: {x: 30.5, z: -7.6}, height: 0.55, falloff: 3, shape: {kind: circle, radius: 5}}
     violetClear: {kind: clear-scatter, center: {x: 30.5, z: -7.6}, shape: {kind: circle, radius: 7.5}}
     spawnClear: {kind: clear-scatter, center: {x: 0, z: -3}, shape: {kind: circle, radius: 7}}
+    townClear: {kind: clear-scatter, center: {x: 0, z: 108}, shape: {kind: circle, radius: 40}}
+    townLaneClear: {kind: clear-scatter, center: {x: 0, z: 45}, shape: {kind: path, points: [[0, 12], [0, 80]], width: 14}}
     homeSite: {center: {x: 0, z: -27}, falloff: 8, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 18}, edgeMaterial: yard}
     grounds-lawn-front: {kind: path, grade: false, material: lawn, edgeMaterial: yard, falloff: 3, points: [[0, -6], [0, 4.4]], width: 30}
     grounds-lawn-frontClear: {kind: clear-scatter, center: {x: 0, z: -1}, shape: {kind: path, points: [[0, -6], [0, 4.4]], width: 28}}
