@@ -97,7 +97,8 @@ function pose(ctx, now) {
 }
 function setClip(ctx, clip, speed = 1) {
   const m = mind(ctx);
-  if (m.clip === clip && m.speed === speed) return;
+  const live = ctx.self.anim?.body, liveName = live && typeof live === 'object' ? live.clip?.name : null;
+  if (m.clip === clip && m.speed === speed && (!liveName || liveName === 'purple-' + clip)) return;
   m.clip = clip; m.speed = speed;
   ctx.self.anim.body = { clip: CLIPS[clip](), loop: 'loop', weight: 1, blendIn: clip === 'rest' ? 1.2 : 0.6, speed };
 }
@@ -158,7 +159,7 @@ export function onControlEnd(ctx, player) { const s = ctx.self.state; if (s.ride
 export function onInput(ctx, input) { if (input.pressed?.interact || input.pressed?.jump) goHome(ctx); }
 export function update(ctx, dt) {
   const s = ctx.self.state;
-  if (!s.flying) { ctx.sleep(); return; }
+  if (!s.flying) { setClip(ctx, 'rest'); ctx.sleep(); return; }  // after a ride hands her back, this machine puts her back at rest
   if (s.rider && !riderHere(ctx, s.rider)) { s.rider = null; ctx.self.controller = null; goHome(ctx); }
   const now = ctx.now(), p = pose(ctx, now);
   if (!p) return;
