@@ -3808,6 +3808,13 @@ violet-pad-right:
   physics: none
   state: {pressTo: purple-dragon-blueprint}
   tags: [interactable, dragon, purple-dragon-pad]
+wall-softening:
+  feetPosition: {x: -10, y: 0.5, z: -50}
+  id: wall-softening
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 125, height: 3, kind: box, width: 140}
+  tags: [blueprint]
 warden-e:
   behavior: [scripts/tower-warden.js]
   castShadow: true
