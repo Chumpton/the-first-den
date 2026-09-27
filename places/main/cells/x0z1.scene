@@ -1,4 +1,28 @@
 # spawn-scene v2 yaml x0z1
+town-apothecary:
+  feetPosition: {x: 28, y: 0.5302985096870096, z: 88}
+  id: town-apothecary
+  physics: static
+  primitive: {kind: scripted, params: {d: 9, floors: 2, lamp: true, plaster: oklch(0.93 0.04 130), roof: {kind: gz, pitch: 56, tex: teal, tint: oklch(0.97 0.01 190)}, seed: 4, shop: true, sign: apothecary, trim: oklch(0.55 0.08 195), w: 8}, script: scripts/gen/town-house.js, seed: 4}
+  rotation: {yaw: 90}
+  tags: [town, building]
+  visibleRange: {max: 170}
+town-bakery:
+  feetPosition: {x: -28, y: 0.7724079094924621, z: 88.5}
+  id: town-bakery
+  physics: static
+  primitive: {kind: scripted, params: {awning: oklch(0.62 0.13 40), base: stone, chimney: [2.5, 2], d: 9, floors: 2, plaster: oklch(0.96 0.045 88), roof: {kind: gx, pitch: 42, tex: clay, tint: oklch(0.95 0.03 45)}, seed: 1, shop: true, sign: bakery, trim: oklch(0.62 0.08 195), w: 9}, script: scripts/gen/town-house.js, seed: 1}
+  rotation: {yaw: -90}
+  tags: [town, building]
+  visibleRange: {max: 170}
+town-cheese:
+  feetPosition: {x: -13.5, y: 0.45989450915449076, z: 72.25}
+  id: town-cheese
+  physics: static
+  primitive: {kind: scripted, params: {awning: oklch(0.7 0.08 130), d: 8.5, floors: 2, plaster: oklch(0.97 0.02 85), roof: {kind: hip, pitch: 30, tex: teal, tint: oklch(0.95 0.02 190)}, seed: 7, shop: true, sign: books, trim: oklch(0.62 0.13 40), w: 10}, script: scripts/gen/town-house.js, seed: 7}
+  rotation: {yaw: 180}
+  tags: [town, building]
+  visibleRange: {max: 170}
 town-crowd:
   audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-town-square-crowd-murmur-loop.mp3, gain: 0.15, loop: true, maxDistance: 40, spatial: true}
   behavior: scripts/town-crowd.js
@@ -62,6 +86,46 @@ town-hall:
   primitive: {kind: scripted, params: {roostY: 21.584}, script: scripts/gen/town-hall.js, seed: 15}
   tags: [town, roost]
   visibleRange: {max: 400}
+town-house-e:
+  feetPosition: {x: 28, y: 0.4311763555940418, z: 111}
+  id: town-house-e
+  physics: static
+  primitive: {kind: scripted, params: {chimney: [-2.5, 2.5], d: 9, floors: 3, plaster: oklch(0.94 0.035 190), roof: {kind: gx, pitch: 34, tex: clay, tint: oklch(0.9 0.05 40)}, seed: 6, trim: oklch(0.55 0.07 135), w: 9}, script: scripts/gen/town-house.js, seed: 6}
+  rotation: {yaw: 90}
+  tags: [town, building]
+  visibleRange: {max: 170}
+town-house-ne:
+  feetPosition: {x: 19, y: 0.1803013263502008, z: 127}
+  id: town-house-ne
+  physics: static
+  primitive: {kind: scripted, params: {awning: oklch(0.66 0.11 10), d: 9, floors: 2, plaster: oklch(0.93 0.04 130), roof: {kind: hip, pitch: 52, tex: clay, tint: oklch(0.95 0.04 55)}, seed: 10, shop: true, trim: oklch(0.6 0.12 40), w: 9}, script: scripts/gen/town-house.js, seed: 10}
+  rotation: {yaw: 0}
+  tags: [town, building]
+  visibleRange: {max: 170}
+town-house-nw:
+  feetPosition: {x: -19, y: 0.5489051862959411, z: 127}
+  id: town-house-nw
+  physics: static
+  primitive: {kind: scripted, params: {chimney: [2.5, 2], d: 9, floors: 2, plaster: oklch(0.94 0.04 40), roof: {kind: gx, pitch: 55, tex: cedar, tint: oklch(0.92 0.03 60)}, seed: 9, trim: oklch(0.62 0.08 195), w: 9}, script: scripts/gen/town-house.js, seed: 9}
+  rotation: {yaw: 0}
+  tags: [town, building]
+  visibleRange: {max: 170}
+town-house-se:
+  feetPosition: {x: 13.5, y: 0.407376225462724, z: 72.25}
+  id: town-house-se
+  physics: static
+  primitive: {kind: scripted, params: {chimney: [3, 2], d: 8.5, floors: 3, plaster: oklch(0.96 0.045 88), roof: {kind: gz, pitch: 38, tex: slate, tint: oklch(0.93 0.015 250)}, seed: 8, trim: oklch(0.62 0.08 195), w: 10}, script: scripts/gen/town-house.js, seed: 8}
+  rotation: {yaw: 180}
+  tags: [town, building]
+  visibleRange: {max: 170}
+town-house-w:
+  feetPosition: {x: -28, y: 0.42423883697257864, z: 112.5}
+  id: town-house-w
+  physics: static
+  primitive: {kind: scripted, params: {d: 9, floors: 3, plaster: oklch(0.97 0.02 85), roof: {kind: hip, pitch: 40, tex: slate, tint: oklch(0.95 0.01 250)}, seed: 3, trim: oklch(0.6 0.12 40), w: 8}, script: scripts/gen/town-house.js, seed: 3}
+  rotation: {yaw: -90}
+  tags: [town, building]
+  visibleRange: {max: 170}
 town-market:
   feetPosition: {x: 0, y: 0.55, z: 100}
   id: town-market
@@ -85,4 +149,20 @@ town-square:
   physics: static
   primitive: {kind: scripted, params: {benches: [[-18.5, -8, -90], [-18.5, 8, -90], [18.5, -8, 90], [18.5, 8, 90]], kind: square, planters: [[-6, -20.5, 3, 90], [6, -20.5, 3, 90], [-8, 19.5, 3, 0], [8, 19.5, 3, 0]], poleH: 8.5, poles: [[-20.5, -16], [20.5, -16], [-20.5, 16], [20.5, 16]], strings: [[0, 1], [2, 3], [0, 3], [1, 2]], trees: [[-17, 18.5], [17, 18.5]]}, script: scripts/gen/town-square.js, seed: 12}
   tags: [town]
+  visibleRange: {max: 170}
+town-tailor:
+  feetPosition: {x: 28, y: 0.4220246443605373, z: 99.5}
+  id: town-tailor
+  physics: static
+  primitive: {kind: scripted, params: {awning: oklch(0.62 0.08 195), d: 9, floors: 2, plaster: oklch(0.96 0.045 88), roof: {kind: salt, pitch: 45, ridge: 0.38, tex: gold, tint: oklch(0.96 0.02 80)}, seed: 5, shop: true, sign: tailor, trim: oklch(0.66 0.11 10), w: 10}, script: scripts/gen/town-house.js, seed: 5}
+  rotation: {yaw: 90}
+  tags: [town, building]
+  visibleRange: {max: 170}
+town-tavern:
+  feetPosition: {x: -28.5, y: 0.6568747900200451, z: 100.5}
+  id: town-tavern
+  physics: static
+  primitive: {kind: scripted, params: {chimney: [-3.5, 3], d: 10, floors: 3, lamp: true, plaster: oklch(0.94 0.04 40), roof: {kind: gz, pitch: 48, tex: cedar, tint: oklch(0.95 0.02 70)}, seed: 2, shop: true, sign: tavern, trim: oklch(0.55 0.07 135), w: 11}, script: scripts/gen/town-house.js, seed: 2}
+  rotation: {yaw: -90}
+  tags: [town, building]
   visibleRange: {max: 170}

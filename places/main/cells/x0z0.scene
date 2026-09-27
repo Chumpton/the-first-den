@@ -4370,7 +4370,7 @@ town-road:
   physics: static
   primitive: {kind: scripted, params: {archZ: 4, kind: lane, lamps: [[-4.4, 14], [4.4, 14], [-4.4, 34], [4.4, 34], [-4.4, 54], [4.4, 54]]}, script: scripts/gen/town-square.js, seed: 11}
   tags: [town]
-  ui: "<div face=\"front\" at=\"0.5 0.905\" width=\"7.2m\" class=\"flex items-center justify-center\" style=\"height:1.05m;background:#efe3c8;border:40px solid #cdbb96;border-radius:60px;color:#4f3828;font-family:serif;font-size:560px;letter-spacing:90px;font-weight:700\">MARKET SQUARE</div>"
+  ui: "<div face=\"front\" at=\"0.5 0.905\" width=\"7.2m\" class=\"flex items-center justify-center\" style=\"height:1050px;background:#efe3c8;border:40px solid #cdbb96;border-radius:60px;color:#4f3828;font-family:serif;font-size:560px;letter-spacing:90px;font-weight:700\">MARKET SQUARE</div>"
   visibleRange: {max: 170}
 trade-banner-e:
   castShadow: true
