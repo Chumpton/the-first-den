@@ -179,6 +179,7 @@ const items = {
 
 export function geometry(ctx) {
   ctx.flat(); ctx.roughness(0.85);
+  if (Number(ctx.lod ?? 1) >= 4) { box(ctx, 0, 0, 0, 0.01, 0.01, 0.01); return; } // indoors: the far picture never sees it
   (items[ctx.params.item] || items.vase)(ctx);
 }
 export function collider(ctx) {
