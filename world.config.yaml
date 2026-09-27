@@ -19,6 +19,8 @@ inputs:
         - space
     descend: {keys: [shift]}
     camView: {keys: ['7']}
+    deleteMode: {keys: ['8']}
+    deleteThing: {keys: ['9']}
   axes:
     moveX:
       keys: a/d
