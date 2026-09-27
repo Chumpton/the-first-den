@@ -7,13 +7,6 @@ royal-bank:
   primitive: {kind: scripted, params: {d: 13, floors: 3, kind: bank, w: 18}, script: scripts/gen/royal-house.js, seed: 6}
   rotation: {yaw: 90}
   visibleRange: {max: 500}
-royal-castle:
-  feetPosition: {x: 0, y: 14, z: 277}
-  id: royal-castle
-  physics: static
-  primitive: {kind: scripted, params: {part: keep}, script: scripts/gen/royal-castle.js}
-  tags: [royal, castle]
-  visibleRange: {max: 900}
 royal-castle-banner-gate-l:
   castShadow: false
   feetPosition: {x: -4.4, y: 30.2, z: 244.6}
@@ -74,6 +67,13 @@ royal-castle-hall-light:
   light: {color: oklch(0.88 0.08 75), distance: 26, intensity: 30, kind: point}
   tags: [royal, castle]
   visibleRange: {max: 80}
+royal-castle-keep:
+  feetPosition: {x: 0, y: 14, z: 277}
+  id: royal-castle-keep
+  physics: static
+  primitive: {kind: scripted, params: {part: keep}, script: scripts/gen/royal-castle.js}
+  tags: [royal, castle]
+  visibleRange: {max: 900}
 royal-castle-stair:
   feetPosition: {x: 0, y: 0, z: 233}
   id: royal-castle-stair
