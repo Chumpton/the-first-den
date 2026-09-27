@@ -136,8 +136,19 @@ const faceYaw = (s) => Math.atan2(s.x - (s.fx ?? 0), s.z - (s.fz ?? 0));
 const RUGS = [['oklch(0.5 0.14 25)', 'oklch(0.86 0.1 85)', 'oklch(0.36 0.08 260)'], ['oklch(0.42 0.09 262)', 'oklch(0.82 0.08 75)', 'oklch(0.6 0.13 32)'], ['oklch(0.72 0.12 72)', 'oklch(0.46 0.12 28)', 'oklch(0.92 0.03 85)']];
 const BARRELS = [[0, 0, 1], [0.7, 0.12, 1], [0.34, 0.64, 0.86], [-0.52, 0.52, 0.92]];
 const SACKS = [[0, 0, 1, 0], [0.52, 0.12, 0.9, 1], [0.22, 0.56, 1.06, 0], [-0.4, 0.42, 0.86, 1]];
-const PROP_BOX = { rugs: [-1.62, 0, -0.14, 1.62, 2.35, 0.14], barrels: [-0.85, 0, -0.35, 1.05, 0.85, 1.0], sacks: [-0.7, 0, -0.3, 0.8, 0.6, 0.85], stack: [-0.92, 0, -0.6, 0.92, 1.0, 0.62] };
+const PROP_BOX = { ladder: [-0.3, 0, -0.9, 0.3, 1.2, 0.05], rugs: [-1.62, 0, -0.14, 1.62, 2.35, 0.14], barrels: [-0.85, 0, -0.35, 1.05, 0.85, 1.0], sacks: [-0.7, 0, -0.3, 0.8, 0.6, 0.85], stack: [-0.92, 0, -0.6, 0.92, 1.0, 0.62] };
 const PROPS = {
+  wallLamp(ctx, P, q, rnd, lod) { // wrought-iron bracket off a wall behind (+z), a lantern hung at its tip
+    const y = q.h ?? 3.1; paint(ctx, null, COL.iron, 0.5, 0.6);
+    obox(P, 0, y - 0.35, 0.02, 0.22, 0.5, 0.05); beam(P, [0, y, 0], [0, y, -0.55], 0.05, 0.05); beam(P, [0, y - 0.3, 0], [0, y - 0.02, -0.4], 0.035, 0.035);
+    if (lod <= 2) beam(P, [0, y + 0.02, -0.5], [0, y + 0.14, -0.62], 0.03, 0.03);
+    lantern(ctx, P, 0, y - 0.42, -0.55, 1.25);
+  },
+  ladder(ctx, P, q, rnd, lod) { // oak ladder leaning on the wall behind (+z)
+    const h = q.h ?? 3.6, foot = -h * 0.28; paint(ctx, null, COL.oak ?? 'oklch(0.62 0.08 65)', 0.85);
+    for (const x of [-0.24, 0.24]) beam(P, [x, 0, foot], [x, h, 0], 0.07, 0.05);
+    if (lod <= 3) for (let y = 0.3; y < h - 0.1; y += 0.32) { const t = y / h; beam(P, [-0.24, y, foot * (1 - t)], [0.24, y, foot * (1 - t)], 0.04, 0.04); }
+  },
   rugs(ctx, P, q, rnd, lod) { // a walnut rack along x, three patterned rugs folded over its beam, fringes at the hem
     paint(ctx, 'walnut', COL.walnut, 0.85);
     for (const x of [-1.5, 1.5]) { obox(P, x, 0, 0, 0.12, 2.3, 0.12); obox(P, x, 0, 0, 0.14, 0.08, 0.9); }
@@ -263,7 +274,7 @@ export function geometry(ctx) {
     arch(ctx, P, p.archZ ?? 4, lod);
   } else if (p.kind === 'market') {
     for (const s of p.stalls || []) stall(ctx, XF(P, s.x, 0, s.z, faceYaw(s)), s, rnd, lod);
-    for (const q of p.props || []) PROPS[q.k]?.(ctx, XF(P, q.x, 0, q.z, (q.yaw || 0) * Math.PI / 180), q, rnd, lod);
+    for (const q of p.props || []) PROPS[q.k]?.(ctx, XF(P, q.x, q.y || 0, q.z, (q.yaw || 0) * Math.PI / 180), q, rnd, lod);
   } else {
     floor(ctx, P, p, lod);
     for (const [x, z, yaw] of p.benches || []) bench(ctx, XF(P, x, 0, z, yaw * Math.PI / 180), lod);
@@ -285,7 +296,7 @@ export function collider(ctx) {
       const F = XF(C, s.x, 0, s.z, faceYaw(s)); box(F, -1.5, 0, -0.8, 1.5, 1.0, -0.45); box(F, 1.4, 0, 0, 2.0, 0.85, 0.6); box(F, -2.0, 0, -0.4, -1.4, 0.4, 0.2);
       for (const x of [-1.4, 1.4]) box(F, x - 0.08, 0, 0.67, x + 0.08, 2.8, 0.83);
     }
-    for (const q of p.props || []) { const F = XF(C, q.x, 0, q.z, (q.yaw || 0) * Math.PI / 180), H = PROP_BOX[q.k]; if (H) box(F, ...H); }
+    for (const q of p.props || []) { const F = XF(C, q.x, q.y || 0, q.z, (q.yaw || 0) * Math.PI / 180), H = PROP_BOX[q.k]; if (H) box(F, ...H); }
   } else {
     for (const [x, z, yaw] of p.benches || []) box(XF(C, x, 0, z, yaw * Math.PI / 180), -1.0, 0, -0.24, 1.0, 0.47, 0.3);
     for (const [x, z, L, yaw] of p.planters || []) box(XF(C, x, 0, z, (yaw || 0) * Math.PI / 180), -L / 2, 0, -0.4, L / 2, 0.62, 0.4);

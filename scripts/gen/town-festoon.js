@@ -64,6 +64,7 @@ export function geometry(ctx) {
           ctx.tri(p[0] - dx * w, q0[1], p[2] - dz * w, p[0] + dx * w, q1[1], p[2] + dz * w, p[0], p[1] - 0.42, p[2]);
         }
       }
+      for (let i = 1; i < m; i += lod <= 2 ? 1 : 2) bulb(ctx, at(i / m), lod); // warm bulbs hung between the pennants
     }
     for (const t of l.lanterns || []) lantern(ctx, at(t), lk++, lod);
   });
