@@ -3366,12 +3366,15 @@ pollinator-keeper:
   id: pollinator-keeper
   tags: [manager]
 purple-dragon-blueprint:
-  feetPosition: {x: 31.5, y: 0.5, z: -8.5}
+  behavior: scripts/purple-dragon.js
+  feetPosition: {x: 30.8, y: 0.55, z: -7.4}
   id: purple-dragon-blueprint
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 5, height: 6, kind: box, width: 10}
-  tags: [blueprint]
+  interpolation: {teleportThreshold: 40}
+  physics: {body: kinematic, collider: auto}
+  primitive: {kind: scripted, params: {}, script: scripts/gen/purple-dragon.js}
+  rotation: {yaw: 90}
+  state: {flying: false, home: {x: 30.8, y: 0.55, yaw: 90, z: -7.4}, kind: purple-dragon, name: Violet, pad: violet-pad-front, phase: rest, rider: null}
+  tags: [purple-dragon, dragon, mount]
 quad-garden:
   castShadow: true
   feetPosition: {x: 13, y: {terrain: 0}, z: -8.5}
@@ -3527,7 +3530,7 @@ square-door/sign:
 stone-golem:
   behavior: scripts/stone-golem.js
   children: [{feetPosition: {x: 0, y: 4.6, z: 0}, id: nametag, text: {color: oklch(0.95 0.03 90), content: Mossback, size: 0.35}}]
-  feetPosition: {x: 24, y: {terrain: 0}, z: -18}
+  feetPosition: {x: 24.5, y: 0.6, z: -3.8}
   id: stone-golem
   physics: {body: character, collider: capsule, height: 4.1, radius: 0.95}
   primitive: {kind: scripted, params: {glow: 1}, script: scripts/gen/stone-golem.js, seed: 7}
@@ -3652,6 +3655,34 @@ treehouse-rope:
   primitive: {kind: scripted, params: {length: 7.2, rope: true}, script: scripts/gen/rope-bridge.js}
   rotation: 90
   tags: [treehouse, climb-rope]
+violet-pad-back:
+  children: []
+  feetPosition: {x: 35.4, y: 0.55, z: -7.4}
+  id: violet-pad-back
+  physics: none
+  state: {pressTo: purple-dragon-blueprint}
+  tags: [interactable, dragon, purple-dragon-pad]
+violet-pad-front:
+  children: [{feetPosition: {x: 0, y: 3.1, z: 0}, id: prompt, visibleRange: {max: 9}}]
+  feetPosition: {x: 26.4, y: 0.55, z: -7.4}
+  id: violet-pad-front
+  physics: none
+  state: {pressTo: purple-dragon-blueprint}
+  tags: [interactable, dragon, purple-dragon-pad]
+violet-pad-left:
+  children: []
+  feetPosition: {x: 30.8, y: 0.55, z: -4.9}
+  id: violet-pad-left
+  physics: none
+  state: {pressTo: purple-dragon-blueprint}
+  tags: [interactable, dragon, purple-dragon-pad]
+violet-pad-right:
+  children: []
+  feetPosition: {x: 30.8, y: 0.55, z: -9.9}
+  id: violet-pad-right
+  physics: none
+  state: {pressTo: purple-dragon-blueprint}
+  tags: [interactable, dragon, purple-dragon-pad]
 warden-e:
   behavior: [scripts/tower-warden.js]
   castShadow: true
