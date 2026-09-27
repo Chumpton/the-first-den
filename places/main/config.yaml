@@ -65,6 +65,7 @@ terrain:
     pathCamp: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[1.5, -38], [-6, -42], [-13, -47], [-16, -49]], width: 1.6}
     lumenvaleClear: {center: {x: 1100, z: -250}, kind: clear-scatter, shape: {kind: circle, radius: 190}}
     hearthmereClear: {center: {x: -1000, z: -500}, kind: clear-scatter, shape: {kind: circle, radius: 190}}
+    cobCellar: {kind: hole, points: [[6.25, -26], [3.13, -20.59], [-3.12, -20.59], [-6.25, -26], [-3.13, -31.41], [3.13, -31.41]]}
   decorations:
     settings: {enabled: true, budget: 75000, maxDistance: 420, fadeDistance: 25}
     bindings:

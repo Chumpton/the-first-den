@@ -6,11 +6,19 @@ camp-spot:
   physics: none
   primitive: {depth: 7, height: 2, kind: box, width: 7}
 cob-house:
+  castShadow: true
   feetPosition: {x: 0, y: 0.5, z: -26}
   id: cob-house
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {height: 9, kind: cylinder, radialSegments: 6, radiusBottom: 6, radiusTop: 6}
+  material: {kind: scripted, script: scripts/gen/cob-house.js}
+  physics: {body: static, collider: mesh}
+  primitive: {kind: scripted, script: scripts/gen/cob-house.js}
+  receiveShadow: true
+  tags: [home, cob-house]
+cob-house/cob-sun-cellar:
+  feetPosition: {x: -2.8, y: -1.2, z: 1.6}
+  id: cob-house/cob-sun-cellar
+  light: {color: oklch(0.85 0.1 70), distance: 9, intensity: 14, kind: point}
+  parent: cob-house
 fireflies:
   feetPosition: {x: 0, y: 0.5, z: -40}
   fx: {script: "fx\npop flies n=?mobile:30|70 on=box(70,3,70).c(1.5) life=5..9 v=sdir()*.15 size=.035..0.06 acc=curl(.35)*.6+drag(.8) blink=0..6.28 col=hdr(2.6,3.4,.9) a=(0>.15:1>.85:1>0)*(.5+.5*sin($age*3+$blink))^3 sz=$size r=sprite(soft-disc,add)"}
