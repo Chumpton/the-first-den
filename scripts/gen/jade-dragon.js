@@ -3,7 +3,7 @@
 import { DRAGON } from '../lib/data/dragon.js';
 const SP = DRAGON.spine.spacing, NB = DRAGON.spine.bones, TAIL = 10.9;
 // Colour variants: params { hue, chroma, light } re-hue the jade palette (hue = the body's hue, jade 150; chroma a scale;
-// light a lightness lift). No params = the original jade strings exactly.
+// light a lightness lift; colors { MANE: [l, c, h], … } sets single parts). No params = the original jade strings exactly.
 const BASE = { JADE: [0.78, 0.13, 150], DORSAL: [0.55, 0.12, 155], FLANK: [0.84, 0.11, 148], BELLY: [0.93, 0.06, 140],
   BELLY2: [0.88, 0.07, 120], MANE: [0.47, 0.11, 158], WHISKER: [0.9, 0.07, 130] };
 const ok = ([l, c, h]) => `oklch(${l} ${c} ${h})`;
@@ -13,6 +13,7 @@ function palette(p = {}) {
   const re = p.hue != null, dh = re ? p.hue - 150 : 0, ck = p.chroma ?? 1, dl = p.light ?? 0;
   const C = {};
   for (const k in BASE) { const [l, c, h] = BASE[k]; C[k] = re || ck !== 1 || dl ? ok([+Math.min(0.97, l + dl).toFixed(3), +(c * ck).toFixed(3), +(((h + dh) % 360 + 360) % 360).toFixed(1)]) : ok(BASE[k]); }
+  if (p.colors) for (const k in p.colors) if (k in BASE) C[k] = ok(p.colors[k]); // per-part overrides [l, c, h] (Sage's gold-green mane)
   ({ JADE, DORSAL, FLANK, BELLY, BELLY2, MANE, WHISKER } = C);
 }
 palette();
