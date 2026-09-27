@@ -686,7 +686,10 @@ function verge(ctx, p, lod) {
   if (lod >= 4) return;
   const rnd = () => ctx.random(), f = lod <= 2 ? 1 : 0.45, rIn = p.rIn ?? 3, rOut = p.rOut ?? 4.8, gaps = p.gaps ?? [], avoid = p.avoid ?? [];
   const blocked = (x, z, th, forLeaf) => (!forLeaf && gaps.some(([a, b]) => th >= a && th <= b)) || avoid.some(([ax, az, ar, leafOk]) => (!forLeaf || !leafOk) && Math.hypot(x - ax, z - az) < ar);
-  const spot = (a, b, forLeaf) => { for (let t = 0; t < 8; t++) { const th = rnd() * 360, u = rnd(), r = a + (b - a) * (forLeaf ? Math.sqrt(u) : 0.5 + (u + rnd() - 1) * 0.5), x = r * Math.cos(th * D), z = r * Math.sin(th * D); if (!blocked(x, z, th, forLeaf)) return [x, z, th]; } return null; };
+  const E = p.edge, edgeR = (th) => { for (let i = 0; i < E.length - 1; i++) if (th <= E[i + 1][0]) { const k = (th - E[i][0]) / (E[i + 1][0] - E[i][0]); return E[i][1] + (E[i + 1][1] - E[i][1]) * k; } return E[E.length - 1][1]; };
+  const spot = (a, b, forLeaf) => { if (E && !forLeaf) for (let t = 0; t < 8; t++) { const th = E[0][0] + rnd() * (E[E.length - 1][0] - E[0][0]), r = edgeR(th) + (rnd() + rnd() - 1) * (p.band ?? 0.7) + 0.05, x = r * Math.cos(th * D), z = r * Math.sin(th * D), thw = (th + 360) % 360; if (!blocked(x, z, thw, false)) return [x, z, thw]; }
+    if (E && !forLeaf) return null;
+    for (let t = 0; t < 8; t++) { const th = rnd() * 360, u = rnd(), r = a + (b - a) * (forLeaf ? Math.sqrt(u) : 0.5 + (u + rnd() - 1) * 0.5), x = r * Math.cos(th * D), z = r * Math.sin(th * D); if (!blocked(x, z, th, forLeaf)) return [x, z, th]; } return null; };
   ctx.albedo(null); ctx.metalness(0); ctx.emissive(null);
   for (let k = 0; k < (p.tufts ?? 110) * f; k++) {
     const s = spot(rIn, rOut); if (!s) continue; const [x, z, th] = s, nb = lod <= 2 ? 7 : 4, big = 0.7 + rnd() * 0.6;
