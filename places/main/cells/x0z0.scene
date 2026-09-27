@@ -3471,13 +3471,13 @@ pollinator-keeper:
   tags: [manager]
 purple-dragon-blueprint:
   behavior: scripts/purple-dragon.js
-  feetPosition: {x: 30.8, y: 0.55, z: -7.4}
+  feetPosition: {x: 30.799999999987836, y: 0.5499999999999572, z: -8.9}
   id: purple-dragon-blueprint
   interpolation: {teleportThreshold: 40}
   physics: {body: kinematic, collider: auto}
   primitive: {kind: scripted, params: {}, script: scripts/gen/purple-dragon.js}
   rotation: {yaw: 90}
-  state: {flying: false, home: {x: 30.8, y: 0.55, yaw: 90, z: -7.4}, kind: purple-dragon, name: Violet, pad: violet-pad-front, phase: rest, rider: null}
+  state: {flying: false, home: {x: 30.8, y: 0.55, yaw: 90, z: -8.9}, kind: purple-dragon, name: Violet, pad: violet-pad-front, phase: rest, rider: null}
   tags: [purple-dragon, dragon, mount]
 quad-garden:
   castShadow: true
@@ -3761,28 +3761,28 @@ treehouse-rope:
   tags: [treehouse, climb-rope]
 violet-pad-back:
   children: []
-  feetPosition: {x: 35.4, y: 0.55, z: -7.4}
+  feetPosition: {x: 35.4, y: 0.55, z: -8.9}
   id: violet-pad-back
   physics: none
   state: {pressTo: purple-dragon-blueprint}
   tags: [interactable, dragon, purple-dragon-pad]
 violet-pad-front:
   children: [{feetPosition: {x: 0, y: 3.1, z: 0}, id: prompt, visibleRange: {max: 9}}]
-  feetPosition: {x: 26.4, y: 0.55, z: -7.4}
+  feetPosition: {x: 26.4, y: 0.55, z: -8.9}
   id: violet-pad-front
   physics: none
   state: {pressTo: purple-dragon-blueprint}
   tags: [interactable, dragon, purple-dragon-pad]
 violet-pad-left:
   children: []
-  feetPosition: {x: 30.8, y: 0.55, z: -4.9}
+  feetPosition: {x: 30.8, y: 0.55, z: -6.4}
   id: violet-pad-left
   physics: none
   state: {pressTo: purple-dragon-blueprint}
   tags: [interactable, dragon, purple-dragon-pad]
 violet-pad-right:
   children: []
-  feetPosition: {x: 30.8, y: 0.55, z: -9.9}
+  feetPosition: {x: 30.8, y: 0.55, z: -11.4}
   id: violet-pad-right
   physics: none
   state: {pressTo: purple-dragon-blueprint}
