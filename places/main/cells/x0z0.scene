@@ -1823,19 +1823,56 @@ fox-meadow:
   tags: [fauna-ground, interactable, animal, fox]
   visibleRange: {max: 180}
 garden-gazebo:
-  feetPosition: {x: -8, y: 0.5, z: -42}
+  castShadow: true
+  children: [{feetPosition: {x: 0, y: 1.85, z: 0}, id: lamp, light: {color: oklch(0.85 0.1 70), distance: 9, intensity: 6, kind: point}}]
+  feetPosition: {x: -8, y: 0.4996795009173649, z: -42}
   id: garden-gazebo
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 4.4, height: 3.8, kind: box, width: 4.4}
-  tags: [blueprint]
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/garden-gazebo.js, seed: 11}
+  receiveShadow: true
+  rotation: {lookAt: {x: -3, y: 0.5, z: -40.5}}
+  tags: [garden, garden-gazebo]
+  visibleRange: {max: 220}
+garden-paths:
+  feetPosition: {x: 0, y: 0.5, z: -40}
+  id: garden-paths
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {hubs: [[1.8, -40.3, 1], [-8, -36, 1], [-2, -41, 0.7]], origin: [0, -40], paths: [[[0, -35.4], [0.5, -37.9], [1.8, -40.3]], [[1.8, -40.3], [4, -38.6], [5, -38.2], [5, -44], [5, -49.8], [6, -51.3]], [[1.8, -40.3], [-2, -41], [-6, -41.3]], [[-2, -41], [-3.5, -43.4], [-4.9, -44.6]], [[0, -35.4], [-3, -35.7], [-6.9, -36]], [[0, -35.4], [4, -34.8], [7, -34.4], [10.65, -34.1]]], width: 1.05}, script: scripts/gen/garden-flagstones.js, seed: 21}
+  receiveShadow: true
+  tags: [garden, garden-paths]
+  visibleRange: {max: 180}
+garden-paths-front:
+  feetPosition: {x: 5, y: 0.5, z: -14}
+  id: garden-paths-front
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {hubs: [], origin: [5, -14], paths: [[[0.3, -16.3], [2.6, -14.4], [4.3, -14.15], [10.3, -14.15]]], width: 1.05}, script: scripts/gen/garden-flagstones.js, seed: 22}
+  receiveShadow: true
+  tags: [garden, garden-paths]
+  visibleRange: {max: 180}
+garden-shed:
+  castShadow: true
+  children: [{feetPosition: {x: 0, y: 1.9, z: 0}, id: lamp, light: {color: oklch(0.85 0.1 70), distance: 6, intensity: 4, kind: point}}]
+  feetPosition: {x: 10.5, y: 0.5, z: -32.2}
+  id: garden-shed
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/garden-shed.js, seed: 7}
+  receiveShadow: true
+  tags: [garden, garden-shed]
+  visibleRange: {max: 220}
 garden-tunnel:
-  feetPosition: {x: 5, y: 0.5, z: -44}
+  castShadow: true
+  feetPosition: {x: 5, y: 0.49982664554163037, z: -44}
   id: garden-tunnel
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 9, height: 2.6, kind: box, width: 2.8}
-  tags: [blueprint]
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/garden-tunnel.js, seed: 5}
+  receiveShadow: true
+  tags: [garden, garden-tunnel]
+  visibleRange: {max: 220}
 hive-site:
   audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-honeybee-hive-soft-hum-loop.mp3, gain: 0.12, loop: true, maxDistance: 12, spatial: true}
   castShadow: true

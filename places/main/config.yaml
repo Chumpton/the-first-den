@@ -123,6 +123,9 @@ terrain:
     coop-clear: {center: {x: 27, z: -28}, kind: clear-scatter, shape: {kind: circle, radius: 5.5}}
     hive-ground: {center: {x: 31, z: -46}, falloff: 3, height: 0.68, kind: flatten, shape: {kind: circle, radius: 3}}
     hive-clear: {center: {x: 31, z: -46}, kind: clear-scatter, shape: {kind: circle, radius: 3.5}}
+    garden-clear-back: {center: {x: -1, z: -43}, kind: clear-scatter, shape: {kind: ellipse, radiusX: 13.5, radiusZ: 8.5}}
+    garden-clear-shed: {center: {x: 10.5, z: -32.5}, kind: clear-scatter, shape: {depth: 4.5, kind: rectangle, width: 5}}
+    garden-clear-front: {center: {x: 5.5, z: -13}, kind: clear-scatter, shape: {depth: 6, kind: rectangle, width: 12}}
   decorations:
     settings: {enabled: true, budget: 75000, maxDistance: 420, fadeDistance: 25}
     bindings:
