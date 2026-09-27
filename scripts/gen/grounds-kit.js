@@ -538,8 +538,189 @@ function stones(ctx, p, lod) {
     for (let i = 0; i < n; i++) { const a = v[i], b = v[(i + 1) % n]; triOut(ctx, c, a, b, [0, 1, 0]); if (lod <= 3) quadOut(ctx, [a[0], -0.02, a[2]], [b[0], -0.02, b[2]], b, a, [(a[0] + b[0]) / 2 - x, 0, (a[2] + b[2]) / 2 - z]); }
   }
 }
-const B = { dock, boat, fishspot, lilies, reeds, camp, tent, vegbed, flowerbed, herbspiral, fence, birdbath, wheelbarrow, lantern, stones, bench: (ctx, p, lod) => bench(ctx, lod, p.w ?? 1.5) };
+// ---------- camp-ring: seat logs, river boulders, firewood + block, roast sticks, kettle, verge ----------
+const HEART = "oklch(0.6 0.08 55)", RINGLINE = "oklch(0.7 0.075 65)", BARKRIM = "oklch(0.42 0.04 50)", MOSS = "oklch(0.56 0.12 132)";
+// an end face in the y-z plane (a log along x): bark rim, sapwood, a growth line, the heart
+function logEnd(ctx, x, cy, R, n, s, lod) {
+  const P = (f, i) => { const t = (i / n) * 2 * Math.PI, r = R(i) * f; return [x, cy + r * Math.cos(t), r * Math.sin(t)]; }, out = [s, 0, 0];
+  const bands = lod <= 2 ? [[0, 0.3, HEART], [0.3, 0.55, ENDGRAIN], [0.55, 0.6, RINGLINE], [0.6, 0.88, ENDGRAIN], [0.88, 1, BARKRIM]] : [[0, 0.88, ENDGRAIN], [0.88, 1, BARKRIM]];
+  for (const [a, b, col] of bands) {
+    paint(ctx, col, 0.9);
+    for (let i = 0; i < n; i++) { if (a === 0) triOut(ctx, [x, cy, 0], P(b, i), P(b, i + 1), out); else quadOut(ctx, P(a, i), P(b, i), P(b, i + 1), P(a, i + 1), out); }
+  }
+}
+function seatlog(ctx, p, lod) {
+  const L = p.width ?? 1.3, r = p.r ?? 0.22, n = lod <= 2 ? 12 : lod <= 3 ? 8 : 6, cy = r - 0.02, rnd = () => ctx.random(), segs = lod <= 2 ? 4 : 1;
+  const wob = []; for (let i = 0; i < n; i++) wob.push(1 + (rnd() - 0.5) * 0.12);
+  const tap = (k) => 1 - (0.07 * k) / segs;
+  const V = (x, i, t) => { const a = (i / n) * 2 * Math.PI, rr = r * wob[i % n] * t; return [x, cy + rr * Math.cos(a), rr * Math.sin(a)]; };
+  paint(ctx, "bark", jitColor(ctx, 0.92, 0.02, 60, 0.06, 12));
+  for (let k = 0; k < segs; k++) {
+    const x0 = -L / 2 + (L * k) / segs, x1 = -L / 2 + (L * (k + 1)) / segs;
+    for (let i = 0; i < n; i++) { const a = ((i + 0.5) / n) * 2 * Math.PI; quadOut(ctx, V(x0, i, tap(k)), V(x1, i, tap(k + 1)), V(x1, i + 1, tap(k + 1)), V(x0, i + 1, tap(k)), [0, Math.cos(a), Math.sin(a)]); }
+  }
+  logEnd(ctx, -L / 2, cy, (i) => r * wob[i % n], n, -1, lod);
+  logEnd(ctx, L / 2, cy, (i) => r * wob[i % n] * tap(segs), n, 1, lod);
+  if (lod <= 3) {
+    paint(ctx, MOSS, 0.95);
+    for (let k = 0; k < (lod <= 2 ? 4 : 2); k++) { const x = (rnd() - 0.5) * L * 0.8, a = 0.5 + rnd() * 0.9; blob(ctx, [x, cy + r * Math.cos(a) * 0.96, r * Math.sin(a) * 0.96], 0.09 + rnd() * 0.07, 0.035, 0.07 + rnd() * 0.04, 6, 2, rnd() * 90); } // on the back shoulder: the seat stays bare
+    blob(ctx, [-L / 2 + 0.06, cy - r * 0.55, r * 0.5], 0.09, 0.07, 0.1, 5, 2);
+  }
+  if (lod <= 2) {
+    paint(ctx, "bark"); cyl(ctx, [L * 0.18, cy + 0.04, r * 0.8], [L * 0.2 + 0.03, cy + 0.12, r + 0.12], 0.045, 0.035, 6, 1, () => paint(ctx, ENDGRAIN));
+    paint(ctx, "oklch(0.82 0.06 80)", 0.8); // a bracket fungus low on the back
+    for (const [x, y] of [[-L * 0.25, cy - 0.06], [-L * 0.25 + 0.08, cy - 0.12]]) blob(ctx, [x, y, r * 0.95], 0.06, 0.018, 0.045, 6, 2);
+  }
+}
+function seatlogCollider(ctx, p) { const L = p.width ?? 1.3, r = p.r ?? 0.22; rbox(ctx, [0, r - 0.02, 0], L, 2 * r, 2 * r * 0.92); }
+function boulders(ctx, p, lod) {
+  const rnd = () => ctx.random(), n = lod <= 2 ? 10 : lod <= 3 ? 7 : 5, m = lod <= 2 ? 6 : 4;
+  for (const [x, z, r, h, moss = 1, yaw = 0] of p.points ?? []) {
+    const sink = h * 0.3, cyy = (h - sink) / 2, ry = (h + sink) / 2, J = [];
+    for (let j = 0; j <= m; j++) { J.push([]); for (let i = 0; i < n; i++) J[j].push(1 + (rnd() - 0.5) * 0.24); }
+    const P = (j, i) => {
+      if (j === 0) return [x, -sink, z]; if (j === m) return [x, h, z];
+      const f = -90 + (180 * j) / m, t = (360 * i) / n + yaw, k = J[j][i % n], sf = Math.sin(f * D), top = sf > 0.4 ? 0.85 : 1;
+      return [x + r * k * Math.cos(f * D) * Math.cos(t * D), cyy + ry * sf * top, z + r * 0.82 * k * Math.cos(f * D) * Math.sin(t * D)];
+    };
+    const base = jitColor(ctx, 0.9, 0.015, 230, 0.07, 25);
+    for (let j = 0; j < m; j++) for (let i = 0; i < n; i++) {
+      const a = P(j, i), b = P(j + 1, i), e = P(j + 1, i + 1), g = P(j, i + 1), c = [x, cyy, z], out = sub(mul(add(add(a, b), add(e, g)), 0.25), c);
+      if (moss && lod <= 3 && j >= m - 2 && rnd() < 0.55) paint(ctx, jitColor(ctx, 0.56, 0.11, 130, 0.06, 14), 0.95); else paint(ctx, "stone", base);
+      if (j === 0) triOut(ctx, a, b, e, out); else if (j === m - 1) triOut(ctx, a, b, g, out); else quadOut(ctx, a, b, e, g, out);
+    }
+  }
+}
+function bouldersCollider(ctx, p) { for (const [x, z, r, h] of p.points ?? []) if (h > 0.25) rbox(ctx, [x, h * 0.42, z], r * 1.6, h * 0.84, r * 1.3); }
+// a split piece along z: a quarter or half round, bark on the arc, pale split faces, end grain on the cuts
+function split(ctx, c, len, R, a0, span, lod) {
+  const K = lod <= 2 ? 4 : 2, poly = [[0, 0]];
+  for (let k = 0; k <= K; k++) { const a = (a0 + (span * k) / K) * D; poly.push([R * Math.cos(a), R * Math.sin(a)]); }
+  let cx = 0, cy = 0; for (const [u, v] of poly) { cx += u / poly.length; cy += v / poly.length; }
+  const W = ([u, v], zz) => add(c, [u - cx, v - cy, zz]);
+  for (let i = 0; i < poly.length; i++) {
+    const a = poly[i], b = poly[(i + 1) % poly.length], barkFace = i > 0 && i < poly.length - 1;
+    paint(ctx, barkFace ? "bark" : "wood", barkFace ? undefined : "oklch(0.9 0.05 75)");
+    quadOut(ctx, W(a, -len / 2), W(b, -len / 2), W(b, len / 2), W(a, len / 2), [(a[0] + b[0]) / 2 - cx, (a[1] + b[1]) / 2 - cy, 0]);
+  }
+  paint(ctx, ENDGRAIN, 0.9);
+  for (const s of [-1, 1]) for (let i = 1; i < poly.length - 1; i++) triOut(ctx, W(poly[0], (s * len) / 2), W(poly[i], (s * len) / 2), W(poly[i + 1], (s * len) / 2), [0, 0, s]);
+}
+function firewood(ctx, p, lod) {
+  const rnd = () => ctx.random(), W = p.w ?? 1.5, rows = lod <= 2 ? 4 : 3;
+  if (lod >= 4) { paint(ctx, "bark"); box(ctx, 0, 0, 0, W, 0.75, 0.5); }
+  else {
+    paint(ctx, "bark"); for (const z of [-0.15, 0.15]) cyl(ctx, [-W / 2, 0.045, z], [W / 2, 0.045, z], 0.045, 0.042, 5, 3);
+    for (let k = 0; k < rows; k++) {
+      const cnt = 7 - k, step = (W - 0.2) / 7;
+      for (let i = 0; i < cnt; i++) {
+        const x = (i - (cnt - 1) / 2) * step + (rnd() - 0.5) * 0.03, y = 0.2 + k * 0.17 + (rnd() - 0.5) * 0.02, half = rnd() < 0.35;
+        split(ctx, [x, y, (rnd() - 0.5) * 0.04], 0.48 + rnd() * 0.06, 0.12 + rnd() * 0.02, rnd() * 360, half ? 180 : 90, lod);
+      }
+    }
+    paint(ctx, "bark"); for (const sx of [-1, 1]) rbox(ctx, [sx * (W / 2 + 0.05), 0.42, 0], 0.06, 0.95, 0.06, 0, 0, sx * -3);
+    if (lod <= 2) { paint(ctx, "greywood"); rbox(ctx, [0, 0.95, 0.02], W + 0.25, 0.03, 0.62, 0, 6, 0); } // a weathered board keeps the rain off
+  }
+  const [bx, bz] = p.block ?? [1.25, -0.45];
+  withXF([bx, 0, bz], 15, () => {
+    const n = lod <= 2 ? 10 : 6, H = 0.46;
+    paint(ctx, "bark"); cyl(ctx, [0, -0.02, 0], [0, H, 0], 0.34, 0.31, n, 0);
+    const top = (f, i) => { const t = (i / n) * 2 * Math.PI; return [0.31 * f * Math.cos(t), H, 0.31 * f * Math.sin(t)]; };
+    for (const [a, b, col] of lod <= 2 ? [[0, 0.25, HEART], [0.25, 0.5, ENDGRAIN], [0.5, 0.55, RINGLINE], [0.55, 0.86, ENDGRAIN], [0.86, 1, BARKRIM]] : [[0, 1, ENDGRAIN]]) {
+      paint(ctx, col, 0.9);
+      for (let i = 0; i < n; i++) { if (a === 0) triOut(ctx, [0, H, 0], top(b, i), top(b, i + 1), [0, 1, 0]); else quadOut(ctx, top(a, i), top(b, i), top(b, i + 1), top(a, i + 1), [0, 1, 0]); }
+    }
+    if (lod >= 4) return;
+    metal(ctx, "oklch(0.6 0.01 250)", 0.75, 0.35); rbox(ctx, [0.02, H + 0.02, 0.02], 0.045, 0.1, 0.19, 0, 12, 0); // the bit sunk in the grain
+    metal(ctx, "oklch(0.3 0.01 250)", 0.6, 0.5); rbox(ctx, [0.02, H + 0.07, 0.1], 0.05, 0.05, 0.07, 0, 12, 0);
+    paint(ctx, "oklch(0.72 0.09 70)", 0.6); cyl(ctx, [0.02, H + 0.06, 0.1], [0.02, H + 0.5, 0.58], 0.022, 0.019, 6, 1);
+    if (lod <= 2) {
+      split(ctx, [-0.46, 0.2, 0.12], 0.46, 0.12, 250, 90, lod); // one split leaning on the block
+      paint(ctx, ENDGRAIN, 0.9); for (let i = 0; i < 9; i++) { const a = rnd() * 6.283, d = 0.4 + rnd() * 0.45; rbox(ctx, [Math.cos(a) * d, 0.012, Math.sin(a) * d], 0.07 + rnd() * 0.05, 0.02, 0.035, rnd() * 180, 0, rnd() * 20); }
+    }
+  });
+}
+function firewoodCollider(ctx, p) {
+  const W = p.w ?? 1.5, [bx, bz] = p.block ?? [1.25, -0.45];
+  rbox(ctx, [0, 0.47, 0], W + 0.2, 0.94, 0.6);
+  cyl(ctx, [bx, 0, bz], [bx, 0.46, bz], 0.34, 0.31, 6, 3);
+}
+function roast(ctx, p, lod) {
+  if (lod >= 4) return;
+  const rnd = () => ctx.random();
+  for (const [th, food = "mallow"] of p.sticks ?? []) {
+    const c = Math.cos(th * D), s = Math.sin(th * D), rb = p.base ?? 1.95, base = [rb * c, -0.05, rb * s], tip = [0.42 * c, 0.8, 0.42 * s];
+    const mid = add(mul(add(base, tip), 0.5), [0, 0.06, 0]), dir = norm(sub(tip, mid)), side = [-s, 0, c];
+    paint(ctx, "oklch(0.62 0.06 70)", 0.8); cyl(ctx, base, mid, 0.017, 0.014, 5, 0); cyl(ctx, mid, tip, 0.014, 0.009, 5, 1);
+    if (lod <= 2) { const f = add(mid, mul(sub(tip, mid), 0.55)); cyl(ctx, f, add(add(f, mul(dir, 0.13)), mul(side, 0.06)), 0.008, 0.005, 4, 1); paint(ctx, "stone"); blob(ctx, add(base, [0, 0.05, 0]), 0.1, 0.07, 0.09, 6, 2, rnd() * 60); }
+    if (food === "sausage") {
+      const a = sub(tip, mul(dir, 0.16)), b = sub(tip, mul(dir, 0.03));
+      paint(ctx, "oklch(0.48 0.13 35)", 0.45); cyl(ctx, a, b, 0.026, 0.026, 8, 0); blob(ctx, a, 0.026, 0.026, 0.026, 6, 3); blob(ctx, b, 0.026, 0.026, 0.026, 6, 3);
+      if (lod <= 2) { paint(ctx, "oklch(0.3 0.06 40)", 0.6); for (let k = 1; k <= 3; k++) { const q = add(a, mul(sub(b, a), k / 4)); cyl(ctx, sub(q, mul(dir, 0.004)), add(q, mul(dir, 0.004)), 0.0275, 0.0275, 8, 0); } }
+    } else {
+      const toasted = food === "toasted";
+      for (let k = 0; k < (food === "mallows" ? 2 : 1); k++) {
+        const q = sub(tip, mul(dir, 0.05 + k * 0.06));
+        paint(ctx, toasted ? "oklch(0.64 0.11 62)" : "oklch(0.97 0.012 85)", 0.7); cyl(ctx, sub(q, mul(dir, 0.024)), add(q, mul(dir, 0.024)), 0.026, 0.026, 8, 3);
+        if (toasted && lod <= 2) { paint(ctx, "oklch(0.4 0.07 50)", 0.8); cyl(ctx, add(q, mul(dir, 0.024)), add(q, mul(dir, 0.028)), 0.024, 0.018, 8, 1); }
+      }
+    }
+  }
+}
+function kettle(ctx, p, lod) {
+  const n = lod <= 2 ? 14 : 8, ENAMEL = p.color ?? "oklch(0.66 0.08 192)";
+  paint(ctx, "stone", "oklch(0.9 0.012 80)"); blob(ctx, [0, 0.03, 0], 0.3, 0.07, 0.24, lod <= 2 ? 8 : 6, 3, 17);
+  if (lod >= 4) { metal(ctx, ENAMEL, 0.1, 0.35); cyl(ctx, [0, 0.09, 0], [0, 0.28, 0], 0.12, 0.08, 6, 1); return; }
+  const y0 = 0.09, prof = [[0, 0.1], [0.02, 0.115], [0.07, 0.125], [0.12, 0.115], [0.16, 0.09], [0.175, 0.07]];
+  metal(ctx, ENAMEL, 0.1, 0.32);
+  for (let i = 0; i < prof.length - 1; i++) cyl(ctx, [0, y0 + prof[i][0], 0], [0, y0 + prof[i + 1][0], 0], prof[i][1], prof[i + 1][1], n, i === 0 ? 2 : 0);
+  metal(ctx, "oklch(0.95 0.01 90)", 0.1, 0.35); cyl(ctx, [0, y0 + 0.175, 0], [0, y0 + 0.19, 0], 0.07, 0.05, n, 1); // cream lid
+  metal(ctx, "oklch(0.25 0.01 250)", 0.3, 0.5); cyl(ctx, [0, y0 + 0.19, 0], [0, y0 + 0.215, 0], 0.012, 0.018, 6, 1); cyl(ctx, [0, y0 - 0.005, 0], [0, y0 + 0.01, 0], 0.095, 0.1, n, 2);
+  metal(ctx, ENAMEL, 0.1, 0.32); cyl(ctx, [0.1, y0 + 0.05, 0], [0.2, y0 + 0.16, 0], 0.024, 0.011, 7, 1);
+  metal(ctx, "oklch(0.3 0.01 250)", 0.7, 0.4);
+  let prev = [-0.07, y0 + 0.17, 0]; for (let i = 1; i <= 6; i++) { const t = (i / 6) * Math.PI, q = [-0.07 * Math.cos(t), y0 + 0.17 + 0.12 * Math.sin(t), 0]; cyl(ctx, prev, q, 0.007, 0.007, 4, 0); prev = q; }
+  if (lod <= 2) { metal(ctx, "oklch(0.72 0.02 230)", 0.6, 0.4); cyl(ctx, [0.2, 0.06, 0.14], [0.2, 0.15, 0.14], 0.04, 0.042, 8, 2); cyl(ctx, [0.2, 0.07, 0.14], [0.2, 0.074, 0.14], 0.043, 0.043, 8, 0); } // a tin mug beside it
+}
+const LEAVES = ["oklch(0.7 0.14 70)", "oklch(0.58 0.15 42)", "oklch(0.78 0.13 92)", "oklch(0.5 0.08 55)", "oklch(0.63 0.13 30)"];
+function verge(ctx, p, lod) {
+  if (lod >= 4) return;
+  const rnd = () => ctx.random(), f = lod <= 2 ? 1 : 0.45, rIn = p.rIn ?? 3, rOut = p.rOut ?? 4.8, gaps = p.gaps ?? [], avoid = p.avoid ?? [];
+  const blocked = (x, z, th, forLeaf) => (!forLeaf && gaps.some(([a, b]) => th >= a && th <= b)) || avoid.some(([ax, az, ar, leafOk]) => (!forLeaf || !leafOk) && Math.hypot(x - ax, z - az) < ar);
+  const spot = (a, b, forLeaf) => { for (let t = 0; t < 8; t++) { const th = rnd() * 360, u = rnd(), r = a + (b - a) * (forLeaf ? Math.sqrt(u) : 0.5 + (u + rnd() - 1) * 0.5), x = r * Math.cos(th * D), z = r * Math.sin(th * D); if (!blocked(x, z, th, forLeaf)) return [x, z, th]; } return null; };
+  ctx.albedo(null); ctx.metalness(0); ctx.emissive(null);
+  for (let k = 0; k < (p.tufts ?? 110) * f; k++) {
+    const s = spot(rIn, rOut); if (!s) continue; const [x, z, th] = s, nb = lod <= 2 ? 7 : 4, big = 0.7 + rnd() * 0.6;
+    for (let b = 0; b < nb; b++) {
+      const a = rnd() * 6.283, o = rnd() * 0.06, bx = x + Math.cos(a) * o, bz = z + Math.sin(a) * o, h = (0.14 + rnd() * 0.16) * big;
+      const la = a + (rnd() - 0.5) * 0.8, lean = 0.25 + rnd() * 0.3, pw = [-Math.sin(la) * 0.018, 0, Math.cos(la) * 0.018];
+      ctx.color(jitColor(ctx, 0.6, 0.13, 128, 0.12, 22)); ctx.roughness(0.9);
+      T(ctx, [bx - pw[0], 0, bz - pw[2]], [bx + pw[0], 0, bz + pw[2]], [bx + Math.cos(la) * h * lean, h, bz + Math.sin(la) * h * lean]);
+    }
+  }
+  for (let k = 0; k < (p.clover ?? 45) * f; k++) {
+    const s = spot(rIn - 0.2, rOut); if (!s) continue; const [x, z] = s, nt = 3 + Math.floor(rnd() * 4);
+    for (let t = 0; t < nt; t++) {
+      const a = rnd() * 6.283, o = rnd() * 0.13, cx = x + Math.cos(a) * o, cz = z + Math.sin(a) * o, y = 0.03 + rnd() * 0.035, rot0 = rnd() * 6.283;
+      ctx.color(jitColor(ctx, 0.58, 0.13, 142, 0.06, 10)); ctx.roughness(0.8);
+      for (let l = 0; l < 3; l++) {
+        const la = rot0 + (l * 2 * Math.PI) / 3, d = [Math.cos(la), 0, Math.sin(la)], q = [-d[2], 0, d[0]], L = 0.032;
+        const c0 = [cx, y, cz], m = add(c0, mul(d, L * 0.55)), tp = add(c0, add(mul(d, L), [0, 0.006, 0]));
+        triOut(ctx, c0, add(m, mul(q, L * 0.42)), tp, [0, 1, 0]); triOut(ctx, c0, tp, add(m, mul(q, -L * 0.42)), [0, 1, 0]);
+      }
+    }
+    if (lod <= 2 && rnd() < 0.35) { ctx.color("oklch(0.97 0.02 100)"); ctx.roughness(0.8); blob(ctx, [x, 0.1, z], 0.02, 0.018, 0.02, 5, 2); ctx.color("oklch(0.55 0.1 135)"); cyl(ctx, [x, 0, z], [x, 0.09, z], 0.004, 0.004, 3, 0); }
+  }
+  for (let k = 0; k < (p.leaves ?? 160) * f; k++) {
+    const s = spot(p.leafIn ?? 1.1, p.leafOut ?? 6.2, true); if (!s) continue; const [x, z] = s, a = rnd() * 6.283, L = 0.035 + rnd() * 0.025, w = L * 0.5;
+    const d = [Math.cos(a), 0, Math.sin(a)], q = [-d[2], 0, d[0]], c0 = [x, 0.012, z], lift = rnd() * 0.012;
+    ctx.color(LEAVES[Math.floor(rnd() * LEAVES.length)]); ctx.roughness(0.85);
+    const A = add(c0, add(mul(d, -L), [0, lift, 0])), Bp = add(c0, mul(q, w)), Cp = add(c0, add(mul(d, L), [0, lift * 0.5, 0])), Dp = add(c0, mul(q, -w));
+    triOut(ctx, A, Bp, Cp, [0, 1, 0]); triOut(ctx, A, Cp, Dp, [0, 1, 0]);
+  }
+}
+const B = { seatlog, boulders, firewood, roast, kettle, verge, dock, boat, fishspot, lilies, reeds, camp, tent, vegbed, flowerbed, herbspiral, fence, birdbath, wheelbarrow, lantern, stones, bench: (ctx, p, lod) => bench(ctx, lod, p.w ?? 1.5) };
 const C = {
+  seatlog: seatlogCollider, boulders: bouldersCollider, firewood: firewoodCollider, kettle: (ctx) => rbox(ctx, [0, 0.12, 0], 0.55, 0.24, 0.45),
   dock: dockCollider, boat: boatCollider, camp: campCollider, tent: tentCollider, vegbed: vegbedCollider, fence: fenceCollider,
   bench: (ctx, p) => rbox(ctx, [0, 0.45, 0.05], p.w ?? 1.5, 0.9, 0.5),
   birdbath: (ctx) => cyl(ctx, [0, 0, 0], [0, 0.9, 0], 0.3, 0.3, 6, 3),
