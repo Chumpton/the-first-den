@@ -78,10 +78,10 @@ function pier(ctx, p, lod) {
     const bx = 1.75, bz = -L - 0.55;
     paint(ctx, 'walnut', 'oklch(0.62 0.05 60)', 0.9); lathe(ctx, [[0.14, 0.45], [0.18, 0.75], [0.16, 0.75], [0.12, 0.5]], 10, bx, bz);
     paint(ctx, null, IRON, 0.5, 0.6); lathe(ctx, [[0.155, 0.52], [0.158, 0.55], [0], [0]].slice(0, 2).map(([a, b]) => [a, b]), 10, bx, bz);
-    lathe(ctx, [[0.172, 0.68], [0.176, 0.71]], 10, bx, bz);
+    lathe(ctx, [[0.168, 0.64], [0.171, 0.67]], 10, bx, bz);
     for (let s = 0; s < 6; s++) { const a0 = Math.PI * s / 6, a1 = Math.PI * (s + 1) / 6; beam(ctx, [bx + Math.cos(a0) * 0.18, 0.74 + Math.sin(a0) * 0.2, bz], [bx + Math.cos(a1) * 0.18, 0.74 + Math.sin(a1) * 0.2, bz], 0.012, 0.012); }
-    ctx.albedo(null); ctx.color('oklch(0.62 0.07 195)'); ctx.roughness(0.1); prism(ctx, ngon(10, 0.155, bx, bz), 0.68, 0.69);
-    ctx.color('oklch(0.72 0.08 120)'); ctx.roughness(0.4); T(ctx, [bx - 0.02, 0.69, bz], [bx + 0.05, 0.84, bz - 0.04], [bx + 0.07, 0.83, bz + 0.05], [bx, 0.6, bz]);
+    ctx.albedo(null); ctx.color('oklch(0.62 0.07 195)'); ctx.roughness(0.1); prism(ctx, ngon(10, 0.158, bx, bz), 0.7, 0.71);
+    ctx.color('oklch(0.72 0.08 120)'); ctx.roughness(0.4); T(ctx, [bx - 0.02, 0.71, bz], [bx + 0.05, 0.86, bz - 0.04], [bx + 0.07, 0.85, bz + 0.05], [bx, 0.6, bz]);
     // the rod, leaning on the left lantern post, its line trailing into the water
     const bt = [-1.95, 0.46, -L - 0.95], lp = [-TW + 0.28, 1.75, zT + 0.28], d = [lp[0] - bt[0], lp[1] - bt[1], lp[2] - bt[2]], dl = Math.hypot(...d), u = d.map((v) => v / dl);
     const at = (s) => [bt[0] + u[0] * s, bt[1] + u[1] * s, bt[2] + u[2] * s], tip = at(2.9);

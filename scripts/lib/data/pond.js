@@ -20,7 +20,7 @@ export const POND = {
   seedsOn: [1, 3, 5, 7],                            // pads holding a glowing seed
   seedRespawn: 25,
   islet: { x: -7.96, y: 0, z: -78.68 },
-  pouch: { local: { x: -1.15, y: 0.5, z: 0.35 }, seeds: 5 },
+  pouch: { local: { x: -1.15, y: 0.55, z: 0.35 }, seeds: 5 },
   sfx: {
     cast: S + 'sfx-fishing-rod-whip-line-cast.mp3',
     plop: S + 'sfx-small-fish-plop-water-splash.mp3',
