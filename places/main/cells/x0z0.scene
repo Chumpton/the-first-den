@@ -1,4 +1,11 @@
 # spawn-scene v2 yaml x0z0
+castle-keep:
+  feetPosition: {x: 4, y: 23.55, z: 1}
+  id: castle-keep
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {height: 25, kind: cylinder, radialSegments: 24, radiusBottom: 7, radiusTop: 7}
+  tags: [castle]
 den-life-butterflies:
   overrides:
     feetPosition: {x: 7.5, y: {terrain: 0}, z: -11}
