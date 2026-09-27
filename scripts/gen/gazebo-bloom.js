@@ -11,7 +11,7 @@ const ang = (k) => k * Math.PI / 3;
 const V = (r, k, y = 0) => [Math.cos(ang(k)) * r, y, Math.sin(ang(k)) * r];
 const lerp = (a, b, t) => a.map((v, i) => v + (b[i] - v) * t);
 const WIST = [1, 2], ROSES = [0, 3, 4, 5], SWAG = [0, 3, 5];
-export const URNS = [[1.1, -2.3], [-1.1, -2.3]];
+export const URNS = [[1.4, -2.3], [-1.4, -2.3]];
 function helix(k, turns, r, y0, y1, n, ph) {
   const [px, , pz] = V(R - 0.08, k), out = [];
   for (let i = 0; i <= n; i++) { const t = i / n, a = ph + t * turns * Math.PI * 2; out.push([px + Math.cos(a) * r, y0 + (y1 - y0) * t, pz + Math.sin(a) * r]); }
