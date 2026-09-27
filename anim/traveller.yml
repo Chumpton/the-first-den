@@ -1,0 +1,57 @@
+# Road travellers' clips (scripts/road-travellers.js plays them on channel gait / wheels).
+walk:
+  duration: 1.1
+  tracks:
+    legL: { pitch: [24, 0, -24, 0, 24] }
+    legR: { pitch: [-24, 0, 24, 0, -24] }
+    armL: { pitch: [-16, 0, 16, 0, -16] }
+    armR: { pitch: [16, 0, -16, 0, 16] }
+    root: { y: [-0.05, 0, -0.05, 0, -0.05], roll: [1.2, 0, -1.2, 0, 1.2] }
+    head: { pitch: [1, -1, 1, -1, 1] }
+stand:
+  duration: 3.5
+  tracks:
+    legL: { pitch: [0, 0] }
+    legR: { pitch: [0, 0] }
+    armL: { pitch: [0, 2, 0] }
+    armR: { pitch: [0, 2, 0] }
+    root: { y: [0, 0.008, 0] }
+    head: { yaw: [0, 8, 0, -6, 0] }
+greet:
+  duration: 1.5
+  tracks:
+    head: { pitch: [0, -20, 0, -14, 0] }
+    armR: { pitch: [0, 100, 100, 100, 0], roll: [0, 12, -12, 12, 0] }
+    legL: { pitch: [0, 0] }
+    legR: { pitch: [0, 0] }
+    root: { y: [0, 0] }
+horse-walk:
+  duration: 0.9
+  tracks:
+    legFL: { pitch: [22, 0, -22, 0, 22] }
+    legBL: { pitch: [0, -22, 0, 22, 0] }
+    legFR: { pitch: [-22, 0, 22, 0, -22] }
+    legBR: { pitch: [0, 22, 0, -22, 0] }
+    neck: { pitch: [3, -3, 3, -3, 3] }
+    head: { pitch: [-2, 2, -2, 2, -2] }
+    tail: { yaw: [-7, 7, -7] }
+    root: { y: [-0.02, 0, -0.02, 0, -0.02], roll: [1, 0, -1, 0, 1] }
+horse-stand:
+  duration: 4
+  tracks:
+    legFL: { pitch: [0, 0] }
+    legBL: { pitch: [0, 0] }
+    legFR: { pitch: [0, 0] }
+    legBR: { pitch: [0, 0] }
+    neck: { pitch: [-3, 4, -3] }
+    head: { pitch: [0, -4, 0], yaw: [0, 6, 0] }
+    tail: { yaw: [-12, 12, -4, 10, -12] }
+    root: { y: [0, 0] }
+wheels:
+  duration: 6.36
+  tracks:
+    wFL: { pitch: [0, -90, -180, -270, -360, -450, -540, -630, -720, -810, -900, -990, -1080, -1170, -1260, -1350, -1440] }
+    wFR: { pitch: [0, -90, -180, -270, -360, -450, -540, -630, -720, -810, -900, -990, -1080, -1170, -1260, -1350, -1440] }
+    wBL: { pitch: [0, -90, -180, -270, -360, -450, -540, -630, -720, -810, -900, -990, -1080] }
+    wBR: { pitch: [0, -90, -180, -270, -360, -450, -540, -630, -720, -810, -900, -990, -1080] }
+    driver: { roll: [1.5, -1.5, 1.5, -1.5, 1.5, -1.5, 1.5] }

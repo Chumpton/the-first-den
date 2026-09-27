@@ -1,0 +1,30 @@
+{
+  "lane": 1.2, "near": 250, "restMin": 2, "restMax": 6, "junctionTurn": 0.5,
+  "nodRadius": 4, "nodMs": 1500, "nodCooldownMs": 12000,
+  "kinds": {
+    "walker": { "speed": 1.3, "script": "scripts/gen/traveller-walker.js", "gait": "walk", "stand": "stand", "greet": "greet" },
+    "rider": { "speed": 2.2, "script": "scripts/gen/traveller-rider.js", "gait": "horse-walk", "stand": "horse-stand" },
+    "caravan": { "speed": 1.6, "script": "scripts/gen/traveller-caravan.js", "gait": "horse-walk", "gaitSpeed": 0.75, "stand": "horse-stand", "wheels": "wheels",
+      "audio": { "clip": "/cdn/moodboard-lowpoly-cozy/sfx-horse-cart-wheels-and-hooves-loop.mp3", "gain": 0.12, "loop": true, "spatial": true, "maxDistance": 25 } }
+  },
+  "roster": [
+    { "id": "traveller-merchant", "kind": "walker", "road": "east", "s": 45, "dir": 1,
+      "params": { "body": "oklch(0.62 0.07 195)", "accent": "oklch(0.66 0.1 70)", "trousers": "oklch(0.38 0.02 250)", "hair": "oklch(0.36 0.05 50)", "hat": true, "hatCol": "oklch(0.4 0.05 50)", "pack": "oklch(0.58 0.09 62)" } },
+    { "id": "traveller-pilgrim-oat", "kind": "walker", "road": "west", "s": 260, "dir": 1,
+      "params": { "robe": true, "body": "oklch(0.86 0.035 85)", "accent": "oklch(0.62 0.07 195)", "hood": true, "staff": true, "skin": "oklch(0.7 0.07 50)" } },
+    { "id": "traveller-pilgrim-walnut", "kind": "walker", "road": "east", "s": 420, "dir": -1,
+      "params": { "robe": true, "body": "oklch(0.45 0.05 50)", "accent": "oklch(0.7 0.06 130)", "hood": true, "hoodCol": "oklch(0.4 0.05 50)", "staff": true } },
+    { "id": "traveller-child", "kind": "walker", "road": "west", "s": 95, "dir": -1, "scale": 0.72, "gaitMul": 1.35,
+      "params": { "body": "oklch(0.7 0.08 130)", "accent": "oklch(0.55 0.1 40)", "trousers": "oklch(0.5 0.05 60)", "hair": "oklch(0.55 0.09 60)", "stick": true, "skin": "oklch(0.8 0.06 55)" } },
+    { "id": "traveller-rider-bay", "kind": "rider", "road": "west", "s": 70, "dir": -1,
+      "params": { "coat": "bay", "blanket": "oklch(0.62 0.07 195)", "body": "oklch(0.86 0.035 85)", "accent": "oklch(0.45 0.05 50)", "cape": "oklch(0.5 0.07 195)", "hood": true, "hoodCol": "oklch(0.5 0.07 195)" } },
+    { "id": "traveller-rider-grey", "kind": "rider", "road": "east", "s": 700, "dir": 1,
+      "params": { "coat": "grey", "blanket": "oklch(0.58 0.12 35)", "body": "oklch(0.66 0.1 70)", "accent": "oklch(0.36 0.05 50)", "hat": true, "hatCol": "oklch(0.36 0.05 50)", "hair": "oklch(0.3 0.03 50)" } },
+    { "id": "traveller-rider-chestnut", "kind": "rider", "road": "west", "s": 520, "dir": 1,
+      "params": { "coat": "chestnut", "blanket": "oklch(0.7 0.06 130)", "body": "oklch(0.38 0.02 250)", "accent": "oklch(0.66 0.1 70)", "cape": "oklch(0.86 0.035 85)", "hair": "oklch(0.25 0.03 50)" } },
+    { "id": "traveller-caravan-linen", "kind": "caravan", "road": "east", "s": 110, "dir": -1,
+      "params": { "coat": "dun", "body": "oklch(0.7 0.06 130)", "accent": "oklch(0.45 0.05 50)", "hat": true, "hatCol": "oklch(0.62 0.08 65)", "hair": "oklch(0.3 0.03 50)" } },
+    { "id": "traveller-caravan-honey", "kind": "caravan", "road": "west", "s": 820, "dir": -1,
+      "params": { "coat": "bay", "canvas": "oklch(0.88 0.05 70)", "canvas2": "oklch(0.83 0.055 66)", "boards": "oklch(0.52 0.07 195)", "body": "oklch(0.45 0.05 50)", "accent": "oklch(0.66 0.1 70)", "hood": true, "hoodCol": "oklch(0.4 0.05 50)" } }
+  ]
+}
