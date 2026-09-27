@@ -2,7 +2,7 @@
 // A chore stop: at [x, z] where they stand, face [x, z] what they look at, clip what they do, secs how long.
 export default {
   walk: 1.35,            // m/s indoors and out
-  teaSecs: [45, 90],     // seated at the table before getting up
+  teaSecs: [100, 200],     // seated at the table before getting up
   sitSwapSecs: [9, 16],  // how often the seated clip changes
   workSecs: [7, 13],
   choresPerOuting: [2, 3],
