@@ -23,13 +23,6 @@ corn-maze:
   physics: static
   primitive: {kind: scripted, params: {cell: 3, n: 11, seed: 7}, script: scripts/gen/corn-maze.js, seed: 3}
   tags: [maze]
-corral:
-  feetPosition: {x: -45, y: 0.5, z: -65}
-  id: corral
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 26, height: 3, kind: box, width: 24}
-  tags: [blueprint]
 critter-duck-1:
   castShadow: false
   feetPosition: {x: 10.86066101375036, y: 0.02, z: -76}
