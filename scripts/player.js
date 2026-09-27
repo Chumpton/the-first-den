@@ -5,6 +5,7 @@
 // (places/<p>/config.yaml gravity:), so a district that declares its own pulls on you the
 // moment you step in.
 import PLAYER from './lib/data/player.yml'
+import { ROPES } from './lib/data/ropes.js'
 
 // The keys' intent is this machine's alone: onInput writes it, update() reads it, nobody else does —
 // and a value written to state rides the wire and the save on every tick it changes (the intent turns
@@ -51,6 +52,8 @@ export function onInput(ctx, input) {
     } else walk.lastJumpAt = now
   }
   walk.climb = (input.held.jump ? 1 : 0) - (input.held.descend ? 1 : 0)
+  walk.ropeUp = input.held.jump || moveZ > 0.3
+  walk.ropeDown = input.held.descend || moveZ < -0.3
   const speed = walk.flying ? PLAYER.flySpeed : PLAYER.walkSpeed
   walk.moveIntent = {
     x: (facingCos * nx - facingSin * nz) * speed,
@@ -84,6 +87,20 @@ export function update(ctx, dt) {
       ctx.self.velocity = { x: v.x + (intent.x - v.x) * e, y: v.y + (vy - v.y) * e, z: v.z + (intent.z - v.z) * e }
       return
     }
+  }
+  // A rope: stand in reach and hold W or space to climb, S or shift to slide; at the top you step in onto the deck.
+  const p = ctx.self.feetPosition
+  const rope = ROPES.find((r) => Math.hypot(p.x - r.x, p.z - r.z) < 0.9 && p.y < r.top + 0.4 && p.y > r.bottom - 0.6)
+  if (rope && (walk.ropeUp || (!ctx.self.grounded && p.y > rope.bottom + 0.4))) {
+    const atTop = p.y > rope.top + 0.05
+    const vy = walk.ropeUp ? PLAYER.ropeClimb : walk.ropeDown ? -PLAYER.ropeClimb : 0
+    const pull = atTop ? 0 : 5
+    ctx.self.velocity = {
+      x: (rope.x - p.x) * pull + (atTop ? rope.in.x * 2.5 : 0),
+      y: atTop ? Math.min(vy, 0.5) : vy,
+      z: (rope.z - p.z) * pull + (atTop ? rope.in.z * 2.5 : 0),
+    }
+    return
   }
   const along = intent.x * v.x + intent.z * v.z > 0 || (v.x === 0 && v.z === 0 && (intent.x !== 0 || intent.z !== 0))
   const step = (along ? PLAYER.acceleration : PLAYER.deceleration) * dt
