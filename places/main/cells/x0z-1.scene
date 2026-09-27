@@ -1,4 +1,11 @@
 # spawn-scene v2 yaml objects
+blossom-walk:
+  feetPosition: {x: -3, y: 0.5, z: -106}
+  id: blossom-walk
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 10, height: 5, kind: box, width: 18}
+  tags: [blueprint]
 corn-maze:
   feetPosition: {x: -8, y: 0.5, z: -127}
   id: corn-maze
