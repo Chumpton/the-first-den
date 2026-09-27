@@ -11,6 +11,15 @@ bear-lone:
   state: {home: {x: -114.47500609936333, z: 14.023012346984956}, mode: idle, range: 35, scale: 1, sp: bear, until: 0, yaw: 41}
   tags: [fauna-ground, interactable, animal, bear]
   visibleRange: {max: 180}
+bridge-w1:
+  children: [{feetPosition: {x: 0, y: 1.8, z: 0}, id: glow, light: {color: "#ffb35a", distance: 20, intensity: 6, kind: point}}]
+  feetPosition: {x: -145.44, y: 0.5, z: 6.52}
+  id: bridge-w1
+  physics: static
+  primitive: {kind: scripted, params: {length: 9, seed: 2, width: 9}, script: scripts/gen/road-bridge.js}
+  rotation: {lookAt: {x: -155.42840502978572, y: 0.5, z: 6.024336384664074}}
+  tags: [road-bridge]
+  visibleRange: {max: 700}
 critter-rabbit-08:
   behavior: scripts/critter-press.js
   feetPosition: {x: -81.57509740781596, y: 0.7404271103346219, z: -63.2760435357085}
@@ -38,6 +47,30 @@ deer-fence-1-1:
   primitive: {kind: scripted, params: {kind: run, pts: [[0, 0, 0], [0.805, -0.043, 3.3], [1.764, -0.111, 6.559], [2.876, -0.162, 9.769], [4.138, -0.173, 12.923], [5.548, -0.152, 16.013], [7.101, -0.107, 19.034], [8.796, -0.073, 21.978], [10.627, -0.071, 24.839], [12.592, -0.098, 27.611], [14.685, -0.14, 30.286]], style: stone}, script: scripts/gen/deer-fence.js}
   tags: [deer-fence]
   visibleRange: {max: 220}
+hw-west-fence-l-2:
+  castShadow: false
+  feetPosition: {x: -151.18, y: 0.38, z: 11.24}
+  id: hw-west-fence-l-2
+  physics: static
+  primitive: {kind: scripted, params: {runs: [[[0, 0, 0], [-3.04, 0.06, -0.15], [-6.03, 0.11, -0.32], [-9.03, 0.13, -0.49], [-12.02, 0.15, -0.66], [-15.02, 0.18, -0.84], [-18.02, 0.21, -1.01], [-21.01, 0.23, -1.19], [-24.06, 0.23, -1.37], [-27.05, 0.23, -1.57], [-30.05, 0.2, -1.78], [-33.04, 0.16, -1.99], [-36.04, 0.12, -2.2], [-39.03, 0.11, -2.41]]]}, script: scripts/gen/road-rail.js}
+  tags: [highway-fence]
+  visibleRange: {max: 160}
+hw-west-fence-r-2:
+  castShadow: false
+  feetPosition: {x: -150.69, y: 0.62, z: 1.25}
+  id: hw-west-fence-r-2
+  physics: static
+  primitive: {kind: scripted, params: {runs: [[[0, 0, 0], [-2.95, 0.05, -0.14], [-5.95, 0.08, -0.31], [-8.95, 0.11, -0.49], [-11.94, 0.16, -0.66], [-14.93, 0.21, -0.83], [-17.92, 0.22, -1], [-20.92, 0.19, -1.18], [-23.86, 0.16, -1.35], [-26.85, 0.13, -1.56], [-29.85, 0.09, -1.77], [-32.84, 0.03, -1.97], [-35.83, -0.04, -2.18], [-38.82, -0.11, -2.39]]]}, script: scripts/gen/road-rail.js}
+  tags: [highway-fence]
+  visibleRange: {max: 160}
+hw-west-lamps-1:
+  castShadow: false
+  feetPosition: {x: -156.189399140113, y: 0.48765139805654995, z: 10.576681275285386}
+  id: hw-west-lamps-1
+  physics: static
+  primitive: {kind: scripted, params: {lamps: [[0, 0, 0, 0.057, -0.998], [-23.38, 0.24, -10.62, -0.069, 0.998], [-71.1, 0.05, -14.38, -0.097, 0.995], [-95.89, 0.09, -7.57, 0.1, -0.995]]}, script: scripts/gen/road-lamps.js}
+  tags: [highway-lamps]
+  visibleRange: {max: 180}
 river-sound:
   audio: {bus: Ambience, clip: /cdn/moodboard-realistic-gritty/sfx-gentle-forest-river-flowing-over-stones-loop.mp3, gain: 0.5, loop: true, maxDistance: 60, spatial: true}
   feetPosition: {x: -69, y: 0.2, z: 40}
@@ -62,27 +95,3 @@ warden-w:
   physics: none
   state: {center: {x: -72, y: 11.700562860178563, z: -43.5}, name: Warden Willow, tower: w}
   tags: [interactable, npc, warden]
-waylamp-west-1:
-  feetPosition: {x: -79.70018600958838, y: {terrain: 0}, z: 2.0049938206204247}
-  id: waylamp-west-1
-  physics: static
-  primitive: {kind: scripted, params: {hue: 195, kind: lamp}, script: scripts/gen/road-dressing.js}
-  rotation: {yaw: 80}
-  tags: [road-dressing, waylamp, road-west]
-  visibleRange: {max: 200}
-waylamp-west-2:
-  feetPosition: {x: -125.04542961211922, y: {terrain: 0}, z: 7.745228088776609}
-  id: waylamp-west-2
-  physics: static
-  primitive: {kind: scripted, params: {hue: 85, kind: lamp}, script: scripts/gen/road-dressing.js}
-  rotation: {yaw: 305}
-  tags: [road-dressing, waylamp, road-west]
-  visibleRange: {max: 200}
-waylamp-west-3:
-  feetPosition: {x: -169.58764587573077, y: {terrain: 0}, z: -2.4943791726866955}
-  id: waylamp-west-3
-  physics: static
-  primitive: {kind: scripted, params: {hue: 195, kind: lamp}, script: scripts/gen/road-dressing.js}
-  rotation: {yaw: 170}
-  tags: [road-dressing, waylamp, road-west]
-  visibleRange: {max: 200}

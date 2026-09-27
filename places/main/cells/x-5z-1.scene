@@ -1,26 +1,60 @@
 # spawn-scene v2 yaml x-5z-1
-bridge-w1:
-  feetPosition: {x: -697.6, y: 0.5, z: -103.69999999999999}
-  id: bridge-w1
+bridge-w7:
+  children: [{feetPosition: {x: 0, y: 1.8, z: 0}, id: glow, light: {color: "#ffb35a", distance: 20, intensity: 6, kind: point}}]
+  feetPosition: {x: -630.9, y: 0.5, z: -150.03}
+  id: bridge-w7
   physics: static
-  primitive: {kind: scripted, params: {length: 32, seed: 6, width: 6}, script: scripts/gen/road-bridge.js}
-  rotation: {lookAt: {x: -704.1, y: 0.5, z: -116.1}}
+  primitive: {kind: scripted, params: {length: 36, seed: 8, width: 9}, script: scripts/gen/road-bridge.js}
+  rotation: {lookAt: {x: -637.4679893492032, y: 0.5, z: -157.57515193863665}}
   tags: [road-bridge]
   visibleRange: {max: 700}
+bridge-w8:
+  children: []
+  feetPosition: {x: -660.41, y: 0.5, z: -189.72}
+  id: bridge-w8
+  physics: static
+  primitive: {kind: scripted, params: {length: 31, seed: 9, width: 9}, script: scripts/gen/road-bridge.js}
+  rotation: {lookAt: {x: -665.7684479903463, y: 0.5, z: -198.1577422070267}}
+  tags: [road-bridge]
+  visibleRange: {max: 700}
+hw-west-fence-l-6:
+  castShadow: false
+  feetPosition: {x: -581.67, y: 0.62, z: -98.03}
+  id: hw-west-fence-l-6
+  physics: static
+  primitive: {kind: scripted, params: {runs: [[[0, 0, 0], [-2.44, 0.09, -1.75], [-4.97, 0.17, -3.67], [-7.34, 0.21, -5.5], [-9.72, 0.23, -7.34], [-12.2, 0.21, -9.31], [-14.51, 0.17, -11.22], [-16.82, 0.1, -13.14], [-19.13, 0.01, -15.06], [-21.49, -0.06, -17.13], [-23.74, -0.08, -19.11], [-25.99, -0.06, -21.1], [-28.33, 0, -23.24], [-30.51, 0.03, -25.3], [-32.69, 0.02, -27.36], [-34.96, 0, -29.53], [-37.08, -0.03, -31.65], [-39.21, -0.05, -33.78]]]}, script: scripts/gen/road-rail.js}
+  tags: [highway-fence]
+  visibleRange: {max: 160}
+hw-west-fence-l-7:
+  castShadow: false
+  feetPosition: {x: -646.88, y: 0.43, z: -161.67}
+  id: hw-west-fence-l-7
+  physics: static
+  primitive: {kind: scripted, params: {runs: [[[0, 0, 0], [-1.84, 0, -2.38], [-3.75, 0.01, -4.91], [-5.51, -0.01, -7.35], [-7.26, -0.04, -9.78]]]}, script: scripts/gen/road-rail.js}
+  tags: [highway-fence]
+  visibleRange: {max: 160}
+hw-west-fence-r-8:
+  castShadow: false
+  feetPosition: {x: -638.98, y: 0.49, z: -167.8}
+  id: hw-west-fence-r-8
+  physics: static
+  primitive: {kind: scripted, params: {runs: [[[0, 0, 0], [-1.83, -0.02, -2.37], [-3.54, -0.04, -4.62], [-5.29, -0.08, -7.06], [-7.04, -0.12, -9.49]]]}, script: scripts/gen/road-rail.js}
+  tags: [highway-fence]
+  visibleRange: {max: 160}
+hw-west-lamps-3:
+  castShadow: false
+  feetPosition: {x: -587.0860143478363, y: 0.8019275858936237, z: -114.18388834685797}
+  id: hw-west-lamps-3
+  physics: static
+  primitive: {kind: scripted, params: {lamps: [[0, 0, 0, -0.613, 0.79], [-24.1, -0.16, -8.75, 0.687, -0.727], [-107.38, -0.08, -127.16, 0.894, -0.447], [-109.46, -0.03, -152.83, -0.904, 0.427]]}, script: scripts/gen/road-lamps.js}
+  tags: [highway-lamps]
+  visibleRange: {max: 180}
 milestone-west-3:
-  feetPosition: {x: -616.4175438720378, y: {terrain: 0}, z: -66.51422304410666}
+  feetPosition: {x: -586.11, y: {terrain: 0}, z: -115.45}
   id: milestone-west-3
   physics: static
   primitive: {kind: scripted, params: {kind: milestone}, script: scripts/gen/road-dressing.js}
-  rotation: {lookAt: {x: -616.8371836711221, y: 0.5, z: -62.7374648523469}}
+  rotation: {lookAt: {x: -589.9038440088411, y: 0.5, z: -110.54797910685186}}
   tags: [road-dressing, milestone, road-west]
   ui: "<div face=\"front\" offset=\"0.004m\" style=\"width:480px;height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Georgia,serif;color:#4f3828;text-align:center\"><div style=\"font-size:78px\">Hearthmere</div><div style=\"font-size:120px;font-weight:bold\">0.5 km</div></div>"
   visibleRange: {max: 150}
-waylamp-west-11:
-  feetPosition: {x: -614.4076900974756, y: {terrain: 0}, z: -66.49213673889169}
-  id: waylamp-west-11
-  physics: static
-  primitive: {kind: scripted, params: {hue: 85, kind: lamp}, script: scripts/gen/road-dressing.js}
-  rotation: {yaw: 260}
-  tags: [road-dressing, waylamp, road-west]
-  visibleRange: {max: 200}

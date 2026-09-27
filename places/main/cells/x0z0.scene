@@ -185,6 +185,15 @@ bee-9:
   state: {kind: bee}
   tags: [pollinator]
   visibleRange: {max: 45}
+bridge-w0:
+  children: [{feetPosition: {x: 0, y: 1.8, z: 0}, id: glow, light: {color: "#ffb35a", distance: 20, intensity: 6, kind: point}}]
+  feetPosition: {x: -42.5, y: 0.5, z: 9.77}
+  id: bridge-w0
+  physics: static
+  primitive: {kind: scripted, params: {length: 29, seed: 1, width: 9}, script: scripts/gen/road-bridge.js}
+  rotation: {lookAt: {x: -52.4968758772736, y: 0.5, z: 9.57870143927624}}
+  tags: [road-bridge]
+  visibleRange: {max: 700}
 butterfly-0:
   castShadow: false
   feetPosition: {x: 12.4, y: 1.5, z: -51.4}
@@ -3165,6 +3174,46 @@ hw-east-lamps-0:
   primitive: {kind: scripted, params: {lamps: [[0, 0, 0, -0.02, -1], [24.16, -0.08, -0.91, -0.059, -0.998], [47.41, -0.46, -11.87, 0.089, 0.996], [72.28, -0.39, -5.29, -0.129, -0.992]]}, script: scripts/gen/road-lamps.js}
   tags: [highway-lamps]
   visibleRange: {max: 180}
+hw-west-fence-l-0:
+  castShadow: false
+  feetPosition: {x: -13.05, y: 0.52, z: 14.97}
+  id: hw-west-fence-l-0
+  physics: static
+  primitive: {kind: scripted, params: {runs: [[[0, 0, 0], [-3, -0.04, -0.03], [-6, -0.11, -0.06]]]}, script: scripts/gen/road-rail.js}
+  tags: [highway-fence]
+  visibleRange: {max: 160}
+hw-west-fence-l-1:
+  castShadow: false
+  feetPosition: {x: -58.09, y: 0.4, z: 14.47}
+  id: hw-west-fence-l-1
+  physics: static
+  primitive: {kind: scripted, params: {runs: [[[0, 0, 0], [-3, 0, -0.06], [-6, -0.04, -0.12], [-9, -0.03, -0.18], [-12, 0.02, -0.24], [-15, 0.11, -0.3], [-18, 0.2, -0.35], [-21, 0.27, -0.41], [-24, 0.3, -0.47], [-27.05, 0.31, -0.56], [-30.04, 0.32, -0.64], [-33.04, 0.32, -0.73], [-36.04, 0.32, -0.82], [-39.04, 0.31, -0.91], [-42.04, 0.27, -1], [-45.09, 0.21, -1.09], [-48.09, 0.18, -1.21], [-51.09, 0.19, -1.33], [-54.08, 0.22, -1.45], [-57.07, 0.25, -1.56], [-60.07, 0.28, -1.67], [-63.07, 0.31, -1.79], [-66.12, 0.27, -1.91], [-69.11, 0.2, -2.06], [-72.11, 0.12, -2.2], [-75.11, 0.04, -2.34], [-78.11, -0.02, -2.49]]]}, script: scripts/gen/road-rail.js}
+  tags: [highway-fence]
+  visibleRange: {max: 160}
+hw-west-fence-r-0:
+  castShadow: false
+  feetPosition: {x: -18.95, y: 0.41, z: 4.91}
+  id: hw-west-fence-r-0
+  physics: static
+  primitive: {kind: scripted, params: {runs: [[[0, 0, 0], [-3.05, -0.03, -0.01], [-6.05, -0.04, -0.01]]]}, script: scripts/gen/road-rail.js}
+  tags: [highway-fence]
+  visibleRange: {max: 160}
+hw-west-fence-r-1:
+  castShadow: false
+  feetPosition: {x: -57.9, y: 0.47, z: 4.47}
+  id: hw-west-fence-r-1
+  physics: static
+  primitive: {kind: scripted, params: {runs: [[[0, 0, 0], [-3, 0.01, -0.06], [-6, 0, -0.12], [-9, -0.01, -0.18], [-11.99, 0.01, -0.24], [-15, 0.09, -0.3], [-18, 0.2, -0.35], [-21, 0.28, -0.41], [-24, 0.29, -0.47], [-26.94, 0.25, -0.55], [-29.94, 0.21, -0.64], [-32.94, 0.2, -0.73], [-35.94, 0.2, -0.81], [-38.94, 0.19, -0.9], [-41.94, 0.14, -0.99], [-44.88, 0.1, -1.08], [-47.88, 0.1, -1.2], [-50.88, 0.14, -1.32], [-53.88, 0.18, -1.44], [-56.88, 0.19, -1.55], [-59.88, 0.21, -1.67], [-62.88, 0.26, -1.78], [-65.83, 0.3, -1.9], [-68.82, 0.31, -2.05], [-71.82, 0.28, -2.19], [-74.82, 0.23, -2.33], [-77.81, 0.17, -2.48], [-80.8, 0.11, -2.63]]]}, script: scripts/gen/road-rail.js}
+  tags: [highway-fence]
+  visibleRange: {max: 160}
+hw-west-lamps-0:
+  castShadow: false
+  feetPosition: {x: -60.086468853537625, y: 0.4051437965538801, z: 14.028892499744124}
+  id: hw-west-lamps-0
+  physics: static
+  primitive: {kind: scripted, params: {lamps: [[0, 0, 0, 0.02, -1], [-23.77, 0.33, -9.68, -0.029, 1], [-48.07, 0.17, -1.25, 0.04, -0.999], [-71.65, 0.29, -11.44, -0.048, 0.999]]}, script: scripts/gen/road-lamps.js}
+  tags: [highway-lamps]
+  visibleRange: {max: 180}
 lake-dock:
   castShadow: true
   feetPosition: {x: 6, y: 0, z: -50}
@@ -3755,14 +3804,6 @@ warden-tower-s:
   receiveShadow: true
   rotation: {yaw: 66.644435140714}
   tags: [grounds, warden-tower]
-waylamp-west-0:
-  feetPosition: {x: -34.756581392948995, y: {terrain: 0}, z: 4.2571740514523935}
-  id: waylamp-west-0
-  physics: static
-  primitive: {kind: scripted, params: {hue: 195, kind: lamp}, script: scripts/gen/road-dressing.js}
-  rotation: {yaw: 215}
-  tags: [road-dressing, waylamp, road-west]
-  visibleRange: {max: 200}
 wizard-portal-down:
   behavior: scripts/wizard-portal.js
   feetPosition: {x: 33.52, y: 18.098517805895344, z: -18.78}

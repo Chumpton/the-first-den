@@ -1,10 +1,20 @@
 # spawn-scene v2 yaml x-2z0
-bridge-w0:
-  feetPosition: {x: -277.7, y: 0.5, z: -14.15}
-  id: bridge-w0
+bridge-w2:
+  children: []
+  feetPosition: {x: -204.32, y: 0.5, z: 2.77}
+  id: bridge-w2
   physics: static
-  primitive: {kind: scripted, params: {length: 25.95, seed: 5, width: 6}, script: scripts/gen/road-bridge.js}
-  rotation: {lookAt: {x: -288.5, y: 0.5, z: -16.1}}
+  primitive: {kind: scripted, params: {length: 23, seed: 3, width: 9}, script: scripts/gen/road-bridge.js}
+  rotation: {lookAt: {x: -214.289412567238, y: 0.5, z: 2.000814417904766}}
+  tags: [road-bridge]
+  visibleRange: {max: 700}
+bridge-w3:
+  children: [{feetPosition: {x: 0, y: 1.8, z: 0}, id: glow, light: {color: "#ffb35a", distance: 20, intensity: 6, kind: point}}]
+  feetPosition: {x: -296.29, y: 0.5, z: -6.96}
+  id: bridge-w3
+  physics: static
+  primitive: {kind: scripted, params: {length: 72, seed: 4, width: 9}, script: scripts/gen/road-bridge.js}
+  rotation: {lookAt: {x: -306.21160599245104, y: 0.5, z: -8.237137404968943}}
   tags: [road-bridge]
   visibleRange: {max: 700}
 fox-road-west:
@@ -19,20 +29,28 @@ fox-road-west:
   state: {home: {x: -200, z: 8}, mode: idle, range: 15, scale: 1, sp: fox, until: 0, yaw: -68}
   tags: [fauna-ground, interactable, animal, fox]
   visibleRange: {max: 180}
+hw-west-fence-l-3:
+  castShadow: false
+  feetPosition: {x: -217.23, y: 0.48, z: 6.76}
+  id: hw-west-fence-l-3
+  physics: static
+  primitive: {kind: scripted, params: {runs: [[[0, 0, 0], [-2.99, 0.1, -0.27], [-5.97, 0.17, -0.54], [-9, 0.19, -0.82], [-11.98, 0.21, -1.11], [-14.97, 0.22, -1.4], [-17.95, 0.23, -1.69], [-20.94, 0.24, -1.98], [-23.93, 0.23, -2.27], [-26.92, 0.2, -2.56], [-29.91, 0.16, -2.86], [-32.9, 0.12, -3.16], [-35.88, 0.1, -3.46], [-38.87, 0.1, -3.75], [-41.93, 0.09, -4.11]]]}, script: scripts/gen/road-rail.js}
+  tags: [highway-fence]
+  visibleRange: {max: 160}
+hw-west-fence-r-3:
+  castShadow: false
+  feetPosition: {x: -216.33, y: 0.39, z: -3.2}
+  id: hw-west-fence-r-3
+  physics: static
+  primitive: {kind: scripted, params: {runs: [[[0, 0, 0], [-2.99, 0.07, -0.27], [-5.98, 0.14, -0.54], [-8.93, 0.16, -0.81], [-11.92, 0.13, -1.1], [-14.9, 0.08, -1.39], [-17.89, 0.06, -1.68], [-20.87, 0.1, -1.97], [-23.85, 0.18, -2.26], [-26.84, 0.24, -2.56], [-29.82, 0.25, -2.85], [-32.8, 0.23, -3.15], [-35.79, 0.18, -3.45], [-38.77, 0.15, -3.75], [-41.66, 0.13, -4.08]]]}, script: scripts/gen/road-rail.js}
+  tags: [highway-fence]
+  visibleRange: {max: 160}
 milestone-west-1:
-  feetPosition: {x: -220.71743667970833, y: {terrain: 0}, z: -7.617789682959357}
+  feetPosition: {x: -211.31, y: {terrain: 0}, z: -4}
   id: milestone-west-1
   physics: static
   primitive: {kind: scripted, params: {kind: milestone}, script: scripts/gen/road-dressing.js}
-  rotation: {lookAt: {x: -221.403912456956, y: 0.5, z: -3.880310451277632}}
+  rotation: {lookAt: {x: -211.79600815428472, y: 0.5, z: 2.182666027114924}}
   tags: [road-dressing, milestone, road-west]
   ui: "<div face=\"front\" offset=\"0.004m\" style=\"width:480px;height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Georgia,serif;color:#4f3828;text-align:center\"><div style=\"font-size:78px\">Hearthmere</div><div style=\"font-size:120px;font-weight:bold\">0.9 km</div></div>"
   visibleRange: {max: 150}
-waylamp-west-4:
-  feetPosition: {x: -215.24168837464507, y: {terrain: 0}, z: 1.3184388559488291}
-  id: waylamp-west-4
-  physics: static
-  primitive: {kind: scripted, params: {hue: 195, kind: lamp}, script: scripts/gen/road-dressing.js}
-  rotation: {yaw: 35}
-  tags: [road-dressing, waylamp, road-west]
-  visibleRange: {max: 200}

@@ -1,17 +1,1 @@
 # spawn-scene v2 yaml x-6z-1
-bridge-w2:
-  feetPosition: {x: -727.3, y: 0.5, z: -160.4}
-  id: bridge-w2
-  physics: static
-  primitive: {kind: scripted, params: {length: 32, seed: 7, width: 6}, script: scripts/gen/road-bridge.js}
-  rotation: {lookAt: {x: -733.8, y: 0.5, z: -172.8}}
-  tags: [road-bridge]
-  visibleRange: {max: 700}
-waylamp-west-13:
-  feetPosition: {x: -716.2404657945328, y: {terrain: 0}, z: -130.58395954239174}
-  id: waylamp-west-13
-  physics: static
-  primitive: {kind: scripted, params: {hue: 195, kind: lamp}, script: scripts/gen/road-dressing.js}
-  rotation: {yaw: 215}
-  tags: [road-dressing, waylamp, road-west]
-  visibleRange: {max: 200}
