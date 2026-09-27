@@ -1,0 +1,50 @@
+# spawn-scene v2 yaml x-1z1
+wild-mushroom-18:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -182.17, y: 0.393, z: 125.26}
+  id: wild-mushroom-18
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 5, kind: agaric}, script: scripts/gen/wild-mushroom.js, seed: 4}
+  receiveShadow: true
+  rotation: {yaw: 321}
+  state: {kind: agaric, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-19:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -157.56, y: 0.617, z: 159.33}
+  id: wild-mushroom-19
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 3, kind: deceiver}, script: scripts/gen/wild-mushroom.js, seed: 1}
+  receiveShadow: true
+  rotation: {yaw: 65}
+  state: {kind: deceiver, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-24:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -148.1, y: 0.624, z: 99.88}
+  id: wild-mushroom-24
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 3, kind: agaric}, script: scripts/gen/wild-mushroom.js, seed: 1}
+  receiveShadow: true
+  rotation: {yaw: 5}
+  state: {kind: agaric, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-54:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -157.07, y: 0.605, z: 128.22}
+  fx: {script: "fx\npop mote n=2 on=disc(.3).c(.2) life=2.5..4 v=up(.04..0.1)+sdir()*.03 size=.025..0.04 acc=curl(.3)*.15+drag(.6) col=hdr(.55,1.1,1.8) a=0>.3:.6>.7:.5>0 sz=$size r=sprite(soft-disc,add)"}
+  id: wild-mushroom-54
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 2, kind: moon}, script: scripts/gen/wild-mushroom.js, seed: 2}
+  receiveShadow: true
+  rotation: {yaw: 110}
+  state: {kind: moon, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}

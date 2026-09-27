@@ -1,1 +1,14 @@
 # spawn-scene v2 yaml x2z-1
+wild-mushroom-37:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 214.63, y: 0.415, z: -181.99}
+  fx: {script: "fx\npop mote n=2 on=disc(.3).c(.2) life=2.5..4 v=up(.04..0.1)+sdir()*.03 size=.025..0.04 acc=curl(.3)*.15+drag(.6) col=hdr(.55,1.1,1.8) a=0>.3:.6>.7:.5>0 sz=$size r=sprite(soft-disc,add)"}
+  id: wild-mushroom-37
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 3, kind: moon}, script: scripts/gen/wild-mushroom.js, seed: 3}
+  receiveShadow: true
+  rotation: {yaw: 5}
+  state: {kind: moon, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}

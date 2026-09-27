@@ -1,0 +1,25 @@
+# spawn-scene v2 yaml x0z-2
+wild-mushroom-42:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -19.07, y: 0.665, z: -283.15}
+  id: wild-mushroom-42
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 5, kind: agaric}, script: scripts/gen/wild-mushroom.js, seed: 2}
+  receiveShadow: true
+  rotation: {yaw: 280}
+  state: {kind: agaric, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-50:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -30.2, y: 0.74, z: -293.28}
+  id: wild-mushroom-50
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 5, kind: bolete}, script: scripts/gen/wild-mushroom.js, seed: 2}
+  receiveShadow: true
+  rotation: {yaw: 71}
+  state: {kind: bolete, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}

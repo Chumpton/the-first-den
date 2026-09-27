@@ -66,3 +66,51 @@ milestone-east-1:
   tags: [road-dressing, milestone, road-east]
   ui: "<div face=\"front\" offset=\"0.004m\" style=\"width:480px;height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Georgia,serif;color:#4f3828;text-align:center\"><div style=\"font-size:78px\">Lumenvale</div><div style=\"font-size:120px;font-weight:bold\">0.8 km</div></div>"
   visibleRange: {max: 150}
+wild-mushroom-06:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 213.4, y: 0.479, z: 50.23}
+  id: wild-mushroom-06
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 5, kind: deceiver}, script: scripts/gen/wild-mushroom.js, seed: 4}
+  receiveShadow: true
+  rotation: {yaw: 340}
+  state: {kind: deceiver, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-23:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 198.47, y: 0.644, z: 2.81}
+  id: wild-mushroom-23
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 5, kind: chanterelle}, script: scripts/gen/wild-mushroom.js, seed: 3}
+  receiveShadow: true
+  rotation: {yaw: 234}
+  state: {kind: chanterelle, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-29:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 247.03, y: 0.532, z: 22.1}
+  id: wild-mushroom-29
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 5, kind: agaric}, script: scripts/gen/wild-mushroom.js, seed: 2}
+  receiveShadow: true
+  rotation: {yaw: 303}
+  state: {kind: agaric, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-63:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 226.44, y: 0.516, z: -47.2}
+  id: wild-mushroom-63
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 5, kind: deceiver}, script: scripts/gen/wild-mushroom.js, seed: 3}
+  receiveShadow: true
+  rotation: {yaw: 354}
+  state: {kind: deceiver, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}

@@ -54,3 +54,51 @@ milestone-west-1:
   tags: [road-dressing, milestone, road-west]
   ui: "<div face=\"front\" offset=\"0.004m\" style=\"width:480px;height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Georgia,serif;color:#4f3828;text-align:center\"><div style=\"font-size:78px\">Hearthmere</div><div style=\"font-size:120px;font-weight:bold\">0.9 km</div></div>"
   visibleRange: {max: 150}
+wild-mushroom-08:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -199.82, y: 0.698, z: 24.24}
+  id: wild-mushroom-08
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 4, kind: chanterelle}, script: scripts/gen/wild-mushroom.js, seed: 1}
+  receiveShadow: true
+  rotation: {yaw: 59}
+  state: {kind: chanterelle, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-58:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -243.7, y: 0.651, z: 38.48}
+  id: wild-mushroom-58
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 5, kind: agaric}, script: scripts/gen/wild-mushroom.js, seed: 3}
+  receiveShadow: true
+  rotation: {yaw: 14}
+  state: {kind: agaric, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-60:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -272, y: 0.368, z: 62.71}
+  id: wild-mushroom-60
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 3, kind: bolete}, script: scripts/gen/wild-mushroom.js, seed: 3}
+  receiveShadow: true
+  rotation: {yaw: 306}
+  state: {kind: bolete, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-67:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -195.89, y: 0.441, z: -16.69}
+  id: wild-mushroom-67
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 4, kind: agaric}, script: scripts/gen/wild-mushroom.js, seed: 2}
+  receiveShadow: true
+  rotation: {yaw: 356}
+  state: {kind: agaric, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}

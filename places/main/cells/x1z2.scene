@@ -1,0 +1,37 @@
+# spawn-scene v2 yaml x1z2
+wild-mushroom-44:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 151.13, y: 0.431, z: 228.04}
+  id: wild-mushroom-44
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 5, kind: agaric}, script: scripts/gen/wild-mushroom.js, seed: 2}
+  receiveShadow: true
+  rotation: {yaw: 49}
+  state: {kind: agaric, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-48:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 147.29, y: 0.543, z: 204.52}
+  id: wild-mushroom-48
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 4, kind: chanterelle}, script: scripts/gen/wild-mushroom.js, seed: 3}
+  receiveShadow: true
+  rotation: {yaw: 128}
+  state: {kind: chanterelle, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-52:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 78.65, y: 0.781, z: 259.53}
+  id: wild-mushroom-52
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 5, kind: chanterelle}, script: scripts/gen/wild-mushroom.js, seed: 1}
+  receiveShadow: true
+  rotation: {yaw: 334}
+  state: {kind: chanterelle, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}

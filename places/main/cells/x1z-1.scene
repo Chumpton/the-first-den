@@ -33,3 +33,51 @@ critter-squirrel-04:
   state: {kind: squirrel, mode: idle, until: 0}
   tags: [fauna-small, interactable, critter]
   visibleRange: {max: 150}
+wild-mushroom-14:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 71.15, y: 0.574, z: -129.59}
+  id: wild-mushroom-14
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 5, kind: bolete}, script: scripts/gen/wild-mushroom.js, seed: 1}
+  receiveShadow: true
+  rotation: {yaw: 311}
+  state: {kind: bolete, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-21:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 139.85, y: 0.599, z: -125.7}
+  id: wild-mushroom-21
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 5, kind: chanterelle}, script: scripts/gen/wild-mushroom.js, seed: 4}
+  receiveShadow: true
+  rotation: {yaw: 20}
+  state: {kind: chanterelle, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-31:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 132.37, y: 0.541, z: -90.91}
+  id: wild-mushroom-31
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 4, kind: chanterelle}, script: scripts/gen/wild-mushroom.js, seed: 3}
+  receiveShadow: true
+  rotation: {yaw: 318}
+  state: {kind: chanterelle, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-35:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 149.44, y: 0.834, z: -163.07}
+  id: wild-mushroom-35
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 5, kind: bolete}, script: scripts/gen/wild-mushroom.js, seed: 1}
+  receiveShadow: true
+  rotation: {yaw: 338}
+  state: {kind: bolete, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}

@@ -5445,6 +5445,54 @@ warden-tower-s:
   receiveShadow: true
   rotation: {yaw: 66.644435140714}
   tags: [grounds, warden-tower]
+wild-mushroom-39:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -31.43, y: 0.391, z: 36.55}
+  id: wild-mushroom-39
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 2, kind: deceiver}, script: scripts/gen/wild-mushroom.js, seed: 3}
+  receiveShadow: true
+  rotation: {yaw: 139}
+  state: {kind: deceiver, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-41:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -58.25, y: 0.54, z: -12.93}
+  id: wild-mushroom-41
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 3, kind: agaric}, script: scripts/gen/wild-mushroom.js, seed: 3}
+  receiveShadow: true
+  rotation: {yaw: 191}
+  state: {kind: agaric, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-47:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 43.61, y: 0.53, z: 37.74}
+  id: wild-mushroom-47
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 2, kind: deceiver}, script: scripts/gen/wild-mushroom.js, seed: 2}
+  receiveShadow: true
+  rotation: {yaw: 205}
+  state: {kind: deceiver, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-68:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 53.91, y: 0.738, z: -53}
+  id: wild-mushroom-68
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 4, kind: deceiver}, script: scripts/gen/wild-mushroom.js, seed: 2}
+  receiveShadow: true
+  rotation: {yaw: 171}
+  state: {kind: deceiver, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
 wizard-portal-down:
   behavior: scripts/wizard-portal.js
   feetPosition: {x: 33.52, y: 18.098517805895344, z: -18.78}

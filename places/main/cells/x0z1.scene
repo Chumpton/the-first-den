@@ -368,3 +368,87 @@ town-wall-w2:
   physics: static
   primitive: {kind: scripted, params: {h: 1.6, kind: wall, pts: [[-23.5, 5.8, 0.552], [-23.5, 8.7, 0.55]]}, script: scripts/gen/town-alleys.js, seed: 21}
   tags: [town-wall]
+wild-mushroom-01:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 57.81, y: 0.706, z: 172.85}
+  id: wild-mushroom-01
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 2, kind: chanterelle}, script: scripts/gen/wild-mushroom.js, seed: 1}
+  receiveShadow: true
+  rotation: {yaw: 265}
+  state: {kind: chanterelle, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-02:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -42.15, y: 0.485, z: 65.76}
+  id: wild-mushroom-02
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 2, kind: agaric}, script: scripts/gen/wild-mushroom.js, seed: 3}
+  receiveShadow: true
+  rotation: {yaw: 324}
+  state: {kind: agaric, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-07:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 53.47, y: 0.558, z: 114.4}
+  id: wild-mushroom-07
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 2, kind: bolete}, script: scripts/gen/wild-mushroom.js, seed: 2}
+  receiveShadow: true
+  rotation: {yaw: 60}
+  state: {kind: bolete, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-22:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -13.32, y: 0.721, z: 149.35}
+  id: wild-mushroom-22
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 4, kind: chanterelle}, script: scripts/gen/wild-mushroom.js, seed: 4}
+  receiveShadow: true
+  rotation: {yaw: 146}
+  state: {kind: chanterelle, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-27:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -37.88, y: 0.701, z: 157.58}
+  id: wild-mushroom-27
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 2, kind: chanterelle}, script: scripts/gen/wild-mushroom.js, seed: 2}
+  receiveShadow: true
+  rotation: {yaw: 44}
+  state: {kind: chanterelle, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-38:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -55.3, y: 0.362, z: 84.84}
+  id: wild-mushroom-38
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 2, kind: agaric}, script: scripts/gen/wild-mushroom.js, seed: 3}
+  receiveShadow: true
+  rotation: {yaw: 5}
+  state: {kind: agaric, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-66:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: 44.79, y: 0.644, z: 110.81}
+  id: wild-mushroom-66
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 2, kind: bolete}, script: scripts/gen/wild-mushroom.js, seed: 4}
+  receiveShadow: true
+  rotation: {yaw: 201}
+  state: {kind: bolete, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}

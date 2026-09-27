@@ -23,3 +23,39 @@ deer-stag-b:
   state: {home: {x: -70, z: -85}, mode: idle, range: 30, scale: 1, sp: deer, until: 0, yaw: 129}
   tags: [fauna-ground, interactable, animal, deer]
   visibleRange: {max: 180}
+wild-mushroom-34:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -119.94, y: 0.479, z: -123.44}
+  id: wild-mushroom-34
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 2, kind: agaric}, script: scripts/gen/wild-mushroom.js, seed: 2}
+  receiveShadow: true
+  rotation: {yaw: 333}
+  state: {kind: agaric, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-45:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -158.4, y: 0.369, z: -110.24}
+  id: wild-mushroom-45
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 4, kind: deceiver}, script: scripts/gen/wild-mushroom.js, seed: 3}
+  receiveShadow: true
+  rotation: {yaw: 87}
+  state: {kind: deceiver, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
+wild-mushroom-49:
+  behavior: scripts/wild-mushroom.js
+  castShadow: false
+  feetPosition: {x: -92.6, y: 0.856, z: -92.37}
+  id: wild-mushroom-49
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {count: 2, kind: agaric}, script: scripts/gen/wild-mushroom.js, seed: 1}
+  receiveShadow: true
+  rotation: {yaw: 249}
+  state: {kind: agaric, picked: false}
+  tags: [interactable, wild-mushroom]
+  visibleRange: {max: 70, min: 0}
