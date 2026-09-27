@@ -52,6 +52,16 @@ warden-tower-w:
   receiveShadow: true
   rotation: {yaw: -103.66115370690552}
   tags: [grounds, warden-tower]
+warden-w:
+  behavior: [scripts/tower-warden.js]
+  castShadow: true
+  children: [{feetPosition: {x: 0, y: 2.2, z: 0}, id: tag, text: {color: "#bff0d8", content: Warden Willow, size: 0.3}}, {castShadow: true, feetPosition: {x: 0, y: 0, z: 0}, id: cloak, primitive: {kind: scripted, script: scripts/gen/warden-cloak.js}}, {attachment: {bone: RightHand}, castShadow: true, feetPosition: {x: 0, y: 0, z: 0}, id: staff, primitive: {kind: scripted, script: scripts/gen/warden-staff.js}}]
+  feetPosition: {x: -70.4, y: 11.700562860178563, z: -43.5}
+  id: warden-w
+  model: "https://www.spawn.co/magic/character-character-54ug69f6.glb?animations=Idle,Walk,Run"
+  physics: none
+  state: {center: {x: -72, y: 11.700562860178563, z: -43.5}, name: Warden Willow, tower: w}
+  tags: [interactable, npc, warden]
 waylamp-west-1:
   feetPosition: {x: -79.70018600958838, y: {terrain: 0}, z: 2.0049938206204247}
   id: waylamp-west-1
