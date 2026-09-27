@@ -2,6 +2,7 @@ assets:
   authoredClips:
     "anim/bear.yml#sniff": clips/anim-bear-yml-sniff-56575500.json
     "anim/bear.yml#walk": clips/anim-bear-yml-walk-4be54aa1.json
+    "anim/coop-hen.yml#crow": clips/anim-coop-hen-yml-crow-be63b420.json
     "anim/coop-hen.yml#flap": clips/anim-coop-hen-yml-flap-b7a91a34.json
     "anim/coop-hen.yml#idle": clips/anim-coop-hen-yml-idle-6ebead5d.json
     "anim/coop-hen.yml#peck": clips/anim-coop-hen-yml-peck-f34d15be.json
