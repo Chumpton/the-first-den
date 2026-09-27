@@ -18,7 +18,7 @@ function frame(x, y, z, r) {
     p, r,
     box: (ctx, cx, y0, cz, sx, sy, sz, yl = 0) => { const q = p(cx, y0, cz); obox(ctx, q[0], q[1], q[2], sx, sy, sz, r + yl); },
     beam: (ctx, a, b, w, h) => beam(ctx, p(...a), p(...b), w, h),
-    lathe: (ctx, prof, n, cx, cz) => { const q = p(cx, 0, cz); lathe(ctx, prof.map(([rr, yy]) => [rr, yy + y]), n, q[0], q[2]); },
+    lathe: (ctx, prof, n, cx = 0, cz = 0) => { const q = p(cx, 0, cz); lathe(ctx, prof.map(([rr, yy]) => [rr, yy + y]), n, q[0], q[2]); },
     blob: (ctx, cx, cy, cz, rx, ry, rz, n, rnd) => { const q = p(cx, cy, cz); blob(ctx, q[0], q[1], q[2], rx, ry, rz, n, rnd); },
     gem: (ctx, cx, cy, cz, rr, up, dn, n) => { const q = p(cx, cy, cz); gem(ctx, q[0], q[1], q[2], rr, up, dn, n); },
     quad: (ctx, a, b, cc, d) => ctx.quad(...p(...a), ...p(...b), ...p(...cc), ...p(...d)),
