@@ -3029,13 +3029,6 @@ garden-bed-o23:
   state: {crop: null, d: 1.4, gh: false, stage: 0, w: 3, wet: false}
   tags: [interactable, garden-bed]
   visibleRange: {max: 110}
-garden-beds-bp:
-  feetPosition: {x: 58, y: 0.5, z: -22}
-  id: garden-beds-bp
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 11, height: 0.5, kind: box, width: 26}
-  tags: [blueprint]
 garden-gazebo:
   castShadow: true
   children: [{feetPosition: {x: 0, y: 1.85, z: 0}, id: lamp, light: {color: oklch(0.85 0.1 70), distance: 9, intensity: 6, kind: point}}]
