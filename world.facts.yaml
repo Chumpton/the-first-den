@@ -29,6 +29,7 @@ assets:
     "anim/wolf.yml#walk": clips/anim-wolf-yml-walk-2b7543f3.json
     "jade-dragon.js#dragon-rest": clips/jade-dragon-js-dragon-rest-fbc127dd.json
     "pasture-herd.js#pasture-graze": clips/pasture-herd-js-pasture-graze-92f77e93.json
+    "pasture-herd.js#pasture-nicker": clips/pasture-herd-js-pasture-nicker-8747fd6a.json
     "pasture-herd.js#pasture-stand": clips/pasture-herd-js-pasture-stand-55b19bea.json
     "pasture-herd.js#pasture-walk": clips/pasture-herd-js-pasture-walk-aaad8e4f.json
     "sky-dragons.js#sky-dragon-wave": clips/sky-dragons-js-sky-dragon-wave-cfd68914.json
