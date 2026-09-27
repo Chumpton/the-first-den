@@ -7,6 +7,29 @@ import { triangulate } from './home-garden-kit.js';
 const P0 = (p) => ({ rx: p.rx ?? 7.4, rz: p.rz ?? 5, pw: (p.path ?? 1.2) / 2, hr: p.hub ?? 1.6, gates: p.gates ?? ['w', 'n', 'e'] });
 const GATE = { w: Math.PI, e: 0, n: -Math.PI / 2, s: Math.PI / 2 }; // angle in (x, z) plane, z = -north
 const BED_H = 0.34, WALL = 0.14;
+// the whole garden stands on the mandala terrace (scripts/gen/mandala-terrace.js): every vertex rides LIFT metres up
+const LIFT = 0.45;
+function lifted(ctx, L) {
+  return new Proxy(ctx, { get(t, k) {
+    if (k === 'tri') return (a, b, c, d, e, f, g, h, i) => t.tri(a, b + L, c, d, e + L, f, g, h + L, i);
+    if (k === 'quad') return (...v) => { for (let j = 1; j < 12; j += 3) v[j] += L; t.quad(...v); };
+    const v = Reflect.get(t, k); return typeof v === 'function' ? v.bind(t) : v;
+  } });
+}
+// woven wattle edging just inside a bed's stone lip: hazel stakes and two zig-zag weave bands
+function wattle(ctx, inner) {
+  const a = shrink(inner, 0.05), b = shrink(inner, 0.1), n = inner.length;
+  paint(ctx, 'oak', 'oklch(0.58 0.07 62)', 0.95);
+  for (let i = 0; i < n; i += 3) beam(ctx, [a[i][0], BED_H - 0.06, a[i][1]], [a[i][0], BED_H + 0.2, a[i][1]], 0.035);
+  for (const [y0, ph] of [[BED_H - 0.03, 0], [BED_H + 0.07, 1]]) {
+    paint(ctx, 'oak', ph ? 'oklch(0.52 0.06 58)' : 'oklch(0.6 0.07 66)', 0.95);
+    for (let i = 0; i < n; i++) {
+      const j = (i + 1) % n, p = (i + ph) % 2 ? a[i] : b[i], q = (j + ph) % 2 ? a[j] : b[j], y1 = y0 + 0.08;
+      ctx.quad(p[0], y0, p[1], q[0], y0, q[1], q[0], y1, q[1], p[0], y1, p[1]);
+      ctx.quad(p[0], y1, p[1], q[0], y1, q[1], q[0], y0, q[1], p[0], y0, p[1]);
+    }
+  }
+}
 
 function col(ctx, l, c, h, dl = 0.05, dh = 10) { return `oklch(${(l + (ctx.random() - 0.5) * dl).toFixed(3)} ${c.toFixed(3)} ${(h + (ctx.random() - 0.5) * dh).toFixed(0)})`; }
 function blob(ctx, x, y, z, rx, ry, rz, n = 6) {
@@ -56,6 +79,7 @@ function raisedBed(ctx, poly, lod) {
   paint(ctx, 'soil', 'oklch(0.72 0.07 60)', 0.97);
   for (const t of triangulate(inner)) { const [p, q, r] = t.map((k) => inner[k]); ctx.tri(p[0], BED_H - 0.06, p[1], q[0], BED_H - 0.06, q[1], r[0], BED_H - 0.06, r[1]); ctx.tri(r[0], BED_H - 0.06, r[1], q[0], BED_H - 0.06, q[1], p[0], BED_H - 0.06, p[1]); }
   if (lod <= 2) for (let i = 0; i < n; i++) { const a = inner[i], b = inner[(i + 1) % n]; paint(ctx, 'stone', 'oklch(0.78 0.02 70)'); Q(ctx, [a[0], BED_H - 0.06, a[1]], [b[0], BED_H - 0.06, b[1]], [b[0], BED_H, b[1]], [a[0], BED_H, a[1]], [a[0] * 2 - cx, BED_H, a[1] * 2 - cz]); }
+  if (lod <= 2) wattle(ctx, inner);
   return inner;
 }
 // crops sown along curved rows that follow the oval
@@ -94,7 +118,8 @@ function crops(ctx, kind, lod) {
 function ringXZ(g, a, k) { return [Math.cos(a) * g.rx * k, Math.sin(a) * g.rz * k]; }
 function gateOpen(g, a) { return g.gates.some((n) => { let d = Math.abs(a - GATE[n]); d = Math.min(d, TAU - d); return d * (g.rx + g.rz) / 2 < 0.95; }); }
 
-export function geometry(ctx) {
+export function geometry(ctx0) {
+  const ctx = lifted(ctx0, LIFT);
   const p = ctx.params || {}, g = P0(p), lod = ctx.lod || 1; ctx.flat();
   // lawn-coloured underlay so the old ground never shows through: a soft mulch oval
   paint(ctx, 'soil', 'oklch(0.5 0.06 60)', 0.98);
@@ -107,10 +132,7 @@ export function geometry(ctx) {
   }
   // hub: a ring of flags and a limestone birdbath
   { const rr = (g.hr + 0.5) / 2, n = Math.floor(TAU * rr / 0.6); for (let i = 0; i < n; i++) { const a = i / n * TAU; paint(ctx, 'stone', col(ctx, 0.9, 0.015, 78, 0.07, 20), 0.92); slab(ctx, Math.cos(a) * rr, Math.sin(a) * rr, 0.26, (g.hr - 0.5) / 2 * 0.95, a + Math.PI / 2, 0.065); } }
-  paint(ctx, 'stone', 'oklch(0.88 0.02 80)', 0.9);
-  lathe(ctx, [[0.42, 0], [0.4, 0.12], [0.16, 0.2], [0.13, 0.7], [0.18, 0.78], [0.55, 0.86], [0.6, 0.95], [0, 0.95]], lod <= 2 ? 12 : 8);
-  paint(ctx, null, 'oklch(0.66 0.09 205)', 0.1); ctx.emissive(null); lathe(ctx, [[0.5, 0.955], [0, 0.955]], lod <= 2 ? 12 : 8);
-  paint(ctx, 'moss', 'oklch(0.72 0.1 135)', 1); blob(ctx, 0.3, 0.9, 0.35, 0.18, 0.08, 0.12, 5);
+  // the centre holds the mandala relic pedestal (drawn by scripts/gen/mandala-terrace.js)
   // the four beds
   const Q4 = [[1, -1, 'cabbage'], [-1, -1, 'carrot'], [-1, 1, 'tomato'], [1, 1, 'flowers']];
   for (const [sx, sz, kind] of Q4) {
@@ -162,7 +184,8 @@ export function geometry(ctx) {
   ctx.albedo(null); ctx.emissive(null);
 }
 
-export function collider(ctx) {
+export function collider(ctx0) {
+  const ctx = lifted(ctx0, LIFT);
   const g = P0(ctx.params || {});
   for (const [sx, sz] of [[1, -1], [-1, -1], [-1, 1], [1, 1]]) {
     const poly = bedPoly(g, sx, sz);
@@ -170,5 +193,4 @@ export function collider(ctx) {
   }
   const k = 1 + 0.32 / ((g.rx + g.rz) / 2), m = 36;
   for (let i = 0; i < m; i++) { const a0 = i / m * TAU, a1 = (i + 1) / m * TAU; if (gateOpen(g, a0) || gateOpen(g, a1)) continue; const [x0, z0] = ringXZ(g, a0, k), [x1, z1] = ringXZ(g, a1, k); obox(ctx, (x0 + x1) / 2, 0, (z0 + z1) / 2, Math.hypot(x1 - x0, z1 - z0) + 0.05, 0.62, 0.12, Math.atan2(-(z1 - z0), x1 - x0)); }
-  lathe(ctx, [[0.42, 0], [0.42, 0.95], [0, 0.95]], 8);
 }
