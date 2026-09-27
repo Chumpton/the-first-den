@@ -24,7 +24,7 @@ export const FISH = {
   castDelay: 0.55,                    // s from the swing to the splash
   wait: [2.5, 6.5],                   // s until a bite
   window: 1.4,                        // s to press 2 once the bobber dips
-  present: 3.2,                       // s the catch is held overhead
+  present: 4.0,                       // s the catch is held overhead
   overhead: { x: 0, y: 1.72, z: -0.95 }, // boat-local, just above the seated rider's head
   catches: [
     { w: 40, kind: 'perch', name: 'a Perch', color: '#b9d77a', fish: true },
