@@ -1,0 +1,90 @@
+# Rescue pasture behind the cob house. Every tuned number of the piece lives here.
+site: { x: -38, z: -73, w: 28, d: 20, y: 0.5 }
+fence: { height: 1.3, bay: 2.4, rails: [0.42, 0.82, 1.2], gateX: 8, gateW: 3.2, gatepostH: 3.1, beamY: 2.8 }
+gate: { openYaw: -100, speed: 150, autoClose: 25 }
+inner: 2.0
+keepOut:
+  - { x: -9, z: -6.3, r: 3.8 }
+  - { x: -3.2, z: -8.2, r: 1.4 }
+  - { x: -0.5, z: -8.3, r: 1.6 }
+  - { x: 11.3, z: 1.5, r: 1.6 }
+  - { x: 3.5, z: -3.5, r: 0.6 }
+spots:
+  - { x: -3.2, z: -6.2, face: 0 }
+  - { x: 9.1, z: 1.5, face: -90 }
+  - { x: 3.5, z: -1.6, face: 0 }
+herd:
+  walk: 1.15
+  trot: 2.7
+  trotChance: 0.22
+  turnRate: 110
+  grazeMin: 7
+  grazeMax: 18
+  standMin: 3
+  standMax: 7
+  notice: 6
+  curious: 10
+  nickerMin: 28
+  nickerMax: 75
+  hearRange: 45
+  wake: 220
+sounds:
+  nicker: /cdn/moodboard-lowpoly-cozy/sfx-soft-horse-nicker.mp3
+  snort: /cdn/moodboard-lowpoly-cozy/sfx-gentle-horse-snort-blow.mp3
+  gateOpen: /cdn/moodboard-lowpoly-cozy/sfx-wooden-field-gate-creak-open.mp3
+  gateClose: /cdn/moodboard-lowpoly-cozy/sfx-wooden-field-gate-latch-close.mp3
+horses:
+  - { id: pasture-horse-clover, name: Clover, coat: bay, scale: 1.0, pitch: 1.0, at: [-4, 2], yaw: 30, story: "retired from the riding school" }
+  - { id: pasture-horse-biscuit, name: Biscuit, coat: chestnut, scale: 0.96, pitch: 1.05, at: [4, -1], yaw: -60, story: "found thin by the east road" }
+  - { id: pasture-horse-juniper, name: Juniper, coat: dapple, scale: 1.04, pitch: 0.92, at: [-8, 3], yaw: 120, story: "an old plough mare, gentle as rain" }
+  - { id: pasture-horse-pip, name: Pip, coat: piebald, scale: 0.72, pitch: 1.3, at: [6, 4], yaw: 200, story: "a pony nobody wanted, now everyone's" }
+clips:
+  walk:
+    duration: 1.2
+    tracks:
+      legFL: { pitch: [18, 0, -18, 0, 18] }
+      legBR: { pitch: [18, 0, -18, 0, 18] }
+      legFR: { pitch: [-18, 0, 18, 0, -18] }
+      legBL: { pitch: [-18, 0, 18, 0, -18] }
+      neck: { pitch: [2, -4, 2, -4, 2] }
+      head: { pitch: [-2, 3, -2, 3, -2] }
+      tail: { pitch: [10, 14, 10, 14, 10], roll: [4, -4, 4, -4, 4] }
+      root: { y: [0, 0.015, 0, 0.015, 0], roll: [1, 0, -1, 0, 1] }
+  trot:
+    duration: 0.62
+    tracks:
+      legFL: { pitch: [30, 0, -26, 0, 30] }
+      legBR: { pitch: [30, 0, -26, 0, 30] }
+      legFR: { pitch: [-26, 0, 30, 0, -26] }
+      legBL: { pitch: [-26, 0, 30, 0, -26] }
+      neck: { pitch: [8, 3, 8, 3, 8] }
+      head: { pitch: [-4, 0, -4, 0, -4] }
+      tail: { pitch: [28, 34, 28, 34, 28] }
+      root: { y: [0, 0.06, 0, 0.06, 0] }
+  graze:
+    duration: 9
+    tracks:
+      neck: { pitch: [-6, -80, -86, -80, -86, -80, -86, -80, -6, -6] }
+      head: { pitch: [0, -28, -22, -28, -22, -28, -22, -28, 2, 0], yaw: [0, 0, 8, -6, 0, 6, -8, 0, 10, 0] }
+      legFL: { pitch: [0, 7, 7, 7, 7, 7, 7, 7, 0, 0] }
+      tail: { pitch: [8, 8, 12, 8, 8, 14, 8, 8, 8, 8], roll: [0, 0, 32, -26, 0, 0, 0, 30, -24, 0] }
+      root: { roll: [0, 0, 0, 0, 1.5, 1.5, 0, 0, 0, 0] }
+  stand:
+    duration: 6
+    tracks:
+      neck: { pitch: [10, 12, 10, 8, 10, 10, 10] }
+      head: { pitch: [-4, -2, -4, -6, -4, -4, -4], yaw: [0, 0, 12, 12, 0, -8, 0] }
+      tail: { pitch: [8, 8, 8, 12, 8, 8, 8], roll: [0, 0, 0, 34, -28, 22, 0] }
+      legBR: { pitch: [0, -8, -8, -8, -8, 0, 0] }
+  pet:
+    duration: 2.4
+    tracks:
+      neck: { pitch: [6, -18, -10, -18, 6] }
+      head: { pitch: [0, -12, 4, -12, 0], roll: [0, 10, -8, 10, 0] }
+      tail: { pitch: [12, 30, 12, 30, 12], roll: [0, 25, -25, 25, 0] }
+  nicker:
+    duration: 1.6
+    tracks:
+      neck: { pitch: [8, 22, 8, 20, 8] }
+      head: { pitch: [-4, 12, -6, 10, -4], yaw: [0, 6, -6, 4, 0] }
+      tail: { pitch: [10, 22, 12, 22, 10] }
