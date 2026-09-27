@@ -41,5 +41,5 @@ export const FISH = {
     boot: S + 'sfx-comedic-deflated-womp-womp.mp3',
     miss: S + 'sfx-fishing-line-slack-reel-whirr.mp3',
   },
-  clip: { cast: 'cdn/clip-cast.glb', present: 'cdn/clip-victory.glb' },
+  clip: { cast: 'cdn/clip-cast.glb', present: 'scripts/fish-pose.js#present' },
 };
