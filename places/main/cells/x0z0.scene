@@ -4490,6 +4490,15 @@ tower-skirt:
   rotation: {yaw: 90}
   tags: [tower-grounds]
   visibleRange: {max: 90}
+town-alley:
+  children: [{feetPosition: {x: -19.05, y: 2.619686098041762, z: 69.5}, id: lamp-a, light: {color: oklch(0.85 0.12 65), distance: 9, intensity: 3, kind: point}}, {feetPosition: {x: -19.05, y: 2.7018958260755914, z: 75}, id: lamp-b, light: {color: oklch(0.85 0.12 65), distance: 9, intensity: 3, kind: point}}]
+  feetPosition: {x: 0, y: 0.5474079810136676, z: 0}
+  id: town-alley
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: market, props: [{h: 3.1, k: wallLamp, x: -18.5, y: -0.08031390195823834, yaw: 90, z: 69.5}, {h: 3.1, k: wallLamp, x: -18.5, y: 0.0018958260755910228, yaw: 90, z: 75}, {h: 3.8, k: ladder, x: -18.6, y: -0.03404904934213826, yaw: 90, z: 72.2}, {goods: [apples, cabbage, bread, apples], k: stack, x: -19.4, y: 0.00361608683111303, yaw: 90, z: 74}, {goods: [bread, apples, cabbage, cabbage], k: stack, x: -22.9, y: -0.022651960296884988, yaw: -90, z: 69.2}, {k: barrels, x: -22.9, y: 0.02153380227652546, yaw: -70, z: 72.4}, {k: sacks, x: -22.7, y: 0.016865167936592096, yaw: -100, z: 75.2}], stalls: []}, script: scripts/gen/town-square.js, seed: 31}
+  tags: [town]
+  visibleRange: {max: 140}
 town-road:
   feetPosition: {x: 0, y: 0.5375542362795345, z: 12}
   id: town-road
