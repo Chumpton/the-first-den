@@ -2418,7 +2418,7 @@ grounds-arch-workshop:
   rotation: {lookAt: {x: 14.4, y: 0.5, z: -35}}
   tags: [grounds]
 grounds-bed-front:
-  feetPosition: {x: 6.4, y: {terrain: 0}, z: -11.2}
+  feetPosition: {x: 5.3, y: 0.5, z: -11.2}
   id: grounds-bed-front
   primitive: {kind: scripted, params: {d: 0.8, edge: stone, palette: cool, w: 2.2}, script: scripts/gen/flower-bed.js, seed: 11}
   rotation: {yaw: 90}
