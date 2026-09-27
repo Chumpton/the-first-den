@@ -1,0 +1,112 @@
+# The Catio: tuned numbers for the cats, the screen door and the sounds. Layout (perches, links) lives in scripts/gen/catio-layout.js.
+cats:
+  - { id: catio-marmalade, name: Marmalade, coat: ginger, start: S1, mode: sit, pitch: 1.0 }
+  - { id: catio-sootie, name: Sootie, coat: black, start: HM, mode: nap, pitch: 1.12 }
+  - { id: catio-patches, name: Patches, coat: calico, start: T3, mode: loaf, pitch: 1.2 }
+walkSpeed: 0.45        # m/s padding along the floor and up the ramp
+jump: { base: 0.45, perM: 0.12, lift: 0.18, liftPerUp: 0.3, liftPerM: 0.08 }
+stayChance: 0.35       # when a rest ends, chance to take another rest on the same perch
+yawJitter: 30
+rest:                  # seconds [min, max]
+  nap: [22, 45]
+  loaf: [10, 20]
+  sit: [5, 11]
+  groom: [5, 9]
+  drink: [3.5, 5.5]
+  pass: [0.2, 0.4]
+petHold: 3             # s a petted cat shows its happy pose
+sound:
+  purr: /cdn/moodboard-lowpoly-cozy/sfx-cat-purr-soft-contented.mp3
+  meow: /cdn/moodboard-lowpoly-cozy/sfx-cat-meow-short-friendly.mp3
+door:
+  near: 1.9            # m from the door's middle that swings it open
+  latchSeconds: 8      # E holds it open this long
+  speed: 260           # deg/s
+  swing: 95            # deg outward
+  openSound: /cdn/moodboard-lowpoly-cozy/sfx-screen-door-spring-creak-open.mp3
+  closeSound: /cdn/moodboard-lowpoly-cozy/sfx-screen-door-wooden-clap-close.mp3
+clips:
+  walk:
+    duration: 0.7
+    tracks:
+      legFL: { pitch: [24, 0, -24, 0, 24] }
+      legBR: { pitch: [24, 0, -24, 0, 24] }
+      legFR: { pitch: [-24, 0, 24, 0, -24] }
+      legBL: { pitch: [-24, 0, 24, 0, -24] }
+      neck: { pitch: [2, -2, 2, -2, 2] }
+      tail: { pitch: [-18, -14, -18, -14, -18], yaw: [-10, 0, 10, 0, -10] }
+      root: { y: [0, 0.008, 0, 0.008, 0] }
+  jump:
+    duration: 0.6
+    tracks:
+      root: { pitch: [0, -10, 22, 6, -8, 0], y: [0, -0.05, 0.02, 0.02, -0.04, 0] }
+      legFL: { pitch: [0, 20, 65, 35, -10, 0] }
+      legFR: { pitch: [0, 20, 65, 35, -10, 0] }
+      legBL: { pitch: [0, 35, -55, -20, 25, 0] }
+      legBR: { pitch: [0, 35, -55, -20, 25, 0] }
+      neck: { pitch: [0, 10, -10, -5, 5, 0] }
+      tail: { pitch: [0, 10, 35, 25, 5, 0] }
+  sit:
+    duration: 3
+    tracks:
+      root: { pitch: [22, 22], y: [-0.11, -0.11] }
+      legFL: { pitch: [-22, -22] }
+      legFR: { pitch: [-22, -22] }
+      legBL: { pitch: [70, 70] }
+      legBR: { pitch: [70, 70] }
+      neck: { pitch: [-16, -14, -18, -16] }
+      head: { yaw: [0, 0, 22, 18, 0, 0], pitch: [0, 0, 0, 4, 0, 0] }
+      tail: { pitch: [80, 80, 80, 80, 80], yaw: [30, 44, 30, 40, 30] }
+  groom:
+    duration: 2
+    tracks:
+      root: { pitch: [22, 22], y: [-0.11, -0.11] }
+      legFR: { pitch: [-22, -22] }
+      legFL: { pitch: [35, 50, 35, 50, 35] }
+      legBL: { pitch: [70, 70] }
+      legBR: { pitch: [70, 70] }
+      neck: { pitch: [-38, -30, -38, -30, -38] }
+      head: { yaw: [-15, -10, -15, -10, -15], roll: [15, 25, 15, 25, 15], pitch: [-10, 0, -10, 0, -10] }
+      tail: { pitch: [80, 80, 80], yaw: [35, 48, 35] }
+  loaf:
+    duration: 4
+    tracks:
+      root: { y: [-0.15, -0.145, -0.15] }
+      legFL: { pitch: [85, 85] }
+      legFR: { pitch: [85, 85] }
+      legBL: { pitch: [85, 85] }
+      legBR: { pitch: [85, 85] }
+      neck: { pitch: [6, 6, 4, 6, 6] }
+      head: { yaw: [0, 0, 14, 14, 0], roll: [0, 0, 6, 6, 0] }
+      tail: { pitch: [86, 86, 86], yaw: [55, 66, 55] }
+  nap:
+    duration: 3.2
+    tracks:
+      root: { y: [-0.155, -0.145, -0.155], roll: [12, 12] }
+      legFL: { pitch: [85, 85] }
+      legFR: { pitch: [85, 85] }
+      legBL: { pitch: [85, 85] }
+      legBR: { pitch: [85, 85] }
+      neck: { pitch: [-40, -40], yaw: [38, 38] }
+      head: { pitch: [-12, -12], yaw: [30, 30], roll: [22, 22] }
+      tail: { pitch: [88, 88, 88], yaw: [88, 94, 88] }
+  drink:
+    duration: 1.2
+    tracks:
+      root: { y: [-0.04, -0.04], pitch: [-6, -6] }
+      legFL: { pitch: [10, 10] }
+      legFR: { pitch: [10, 10] }
+      neck: { pitch: [-55, -50, -55] }
+      head: { pitch: [-18, -10, -18] }
+      tail: { pitch: [10, 10, 10], yaw: [-12, 12, -12] }
+  happy:
+    duration: 1.6
+    tracks:
+      root: { pitch: [22, 22], y: [-0.11, -0.11] }
+      legFL: { pitch: [-22, -22] }
+      legFR: { pitch: [-22, -22] }
+      legBL: { pitch: [70, 70] }
+      legBR: { pitch: [70, 70] }
+      neck: { pitch: [-8, -2, -8] }
+      head: { roll: [0, 18, 0, -12, 0], pitch: [8, 12, 8, 12, 8] }
+      tail: { pitch: [-12, -8, -12], yaw: [-8, 8, -8] }
