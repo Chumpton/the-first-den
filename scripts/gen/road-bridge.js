@@ -1,7 +1,7 @@
 // Pale limestone road bridge: timber deck on low stone arches and cutwater piers, stone parapets with glowing newels,
 // moss at the waterline. Origin = deck centre at road level (world y 0.5); length along Z; water sits at local -0.5.
 import { Q, solid, prism, box, gem } from "../lib/road-solid.js";
-const STONE="cdn/texture-pale-weathered-limestone-blocks.png", WOOD="cdn/texture-weathered-honey-oak-deck-planks.png", MOSS="cdn/texture-soft-green-moss-cozy.png";
+const STONE="cdn/texture-pale-weathered-limestone-blocks.png", COBBLE="cdn/texture-terrain-pale-limestone-cobblestone-road.png", WOOD="cdn/texture-weathered-honey-oak-deck-planks.png", MOSS="cdn/texture-soft-green-moss-cozy.png";
 function dims(ctx){
   const { length:L=30, width:W=6 } = ctx.params;
   const hw=W/2+0.4, rise=Math.min(0.55,L*0.02);
@@ -20,8 +20,8 @@ export function geometry(ctx){
   const nSeg = lod<=2?Math.max(8,Math.round(L/2.5)):lod===3?6:3;
   const zs=steps(-L/2,L/2,nSeg), ab=L/2-2.5;
   ctx.flat();
-  // timber deck between the curbs
-  ctx.albedo(WOOD); ctx.color("oklch(0.93 0.04 70)"); ctx.roughness(0.85);
+  // cobbled deck between the curbs, the same pale limestone as the highway
+  ctx.albedo(COBBLE); ctx.color("oklch(0.97 0.01 85)"); ctx.roughness(0.85);
   sweep(ctx,zs,z=>{const t=top(z);return [[-hw+0.4,t-0.3],[hw-0.4,t-0.3],[hw-0.4,t],[-hw+0.4,t]];});
   // stone parapets (curb + wall), coping
   ctx.albedo(STONE); ctx.color("oklch(0.95 0.02 85)"); ctx.roughness(0.92);
