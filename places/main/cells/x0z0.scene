@@ -2222,11 +2222,11 @@ treehouse-a:
   feetPosition: {x: -27, y: 0.28518751604034187, z: -18}
   id: treehouse-a
   physics: static
-  primitive: {kind: scripted, params: {deckY: 7.214812483959658, door: 0, gaps: [-0.8850668158886104, 0], seed: 3}, script: scripts/gen/treehouse.js}
+  primitive: {kind: scripted, params: {deckR: 5.8, deckY: 7.214812483959658, door: 0, gaps: [0, -0.885], hutR: 4.2, seed: 3}, script: scripts/gen/treehouse.js}
   receiveShadow: true
   tags: [treehouse]
 treehouse-a-glow:
-  feetPosition: {x: -25.7, y: 9.1, z: -18}
+  feetPosition: {x: -28.8, y: 10.1, z: -18}
   id: treehouse-a-glow
   light: {color: oklch(0.85 0.1 70), distance: 6, intensity: 1.4, kind: point}
 treehouse-b:
@@ -2234,26 +2234,71 @@ treehouse-b:
   feetPosition: {x: -18, y: 0.4999151732982104, z: -29}
   id: treehouse-b
   physics: static
-  primitive: {kind: scripted, params: {deckY: 7.00008482670179, door: 5.398118491290976, gaps: [2.256525837701183], seed: 7}, script: scripts/gen/treehouse.js}
+  primitive: {kind: scripted, params: {deckR: 5.8, deckY: 7.00008482670179, door: 2.256, gaps: [2.256, 0.165], hutR: 4.2, seed: 7}, script: scripts/gen/treehouse.js}
   receiveShadow: true
   tags: [treehouse]
 treehouse-b-glow:
-  feetPosition: {x: -16.7, y: 9.1, z: -29}
+  feetPosition: {x: -16.86, y: 10.1, z: -30.39}
   id: treehouse-b-glow
   light: {color: oklch(0.85 0.1 70), distance: 6, intensity: 1.4, kind: point}
 treehouse-bridge:
   castShadow: true
-  feetPosition: {x: -25.10028662922821, y: 7.5, z: -20.321871897609963}
+  feetPosition: {x: -23.866, y: 7.5, z: -21.831}
   id: treehouse-bridge
   physics: static
-  primitive: {kind: scripted, params: {length: 8.212670403551895, sag: 0.55}, script: scripts/gen/rope-bridge.js}
-  rotation: {lookAt: {x: -25.733524419485473, y: 7.5, z: -19.547914598406642}}
+  primitive: {kind: scripted, params: {length: 4.4, sag: 0.25}, script: scripts/gen/rope-bridge.js}
+  rotation: {lookAt: {x: -24.499, y: 7.5, z: -21.057}}
   tags: [treehouse]
+treehouse-guest:
+  castShadow: true
+  feetPosition: {x: -18, y: 7.5, z: -29}
+  id: treehouse-guest
+  physics: static
+  primitive: {kind: scripted, params: {door: 2.256, hutR: 4.2, style: hippie}, script: scripts/gen/treehouse-interior.js}
+  receiveShadow: true
+  tags: [treehouse, treehouse-guest]
+treehouse-guest-lamp:
+  feetPosition: {x: -19.2, y: 10.1, z: -27.5}
+  id: treehouse-guest-lamp
+  light: {color: oklch(0.8 0.14 340), distance: 7, intensity: 1.4, kind: point}
+treehouse-guest-tapestry:
+  feetPosition: {x: -15.81, y: 8.35, z: -31.68}
+  id: treehouse-guest-tapestry
+  material: {roughness: 1, texture: /cdn/value.620ed84605d085a9c19f1370302cfffa6a9fca3f184da4e7ee48f764be7f9ae6.png}
+  primitive: {depth: 0.02, height: 1.43, kind: box, width: 1.9}
+  rotation: {lookAt: {x: -18, y: 8.35, z: -29}}
+treehouse-home-bridge:
+  castShadow: true
+  feetPosition: {x: -13.117, y: 7.5, z: -28.186}
+  id: treehouse-home-bridge
+  physics: static
+  primitive: {kind: scripted, params: {length: 9.1, rise: 0.2, sag: 0.2}, script: scripts/gen/rope-bridge.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: -14.103, y: 7.5, z: -28.35}}
+  tags: [treehouse]
+treehouse-office:
+  castShadow: true
+  feetPosition: {x: -27, y: 7.5, z: -18}
+  id: treehouse-office
+  physics: static
+  primitive: {kind: scripted, params: {door: 0, hutR: 4.2, style: office}, script: scripts/gen/treehouse-interior.js}
+  receiveShadow: true
+  tags: [treehouse, treehouse-office]
+treehouse-office-lamp:
+  feetPosition: {x: -25.2, y: 10.1, z: -18}
+  id: treehouse-office-lamp
+  light: {color: oklch(0.88 0.08 80), distance: 7, intensity: 1.6, kind: point}
+treehouse-office-map:
+  feetPosition: {x: -30.46, y: 8.95, z: -18}
+  id: treehouse-office-map
+  material: {roughness: 0.9, texture: /cdn/value.0a7594adba4158f44495c7b808b57edd991571427f114c44b6826c2be3d93855.png}
+  primitive: {depth: 0.02, height: 1.13, kind: box, width: 1.5}
+  rotation: {lookAt: {x: -27, y: 8.95, z: -18}}
 treehouse-rope:
   castShadow: true
-  feetPosition: {x: -23.35, y: 7.5, z: -18}
+  feetPosition: {x: -21.58, y: 7.5, z: -18}
   id: treehouse-rope
-  primitive: {kind: scripted, params: {length: 6.935969923049752, rope: true}, script: scripts/gen/rope-bridge.js}
+  primitive: {kind: scripted, params: {length: 7.2, rope: true}, script: scripts/gen/rope-bridge.js}
   rotation: 90
   tags: [treehouse, climb-rope]
 waylamp-east-0:
