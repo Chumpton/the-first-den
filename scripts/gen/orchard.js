@@ -21,7 +21,7 @@ function table(ctx, lod, [cx, cz, gy, yawDeg = 0, basket = 1], idx) {
   // checked cloth: top in cells, drops on the two long sides
   const nx = lod <= 2 ? 8 : 4, nz = lod <= 2 ? 4 : 2, cw = (L - 0.1) / nx, cd = (W + 0.1) / nz, y = gy + H + 0.004, drop = 0.2;
   for (const col of [0, 1]) {
-    paint(ctx, 'linen', col ? 'oklch(0.97 0.01 90)' : 'oklch(0.55 0.19 27)', 0.95);
+    paint(ctx, null, col ? 'oklch(0.97 0.01 90)' : 'oklch(0.55 0.19 27)', 0.95);
     for (let i = 0; i < nx; i++) for (let j = 0; j < nz; j++) {
       if ((i + j) % 2 !== col) continue;
       const x0 = -(L - 0.1) / 2 + i * cw, z0 = -(W + 0.1) / 2 + j * cd, A = P(x0, z0), B = P(x0 + cw, z0), C = P(x0 + cw, z0 + cd), D = P(x0, z0 + cd);
@@ -37,7 +37,7 @@ function table(ctx, lod, [cx, cz, gy, yawDeg = 0, basket = 1], idx) {
   if (!basket || lod > 3) return;
   // wicker basket with a handle, apples and a folded napkin
   const [bx, bz2] = P(0.35, -0.05), by = y + 0.005;
-  paint(ctx, 'wicker', 'oklch(0.9 0.05 75)', 0.95);
+  paint(ctx, 'oak', 'oklch(0.85 0.06 70)', 0.95);
   lathe(ctx, [[0, by], [0.15, by], [0.18, by + 0.16], [0.19, by + 0.17]], lod <= 2 ? 10 : 6, bx, bz2);
   const hA = P(0.35 - 0.17, -0.05), hB = P(0.35 + 0.17, -0.05), hm = P(0.35, -0.05);
   const arc = [[hA[0], by + 0.17, hA[1]], [(hA[0] + hm[0]) / 2, by + 0.33, (hA[1] + hm[1]) / 2], [hm[0], by + 0.37, hm[1]], [(hB[0] + hm[0]) / 2, by + 0.33, (hB[1] + hm[1]) / 2], [hB[0], by + 0.17, hB[1]]];
