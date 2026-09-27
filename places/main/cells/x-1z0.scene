@@ -48,7 +48,7 @@ deer-fence-1-1:
   tags: [deer-fence]
   visibleRange: {max: 220}
 farm-west/barn:
-  feetPosition: {x: -17.27, y: -0.11, z: -7.98}
+  feetPosition: {x: -17.270000457763672, y: 0, z: -7.980000019073486}
   id: farm-west/barn
   parent: farm-west
   physics: static

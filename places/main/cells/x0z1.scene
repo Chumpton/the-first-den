@@ -293,7 +293,7 @@ pasture-west:
   tags: [farm, pasture]
 pasture-west/farmhouse:
   castShadow: true
-  feetPosition: {x: 8, y: -0.06, z: -4}
+  feetPosition: {x: 8, y: 0, z: -4}
   id: pasture-west/farmhouse
   parent: pasture-west
   physics: static
