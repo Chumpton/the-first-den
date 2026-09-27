@@ -31,7 +31,8 @@ function pebbles(ctx, x, y, z, s, lod, rnd) {
 export function geometry(ctx) {
   ctx.flat();
   const lod = ctx.lod ?? 1, items = ctx.params.items ?? [], rnd = () => ctx.random();
-  if (lod >= 4) return;
+  if (lod >= 4) { ctx.color(STONE[1]); const far = items.filter(it => it[3]).slice(0, 6); (far.length ? far : [items[0] ?? [0, 0, 0]]).forEach(([x, y, z, k, sz]) => gem(ctx, x, y, z, 0.07 * (sz ?? 1), 0.03, 0.02, 4)); return; }
+  if (!items.length) { gem(ctx, 0, 0, 0, 0.05, 0.02, 0.015, 4); return; }
   items.forEach(([x, y, z, k, s], i) => { if (lod === 3 && i % 2) return; (k ? pebbles : clover)(ctx, x, y, z, s, lod, rnd); });
 }
 export function collider() { return null; }
