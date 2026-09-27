@@ -2201,6 +2201,116 @@ home-root/castle-bookcase-2:
   receiveShadow: true
   rotation: {yaw: -120}
   tags: [castle, castle-furniture]
+home-root/castle-carpet-0:
+  castShadow: false
+  feetPosition: {x: 0.17447754946134306, y: 0.002, z: -3.996192886327431}
+  id: home-root/castle-carpet-0
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {accent: oklch(0.85 0.08 85), border: oklch(0.35 0.05 230), d: 3.2, field: oklch(0.5 0.08 195), item: carpet, w: 1.1}, script: scripts/gen/castle-decor.js, seed: 115}
+  receiveShadow: true
+  rotation: {yaw: -182.5}
+  tags: [castle, castle-decor]
+home-root/castle-carpet-1:
+  castShadow: false
+  feetPosition: {x: -3.3, y: 0.002, z: 4.0413344371862655e-16}
+  id: home-root/castle-carpet-1
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {accent: oklch(0.85 0.09 85), border: oklch(0.36 0.06 40), d: 2, field: oklch(0.55 0.13 30), item: carpet, round: true, w: 2.6}, script: scripts/gen/castle-decor.js, seed: 116}
+  receiveShadow: true
+  rotation: {yaw: -90}
+  tags: [castle, castle-decor]
+home-root/castle-carpet-2:
+  castShadow: false
+  feetPosition: {x: 3.377499074759311, y: 4.202, z: 1.9499999999999997}
+  id: home-root/castle-carpet-2
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {accent: oklch(0.82 0.1 80), border: oklch(0.33 0.05 60), d: 1.5, field: oklch(0.45 0.09 150), item: carpet, w: 2.2}, script: scripts/gen/castle-decor.js, seed: 117}
+  receiveShadow: true
+  rotation: {yaw: 60}
+  tags: [castle, castle-decor]
+home-root/castle-carpet-3:
+  castShadow: false
+  feetPosition: {x: -3.7422694614463903, y: 8.402000000000001, z: 0.6598630751343351}
+  id: home-root/castle-carpet-3
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {accent: oklch(0.9 0.05 85), border: oklch(0.4 0.07 260), d: 2, field: oklch(0.62 0.1 350), item: carpet, round: true, w: 2}, script: scripts/gen/castle-decor.js, seed: 118}
+  receiveShadow: true
+  rotation: {yaw: -80}
+  tags: [castle, castle-decor]
+home-root/castle-carpet-4:
+  castShadow: false
+  feetPosition: {x: -3.984778792366982, y: 12.602000000000002, z: 0.3486229709906328}
+  id: home-root/castle-carpet-4
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {accent: oklch(0.78 0.08 85), border: oklch(0.38 0.05 45), d: 1.2, field: oklch(0.55 0.07 60), item: carpet, w: 1.8}, script: scripts/gen/castle-decor.js, seed: 119}
+  receiveShadow: true
+  rotation: {yaw: -85}
+  tags: [castle, castle-decor]
+home-root/castle-carpet-5:
+  castShadow: false
+  feetPosition: {x: -3.377499074759311, y: 16.802, z: 1.9499999999999997}
+  id: home-root/castle-carpet-5
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {accent: oklch(0.85 0.1 80), border: oklch(0.32 0.05 250), d: 2.2, field: oklch(0.48 0.1 250), item: carpet, round: true, w: 2.2}, script: scripts/gen/castle-decor.js, seed: 120}
+  receiveShadow: true
+  rotation: {yaw: -60}
+  tags: [castle, castle-decor]
+home-root/castle-chandelier-0:
+  castShadow: false
+  children: [{feetPosition: {x: 0, y: 0.3, z: 0}, id: light, light: {color: oklch(0.86 0.1 65), decay: 2, distance: 10, intensity: 6, kind: point, shadow: {enabled: false}}}]
+  feetPosition: {x: 3.8851593225578074, y: 2.6, z: 0.33990739671586684}
+  id: home-root/castle-chandelier-0
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.3, item: chandelier}, script: scripts/gen/castle-decor.js, seed: 110}
+  receiveShadow: true
+  tags: [castle, castle-decor]
+home-root/castle-chandelier-1:
+  castShadow: false
+  children: [{feetPosition: {x: 0, y: 0.3, z: 0}, id: light, light: {color: oklch(0.86 0.1 65), decay: 2, distance: 10, intensity: 6, kind: point, shadow: {enabled: false}}}]
+  feetPosition: {x: -3.3073875750100616, y: 6.800000000000001, z: -2.0666851305094984}
+  id: home-root/castle-chandelier-1
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.3, item: chandelier}, script: scripts/gen/castle-decor.js, seed: 111}
+  receiveShadow: true
+  tags: [castle, castle-decor]
+home-root/castle-chandelier-2:
+  castShadow: false
+  children: [{feetPosition: {x: 0, y: 0.3, z: 0}, id: light, light: {color: oklch(0.86 0.1 65), decay: 2, distance: 10, intensity: 6, kind: point, shadow: {enabled: false}}}]
+  feetPosition: {x: 0.3399073967158658, y: 11, z: -3.8851593225578074}
+  id: home-root/castle-chandelier-2
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.3, item: chandelier}, script: scripts/gen/castle-decor.js, seed: 112}
+  receiveShadow: true
+  tags: [castle, castle-decor]
+home-root/castle-chandelier-3:
+  castShadow: false
+  children: [{feetPosition: {x: 0, y: 0.3, z: 0}, id: light, light: {color: oklch(0.86 0.1 65), decay: 2, distance: 10, intensity: 6, kind: point, shadow: {enabled: false}}}]
+  feetPosition: {x: -4, y: 15.200000000000001, z: 4.898587196589413e-16}
+  id: home-root/castle-chandelier-3
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.3, item: chandelier}, script: scripts/gen/castle-decor.js, seed: 113}
+  receiveShadow: true
+  tags: [castle, castle-decor]
+home-root/castle-chandelier-4:
+  castShadow: false
+  children: [{feetPosition: {x: 0, y: 0.3, z: 0}, id: light, light: {color: oklch(0.86 0.1 65), decay: 2, distance: 10, intensity: 6, kind: point, shadow: {enabled: false}}}]
+  feetPosition: {x: 1.9500000000000004, y: 19.400000000000002, z: -3.3774990747593105}
+  id: home-root/castle-chandelier-4
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.3, item: chandelier}, script: scripts/gen/castle-decor.js, seed: 114}
+  receiveShadow: true
+  tags: [castle, castle-decor]
 home-root/castle-chest-2:
   castShadow: true
   feetPosition: {x: -2.4896444401366784, y: 8.4, z: 2.089059731481253}
@@ -2234,6 +2344,138 @@ home-root/castle-flag-5:
   receiveShadow: true
   rotation: {yaw: 30}
   tags: [castle, castle-furniture]
+home-root/castle-hanging-plant-0-0:
+  castShadow: false
+  feetPosition: {x: -3.3779510380783013, y: 2.85, z: 3.6863866840506203}
+  id: home-root/castle-hanging-plant-0-0
+  material: {kind: scripted, params: {drop: 1.05, reach: 0.04, speed: 0.8}, script: scripts/material-den-sway.js}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.05, item: hangingPlant}, script: scripts/gen/castle-decor.js, seed: 129}
+  receiveShadow: true
+  rotation: {yaw: -42.5}
+  tags: [castle, castle-decor]
+home-root/castle-hanging-plant-0-1:
+  castShadow: false
+  feetPosition: {x: -3.3779510380783018, y: 2.85, z: -3.6863866840506194}
+  id: home-root/castle-hanging-plant-0-1
+  material: {kind: scripted, params: {drop: 1.05, reach: 0.04, speed: 0.8}, script: scripts/material-den-sway.js}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.05, item: hangingPlant}, script: scripts/gen/castle-decor.js, seed: 130}
+  receiveShadow: true
+  rotation: {yaw: -97.5}
+  tags: [castle, castle-decor]
+home-root/castle-hanging-plant-1-0:
+  castShadow: false
+  feetPosition: {x: 2.308743066175169, y: 7.050000000000001, z: 4.435054165891109}
+  id: home-root/castle-hanging-plant-1-0
+  material: {kind: scripted, params: {drop: 1.05, reach: 0.04, speed: 0.8}, script: scripts/material-den-sway.js}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.05, item: hangingPlant}, script: scripts/gen/castle-decor.js, seed: 131}
+  receiveShadow: true
+  rotation: {yaw: 27.5}
+  tags: [castle, castle-decor]
+home-root/castle-hanging-plant-1-1:
+  castShadow: false
+  feetPosition: {x: -4.435054165891109, y: 7.050000000000001, z: 2.3087430661751696}
+  id: home-root/castle-hanging-plant-1-1
+  material: {kind: scripted, params: {drop: 1.05, reach: 0.04, speed: 0.8}, script: scripts/material-den-sway.js}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.05, item: hangingPlant}, script: scripts/gen/castle-decor.js, seed: 132}
+  receiveShadow: true
+  rotation: {yaw: -22.5}
+  tags: [castle, castle-decor]
+home-root/castle-hanging-plant-1-2:
+  castShadow: false
+  feetPosition: {x: 2.6864980417341195, y: 7.050000000000001, z: -4.216957229064429}
+  id: home-root/castle-hanging-plant-1-2
+  material: {kind: scripted, params: {drop: 1.05, reach: 0.04, speed: 0.8}, script: scripts/material-den-sway.js}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.05, item: hangingPlant}, script: scripts/gen/castle-decor.js, seed: 133}
+  receiveShadow: true
+  rotation: {yaw: -132.5}
+  tags: [castle, castle-decor]
+home-root/castle-hanging-plant-2-0:
+  castShadow: false
+  feetPosition: {x: 4.216957229064429, y: 11.25, z: 2.6864980417341195}
+  id: home-root/castle-hanging-plant-2-0
+  material: {kind: scripted, params: {drop: 1.05, reach: 0.04, speed: 0.8}, script: scripts/material-den-sway.js}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.05, item: hangingPlant}, script: scripts/gen/castle-decor.js, seed: 134}
+  receiveShadow: true
+  rotation: {yaw: 57.5}
+  tags: [castle, castle-decor]
+home-root/castle-hanging-plant-2-1:
+  castShadow: false
+  feetPosition: {x: -4.995241107909289, y: 11.25, z: -0.21809693682667913}
+  id: home-root/castle-hanging-plant-2-1
+  material: {kind: scripted, params: {drop: 1.05, reach: 0.04, speed: 0.8}, script: scripts/material-den-sway.js}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.05, item: hangingPlant}, script: scripts/gen/castle-decor.js, seed: 135}
+  receiveShadow: true
+  rotation: {yaw: -52.5}
+  tags: [castle, castle-decor]
+home-root/castle-hanging-plant-3-0:
+  castShadow: false
+  feetPosition: {x: 2.308743066175169, y: 15.450000000000001, z: 4.435054165891109}
+  id: home-root/castle-hanging-plant-3-0
+  material: {kind: scripted, params: {drop: 1.05, reach: 0.04, speed: 0.8}, script: scripts/material-den-sway.js}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.05, item: hangingPlant}, script: scripts/gen/castle-decor.js, seed: 136}
+  receiveShadow: true
+  rotation: {yaw: 27.5}
+  tags: [castle, castle-decor]
+home-root/castle-hanging-plant-3-1:
+  castShadow: false
+  feetPosition: {x: -2.68649804173412, y: 15.450000000000001, z: 4.216957229064428}
+  id: home-root/castle-hanging-plant-3-1
+  material: {kind: scripted, params: {drop: 1.05, reach: 0.04, speed: 0.8}, script: scripts/material-den-sway.js}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.05, item: hangingPlant}, script: scripts/gen/castle-decor.js, seed: 137}
+  receiveShadow: true
+  rotation: {yaw: 7.5}
+  tags: [castle, castle-decor]
+home-root/castle-hanging-plant-4-0:
+  castShadow: false
+  feetPosition: {x: 4.619397662556434, y: 19.650000000000002, z: 1.913417161825449}
+  id: home-root/castle-hanging-plant-4-0
+  material: {kind: scripted, params: {drop: 1.05, reach: 0.04, speed: 0.8}, script: scripts/material-den-sway.js}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.05, item: hangingPlant}, script: scripts/gen/castle-decor.js, seed: 138}
+  receiveShadow: true
+  rotation: {yaw: 67.5}
+  tags: [castle, castle-decor]
+home-root/castle-hanging-plant-4-1:
+  castShadow: false
+  feetPosition: {x: -3.966766701456175, y: 19.650000000000002, z: 3.0438071450436044}
+  id: home-root/castle-hanging-plant-4-1
+  material: {kind: scripted, params: {drop: 1.05, reach: 0.04, speed: 0.8}, script: scripts/material-den-sway.js}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.05, item: hangingPlant}, script: scripts/gen/castle-decor.js, seed: 139}
+  receiveShadow: true
+  rotation: {yaw: -12.5}
+  tags: [castle, castle-decor]
+home-root/castle-hanging-plant-4-2:
+  castShadow: false
+  feetPosition: {x: -4.619397662556434, y: 19.650000000000002, z: -1.9134171618254483}
+  id: home-root/castle-hanging-plant-4-2
+  material: {kind: scripted, params: {drop: 1.05, reach: 0.04, speed: 0.8}, script: scripts/material-den-sway.js}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {chain: 1.05, item: hangingPlant}, script: scripts/gen/castle-decor.js, seed: 140}
+  receiveShadow: true
+  rotation: {yaw: -32.5}
+  tags: [castle, castle-decor]
 home-root/castle-maptable-4:
   castShadow: true
   feetPosition: {x: 1.9500000000000004, y: 16.8, z: -3.3774990747593105}
@@ -2245,6 +2487,234 @@ home-root/castle-maptable-4:
   receiveShadow: true
   rotation: {yaw: -210}
   tags: [castle, castle-furniture]
+home-root/castle-pad-down-1:
+  behavior: scripts/castle-pad.js
+  castShadow: false
+  children: [{feetPosition: {x: 0, y: 2.05, z: 0}, id: label, text: {color: oklch(0.9 0.1 75), content: "▼ Great Hall", size: 0.2}}]
+  feetPosition: {x: 4.283637201794505, y: 4.2, z: -0.37476969381493075}
+  fx: {script: "fx\npop motes rate=?mobile:5|9 on=disc(.66) life=1.3..2.2 v=up(.35..0.75) size=.025..0.05 acc=curl(.3)*.3+drag(.4) col=hdr(2.4,1.3,.4) a=0>.2:1>.7:.8>0 sz=$size r=sprite(mote,add)"}
+  id: home-root/castle-pad-down-1
+  parent: home-root
+  physics: {body: static, trigger: true}
+  primitive: {kind: scripted, params: {color: oklch(0.82 0.13 70), dir: down, glow: [2.2, 1.2, 0.35], item: pad}, script: scripts/gen/castle-decor.js, seed: 102}
+  receiveShadow: true
+  rotation: {yaw: -265}
+  state: {dir: down, room: "▼ Great Hall", to: {x: 0.27927069094686097, y: 24, z: 0.5425438671330252}}
+  tags: [castle, castle-decor, castle-pad]
+home-root/castle-pad-down-2:
+  behavior: scripts/castle-pad.js
+  castShadow: false
+  children: [{feetPosition: {x: 0, y: 2.05, z: 0}, id: label, text: {color: oklch(0.9 0.1 75), content: "▼ Library", size: 0.2}}]
+  feetPosition: {x: 4.283637201794505, y: 8.4, z: -0.37476969381493075}
+  fx: {script: "fx\npop motes rate=?mobile:5|9 on=disc(.66) life=1.3..2.2 v=up(.35..0.75) size=.025..0.05 acc=curl(.3)*.3+drag(.4) col=hdr(2.4,1.3,.4) a=0>.2:1>.7:.8>0 sz=$size r=sprite(mote,add)"}
+  id: home-root/castle-pad-down-2
+  parent: home-root
+  physics: {body: static, trigger: true}
+  primitive: {kind: scripted, params: {color: oklch(0.82 0.13 70), dir: down, glow: [2.2, 1.2, 0.35], item: pad}, script: scripts/gen/castle-decor.js, seed: 104}
+  receiveShadow: true
+  rotation: {yaw: -265}
+  state: {dir: down, room: "▼ Library", to: {x: 3.026060429977007, y: 28.2, z: 0.18092213764227516}}
+  tags: [castle, castle-decor, castle-pad]
+home-root/castle-pad-down-3:
+  behavior: scripts/castle-pad.js
+  castShadow: false
+  children: [{feetPosition: {x: 0, y: 2.05, z: 0}, id: label, text: {color: oklch(0.9 0.1 75), content: "▼ Bedchamber", size: 0.2}}]
+  feetPosition: {x: 4.283637201794505, y: 12.600000000000001, z: -0.37476969381493075}
+  fx: {script: "fx\npop motes rate=?mobile:5|9 on=disc(.66) life=1.3..2.2 v=up(.35..0.75) size=.025..0.05 acc=curl(.3)*.3+drag(.4) col=hdr(2.4,1.3,.4) a=0>.2:1>.7:.8>0 sz=$size r=sprite(mote,add)"}
+  id: home-root/castle-pad-down-3
+  parent: home-root
+  physics: {body: static, trigger: true}
+  primitive: {kind: scripted, params: {color: oklch(0.82 0.13 70), dir: down, glow: [2.2, 1.2, 0.35], item: pad}, script: scripts/gen/castle-decor.js, seed: 106}
+  receiveShadow: true
+  rotation: {yaw: -265}
+  state: {dir: down, room: "▼ Bedchamber", to: {x: 0.49999999999999867, y: 32.4, z: 0.4019237886466849}}
+  tags: [castle, castle-decor, castle-pad]
+home-root/castle-pad-down-4:
+  behavior: scripts/castle-pad.js
+  castShadow: false
+  children: [{feetPosition: {x: 0, y: 2.05, z: 0}, id: label, text: {color: oklch(0.9 0.1 75), content: "▼ Workshop", size: 0.2}}]
+  feetPosition: {x: 4.283637201794505, y: 16.8, z: -0.37476969381493075}
+  fx: {script: "fx\npop motes rate=?mobile:5|9 on=disc(.66) life=1.3..2.2 v=up(.35..0.75) size=.025..0.05 acc=curl(.3)*.3+drag(.4) col=hdr(2.4,1.3,.4) a=0>.2:1>.7:.8>0 sz=$size r=sprite(mote,add)"}
+  id: home-root/castle-pad-down-4
+  parent: home-root
+  physics: {body: static, trigger: true}
+  primitive: {kind: scripted, params: {color: oklch(0.82 0.13 70), dir: down, glow: [2.2, 1.2, 0.35], item: pad}, script: scripts/gen/castle-decor.js, seed: 108}
+  receiveShadow: true
+  rotation: {yaw: -265}
+  state: {dir: down, room: "▼ Workshop", to: {x: 1.9999999999999996, y: 36.6, z: 0}}
+  tags: [castle, castle-decor, castle-pad]
+home-root/castle-pad-down-5:
+  behavior: scripts/castle-pad.js
+  castShadow: false
+  children: [{feetPosition: {x: 0, y: 2.05, z: 0}, id: label, text: {color: oklch(0.9 0.1 75), content: "▼ Lookout", size: 0.2}}]
+  feetPosition: {x: 4.283637201794505, y: 21, z: -0.37476969381493075}
+  fx: {script: "fx\npop motes rate=?mobile:5|9 on=disc(.66) life=1.3..2.2 v=up(.35..0.75) size=.025..0.05 acc=curl(.3)*.3+drag(.4) col=hdr(2.4,1.3,.4) a=0>.2:1>.7:.8>0 sz=$size r=sprite(mote,add)"}
+  id: home-root/castle-pad-down-5
+  parent: home-root
+  physics: {body: static, trigger: true}
+  primitive: {kind: scripted, params: {color: oklch(0.82 0.13 70), dir: down, glow: [2.2, 1.2, 0.35], item: pad}, script: scripts/gen/castle-decor.js, seed: 109}
+  receiveShadow: true
+  rotation: {yaw: -265}
+  state: {dir: down, room: "▼ Lookout", to: {x: -0.4574561328669753, y: 40.8, z: 1.2792706909468614}}
+  tags: [castle, castle-decor, castle-pad]
+home-root/castle-pad-up-0:
+  behavior: scripts/castle-pad.js
+  castShadow: false
+  children: [{feetPosition: {x: 0, y: 2.05, z: 0}, id: label, text: {color: oklch(0.9 0.1 190), content: "▲ Library", size: 0.2}}]
+  feetPosition: {x: -2.4663786763094993, y: 0, z: -3.5223537904426636}
+  fx: {script: "fx\npop motes rate=?mobile:5|9 on=disc(.66) life=1.3..2.2 v=up(.35..0.75) size=.025..0.05 acc=curl(.3)*.3+drag(.4) col=hdr(.5,2.2,2) a=0>.2:1>.7:.8>0 sz=$size r=sprite(mote,add)"}
+  id: home-root/castle-pad-up-0
+  parent: home-root
+  physics: {body: static, trigger: true}
+  primitive: {kind: scripted, params: {color: oklch(0.8 0.12 190), dir: up, glow: [0.4, 1.9, 1.7], item: pad}, script: scripts/gen/castle-decor.js, seed: 100}
+  receiveShadow: true
+  rotation: {yaw: -145}
+  state: {dir: up, room: "▲ Library", to: {x: 4.988584094275237, y: 28.2, z: 2.738532771757025}}
+  tags: [castle, castle-decor, castle-pad]
+home-root/castle-pad-up-1:
+  behavior: scripts/castle-pad.js
+  castShadow: false
+  children: [{feetPosition: {x: 0, y: 2.05, z: 0}, id: label, text: {color: oklch(0.9 0.1 190), content: "▲ Bedchamber", size: 0.2}}]
+  feetPosition: {x: 1.4706866163003767, y: 4.2, z: -4.040678269379406}
+  fx: {script: "fx\npop motes rate=?mobile:5|9 on=disc(.66) life=1.3..2.2 v=up(.35..0.75) size=.025..0.05 acc=curl(.3)*.3+drag(.4) col=hdr(.5,2.2,2) a=0>.2:1>.7:.8>0 sz=$size r=sprite(mote,add)"}
+  id: home-root/castle-pad-up-1
+  parent: home-root
+  physics: {body: static, trigger: true}
+  primitive: {kind: scripted, params: {color: oklch(0.8 0.12 190), dir: up, glow: [0.4, 1.9, 1.7], item: pad}, script: scripts/gen/castle-decor.js, seed: 101}
+  receiveShadow: true
+  rotation: {yaw: -200}
+  state: {dir: up, room: "▲ Bedchamber", to: {x: 4.988584094275237, y: 32.4, z: 2.738532771757025}}
+  tags: [castle, castle-decor, castle-pad]
+home-root/castle-pad-up-2:
+  behavior: scripts/castle-pad.js
+  castShadow: false
+  children: [{feetPosition: {x: 0, y: 2.05, z: 0}, id: label, text: {color: oklch(0.9 0.1 190), content: "▲ Workshop", size: 0.2}}]
+  feetPosition: {x: -2.1500000000000017, y: 8.4, z: -3.723909236273085}
+  fx: {script: "fx\npop motes rate=?mobile:5|9 on=disc(.66) life=1.3..2.2 v=up(.35..0.75) size=.025..0.05 acc=curl(.3)*.3+drag(.4) col=hdr(.5,2.2,2) a=0>.2:1>.7:.8>0 sz=$size r=sprite(mote,add)"}
+  id: home-root/castle-pad-up-2
+  parent: home-root
+  physics: {body: static, trigger: true}
+  primitive: {kind: scripted, params: {color: oklch(0.8 0.12 190), dir: up, glow: [0.4, 1.9, 1.7], item: pad}, script: scripts/gen/castle-decor.js, seed: 103}
+  receiveShadow: true
+  rotation: {yaw: -150}
+  state: {dir: up, room: "▲ Workshop", to: {x: 4.988584094275237, y: 36.6, z: 2.738532771757025}}
+  tags: [castle, castle-decor, castle-pad]
+home-root/castle-pad-up-3:
+  behavior: scripts/castle-pad.js
+  castShadow: false
+  children: [{feetPosition: {x: 0, y: 2.05, z: 0}, id: label, text: {color: oklch(0.9 0.1 190), content: "▲ Lookout", size: 0.2}}]
+  feetPosition: {x: -7.898971854500428e-16, y: 12.600000000000001, z: -4.3}
+  fx: {script: "fx\npop motes rate=?mobile:5|9 on=disc(.66) life=1.3..2.2 v=up(.35..0.75) size=.025..0.05 acc=curl(.3)*.3+drag(.4) col=hdr(.5,2.2,2) a=0>.2:1>.7:.8>0 sz=$size r=sprite(mote,add)"}
+  id: home-root/castle-pad-up-3
+  parent: home-root
+  physics: {body: static, trigger: true}
+  primitive: {kind: scripted, params: {color: oklch(0.8 0.12 190), dir: up, glow: [0.4, 1.9, 1.7], item: pad}, script: scripts/gen/castle-decor.js, seed: 105}
+  receiveShadow: true
+  rotation: {yaw: -180}
+  state: {dir: up, room: "▲ Lookout", to: {x: 4.988584094275237, y: 40.8, z: 2.738532771757025}}
+  tags: [castle, castle-decor, castle-pad]
+home-root/castle-pad-up-4:
+  behavior: scripts/castle-pad.js
+  castShadow: false
+  children: [{feetPosition: {x: 0, y: 2.05, z: 0}, id: label, text: {color: oklch(0.9 0.1 190), content: "▲ Battlements", size: 0.2}}]
+  feetPosition: {x: -3.5223537904426645, y: 16.8, z: -2.4663786763094984}
+  fx: {script: "fx\npop motes rate=?mobile:5|9 on=disc(.66) life=1.3..2.2 v=up(.35..0.75) size=.025..0.05 acc=curl(.3)*.3+drag(.4) col=hdr(.5,2.2,2) a=0>.2:1>.7:.8>0 sz=$size r=sprite(mote,add)"}
+  id: home-root/castle-pad-up-4
+  parent: home-root
+  physics: {body: static, trigger: true}
+  primitive: {kind: scripted, params: {color: oklch(0.8 0.12 190), dir: up, glow: [0.4, 1.9, 1.7], item: pad}, script: scripts/gen/castle-decor.js, seed: 107}
+  receiveShadow: true
+  rotation: {yaw: -125}
+  state: {dir: up, room: "▲ Battlements", to: {x: 4.988584094275237, y: 45, z: 2.738532771757025}}
+  tags: [castle, castle-decor, castle-pad]
+home-root/castle-painting-cat:
+  castShadow: false
+  children: [{castShadow: false, feetPosition: {x: 0, y: 0.69, z: -0.035}, id: canvas, material: {roughness: 0.9, texture: /cdn/value.912b45f8ba11ab57547c5437bf094e4fae33fab6633d767058b95ae6603bc182.png}, physics: none, primitive: {height: 1.2, kind: plane, width: 0.9}, rotation: {yaw: 180}}]
+  feetPosition: {x: -5.544186462636859, y: 9.700000000000001, z: 2.0179188456214465}
+  id: home-root/castle-painting-cat
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {h: 1.2, item: frame, w: 0.9}, script: scripts/gen/castle-decor.js, seed: 125}
+  receiveShadow: true
+  rotation: {yaw: -70}
+  tags: [castle, castle-decor]
+home-root/castle-painting-dragon:
+  castShadow: false
+  children: [{castShadow: false, feetPosition: {x: 0, y: 0.58, z: -0.035}, id: canvas, material: {roughness: 0.9, texture: /cdn/value.07d3cc45fec2db95c9b277259d5d3bb5b9767ca94a8b53a40f6c16dc906414f4.png}, physics: none, primitive: {height: 0.98, kind: plane, width: 1.3}, rotation: {yaw: 180}}]
+  feetPosition: {x: 2.017918845621447, y: 18.25, z: -5.544186462636859}
+  id: home-root/castle-painting-dragon
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {h: 0.98, item: frame, w: 1.3}, script: scripts/gen/castle-decor.js, seed: 128}
+  receiveShadow: true
+  rotation: {yaw: -200}
+  tags: [castle, castle-decor]
+home-root/castle-painting-flowers:
+  castShadow: false
+  children: [{castShadow: false, feetPosition: {x: 0, y: 0.69, z: -0.035}, id: canvas, material: {roughness: 0.9, texture: /cdn/value.ef213fbb0c8c2e37f8a5f7547de18b55be7b3ebcc88b6be221423a6680335695.png}, physics: none, primitive: {height: 1.2, kind: plane, width: 0.9}, rotation: {yaw: 180}}]
+  feetPosition: {x: -5.109549882328189, y: 1.3, z: 2.9499999999999997}
+  id: home-root/castle-painting-flowers
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {h: 1.2, item: frame, w: 0.9}, script: scripts/gen/castle-decor.js, seed: 122}
+  receiveShadow: true
+  rotation: {yaw: -60}
+  tags: [castle, castle-decor]
+home-root/castle-painting-forest:
+  castShadow: false
+  children: [{castShadow: false, feetPosition: {x: 0, y: 0.69, z: -0.035}, id: canvas, material: {roughness: 0.9, texture: /cdn/value.02d45fefb21e9535d2ede4c6ff08a085d647445fc8756ed3d09f93705fa087f7.png}, physics: none, primitive: {height: 1.2, kind: plane, width: 0.9}, rotation: {yaw: 180}}]
+  feetPosition: {x: 5.347215943516235, y: 13.900000000000002, z: -2.4934477442701257}
+  id: home-root/castle-painting-forest
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {h: 1.2, item: frame, w: 0.9}, script: scripts/gen/castle-decor.js, seed: 127}
+  receiveShadow: true
+  rotation: {yaw: -245}
+  tags: [castle, castle-decor]
+home-root/castle-painting-keep:
+  castShadow: false
+  children: [{castShadow: false, feetPosition: {x: 0, y: 0.69, z: -0.035}, id: canvas, material: {roughness: 0.9, texture: /cdn/value.9de8f4431d77017109900b073deb722852445b83322003ec4c7b5c6d4025d8ec.png}, physics: none, primitive: {height: 1.2, kind: plane, width: 0.9}, rotation: {yaw: 180}}]
+  feetPosition: {x: 4.384554470316626, y: 5.5, z: 3.947870577517264}
+  id: home-root/castle-painting-keep
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {h: 1.2, item: frame, w: 0.9}, script: scripts/gen/castle-decor.js, seed: 124}
+  receiveShadow: true
+  rotation: {yaw: 48}
+  tags: [castle, castle-decor]
+home-root/castle-painting-lake:
+  castShadow: false
+  children: [{castShadow: false, feetPosition: {x: 0, y: 0.69, z: -0.035}, id: canvas, material: {roughness: 0.9, texture: /cdn/value.b900177b6cd27e2422b7fd23a1755391848584637b32fcd7739af4dc39b2f1c0.png}, physics: none, primitive: {height: 1.2, kind: plane, width: 0.9}, rotation: {yaw: 180}}]
+  feetPosition: {x: 5.698962375105503, y: 1.3, z: 1.5270323661048724}
+  id: home-root/castle-painting-lake
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {h: 1.2, item: frame, w: 0.9}, script: scripts/gen/castle-decor.js, seed: 121}
+  receiveShadow: true
+  rotation: {yaw: 75}
+  tags: [castle, castle-decor]
+home-root/castle-painting-map:
+  castShadow: false
+  children: [{castShadow: false, feetPosition: {x: 0, y: 0.69, z: -0.035}, id: canvas, material: {roughness: 0.9, texture: /cdn/value.2806761e23394543b6e90cba111a44eacb03200dd1251e47e14188c62c7050c4.png}, physics: none, primitive: {height: 1.2, kind: plane, width: 0.9}, rotation: {yaw: 180}}]
+  feetPosition: {x: 1.2266789758247807, y: 5.5, z: -5.771070844329453}
+  id: home-root/castle-painting-map
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {h: 1.2, item: frame, w: 0.9}, script: scripts/gen/castle-decor.js, seed: 123}
+  receiveShadow: true
+  rotation: {yaw: -192}
+  tags: [castle, castle-decor]
+home-root/castle-painting-sunflowers:
+  castShadow: false
+  children: [{castShadow: false, feetPosition: {x: 0, y: 0.58, z: -0.035}, id: canvas, material: {roughness: 0.9, texture: /cdn/value.f3f7bd40aaa7bc0180c71a6663a1aa5c12c0cda59fbfe798f9c89898b22003ca.png}, physics: none, primitive: {height: 0.98, kind: plane, width: 1.3}, rotation: {yaw: 180}}]
+  feetPosition: {x: 5.109549882328187, y: 9.85, z: -2.950000000000003}
+  id: home-root/castle-painting-sunflowers
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {h: 0.98, item: frame, w: 1.3}, script: scripts/gen/castle-decor.js, seed: 126}
+  receiveShadow: true
+  rotation: {yaw: -240}
+  tags: [castle, castle-decor]
 home-root/castle-plaque-1:
   castShadow: true
   feetPosition: {x: -2.041860255654242, y: 6.95, z: 5.609964946091873}
@@ -2293,6 +2763,136 @@ home-root/castle-plaque-4:
   rotation: {yaw: -20}
   tags: [castle, castle-furniture]
   ui: "<div face=\"front\" width=\"1.0m\" style=\"height:300px;display:flex;align-items:center;justify-content:center;color:#f2e6cf;font-family:Georgia,serif;font-size:130px;letter-spacing:6px\">LOOKOUT</div>"
+home-root/castle-potted-plant-0:
+  castShadow: true
+  feetPosition: {x: -1.3717409390433593, y: 0, z: -5.119406879332062}
+  id: home-root/castle-potted-plant-0
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: pottedPlant, kind: fern}, script: scripts/gen/castle-decor.js, seed: 141}
+  receiveShadow: true
+  rotation: {yaw: 0}
+  tags: [castle, castle-decor]
+home-root/castle-potted-plant-1:
+  castShadow: true
+  feetPosition: {x: 5.119406879332062, y: 0, z: -1.3717409390433595}
+  id: home-root/castle-potted-plant-1
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: pottedPlant, kind: olive}, script: scripts/gen/castle-decor.js, seed: 142}
+  receiveShadow: true
+  rotation: {yaw: 67}
+  tags: [castle, castle-decor]
+home-root/castle-potted-plant-10:
+  castShadow: true
+  feetPosition: {x: 4.9803708901653145, y: 16.8, z: -1.8127067596260436}
+  id: home-root/castle-potted-plant-10
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: pottedPlant, kind: olive}, script: scripts/gen/castle-decor.js, seed: 151}
+  receiveShadow: true
+  rotation: {yaw: 670}
+  tags: [castle, castle-decor]
+home-root/castle-potted-plant-11:
+  castShadow: true
+  feetPosition: {x: -4.792432366008133, y: 21, z: -1.74430273096091}
+  id: home-root/castle-potted-plant-11
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: pottedPlant, kind: olive}, script: scripts/gen/castle-decor.js, seed: 152}
+  receiveShadow: true
+  rotation: {yaw: 737}
+  tags: [castle, castle-decor]
+home-root/castle-potted-plant-12:
+  castShadow: true
+  feetPosition: {x: -3.2782168094013504, y: 21, z: 3.9068266599067876}
+  id: home-root/castle-potted-plant-12
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: pottedPlant, kind: fern}, script: scripts/gen/castle-decor.js, seed: 153}
+  receiveShadow: true
+  rotation: {yaw: 804}
+  tags: [castle, castle-decor]
+home-root/castle-potted-plant-2:
+  castShadow: true
+  feetPosition: {x: -2.239876787225706, y: 0, z: 4.8034312712942455}
+  id: home-root/castle-potted-plant-2
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: pottedPlant, kind: tall}, script: scripts/gen/castle-decor.js, seed: 143}
+  receiveShadow: true
+  rotation: {yaw: 134}
+  tags: [castle, castle-decor]
+home-root/castle-potted-plant-3:
+  castShadow: true
+  feetPosition: {x: -0.9203353416347306, y: 4.2, z: 5.2194810909647025}
+  id: home-root/castle-potted-plant-3
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: pottedPlant, kind: fern}, script: scripts/gen/castle-decor.js, seed: 144}
+  receiveShadow: true
+  rotation: {yaw: 201}
+  tags: [castle, castle-decor]
+home-root/castle-potted-plant-4:
+  castShadow: true
+  feetPosition: {x: 5.2194810909647025, y: 4.2, z: -0.920335341634731}
+  id: home-root/castle-potted-plant-4
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: pottedPlant, kind: olive}, script: scripts/gen/castle-decor.js, seed: 145}
+  receiveShadow: true
+  rotation: {yaw: 268}
+  tags: [castle, castle-decor]
+home-root/castle-potted-plant-5:
+  castShadow: true
+  feetPosition: {x: 2.6500000000000004, y: 8.4, z: -4.589934640057525}
+  id: home-root/castle-potted-plant-5
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: pottedPlant, kind: fern}, script: scripts/gen/castle-decor.js, seed: 146}
+  receiveShadow: true
+  rotation: {yaw: 335}
+  tags: [castle, castle-decor]
+home-root/castle-potted-plant-6:
+  castShadow: true
+  feetPosition: {x: -0.9203353416347306, y: 8.4, z: 5.2194810909647025}
+  id: home-root/castle-potted-plant-6
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: pottedPlant, kind: tall}, script: scripts/gen/castle-decor.js, seed: 147}
+  receiveShadow: true
+  rotation: {yaw: 402}
+  tags: [castle, castle-decor]
+home-root/castle-potted-plant-7:
+  castShadow: true
+  feetPosition: {x: 4.589934640057523, y: 12.600000000000001, z: -2.650000000000002}
+  id: home-root/castle-potted-plant-7
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: pottedPlant, kind: olive}, script: scripts/gen/castle-decor.js, seed: 148}
+  receiveShadow: true
+  rotation: {yaw: 469}
+  tags: [castle, castle-decor]
+home-root/castle-potted-plant-8:
+  castShadow: true
+  feetPosition: {x: 0.18496733252325573, y: 12.600000000000001, z: 5.296771383201207}
+  id: home-root/castle-potted-plant-8
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: pottedPlant, kind: fern}, script: scripts/gen/castle-decor.js, seed: 149}
+  receiveShadow: true
+  rotation: {yaw: 536}
+  tags: [castle, castle-decor]
+home-root/castle-potted-plant-9:
+  castShadow: true
+  feetPosition: {x: -2.6499999999999986, y: 16.8, z: 4.589934640057525}
+  id: home-root/castle-potted-plant-9
+  parent: home-root
+  physics: static
+  primitive: {kind: scripted, params: {item: pottedPlant, kind: fern}, script: scripts/gen/castle-decor.js, seed: 150}
+  receiveShadow: true
+  rotation: {yaw: 603}
+  tags: [castle, castle-decor]
 home-root/castle-rack-3:
   castShadow: true
   feetPosition: {x: 2.9000000000000004, y: 12.6, z: -5.0229473419497435}
@@ -2387,12 +2987,6 @@ home-root/castle-torch-0b:
   receiveShadow: true
   rotation: {yaw: -160}
   tags: [castle, castle-furniture]
-home-root/castle-torch-0b/castle-torch-0b/light:
-  feetPosition: {x: 0, y: 0.6, z: -0.3}
-  id: home-root/castle-torch-0b/castle-torch-0b/light
-  light: {color: oklch(0.85 0.1 65), decay: 2, distance: 11, intensity: 7, kind: point, shadow: {enabled: false}}
-  parent: home-root/castle-torch-0b
-  tags: [castle, castle-light]
 home-root/castle-torch-1a:
   castShadow: true
   feetPosition: {x: 5.609964946091873, y: 6.4, z: 2.041860255654242}
@@ -2421,12 +3015,6 @@ home-root/castle-torch-1b:
   receiveShadow: true
   rotation: {yaw: -142}
   tags: [castle, castle-furniture]
-home-root/castle-torch-1b/castle-torch-1b/light:
-  feetPosition: {x: 0, y: 0.6, z: -0.3}
-  id: home-root/castle-torch-1b/castle-torch-1b/light
-  light: {color: oklch(0.85 0.1 65), decay: 2, distance: 11, intensity: 7, kind: point, shadow: {enabled: false}}
-  parent: home-root/castle-torch-1b
-  tags: [castle, castle-light]
 home-root/castle-torch-2a:
   castShadow: true
   feetPosition: {x: 2.9850000000000003, y: 10.600000000000001, z: 5.170171660593098}
@@ -2455,12 +3043,6 @@ home-root/castle-torch-2b:
   receiveShadow: true
   rotation: {yaw: -125}
   tags: [castle, castle-furniture]
-home-root/castle-torch-2b/castle-torch-2b/light:
-  feetPosition: {x: 0, y: 0.6, z: -0.3}
-  id: home-root/castle-torch-2b/castle-torch-2b/light
-  light: {color: oklch(0.85 0.1 65), decay: 2, distance: 11, intensity: 7, kind: point, shadow: {enabled: false}}
-  parent: home-root/castle-torch-2b
-  tags: [castle, castle-light]
 home-root/castle-torch-3a:
   castShadow: true
   feetPosition: {x: -0.5203197842035197, y: 14.8, z: 5.947282347607721}
@@ -2489,12 +3071,6 @@ home-root/castle-torch-3b:
   receiveShadow: true
   rotation: {yaw: -125}
   tags: [castle, castle-furniture]
-home-root/castle-torch-3b/castle-torch-3b/light:
-  feetPosition: {x: 0, y: 0.6, z: -0.3}
-  id: home-root/castle-torch-3b/castle-torch-3b/light
-  light: {color: oklch(0.85 0.1 65), decay: 2, distance: 11, intensity: 7, kind: point, shadow: {enabled: false}}
-  parent: home-root/castle-torch-3b
-  tags: [castle, castle-light]
 home-root/castle-torch-4a:
   castShadow: true
   feetPosition: {x: 5.97, y: 19, z: 0}
@@ -2523,12 +3099,33 @@ home-root/castle-torch-4b:
   receiveShadow: true
   rotation: {yaw: -142}
   tags: [castle, castle-furniture]
-home-root/castle-torch-4b/castle-torch-4b/light:
-  feetPosition: {x: 0, y: 0.6, z: -0.3}
-  id: home-root/castle-torch-4b/castle-torch-4b/light
-  light: {color: oklch(0.85 0.1 65), decay: 2, distance: 11, intensity: 7, kind: point, shadow: {enabled: false}}
-  parent: home-root/castle-torch-4b
-  tags: [castle, castle-light]
+home-root/castle-vase-0:
+  castShadow: false
+  feetPosition: {x: 3.7, y: 0.76, z: 0.5}
+  id: home-root/castle-vase-0
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: vase}, script: scripts/gen/castle-decor.js, seed: 154}
+  receiveShadow: true
+  tags: [castle, castle-decor]
+home-root/castle-vase-1:
+  castShadow: false
+  feetPosition: {x: -3.007387575010062, y: 4.98, z: -2.0666851305094984}
+  id: home-root/castle-vase-1
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: vase}, script: scripts/gen/castle-decor.js, seed: 155}
+  receiveShadow: true
+  tags: [castle, castle-decor]
+home-root/castle-vase-2:
+  castShadow: false
+  feetPosition: {x: -2.527946662292627, y: 9.040000000000001, z: 2.12119911196558}
+  id: home-root/castle-vase-2
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, params: {item: vase}, script: scripts/gen/castle-decor.js, seed: 156}
+  receiveShadow: true
+  tags: [castle, castle-decor]
 home-root/castle-workbench-3:
   castShadow: true
   feetPosition: {x: -4.719838450625191, y: 12.6, z: 2.7249999999999996}
