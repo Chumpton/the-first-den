@@ -58,9 +58,9 @@ const kinds = {
     const pal = ctx.params.berry ? ["#2d5230", "#3b6936", "#4e7f3e", "#5e8d44"] : [LEAF[0], LEAF[1], LEAF[2], LEAF[3]];
     for (let i = 0; i < c; i++) { const th = i / c * TAU + ctx.random(), d = i ? h * 0.35 : 0, s = h * (0.38 + ctx.random() * 0.15);
       blob(ctx, Math.cos(th) * d, s * 0.7, Math.sin(th) * d, s, s * 0.8, s, seg, pal); }
-    if (ctx.params.berry && lod < 3) { ctx.albedo(null); ctx.color("#b3263a"); ctx.emissive(null);
+    if (ctx.params.berry && lod < 3) { const bc = ctx.params.berryColor || "#c02a3e"; ctx.albedo(null); ctx.color(bc); ctx.emissive(null);
       for (let i = 0; i < 14; i++) { const th = ctx.random() * TAU, e = ctx.random() * 1.2, R = h * 0.62; const x = Math.cos(th) * Math.cos(e) * R, y = h * 0.4 + Math.sin(e) * R * 0.7, z = Math.sin(th) * Math.cos(e) * R;
-        blob(ctx, x, y, z, 0.035, 0.035, 0.035, 4, ["#c02a3e"]); } }
+        blob(ctx, x, y, z, 0.035, 0.035, 0.035, 4, [bc]); } }
   },
   fern(ctx, lod) {
     const L0 = Number(ctx.params.size ?? 0.9), fronds = lod >= 3 ? 5 : 10, segs = lod >= 3 ? 3 : 6;

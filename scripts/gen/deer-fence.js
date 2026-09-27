@@ -74,7 +74,10 @@ function obb(ctx, a, b, ya, yb, h0, h1, t) { // a block along a->b (xz), bottom 
   const T = [[a[0] - nx, ya + h1, a[1] - nz], [a[0] + nx, ya + h1, a[1] + nz], [b[0] + nx, yb + h1, b[1] + nz], [b[0] - nx, yb + h1, b[1] - nz]];
   solid(ctx, B, T);
 }
-function lime(ctx) { const l = 0.84 + ctx.random() * 0.1; ctx.albedo(LIME_TEX); ctx.color(`oklch(${l.toFixed(3)} ${(0.018 + ctx.random() * 0.02).toFixed(3)} ${Math.round(70 + ctx.random() * 25)})`); ctx.roughness(0.92); }
+// warm pale limestone: a narrow, high tint band (a tint multiplies the texture; below L 0.9 a block goes grey-dark and the courses read as a checker)
+function lime(ctx) { const l = 0.93 + ctx.random() * 0.045; ctx.albedo(LIME_TEX); ctx.color(`oklch(${l.toFixed(3)} ${(0.022 + ctx.random() * 0.012).toFixed(3)} ${Math.round(74 + ctx.random() * 14)})`); ctx.roughness(0.92); }
+const MOSS = ['oklch(0.72 0.09 128)', 'oklch(0.76 0.10 122)', 'oklch(0.68 0.08 134)'];
+function moss(ctx) { ctx.albedo(null); ctx.color(MOSS[Math.floor(ctx.random() * MOSS.length)]); ctx.roughness(1); }
 // trailing vines spilling down from the coping on both faces: leafy strands with bloom clusters
 const BLOOMS = ['oklch(0.78 0.14 350)', 'oklch(0.96 0.02 95)', 'oklch(0.66 0.15 300)', 'oklch(0.86 0.15 90)', 'oklch(0.72 0.16 25)'];
 function dtri(ctx, a, b, c) { ctx.tri(a[0], a[1], a[2], b[0], b[1], b[2], c[0], c[1], c[2]); ctx.tri(a[0], a[1], a[2], c[0], c[1], c[2], b[0], b[1], b[2]); }
@@ -83,16 +86,16 @@ function vines(ctx, a, b, lod) {
   const bloom = BLOOMS[Math.floor(ctx.random() * BLOOMS.length)];
   for (const side of [-1, 1]) {
     for (let d = 0.3 + ctx.random() * 0.5; d < L - 0.2; d += 0.9 + ctx.random() * 1.1) {
-      if (ctx.random() < 0.25) continue;
+      if (ctx.random() < 0.45) continue;
       const t = d / L, gy = a[1] + (b[1] - a[1]) * t, off = ST / 2 + 0.045;
       const bx = a[0] + dx * t + nx * off * side, bz = a[2] + dz * t + nz * off * side;
       const len = 0.6 + ctx.random() * (SH - 0.7), n = lod <= 2 ? 6 : 3;
       let px = bx, py = gy + SH + 0.04, pz = bz, sw = (ctx.random() - 0.5) * 0.3;
       for (let k = 1; k <= n; k++) {
         const y = gy + SH + 0.04 - len * k / n, w = Math.sin(k * 1.7 + sw * 9) * 0.12 + sw * k / n, x = bx + tx * w, z = bz + tz * w;
-        ctx.albedo(null); ctx.color('oklch(0.45 0.08 135)'); ctx.roughness(0.9);
+        ctx.albedo(null); ctx.color('oklch(0.56 0.08 132)'); ctx.roughness(0.9);
         dtri(ctx, [px - tx * 0.012, py, pz - tz * 0.012], [px + tx * 0.012, py, pz + tz * 0.012], [x, y, z]);
-        ctx.color(`oklch(${(0.5 + ctx.random() * 0.14).toFixed(3)} 0.13 ${Math.round(128 + ctx.random() * 16)})`);
+        ctx.color(`oklch(${(0.62 + ctx.random() * 0.1).toFixed(3)} 0.11 ${Math.round(124 + ctx.random() * 14)})`);
         for (const lr of [-1, 1]) { const lx = x + tx * lr * 0.13, lz = z + tz * lr * 0.13, oy = y + 0.04;
           dtri(ctx, [x, y, z], [lx + nx * side * 0.03, oy + 0.05, lz + nz * side * 0.03], [lx, oy - 0.05, lz]); }
         if (lod <= 2 && ctx.random() < 0.45) {
@@ -108,7 +111,7 @@ function vines(ctx, a, b, lod) {
     }
   }
 }
-function stoneRun(ctx, pts, lod) {
+function stoneRun(ctx, pts, lod, p = {}) {
   const P = (i, t) => { const a = pts[i], b = pts[i + 1]; return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; };
   for (let i = 0; i < pts.length - 1; i++) {
     const a = pts[i], b = pts[i + 1], L = Math.hypot(b[0] - a[0], b[2] - a[2]);
@@ -124,31 +127,28 @@ function stoneRun(ctx, pts, lod) {
         }
       }
       // mortar core so gaps read dark, not see-through
-      ctx.albedo(null); ctx.color('oklch(0.52 0.02 80)'); obb(ctx, [a[0], a[2]], [b[0], b[2]], a[1], b[1], -0.3, SH - 0.14, ST - 0.08);
+      ctx.albedo(null); ctx.color('oklch(0.76 0.025 80)'); obb(ctx, [a[0], a[2]], [b[0], b[2]], a[1], b[1], -0.3, SH - 0.14, ST - 0.08);
     } else { lime(ctx); obb(ctx, [a[0], a[2]], [b[0], b[2]], a[1], b[1], -0.35, SH - 0.14, ST); }
     // coping: a wider pale slab
     ctx.albedo(LIME_TEX); ctx.color('oklch(0.93 0.02 85)'); ctx.roughness(0.85);
     obb(ctx, [a[0], a[2]], [b[0], b[2]], a[1], b[1], SH - 0.14, SH, ST + 0.16);
-    // moss on the coping and at the foot
+    // moss on the coping: soft sage cushions a little narrower than the slab, so its pale lip still reads; a mossy foot
     if (lod <= 3) {
-      ctx.albedo(MOSS_TEX); ctx.color('oklch(0.72 0.11 132)'); ctx.roughness(1);
-      const t0 = ctx.random() * 0.5, t1 = t0 + 0.2 + ctx.random() * 0.3, A = P(i, t0), B = P(i, t1);
-      obb(ctx, [A[0], A[2]], [B[0], B[2]], A[1], B[1], SH, SH + 0.05, ST + 0.05);
-      if (lod <= 2) { const C = P(i, ctx.random() * 0.6), D = P(i, Math.min(1, ctx.random() * 0.4 + 0.6)); obb(ctx, [C[0], C[2]], [D[0], D[2]], C[1], D[1], -0.05, 0.14 + ctx.random() * 0.12, ST + 0.18); }
+      const n = lod <= 2 ? Math.max(1, Math.round(L / 1.6)) : 1;
+      for (let k = 0; k < n; k++) {
+        if (lod <= 2 && ctx.random() < 0.3) continue;
+        const c = (k + 0.5) / n, hw = (lod <= 2 ? 0.25 + ctx.random() * 0.35 : 0.3) / n, A = P(i, Math.max(0, c - hw)), B = P(i, Math.min(1, c + hw));
+        moss(ctx); obb(ctx, [A[0], A[2]], [B[0], B[2]], A[1], B[1], SH, SH + 0.03 + ctx.random() * 0.03, ST - 0.02 + ctx.random() * 0.1);
+      }
+      if (lod <= 2) { const C = P(i, ctx.random() * 0.5), D = P(i, Math.min(1, ctx.random() * 0.4 + 0.55)); moss(ctx); obb(ctx, [C[0], C[2]], [D[0], D[2]], C[1], D[1], -0.05, 0.1 + ctx.random() * 0.1, ST + 0.12); }
     }
-    // ivy curtain crawling up both faces on some runs
+    // flowering vines trailing from the coping on both faces
     if (lod <= 3) vines(ctx, a, b, lod);
-    if (lod <= 2 && ctx.random() < 0.7) {
-      ctx.albedo(IVY_TEX); ctx.color(`oklch(${(0.62 + ctx.random() * 0.1).toFixed(3)} 0.12 ${Math.round(128 + ctx.random() * 18)})`); ctx.roughness(0.9);
-      const tc = 0.2 + ctx.random() * 0.6, w = (0.5 + ctx.random() * 0.9) / L, top = 0.9 + ctx.random() * (SH - 0.9);
-      const A = P(i, Math.max(0, tc - w)), B = P(i, Math.min(1, tc + w));
-      obb(ctx, [A[0], A[2]], [B[0], B[2]], A[1], B[1], 0, top, ST + 0.07);
-      for (let k = 0; k < 3; k++) { const c = P(i, Math.max(0, Math.min(1, tc + (ctx.random() - 0.5) * w * 2))), cw = 0.18 / L; const C0 = P(i, Math.max(0, tc - w + k * w * 0.7)), C1 = P(i, Math.min(1, tc - w + k * w * 0.7 + cw)); obb(ctx, [C0[0], C0[2]], [C1[0], C1[2]], C0[1], C1[1], top - 0.1, Math.min(SH + 0.08, top + 0.35 + ctx.random() * 0.4), ST + 0.09); }
-    }
   }
   // piers: every 4th point and both ends, a little taller with a pyramid cap
   for (let i = 0; i < pts.length; i++) {
     if (i % 4 && i !== pts.length - 1) continue;
+    if ((i === 0 && p.noStartPier) || (i === pts.length - 1 && p.noEndPier)) continue; // a shared corner: the neighbouring run stands the pier
     const [x, y, z] = pts[i], s = 0.46;
     lime(ctx); box(ctx, x - s, y - 0.35, z - s, x + s, y + SH + 0.2, z + s);
     ctx.albedo(LIME_TEX); ctx.color('oklch(0.94 0.02 85)'); box(ctx, x - s - 0.08, y + SH + 0.2, z - s - 0.08, x + s + 0.08, y + SH + 0.34, z + s + 0.08);
@@ -169,7 +169,7 @@ function stonePiers(ctx, hw) {
 export function geometry(ctx) {
   const p = ctx.params || {}, lod = ctx.lod ?? 1;
   ctx.flat(); ctx.roughness(0.9);
-  if (p.kind === 'gate') { if (p.style === 'stone') stonePiers(ctx, p.w ?? 9); else gate(ctx, p.w ?? 9, lod); } else if (p.style === 'stone') stoneRun(ctx, p.pts || [], lod); else run(ctx, p.pts || [], lod);
+  if (p.kind === 'gate') { if (p.style === 'stone') stonePiers(ctx, p.w ?? 9); else gate(ctx, p.w ?? 9, lod); } else if (p.style === 'stone') stoneRun(ctx, p.pts || [], lod, p); else run(ctx, p.pts || [], lod);
 }
 export function collider(ctx) {
   const p = ctx.params || {};
