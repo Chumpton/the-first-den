@@ -1,0 +1,75 @@
+# The hilltop village's neighbours: every number scripts/village-crowd.js reads. A new villager is one roster row.
+# Roles: wander (strolls between its own spots, pausing), garden (tends the beds at `at`), sit (on the fire's log bench,
+# facing `face`), stand (keeps near `at`, idles, now and then a short stroll among `spots`).
+visibleRange: 90
+turnRate: 6
+reach: 4
+pressSecs: 4
+speed: [0.9, 1.2]
+kidSpeed: [1.5, 2.2]
+restSecs: [3, 8]
+stuckSecs: 2.5
+roster:
+  - id: villager-bram
+    name: Old Bram
+    role: stand
+    at: [161.5, 91]
+    face: [150, 92]
+    spots: [[161.5, 91], [166, 97.8], [161.5, 88]]
+    params: { jumper: 'oklch(0.55 0.07 150)', pants: 'oklch(0.42 0.04 60)', hat: wide, hatColor: 'oklch(0.5 0.07 50)', hair: 'oklch(0.94 0.01 90)', beard: true, staff: true, scarf: 'oklch(0.7 0.13 30)' }
+    lines:
+      - "Took you a while up those bends, eh? The view pays it back."
+      - "Every lantern on that path was lit by a neighbour. We take turns."
+      - "The notice board says bread at noon. It always says bread at noon."
+  - id: villager-nell
+    name: Mossy Nell
+    role: garden
+    at: [163.3, 106.4]
+    face: [162.3, 108.6]
+    params: { jumper: 'oklch(0.78 0.1 95)', pants: 'oklch(0.5 0.06 140)', apron: 'oklch(0.62 0.1 145)', hat: straw, hatColor: 'oklch(0.84 0.09 85)', hair: 'oklch(0.55 0.12 40)' }
+    lines:
+      - "Beans are climbing the teepee faster than Pip climbs the tree."
+      - "Take a carrot on your way. The garden's everyone's."
+      - "The scarecrow's name is Gerald. He is useless and we love him."
+  - id: villager-pip
+    name: Pip
+    role: wander
+    kid: true
+    scale: 0.68
+    at: [174, 92]
+    spots: [[174.5, 91], [170, 86], [176, 95], [168, 94], [178, 88], [172, 100], [165, 86]]
+    params: { jumper: 'oklch(0.7 0.14 250)', pants: 'oklch(0.5 0.1 30)', hat: beanie, hatColor: 'oklch(0.72 0.16 30)', hair: 'oklch(0.4 0.06 50)', scarf: 'oklch(0.85 0.12 95)' }
+    lines:
+      - "I can swing so high I see the whole town!"
+      - "Don't tell Nell, but Gerald's hat was my idea."
+      - "Race you to the well! ...I'm already here."
+  - id: villager-hazel
+    name: Hazel
+    role: sit
+    at: [179.37, 84.3]
+    face: [177.5, 84.5]
+    params: { jumper: 'oklch(0.62 0.13 350)', pants: 'oklch(0.4 0.04 260)', scarf: 'oklch(0.86 0.06 200)', hat: bun, hair: 'oklch(0.66 0.08 60)' }
+    lines:
+      - "Sit a while. The fire's never out; somebody always wanders by."
+      - "I'm knitting Bram a new scarf. Don't tell him it's orange again."
+      - "On a clear night you can see the lake glitter from here."
+  - id: villager-tomas
+    name: Tomas the Baker
+    role: stand
+    at: [163.2, 74.3]
+    face: [162.3, 71.4]
+    spots: [[163.2, 74.3], [167, 80], [172, 84], [163.2, 74.3]]
+    params: { jumper: 'oklch(0.9 0.03 80)', pants: 'oklch(0.45 0.05 50)', apron: 'oklch(0.96 0.01 90)', hat: beanie, hatColor: 'oklch(0.96 0.01 90)', hair: 'oklch(0.3 0.03 40)', beard: false }
+    lines:
+      - "Oven's hot since dawn. Seeded loaf, honey buns, and one burnt one for me."
+      - "Bread tastes better when the whole hill queues for it."
+  - id: villager-wren
+    name: Wren
+    role: wander
+    at: [180, 97]
+    spots: [[181.3, 101.4], [169.6, 104.5], [160.5, 99.3], [160.5, 80.7], [169.6, 75.5], [181.3, 78.6], [187.8, 90], [176.5, 70.3]]
+    params: { jumper: 'oklch(0.58 0.1 200)', pants: 'oklch(0.5 0.05 70)', scarf: 'oklch(0.78 0.14 60)', hat: none, hair: 'oklch(0.35 0.05 30)' }
+    lines:
+      - "Seven doors, seven kettles. I visit all of them before lunch."
+      - "The hall's for everyone: suppers, dances, and arguing about pie."
+      - "Laundry dries in an hour up here. The wind's a good neighbour."

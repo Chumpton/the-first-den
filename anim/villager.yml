@@ -1,0 +1,53 @@
+# The hilltop villagers' clips (scripts/gen/villager.js bones). Pitch + tips the −Z front up.
+idle:
+  duration: 3.2
+  tracks:
+    spine: { pitch: [0, 1.5, 0], roll: [0, 1, 0, -1, 0] }
+    head: { yaw: [0, 8, 8, -6, 0], pitch: [0, -3, 0] }
+    armL: { roll: [-4, -6, -4] }
+    armR: { roll: [4, 6, 4] }
+walk:
+  duration: 0.9
+  tracks:
+    legL: { pitch: [26, 0, -26, 0, 26] }
+    legR: { pitch: [-26, 0, 26, 0, -26] }
+    armL: { pitch: [-22, 0, 22, 0, -22] }
+    armR: { pitch: [22, 0, -22, 0, 22] }
+    root: { y: [0, 0.03, 0, 0.03, 0], roll: [2, 0, -2, 0, 2] }
+    head: { pitch: [2, 0, 2, 0, 2] }
+sit:
+  duration: 4
+  tracks:
+    root: { y: [-0.24, -0.24] }
+    legL: { pitch: [82, 82] }
+    legR: { pitch: [82, 82] }
+    spine: { pitch: [-4, -2, -4] }
+    armL: { pitch: [34, 34], roll: [-6, -6] }
+    armR: { pitch: [34, 30, 34], roll: [6, 6] }
+    head: { yaw: [0, 12, 12, -10, 0], pitch: [0, 4, 0] }
+garden:
+  duration: 2.4
+  tracks:
+    spine: { pitch: [-40, -46, -40] }
+    root: { y: [-0.06, -0.06] }
+    legL: { pitch: [18, 18] }
+    legR: { pitch: [-8, -8] }
+    armL: { pitch: [55, 70, 55] }
+    armR: { pitch: [70, 45, 70, 45, 70] }
+    head: { pitch: [10, 14, 10] }
+talk:
+  duration: 2
+  tracks:
+    armR: { pitch: [10, 45, 30, 50, 10], roll: [4, -10, 4] }
+    armL: { pitch: [0, 12, 0] }
+    head: { yaw: [0, 6, -4, 0], pitch: [0, 4, 0, 4, 0] }
+    spine: { pitch: [0, 3, 0] }
+sitTalk:
+  duration: 2
+  tracks:
+    root: { y: [-0.24, -0.24] }
+    legL: { pitch: [82, 82] }
+    legR: { pitch: [82, 82] }
+    armL: { pitch: [34, 34] }
+    armR: { pitch: [34, 70, 50, 70, 34] }
+    head: { yaw: [0, 8, 0], pitch: [0, 5, 0, 5, 0] }
