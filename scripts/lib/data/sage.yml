@@ -57,3 +57,22 @@ sound:
   loop: /cdn/moodboard-lowpoly-cozy/sfx-sky-dragon-distant-wind-whoosh-loop.mp3
   loopGain: 0.16
   loopRange: 40
+# greet: a grounded player within `notice` m (horizontal) of her path point makes her break off, glide down in `glide` s and
+# hover `gap` m in front of them, `lift` m up, facing them, for `hold` s; each E press holds her `stay` s more; she leaves when
+# the time runs out or they walk `leave` m off, then resumes the circuit where she paused. E alternates pat / treat, `cooldown` s apart.
+greet:
+  notice: 9
+  leave: 14
+  hold: 8
+  stay: 6
+  glide: 1.4
+  max: 2
+  again: 60
+  gap: 3.2
+  lift: 1.9
+  reach: 1.5             # the invisible press point sits this far from the player toward her (interaction reach is 3 m)
+  cooldown: 5
+  prompt: "Sage  ·  [E] pat / treat"
+  chirp: /cdn/moodboard-lowpoly-cozy/sfx-small-dragon-happy-chirp-trill.mp3
+  chomp: /cdn/moodboard-lowpoly-cozy/sfx-dragon-snaps-apple-crunch.mp3
+  sneeze: /cdn/moodboard-lowpoly-cozy/sfx-tiny-dragon-flame-sneeze-puff.mp3
