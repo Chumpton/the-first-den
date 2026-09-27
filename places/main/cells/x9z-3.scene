@@ -1,0 +1,8 @@
+# spawn-scene v2 yaml x9z-3
+lumenvale/lumen-tower-3:
+  feetPosition: {x: 71.99221228489239, y: 0, z: -85.79697762932555}
+  id: lumenvale/lumen-tower-3
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {cap: lilac, height: 38, radius: 3.2}, script: scripts/gen/lumen-tower.js, seed: 10}
+  tags: [lumen-tower]

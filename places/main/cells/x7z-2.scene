@@ -1,4 +1,48 @@
 # spawn-scene v2 yaml x7z-2
+lumenvale/lumen-banner-0:
+  feetPosition: {x: -159.23155400126862, y: 0, z: 23.79731519186734}
+  id: lumenvale/lumen-banner-0
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: teal, kind: banner}, script: scripts/gen/lumen-civic.js, seed: 0}
+  rotation: {yaw: -81.5}
+  visibleRange: {max: 200}
+lumenvale/lumen-banner-1:
+  feetPosition: {x: -160.975478920179, y: 0, z: 2.8098374364026335}
+  id: lumenvale/lumen-banner-1
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: lilac, kind: banner}, script: scripts/gen/lumen-civic.js, seed: 1}
+  rotation: {yaw: -89}
+  visibleRange: {max: 200}
+lumenvale/lumen-lamp-22:
+  feetPosition: {x: -143.91825967543636, y: 0, z: 6.966672950100333}
+  id: lumenvale/lumen-lamp-22
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: teal, kind: lamp}, script: scripts/gen/lumen-civic.js, seed: 23}
+  visibleRange: {max: 180}
+lumenvale/lumen-lamp-23:
+  feetPosition: {x: -143.08843827801255, y: 0, z: 16.9321832957062}
+  id: lumenvale/lumen-lamp-23
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: teal, kind: lamp}, script: scripts/gen/lumen-civic.js, seed: 24}
+  visibleRange: {max: 180}
+lumenvale/lumen-tower-4:
+  feetPosition: {x: -153.3877655799769, y: 0, z: 28.428741976775044}
+  id: lumenvale/lumen-tower-4
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {cap: teal, height: 20, radius: 2.6}, script: scripts/gen/lumen-tower.js, seed: 11}
+  tags: [lumen-tower]
+lumenvale/lumen-tower-5:
+  feetPosition: {x: -155.97624044439704, y: 0, z: -2.722575404216247}
+  id: lumenvale/lumen-tower-5
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {cap: lilac, height: 20, radius: 2.6}, script: scripts/gen/lumen-tower.js, seed: 12}
+  tags: [lumen-tower]
 waylamp-east-14:
   feetPosition: {x: 886.6113683885467, y: {terrain: 0}, z: -218.8233170302763}
   id: waylamp-east-14

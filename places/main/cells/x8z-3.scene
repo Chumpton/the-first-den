@@ -23,3 +23,10 @@ fox-lumen-6:
   state: {home: {x: 960, z: -390}, mode: idle, range: 25, scale: 1, sp: fox, until: 0, yaw: -156}
   tags: [fauna-ground, interactable, animal, fox]
   visibleRange: {max: 180}
+lumenvale/lumen-tower-1:
+  feetPosition: {x: -85.79697762932554, y: 0, z: -71.99221228489239}
+  id: lumenvale/lumen-tower-1
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {cap: lilac, height: 34, radius: 3.2}, script: scripts/gen/lumen-tower.js, seed: 8}
+  tags: [lumen-tower]

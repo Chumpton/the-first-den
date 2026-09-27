@@ -20,3 +20,10 @@ lumenvale/lumen-house-3:
   rotation: {yaw: -15.000000000000005}
   state: {}
   tags: [lumen-house]
+lumenvale/lumen-tower-0:
+  feetPosition: {x: -71.9922122848924, y: 0, z: 85.79697762932554}
+  id: lumenvale/lumen-tower-0
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {cap: teal, height: 30, radius: 3.2}, script: scripts/gen/lumen-tower.js, seed: 7}
+  tags: [lumen-tower]

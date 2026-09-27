@@ -10,6 +10,38 @@ lumenvale/lumen-ambience:
   feetPosition: {x: 0, y: 2, z: 0}
   id: lumenvale/lumen-ambience
   parent: lumenvale
+lumenvale/lumen-banner-4:
+  feetPosition: {x: -4.723972141221171, y: 0, z: -20.461771360489937}
+  id: lumenvale/lumen-banner-4
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: teal, kind: banner}, script: scripts/gen/lumen-civic.js, seed: 4}
+  rotation: {yaw: -166.99999999999997}
+  visibleRange: {max: 200}
+lumenvale/lumen-banner-5:
+  feetPosition: {x: 20.97122022984605, y: 0, z: 1.0990550811018205}
+  id: lumenvale/lumen-banner-5
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: lilac, kind: banner}, script: scripts/gen/lumen-civic.js, seed: 5}
+  rotation: {yaw: 87.00000000000001}
+  visibleRange: {max: 200}
+lumenvale/lumen-banner-6:
+  feetPosition: {x: 4.7239721412211635, y: 0, z: 20.46177136048994}
+  id: lumenvale/lumen-banner-6
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: teal, kind: banner}, script: scripts/gen/lumen-civic.js, seed: 6}
+  rotation: {yaw: 12.999999999999996}
+  visibleRange: {max: 200}
+lumenvale/lumen-banner-7:
+  feetPosition: {x: -1.0990550811018207, y: 0, z: 20.97122022984605}
+  id: lumenvale/lumen-banner-7
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: lilac, kind: banner}, script: scripts/gen/lumen-civic.js, seed: 7}
+  rotation: {yaw: -3.0000000000000004}
+  visibleRange: {max: 200}
 lumenvale/lumen-bridge-east:
   feetPosition: {x: 35.86300913130284, y: 0, z: -3.137606738915694}
   id: lumenvale/lumen-bridge-east
@@ -37,6 +69,36 @@ lumenvale/lumen-canal:
   parent: lumenvale
   physics: static
   primitive: {kind: scripted, params: {kind: canal}, script: scripts/gen/lumen-civic.js}
+lumenvale/lumen-folk-1:
+  behavior: scripts/lumen-folk.js
+  feetPosition: {x: -9.377001594014237, y: 0, z: 53.17961866265923}
+  id: lumenvale/lumen-folk-1
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {hue: 305}, script: scripts/gen/lumen-folk.js, seed: 12}
+  state: {lines: [Welcome to Lumenvale!, The inn keeps a warm hearth., "Tea house is past the gate, left."], pace: 1.08, route: [[-9.38, 53.18], [-22.82, 48.94], [-34.71, 41.37], [-44.23, 30.97], [-50.74, 18.47], [-44.23, 30.97], [-34.71, 41.37], [-22.82, 48.94]]}
+  tags: [interactable, lumen-folk]
+  visibleRange: {max: 150}
+lumenvale/lumen-folk-2:
+  behavior: scripts/lumen-folk.js
+  feetPosition: {x: 9.377001594014219, y: 0, z: -53.17961866265924}
+  id: lumenvale/lumen-folk-2
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {hue: 80}, script: scripts/gen/lumen-folk.js, seed: 13}
+  state: {lines: [Books float in the library. Don't chase them., Lovely day for the gardens.], pace: 1.16, route: [[9.38, -53.18], [22.82, -48.94], [34.71, -41.37], [44.23, -30.97], [50.74, -18.47], [44.23, -30.97], [34.71, -41.37], [22.82, -48.94]]}
+  tags: [interactable, lumen-folk]
+  visibleRange: {max: 150}
+lumenvale/lumen-folk-3:
+  behavior: scripts/lumen-folk.js
+  feetPosition: {x: 53.17961866265923, y: 0, z: 9.377001594014239}
+  id: lumenvale/lumen-folk-3
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {hue: 150}, script: scripts/gen/lumen-folk.js, seed: 14}
+  state: {lines: ["Crystal light, calm heart.", The canal is still enough to see the stars at night.], pace: 1.24, route: [[53.18, 9.38], [48.94, 22.82], [41.37, 34.71], [30.97, 44.23], [18.47, 50.74], [30.97, 44.23], [41.37, 34.71], [48.94, 22.82]]}
+  tags: [interactable, lumen-folk]
+  visibleRange: {max: 150}
 lumenvale/lumen-fountain-1:
   feetPosition: {x: 17.837356168801463, y: 0, z: -21.257733296551642}
   fx: {script: "fx\npop spill rate=?mobile:24|48 on=disc(.95) life=.35..0.5 v=sdir()*.15+<0,-.4,0> size=.04..0.07 acc=grav() col=<.8,.95,1> a=.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop jet rate=?mobile:14|26 on=point() life=.8..1.0 v=up(3.2..3.8)+cone(12)*(.4..0.7) size=.05..0.08 acc=grav() col=<.85,.97,1> a=.85>.6:.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)"}
@@ -167,6 +229,76 @@ lumenvale/lumen-house-9:
   rotation: {yaw: 165.00000000000006}
   state: {}
   tags: [lumen-house]
+lumenvale/lumen-lamp-0:
+  feetPosition: {x: 56.88554626338737, y: 0, z: 11.315238676935438}
+  id: lumenvale/lumen-lamp-0
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: teal, kind: lamp}, script: scripts/gen/lumen-civic.js, seed: 0}
+  visibleRange: {max: 180}
+lumenvale/lumen-lamp-1:
+  feetPosition: {x: 48.225237513547626, y: 0, z: 32.223073515136925}
+  id: lumenvale/lumen-lamp-1
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: lilac, kind: lamp}, script: scripts/gen/lumen-civic.js, seed: 1}
+  visibleRange: {max: 180}
+lumenvale/lumen-lamp-11:
+  feetPosition: {x: -11.315238676935463, y: 0, z: -56.88554626338736}
+  id: lumenvale/lumen-lamp-11
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: lilac, kind: lamp}, script: scripts/gen/lumen-civic.js, seed: 11}
+  visibleRange: {max: 180}
+lumenvale/lumen-lamp-12:
+  feetPosition: {x: 11.315238676935442, y: 0, z: -56.88554626338737}
+  id: lumenvale/lumen-lamp-12
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: teal, kind: lamp}, script: scripts/gen/lumen-civic.js, seed: 12}
+  visibleRange: {max: 180}
+lumenvale/lumen-lamp-13:
+  feetPosition: {x: 32.22307351513691, y: 0, z: -48.22523751354764}
+  id: lumenvale/lumen-lamp-13
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: lilac, kind: lamp}, script: scripts/gen/lumen-civic.js, seed: 13}
+  visibleRange: {max: 180}
+lumenvale/lumen-lamp-14:
+  feetPosition: {x: 48.225237513547626, y: 0, z: -32.223073515136925}
+  id: lumenvale/lumen-lamp-14
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: teal, kind: lamp}, script: scripts/gen/lumen-civic.js, seed: 14}
+  visibleRange: {max: 180}
+lumenvale/lumen-lamp-15:
+  feetPosition: {x: 56.88554626338736, y: 0, z: -11.315238676935465}
+  id: lumenvale/lumen-lamp-15
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: lilac, kind: lamp}, script: scripts/gen/lumen-civic.js, seed: 15}
+  visibleRange: {max: 180}
+lumenvale/lumen-lamp-2:
+  feetPosition: {x: 32.22307351513693, y: 0, z: 48.225237513547626}
+  id: lumenvale/lumen-lamp-2
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: teal, kind: lamp}, script: scripts/gen/lumen-civic.js, seed: 2}
+  visibleRange: {max: 180}
+lumenvale/lumen-lamp-3:
+  feetPosition: {x: 11.315238676935444, y: 0, z: 56.88554626338737}
+  id: lumenvale/lumen-lamp-3
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: lilac, kind: lamp}, script: scripts/gen/lumen-civic.js, seed: 3}
+  visibleRange: {max: 180}
+lumenvale/lumen-lamp-4:
+  feetPosition: {x: -11.315238676935435, y: 0, z: 56.88554626338737}
+  id: lumenvale/lumen-lamp-4
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {glow: teal, kind: lamp}, script: scripts/gen/lumen-civic.js, seed: 4}
+  visibleRange: {max: 180}
 lumenvale/lumen-motes:
   feetPosition: {x: 0, y: 0, z: 0}
   fx: {script: "fx\npop motes n=?mobile:70|160 on=box(24,7,24).c(7.5) life=5..9 v=up(.05..0.2)+sdir()*.15 size=.05..0.11 tint=<.5,1.6,1.5>..<1.4,.8,1.8> acc=curl(.25)*.3+drag(.4) col=$tint*flick(1.2,.35) a=0>.2:1>.8:1>0 sz=$size r=sprite(mote,add)\npop tip rate=5 on=sphere(4).c(44) life=2..4 v=sdir()*(.3..0.8) size=.12..0.22 acc=drag(.6) col=hdr(1.2,2.4,2.4) a=0>.2:1>0 sz=$size r=sprite(ember,add)"}
