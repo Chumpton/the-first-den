@@ -3708,13 +3708,13 @@ pollinator-keeper:
   tags: [manager]
 purple-dragon-blueprint:
   behavior: scripts/purple-dragon.js
-  feetPosition: {x: 30.799999999987836, y: 0.5499999999999572, z: -8.9}
+  feetPosition: {x: 30.8, y: 0.72, z: -8.9}
   id: purple-dragon-blueprint
   interpolation: {teleportThreshold: 40}
   physics: {body: kinematic, collider: auto}
   primitive: {kind: scripted, params: {}, script: scripts/gen/purple-dragon.js}
   rotation: {yaw: 90}
-  state: {flying: false, home: {x: 30.8, y: 0.55, yaw: 90, z: -8.9}, kind: purple-dragon, name: Violet, pad: violet-pad-front, phase: rest, rider: null}
+  state: {flying: false, home: {x: 30.8, y: 0.72, yaw: 90, z: -8.9}, kind: purple-dragon, name: Violet, pad: violet-pad-front, phase: rest, rider: null}
   tags: [purple-dragon, dragon, mount]
 quad-garden:
   castShadow: true
@@ -3906,12 +3906,32 @@ sunbeams:
   fx: {script: "fx follow=camera\npop motes n=?mobile:60|160 on=box(24,8,24).c(3) wrap=24;8;24 life=4..7 v=up(.02..0.08)+sdir()*.05 size=.02..0.04 acc=curl(.2)*.2 col=hdr(1.6,1.4,.9) a=0>.3:.6>.7:.5>0 sz=$size r=sprite(mote,add)"}
   id: sunbeams
 tower-dais:
-  feetPosition: {x: 30.5, y: 0.5, z: -13}
+  castShadow: false
+  feetPosition: {x: 30.8, y: 0.47, z: -8.9}
   id: tower-dais
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 16, height: 1, kind: box, width: 14}
-  tags: [blueprint]
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {glyphs: [[0, 8, 0.151, 0, 0.34], [4.8, 6.3, 0.06, 1.37, 0.4], [7.3, 0.9, -0.035, 2.74, 0.46], [7.1, -4.7, 0.041, 4.11, 0.34], [5.8, -10.3, 0.09, 5.48, 0.4], [4.5, -13.9, 0.059, 0.57, 0.46], [6.4, -15.9, 0.041, 1.94, 0.34], [-4.4, -13.7, 0, 3.31, 0.4], [-6.9, -10.5, 0.02, 4.68, 0.46], [-7.9, -5.1, 0.168, 6.05, 0.34], [-7.7, 0.5, 0.03, 1.14, 0.4], [-3.4, 7.4, 0.212, 2.51, 0.46]], lamps: [[-6.5, -10.5, 0.021], [-6.2, -3.8, 0.227]], slabs: [[-5.5, -5, 0.188, 0.4, 0.82, 0.62], [-6, -6.15, 0.141, 1.1, 0.82, 0.62], [-6.2, -7.35, 0.097, 1.7999999999999998, 0.82, 0.62], [-6, -8.5, 0.065, 2.4999999999999996, 0.82, 0.62], [-5.4, -9.55, 0.045, 3.1999999999999997, 0.82, 0.62]]}, script: scripts/gen/tower-dais.js, seed: 11}
+  receiveShadow: true
+  tags: [tower-grounds]
+  visibleRange: {max: 90}
+tower-motes:
+  feetPosition: {x: 30.8, y: 0.72, z: -8.9}
+  fx: {script: "fx\npop motes n=?mobile:10|16 on=disc(5.6).c(.5) life=5..8 v=up(.04..0.12)+sdir()*.05 size=.05..0.1 acc=curl(.25)*.35+buoy(.06)+drag(.7) col=hdr(1.2,.55,2.1) a=0>.2:.75>.8:.75>0 sz=$size*flick(1.2,.3) r=sprite(soft-disc,add)\npop rise n=?mobile:5|8 on=disc(4.2).c(.05) life=3..5 v=up(.18..0.32) size=.03..0.05 acc=curl(.3)*.2+drag(.3) col=hdr(1.6,.7,2.6) a=0>.15:1>.7:.8>0 sz=$size r=sprite(soft-disc,add)"}
+  id: tower-motes
+  tags: [tower-grounds]
+  visibleRange: {max: 60}
+tower-skirt:
+  castShadow: true
+  feetPosition: {x: 30.5, y: 0.58, z: -18.5}
+  id: tower-skirt
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {gnd: [-0.105, -0.094, -0.077, -0.057, -0.044, -0.033, -0.022, -0.012, -0.002, 0.008, 0.021, 0.037, 0.058, 0.065, 0.04, 0.013, 0.004, 0.016, 0.046, 0.073, 0.059, 0.024, -0.011, -0.041, -0.065, -0.083, -0.096, -0.104, -0.107, -0.109, -0.109, -0.108]}, script: scripts/gen/tower-skirt.js, seed: 5}
+  receiveShadow: true
+  rotation: {yaw: 90}
+  tags: [tower-grounds]
+  visibleRange: {max: 90}
 treehouse-a:
   castShadow: true
   feetPosition: {x: -27, y: 0.28518751604034187, z: -18}
