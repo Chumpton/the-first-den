@@ -1,4 +1,11 @@
 # spawn-scene v2 yaml x1z1
+hill-village:
+  feetPosition: {x: 170, y: 0.5, z: 90}
+  id: hill-village
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 60, height: 20, kind: box, width: 60}
+  tags: [blueprint]
 magic-district:
   feetPosition: {x: 82, y: 0.5, z: 78}
   id: magic-district
