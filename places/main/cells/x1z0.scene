@@ -19,6 +19,18 @@ critter-squirrel-08:
   state: {kind: squirrel, mode: idle, until: 0}
   tags: [fauna-small, interactable, critter]
   visibleRange: {max: 150}
+fox-road-east:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: 150, y: {terrain: 0.05}, z: 38}
+  id: fox-road-east
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-fox.js}
+  rotation: {yaw: 50}
+  scale: 1
+  state: {home: {x: 150, z: 38}, mode: idle, range: 15, scale: 1, sp: fox, until: 0, yaw: 50}
+  tags: [fauna-ground, interactable, animal, fox]
+  visibleRange: {max: 180}
 waylamp-east-1:
   feetPosition: {x: 78.77318065836097, y: {terrain: 0}, z: 24.565160584670956}
   id: waylamp-east-1

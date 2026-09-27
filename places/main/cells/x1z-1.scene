@@ -1,4 +1,28 @@
 # spawn-scene v2 yaml x1z-1
+bear-cub:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: 88, y: {terrain: 0.05}, z: -93}
+  id: bear-cub
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-bear.js}
+  rotation: {yaw: 74}
+  scale: 0.55
+  state: {follow: bear-mother, home: {x: 88, z: -93}, mode: idle, "off": {x: 1.8, z: 1.5}, range: 20, scale: 0.55, sp: bear, until: 0, yaw: 74}
+  tags: [fauna-ground, interactable, animal, bear]
+  visibleRange: {max: 180}
+bear-mother:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: 85, y: {terrain: 0.05}, z: -95}
+  id: bear-mother
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-bear.js}
+  rotation: {yaw: -20}
+  scale: 1
+  state: {home: {x: 85, z: -95}, mode: idle, range: 30, scale: 1, sp: bear, until: 0, yaw: -20}
+  tags: [fauna-ground, interactable, animal, bear]
+  visibleRange: {max: 180}
 critter-squirrel-04:
   behavior: scripts/critter-press.js
   feetPosition: {x: 73.86099072643579, y: 0.39021566360957555, z: -72.41132262198624}

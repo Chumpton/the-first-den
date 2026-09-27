@@ -1,0 +1,25 @@
+# spawn-scene v2 yaml x8z-3
+bear-lumen-7:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: 990, y: {terrain: 0.05}, z: -420}
+  id: bear-lumen-7
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-bear.js}
+  rotation: {yaw: -93}
+  scale: 1
+  state: {home: {x: 990, z: -420}, mode: idle, range: 25, scale: 1, sp: bear, until: 0, yaw: -93}
+  tags: [fauna-ground, interactable, animal, bear]
+  visibleRange: {max: 180}
+fox-lumen-6:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: 960, y: {terrain: 0.05}, z: -390}
+  id: fox-lumen-6
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-fox.js}
+  rotation: {yaw: -156}
+  scale: 1
+  state: {home: {x: 960, z: -390}, mode: idle, range: 25, scale: 1, sp: fox, until: 0, yaw: -156}
+  tags: [fauna-ground, interactable, animal, fox]
+  visibleRange: {max: 180}

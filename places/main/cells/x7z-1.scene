@@ -1,4 +1,16 @@
 # spawn-scene v2 yaml x7z-1
+deer-lumen-0:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: 930, y: {terrain: 0.05}, z: -110}
+  id: deer-lumen-0
+  physics: character
+  primitive: {kind: scripted, params: {antlers: 1}, script: scripts/gen/animal-deer.js}
+  rotation: {yaw: 71}
+  scale: 1
+  state: {home: {x: 930, z: -110}, mode: idle, range: 25, scale: 1, sp: deer, until: 0, yaw: 71}
+  tags: [fauna-ground, interactable, animal, deer]
+  visibleRange: {max: 180}
 waylamp-east-13:
   feetPosition: {x: 852.6871527763302, y: {terrain: 0}, z: -188.18046675488216}
   id: waylamp-east-13

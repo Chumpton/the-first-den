@@ -1,0 +1,13 @@
+# spawn-scene v2 yaml x-8z-5
+fox-hearth-5:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: -980, y: {terrain: 0.05}, z: -700}
+  id: fox-hearth-5
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-fox.js}
+  rotation: {yaw: 174}
+  scale: 1
+  state: {home: {x: -980, z: -700}, mode: idle, range: 25, scale: 1, sp: fox, until: 0, yaw: 174}
+  tags: [fauna-ground, interactable, animal, fox]
+  visibleRange: {max: 180}

@@ -1,0 +1,13 @@
+# spawn-scene v2 yaml x10z-3
+bear-lumen-4:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: 1230, y: {terrain: 0.05}, z: -400}
+  id: bear-lumen-4
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-bear.js}
+  rotation: {yaw: 155}
+  scale: 1
+  state: {home: {x: 1230, z: -400}, mode: idle, range: 25, scale: 1, sp: bear, until: 0, yaw: 155}
+  tags: [fauna-ground, interactable, animal, bear]
+  visibleRange: {max: 180}

@@ -1,0 +1,13 @@
+# spawn-scene v2 yaml x10z-1
+wolf-lumen-2:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: 1250, y: {terrain: 0.05}, z: -130}
+  id: wolf-lumen-2
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-wolf.js}
+  rotation: {yaw: -34}
+  scale: 1
+  state: {home: {x: 1250, z: -130}, mode: idle, range: 25, scale: 1, sp: wolf, until: 0, yaw: -34}
+  tags: [fauna-ground, interactable, animal, wolf]
+  visibleRange: {max: 180}

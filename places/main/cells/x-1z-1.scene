@@ -1,0 +1,25 @@
+# spawn-scene v2 yaml x-1z-1
+deer-doe-b:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: -66, y: {terrain: 0.05}, z: -88}
+  id: deer-doe-b
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-deer.js}
+  rotation: {yaw: 104}
+  scale: 1
+  state: {follow: deer-stag-b, home: {x: -66, z: -88}, mode: idle, "off": {x: -2.5, z: 2}, range: 20, scale: 1, sp: deer, until: 0, yaw: 104}
+  tags: [fauna-ground, interactable, animal, deer]
+  visibleRange: {max: 180}
+deer-stag-b:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: -70, y: {terrain: 0.05}, z: -85}
+  id: deer-stag-b
+  physics: character
+  primitive: {kind: scripted, params: {antlers: 1}, script: scripts/gen/animal-deer.js}
+  rotation: {yaw: 129}
+  scale: 1
+  state: {home: {x: -70, z: -85}, mode: idle, range: 30, scale: 1, sp: deer, until: 0, yaw: 129}
+  tags: [fauna-ground, interactable, animal, deer]
+  visibleRange: {max: 180}

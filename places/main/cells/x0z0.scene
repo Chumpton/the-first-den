@@ -360,6 +360,47 @@ critter-squirrel-12:
   state: {kind: squirrel, mode: idle, until: 0}
   tags: [fauna-small, interactable, critter]
   visibleRange: {max: 150}
+deer-doe-a:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: 63, y: {terrain: 0.05}, z: -7}
+  id: deer-doe-a
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-deer.js}
+  rotation: {yaw: -122}
+  scale: 1
+  state: {follow: deer-stag-a, home: {x: 63, z: -7}, mode: idle, "off": {x: 2.5, z: 2}, range: 20, scale: 1, sp: deer, until: 0, yaw: -122}
+  tags: [fauna-ground, interactable, animal, deer]
+  visibleRange: {max: 180}
+deer-fawn-a:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: 58, y: {terrain: 0.05}, z: -6}
+  id: deer-fawn-a
+  physics: character
+  primitive: {kind: scripted, params: {spots: 1}, script: scripts/gen/animal-deer.js}
+  rotation: {yaw: -126}
+  scale: 0.6
+  state: {follow: deer-doe-a, home: {x: 58, z: -6}, mode: idle, "off": {x: -1.2, z: 1.2}, range: 20, scale: 0.6, sp: deer, until: 0, yaw: -126}
+  tags: [fauna-ground, interactable, animal, deer]
+  visibleRange: {max: 180}
+deer-stag-a:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: 60, y: {terrain: 0.05}, z: -10}
+  id: deer-stag-a
+  physics: character
+  primitive: {kind: scripted, params: {antlers: 1}, script: scripts/gen/animal-deer.js}
+  rotation: {yaw: 179}
+  scale: 1
+  state: {home: {x: 60, z: -10}, mode: idle, range: 30, scale: 1, sp: deer, until: 0, yaw: 179}
+  tags: [fauna-ground, interactable, animal, deer]
+  visibleRange: {max: 180}
+fauna-ground:
+  behavior: scripts/fauna-ground.js
+  feetPosition: {x: 0, y: {terrain: 0}, z: 0}
+  id: fauna-ground
+  state: {}
 fauna-small:
   behavior: scripts/fauna-small.js
   feetPosition: {x: 18, y: 0.5, z: -30}
@@ -380,6 +421,18 @@ forest-ambience:
   audio: {bus: Ambience, clip: /cdn/moodboard-realistic-gritty/sfx-sunny-forest-birdsong-leaves-rustling-ambience-loop.mp3, gain: 0.18, loop: true, spatial: false}
   feetPosition: {x: 0, y: 1, z: 0}
   id: forest-ambience
+fox-meadow:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: 30, y: {terrain: 0.05}, z: 32}
+  id: fox-meadow
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-fox.js}
+  rotation: {yaw: 105}
+  scale: 1
+  state: {home: {x: 30, z: 32}, mode: idle, range: 20, scale: 1, sp: fox, until: 0, yaw: 105}
+  tags: [fauna-ground, interactable, animal, fox]
+  visibleRange: {max: 180}
 home-garden:
   feetPosition: {x: -2, y: 0.5, z: -38}
   id: home-garden
@@ -533,3 +586,51 @@ waylamp-west-0:
   rotation: {yaw: 215}
   tags: [road-dressing, waylamp, road-west]
   visibleRange: {max: 200}
+wolf-2:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: -43, y: {terrain: 0.05}, z: 42}
+  id: wolf-2
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-wolf.js}
+  rotation: {yaw: 71}
+  scale: 1
+  state: {follow: wolf-lead, home: {x: -43, z: 42}, mode: idle, "off": {x: 2, z: 2.5}, range: 20, scale: 1, sp: wolf, until: 0, yaw: 71}
+  tags: [fauna-ground, interactable, animal, wolf]
+  visibleRange: {max: 180}
+wolf-3:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: -37, y: {terrain: 0.05}, z: 43}
+  id: wolf-3
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-wolf.js}
+  rotation: {yaw: 105}
+  scale: 1
+  state: {follow: wolf-lead, home: {x: -37, z: 43}, mode: idle, "off": {x: -2, z: 3}, range: 20, scale: 1, sp: wolf, until: 0, yaw: 105}
+  tags: [fauna-ground, interactable, animal, wolf]
+  visibleRange: {max: 180}
+wolf-4:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: -40, y: {terrain: 0.05}, z: 46}
+  id: wolf-4
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-wolf.js}
+  rotation: {yaw: -3}
+  scale: 1
+  state: {follow: wolf-2, home: {x: -40, z: 46}, mode: idle, "off": {x: 0.5, z: 2.5}, range: 20, scale: 1, sp: wolf, until: 0, yaw: -3}
+  tags: [fauna-ground, interactable, animal, wolf]
+  visibleRange: {max: 180}
+wolf-lead:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: -40, y: {terrain: 0.05}, z: 40}
+  id: wolf-lead
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-wolf.js}
+  rotation: {yaw: -97}
+  scale: 1
+  state: {home: {x: -40, z: 40}, mode: idle, range: 45, scale: 1, sp: wolf, until: 0, yaw: -97}
+  tags: [fauna-ground, interactable, animal, wolf]
+  visibleRange: {max: 180}

@@ -1,4 +1,16 @@
 # spawn-scene v2 yaml x-1z0
+bear-lone:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: -114.47500609936333, y: {terrain: 0.05}, z: 14.023012346984956}
+  id: bear-lone
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-bear.js}
+  rotation: {yaw: 41}
+  scale: 1
+  state: {home: {x: -114.47500609936333, z: 14.023012346984956}, mode: idle, range: 35, scale: 1, sp: bear, until: 0, yaw: 41}
+  tags: [fauna-ground, interactable, animal, bear]
+  visibleRange: {max: 180}
 critter-rabbit-08:
   behavior: scripts/critter-press.js
   feetPosition: {x: -81.57509740781596, y: 0.7404271103346219, z: -63.2760435357085}

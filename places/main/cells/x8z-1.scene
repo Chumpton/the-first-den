@@ -1,0 +1,13 @@
+# spawn-scene v2 yaml x8z-1
+deer-lumen-1:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: 960, y: {terrain: 0.05}, z: -80}
+  id: deer-lumen-1
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-deer.js}
+  rotation: {yaw: -141}
+  scale: 1
+  state: {home: {x: 960, z: -80}, mode: idle, range: 25, scale: 1, sp: deer, until: 0, yaw: -141}
+  tags: [fauna-ground, interactable, animal, deer]
+  visibleRange: {max: 180}

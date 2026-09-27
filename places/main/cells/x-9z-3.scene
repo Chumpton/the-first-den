@@ -1,0 +1,13 @@
+# spawn-scene v2 yaml x-9z-3
+wolf-hearth-2:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: -1150, y: {terrain: 0.05}, z: -380}
+  id: wolf-hearth-2
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-wolf.js}
+  rotation: {yaw: 54}
+  scale: 1
+  state: {home: {x: -1150, z: -380}, mode: idle, range: 25, scale: 1, sp: wolf, until: 0, yaw: 54}
+  tags: [fauna-ground, interactable, animal, wolf]
+  visibleRange: {max: 180}

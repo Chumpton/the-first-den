@@ -1,0 +1,13 @@
+# spawn-scene v2 yaml x9z-4
+fox-lumen-5:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: 1100, y: {terrain: 0.05}, z: -450}
+  id: fox-lumen-5
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-fox.js}
+  rotation: {yaw: 73}
+  scale: 1
+  state: {home: {x: 1100, z: -450}, mode: idle, range: 25, scale: 1, sp: fox, until: 0, yaw: 73}
+  tags: [fauna-ground, interactable, animal, fox]
+  visibleRange: {max: 180}

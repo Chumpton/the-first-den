@@ -1,0 +1,13 @@
+# spawn-scene v2 yaml x-9z-5
+bear-hearth-4:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: -1120, y: {terrain: 0.05}, z: -660}
+  id: bear-hearth-4
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-bear.js}
+  rotation: {yaw: -135}
+  scale: 1
+  state: {home: {x: -1120, z: -660}, mode: idle, range: 25, scale: 1, sp: bear, until: 0, yaw: -135}
+  tags: [fauna-ground, interactable, animal, bear]
+  visibleRange: {max: 180}

@@ -89,3 +89,15 @@ critter-squirrel-09:
   state: {kind: squirrel, mode: idle, until: 0}
   tags: [fauna-small, interactable, critter]
   visibleRange: {max: 150}
+fox-lakewood:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: -35, y: {terrain: 0.05}, z: -115}
+  id: fox-lakewood
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-fox.js}
+  rotation: {yaw: -153}
+  scale: 1
+  state: {home: {x: -35, z: -115}, mode: idle, range: 20, scale: 1, sp: fox, until: 0, yaw: -153}
+  tags: [fauna-ground, interactable, animal, fox]
+  visibleRange: {max: 180}

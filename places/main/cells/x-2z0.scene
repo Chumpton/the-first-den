@@ -7,6 +7,18 @@ bridge-w0:
   rotation: {lookAt: {x: -288.5, y: 0.5, z: -16.1}}
   tags: [road-bridge]
   visibleRange: {max: 700}
+fox-road-west:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: -200, y: {terrain: 0.05}, z: 8}
+  id: fox-road-west
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-fox.js}
+  rotation: {yaw: -68}
+  scale: 1
+  state: {home: {x: -200, z: 8}, mode: idle, range: 15, scale: 1, sp: fox, until: 0, yaw: -68}
+  tags: [fauna-ground, interactable, animal, fox]
+  visibleRange: {max: 180}
 milestone-west-1:
   feetPosition: {x: -220.71743667970833, y: {terrain: 0}, z: -7.617789682959357}
   id: milestone-west-1

@@ -7,6 +7,18 @@ bridge-e2:
   rotation: {lookAt: {x: 361.1, y: 0.5, z: -24.5}}
   tags: [road-bridge]
   visibleRange: {max: 700}
+deer-road-east:
+  behavior: scripts/fauna-pet.js
+  castShadow: true
+  feetPosition: {x: 350, y: {terrain: 0.05}, z: -12}
+  id: deer-road-east
+  physics: character
+  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-deer.js}
+  rotation: {yaw: -176}
+  scale: 1
+  state: {home: {x: 350, z: -12}, mode: idle, range: 20, scale: 1, sp: deer, until: 0, yaw: -176}
+  tags: [fauna-ground, interactable, animal, deer]
+  visibleRange: {max: 180}
 milestone-east-2:
   feetPosition: {x: 411.46389014429377, y: {terrain: 0}, z: -40.44754934516681}
   id: milestone-east-2
