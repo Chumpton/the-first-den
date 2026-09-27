@@ -38,6 +38,10 @@ assets:
     "anim/dog.yml#wag": clips/anim-dog-yml-wag-f016903f.json
     "anim/dog.yml#walk": clips/anim-dog-yml-walk-1f9abb93.json
     "anim/fairy.yml#flutter": clips/anim-fairy-yml-flutter-1dc0bc8b.json
+    "anim/folk.yml#idle": clips/anim-folk-yml-idle-661641c2.json
+    "anim/folk.yml#idleHold": clips/anim-folk-yml-idlehold-757e6f1b.json
+    "anim/folk.yml#walk": clips/anim-folk-yml-walk-9e5b2431.json
+    "anim/folk.yml#walkHold": clips/anim-folk-yml-walkhold-d2f5a43c.json
     "anim/fox.yml#alert": clips/anim-fox-yml-alert-16ef7eb7.json
     "anim/fox.yml#sniff": clips/anim-fox-yml-sniff-459554f1.json
     "anim/fox.yml#walk": clips/anim-fox-yml-walk-1d210e7e.json
@@ -56,6 +60,10 @@ assets:
     "anim/traveller.yml#stand": clips/anim-traveller-yml-stand-a2516af3.json
     "anim/traveller.yml#walk": clips/anim-traveller-yml-walk-8a1a5ce0.json
     "anim/traveller.yml#wheels": clips/anim-traveller-yml-wheels-fc8a984d.json
+    "anim/villager.yml#garden": clips/anim-villager-yml-garden-4ffb93f9.json
+    "anim/villager.yml#idle": clips/anim-villager-yml-idle-dea04d12.json
+    "anim/villager.yml#sit": clips/anim-villager-yml-sit-36246f7c.json
+    "anim/villager.yml#walk": clips/anim-villager-yml-walk-0f281ce1.json
     "anim/wolf.yml#alert": clips/anim-wolf-yml-alert-0ed44828.json
     "anim/wolf.yml#sniff": clips/anim-wolf-yml-sniff-181ab4fe.json
     "anim/wolf.yml#walk": clips/anim-wolf-yml-walk-2b7543f3.json
