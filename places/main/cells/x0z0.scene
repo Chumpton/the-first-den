@@ -4002,7 +4002,7 @@ treehouse-b:
   feetPosition: {x: -18, y: 0.4999151732982104, z: -29}
   id: treehouse-b
   physics: static
-  primitive: {kind: scripted, params: {deckR: 5.8, deckY: 7.00008482670179, door: 2.256, gaps: [2.256, 0.165], hutR: 4.2, seed: 7}, script: scripts/gen/treehouse.js}
+  primitive: {kind: scripted, params: {deckR: 5.8, deckY: 7.00008482670179, door: 2.256, gaps: [2.256, 0.165, -1.0472], hutR: 4.2, seed: 7}, script: scripts/gen/treehouse.js}
   receiveShadow: true
   tags: [treehouse]
 treehouse-b-glow:
@@ -4429,9 +4429,19 @@ wolf-lead:
   tags: [fauna-ground, interactable, animal, wolf]
   visibleRange: {max: 180}
 zipline:
-  feetPosition: {x: -15, y: 4, z: -35}
+  feetPosition: {x: -14.34, y: 0.5, z: -35.34}
   id: zipline
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 30, height: 8, kind: box, width: 6}
-  tags: [blueprint]
+  physics: static
+  primitive: {kind: scripted, params: {C: [-3.66, 7, 6.340000000000003], P: [5.74, 0.04710371940089808, -15.259999999999998], a: [-0.20999999999999996, 9.6, 0.3646000000000029], b: [6.772048877272976, 2.217774593673918, -17.97014300635955], gB: -0.3822254063260824, gS: -0.5190055856913036, n: [0.5, -0.866], sag: 0.5, stake: 0.8000000000000003}, script: scripts/gen/zipline.js, seed: 3}
+  state: {does: "treehouse-b launch platform, rope and sand pit landing; the trolley zipline-trolley rides it"}
+  tags: [zipline]
+  visibleRange: {max: 90}
+zipline-trolley:
+  behavior: scripts/zipline.js
+  feetPosition: {x: -14.416944793642442, y: 8.971931533564273, z: -35.324800735672994}
+  id: zipline-trolley
+  primitive: {kind: scripted, params: {hang: 0.95}, script: scripts/gen/zipline-trolley.js}
+  rotation: {yaw: -20.847321164424727}
+  state: {a: [-14.55, 10.1, -34.9754], act: Ride, b: [-7.567951122727024, 2.717774593673918, -53.31014300635955], does: rides the zip-line from the treehouse to the lake sand pit, drop: {x: -8.6, y: 0.627103719400898, yaw: -20.847321164424727, z: -50.6}, phase: idle, s: 0.4, sStop: 18.233543055933854, sag: 0.5, seat: {x: 0, y: -1.45, z: 0.15}, seatYaw: 0, thirdPerson: false}
+  tags: [mount, interactable, zipline]
+  visibleRange: {max: 80}
