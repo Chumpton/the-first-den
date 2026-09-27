@@ -2061,6 +2061,66 @@ lake-dock/rowboat:
   primitive: {kind: scripted, params: {kind: boat}, script: scripts/gen/grounds-kit.js, seed: 5}
   rotation: {yaw: 3}
   visibleRange: {max: 200}
+outbuilding-glasshouse:
+  castShadow: true
+  feetPosition: {x: 14, y: 0.5, z: -56}
+  id: outbuilding-glasshouse
+  physics: static
+  primitive: {kind: scripted, params: {style: glasshouse}, script: scripts/gen/hex-outbuilding.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 0, y: 0.5, z: -35}}
+  tags: [outbuilding]
+outbuilding-glasshouse-lamp:
+  feetPosition: {x: 12.779659568304496, y: {terrain: 0}, z: -51.64560345963195}
+  id: outbuilding-glasshouse-lamp
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  tags: [path-lamp]
+outbuilding-glasshouse/outbuilding-glasshouse-light:
+  feetPosition: {x: 0, y: 2.2, z: 0}
+  id: outbuilding-glasshouse/outbuilding-glasshouse-light
+  light: {color: oklch(0.85 0.1 70), distance: 7, intensity: 1.2, kind: point}
+  parent: outbuilding-glasshouse
+outbuilding-studio:
+  castShadow: true
+  feetPosition: {x: -19, y: 0.5, z: -36}
+  id: outbuilding-studio
+  physics: static
+  primitive: {kind: scripted, params: {style: studio}, script: scripts/gen/hex-outbuilding.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 0, y: 0.5, z: -35}}
+  tags: [outbuilding]
+outbuilding-studio-lamp:
+  feetPosition: {x: -14.63236096749834, y: {terrain: 0}, z: -37.17206197863763}
+  id: outbuilding-studio-lamp
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  tags: [path-lamp]
+outbuilding-studio/outbuilding-studio-light:
+  feetPosition: {x: 0, y: 2.2, z: 0}
+  id: outbuilding-studio/outbuilding-studio-light
+  light: {color: oklch(0.85 0.1 70), distance: 7, intensity: 1.2, kind: point}
+  parent: outbuilding-studio
+outbuilding-workshop:
+  castShadow: true
+  feetPosition: {x: 17, y: 0.5, z: -41}
+  id: outbuilding-workshop
+  physics: static
+  primitive: {kind: scripted, params: {style: workshop}, script: scripts/gen/hex-outbuilding.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 0, y: 0.5, z: -35}}
+  tags: [outbuilding]
+outbuilding-workshop-lamp:
+  feetPosition: {x: 13.1281926303479, y: {terrain: 0}, z: -38.148840991402324}
+  id: outbuilding-workshop-lamp
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  tags: [path-lamp]
+outbuilding-workshop/outbuilding-workshop-light:
+  feetPosition: {x: 0, y: 2.2, z: 0}
+  id: outbuilding-workshop/outbuilding-workshop-light
+  light: {color: oklch(0.85 0.1 70), distance: 7, intensity: 1.2, kind: point}
+  parent: outbuilding-workshop
 path-lamp-pathCamp-0:
   castShadow: true
   feetPosition: {x: -3.0210785403721756, y: {terrain: 0}, z: -39.3679747306148}
