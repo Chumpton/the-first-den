@@ -46,7 +46,7 @@ terrain:
     - {albedo: cdn/texture-terrain-short-fine-mown-lawn-grass-realistic.png, antiTiling: stochastic, id: lawn, macro: {hue: 0.012, scale: 50, value: 0.07}, normalStrength: 0.35, pbr: true, roughnessIntensity: 0.9, textureScale: 2.2, tint: oklch(0.96 0.02 130)}
   marks:
     river: {kind: sea, level: 0, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
-    spawnClearing: {kind: flatten, center: {x: 0, z: -3}, height: 0.5, falloff: 6, shape: {kind: circle, radius: 9}, material: moss}
+    spawnClearing: {kind: flatten, center: {x: 0, z: -3}, height: 0.5, falloff: 6, shape: {kind: circle, radius: 9}, material: lawn}
     spawnClear: {kind: clear-scatter, center: {x: 0, z: -3}, shape: {kind: circle, radius: 7}}
     road-east-0: {clearScatter: true, edgeMaterial: yard, edgeWidth: 5, falloff: 3, kind: road, material: cobble, points: [[0, 10], [9.9, 11.3], [19.8, 12.6], [29.7, 14], [39.6, 15.3], [49.6, 16.6], [59.5, 17.9], [69.4, 19.3], [79.3, 20.6], [89.2, 21.9], [99.1, 23.2], [109, 24.5], [118.9, 25.9], [128.9, 27.2], [138.8, 28.5], [148.7, 29.8], [157.8, 28.1], [167.5, 25.6], [177.2, 23.2], [186.9, 20.8], [196.6, 18.4], [206.3, 15.9], [216, 13.5], [225.7, 11.1], [235.4, 8.7], [237.3, 8.2]], width: 6}
     road-east-1: {clearScatter: true, edgeMaterial: yard, edgeWidth: 5, falloff: 3, kind: road, material: cobble, points: [[264.5, 1.4], [270.3, -0.1]], width: 6}
@@ -59,6 +59,8 @@ terrain:
     road-west-3: {clearScatter: true, edgeMaterial: yard, edgeWidth: 5, falloff: 3, kind: road, material: cobble, points: [[-733.8, -172.8], [-738.5, -181.6], [-743.1, -190.5], [-747.7, -199.3], [-752.4, -208.2]], width: 6}
     road-west-4: {clearScatter: true, edgeMaterial: yard, edgeWidth: 5, falloff: 3, kind: road, material: cobble, points: [[-772.8, -247.2], [-777.4, -256], [-782.1, -264.9], [-786.7, -273.7], [-790.4, -282], [-792.5, -291.7], [-794.6, -301.5], [-796.8, -311.3], [-798.9, -321.1], [-801, -330.8], [-803.1, -340.6], [-805.2, -350.4], [-807.3, -360.1], [-809.4, -369.9], [-811.6, -379.7], [-813.7, -389.5], [-815.8, -399.2], [-817.9, -409], [-820, -418.8], [-822.1, -428.6], [-824.2, -438.3], [-826.3, -448.1], [-828.5, -457.9], [-830, -465]], width: 6}
     homeSite: {center: {x: 0, z: -27}, falloff: 8, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 18}, edgeMaterial: yard}
+    grounds-lawn-front: {kind: path, grade: false, material: lawn, edgeMaterial: yard, falloff: 3, points: [[0, -6], [0, 4.4]], width: 30}
+    grounds-lawn-frontClear: {kind: clear-scatter, center: {x: 0, z: -1}, shape: {kind: path, points: [[0, -6], [0, 4.4]], width: 28}}
     grounds-lawn: {kind: path, grade: false, material: lawn, edgeMaterial: yard, falloff: 3, points: [[-18, -28], [18, -28]], width: 48}
     grounds-campClear: {kind: clear-scatter, center: {x: -18, z: -50}, shape: {kind: circle, radius: 11}}
     path-grounds-rope: {clearScatter: true, edgeMaterial: yard, falloff: 3, grade: true, kind: path, material: yard, points: [[-1.2, -9], [-4, -10.3], [-8, -11.8], [-13, -12.9], [-17.4, -14.4], [-20.6, -17.4]], width: 2}
