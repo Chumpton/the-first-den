@@ -39,7 +39,7 @@ lumenvale/lumen-canal:
   primitive: {kind: scripted, params: {kind: canal}, script: scripts/gen/lumen-civic.js}
 lumenvale/lumen-fountain-1:
   feetPosition: {x: 17.837356168801463, y: 0, z: -21.257733296551642}
-  fx: {script: "fx\npop spill rate=?mobile:24|48 on=ci()*.95 life=.35..0.5 v=sdir()*.15+<0,-.4,0> size=.04..0.07 acc=grav() col=<.8,.95,1> a=.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop jet rate=?mobile:14|26 on=point() life=.8..1.0 v=up(3.2..3.8)+cone(12)*(.4..0.7) size=.05..0.08 acc=grav() col=<.85,.97,1> a=.85>.6:.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)"}
+  fx: {script: "fx\npop spill rate=?mobile:24|48 on=disc(.95) life=.35..0.5 v=sdir()*.15+<0,-.4,0> size=.04..0.07 acc=grav() col=<.8,.95,1> a=.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop jet rate=?mobile:14|26 on=point() life=.8..1.0 v=up(3.2..3.8)+cone(12)*(.4..0.7) size=.05..0.08 acc=grav() col=<.85,.97,1> a=.85>.6:.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)"}
   id: lumenvale/lumen-fountain-1
   parent: lumenvale
   physics: static
@@ -47,7 +47,7 @@ lumenvale/lumen-fountain-1:
   visibleRange: {max: 200}
 lumenvale/lumen-fountain-2:
   feetPosition: {x: 21.25773329655164, y: 0, z: 17.837356168801463}
-  fx: {script: "fx\npop spill rate=?mobile:24|48 on=ci()*.95 life=.35..0.5 v=sdir()*.15+<0,-.4,0> size=.04..0.07 acc=grav() col=<.8,.95,1> a=.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop jet rate=?mobile:14|26 on=point() life=.8..1.0 v=up(3.2..3.8)+cone(12)*(.4..0.7) size=.05..0.08 acc=grav() col=<.85,.97,1> a=.85>.6:.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)"}
+  fx: {script: "fx\npop spill rate=?mobile:24|48 on=disc(.95) life=.35..0.5 v=sdir()*.15+<0,-.4,0> size=.04..0.07 acc=grav() col=<.8,.95,1> a=.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop jet rate=?mobile:14|26 on=point() life=.8..1.0 v=up(3.2..3.8)+cone(12)*(.4..0.7) size=.05..0.08 acc=grav() col=<.85,.97,1> a=.85>.6:.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)"}
   id: lumenvale/lumen-fountain-2
   parent: lumenvale
   physics: static
@@ -77,6 +77,96 @@ lumenvale/lumen-garden-3:
   parent: lumenvale
   physics: static
   primitive: {kind: scripted, params: {angle: 130.1181791546369, half: 38.118179154636906, kind: garden}, script: scripts/gen/lumen-civic.js}
+lumenvale/lumen-house-0:
+  feetPosition: {x: 60.853327056211306, y: 0, z: 16.305599841458807}
+  id: lumenvale/lumen-house-0
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 7, floors: 2, glow: teal, roof: gable, width: 8}, script: scripts/gen/lumen-house.js, seed: 1}
+  rotation: {yaw: 75.00000000000001}
+  state: {}
+  tags: [lumen-house]
+lumenvale/lumen-house-1:
+  feetPosition: {x: 51.606578790206484, y: 0, z: 36.1353154901159}
+  id: lumenvale/lumen-house-1
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 7, floors: 2, glow: teal, roof: hip, width: 9}, script: scripts/gen/lumen-house.js, seed: 2}
+  rotation: {yaw: 55}
+  state: {}
+  tags: [lumen-house]
+lumenvale/lumen-house-10:
+  feetPosition: {x: 40.495619410251976, y: 0, z: -48.26079991649562}
+  id: lumenvale/lumen-house-10
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 7, floors: 2, glow: lilac, roof: hip, width: 9}, script: scripts/gen/lumen-house.js, seed: 11}
+  rotation: {yaw: 140}
+  state: {}
+  tags: [lumen-house]
+lumenvale/lumen-house-11:
+  feetPosition: {x: 57.09739058330895, y: 0, z: -26.62495048966405}
+  id: lumenvale/lumen-house-11
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 8, floors: 1, glow: lilac, roof: dome, width: 7}, script: scripts/gen/lumen-house.js, seed: 12}
+  rotation: {yaw: 114.99999999999999}
+  state: {}
+  tags: [lumen-house]
+lumenvale/lumen-house-12:
+  feetPosition: {x: 39.83716857408418, y: 0, z: 22.999999999999996}
+  id: lumenvale/lumen-house-12
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6, floors: 3, glow: teal, roof: gable, width: 10}, script: scripts/gen/lumen-house.js, seed: 13}
+  rotation: {yaw: -119.99999999999999}
+  state: {}
+  tags: [lumen-house]
+lumenvale/lumen-house-13:
+  feetPosition: {x: 23.000000000000004, y: 0, z: 39.837168574084174}
+  id: lumenvale/lumen-house-13
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 8, floors: 1, glow: teal, roof: hip, width: 7}, script: scripts/gen/lumen-house.js, seed: 14}
+  rotation: {yaw: -150.00000000000003}
+  state: {}
+  tags: [lumen-house]
+lumenvale/lumen-house-18:
+  feetPosition: {x: 23.000000000000004, y: 0, z: -39.837168574084174}
+  id: lumenvale/lumen-house-18
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 8, floors: 1, glow: lilac, roof: gable, width: 7}, script: scripts/gen/lumen-house.js, seed: 19}
+  rotation: {yaw: -30.000000000000004}
+  state: {}
+  tags: [lumen-house]
+lumenvale/lumen-house-19:
+  feetPosition: {x: 37.680994037293615, y: 0, z: -26.384516072148138}
+  id: lumenvale/lumen-house-19
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 7, floors: 2, glow: lilac, roof: hip, width: 9}, script: scripts/gen/lumen-house.js, seed: 20}
+  rotation: {yaw: -54.999999999999986}
+  state: {}
+  tags: [lumen-house]
+lumenvale/lumen-house-2:
+  feetPosition: {x: 31.500000000000007, y: 0, z: 54.55960043841963}
+  id: lumenvale/lumen-house-2
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 8, floors: 1, glow: lilac, roof: dome, width: 7}, script: scripts/gen/lumen-house.js, seed: 3}
+  rotation: {yaw: 30.00000000000001}
+  state: {}
+  tags: [lumen-house]
+lumenvale/lumen-house-9:
+  feetPosition: {x: 16.30559984145878, y: 0, z: -60.85332705621131}
+  id: lumenvale/lumen-house-9
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6, floors: 3, glow: teal, roof: gable, width: 9}, script: scripts/gen/lumen-house.js, seed: 10}
+  rotation: {yaw: 165.00000000000006}
+  state: {}
+  tags: [lumen-house]
 lumenvale/lumen-motes:
   feetPosition: {x: 0, y: 0, z: 0}
   fx: {script: "fx\npop motes n=?mobile:70|160 on=box(24,7,24).c(7.5) life=5..9 v=up(.05..0.2)+sdir()*.15 size=.05..0.11 tint=<.5,1.6,1.5>..<1.4,.8,1.8> acc=curl(.25)*.3+drag(.4) col=$tint*flick(1.2,.35) a=0>.2:1>.8:1>0 sz=$size r=sprite(mote,add)\npop tip rate=5 on=sphere(4).c(44) life=2..4 v=sdir()*(.3..0.8) size=.12..0.22 acc=drag(.6) col=hdr(1.2,2.4,2.4) a=0>.2:1>0 sz=$size r=sprite(ember,add)"}

@@ -11,3 +11,12 @@ deer-lumen-1:
   state: {home: {x: 960, z: -80}, mode: idle, range: 25, scale: 1, sp: deer, until: 0, yaw: -141}
   tags: [fauna-ground, interactable, animal, deer]
   visibleRange: {max: 180}
+lumenvale/lumen-house-3:
+  feetPosition: {x: -16.305599841458815, y: 0, z: 60.853327056211306}
+  id: lumenvale/lumen-house-3
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 6, floors: 3, glow: lilac, roof: gable, width: 10}, script: scripts/gen/lumen-house.js, seed: 4}
+  rotation: {yaw: -15.000000000000005}
+  state: {}
+  tags: [lumen-house]

@@ -8,7 +8,7 @@ lumenvale/lumen-bridge-west:
   rotation: {yaw: 94.76364169072619}
 lumenvale/lumen-fountain-0:
   feetPosition: {x: -21.220896498657453, y: 0, z: -17.881164721384003}
-  fx: {script: "fx\npop spill rate=?mobile:24|48 on=ci()*.95 life=.35..0.5 v=sdir()*.15+<0,-.4,0> size=.04..0.07 acc=grav() col=<.8,.95,1> a=.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop jet rate=?mobile:14|26 on=point() life=.8..1.0 v=up(3.2..3.8)+cone(12)*(.4..0.7) size=.05..0.08 acc=grav() col=<.85,.97,1> a=.85>.6:.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)"}
+  fx: {script: "fx\npop spill rate=?mobile:24|48 on=disc(.95) life=.35..0.5 v=sdir()*.15+<0,-.4,0> size=.04..0.07 acc=grav() col=<.8,.95,1> a=.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop jet rate=?mobile:14|26 on=point() life=.8..1.0 v=up(3.2..3.8)+cone(12)*(.4..0.7) size=.05..0.08 acc=grav() col=<.85,.97,1> a=.85>.6:.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)"}
   id: lumenvale/lumen-fountain-0
   parent: lumenvale
   physics: static
@@ -16,9 +16,182 @@ lumenvale/lumen-fountain-0:
   visibleRange: {max: 200}
 lumenvale/lumen-fountain-3:
   feetPosition: {x: -17.881164721384007, y: 0, z: 21.22089649865745}
-  fx: {script: "fx\npop spill rate=?mobile:24|48 on=ci()*.95 life=.35..0.5 v=sdir()*.15+<0,-.4,0> size=.04..0.07 acc=grav() col=<.8,.95,1> a=.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop jet rate=?mobile:14|26 on=point() life=.8..1.0 v=up(3.2..3.8)+cone(12)*(.4..0.7) size=.05..0.08 acc=grav() col=<.85,.97,1> a=.85>.6:.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)"}
+  fx: {script: "fx\npop spill rate=?mobile:24|48 on=disc(.95) life=.35..0.5 v=sdir()*.15+<0,-.4,0> size=.04..0.07 acc=grav() col=<.8,.95,1> a=.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop jet rate=?mobile:14|26 on=point() life=.8..1.0 v=up(3.2..3.8)+cone(12)*(.4..0.7) size=.05..0.08 acc=grav() col=<.85,.97,1> a=.85>.6:.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)"}
   id: lumenvale/lumen-fountain-3
   parent: lumenvale
   physics: static
   primitive: {kind: scripted, params: {kind: fountain}, script: scripts/gen/lumen-civic.js}
   visibleRange: {max: 200}
+lumenvale/lumen-house-14:
+  feetPosition: {x: -22.99999999999999, y: 0, z: 39.83716857408418}
+  id: lumenvale/lumen-house-14
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 8, floors: 1, glow: lilac, roof: dome, width: 8}, script: scripts/gen/lumen-house.js, seed: 15}
+  rotation: {yaw: 150.00000000000003}
+  state: {}
+  tags: [lumen-house]
+lumenvale/lumen-house-15:
+  feetPosition: {x: -37.68099403729363, y: 0, z: 26.384516072148113}
+  id: lumenvale/lumen-house-15
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 8, floors: 2, glow: lilac, kind: shop, roof: gable, width: 9}, script: scripts/gen/lumen-house.js, seed: 16}
+  rotation: {yaw: 124.99999999999999}
+  state: {kind: shop}
+  tags: [lumen-house, lumen-enterable, lumen-shop]
+lumenvale/lumen-house-15/light:
+  feetPosition: {x: 0, y: 2.4, z: 0.5}
+  id: lumenvale/lumen-house-15/light
+  light: {color: oklch(0.85 0.1 70), distance: 11, intensity: 12, kind: point}
+  parent: lumenvale/lumen-house-15
+lumenvale/lumen-house-16:
+  feetPosition: {x: -39.837168574084174, y: 0, z: -23.000000000000004}
+  id: lumenvale/lumen-house-16
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 8, floors: 2, glow: teal, kind: tea, roof: hip, width: 9}, script: scripts/gen/lumen-house.js, seed: 17}
+  rotation: {yaw: 59.99999999999999}
+  state: {kind: tea}
+  tags: [lumen-house, lumen-enterable, lumen-tea]
+lumenvale/lumen-house-16/light:
+  feetPosition: {x: 0, y: 2.4, z: 0.5}
+  id: lumenvale/lumen-house-16/light
+  light: {color: oklch(0.85 0.1 70), distance: 11, intensity: 12, kind: point}
+  parent: lumenvale/lumen-house-16
+lumenvale/lumen-house-17:
+  feetPosition: {x: -26.384516072148134, y: 0, z: -37.680994037293615}
+  id: lumenvale/lumen-house-17
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 7, floors: 2, glow: teal, roof: dome, width: 8}, script: scripts/gen/lumen-house.js, seed: 18}
+  rotation: {yaw: 35.000000000000014}
+  state: {}
+  tags: [lumen-house]
+lumenvale/lumen-house-4:
+  feetPosition: {x: -40.49561941025198, y: 0, z: 48.260799916495614}
+  id: lumenvale/lumen-house-4
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 7, floors: 2, glow: teal, roof: hip, width: 9}, script: scripts/gen/lumen-house.js, seed: 5}
+  rotation: {yaw: -40.00000000000001}
+  state: {}
+  tags: [lumen-house]
+lumenvale/lumen-house-5:
+  feetPosition: {x: -57.09739058330894, y: 0, z: 26.62495048966407}
+  id: lumenvale/lumen-house-5
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 8, floors: 2, glow: lilac, kind: inn, roof: gable, width: 9}, script: scripts/gen/lumen-house.js, seed: 6}
+  rotation: {yaw: -65}
+  state: {kind: inn}
+  tags: [lumen-house, lumen-enterable, lumen-inn]
+lumenvale/lumen-house-5/light:
+  feetPosition: {x: 0, y: 2.4, z: 0.5}
+  id: lumenvale/lumen-house-5/light
+  light: {color: oklch(0.85 0.1 70), distance: 11, intensity: 12, kind: point}
+  parent: lumenvale/lumen-house-5
+lumenvale/lumen-house-6:
+  feetPosition: {x: -60.853327056211306, y: 0, z: -16.30559984145881}
+  id: lumenvale/lumen-house-6
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 8, floors: 2, glow: teal, kind: library, roof: dome, width: 9}, script: scripts/gen/lumen-house.js, seed: 7}
+  rotation: {yaw: -105}
+  state: {kind: library}
+  tags: [lumen-house, lumen-enterable, lumen-library]
+lumenvale/lumen-house-6/book-0:
+  behavior: scripts/lumen-float.js
+  feetPosition: {x: -2.6, y: 1.5, z: -1}
+  id: lumenvale/lumen-house-6/book-0
+  parent: lumenvale/lumen-house-6
+  primitive: {kind: scripted, params: {kind: books}, script: scripts/gen/lumen-civic.js, seed: 3}
+  rotation: {yaw: 0}
+  state: {bob: 0.25, bobT: 2.5, spin: 30}
+  visibleRange: {max: 60}
+lumenvale/lumen-house-6/book-1:
+  behavior: scripts/lumen-float.js
+  feetPosition: {x: -0.9000000000000001, y: 1.85, z: -1}
+  id: lumenvale/lumen-house-6/book-1
+  parent: lumenvale/lumen-house-6
+  primitive: {kind: scripted, params: {kind: books}, script: scripts/gen/lumen-civic.js, seed: 4}
+  rotation: {yaw: 47}
+  state: {bob: 0.25, bobT: 2.8, spin: 34}
+  visibleRange: {max: 60}
+lumenvale/lumen-house-6/book-2:
+  behavior: scripts/lumen-float.js
+  feetPosition: {x: 0.7999999999999998, y: 2.2, z: -1}
+  id: lumenvale/lumen-house-6/book-2
+  parent: lumenvale/lumen-house-6
+  primitive: {kind: scripted, params: {kind: books}, script: scripts/gen/lumen-civic.js, seed: 5}
+  rotation: {yaw: 94}
+  state: {bob: 0.25, bobT: 3.1, spin: 38}
+  visibleRange: {max: 60}
+lumenvale/lumen-house-6/book-3:
+  behavior: scripts/lumen-float.js
+  feetPosition: {x: 2.4999999999999996, y: 1.5, z: -1}
+  id: lumenvale/lumen-house-6/book-3
+  parent: lumenvale/lumen-house-6
+  primitive: {kind: scripted, params: {kind: books}, script: scripts/gen/lumen-civic.js, seed: 6}
+  rotation: {yaw: 141}
+  state: {bob: 0.25, bobT: 3.4, spin: 42}
+  visibleRange: {max: 60}
+lumenvale/lumen-house-6/book-4:
+  behavior: scripts/lumen-float.js
+  feetPosition: {x: -2.6, y: 1.85, z: 1.2000000000000002}
+  id: lumenvale/lumen-house-6/book-4
+  parent: lumenvale/lumen-house-6
+  primitive: {kind: scripted, params: {kind: books}, script: scripts/gen/lumen-civic.js, seed: 7}
+  rotation: {yaw: 188}
+  state: {bob: 0.25, bobT: 3.7, spin: 46}
+  visibleRange: {max: 60}
+lumenvale/lumen-house-6/book-5:
+  behavior: scripts/lumen-float.js
+  feetPosition: {x: -0.9000000000000001, y: 2.2, z: 1.2000000000000002}
+  id: lumenvale/lumen-house-6/book-5
+  parent: lumenvale/lumen-house-6
+  primitive: {kind: scripted, params: {kind: books}, script: scripts/gen/lumen-civic.js, seed: 8}
+  rotation: {yaw: 235}
+  state: {bob: 0.25, bobT: 4, spin: 50}
+  visibleRange: {max: 60}
+lumenvale/lumen-house-6/book-6:
+  behavior: scripts/lumen-float.js
+  feetPosition: {x: 0.7999999999999998, y: 1.5, z: 1.2000000000000002}
+  id: lumenvale/lumen-house-6/book-6
+  parent: lumenvale/lumen-house-6
+  primitive: {kind: scripted, params: {kind: books}, script: scripts/gen/lumen-civic.js, seed: 9}
+  rotation: {yaw: 282}
+  state: {bob: 0.25, bobT: 4.3, spin: 54}
+  visibleRange: {max: 60}
+lumenvale/lumen-house-6/book-7:
+  behavior: scripts/lumen-float.js
+  feetPosition: {x: 2.4999999999999996, y: 1.85, z: 1.2000000000000002}
+  id: lumenvale/lumen-house-6/book-7
+  parent: lumenvale/lumen-house-6
+  primitive: {kind: scripted, params: {kind: books}, script: scripts/gen/lumen-civic.js, seed: 10}
+  rotation: {yaw: 329}
+  state: {bob: 0.25, bobT: 4.6, spin: 58}
+  visibleRange: {max: 60}
+lumenvale/lumen-house-6/light:
+  feetPosition: {x: 0, y: 2.4, z: 0.5}
+  id: lumenvale/lumen-house-6/light
+  light: {color: oklch(0.85 0.1 70), distance: 11, intensity: 12, kind: point}
+  parent: lumenvale/lumen-house-6
+lumenvale/lumen-house-7:
+  feetPosition: {x: -48.260799916495614, y: 0, z: -40.495619410251976}
+  id: lumenvale/lumen-house-7
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 7, floors: 2, glow: lilac, roof: hip, width: 8}, script: scripts/gen/lumen-house.js, seed: 8}
+  rotation: {yaw: -130}
+  state: {}
+  tags: [lumen-house]
+lumenvale/lumen-house-8:
+  feetPosition: {x: -26.624950489664048, y: 0, z: -57.09739058330895}
+  id: lumenvale/lumen-house-8
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {depth: 7, floors: 2, glow: teal, roof: dome, width: 9}, script: scripts/gen/lumen-house.js, seed: 9}
+  rotation: {yaw: -155.00000000000003}
+  state: {}
+  tags: [lumen-house]
