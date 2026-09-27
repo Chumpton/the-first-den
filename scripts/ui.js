@@ -3,6 +3,7 @@ import SEC from './lib/data/secrets.js';
 import { COURIER as CR } from './lib/data/courier.js';
 import { TRAVEL as TV } from './lib/data/travel.js';
 import { ALCHEMY } from './lib/data/alchemy.js';
+import { GARDEN as GD } from './lib/data/garden.js';
 // Tomas the Courier: the city picker by his horse, the rider's line while riding, and 'on the road' for everyone else near his post.
 const CPILL = 'position:fixed;left:50%;transform:translateX(-50%);padding:8px 16px;border-radius:14px;background:rgba(40,28,14,.78);border:1px solid rgba(242,214,160,.45);color:#f7eedd;font-family:Georgia,serif;font-size:14px;white-space:nowrap';
 const CBTN = 'pointer-events:auto;cursor:pointer;margin:0 4px;padding:6px 12px;border-radius:10px;border:1px solid rgba(255,220,150,.6);background:rgba(120,78,30,.85);color:#fff3d8;font-family:Georgia,serif;font-size:14px';
@@ -63,8 +64,21 @@ function fishHud(player) {
   const tip = ph === 'bite' ? '<b style="color:#ffd24a">[2] HOOK IT!</b>' : ph === 'wait' || ph === 'cast' ? 'waiting for a bite… · [2] reel in' : 'W/S row · A/D turn · <b>[2] fish</b> · E step out';
   return `<div style="position:fixed;left:50%;bottom:26px;transform:translateX(-50%);pointer-events:none;padding:7px 16px;border-radius:999px;background:rgba(29,23,18,.72);border:1px solid rgba(242,230,207,.3);color:#f7eedd;font-family:Georgia,serif;font-size:14px">${tip}</div>`;
 }
+
+// Tower Gardens (scripts/garden-plot.js): seeds in hand, the watering can and the basket, while near the garden or carrying any.
+function gardenHud(player) {
+  const g = player?.state?.garden, f = player?.feetPosition; if (!f) return '';
+  const near = Math.hypot(f.x - GD.centre.x, f.z - GD.centre.z) < GD.hudReach;
+  if (!near) return '';
+  const seeds = Object.entries(g?.seeds || {}).filter(([, n]) => n > 0), sel = g?.sel && g.seeds?.[g.sel] > 0 ? g.sel : seeds[0]?.[0];
+  const pill = (h) => `<div style="padding:4px 11px;border-radius:999px;background:rgba(40,28,14,.72);border:1px solid rgba(242,214,160,.35);color:#f7eedd;font-family:Georgia,serif;font-size:13px">${h}</div>`;
+  const can = g?.can ?? 0, drops = '<span style="color:#8fd0d6">' + '●'.repeat(can) + '</span><span style="opacity:.3">' + '●'.repeat(Math.max(0, GD.canMax - can)) + '</span>';
+  const rows = [pill(`🌱 ${sel ? `<b style="color:${GD.crops[sel].color}">${GD.crops[sel].name}</b> seeds ${g.seeds[sel]}${seeds.length > 1 ? ` <span style="opacity:.6">+${seeds.length - 1} kinds</span>` : ''}` : '<span style="opacity:.7">no seeds · take some from the stall</span>'}`), pill(`💧 can ${drops}`)];
+  if (g?.total) rows.push(pill(`🧺 harvested ${g.total}${g.golden ? ` · <span style="color:#ffd24a">✨ ${g.golden} golden</span>` : ''}`));
+  return `<div style="position:fixed;right:78px;bottom:24px;display:flex;flex-direction:column;align-items:flex-end;gap:5px;pointer-events:none"><div style="font-family:Georgia,serif;font-size:12px;color:#ffe7a8;letter-spacing:.12em;text-shadow:0 1px 2px #0008">TOWER GARDENS · E seeds › plant › water › harvest</div>${rows.join('')}</div>`;
+}
 export default function (ctx, player) {
-  const hud = secretHint(player) + secretCount(player) + courierHud(ctx, player) + travelHud(player) + alchemyHud(player) + fishHud(player);
+  const hud = secretHint(player) + secretCount(player) + courierHud(ctx, player) + travelHud(player) + alchemyHud(player) + fishHud(player) + gardenHud(player);
   const c = player?.controlling;
   if (player?.state?.deleteMode) return `<div style="position:fixed;left:50%;top:50%;width:10px;height:10px;margin:-5px 0 0 -5px;border:2px solid #ff6b5b;border-radius:50%;pointer-events:none"></div><div style="position:fixed;left:50%;top:22px;transform:translateX(-50%);pointer-events:none;padding:7px 16px;border-radius:999px;background:rgba(120,24,18,.8);border:1px solid rgba(255,160,150,.5);color:#fff1ee;font-family:Georgia,serif;font-size:14px">delete mode · look at a thing · 9 removes it · 8 exits</div>`;
   if (c?.state?.kind === 'purple-dragon') {
