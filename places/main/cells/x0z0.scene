@@ -3354,6 +3354,13 @@ lawn-sprigs-ring-b:
   id: lawn-sprigs-ring-b
   scatter: {bounds: {innerRadius: 12, outerRadius: 34, shape: ring}, count: 500, templates: [{castShadow: false, primitive: {kind: scripted, params: {kind: tuft}, script: scripts/gen/lawn-sprig.js}, visibleRange: {max: 45}, weight: 4}, {castShadow: false, primitive: {kind: scripted, params: {kind: clover}, script: scripts/gen/lawn-sprig.js}, visibleRange: {max: 45}, weight: 3}, {castShadow: false, primitive: {kind: scripted, params: {kind: violet}, script: scripts/gen/lawn-sprig.js}, visibleRange: {max: 45}, weight: 2}, {castShadow: false, primitive: {kind: scripted, params: {kind: daisy}, script: scripts/gen/lawn-sprig.js}, visibleRange: {max: 45}, weight: 2}, {castShadow: false, primitive: {kind: scripted, params: {kind: buttercup}, script: scripts/gen/lawn-sprig.js}, visibleRange: {max: 45}, weight: 1}], variation: {scale: [0.8, 1.5], yaw: [0, 360]}}
   tags: [grounds, lawn-sprigs]
+mandala-terrace:
+  feetPosition: {x: 13, y: 0.5, z: -8.5}
+  id: mandala-terrace
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 12, height: 2, kind: box, width: 17}
+  tags: [blueprint]
 outbuilding-glasshouse:
   castShadow: true
   feetPosition: {x: 14, y: 0.5, z: -56}
