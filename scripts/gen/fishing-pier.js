@@ -137,7 +137,7 @@ function islet(ctx, lod) {
   const jit = Array.from({ length: n }, () => 0.86 + rnd() * 0.22);
   const R = prof.map(([r, y], k) => Array.from({ length: n }, (_, i) => { const a = i / n * TAU, j = k ? jit[i] * (0.97 + rnd() * 0.06) : jit[i]; return [Math.cos(a) * r * j, y, Math.sin(a) * r * j]; }));
   for (let k = 0; k < R.length - 1; k++) {
-    const moss = k >= 2; if (moss) paint(ctx, 'moss', `oklch(${(0.74 + rnd() * 0.06).toFixed(3)} 0.09 128)`, 0.95); else paint(ctx, 'stone', 'oklch(0.8 0.02 85)', 0.9);
+    const moss = k >= 2; if (moss) paint(ctx, 'moss', `oklch(${(0.74 + rnd() * 0.06).toFixed(3)} 0.09 128)`, 0.95); else paint(ctx, 'stone', k === 0 ? 'oklch(0.6 0.04 150)' : 'oklch(0.7 0.05 135)', 0.9);
     const o = [0, (prof[k][1] + prof[k + 1][1]) / 2 - 0.3, 0];
     for (let i = 0; i < n; i++) { const j = (i + 1) % n; Q(ctx, R[k][i], R[k][j], R[k + 1][j], R[k + 1][i], o); }
   }
