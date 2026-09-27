@@ -72,3 +72,20 @@ hw-east-lamps-1:
   primitive: {kind: scripted, params: {lamps: [[0, 0, 0, -0.238, -0.971], [20.91, 0.09, -14.94, 0.266, 0.964], [66.74, -0.08, -28.58, 0.304, 0.953], [137.86, 0.08, -43.08, -0.343, -0.94]]}, script: scripts/gen/road-lamps.js}
   tags: [highway-lamps]
   visibleRange: {max: 180}
+trail-e-hitch:
+  feetPosition: {x: 86.92, y: {terrain: 0}, z: 11.36}
+  id: trail-e-hitch
+  physics: static
+  primitive: {kind: scripted, params: {kind: hitch}, script: scripts/gen/trail-stop.js, seed: 87}
+  rotation: {lookAt: {x: 86.92, y: 0, z: -5.68}}
+  tags: [trail-stop]
+  visibleRange: {max: 100}
+trail-e-mile:
+  feetPosition: {x: 171.64, y: {terrain: 0}, z: -4.31}
+  id: trail-e-mile
+  physics: static
+  primitive: {kind: scripted, params: {kind: milestone}, script: scripts/gen/trail-stop.js, seed: 172}
+  rotation: {lookAt: {x: 171.64, y: 0, z: -21.28}}
+  tags: [trail-stop]
+  ui: "<div face=\"front\" at=\"0.5 0.62\" width=\"0.5m\" class=\"text-center font-bold\" style=\"color:#343c43;font-size:64px;line-height:1.1\">LUMENVALE<br>1 mi</div>"
+  visibleRange: {max: 100}

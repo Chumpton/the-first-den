@@ -75,6 +75,46 @@ river-sound:
   audio: {bus: Ambience, clip: /cdn/moodboard-realistic-gritty/sfx-gentle-forest-river-flowing-over-stones-loop.mp3, gain: 0.5, loop: true, maxDistance: 60, spatial: true}
   feetPosition: {x: -69, y: 0.2, z: 40}
   id: river-sound
+trail-lamps-west:
+  feetPosition: {x: -80.14, y: 0.6741479535231466, z: 16.24}
+  id: trail-lamps-west
+  physics: static
+  primitive: {kind: scripted, params: {kind: lamps, posts: [[0, 0, 0], [-56.21, -0.3, -2.07]]}, script: scripts/gen/trail-stop.js, seed: 7}
+  tags: [trail-stop]
+  visibleRange: {max: 160}
+trail-w-hitch:
+  feetPosition: {x: -94.21, y: {terrain: 0}, z: 15.75}
+  id: trail-w-hitch
+  physics: static
+  primitive: {kind: scripted, params: {kind: hitch}, script: scripts/gen/trail-stop.js, seed: 94}
+  rotation: {lookAt: {x: -94.21, y: 0, z: -1.3499999999999996}}
+  tags: [trail-stop]
+  visibleRange: {max: 100}
+trail-w-mile:
+  feetPosition: {x: -170, y: {terrain: 0}, z: 12.4}
+  id: trail-w-mile
+  physics: static
+  primitive: {kind: scripted, params: {kind: milestone}, script: scripts/gen/trail-stop.js, seed: 170}
+  rotation: {lookAt: {x: -170, y: 0, z: -4.8}}
+  tags: [trail-stop]
+  ui: "<div face=\"front\" at=\"0.5 0.62\" width=\"0.5m\" class=\"text-center font-bold\" style=\"color:#343c43;font-size:64px;line-height:1.1\">HEARTHMERE<br>1 mi</div>"
+  visibleRange: {max: 100}
+trail-w-shrine:
+  feetPosition: {x: -122.28, y: {terrain: 0}, z: 15.04}
+  id: trail-w-shrine
+  physics: static
+  primitive: {kind: scripted, params: {kind: shrine}, script: scripts/gen/trail-stop.js, seed: 122}
+  rotation: {lookAt: {x: -122.28, y: 0, z: -2.3499999999999996}}
+  tags: [trail-stop]
+  visibleRange: {max: 100}
+trailside:
+  feetPosition: {x: -66.16, y: {terrain: 0}, z: 17.31}
+  id: trailside
+  physics: static
+  primitive: {kind: scripted, params: {kind: shelter}, script: scripts/gen/trail-stop.js, seed: 66}
+  rotation: {lookAt: {x: -66.16, y: 0, z: -0.6899999999999995}}
+  tags: [trail-stop]
+  visibleRange: {max: 100}
 warden-tower-w:
   castShadow: true
   children: [{behavior: scripts/warden-crystal.js, castShadow: false, feetPosition: {x: 0, y: 17.95, z: 0}, fx: {script: "fx\npop motes rate=6 on=sphere(1.2) life=2..4 v=up(.2)+curl(.3) size=.04..0.08 acc=curl(.4)+drag(.6) col=hdr(.6,2.4,1.8) a=0>.2:1>.8:1>0 sz=$size*flick(3,.3) r=sprite(soft-disc,add)\npop halo n=1 size=1.6 col=hdr(.25,.9,.7) a=.35*flick(.4,.3) sz=$size r=sprite(soft-disc,add)"}, id: crystal, primitive: {kind: scripted, params: {part: crystal}, script: scripts/gen/warden-tower.js}}, {feetPosition: {x: 0, y: 18.7, z: 0}, id: glow, light: {color: "#5fe8c4", distance: 18, intensity: 4, kind: point}}]
