@@ -42,6 +42,7 @@ terrain:
     - {albedo: cdn/texture-terrain-mossy-cobblestone-road-realistic.png, antiTiling: stochastic, id: cobble, normalStrength: 0.6, pbr: true, roughnessIntensity: 0.8, textureScale: 2.5, tint: oklch(0.95 0.01 80)}
     - {albedo: cdn/texture-terrain-garden-gravel-path-realistic.png, antiTiling: stochastic, id: gravel, normalStrength: 0.5, pbr: true, roughnessIntensity: 0.85, textureScale: 2, tint: oklch(0.96 0.02 80)}
     - {albedo: cdn/texture-terrain-forest-moss-and-grass-realistic.png, antiTiling: stochastic, id: yard, macro: {hue: 0.012, scale: 50, value: 0.07}, normalStrength: 0.35, pbr: true, roughnessIntensity: 0.9, textureScale: 3.5, tint: oklch(0.95 0.03 135)}
+    - {albedo: cdn/texture-terrain-shredded-bark-garden-mulch-realistic.png, antiTiling: stochastic, id: mulch, macro: {hue: 0.012, scale: 50, value: 0.07}, normalStrength: 0.35, pbr: true, roughnessIntensity: 0.9, textureScale: 2.2, tint: oklch(0.92 0.03 60)}
   marks:
     river: {kind: sea, level: 0, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
     spawnClearing: {kind: flatten, center: {x: 0, z: -3}, height: 0.5, falloff: 6, shape: {kind: circle, radius: 9}, material: moss}
@@ -58,6 +59,8 @@ terrain:
     road-west-4: {clearScatter: true, edgeMaterial: yard, edgeWidth: 5, falloff: 3, kind: road, material: cobble, points: [[-772.8, -247.2], [-777.4, -256], [-782.1, -264.9], [-786.7, -273.7], [-790.4, -282], [-792.5, -291.7], [-794.6, -301.5], [-796.8, -311.3], [-798.9, -321.1], [-801, -330.8], [-803.1, -340.6], [-805.2, -350.4], [-807.3, -360.1], [-809.4, -369.9], [-811.6, -379.7], [-813.7, -389.5], [-815.8, -399.2], [-817.9, -409], [-820, -418.8], [-822.1, -428.6], [-824.2, -438.3], [-826.3, -448.1], [-828.5, -457.9], [-830, -465]], width: 6}
     homeSite: {center: {x: 0, z: -27}, falloff: 8, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 18}, edgeMaterial: yard}
     homeClear: {center: {x: 0, z: -30}, kind: clear-scatter, shape: {kind: circle, radius: 26}}
+    grounds-lawn: {kind: path, grade: false, material: yard, edgeMaterial: yard, falloff: 3, points: [[-14, -30], [14, -30]], width: 36}
+    grounds-mulch: {kind: path, grade: false, material: mulch, edgeMaterial: yard, falloff: 1.5, points: [[-3, -28], [3, -28]], width: 29}
     grounds-yardClear: {kind: clear-scatter, center: {x: 0, z: -35}, shape: {kind: circle, radius: 34}}
     grounds-campClear: {kind: clear-scatter, center: {x: -18, z: -50}, shape: {kind: circle, radius: 11}}
     path-grounds-rope: {clearScatter: true, edgeMaterial: yard, falloff: 3, grade: true, kind: path, material: yard, points: [[-1.2, -9], [-4, -10.3], [-8, -11.8], [-13, -12.9], [-17.4, -14.4], [-20.6, -17.4]], width: 2}
@@ -107,17 +110,17 @@ terrain:
     lumen-av-south: {clearScatter: true, edgeMaterial: yard, edgeWidth: 5, falloff: 2.5, kind: road, material: cobble, points: [[1101.9, -228.1], [1103.1, -214.1], [1104.7, -196.2], [1106.5, -175.3], [1108.7, -150.4]], width: 6}
     lumen-ring: {clearScatter: true, edgeMaterial: yard, edgeWidth: 5, falloff: 2.5, kind: road, material: cobble, points: [[1154, -250], [1153.3, -241.6], [1151.4, -233.3], [1148.1, -225.5], [1143.7, -218.3], [1138.2, -211.8], [1131.7, -206.3], [1124.5, -201.9], [1116.7, -198.6], [1108.4, -196.7], [1100, -196], [1091.6, -196.7], [1083.3, -198.6], [1075.5, -201.9], [1068.3, -206.3], [1061.8, -211.8], [1056.3, -218.3], [1051.9, -225.5], [1048.6, -233.3], [1046.7, -241.6], [1046, -250], [1046.7, -258.4], [1048.6, -266.7], [1051.9, -274.5], [1056.3, -281.7], [1061.8, -288.2], [1068.3, -293.7], [1075.5, -298.1], [1083.3, -301.4], [1091.6, -303.3], [1100, -304], [1108.4, -303.3], [1116.7, -301.4], [1124.5, -298.1], [1131.7, -293.7], [1138.2, -288.2], [1143.7, -281.7], [1148.1, -274.5], [1151.4, -266.7], [1153.3, -258.4], [1154, -250]], width: 6}
     lumen-lane: {clearScatter: true, edgeMaterial: yard, edgeWidth: 5, falloff: 2.5, kind: road, material: gravel, points: [[1007.3, -274.8], [1007.1, -286.6], [1010, -297.8], [1016.6, -307.3], [1026, -314.3], [1036.6, -319.2], [1046.6, -323.4], [1055.6, -328.4], [1064, -334.9], [1072.7, -342.1], [1082.6, -348.4], [1093.8, -351.7], [1105.3, -351], [1116.2, -346.6], [1125.9, -340.2], [1134.7, -333.8], [1143.7, -328.8], [1153.6, -325.1], [1164.4, -321.5], [1174.9, -316.3], [1183.5, -308.5], [1188.8, -298.2], [1190.7, -286.6], [1190.3, -275], [1189.6, -264.2]], width: 4}
-    pad-outbuilding-workshop: {center: {x: 17, z: -41}, falloff: 4, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 5}}
+    pad-outbuilding-workshop: {center: {x: 17, z: -41}, falloff: 4, height: 0.5, kind: flatten, material: mulch, shape: {kind: circle, radius: 5}}
     clear-outbuilding-workshop: {center: {x: 17, z: -41}, kind: clear-scatter, shape: {kind: circle, radius: 9}}
-    path-outbuilding-workshop: {clearScatter: true, edgeMaterial: yard, falloff: 3, grade: true, kind: path, material: yard, points: [[10.8, -16.2], [13.6, -18.5], [14.6, -26], [14.4, -33], [13.4, -38.6]], width: 2}
+    path-outbuilding-workshop: {clearScatter: true, edgeMaterial: yard, falloff: 3, grade: true, kind: path, material: yard, points: [[10.8, -16.2], [13.6, -18.5], [14.6, -26], [14.4, -33], [16.06, -38.1]], width: 2}
     verge-outbuilding-workshop: {center: {x: 6.331122232759354, z: -36.48451372920918}, kind: clear-scatter, shape: {kind: path, points: [[0, -36.5], [6.331122232759354, -36.48451372920918], [12.662244465518707, -39.46902745841837]], width: 9}}
-    pad-outbuilding-studio: {center: {x: -19, z: -36}, falloff: 4, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 5}}
+    pad-outbuilding-studio: {center: {x: -19, z: -36}, falloff: 4, height: 0.5, kind: flatten, material: mulch, shape: {kind: circle, radius: 5}}
     clear-outbuilding-studio: {center: {x: -19, z: -36}, kind: clear-scatter, shape: {kind: circle, radius: 9}}
-    path-outbuilding-studio: {clearScatter: true, edgeMaterial: yard, falloff: 3, grade: true, kind: path, material: yard, points: [[-17.4, -14.4], [-17.5, -20], [-17.4, -24.5], [-15.2, -27.2], [-13.2, -31], [-13.0, -34.5], [-14.6, -36.2]], width: 2}
+    path-outbuilding-studio: {clearScatter: true, edgeMaterial: yard, falloff: 3, grade: true, kind: path, material: yard, points: [[-17.4, -14.4], [-17.5, -20], [-17.4, -24.5], [-15.2, -27.2], [-13.2, -31], [-13, -34.8], [-16.25, -35.45]], width: 2}
     verge-outbuilding-studio: {center: {x: -7.352971666935105, z: -34.63699850878606}, kind: clear-scatter, shape: {kind: path, points: [[0, -36.5], [-7.352971666935105, -34.63699850878606], [-14.70594333387021, -35.773997017572114]], width: 9}}
-    pad-outbuilding-glasshouse: {center: {x: 14, z: -56}, falloff: 4, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 5}}
+    pad-outbuilding-glasshouse: {center: {x: 14, z: -56}, falloff: 4, height: 0.5, kind: flatten, material: mulch, shape: {kind: circle, radius: 5}}
     clear-outbuilding-glasshouse: {center: {x: 14, z: -56}, kind: clear-scatter, shape: {kind: circle, radius: 9}}
-    path-outbuilding-glasshouse: {clearScatter: true, edgeMaterial: yard, falloff: 3, grade: true, kind: path, material: yard, points: [[6.2, -50], [9.2, -51.4], [11.8, -52.3]], width: 2}
+    path-outbuilding-glasshouse: {clearScatter: true, edgeMaterial: yard, falloff: 3, grade: true, kind: path, material: yard, points: [[6.2, -50], [11.86, -54.35]], width: 2}
     verge-outbuilding-glasshouse: {center: {x: 5.807394578115757, z: -42.961091867173636}, kind: clear-scatter, shape: {kind: path, points: [[0, -36.5], [5.807394578115757, -42.961091867173636], [11.614789156231515, -52.42218373434727]], width: 9}}
     clear-treehouse-a: {center: {x: -27, z: -18}, kind: clear-scatter, shape: {kind: circle, radius: 9.5}}
     clear-treehouse-b: {center: {x: -18, z: -29}, kind: clear-scatter, shape: {kind: circle, radius: 9.5}}
@@ -141,7 +144,7 @@ terrain:
       litter: [canopy, ancients, midstory, shrubs, ferns, logs, wildflowers]
       moss: [canopy, ancients, midstory, shrubs, ferns, ground, wildflowers]
       mud: [reeds]
-      yard: [ground, ferns, wildflowers]
+      yard: []
     layers:
       canopy:
         density: 0.0065
