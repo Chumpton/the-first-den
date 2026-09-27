@@ -49,7 +49,11 @@ export function update(ctx, dt) {
   if (target.state?.kind === PD.kind) { dragonChase(ctx, target, dt); return }
   if (ctx.self.state.pdHead != null) { const s = ctx.self.state; s.pdHead = null; s.pdYawOff = 0; s.pdPitchOff = 0 }
   // 7 flips player.state.camMode (scripts/player.js); third person pulls the eye back over the shoulder.
-  const third = (target.state?.camMode === 'third' || target.state?.kind === 'boat') && target.state?.kind !== 'dragon'
+  // Riding anything that asks for it (the summoned horse, Tomas's horse, the rowboat) pulls the eye back over the shoulder too,
+  // whether the camera follows the mount (it holds the controls) or the rider sitting on it.
+  const mount = target.parent ?? null, k = target.state?.kind
+  const riding = k === 'boat' || k === 'horse' || !!target.state?.thirdPerson || !!mount?.state?.thirdPerson || mount?.state?.kind === 'horse'
+  const third = (target.state?.camMode === 'third' || riding) && k !== 'dragon'
   ctx.self.hideLocalPlayer = !third
 
   // Seated (the body rides a seat: its parent is the chair or the couch), the eye drops to a sitter's and the feet are read
