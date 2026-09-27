@@ -246,7 +246,7 @@ north-camp:
   physics: static
   primitive: {kind: scripted, params: {trees: [[-14, -1.5, -0.066, cherry, 1], [-12, -5, 0, apple, 0.95], [2.5, -1.5, -0.118, cherry, 1.05], [5.5, -4.5, -0.002, apple, 1], [2.5, -8, -0.002, cherry, 0.9], [7.800000000000001, -1.5, -0.026, apple, 0.95], [7.199999999999999, -8.5, 0.048, cherry, 1.1], [-1, -10, 0, apple, 0.9]]}, script: scripts/gen/north-camp.js, seed: 7}
   tags: [north-shore]
-  visibleRange: {max: 100}
+  visibleRange: {max: 160}
 north-fire:
   audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-small-wood-hearth-crackle-loop.mp3, gain: 0.15, loop: true, maxDistance: 18, spatial: true}
   feetPosition: {x: -1.5, y: 0.52, z: -104}
@@ -261,7 +261,7 @@ north-lookout-bench:
   primitive: {kind: scripted, params: {kind: bench, seat: 0.45, width: 1.8}, script: scripts/gen/firepit.js}
   rotation: {yaw: 180}
   tags: [den-furniture, firepit-seat, north-shore]
-  visibleRange: {max: 80}
+  visibleRange: {max: 160}
 north-seat-0:
   feetPosition: {x: 0.7216294004648569, y: 0.49994674527327654, z: -104.5952838037358}
   id: north-seat-0
@@ -269,7 +269,7 @@ north-seat-0:
   primitive: {kind: scripted, params: {kind: bench, seat: 0.45, width: 1.3}, script: scripts/gen/firepit.js}
   rotation: {yaw: 105}
   tags: [den-furniture, firepit-seat, north-shore]
-  visibleRange: {max: 80}
+  visibleRange: {max: 160}
 north-seat-1:
   feetPosition: {x: -0.34999999999999987, y: 0.4161339340602956, z: -102.0081415712958}
   id: north-seat-1
@@ -277,7 +277,7 @@ north-seat-1:
   primitive: {kind: scripted, params: {kind: stump, seat: 0.45, seed: 12, width: 0.45}, script: scripts/gen/firepit.js}
   rotation: {yaw: 30.00000000000001}
   tags: [den-furniture, firepit-seat, north-shore]
-  visibleRange: {max: 80}
+  visibleRange: {max: 160}
 north-seat-2:
   feetPosition: {x: -2.6499999999999995, y: 0.4523243886101709, z: -102.0081415712958}
   id: north-seat-2
@@ -285,7 +285,7 @@ north-seat-2:
   primitive: {kind: scripted, params: {kind: bench, seat: 0.45, width: 1.3}, script: scripts/gen/firepit.js}
   rotation: {yaw: -29.999999999999993}
   tags: [den-furniture, firepit-seat, north-shore]
-  visibleRange: {max: 80}
+  visibleRange: {max: 160}
 north-seat-3:
   feetPosition: {x: -3.7216294004648574, y: 0.5, z: -104.5952838037358}
   id: north-seat-3
@@ -293,7 +293,7 @@ north-seat-3:
   primitive: {kind: scripted, params: {kind: stump, seat: 0.45, seed: 14, width: 0.45}, script: scripts/gen/firepit.js}
   rotation: {yaw: -104.99999999999999}
   tags: [den-furniture, firepit-seat, north-shore]
-  visibleRange: {max: 80}
+  visibleRange: {max: 160}
 pasture-bales:
   feetPosition: {x: -38.5, y: {terrain: 0}, z: -81.3}
   id: pasture-bales
