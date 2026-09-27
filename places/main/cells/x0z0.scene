@@ -1835,13 +1835,36 @@ coop-site/coop-nest-lid:
   primitive: {kind: scripted, script: scripts/gen/coop-lid.js}
   state: {eggs: 0}
   tags: [interactable, coop]
+courier-horse:
+  behavior: scripts/courier.js
+  castShadow: true
+  feetPosition: {x: -8.2, y: {terrain: 0}, z: 16.4}
+  id: courier-horse
+  primitive: {kind: scripted, params: {blanket: oklch(0.45 0.09 25), coat: chestnut, hand: [-0.52, 0.8, -0.835], man: {accent: oklch(0.34 0.05 50), body: oklch(0.5 0.05 65), boots: oklch(0.22 0.03 45), cape: oklch(0.42 0.06 145), hair: oklch(0.6 0.015 70), hat: true, hatCol: oklch(0.3 0.04 55), skin: oklch(0.66 0.07 55), trousers: oklch(0.33 0.02 60)}, mounted: false, pad: oklch(0.42 0.06 145)}, script: scripts/gen/courier-horse.js}
+  rotation: {yaw: 0}
+  state: {role: horse}
+  tags: [interactable, courier]
 courier-post:
-  feetPosition: {x: -9, y: 0.5, z: 16}
+  castShadow: true
+  feetPosition: {x: -9, y: {terrain: 0}, z: 16}
   id: courier-post
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 4, height: 2.5, kind: box, width: 5}
-  tags: [blueprint]
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/courier-post.js}
+  receiveShadow: true
+  tags: [courier-post]
+  visibleRange: {max: 260}
+courier-tomas:
+  behavior: scripts/courier.js
+  castShadow: true
+  children: [{feetPosition: {x: 0, y: 2.05, z: 0}, text: {color: "#ffe9c2", content: Tomas the Courier, size: 0.2}, visibleRange: {max: 30}}, {feetPosition: {x: 0, y: 1.86, z: 0}, text: {color: "#fff6e0", content: "E · ride to the cities", size: 0.11}, visibleRange: {max: 5}}]
+  feetPosition: {x: -8.92, y: {terrain: 0}, z: 15.45}
+  id: courier-tomas
+  primitive: {kind: scripted, params: {accent: oklch(0.34 0.05 50), body: oklch(0.5 0.05 65), boots: oklch(0.22 0.03 45), cape: oklch(0.42 0.06 145), hair: oklch(0.6 0.015 70), hat: true, hatCol: oklch(0.3 0.04 55), skin: oklch(0.66 0.07 55), trousers: oklch(0.33 0.02 60)}, script: scripts/gen/traveller-walker.js}
+  rotation: {yaw: -30}
+  state: {pressTo: courier-horse, role: man}
+  tags: [interactable, courier]
+  visibleRange: {max: 220}
 creek-banks:
   castShadow: true
   feetPosition: {x: 0, y: 0, z: 0}
