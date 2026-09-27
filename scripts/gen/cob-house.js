@@ -427,5 +427,66 @@ function greenery(ctx) {
     }
   }
 }
-export function geometry(ctx) { if (ctx.params?.part === "greenery") return greenery(ctx); build(ctx, false); }
-export function collider(ctx) { if (ctx.params?.part === "greenery") return; build(ctx, true); }
+// The living roof in bloom (params.part "roofbloom"): moss mounds and sedum cushions for texture, drifts of wildflowers
+// in colour patches (poppy, cornflower, oxeye, buttercup, clover, lavender, coneflower), and vines trailing off the eave edge.
+function roofBloom(ctx) {
+  const lod = Number(ctx.lod ?? 1); if (lod >= 4) return;
+  ctx.flat(); ctx.albedo(null); ctx.roughness(0.95);
+  const eAp = H.eaveR * COS30, dAp = H.deckR * COS30, dy = H.D - H.eaveY;
+  const V = (r, k) => [Math.cos(60 * k * D2R) * r, Math.sin(60 * k * D2R) * r];
+  const at = (k, f, g) => { // f along the face, g from eave (0) to deck (1)
+    const e0 = V(H.eaveR - 0.25, k), e1 = V(H.eaveR - 0.25, k + 1), d0 = V(H.deckR + 0.35, k), d1 = V(H.deckR + 0.35, k + 1);
+    const x = (e0[0] + (e1[0] - e0[0]) * f) * (1 - g) + (d0[0] + (d1[0] - d0[0]) * f) * g, z = (e0[1] + (e1[1] - e0[1]) * f) * (1 - g) + (d0[1] + (d1[1] - d0[1]) * f) * g;
+    const p = Math.hypot(x, z) * Math.cos(((((Math.atan2(z, x) / D2R) % 60) + 60) % 60 - 30) * D2R);
+    return [x, H.eaveY + (eAp - p) / (eAp - dAp) * dy - 0.02, z];
+  };
+  const F = [ // petal colour, centre colour, height, size
+    ["#e0413a", "#2a1a14", 0.42, 0.09], ["#4f7fe0", "#2c3f86", 0.38, 0.07], ["#f6f2e6", "#f0c22e", 0.4, 0.08],
+    ["#f2cf2e", "#d99a1c", 0.3, 0.06], ["#e59ac8", "#c2548d", 0.2, 0.06], ["#9a74d8", "#6e4aa8", 0.45, 0.05], ["#ec7d3a", "#5a2f18", 0.5, 0.1],
+  ];
+  const moss = ["#5f8a3a", "#6f9a44", "#809f4c", "#8aa35a"], sedum = ["#a8b458", "#c18a6a", "#b4c070"];
+  for (let k = 0; k < 6; k++) {
+    // texture: low moss mounds and sedum cushions
+    for (let i = 0; i < (lod <= 1 ? 26 : 14); i++) {
+      const [x, y, z] = at(k, 0.05 + ctx.random() * 0.9, ctx.random() * 0.92), r = 0.25 + ctx.random() * 0.35, sd = ctx.random() < 0.3;
+      blob(ctx, x, y + r * 0.12, z, r, r * 0.28, r, 5, sd ? sedum : moss);
+    }
+    // grass clumps
+    for (let i = 0; i < (lod <= 1 ? 40 : 18); i++) {
+      const [x, y, z] = at(k, ctx.random(), ctx.random() * 0.95);
+      ctx.color(i % 3 ? "#6f9a48" : "#94b25a");
+      for (let b = 0; b < 3; b++) { const a = ctx.random() * 6.28, h = 0.25 + ctx.random() * 0.25; ctx.tri(x - 0.04, y, z, x + 0.04, y, z, x + Math.cos(a) * 0.12, y + h, z + Math.sin(a) * 0.12); }
+    }
+    // flower drifts: each patch one kind, so the colour reads in swathes
+    for (let d = 0; d < (lod <= 1 ? 7 : 4); d++) {
+      const kind = F[Math.floor(ctx.random() * F.length)], cf = 0.1 + ctx.random() * 0.8, cg = 0.08 + ctx.random() * 0.8;
+      const n = lod <= 1 ? 16 : lod <= 2 ? 9 : 5;
+      for (let i = 0; i < n; i++) {
+        const [x, y, z] = at(k, Math.min(0.98, Math.max(0.02, cf + (ctx.random() - 0.5) * 0.25)), Math.min(0.95, Math.max(0, cg + (ctx.random() - 0.5) * 0.3)));
+        const h = kind[2] * (0.7 + ctx.random() * 0.6), s = kind[3] * (0.8 + ctx.random() * 0.4), tx = x + (ctx.random() - 0.5) * 0.06, tz = z + (ctx.random() - 0.5) * 0.06;
+        ctx.color("#5b8a3a"); ctx.tri(x - 0.012, y, z, x + 0.012, y, z, tx, y + h, tz); ctx.tri(x, y, z - 0.012, x, y, z + 0.012, tx, y + h, tz);
+        const top = y + h, pet = lod <= 2 ? 6 : 4;
+        ctx.color(kind[0]);
+        for (let q = 0; q < pet; q++) { const a = q / pet * 6.283 + ctx.random() * 0.3, w = 3.1416 / pet; ctx.tri(tx, top, tz, tx + Math.cos(a - w) * s, top + 0.01, tz + Math.sin(a - w) * s, tx + Math.cos(a + w) * s, top + 0.01, tz + Math.sin(a + w) * s); }
+        if (lod <= 2) { ctx.color(kind[1]); const c = s * 0.35; box(ctx, tx - c, top + 0.005, tz - c, tx + c, top + 0.03, tz + c); }
+      }
+    }
+    // vines trailing off the eave edge (not over the two doors)
+    const door = k === 1 || k === 4, e0 = V(H.eaveR + 0.02, k), e1 = V(H.eaveR + 0.02, k + 1), nv = lod <= 1 ? 16 : 9;
+    for (let i = 0; i < nv; i++) {
+      const f = (i + 0.5 + (ctx.random() - 0.5) * 0.6) / nv, u = (f - 0.5) * 2 * H.eaveR * 0.5;
+      if (door && Math.abs(u) < 2.2) continue;
+      if (ctx.random() < 0.25) continue;
+      const x = e0[0] + (e1[0] - e0[0]) * f, z = e0[1] + (e1[1] - e0[1]) * f, len = 0.5 + ctx.random() * 1.5, sway = (ctx.random() - 0.5) * 0.25;
+      let y = H.eaveY + 0.05; const seg = Math.max(3, Math.round(len / 0.18));
+      ctx.color("#4c6e30"); box(ctx, x - 0.015, H.eaveY - len, z - 0.015, x + 0.015, y, z + 0.015);
+      for (let j = 0; j < seg; j++) {
+        const yy = y - (j / seg) * len, ox = x + Math.sin(j * 0.9) * sway * (j / seg), oz = z + Math.cos(j * 0.9) * sway * (j / seg), r = 0.09 + ctx.random() * 0.06 - j / seg * 0.03;
+        blob(ctx, ox, yy, oz, r, r * 0.7, r, 4, ["#3f7a33", "#4f8a3c", "#5f9a45"]);
+        if (lod <= 2 && ctx.random() < 0.2) { ctx.color(ctx.random() < 0.5 ? "#b784e0" : "#f7f1e8"); box(ctx, ox - 0.04, yy - 0.06, oz - 0.04, ox + 0.04, yy, oz + 0.04); }
+      }
+    }
+  }
+}
+export function geometry(ctx) { if (ctx.params?.part === "roofbloom") return roofBloom(ctx); if (ctx.params?.part === "greenery") return greenery(ctx); build(ctx, false); }
+export function collider(ctx) { if (ctx.params?.part === "greenery" || ctx.params?.part === "roofbloom") return; build(ctx, true); }
