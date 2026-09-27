@@ -1,0 +1,30 @@
+{
+  "feetY": 0.55,
+  "lane": { "id": "town-road", "at": [0, 12], "lamps": [[-4.4, 14], [4.4, 14], [-4.4, 34], [4.4, 34], [-4.4, 54], [4.4, 54]], "archZ": 4, "lit": [[-4.4, 54], [4.4, 54]] },
+  "square": { "id": "town-square", "at": [0, 100],
+    "benches": [[-18.5, -8, -90], [-18.5, 8, -90], [18.5, -8, 90], [18.5, 8, 90]],
+    "planters": [[-6, -20.5, 3, 90], [6, -20.5, 3, 90], [-8, 19.5, 3, 0], [8, 19.5, 3, 0]],
+    "trees": [[-17, 18.5], [17, 18.5]],
+    "poles": [[-20.5, -16], [20.5, -16], [-20.5, 16], [20.5, 16]], "strings": [[0, 1], [2, 3], [0, 3], [1, 2]], "poleH": 8.5 },
+  "market": { "id": "town-market", "at": [0, 100], "stalls": [
+    { "x": -13, "z": -10, "awn": "oklch(0.62 0.13 40)", "goods": ["apples", "pumpkin", "carrots"], "hang": "oklch(0.72 0.14 50)" },
+    { "x": -15.5, "z": 0.5, "awn": "oklch(0.62 0.08 195)", "goods": ["bread", "cheese", "jars"] },
+    { "x": -13, "z": 10.5, "awn": "oklch(0.8 0.12 85)", "goods": ["flowers", "flowers", "cabbage"], "hang": "oklch(0.66 0.15 350)" },
+    { "x": 13, "z": -9.5, "awn": "oklch(0.7 0.08 130)", "goods": ["cabbage", "lemons", "oranges"] },
+    { "x": 15.5, "z": 1, "awn": "oklch(0.66 0.11 10)", "goods": ["plums", "apples", "jars"], "hang": "oklch(0.7 0.13 130)" },
+    { "x": 12.5, "z": 11, "awn": "oklch(0.55 0.06 250)", "goods": ["fish", "fish", "lemons"] } ] },
+  "fountain": { "id": "town-fountain", "at": [0, 100] },
+  "hall": { "id": "town-hall", "at": [0, 130], "roostWorldY": 22.0 },
+  "buildings": [
+    { "id": "town-bakery", "x": -28, "z": 88.5, "yaw": -90, "p": { "w": 9, "d": 9, "floors": 2, "base": "stone", "shop": true, "sign": "bakery", "awning": "oklch(0.62 0.13 40)", "chimney": [2.5, 2], "roof": { "kind": "gx", "pitch": 42, "tex": "clay", "tint": "oklch(0.95 0.03 45)" }, "plaster": "oklch(0.96 0.045 88)", "trim": "oklch(0.62 0.08 195)", "seed": 1 } },
+    { "id": "town-tavern", "x": -28.5, "z": 100.5, "yaw": -90, "p": { "w": 11, "d": 10, "floors": 3, "shop": true, "sign": "tavern", "lamp": true, "chimney": [-3.5, 3], "roof": { "kind": "gz", "pitch": 48, "tex": "cedar", "tint": "oklch(0.95 0.02 70)" }, "plaster": "oklch(0.94 0.04 40)", "trim": "oklch(0.55 0.07 135)", "seed": 2 } },
+    { "id": "town-house-w", "x": -28, "z": 112.5, "yaw": -90, "p": { "w": 8, "d": 9, "floors": 3, "roof": { "kind": "hip", "pitch": 40, "tex": "slate", "tint": "oklch(0.95 0.01 250)" }, "plaster": "oklch(0.97 0.02 85)", "trim": "oklch(0.6 0.12 40)", "seed": 3 } },
+    { "id": "town-apothecary", "x": 28, "z": 88, "yaw": 90, "p": { "w": 8, "d": 9, "floors": 2, "shop": true, "sign": "apothecary", "lamp": true, "roof": { "kind": "gz", "pitch": 56, "tex": "teal", "tint": "oklch(0.97 0.01 190)" }, "plaster": "oklch(0.93 0.04 130)", "trim": "oklch(0.55 0.08 195)", "seed": 4 } },
+    { "id": "town-tailor", "x": 28, "z": 99.5, "yaw": 90, "p": { "w": 10, "d": 9, "floors": 2, "shop": true, "sign": "tailor", "awning": "oklch(0.62 0.08 195)", "roof": { "kind": "salt", "pitch": 45, "ridge": 0.38, "tex": "gold", "tint": "oklch(0.96 0.02 80)" }, "plaster": "oklch(0.96 0.045 88)", "trim": "oklch(0.66 0.11 10)", "seed": 5 } },
+    { "id": "town-house-e", "x": 28, "z": 111, "yaw": 90, "p": { "w": 9, "d": 9, "floors": 3, "chimney": [-2.5, 2.5], "roof": { "kind": "gx", "pitch": 34, "tex": "clay", "tint": "oklch(0.9 0.05 40)" }, "plaster": "oklch(0.94 0.035 190)", "trim": "oklch(0.55 0.07 135)", "seed": 6 } },
+    { "id": "town-cheese", "x": -13.5, "z": 72.25, "yaw": 180, "p": { "w": 10, "d": 8.5, "floors": 2, "shop": true, "sign": "books", "awning": "oklch(0.7 0.08 130)", "roof": { "kind": "hip", "pitch": 30, "tex": "teal", "tint": "oklch(0.95 0.02 190)" }, "plaster": "oklch(0.97 0.02 85)", "trim": "oklch(0.62 0.13 40)", "seed": 7 } },
+    { "id": "town-house-se", "x": 13.5, "z": 72.25, "yaw": 180, "p": { "w": 10, "d": 8.5, "floors": 3, "chimney": [3, 2], "roof": { "kind": "gz", "pitch": 38, "tex": "slate", "tint": "oklch(0.93 0.015 250)" }, "plaster": "oklch(0.96 0.045 88)", "trim": "oklch(0.62 0.08 195)", "seed": 8 } },
+    { "id": "town-house-nw", "x": -19, "z": 127, "yaw": 0, "p": { "w": 9, "d": 9, "floors": 2, "chimney": [2.5, 2], "roof": { "kind": "gx", "pitch": 55, "tex": "cedar", "tint": "oklch(0.92 0.03 60)" }, "plaster": "oklch(0.94 0.04 40)", "trim": "oklch(0.62 0.08 195)", "seed": 9 } },
+    { "id": "town-house-ne", "x": 19, "z": 127, "yaw": 0, "p": { "w": 9, "d": 9, "floors": 2, "shop": true, "awning": "oklch(0.66 0.11 10)", "roof": { "kind": "hip", "pitch": 52, "tex": "clay", "tint": "oklch(0.95 0.04 55)" }, "plaster": "oklch(0.93 0.04 130)", "trim": "oklch(0.6 0.12 40)", "seed": 10 } }
+  ]
+}
