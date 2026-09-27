@@ -1,0 +1,3223 @@
+# spawn-scene v2 yaml x0z0
+den-life-butterflies:
+  overrides:
+    feetPosition: {x: 7.5, y: {terrain: 0}, z: -11}
+  template: templates/den-life.js#butterflies
+den-note-arch:
+  overrides:
+    feetPosition: {x: -2.2, y: {terrain: -0.05}, z: 33.1}
+    rotation: {yaw: 0}
+  template: templates/den-furniture.js#noteStake
+den-note-arch/card:
+  overrides:
+    feetPosition: {x: 0, y: 0.95, z: -0.0012}
+    parent: den-note-arch
+    state.words: your first game starts here
+  template: templates/den-furniture.js#note
+den-note-garden:
+  overrides:
+    feetPosition: {x: 6.3, y: {terrain: -0.05}, z: -9.8}
+    rotation: {yaw: 180}
+  template: templates/den-furniture.js#noteStake
+den-note-garden/card:
+  overrides:
+    feetPosition: {x: 0, y: 0.95, z: -0.0012}
+    parent: den-note-garden
+    state.words: a little pond here?
+  template: templates/den-furniture.js#note
+garden-birch-east:
+  blueprint: {category: Home garden, icon: tree-deciduous, label: Airy silver birch}
+  castShadow: true
+  feetPosition: {x: 15, y: {terrain: 0}, z: 1}
+  id: garden-birch-east
+  material: {pbr: true, roughness: 0.91}
+  physics: static
+  primitive: {kind: scripted, params: {height: 6.3, spread: 2.45}, script: scripts/gen/home-garden-birch.js, seed: 43}
+  receiveShadow: true
+  state: {grounding: terrain, keepNorthWindowClear: true, species: silver birch}
+  tags: [home-garden, garden-tree]
+garden-birch-northeast:
+  blueprint: {category: Home garden, icon: tree-deciduous, label: Airy silver birch}
+  castShadow: true
+  feetPosition: {x: 16, y: {terrain: 0}, z: -10}
+  id: garden-birch-northeast
+  material: {pbr: true, roughness: 0.91}
+  physics: static
+  primitive: {kind: scripted, params: {height: 6.8, spread: 2.5}, script: scripts/gen/home-garden-birch.js, seed: 67}
+  receiveShadow: true
+  state: {grounding: terrain, keepNorthWindowClear: true, species: silver birch}
+  tags: [home-garden, garden-tree]
+garden-birch-path:
+  blueprint: {category: Home garden, icon: tree-deciduous, label: Airy silver birch}
+  castShadow: true
+  feetPosition: {x: -11, y: {terrain: 0}, z: -5}
+  id: garden-birch-path
+  material: {pbr: true, roughness: 0.91}
+  physics: static
+  primitive: {kind: scripted, params: {height: 7.25, spread: 2.65}, script: scripts/gen/home-garden-birch.js, seed: 29}
+  receiveShadow: true
+  state: {grounding: terrain, keepNorthWindowClear: true, species: silver birch}
+  tags: [home-garden, garden-tree]
+garden-birch-west:
+  blueprint: {category: Home garden, icon: tree-deciduous, label: Airy silver birch}
+  castShadow: true
+  feetPosition: {x: -8, y: {terrain: 0}, z: 6}
+  id: garden-birch-west
+  material: {pbr: true, roughness: 0.91}
+  physics: static
+  primitive: {kind: scripted, params: {height: 6.7, spread: 2.5}, script: scripts/gen/home-garden-birch.js, seed: 11}
+  receiveShadow: true
+  state: {grounding: terrain, keepNorthWindowClear: true, species: silver birch}
+  tags: [home-garden, garden-tree]
+garden-fern-corner:
+  blueprint: {category: Home garden, icon: sprout, label: Sheltered foundation fern}
+  castShadow: true
+  feetPosition: {x: -3.6, y: {terrain: 0}, z: 2.6}
+  id: garden-fern-corner
+  material: {pbr: true, roughness: 0.91}
+  physics: none
+  primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 37}
+  receiveShadow: true
+  state: {grounding: terrain, kind: fern}
+  tags: [home-garden, garden-planting]
+garden-fern-west:
+  blueprint: {category: Home garden, icon: sprout, label: Sheltered foundation fern}
+  castShadow: true
+  feetPosition: {x: -3.58, y: {terrain: 0}, z: 0.6}
+  id: garden-fern-west
+  material: {pbr: true, roughness: 0.91}
+  physics: none
+  primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+  receiveShadow: true
+  state: {grounding: terrain, kind: fern}
+  tags: [home-garden, garden-planting]
+garden-meadow-birch:
+  blueprint: {category: Home garden, icon: flower-2, label: Meadow daisies and fine grass}
+  castShadow: true
+  feetPosition: {x: 13.9, y: {terrain: 0}, z: 3.3}
+  id: garden-meadow-birch
+  material: {pbr: true, roughness: 0.91}
+  physics: none
+  primitive: {kind: scripted, params: {flowers: 9, kind: meadow, rx: 1.3, rz: 0.7, tufts: 28}, script: scripts/gen/home-garden-planting.js, seed: 25}
+  receiveShadow: true
+  state: {flowers: 9, grounding: terrain sampled at every stem, lowGreenMeadow: true, tufts: 28}
+  tags: [home-garden, garden-planting]
+garden-meadow-east:
+  blueprint: {category: Home garden, icon: flower-2, label: Meadow daisies and fine grass}
+  castShadow: true
+  feetPosition: {x: 8.5, y: {terrain: 0}, z: -6.7}
+  id: garden-meadow-east
+  material: {pbr: true, roughness: 0.91}
+  physics: none
+  primitive: {kind: scripted, params: {flowers: 10, kind: meadow, rx: 1.15, rz: 0.6, tufts: 28}, script: scripts/gen/home-garden-planting.js, seed: 24}
+  receiveShadow: true
+  state: {flowers: 10, grounding: terrain sampled at every stem, lowGreenMeadow: true, tufts: 28}
+  tags: [home-garden, garden-planting]
+garden-meadow-path:
+  blueprint: {category: Home garden, icon: flower-2, label: Meadow daisies and fine grass}
+  castShadow: true
+  feetPosition: {x: -11.2, y: {terrain: 0}, z: -9}
+  id: garden-meadow-path
+  material: {pbr: true, roughness: 0.91}
+  physics: none
+  primitive: {kind: scripted, params: {flowers: 8, kind: meadow, rx: 0.42, rz: 1.1, tufts: 27}, script: scripts/gen/home-garden-planting.js, seed: 23}
+  receiveShadow: true
+  state: {flowers: 8, grounding: terrain sampled at every stem, lowGreenMeadow: true, tufts: 27}
+  tags: [home-garden, garden-planting]
+garden-meadow-steps:
+  blueprint: {category: Home garden, icon: flower-2, label: Meadow daisies and fine grass}
+  castShadow: true
+  feetPosition: {x: -5.3, y: {terrain: 0}, z: -5.55}
+  id: garden-meadow-steps
+  material: {pbr: true, roughness: 0.91}
+  physics: none
+  primitive: {kind: scripted, params: {flowers: 8, kind: meadow, rx: 1, rz: 0.45, tufts: 23}, script: scripts/gen/home-garden-planting.js, seed: 21}
+  receiveShadow: true
+  state: {flowers: 8, grounding: terrain sampled at every stem, lowGreenMeadow: true, tufts: 23}
+  tags: [home-garden, garden-planting]
+garden-meadow-west:
+  blueprint: {category: Home garden, icon: flower-2, label: Meadow daisies and fine grass}
+  castShadow: true
+  feetPosition: {x: -5, y: {terrain: 0}, z: -2.8}
+  id: garden-meadow-west
+  material: {pbr: true, roughness: 0.91}
+  physics: none
+  primitive: {kind: scripted, params: {flowers: 6, kind: meadow, rx: 0.8, rz: 0.45, tufts: 20}, script: scripts/gen/home-garden-planting.js, seed: 22}
+  receiveShadow: true
+  state: {flowers: 6, grounding: terrain sampled at every stem, lowGreenMeadow: true, tufts: 20}
+  tags: [home-garden, garden-planting]
+garden-path-pebbles-far:
+  blueprint: {category: Home garden, icon: footprints, label: Weathered path pebbles}
+  castShadow: true
+  feetPosition: {x: -13, y: {terrain: 0}, z: -12}
+  id: garden-path-pebbles-far
+  material: {pbr: true, roughness: 0.91}
+  physics: none
+  primitive: {kind: scripted, params: {count: 38, points: [[0, 0], [-5, -10], [-3, -22], [5, -38]]}, script: scripts/gen/home-garden-pebbles.js, seed: 53}
+  receiveShadow: true
+  state: {count: 38, grounding: terrain sampled beneath each pebble}
+  tags: [home-garden, garden-pebbles]
+garden-path-pebbles-near:
+  blueprint: {category: Home garden, icon: footprints, label: Weathered path pebbles}
+  castShadow: true
+  feetPosition: {x: -3.9, y: {terrain: 0}, z: -4.2}
+  id: garden-path-pebbles-near
+  material: {pbr: true, roughness: 0.91}
+  physics: none
+  primitive: {kind: scripted, params: {count: 34, points: [[0, 0], [-5.1, -0.2999999999999998], [-9.1, -7.8]]}, script: scripts/gen/home-garden-pebbles.js, seed: 51}
+  receiveShadow: true
+  state: {count: 34, grounding: terrain sampled beneath each pebble}
+  tags: [home-garden, garden-pebbles]
+garden-rock-back:
+  blueprint: {category: Home garden, icon: mountain, label: Pale limestone fieldstone}
+  castShadow: true
+  feetPosition: {x: 13.8, y: {terrain: 0}, z: 4.7}
+  id: garden-rock-back
+  material: {pbr: true, roughness: 0.91}
+  physics: static
+  primitive: {kind: scripted, params: {d: 0.72, h: 0.38, w: 0.93}, script: scripts/gen/home-garden-rock.js, seed: 18}
+  receiveShadow: true
+  state: {grounding: terrain; hull sinks 6.5cm, kind: field limestone}
+  tags: [home-garden, garden-rock]
+garden-rock-east:
+  blueprint: {category: Home garden, icon: mountain, label: Pale limestone fieldstone}
+  castShadow: true
+  feetPosition: {x: 9.7, y: {terrain: 0}, z: -8.6}
+  id: garden-rock-east
+  material: {pbr: true, roughness: 0.91}
+  physics: static
+  primitive: {kind: scripted, params: {d: 0.83, h: 0.46, w: 1.25}, script: scripts/gen/home-garden-rock.js, seed: 15}
+  receiveShadow: true
+  state: {grounding: terrain; hull sinks 6.5cm, kind: field limestone}
+  tags: [home-garden, garden-rock]
+garden-rock-lakeslope:
+  blueprint: {category: Home garden, icon: mountain, label: Pale limestone fieldstone}
+  castShadow: true
+  feetPosition: {x: -14.3, y: {terrain: 0}, z: -19.2}
+  id: garden-rock-lakeslope
+  material: {pbr: true, roughness: 0.91}
+  physics: static
+  primitive: {kind: scripted, params: {d: 0.85, h: 0.51, w: 1.2}, script: scripts/gen/home-garden-rock.js, seed: 12}
+  receiveShadow: true
+  state: {grounding: terrain; hull sinks 6.5cm, kind: field limestone}
+  tags: [home-garden, garden-rock]
+garden-rock-path:
+  blueprint: {category: Home garden, icon: mountain, label: Pale limestone fieldstone}
+  castShadow: true
+  feetPosition: {x: -10.3, y: {terrain: 0}, z: -9.5}
+  id: garden-rock-path
+  material: {pbr: true, roughness: 0.91}
+  physics: static
+  primitive: {kind: scripted, params: {d: 0.65, h: 0.34, w: 0.8}, script: scripts/gen/home-garden-rock.js, seed: 8}
+  receiveShadow: true
+  state: {grounding: terrain; hull sinks 6.5cm, kind: field limestone}
+  tags: [home-garden, garden-rock]
+garden-rock-steps:
+  blueprint: {category: Home garden, icon: mountain, label: Pale limestone fieldstone}
+  castShadow: true
+  feetPosition: {x: -5.75, y: {terrain: 0}, z: -5.9}
+  id: garden-rock-steps
+  material: {pbr: true, roughness: 0.91}
+  physics: static
+  primitive: {kind: scripted, params: {d: 0.8, h: 0.42, w: 1.1}, script: scripts/gen/home-garden-rock.js, seed: 3}
+  receiveShadow: true
+  state: {grounding: terrain; hull sinks 6.5cm, kind: field limestone}
+  tags: [home-garden, garden-rock]
+hillside-north-edges-01:
+  overrides:
+    feetPosition: {x: -29.2, y: {terrain: 0}, z: -27.6}
+    primitive: {kind: scripted, params: {height: 3.75, spread: 1.45}, script: scripts/gen/home-garden-birch.js, seed: 43}
+    rotation: {yaw: 123}
+    state.footprintRadius: 2.3
+    state.groundAtPlant: 11.251405606122354
+    state.groundOffset: 0
+    state.hillsideGroup: north-edges
+    state.hillsideVariant: sap
+    tags: [hillside, hillside-birch, north-edges]
+    visibleRange: {max: 190}
+  template: templates/home-garden.js#birch
+hillside-north-edges-02:
+  overrides:
+    feetPosition: {x: -28.7, y: {terrain: 0}, z: -27.1}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 26}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 11.658733453301716
+    state.groundOffset: 0
+    state.hillsideGroup: north-edges
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, north-edges]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-edges-03:
+  overrides:
+    feetPosition: {x: -27.2, y: {terrain: 0}, z: -29.3}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 59}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 9.859932094551375
+    state.groundOffset: 0
+    state.hillsideGroup: north-edges
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, north-edges]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-edges-04:
+  overrides:
+    feetPosition: {x: -29.1, y: {terrain: 0}, z: -28.1}
+    primitive: {kind: scripted, params: {d: 1.3, h: 0.59, w: 1.95}, script: scripts/gen/home-garden-rock.js, seed: 15}
+    rotation: {yaw: 144}
+    state.footprintRadius: 1.05
+    state.groundAtPlant: 10.86089408651571
+    state.groundOffset: 0
+    state.hillsideGroup: north-edges
+    state.hillsideVariant: R
+    tags: [hillside, hillside-rock, north-edges]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-north-edges-05:
+  overrides:
+    feetPosition: {x: 16.1, y: {terrain: 0}, z: -24.3}
+    primitive: {kind: scripted, params: {height: 3.75, spread: 1.45}, script: scripts/gen/home-garden-birch.js, seed: 43}
+    rotation: {yaw: 207}
+    state.footprintRadius: 2.3
+    state.groundAtPlant: 15.039637992454782
+    state.groundOffset: 0
+    state.hillsideGroup: north-edges
+    state.hillsideVariant: sap
+    tags: [hillside, hillside-birch, north-edges]
+    visibleRange: {max: 190}
+  template: templates/home-garden.js#birch
+hillside-north-edges-06:
+  overrides:
+    feetPosition: {x: 15.5, y: {terrain: 0}, z: -24.6}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 171}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 14.657456227796157
+    state.groundOffset: 0
+    state.hillsideGroup: north-edges
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, north-edges]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-edges-07:
+  overrides:
+    feetPosition: {x: 14.8, y: {terrain: 0}, z: -27.4}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 27}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 11.48413355814073
+    state.groundOffset: 0
+    state.hillsideGroup: north-edges
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, north-edges]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-edges-08:
+  overrides:
+    feetPosition: {x: 16.5, y: {terrain: 0}, z: -24.1}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 58}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 15.293718199308891
+    state.groundOffset: 0
+    state.hillsideGroup: north-edges
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, north-edges]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-edges-09:
+  overrides:
+    feetPosition: {x: 16.1, y: {terrain: 0}, z: -23.7}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 220}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 15.828751699707928
+    state.groundOffset: 0
+    state.hillsideGroup: north-edges
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, north-edges]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-edges-10:
+  overrides:
+    feetPosition: {x: 15.1, y: {terrain: 0}, z: -25.2}
+    primitive: {kind: scripted, params: {d: 0.95, h: 0.43, w: 1.4}, script: scripts/gen/home-garden-rock.js, seed: 12}
+    rotation: {yaw: 56}
+    state.footprintRadius: 0.76
+    state.groundAtPlant: 13.897081377781468
+    state.groundOffset: 0
+    state.hillsideGroup: north-edges
+    state.hillsideVariant: r
+    tags: [hillside, hillside-rock, north-edges]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-north-edges-11:
+  overrides:
+    feetPosition: {x: 24.2, y: {terrain: 0}, z: -38.2}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 7, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 3.15, rz: 1.35, tufts: 142}, script: scripts/gen/home-garden-planting.js, seed: 25}
+    rotation: {yaw: 118}
+    state.footprintRadius: 3.32
+    state.groundAtPlant: 4.3368914027520935
+    state.groundOffset: 0
+    state.hillsideGroup: north-edges
+    state.hillsideVariant: w
+    tags: [hillside, hillside-planting, north-edges]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-edges-12:
+  overrides:
+    feetPosition: {x: 23, y: {terrain: 0}, z: -40.1}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 62}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 3.3573197495781617
+    state.groundOffset: 0
+    state.hillsideGroup: north-edges
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, north-edges]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-edges-13:
+  overrides:
+    feetPosition: {x: 23.9, y: {terrain: 0}, z: -38.8}
+    primitive: {kind: scripted, params: {d: 0.95, h: 0.43, w: 1.4}, script: scripts/gen/home-garden-rock.js, seed: 12}
+    rotation: {yaw: 124}
+    state.footprintRadius: 0.76
+    state.groundAtPlant: 4.022901822236337
+    state.groundOffset: 0
+    state.hillsideGroup: north-edges
+    state.hillsideVariant: r
+    tags: [hillside, hillside-rock, north-edges]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-north-edges-14:
+  overrides:
+    feetPosition: {x: -30.2, y: {terrain: 0}, z: -43.3}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 22}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 2.012161275374876
+    state.groundOffset: 0
+    state.hillsideGroup: north-edges
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, north-edges]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-edges-15:
+  overrides:
+    feetPosition: {x: -28.9, y: {terrain: 0}, z: -45.1}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 122}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 1.4116719372221425
+    state.groundOffset: 0
+    state.hillsideGroup: north-edges
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, north-edges]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-edges-16:
+  overrides:
+    feetPosition: {x: 12.1, y: {terrain: 0}, z: -51.3}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 7, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 3.15, rz: 1.35, tufts: 142}, script: scripts/gen/home-garden-planting.js, seed: 25}
+    rotation: {yaw: 52}
+    state.footprintRadius: 3.32
+    state.groundAtPlant: 0.6476536897512093
+    state.groundOffset: 0
+    state.hillsideGroup: north-edges
+    state.hillsideVariant: w
+    tags: [hillside, hillside-planting, north-edges]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-01:
+  overrides:
+    feetPosition: {x: -18.75, y: {terrain: 0}, z: -13.5}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 152}
+    state: {footprintRadius: 2.37, groundAtPlant: 18.13639688790267, groundOffset: 0, hillsideGroup: north-path, hillsideVariant: m}
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-02:
+  overrides:
+    feetPosition: {x: -19.8, y: {terrain: 0}, z: -15.3}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 49}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 17.48993836175122
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-03:
+  overrides:
+    feetPosition: {x: -17.2, y: {terrain: 0}, z: -13}
+    primitive: {kind: scripted, params: {d: 0.95, h: 0.43, w: 1.4}, script: scripts/gen/home-garden-rock.js, seed: 12}
+    rotation: {yaw: 113}
+    state.footprintRadius: 0.76
+    state.groundAtPlant: 17.64087293645524
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: r
+    tags: [hillside, hillside-rock, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-north-path-04:
+  overrides:
+    feetPosition: {x: -17.3, y: {terrain: 0}, z: -14.3}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 33}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 16.75447039598849
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-05:
+  overrides:
+    feetPosition: {x: -17.8, y: {terrain: 0}, z: -14.6}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 149}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 16.726803991654947
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-06:
+  overrides:
+    feetPosition: {x: -10.2, y: {terrain: 0}, z: -20.2}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 7, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 3.15, rz: 1.35, tufts: 142}, script: scripts/gen/home-garden-planting.js, seed: 25}
+    rotation: {yaw: 57}
+    state.footprintRadius: 3.32
+    state.groundAtPlant: 18.01360783819251
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: w
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-07:
+  overrides:
+    feetPosition: {x: -11.5, y: {terrain: 0}, z: -22.1}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 9}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 16.233796927356796
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-08:
+  overrides:
+    feetPosition: {x: -11.1, y: {terrain: 0}, z: -19.7}
+    primitive: {kind: scripted, params: {d: 0.61, h: 0.28, w: 0.79}, script: scripts/gen/home-garden-rock.js, seed: 8}
+    rotation: {yaw: 68}
+    state.footprintRadius: 0.43
+    state.groundAtPlant: 17.72024679718087
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: s
+    tags: [hillside, hillside-rock, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-north-path-09:
+  overrides:
+    feetPosition: {x: -23.2, y: {terrain: 0}, z: -22.6}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 123}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 16.60585194113002
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-10:
+  overrides:
+    feetPosition: {x: -24.1, y: {terrain: 0}, z: -24.2}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 42}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 14.590990788341422
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-11:
+  overrides:
+    feetPosition: {x: -21.5, y: {terrain: 0}, z: -22.9}
+    primitive: {kind: scripted, params: {d: 1.3, h: 0.59, w: 1.95}, script: scripts/gen/home-garden-rock.js, seed: 15}
+    rotation: {yaw: 71}
+    state.footprintRadius: 1.05
+    state.groundAtPlant: 15.23634197233165
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: R
+    tags: [hillside, hillside-rock, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-north-path-12:
+  overrides:
+    feetPosition: {x: -22.2, y: {terrain: 0}, z: -23.4}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 231}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 15.388730548541146
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-13:
+  overrides:
+    feetPosition: {x: -21.8, y: {terrain: 0}, z: -23.7}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 64}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 14.923286195914498
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-14:
+  overrides:
+    feetPosition: {x: -11.9, y: {terrain: 0}, z: -30.5}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 84}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 7.892128056638772
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-15:
+  overrides:
+    feetPosition: {x: -10.2, y: {terrain: 0}, z: -31.9}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 121}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 6.844567350322066
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-16:
+  overrides:
+    feetPosition: {x: -12.3, y: {terrain: 0}, z: -31.2}
+    primitive: {kind: scripted, params: {d: 0.95, h: 0.43, w: 1.4}, script: scripts/gen/home-garden-rock.js, seed: 12}
+    rotation: {yaw: 170}
+    state.footprintRadius: 0.76
+    state.groundAtPlant: 7.4076780117907415
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: r
+    tags: [hillside, hillside-rock, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-north-path-17:
+  overrides:
+    feetPosition: {x: -12, y: {terrain: 0}, z: -32.3}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 110}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 6.628429648487362
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-18:
+  overrides:
+    feetPosition: {x: -11.4, y: {terrain: 0}, z: -32.6}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 17}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 6.399920054395743
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-19:
+  overrides:
+    feetPosition: {x: -19.4, y: {terrain: 0}, z: -38.7}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 7, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 3.15, rz: 1.35, tufts: 142}, script: scripts/gen/home-garden-planting.js, seed: 25}
+    rotation: {yaw: 82}
+    state.footprintRadius: 3.32
+    state.groundAtPlant: 3.126224811600994
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: w
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-20:
+  overrides:
+    feetPosition: {x: -20.4, y: {terrain: 0}, z: -36.3}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 122}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 4.535784853866035
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-21:
+  overrides:
+    feetPosition: {x: -18.8, y: {terrain: 0}, z: -39.4}
+    primitive: {kind: scripted, params: {d: 0.95, h: 0.43, w: 1.4}, script: scripts/gen/home-garden-rock.js, seed: 12}
+    rotation: {yaw: 26}
+    state.footprintRadius: 0.76
+    state.groundAtPlant: 2.8366271812963983
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: r
+    tags: [hillside, hillside-rock, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-north-path-22:
+  overrides:
+    feetPosition: {x: -6.4, y: {terrain: 0}, z: -43.2}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 154}
+    state: {footprintRadius: 2.37, groundAtPlant: 1.034384927179984, groundOffset: 0, hillsideGroup: north-path, hillsideVariant: m}
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-23:
+  overrides:
+    feetPosition: {x: -5.9, y: {terrain: 0}, z: -45.1}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 49}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 0.7487812052362136
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-path-24:
+  overrides:
+    feetPosition: {x: -6.8, y: {terrain: 0}, z: -44.3}
+    primitive: {kind: scripted, params: {d: 0.61, h: 0.28, w: 0.79}, script: scripts/gen/home-garden-rock.js, seed: 8}
+    rotation: {yaw: 22}
+    state.footprintRadius: 0.43
+    state.groundAtPlant: 0.8427955847794167
+    state.groundOffset: 0
+    state.hillsideGroup: north-path
+    state.hillsideVariant: s
+    tags: [hillside, hillside-rock, north-path]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-north-view-01:
+  overrides:
+    feetPosition: {x: -3.1, y: {terrain: 0}, z: -16.7}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 7, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 3.15, rz: 1.35, tufts: 142}, script: scripts/gen/home-garden-planting.js, seed: 25}
+    rotation: {yaw: 17}
+    state.footprintRadius: 3.32
+    state.groundAtPlant: 23.15860113747968
+    state.groundOffset: 0
+    state.hillsideGroup: north-view
+    state.hillsideVariant: w
+    tags: [hillside, hillside-planting, north-view]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-view-02:
+  overrides:
+    feetPosition: {x: -0.9, y: {terrain: 0}, z: -18.1}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 117}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 22.365110328327738
+    state.groundOffset: 0
+    state.hillsideGroup: north-view
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, north-view]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-view-03:
+  overrides:
+    feetPosition: {x: -2.1, y: {terrain: 0}, z: -17.3}
+    primitive: {kind: scripted, params: {d: 0.95, h: 0.43, w: 1.4}, script: scripts/gen/home-garden-rock.js, seed: 12}
+    rotation: {yaw: 92}
+    state.footprintRadius: 0.76
+    state.groundAtPlant: 22.893429515857633
+    state.groundOffset: 0
+    state.hillsideGroup: north-view
+    state.hillsideVariant: r
+    tags: [hillside, hillside-rock, north-view]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-north-view-04:
+  overrides:
+    feetPosition: {x: 4.7, y: {terrain: 0}, z: -20.4}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 143}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 19.964244110925264
+    state.groundOffset: 0
+    state.hillsideGroup: north-view
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, north-view]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-view-05:
+  overrides:
+    feetPosition: {x: 6.5, y: {terrain: 0}, z: -21.3}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 28}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 18.906677547363792
+    state.groundOffset: 0
+    state.hillsideGroup: north-view
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, north-view]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-view-06:
+  overrides:
+    feetPosition: {x: 5.1, y: {terrain: 0}, z: -20.3}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 84}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 20.09852509060686
+    state.groundOffset: 0
+    state.hillsideGroup: north-view
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, north-view]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-view-07:
+  overrides:
+    feetPosition: {x: 5.5, y: {terrain: 0}, z: -20.7}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 231}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 19.627748950197056
+    state.groundOffset: 0
+    state.hillsideGroup: north-view
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, north-view]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-view-08:
+  overrides:
+    feetPosition: {x: -1.5, y: {terrain: 0}, z: -28.2}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 7, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 3.15, rz: 1.35, tufts: 142}, script: scripts/gen/home-garden-planting.js, seed: 25}
+    rotation: {yaw: 31}
+    state.footprintRadius: 3.32
+    state.groundAtPlant: 9.67259576665511
+    state.groundOffset: 0
+    state.hillsideGroup: north-view
+    state.hillsideVariant: w
+    tags: [hillside, hillside-planting, north-view]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-view-09:
+  overrides:
+    feetPosition: {x: -3.9, y: {terrain: 0}, z: -29.6}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 143}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 8.4814844991206
+    state.groundOffset: 0
+    state.hillsideGroup: north-view
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, north-view]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-view-10:
+  overrides:
+    feetPosition: {x: -2.2, y: {terrain: 0}, z: -28.7}
+    primitive: {kind: scripted, params: {d: 1.3, h: 0.59, w: 1.95}, script: scripts/gen/home-garden-rock.js, seed: 15}
+    rotation: {yaw: 34}
+    state.footprintRadius: 1.05
+    state.groundAtPlant: 9.239260273761484
+    state.groundOffset: 0
+    state.hillsideGroup: north-view
+    state.hillsideVariant: R
+    tags: [hillside, hillside-rock, north-view]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-north-view-11:
+  overrides:
+    feetPosition: {x: 6.2, y: {terrain: 0}, z: -35.3}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 82}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 4.801721865833772
+    state.groundOffset: 0
+    state.hillsideGroup: north-view
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, north-view]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-view-12:
+  overrides:
+    feetPosition: {x: 4.8, y: {terrain: 0}, z: -37.4}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 19}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 3.4412530084770654
+    state.groundOffset: 0
+    state.hillsideGroup: north-view
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, north-view]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-view-13:
+  overrides:
+    feetPosition: {x: 6.4, y: {terrain: 0}, z: -34.9}
+    primitive: {kind: scripted, params: {d: 0.61, h: 0.28, w: 0.79}, script: scripts/gen/home-garden-rock.js, seed: 8}
+    rotation: {yaw: 116}
+    state.footprintRadius: 0.43
+    state.groundAtPlant: 5.082433011166941
+    state.groundOffset: 0
+    state.hillsideGroup: north-view
+    state.hillsideVariant: s
+    tags: [hillside, hillside-rock, north-view]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-north-view-14:
+  overrides:
+    feetPosition: {x: -1.9, y: {terrain: 0}, z: -41.8}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 7, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 3.15, rz: 1.35, tufts: 142}, script: scripts/gen/home-garden-planting.js, seed: 25}
+    rotation: {yaw: 123}
+    state.footprintRadius: 3.32
+    state.groundAtPlant: 1.3902248966537465
+    state.groundOffset: 0
+    state.hillsideGroup: north-view
+    state.hillsideVariant: w
+    tags: [hillside, hillside-planting, north-view]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-north-view-15:
+  overrides:
+    feetPosition: {x: 0.9, y: {terrain: 0}, z: -43.7}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 161}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 0.9711616425812502
+    state.groundOffset: 0
+    state.hillsideGroup: north-view
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, north-view]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-east-01:
+  overrides:
+    feetPosition: {x: 21, y: {terrain: 0}, z: 12.1}
+    primitive: {kind: scripted, params: {height: 6.15, spread: 2.28}, script: scripts/gen/home-garden-birch.js, seed: 67}
+    rotation: {yaw: 63}
+    state.footprintRadius: 3.05
+    state.groundAtPlant: 23.5787043221775
+    state.groundOffset: 0
+    state.hillsideGroup: rear-east
+    state.hillsideVariant: b4
+    tags: [hillside, hillside-birch, rear-east]
+    visibleRange: {max: 190}
+  template: templates/home-garden.js#birch
+hillside-rear-east-02:
+  overrides:
+    feetPosition: {x: 25.4, y: {terrain: 0}, z: 12.8}
+    primitive: {kind: scripted, params: {height: 6.7, spread: 2.5}, script: scripts/gen/home-garden-birch.js, seed: 11}
+    rotation: {yaw: 187}
+    state.footprintRadius: 3.25
+    state.groundAtPlant: 23.8352456551166
+    state.groundOffset: 0
+    state.hillsideGroup: rear-east
+    state.hillsideVariant: b1
+    tags: [hillside, hillside-birch, rear-east]
+    visibleRange: {max: 190}
+  template: templates/home-garden.js#birch
+hillside-rear-east-03:
+  overrides:
+    feetPosition: {x: 23.1, y: {terrain: 0}, z: 16.4}
+    primitive: {kind: scripted, params: {height: 5.65, spread: 2.12}, script: scripts/gen/home-garden-birch.js, seed: 43}
+    rotation: {yaw: 317}
+    state.footprintRadius: 2.9
+    state.groundAtPlant: 23.792935124479808
+    state.groundOffset: 0
+    state.hillsideGroup: rear-east
+    state.hillsideVariant: b3
+    tags: [hillside, hillside-birch, rear-east]
+    visibleRange: {max: 190}
+  template: templates/home-garden.js#birch
+hillside-rear-east-04:
+  overrides:
+    feetPosition: {x: 27.1, y: {terrain: 0}, z: 17.8}
+    primitive: {kind: scripted, params: {height: 7.25, spread: 2.65}, script: scripts/gen/home-garden-birch.js, seed: 29}
+    rotation: {yaw: 27}
+    state.footprintRadius: 3.4
+    state.groundAtPlant: 23.98088496345919
+    state.groundOffset: 0
+    state.hillsideGroup: rear-east
+    state.hillsideVariant: b2
+    tags: [hillside, hillside-birch, rear-east]
+    visibleRange: {max: 190}
+  template: templates/home-garden.js#birch
+hillside-rear-east-05:
+  overrides:
+    feetPosition: {x: 21.5, y: {terrain: 0}, z: 13.9}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 26}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 23.618769943977636
+    state.groundOffset: 0
+    state.hillsideGroup: rear-east
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, rear-east]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-east-06:
+  overrides:
+    feetPosition: {x: 25.1, y: {terrain: 0}, z: 16.2}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 7, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 3.15, rz: 1.35, tufts: 142}, script: scripts/gen/home-garden-planting.js, seed: 25}
+    rotation: {yaw: 69}
+    state.footprintRadius: 3.32
+    state.groundAtPlant: 23.908830767163995
+    state.groundOffset: 0
+    state.hillsideGroup: rear-east
+    state.hillsideVariant: w
+    tags: [hillside, hillside-planting, rear-east]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-east-07:
+  overrides:
+    feetPosition: {x: 28.5, y: {terrain: 0}, z: 16.1}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 144}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 24.010333860994404
+    state.groundOffset: 0
+    state.hillsideGroup: rear-east
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, rear-east]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-east-08:
+  overrides:
+    feetPosition: {x: 26.3, y: {terrain: 0}, z: 20.6}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 4}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 23.939918150523216
+    state.groundOffset: 0
+    state.hillsideGroup: rear-east
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, rear-east]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-east-09:
+  overrides:
+    feetPosition: {x: 21.1, y: {terrain: 0}, z: 10.4}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 63}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 23.57338816410922
+    state.groundOffset: 0
+    state.hillsideGroup: rear-east
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, rear-east]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-east-10:
+  overrides:
+    feetPosition: {x: 23.4, y: {terrain: 0}, z: 15.8}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 44}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 23.792582642183707
+    state.groundOffset: 0
+    state.hillsideGroup: rear-east
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, rear-east]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-east-11:
+  overrides:
+    feetPosition: {x: 22.7, y: {terrain: 0}, z: 15.9}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 211}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 23.75102858984004
+    state.groundOffset: 0
+    state.hillsideGroup: rear-east
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, rear-east]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-east-12:
+  overrides:
+    feetPosition: {x: 26.8, y: {terrain: 0}, z: 17.1}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 101}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 23.97274141382724
+    state.groundOffset: 0
+    state.hillsideGroup: rear-east
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, rear-east]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-east-13:
+  overrides:
+    feetPosition: {x: 27.4, y: {terrain: 0}, z: 17.4}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 279}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 23.990121109479855
+    state.groundOffset: 0
+    state.hillsideGroup: rear-east
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, rear-east]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-east-14:
+  overrides:
+    feetPosition: {x: 22.1, y: {terrain: 0}, z: 17.4}
+    primitive: {kind: scripted, params: {d: 0.95, h: 0.43, w: 1.4}, script: scripts/gen/home-garden-rock.js, seed: 12}
+    rotation: {yaw: 55}
+    state.footprintRadius: 0.76
+    state.groundAtPlant: 23.76633116788816
+    state.groundOffset: 0
+    state.hillsideGroup: rear-east
+    state.hillsideVariant: r
+    tags: [hillside, hillside-rock, rear-east]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-rear-east-15:
+  overrides:
+    feetPosition: {x: 22.75, y: {terrain: 0}, z: 17.1}
+    primitive: {kind: scripted, params: {d: 0.61, h: 0.28, w: 0.79}, script: scripts/gen/home-garden-rock.js, seed: 8}
+    rotation: {yaw: 11}
+    state.footprintRadius: 0.43
+    state.groundAtPlant: 23.793253396340152
+    state.groundOffset: 0
+    state.hillsideGroup: rear-east
+    state.hillsideVariant: s
+    tags: [hillside, hillside-rock, rear-east]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-rear-east-16:
+  overrides:
+    feetPosition: {x: 26.8, y: {terrain: 0}, z: 14.5}
+    primitive: {kind: scripted, params: {d: 1.3, h: 0.59, w: 1.95}, script: scripts/gen/home-garden-rock.js, seed: 15}
+    rotation: {yaw: 107}
+    state.footprintRadius: 1.05
+    state.groundAtPlant: 23.94454547613795
+    state.groundOffset: 0
+    state.hillsideGroup: rear-east
+    state.hillsideVariant: R
+    tags: [hillside, hillside-rock, rear-east]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-rear-low-01:
+  overrides:
+    feetPosition: {x: -3.2, y: {terrain: 0}, z: 17.5}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 7, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 3.15, rz: 1.35, tufts: 142}, script: scripts/gen/home-garden-planting.js, seed: 25}
+    rotation: {yaw: 13}
+    state.footprintRadius: 3.32
+    state.groundAtPlant: 23.352821644310147
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: w
+    tags: [hillside, hillside-planting, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-low-02:
+  overrides:
+    feetPosition: {x: -0.4, y: {terrain: 0}, z: 18.5}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 148}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 23.353762850429604
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-low-03:
+  overrides:
+    feetPosition: {x: -4.1, y: {terrain: 0}, z: 17.1}
+    primitive: {kind: scripted, params: {d: 0.95, h: 0.43, w: 1.4}, script: scripts/gen/home-garden-rock.js, seed: 12}
+    rotation: {yaw: 82}
+    state.footprintRadius: 0.76
+    state.groundAtPlant: 23.358156819528787
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: r
+    tags: [hillside, hillside-rock, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-rear-low-04:
+  overrides:
+    feetPosition: {x: 1.5, y: {terrain: 0}, z: 29.9}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 117}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 24.55045959605708
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-low-05:
+  overrides:
+    feetPosition: {x: -0.2, y: {terrain: 0}, z: 31.2}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 21}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 24.7677034947892
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-low-06:
+  overrides:
+    feetPosition: {x: -6.8, y: {terrain: 0}, z: 36.4}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 7, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 3.15, rz: 1.35, tufts: 142}, script: scripts/gen/home-garden-planting.js, seed: 25}
+    rotation: {yaw: 44}
+    state.footprintRadius: 3.32
+    state.groundAtPlant: 25.714613025850703
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: w
+    tags: [hillside, hillside-planting, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-low-07:
+  overrides:
+    feetPosition: {x: -9.4, y: {terrain: 0}, z: 37.1}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 169}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 25.925333629406705
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-low-08:
+  overrides:
+    feetPosition: {x: 16.8, y: {terrain: 0}, z: 23.5}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 7, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 3.15, rz: 1.35, tufts: 142}, script: scripts/gen/home-garden-planting.js, seed: 25}
+    rotation: {yaw: 127}
+    state.footprintRadius: 3.32
+    state.groundAtPlant: 23.625991268521798
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: w
+    tags: [hillside, hillside-planting, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-low-09:
+  overrides:
+    feetPosition: {x: 17.8, y: {terrain: 0}, z: 26.1}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 55}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 23.7270852652292
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-low-10:
+  overrides:
+    feetPosition: {x: 17.3, y: {terrain: 0}, z: 24.2}
+    primitive: {kind: scripted, params: {d: 0.95, h: 0.43, w: 1.4}, script: scripts/gen/home-garden-rock.js, seed: 12}
+    rotation: {yaw: 19}
+    state.footprintRadius: 0.76
+    state.groundAtPlant: 23.654287372076308
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: r
+    tags: [hillside, hillside-rock, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-rear-low-11:
+  overrides:
+    feetPosition: {x: 8, y: {terrain: 0}, z: 43.2}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 7, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 3.15, rz: 1.35, tufts: 142}, script: scripts/gen/home-garden-planting.js, seed: 25}
+    rotation: {yaw: 2}
+    state.footprintRadius: 3.32
+    state.groundAtPlant: 26.97348628943959
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: w
+    tags: [hillside, hillside-planting, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-low-12:
+  overrides:
+    feetPosition: {x: 11, y: {terrain: 0}, z: 44.4}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 54}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 27.02641437566127
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-low-13:
+  overrides:
+    feetPosition: {x: 5.1, y: {terrain: 0}, z: 42.8}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 68}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 27.027935912213888
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-low-14:
+  overrides:
+    feetPosition: {x: 9.8, y: {terrain: 0}, z: 43.1}
+    primitive: {kind: scripted, params: {d: 1.3, h: 0.59, w: 1.95}, script: scripts/gen/home-garden-rock.js, seed: 15}
+    rotation: {yaw: 29}
+    state.footprintRadius: 1.05
+    state.groundAtPlant: 26.81841986025229
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: R
+    tags: [hillside, hillside-rock, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-rear-low-15:
+  overrides:
+    feetPosition: {x: -15.8, y: {terrain: 0}, z: 43.5}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 145}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 28.361747365906822
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-low-16:
+  overrides:
+    feetPosition: {x: -14.2, y: {terrain: 0}, z: 45.2}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 24}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 28.86606174401664
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-low-17:
+  overrides:
+    feetPosition: {x: 24.1, y: {terrain: 0}, z: 39.8}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 119}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 25.06639765398386
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-low-18:
+  overrides:
+    feetPosition: {x: 19.3, y: {terrain: 0}, z: 52.8}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 7, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 3.15, rz: 1.35, tufts: 142}, script: scripts/gen/home-garden-planting.js, seed: 25}
+    rotation: {yaw: 39}
+    state.footprintRadius: 3.32
+    state.groundAtPlant: 27.340580832398864
+    state.groundOffset: 0
+    state.hillsideGroup: rear-low
+    state.hillsideVariant: w
+    tags: [hillside, hillside-planting, rear-low]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-middle-01:
+  overrides:
+    feetPosition: {x: 5.5, y: {terrain: 0}, z: 24.3}
+    primitive: {kind: scripted, params: {height: 5.65, spread: 2.12}, script: scripts/gen/home-garden-birch.js, seed: 43}
+    rotation: {yaw: 26}
+    state.footprintRadius: 2.9
+    state.groundAtPlant: 23.763241842431082
+    state.groundOffset: 0
+    state.hillsideGroup: rear-middle
+    state.hillsideVariant: b3
+    tags: [hillside, hillside-birch, rear-middle]
+    visibleRange: {max: 190}
+  template: templates/home-garden.js#birch
+hillside-rear-middle-02:
+  overrides:
+    feetPosition: {x: 9.1, y: {terrain: 0}, z: 26}
+    primitive: {kind: scripted, params: {height: 6.7, spread: 2.5}, script: scripts/gen/home-garden-birch.js, seed: 11}
+    rotation: {yaw: 113}
+    state.footprintRadius: 3.25
+    state.groundAtPlant: 23.79456303688836
+    state.groundOffset: 0
+    state.hillsideGroup: rear-middle
+    state.hillsideVariant: b1
+    tags: [hillside, hillside-birch, rear-middle]
+    visibleRange: {max: 190}
+  template: templates/home-garden.js#birch
+hillside-rear-middle-03:
+  overrides:
+    feetPosition: {x: 6.2, y: {terrain: 0}, z: 29.7}
+    primitive: {kind: scripted, params: {height: 7.25, spread: 2.65}, script: scripts/gen/home-garden-birch.js, seed: 29}
+    rotation: {yaw: 213}
+    state.footprintRadius: 3.4
+    state.groundAtPlant: 24.328539570140656
+    state.groundOffset: 0
+    state.hillsideGroup: rear-middle
+    state.hillsideVariant: b2
+    tags: [hillside, hillside-birch, rear-middle]
+    visibleRange: {max: 190}
+  template: templates/home-garden.js#birch
+hillside-rear-middle-04:
+  overrides:
+    feetPosition: {x: 12.1, y: {terrain: 0}, z: 28.2}
+    primitive: {kind: scripted, params: {height: 6.15, spread: 2.28}, script: scripts/gen/home-garden-birch.js, seed: 67}
+    rotation: {yaw: 301}
+    state.footprintRadius: 3.05
+    state.groundAtPlant: 23.9015922065081
+    state.groundOffset: 0
+    state.hillsideGroup: rear-middle
+    state.hillsideVariant: b4
+    tags: [hillside, hillside-birch, rear-middle]
+    visibleRange: {max: 190}
+  template: templates/home-garden.js#birch
+hillside-rear-middle-05:
+  overrides:
+    feetPosition: {x: 7.5, y: {terrain: 0}, z: 26}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 7, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 3.15, rz: 1.35, tufts: 142}, script: scripts/gen/home-garden-planting.js, seed: 25}
+    rotation: {yaw: 27}
+    state.footprintRadius: 3.32
+    state.groundAtPlant: 23.853922990281696
+    state.groundOffset: 0
+    state.hillsideGroup: rear-middle
+    state.hillsideVariant: w
+    tags: [hillside, hillside-planting, rear-middle]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-middle-06:
+  overrides:
+    feetPosition: {x: 4.5, y: {terrain: 0}, z: 28.5}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 113}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 24.259430901907336
+    state.groundOffset: 0
+    state.hillsideGroup: rear-middle
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, rear-middle]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-middle-07:
+  overrides:
+    feetPosition: {x: 11.9, y: {terrain: 0}, z: 25.8}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 177}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 23.70501489514849
+    state.groundOffset: 0
+    state.hillsideGroup: rear-middle
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, rear-middle]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-middle-08:
+  overrides:
+    feetPosition: {x: 10.1, y: {terrain: 0}, z: 30.5}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 12}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 24.23723513268476
+    state.groundOffset: 0
+    state.hillsideGroup: rear-middle
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, rear-middle]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-middle-09:
+  overrides:
+    feetPosition: {x: 5, y: {terrain: 0}, z: 22.4}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 31}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 23.59644326528498
+    state.groundOffset: 0
+    state.hillsideGroup: rear-middle
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, rear-middle]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-middle-10:
+  overrides:
+    feetPosition: {x: 5.9, y: {terrain: 0}, z: 23.6}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 51}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 23.68273890003937
+    state.groundOffset: 0
+    state.hillsideGroup: rear-middle
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, rear-middle]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-middle-11:
+  overrides:
+    feetPosition: {x: 5.4, y: {terrain: 0}, z: 23.3}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 177}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 23.670114203868625
+    state.groundOffset: 0
+    state.hillsideGroup: rear-middle
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, rear-middle]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-middle-12:
+  overrides:
+    feetPosition: {x: 9.3, y: {terrain: 0}, z: 26.7}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 303}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 23.852539016009366
+    state.groundOffset: 0
+    state.hillsideGroup: rear-middle
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, rear-middle]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-middle-13:
+  overrides:
+    feetPosition: {x: 9.8, y: {terrain: 0}, z: 26.1}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 114}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 23.780543164083173
+    state.groundOffset: 0
+    state.hillsideGroup: rear-middle
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, rear-middle]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-middle-14:
+  overrides:
+    feetPosition: {x: 8.4, y: {terrain: 0}, z: 27.1}
+    primitive: {kind: scripted, params: {d: 1.3, h: 0.59, w: 1.95}, script: scripts/gen/home-garden-rock.js, seed: 15}
+    rotation: {yaw: 11}
+    state.footprintRadius: 1.05
+    state.groundAtPlant: 23.927137562686838
+    state.groundOffset: 0
+    state.hillsideGroup: rear-middle
+    state.hillsideVariant: R
+    tags: [hillside, hillside-rock, rear-middle]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-rear-middle-15:
+  overrides:
+    feetPosition: {x: 7.45, y: {terrain: 0}, z: 27.3}
+    primitive: {kind: scripted, params: {d: 0.61, h: 0.28, w: 0.79}, script: scripts/gen/home-garden-rock.js, seed: 8}
+    rotation: {yaw: 59}
+    state.footprintRadius: 0.43
+    state.groundAtPlant: 23.988526532746093
+    state.groundOffset: 0
+    state.hillsideGroup: rear-middle
+    state.hillsideVariant: s
+    tags: [hillside, hillside-rock, rear-middle]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-rear-middle-16:
+  overrides:
+    feetPosition: {x: 12.2, y: {terrain: 0}, z: 30.2}
+    primitive: {kind: scripted, params: {d: 0.95, h: 0.43, w: 1.4}, script: scripts/gen/home-garden-rock.js, seed: 12}
+    rotation: {yaw: 170}
+    state.footprintRadius: 0.76
+    state.groundAtPlant: 24.11052236941417
+    state.groundOffset: 0
+    state.hillsideGroup: rear-middle
+    state.hillsideVariant: r
+    tags: [hillside, hillside-rock, rear-middle]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-rear-west-01:
+  overrides:
+    feetPosition: {x: -14, y: {terrain: 0}, z: 14.2}
+    primitive: {kind: scripted, params: {height: 6.7, spread: 2.5}, script: scripts/gen/home-garden-birch.js, seed: 11}
+    rotation: {yaw: 23}
+    state.footprintRadius: 3.25
+    state.groundAtPlant: 23.488726977620793
+    state.groundOffset: 0
+    state.hillsideGroup: rear-west
+    state.hillsideVariant: b1
+    tags: [hillside, hillside-birch, rear-west]
+    visibleRange: {max: 190}
+  template: templates/home-garden.js#birch
+hillside-rear-west-02:
+  overrides:
+    feetPosition: {x: -10.5, y: {terrain: 0}, z: 16.1}
+    primitive: {kind: scripted, params: {height: 5.65, spread: 2.12}, script: scripts/gen/home-garden-birch.js, seed: 43}
+    rotation: {yaw: 151}
+    state.footprintRadius: 2.9
+    state.groundAtPlant: 23.449142401627284
+    state.groundOffset: 0
+    state.hillsideGroup: rear-west
+    state.hillsideVariant: b3
+    tags: [hillside, hillside-birch, rear-west]
+    visibleRange: {max: 190}
+  template: templates/home-garden.js#birch
+hillside-rear-west-03:
+  overrides:
+    feetPosition: {x: -15.3, y: {terrain: 0}, z: 19.3}
+    primitive: {kind: scripted, params: {height: 7.25, spread: 2.65}, script: scripts/gen/home-garden-birch.js, seed: 29}
+    rotation: {yaw: 296}
+    state.footprintRadius: 3.4
+    state.groundAtPlant: 23.684950780820543
+    state.groundOffset: 0
+    state.hillsideGroup: rear-west
+    state.hillsideVariant: b2
+    tags: [hillside, hillside-birch, rear-west]
+    visibleRange: {max: 190}
+  template: templates/home-garden.js#birch
+hillside-rear-west-04:
+  overrides:
+    feetPosition: {x: -10.8, y: {terrain: 0}, z: 20.4}
+    primitive: {kind: scripted, params: {height: 6.15, spread: 2.28}, script: scripts/gen/home-garden-birch.js, seed: 67}
+    rotation: {yaw: 79}
+    state.footprintRadius: 3.05
+    state.groundAtPlant: 23.64661211274342
+    state.groundOffset: 0
+    state.hillsideGroup: rear-west
+    state.hillsideVariant: b4
+    tags: [hillside, hillside-birch, rear-west]
+    visibleRange: {max: 190}
+  template: templates/home-garden.js#birch
+hillside-rear-west-05:
+  overrides:
+    feetPosition: {x: -13.2, y: {terrain: 0}, z: 15.1}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 7, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 3.15, rz: 1.35, tufts: 142}, script: scripts/gen/home-garden-planting.js, seed: 25}
+    rotation: {yaw: 24}
+    state.footprintRadius: 3.32
+    state.groundAtPlant: 23.48694958558263
+    state.groundOffset: 0
+    state.hillsideGroup: rear-west
+    state.hillsideVariant: w
+    tags: [hillside, hillside-planting, rear-west]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-west-06:
+  overrides:
+    feetPosition: {x: -15.6, y: {terrain: 0}, z: 18.1}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 132}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 23.644251513893273
+    state.groundOffset: 0
+    state.hillsideGroup: rear-west
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, rear-west]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-west-07:
+  overrides:
+    feetPosition: {x: -9.5, y: {terrain: 0}, z: 18.6}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 58}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 23.49007771188614
+    state.groundOffset: 0
+    state.hillsideGroup: rear-west
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, rear-west]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-west-08:
+  overrides:
+    feetPosition: {x: -11.9, y: {terrain: 0}, z: 22.2}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 6, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 2.2, rz: 1.25, tufts: 104}, script: scripts/gen/home-garden-planting.js, seed: 21}
+    rotation: {yaw: 18}
+    state.footprintRadius: 2.37
+    state.groundAtPlant: 23.798296627349423
+    state.groundOffset: 0
+    state.hillsideGroup: rear-west
+    state.hillsideVariant: m
+    tags: [hillside, hillside-planting, rear-west]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-west-09:
+  overrides:
+    feetPosition: {x: -17.2, y: {terrain: 0}, z: 13.5}
+    primitive: {kind: scripted, params: {flowerHeight: 0.42, flowerSize: 1.35, flowerVariation: 0.15, flowers: 12, grassHeight: 0.22, grassVariation: 0.14, kind: meadow, rx: 1.45, rz: 0.78, tufts: 72}, script: scripts/gen/home-garden-planting.js, seed: 24}
+    rotation: {yaw: 111}
+    state.footprintRadius: 1.62
+    state.groundAtPlant: 23.58278748671708
+    state.groundOffset: 0
+    state.hillsideGroup: rear-west
+    state.hillsideVariant: d
+    tags: [hillside, hillside-planting, rear-west]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-west-10:
+  overrides:
+    feetPosition: {x: -13.8, y: {terrain: 0}, z: 13.6}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 30}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 23.48799874298831
+    state.groundOffset: 0
+    state.hillsideGroup: rear-west
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, rear-west]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-west-11:
+  overrides:
+    feetPosition: {x: -14.4, y: {terrain: 0}, z: 13.9}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 195}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 23.488567117669408
+    state.groundOffset: 0
+    state.hillsideGroup: rear-west
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, rear-west]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-west-12:
+  overrides:
+    feetPosition: {x: -16, y: {terrain: 0}, z: 18.7}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 76}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 23.686979362093478
+    state.groundOffset: 0
+    state.hillsideGroup: rear-west
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, rear-west]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-west-13:
+  overrides:
+    feetPosition: {x: -15.5, y: {terrain: 0}, z: 19.5}
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 31}
+    rotation: {yaw: 243}
+    state.footprintRadius: 0.8
+    state.groundAtPlant: 23.70152743661133
+    state.groundOffset: 0
+    state.hillsideGroup: rear-west
+    state.hillsideVariant: f
+    tags: [hillside, hillside-planting, rear-west]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#planting
+hillside-rear-west-14:
+  overrides:
+    feetPosition: {x: -15.1, y: {terrain: 0}, z: 15.8}
+    primitive: {kind: scripted, params: {d: 1.3, h: 0.59, w: 1.95}, script: scripts/gen/home-garden-rock.js, seed: 15}
+    rotation: {yaw: 43}
+    state.footprintRadius: 1.05
+    state.groundAtPlant: 23.537435373879795
+    state.groundOffset: 0
+    state.hillsideGroup: rear-west
+    state.hillsideVariant: R
+    tags: [hillside, hillside-rock, rear-west]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-rear-west-15:
+  overrides:
+    feetPosition: {x: -14.2, y: {terrain: 0}, z: 15.3}
+    primitive: {kind: scripted, params: {d: 0.61, h: 0.28, w: 0.79}, script: scripts/gen/home-garden-rock.js, seed: 8}
+    rotation: {yaw: 197}
+    state.footprintRadius: 0.43
+    state.groundAtPlant: 23.499800782928496
+    state.groundOffset: 0
+    state.hillsideGroup: rear-west
+    state.hillsideVariant: s
+    tags: [hillside, hillside-rock, rear-west]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+hillside-rear-west-16:
+  overrides:
+    feetPosition: {x: -11.4, y: {terrain: 0}, z: 21.5}
+    primitive: {kind: scripted, params: {d: 0.95, h: 0.43, w: 1.4}, script: scripts/gen/home-garden-rock.js, seed: 12}
+    rotation: {yaw: 79}
+    state.footprintRadius: 0.76
+    state.groundAtPlant: 23.739343452876597
+    state.groundOffset: 0
+    state.hillsideGroup: rear-west
+    state.hillsideVariant: r
+    tags: [hillside, hillside-rock, rear-west]
+    visibleRange: {max: 125}
+  template: templates/home-garden.js#rock
+home-architecture-work:
+  blueprint: {category: Architecture, icon: house, label: "Three-room lake den · shell"}
+  feetPosition: {x: 6.7, y: 0, z: 1.3}
+  id: home-architecture-work
+  parent: home-root
+  rotation: {w: 1, x: 0, y: 0, z: 0}
+  state: {area: 88.5, blueprintReplaced: true, chimneyTopY: 30.06, doorHinges: [home-front-door-hinge, home-spare-door-hinge], doorLeaves: [home-front-door, home-spare-door], drawableCount: 40, eaveY: 27.25, floorY: 24, materials: "buttercream lime plaster · walnut · honey oak · hand-laid charcoal shingles · clear teal glass", meshVertexMaximum: 10548, peakY: 28.85, revision: crafted-02, roofRidgeY: 29.07116413116455, rooms: 3, roots: {den: home-architecture-work/home-architecture-den, wing: home-architecture-work/home-architecture-den/home-architecture-wing}, shellReady: true, wingYaw: 45}
+  tags: [home-architecture, architecture-root]
+home-architecture-work/home-architecture-den:
+  feetPosition: {x: -6.7, y: 0, z: -1.3}
+  id: home-architecture-work/home-architecture-den
+  parent: home-architecture-work
+  rotation: {w: 1, x: 0, y: 0, z: 0}
+  state: {floorY: 24, polygon: [[0, 0], [5, 0], [9.2, 4.2], [6, 6], [0, 6]], room: den}
+  tags: [home-architecture, room-root]
+home-architecture-work/home-architecture-den/home-architecture-wing:
+  feetPosition: {x: 4.464466094067262, y: 0, z: -0.5355339059327378}
+  id: home-architecture-work/home-architecture-den/home-architecture-wing
+  parent: home-architecture-work/home-architecture-den
+  rotation: {w: 0.9238795042037964, x: 0, y: 0.3826834261417389, z: 0}
+  state: {board: [[0, 0], [5, 0], [5, 5], [0, 5]], floorY: 24, rooms: [board, spare], spare: [[0, 5], [5, 5], [5, 9], [0, 9]], yaw: 45}
+  tags: [home-architecture, wing-root]
+home-architecture-work/home-architecture-den/home-architecture-wing/home-spare-door-frame:
+  feetPosition: {x: 0, y: 0, z: 6.43}
+  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-spare-door-frame
+  parent: home-architecture-work/home-architecture-den/home-architecture-wing
+  rotation: {yaw: -90}
+  state: {fixedYaw: -90, opening: 1.2}
+  tags: [home-architecture, door-frame]
+home-architecture-work/home-architecture-den/home-architecture-wing/home-trusses-wing:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-trusses-wing
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den/home-architecture-wing
+  primitive: {kind: scripted, params: {frame: wing}, script: scripts/gen/home-architecture-timber.js}
+  receiveShadow: true
+  tags: [home-architecture, timber, truss]
+home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-front-glass:
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-front-glass
+  material: {color: "#ffffff", depthWrite: false, metalness: 0, pbr: true, roughness: 0.12}
+  parent: home-architecture-work/home-architecture-den/home-architecture-wing
+  physics: static
+  primitive: {kind: scripted, params: {run: wing-front}, script: scripts/gen/home-architecture-glass.js}
+  receiveShadow: false
+  state: {doors: [], run: wing-front, wallThickness: 0.2, windows: [{a: 0.7, b: 4.3, sill: 0.82, top: 2.67}]}
+  tags: [home-architecture, glazing]
+home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-front-joinery:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-front-joinery
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den/home-architecture-wing
+  primitive: {kind: scripted, params: {run: wing-front}, script: scripts/gen/home-architecture-joinery.js}
+  receiveShadow: true
+  state: {doors: [], run: wing-front, wallThickness: 0.2, windows: [{a: 0.7, b: 4.3, sill: 0.82, top: 2.67}]}
+  tags: [home-architecture, timber, joinery]
+home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-front-plaster:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-front-plaster
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den/home-architecture-wing
+  physics: static
+  primitive: {kind: scripted, params: {run: wing-front}, script: scripts/gen/home-architecture-walls.js}
+  receiveShadow: true
+  state: {doors: [], run: wing-front, wallThickness: 0.2, windows: [{a: 0.7, b: 4.3, sill: 0.82, top: 2.67}]}
+  tags: [home-architecture, wall]
+home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-partition-joinery:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-partition-joinery
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den/home-architecture-wing
+  primitive: {kind: scripted, params: {run: wing-partition}, script: scripts/gen/home-architecture-joinery.js}
+  receiveShadow: true
+  state: {doors: [], run: wing-partition, wallThickness: 0.2, windows: []}
+  tags: [home-architecture, timber, joinery]
+home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-partition-plaster:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-partition-plaster
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den/home-architecture-wing
+  physics: static
+  primitive: {kind: scripted, params: {run: wing-partition}, script: scripts/gen/home-architecture-walls.js}
+  receiveShadow: true
+  state: {doors: [], run: wing-partition, wallThickness: 0.2, windows: []}
+  tags: [home-architecture, wall]
+home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-rear-glass:
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-rear-glass
+  material: {color: "#ffffff", depthWrite: false, metalness: 0, pbr: true, roughness: 0.12}
+  parent: home-architecture-work/home-architecture-den/home-architecture-wing
+  physics: static
+  primitive: {kind: scripted, params: {run: wing-rear}, script: scripts/gen/home-architecture-glass.js}
+  receiveShadow: false
+  state: {doors: [], run: wing-rear, wallThickness: 0.2, windows: [{a: 0.75, b: 4.3, sill: 0.86, top: 2.64}]}
+  tags: [home-architecture, glazing]
+home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-rear-joinery:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-rear-joinery
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den/home-architecture-wing
+  primitive: {kind: scripted, params: {run: wing-rear}, script: scripts/gen/home-architecture-joinery.js}
+  receiveShadow: true
+  state: {doors: [], run: wing-rear, wallThickness: 0.2, windows: [{a: 0.75, b: 4.3, sill: 0.86, top: 2.64}]}
+  tags: [home-architecture, timber, joinery]
+home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-rear-plaster:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-rear-plaster
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den/home-architecture-wing
+  physics: static
+  primitive: {kind: scripted, params: {run: wing-rear}, script: scripts/gen/home-architecture-walls.js}
+  receiveShadow: true
+  state: {doors: [], run: wing-rear, wallThickness: 0.2, windows: [{a: 0.75, b: 4.3, sill: 0.86, top: 2.64}]}
+  tags: [home-architecture, wall]
+home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-right-glass:
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-right-glass
+  material: {color: "#ffffff", depthWrite: false, metalness: 0, pbr: true, roughness: 0.12}
+  parent: home-architecture-work/home-architecture-den/home-architecture-wing
+  physics: static
+  primitive: {kind: scripted, params: {run: wing-right}, script: scripts/gen/home-architecture-glass.js}
+  receiveShadow: false
+  state: {doors: [{a: 6.45, b: 7.55, kind: square, top: 2.4}], run: wing-right, wallThickness: 0.2, windows: [{a: 0.75, b: 3.6, sill: 0.85, top: 2.65}]}
+  tags: [home-architecture, glazing]
+home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-right-joinery:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-right-joinery
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den/home-architecture-wing
+  primitive: {kind: scripted, params: {run: wing-right}, script: scripts/gen/home-architecture-joinery.js}
+  receiveShadow: true
+  state: {doors: [{a: 6.45, b: 7.55, kind: square, top: 2.4}], run: wing-right, wallThickness: 0.2, windows: [{a: 0.75, b: 3.6, sill: 0.85, top: 2.65}]}
+  tags: [home-architecture, timber, joinery]
+home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-right-plaster:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-right-plaster
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den/home-architecture-wing
+  physics: static
+  primitive: {kind: scripted, params: {run: wing-right}, script: scripts/gen/home-architecture-walls.js}
+  receiveShadow: true
+  state: {doors: [{a: 6.45, b: 7.55, kind: square, top: 2.4}], run: wing-right, wallThickness: 0.2, windows: [{a: 0.75, b: 3.6, sill: 0.85, top: 2.65}]}
+  tags: [home-architecture, wall]
+home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-shared-joinery:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-shared-joinery
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den/home-architecture-wing
+  primitive: {kind: scripted, params: {run: wing-shared}, script: scripts/gen/home-architecture-joinery.js}
+  receiveShadow: true
+  state: {doors: [{a: 2.55, b: 4.15, kind: board, top: 2.5}, {a: 5.25, b: 6.45, kind: spare, top: 2.4}], run: wing-shared, wallThickness: 0.2, windows: []}
+  tags: [home-architecture, timber, joinery]
+home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-shared-plaster:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-architecture-wing/home-wing-shared-plaster
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den/home-architecture-wing
+  physics: static
+  primitive: {kind: scripted, params: {run: wing-shared}, script: scripts/gen/home-architecture-walls.js}
+  receiveShadow: true
+  state: {doors: [{a: 2.55, b: 4.15, kind: board, top: 2.5}, {a: 5.25, b: 6.45, kind: spare, top: 2.4}], run: wing-shared, wallThickness: 0.2, windows: []}
+  tags: [home-architecture, wall]
+home-architecture-work/home-architecture-den/home-chimney:
+  castShadow: true
+  feetPosition: {x: 0.6, y: 0, z: 5.1}
+  id: home-architecture-work/home-architecture-den/home-chimney
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/home-architecture-chimney.js}
+  receiveShadow: true
+  state: {capY: 30.06, planCenter: [0.6, 5.1], shaftBottomY: 27.18}
+  tags: [home-architecture, chimney]
+home-architecture-work/home-architecture-den/home-chimney/home-chimney-smoke:
+  overrides:
+    feetPosition: {x: 0, y: 6.02, z: 0}
+    parent: home-architecture-work/home-architecture-den/home-chimney
+  template: templates/home-atmosphere.js#chimneySmoke
+home-architecture-work/home-architecture-den/home-den-back-glass:
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-den-back-glass
+  material: {color: "#ffffff", depthWrite: false, metalness: 0, pbr: true, roughness: 0.12}
+  parent: home-architecture-work/home-architecture-den
+  physics: static
+  primitive: {kind: scripted, params: {run: den-back}, script: scripts/gen/home-architecture-glass.js}
+  receiveShadow: false
+  state: {doors: [], run: den-back, wallThickness: 0.2, windows: [{a: 2.05, b: 4.2, sill: 0.9, top: 2.55}]}
+  tags: [home-architecture, glazing]
+home-architecture-work/home-architecture-den/home-den-back-joinery:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-den-back-joinery
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  primitive: {kind: scripted, params: {run: den-back}, script: scripts/gen/home-architecture-joinery.js}
+  receiveShadow: true
+  state: {doors: [], run: den-back, wallThickness: 0.2, windows: [{a: 2.05, b: 4.2, sill: 0.9, top: 2.55}]}
+  tags: [home-architecture, timber, joinery]
+home-architecture-work/home-architecture-den/home-den-back-plaster:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-den-back-plaster
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  physics: static
+  primitive: {kind: scripted, params: {run: den-back}, script: scripts/gen/home-architecture-walls.js}
+  receiveShadow: true
+  state: {doors: [], run: den-back, wallThickness: 0.2, windows: [{a: 2.05, b: 4.2, sill: 0.9, top: 2.55}]}
+  tags: [home-architecture, wall]
+home-architecture-work/home-architecture-den/home-den-front-glass:
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-den-front-glass
+  material: {color: "#ffffff", depthWrite: false, metalness: 0, pbr: true, roughness: 0.12}
+  parent: home-architecture-work/home-architecture-den
+  physics: static
+  primitive: {kind: scripted, params: {run: den-front}, script: scripts/gen/home-architecture-glass.js}
+  receiveShadow: false
+  state: {doors: [{a: 3.04, b: 4.14, kind: front, top: 2.4}], run: den-front, wallThickness: 0.2, windows: [{a: 0.35, arch: true, b: 2.65, sill: 0.85, spring: 2.04, top: 2.85}]}
+  tags: [home-architecture, glazing]
+home-architecture-work/home-architecture-den/home-den-front-joinery:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-den-front-joinery
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  primitive: {kind: scripted, params: {run: den-front}, script: scripts/gen/home-architecture-joinery.js}
+  receiveShadow: true
+  state: {doors: [{a: 3.04, b: 4.14, kind: front, top: 2.4}], run: den-front, wallThickness: 0.2, windows: [{a: 0.35, arch: true, b: 2.65, sill: 0.85, spring: 2.04, top: 2.85}]}
+  tags: [home-architecture, timber, joinery]
+home-architecture-work/home-architecture-den/home-den-front-plaster:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-den-front-plaster
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  physics: static
+  primitive: {kind: scripted, params: {run: den-front}, script: scripts/gen/home-architecture-walls.js}
+  receiveShadow: true
+  state: {doors: [{a: 3.04, b: 4.14, kind: front, top: 2.4}], run: den-front, wallThickness: 0.2, windows: [{a: 0.35, arch: true, b: 2.65, sill: 0.85, spring: 2.04, top: 2.85}]}
+  tags: [home-architecture, wall]
+home-architecture-work/home-architecture-den/home-den-hip-wall-joinery:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-den-hip-wall-joinery
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  primitive: {kind: scripted, params: {run: den-hip-wall}, script: scripts/gen/home-architecture-joinery.js}
+  receiveShadow: true
+  state: {doors: [], run: den-hip-wall, wallThickness: 0.2, windows: []}
+  tags: [home-architecture, timber, joinery]
+home-architecture-work/home-architecture-den/home-den-hip-wall-plaster:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-den-hip-wall-plaster
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  physics: static
+  primitive: {kind: scripted, params: {run: den-hip-wall}, script: scripts/gen/home-architecture-walls.js}
+  receiveShadow: true
+  state: {doors: [], run: den-hip-wall, wallThickness: 0.2, windows: []}
+  tags: [home-architecture, wall]
+home-architecture-work/home-architecture-den/home-den-left-joinery:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-den-left-joinery
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  primitive: {kind: scripted, params: {run: den-left}, script: scripts/gen/home-architecture-joinery.js}
+  receiveShadow: true
+  state: {doors: [], run: den-left, wallThickness: 0.2, windows: []}
+  tags: [home-architecture, timber, joinery]
+home-architecture-work/home-architecture-den/home-den-left-plaster:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-den-left-plaster
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  physics: static
+  primitive: {kind: scripted, params: {run: den-left}, script: scripts/gen/home-architecture-walls.js}
+  receiveShadow: true
+  state: {doors: [], run: den-left, wallThickness: 0.2, windows: []}
+  tags: [home-architecture, wall]
+home-architecture-work/home-architecture-den/home-floor-den:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-floor-den
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  physics: static
+  primitive: {kind: scripted, params: {room: den}, script: scripts/gen/home-architecture-floor.js}
+  receiveShadow: true
+  rotation: {w: 1, x: 0, y: 0, z: 0}
+  state: {floorY: 24, polygon: [[0, 0], [5, 0], [9.2, 4.2], [6, 6], [0, 6]], room: den}
+  tags: [home-architecture, floor]
+home-architecture-work/home-architecture-den/home-foundation-den:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-foundation-den
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  physics: static
+  primitive: {kind: scripted, params: {room: den}, script: scripts/gen/home-architecture-foundation.js}
+  receiveShadow: true
+  rotation: {w: 1, x: 0, y: 0, z: 0}
+  state: {floorY: 24, groundY: 23.55}
+  tags: [home-architecture, foundation]
+home-architecture-work/home-architecture-den/home-roof-den-0:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-roof-den-0
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  physics: static
+  primitive: {kind: scripted, params: {facet: 0, frame: den}, script: scripts/gen/home-architecture-roof.js}
+  receiveShadow: true
+  state: {eaveY: 27.25, facet: 0, frame: den, joinedValley: true}
+  tags: [home-architecture, roof]
+home-architecture-work/home-architecture-den/home-roof-den-1:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-roof-den-1
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  physics: static
+  primitive: {kind: scripted, params: {facet: 1, frame: den}, script: scripts/gen/home-architecture-roof.js}
+  receiveShadow: true
+  state: {eaveY: 27.25, facet: 1, frame: den, joinedValley: true}
+  tags: [home-architecture, roof]
+home-architecture-work/home-architecture-den/home-roof-den-2:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-roof-den-2
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  physics: static
+  primitive: {kind: scripted, params: {facet: 2, frame: den}, script: scripts/gen/home-architecture-roof.js}
+  receiveShadow: true
+  state: {eaveY: 27.25, facet: 2, frame: den, joinedValley: true}
+  tags: [home-architecture, roof]
+home-architecture-work/home-architecture-den/home-roof-den-3:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-roof-den-3
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  physics: static
+  primitive: {kind: scripted, params: {facet: 3, frame: den}, script: scripts/gen/home-architecture-roof.js}
+  receiveShadow: true
+  state: {eaveY: 27.25, facet: 3, frame: den, joinedValley: true}
+  tags: [home-architecture, roof]
+home-architecture-work/home-architecture-den/home-roof-joinery:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-roof-joinery
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  primitive: {kind: scripted, script: scripts/gen/home-architecture-roof-trim.js}
+  receiveShadow: true
+  tags: [home-architecture, roof, joinery]
+home-architecture-work/home-architecture-den/home-roof-wing-0:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-roof-wing-0
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  physics: static
+  primitive: {kind: scripted, params: {facet: 0, frame: wing}, script: scripts/gen/home-architecture-roof.js}
+  receiveShadow: true
+  state: {eaveY: 27.25, facet: 0, frame: wing, joinedValley: true}
+  tags: [home-architecture, roof]
+home-architecture-work/home-architecture-den/home-roof-wing-1:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-roof-wing-1
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  physics: static
+  primitive: {kind: scripted, params: {facet: 1, frame: wing}, script: scripts/gen/home-architecture-roof.js}
+  receiveShadow: true
+  state: {eaveY: 27.25, facet: 1, frame: wing, joinedValley: true}
+  tags: [home-architecture, roof]
+home-architecture-work/home-architecture-den/home-trusses-den:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-architecture-work/home-architecture-den/home-trusses-den
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-architecture-work/home-architecture-den
+  primitive: {kind: scripted, params: {frame: den}, script: scripts/gen/home-architecture-timber.js}
+  receiveShadow: true
+  tags: [home-architecture, timber, truss]
+home-front-door:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-front-door
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-front-door-hinge
+  physics: kinematic
+  pivot: {x: 0, y: 0, z: 0}
+  primitive: {kind: scripted, params: {height: 2.35, width: 1.08}, script: scripts/gen/home-architecture-door.js}
+  receiveShadow: true
+  rotation: {w: 1, x: 0, y: 0, z: 0}
+  state: {colliderBounds: {max: [0, 2.385, 0.038], min: [-1.08, 0.035, -0.038]}, height: 2.35, hinge: home-front-door-hinge, localDrawBounds: {max: [0.0245, 2.385, 0.1705], min: [-1.08, 0.035, -0.1705]}, width: 1.08}
+  tags: [home-architecture, door-leaf]
+home-front-door-hinge:
+  behavior: scripts/home-door.js
+  blueprint: {category: Architecture, icon: door-open, label: "Oak entry door · lake entrance"}
+  feetPosition: {x: 3.05, y: 0, z: -0.045}
+  id: home-front-door-hinge
+  parent: home-architecture-work/home-architecture-den
+  pivot: {x: 0, y: 0, z: 0}
+  rotation: {yaw: 180}
+  state: {closedYaw: 180, currentYaw: 90, leafId: home-front-door, open: true, openYaw: 90, openingWidth: 1.1, ready: true}
+  tags: [home-architecture, door-hinge, interactable]
+home-front-door/handle-label-back:
+  overrides:
+    feetPosition: {x: -0.65, y: 1.33, z: 0.3}
+    parent: home-front-door
+    state.hinge: home-front-door-hinge
+    state.side: 1
+    state.verb: Open
+  template: templates/home-door-label.js#handleLabel
+home-front-door/handle-label-front:
+  overrides:
+    feetPosition: {x: -0.65, y: 1.33, z: -0.3}
+    parent: home-front-door
+    state.hinge: home-front-door-hinge
+    state.side: -1
+    state.verb: Open
+  template: templates/home-door-label.js#handleLabel
+home-furnishing-work/furniture-rug:
+  castShadow: false
+  feetPosition: {x: 0.26, y: 0, z: -0.245}
+  id: home-furnishing-work/furniture-rug
+  material: {color: "#ffffff", pbr: true}
+  parent: home-root/home-furnishing-work
+  physics: none
+  primitive: {kind: scripted, params: {item: rug, radiusX: 1.41, radiusZ: 1.495}, script: scripts/gen/den-furniture.js, seed: 17}
+  receiveShadow: true
+  tags: [furniture, den-furniture]
+home-garden-work:
+  blueprint: {category: Home garden, icon: landmark, label: Limestone lake terrace}
+  castShadow: true
+  feetPosition: {x: 0.5, y: {terrain: 0}, z: -5.5}
+  id: home-garden-work
+  material: {pbr: true, roughness: 0.91}
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/home-garden-terrace.js, seed: 7}
+  receiveShadow: true
+  state: {baseY: 23.55, finished: true, floorY: 24, grounding: foundation on prepared 23.55 pad, paving: beveled ashlar limestone, polygonPlan: [[0, 0], [5, 0], [4.464466094067262, -0.5355339059327378], [8, -4.0710678118654755], [6.302943725152286, -5.76812408671319], [2.767409819219548, -2.232590180780452], [0, -2.4]]}
+  tags: [home-garden, garden-terrace]
+home-garden-work/garden-parapet:
+  castShadow: true
+  feetPosition: {x: 0, y: 0.4499999999999993, z: 0}
+  id: home-garden-work/garden-parapet
+  material: {pbr: true, roughness: 0.91}
+  parent: home-garden-work
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/home-garden-parapet.js, seed: 8}
+  receiveShadow: true
+  state: {gap: {planX: 0, width: 1.2, z0: -1.8, z1: -0.6}, height: 0.58, runs: [[[0, 0], [0, -0.6]], [[0, -1.8], [0, -2.4], [2.767409819219548, -2.232590180780452], [6.302943725152286, -5.76812408671319], [8, -4.0710678118654755]]]}
+  tags: [home-garden, garden-parapet]
+home-garden-work/garden-steps:
+  blueprint: {category: Home garden, icon: stairs, label: Three gentle limestone steps}
+  castShadow: true
+  feetPosition: {x: -3.5, y: 0, z: 1.3}
+  id: home-garden-work/garden-steps
+  material: {pbr: true, roughness: 0.91}
+  parent: home-garden-work
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/home-garden-stairs.js, seed: 13}
+  receiveShadow: true
+  state: {closedSlabs: true, pathJoin: {x: -3.9, y: 23.55, z: -4.2}, rises: [0.15, 0.15, 0.15], stepCount: 3, topYs: [23.85, 23.7, 23.55], treads: [0.3, 0.3, 0.3]}
+  tags: [home-garden, garden-stairs]
+home-garden-work/garden-stone-seams:
+  blueprint: {category: Home garden, icon: sprout, label: Tiny terrace seam herbs}
+  castShadow: true
+  feetPosition: {x: 0, y: 0.4499999999999993, z: 0}
+  id: home-garden-work/garden-stone-seams
+  material: {pbr: true, roughness: 0.91}
+  parent: home-garden-work
+  physics: none
+  primitive: {kind: scripted, params: {kind: seams}, script: scripts/gen/home-garden-planting.js, seed: 71}
+  receiveShadow: true
+  state: {daisies: 3, grounding: rooted in limestone seams, tufts: 6}
+  tags: [home-garden, garden-planting]
+home-portal:
+  behavior: scripts/home-portal-glass.js
+  feetPosition: {x: -3.8, y: 25.48, z: 35}
+  id: home-portal
+  physics: none
+  state: {link: "", phase: awaiting-destination, prompt: tell savi where you want to go first, role: first-destination-gateway}
+  tags: [home-portal-root, portal]
+home-portal-path:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-portal-path
+  material: {color: "#ffffff", pbr: true, roughness: 0.94}
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/home-portal-path.js, seed: 729}
+  receiveShadow: true
+  state: {destination: home-portal, role: winding-uphill-flagstone-path}
+  tags: [home-garden, portal-path]
+home-portal-stonework/home-portal-birch-left:
+  overrides:
+    feetPosition: {x: -3.7, y: 0.32795834792951695, z: 1.8}
+    parent: home-portal-stonework
+    primitive: {kind: scripted, params: {height: 4.7, spread: 1.2}, script: scripts/gen/home-garden-birch.js, seed: 653}
+  template: templates/home-garden.js#birch
+home-portal-stonework/home-portal-birch-right:
+  overrides:
+    feetPosition: {x: 3.4, y: 0.4874961314972275, z: 3}
+    parent: home-portal-stonework
+    primitive: {kind: scripted, params: {height: 5.1, spread: 1.35}, script: scripts/gen/home-garden-birch.js, seed: 659}
+  template: templates/home-garden.js#birch
+home-portal-stonework/home-portal-daisies-left:
+  overrides:
+    feetPosition: {x: -2.39, y: -0.1106895877793832, z: -1.23}
+    parent: home-portal-stonework
+    primitive: {kind: scripted, params: {flowerHeight: 0.18, flowerVariation: 0.08, flowers: 5, grassHeight: 0.1, grassVariation: 0.07, kind: meadow, rx: 0.32, rz: 0.48, tufts: 9}, script: scripts/gen/home-garden-planting.js, seed: 621}
+  template: templates/home-garden.js#planting
+home-portal-stonework/home-portal-daisies-right:
+  overrides:
+    feetPosition: {x: 2.26, y: -0.10680443057950484, z: -1.31}
+    parent: home-portal-stonework
+    primitive: {kind: scripted, params: {flowerHeight: 0.17, flowerVariation: 0.08, flowers: 4, grassHeight: 0.1, grassVariation: 0.06, kind: meadow, rx: 0.3, rz: 0.44, tufts: 8}, script: scripts/gen/home-garden-planting.js, seed: 629}
+  template: templates/home-garden.js#planting
+home-portal-stonework/home-portal-fern-left:
+  overrides:
+    feetPosition: {x: -2.49, y: -0.07623207471737459, z: 0.13}
+    parent: home-portal-stonework
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 611}
+  template: templates/home-garden.js#planting
+home-portal-stonework/home-portal-fern-right:
+  overrides:
+    feetPosition: {x: 2.59, y: -0.050217923855523594, z: 0.92}
+    parent: home-portal-stonework
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 613}
+  template: templates/home-garden.js#planting
+home-portal-stonework/home-portal-fieldstone-left:
+  overrides:
+    feetPosition: {x: -2.18, y: -0.07337102744494572, z: 0.94}
+    parent: home-portal-stonework
+    primitive: {kind: scripted, params: {d: 0.37, h: 0.2, w: 0.52}, script: scripts/gen/home-garden-rock.js, seed: 641}
+  template: templates/home-garden.js#rock
+home-portal-stonework/home-portal-fieldstone-right:
+  overrides:
+    feetPosition: {x: 2.32, y: -0.07965789507887422, z: 0.18}
+    parent: home-portal-stonework
+    primitive: {kind: scripted, params: {d: 0.32, h: 0.16, w: 0.4}, script: scripts/gen/home-garden-rock.js, seed: 647}
+  template: templates/home-garden.js#rock
+home-portal-stonework/home-portal-lantern-left:
+  overrides:
+    feetPosition: {x: -1.45, y: 0.1, z: -1.15}
+    parent: home-portal-stonework
+    rotation: 0
+  template: templates/home-portal-stonework.js#lantern
+home-portal-stonework/home-portal-lantern-right:
+  overrides:
+    feetPosition: {x: 1.45, y: 0.1, z: -1.15}
+    parent: home-portal-stonework
+    rotation: 0
+  template: templates/home-portal-stonework.js#lantern
+home-portal/home-portal-approach:
+  behavior: scripts/home-portal.js
+  feetPosition: {x: 0, y: -0.1, z: -0.3}
+  id: home-portal/home-portal-approach
+  parent: home-portal
+  physics: {body: static, trigger: true}
+  primitive: {depth: 7, height: 3.8, kind: box, width: 6}
+  state: {kind: approach}
+  visible: false
+home-portal/home-portal-glimmer:
+  overrides:
+    feetPosition: {x: 0, y: 0, z: 0}
+    parent: home-portal
+  template: templates/home-portal-invitation.js#glimmer
+home-portal/home-portal-invitation:
+  overrides:
+    parent: home-portal
+  template: templates/home-portal-invitation.js#invitation
+home-portal/home-portal-passage:
+  behavior: scripts/home-portal.js
+  feetPosition: {x: 0, y: 0, z: 0.3}
+  id: home-portal/home-portal-passage
+  parent: home-portal
+  physics: {body: static, trigger: true}
+  primitive: {depth: 0.5, height: 2.65, kind: box, width: 1.8}
+  state: {kind: passage}
+  visible: false
+home-portal/home-portal-stonework:
+  overrides:
+    feetPosition: {x: 0, y: 0, z: 0}
+    parent: home-portal
+    rotation: 0
+  template: templates/home-portal-stonework.js#stonework
+home-portal/home-portal-teal-spill:
+  feetPosition: {x: 0, y: 1.2, z: 0.1}
+  id: home-portal/home-portal-teal-spill
+  light: {color: "#77b5a5", distance: 3.5, intensity: 0.55, kind: point, shadow: {enabled: false}}
+  parent: home-portal
+home-portal/home-portal-veil:
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-portal/home-portal-veil
+  material: {color: "#ffffff", depthWrite: false, pbr: true, transparent: true}
+  parent: home-portal
+  physics: none
+  primitive: {kind: scripted, script: scripts/gen/home-portal-veil.js}
+  receiveShadow: false
+home-portal/spot-arch-landing:
+  feetPosition: {x: 0, y: 0, z: -1.2}
+  id: home-portal/spot-arch-landing
+  parent: home-portal
+  physics: none
+  rotation: {yaw: 0}
+  state: {landingRadius: 2.1, purpose: "the flagstone landing in front of the arch, where a player stands before stepping through"}
+  tags: [marker, spot]
+home-root:
+  feetPosition: {x: -3, y: 24, z: -3}
+  id: home-root
+  state: {boardArea: 25, build: in progress, denArea: 43.5, floorY: 24, spareArea: 20, wingYaw: 45}
+  tags: [home, house]
+home-root/den-curtain-left:
+  overrides:
+    feetPosition: {x: 2.02, y: 0.78, z: 5.7}
+    parent: home-root
+    rotation: {yaw: 0}
+  template: templates/den-life.js#curtain
+home-root/den-curtain-right:
+  overrides:
+    feetPosition: {x: 4.12, y: 0.78, z: 5.7}
+    parent: home-root
+    rotation: {yaw: 0}
+  template: templates/den-life.js#curtain
+home-root/den-curtain-rod:
+  overrides:
+    feetPosition: {x: 3.07, y: 2.66, z: 5.7}
+    parent: home-root
+    rotation: {yaw: 0}
+  template: templates/den-life.js#curtainRod
+home-root/furniture-chair-0:
+  overrides:
+    feetPosition: {x: 7.2221825406947975, y: 0, z: 0.24228355337246466}
+    parent: home-root
+    rotation: {yaw: -45}
+    state: {authoredDepth: 0.55, authoredWidth: 0.55, front: "-z", role: chair, room: board, seatHeight: 0.479, u: 1.4, v: 2.5}
+  template: templates/den-furniture.js#chair
+home-root/furniture-chair-1:
+  overrides:
+    feetPosition: {x: 8.777817459305203, y: 0, z: -1.3133513652379403}
+    parent: home-root
+    rotation: {yaw: 135}
+    state: {authoredDepth: 0.55, authoredWidth: 0.55, front: "-z", role: chair, room: board, seatHeight: 0.479, u: 3.6, v: 2.5}
+  template: templates/den-furniture.js#chair
+home-root/furniture-chair-2:
+  overrides:
+    feetPosition: {x: 7.2221825406947975, y: 0, z: -1.3133513652379403}
+    parent: home-root
+    rotation: {yaw: 225}
+    state: {authoredDepth: 0.55, authoredWidth: 0.55, front: "-z", role: chair, room: board, seatHeight: 0.479, u: 2.5, v: 1.4}
+  template: templates/den-furniture.js#chair
+home-root/furniture-chair-3:
+  overrides:
+    feetPosition: {x: 8.777817459305203, y: 0, z: 0.24228355337246466}
+    parent: home-root
+    rotation: {yaw: 45}
+    state: {authoredDepth: 0.55, authoredWidth: 0.55, front: "-z", role: chair, room: board, seatHeight: 0.479, u: 2.5, v: 3.6}
+  template: templates/den-furniture.js#chair
+home-root/furniture-hearth:
+  overrides:
+    feetPosition: {x: 0.64, y: 0, z: 5.1}
+    parent: home-root
+    primitive: {kind: scripted, params: {height: 3.2, item: hearth, mantelExtension: 0.2}, script: scripts/gen/den-furniture.js, seed: 17}
+  template: templates/den-furniture.js#hearth
+home-root/furniture-hearth/furniture-hearth-fire:
+  overrides:
+    feetPosition: {x: 0.21, y: 0.3, z: 0}
+    parent: home-root/furniture-hearth
+  template: templates/home-atmosphere.js#hearthFire
+home-root/furniture-pendant-board:
+  overrides:
+    children.warm-light: {light: {color: "#eee2d3", decay: 2, distance: 5.2, intensity: 1.6, kind: point, shadow: {enabled: true}}}
+    feetPosition: {x: 8, y: 2.569999933242798, z: -0.5355339059327378}
+    parent: home-root
+    rotation: {yaw: 45}
+    state.lightLocalY: 0.08
+    state.lightY: 26.65
+    state.role: pendant
+    state.room: board
+  template: templates/den-furniture.js#pendant
+home-root/furniture-pendant-den:
+  overrides:
+    children.warm-light: {light: {color: "#eee2d3", decay: 2, distance: 5.2, intensity: 1.6, kind: point, shadow: {enabled: true}}}
+    feetPosition: {x: 2.1, y: 2.52, z: 2}
+    parent: home-root
+    state.lightLocalY: 0.08
+    state.lightY: 26.6
+    state.role: pendant
+    state.room: den
+  template: templates/den-furniture.js#pendant
+home-root/furniture-pendant-spare:
+  overrides:
+    children.warm-light: {light: {color: "#eee2d3", decay: 2, distance: 5.2, intensity: 1.6, kind: point, shadow: {enabled: true}}}
+    feetPosition: {x: 11.181980515339465, y: 2.62, z: 2.6464466094067265}
+    parent: home-root
+    rotation: {yaw: 45}
+    state.lightLocalY: 0.08
+    state.lightY: 26.7
+    state.role: pendant
+    state.room: spare
+  template: templates/den-furniture.js#pendant
+home-root/furniture-shelf-0:
+  overrides:
+    feetPosition: {x: 0.305, y: 0.52, z: 2.34}
+    parent: home-root
+    state.capacityLength: 3.12
+    state.occupiedLength: 0
+    state.role: display-shelf
+    state.surfaceAboveFloor: 0.8
+    state.surfaceLocalY: 0.28
+  template: templates/den-furniture.js#shelf
+home-root/furniture-shelf-0/slot-shelf-0-a:
+  feetPosition: {x: 0, y: 0.28, z: -1.17}
+  id: home-root/furniture-shelf-0/slot-shelf-0-a
+  parent: home-root/furniture-shelf-0
+  physics: none
+  rotation: {yaw: -90}
+  state: {depth: 0.35, length: 0.78, purpose: one game box or one small keepsake, shelf: home-root/furniture-shelf-0, surfaceY: 24.8}
+  tags: [marker, shelf-slot]
+home-root/furniture-shelf-0/slot-shelf-0-b:
+  feetPosition: {x: 0, y: 0.28, z: -0.39}
+  id: home-root/furniture-shelf-0/slot-shelf-0-b
+  parent: home-root/furniture-shelf-0
+  physics: none
+  rotation: {yaw: -90}
+  state: {depth: 0.35, length: 0.78, purpose: one game box or one small keepsake, shelf: home-root/furniture-shelf-0, surfaceY: 24.8}
+  tags: [marker, shelf-slot]
+home-root/furniture-shelf-0/slot-shelf-0-c:
+  feetPosition: {x: 0, y: 0.28, z: 0.39}
+  id: home-root/furniture-shelf-0/slot-shelf-0-c
+  parent: home-root/furniture-shelf-0
+  physics: none
+  rotation: {yaw: -90}
+  state: {depth: 0.35, length: 0.78, purpose: one game box or one small keepsake, shelf: home-root/furniture-shelf-0, surfaceY: 24.8}
+  tags: [marker, shelf-slot]
+home-root/furniture-shelf-0/slot-shelf-0-d:
+  feetPosition: {x: 0, y: 0.28, z: 1.17}
+  id: home-root/furniture-shelf-0/slot-shelf-0-d
+  parent: home-root/furniture-shelf-0
+  physics: none
+  rotation: {yaw: -90}
+  state: {depth: 0.35, length: 0.78, purpose: one game box or one small keepsake, shelf: home-root/furniture-shelf-0, surfaceY: 24.8}
+  tags: [marker, shelf-slot]
+home-root/furniture-shelf-1:
+  overrides:
+    feetPosition: {x: 0.305, y: 1.27, z: 2.34}
+    parent: home-root
+    state.capacityLength: 3.12
+    state.occupiedLength: 0
+    state.role: display-shelf
+    state.surfaceAboveFloor: 1.55
+    state.surfaceLocalY: 0.28
+  template: templates/den-furniture.js#shelf
+home-root/furniture-shelf-1/slot-shelf-1-a:
+  feetPosition: {x: 0, y: 0.28, z: -1.17}
+  id: home-root/furniture-shelf-1/slot-shelf-1-a
+  parent: home-root/furniture-shelf-1
+  physics: none
+  rotation: {yaw: -90}
+  state: {depth: 0.35, length: 0.78, purpose: one game box or one small keepsake, shelf: home-root/furniture-shelf-1, surfaceY: 25.55}
+  tags: [marker, shelf-slot]
+home-root/furniture-shelf-1/slot-shelf-1-b:
+  feetPosition: {x: 0, y: 0.28, z: -0.39}
+  id: home-root/furniture-shelf-1/slot-shelf-1-b
+  parent: home-root/furniture-shelf-1
+  physics: none
+  rotation: {yaw: -90}
+  state: {depth: 0.35, length: 0.78, purpose: one game box or one small keepsake, shelf: home-root/furniture-shelf-1, surfaceY: 25.55}
+  tags: [marker, shelf-slot]
+home-root/furniture-shelf-1/slot-shelf-1-c:
+  feetPosition: {x: 0, y: 0.28, z: 0.39}
+  id: home-root/furniture-shelf-1/slot-shelf-1-c
+  parent: home-root/furniture-shelf-1
+  physics: none
+  rotation: {yaw: -90}
+  state: {depth: 0.35, length: 0.78, purpose: one game box or one small keepsake, shelf: home-root/furniture-shelf-1, surfaceY: 25.55}
+  tags: [marker, shelf-slot]
+home-root/furniture-shelf-1/slot-shelf-1-d:
+  feetPosition: {x: 0, y: 0.28, z: 1.17}
+  id: home-root/furniture-shelf-1/slot-shelf-1-d
+  parent: home-root/furniture-shelf-1
+  physics: none
+  rotation: {yaw: -90}
+  state: {depth: 0.35, length: 0.78, purpose: one game box or one small keepsake, shelf: home-root/furniture-shelf-1, surfaceY: 25.55}
+  tags: [marker, shelf-slot]
+home-root/furniture-shelf-2:
+  overrides:
+    feetPosition: {x: 0.305, y: 2.02, z: 2.34}
+    parent: home-root
+    state.capacityLength: 3.12
+    state.occupiedLength: 0
+    state.role: display-shelf
+    state.surfaceAboveFloor: 2.3
+    state.surfaceLocalY: 0.28
+  template: templates/den-furniture.js#shelf
+home-root/furniture-shelf-2/slot-shelf-2-a:
+  feetPosition: {x: 0, y: 0.28, z: -1.17}
+  id: home-root/furniture-shelf-2/slot-shelf-2-a
+  parent: home-root/furniture-shelf-2
+  physics: none
+  rotation: {yaw: -90}
+  state: {depth: 0.35, length: 0.78, purpose: one game box or one small keepsake, shelf: home-root/furniture-shelf-2, surfaceY: 26.3}
+  tags: [marker, shelf-slot]
+home-root/furniture-shelf-2/slot-shelf-2-b:
+  feetPosition: {x: 0, y: 0.28, z: -0.39}
+  id: home-root/furniture-shelf-2/slot-shelf-2-b
+  parent: home-root/furniture-shelf-2
+  physics: none
+  rotation: {yaw: -90}
+  state: {depth: 0.35, length: 0.78, purpose: one game box or one small keepsake, shelf: home-root/furniture-shelf-2, surfaceY: 26.3}
+  tags: [marker, shelf-slot]
+home-root/furniture-shelf-2/slot-shelf-2-c:
+  feetPosition: {x: 0, y: 0.28, z: 0.39}
+  id: home-root/furniture-shelf-2/slot-shelf-2-c
+  parent: home-root/furniture-shelf-2
+  physics: none
+  rotation: {yaw: -90}
+  state: {depth: 0.35, length: 0.78, purpose: one game box or one small keepsake, shelf: home-root/furniture-shelf-2, surfaceY: 26.3}
+  tags: [marker, shelf-slot]
+home-root/furniture-shelf-2/slot-shelf-2-d:
+  feetPosition: {x: 0, y: 0.28, z: 1.17}
+  id: home-root/furniture-shelf-2/slot-shelf-2-d
+  parent: home-root/furniture-shelf-2
+  physics: none
+  rotation: {yaw: -90}
+  state: {depth: 0.35, length: 0.78, purpose: one game box or one small keepsake, shelf: home-root/furniture-shelf-2, surfaceY: 26.3}
+  tags: [marker, shelf-slot]
+home-root/furniture-stool:
+  overrides:
+    feetPosition: {x: 1.9, y: 0, z: 4.54}
+    parent: home-root
+    rotation: {yaw: -16}
+  template: templates/den-furniture.js#stool
+home-root/furniture-table:
+  overrides:
+    feetPosition: {x: 8, y: 0, z: -0.5355339059327378}
+    parent: home-root
+    rotation: {yaw: 45}
+    state: {closedBoxOnly: true, radius: 0.8, role: board-table, room: board, topHeight: 0.74, u: 2.5, v: 2.5}
+  template: templates/den-furniture.js#table
+home-root/furniture-table/furniture-table-box:
+  overrides:
+    feetPosition: {x: 0.1, y: 0.74, z: -0.07}
+    parent: home-root/furniture-table
+    primitive: {kind: scripted, params: {depth: 0.21, height: 0.078, item: box, tone: moss, width: 0.285}, script: scripts/gen/den-furniture.js, seed: 17}
+    rotation: {yaw: 13}
+  template: templates/den-furniture.js#box
+home-root/garden-door-lantern:
+  blueprint: {category: Home garden, icon: lamp-wall-up, label: Little brass candle lantern}
+  castShadow: true
+  feetPosition: {x: 2.8, y: 2.72, z: -0.18}
+  id: home-root/garden-door-lantern
+  material: {pbr: true, roughness: 0.91}
+  parent: home-root
+  physics: none
+  primitive: {kind: scripted, script: scripts/gen/home-garden-lantern.js, seed: 61}
+  receiveShadow: true
+  state: {flame: modeled emissive candle, mounting: "front plaster pier, outside glazing", planXMax: 2.93, planXMin: 2.67}
+  tags: [home-garden, garden-lantern]
+home-root/garden-door-lantern/garden-door-lantern-light:
+  feetPosition: {x: 0, y: 0.025, z: -0.18}
+  id: home-root/garden-door-lantern/garden-door-lantern-light
+  light: {color: oklch(0.83 0.12 68), distance: 3.8, intensity: 1, kind: point, shadow: {enabled: false}}
+  parent: home-root/garden-door-lantern
+  tags: [home-garden, garden-practical]
+home-root/home-clock:
+  overrides:
+    feetPosition: {x: 5.528661727905273, y: 2.1461567878723145, z: 0.7337227463722229}
+    parent: home-root
+    rotation: {yaw: 135}
+  template: templates/home-devices.js#clock
+home-root/home-furnishing-work:
+  blueprint: {category: "First Den · Furniture", icon: circle, label: Plain oval woven rug}
+  feetPosition: {x: 3, y: 0, z: 3.5}
+  id: home-root/home-furnishing-work
+  parent: home-root
+  state: {installed: true, planBounds: {x: [1.85, 4.67], z: [1.76, 4.75]}, role: rug-assembly}
+  tags: [furniture, den-furniture, furniture-rug-root]
+home-root/home-radio:
+  overrides:
+    audio: {bus: Music, clip: /cdn/moodboard-lowpoly-cozy/music-brushed-jazz-piano-upright-bass-instrumental-no-vocals-evening-loop.mp3, gain: 0.24, kind: clip, loop: true, maxDistance: 22, refDistance: 8, spatial: true}
+    feetPosition: {x: 0.5, y: 1.119, z: 0}
+    parent: home-root/furniture-hearth
+    rotation: {w: 0.7071067690849304, x: 0, y: -0.7071067690849304, z: 0}
+    state: {mantelContactY: 25.119, powered: true, role: shelf-radio, station: 0, support: hearth mantel}
+    ui: "<div face=\"front\" emissive width=\"0.49m\" offset=\"-0.009m\" style=\"height:264px;padding-top:49px;display:flex;justify-content:flex-end;color:#f2e6cf;font-family:Georgia,serif\"><div style=\"width:150px;text-align:center\"><div style=\"font-size:20px;line-height:26px;color:#e8bc77\">{{ state.stationName }}</div><div style=\"font-size:11px;line-height:16px;letter-spacing:1px\">{{ state.frequency }} FM</div><div style=\"margin-top:6px;font-size:14px;line-height:19px;color:#f2e6cf\">{{ state.songTitle }}</div><div style=\"font-size:10px;line-height:14px;letter-spacing:1px;color:{{ state.indicator }}\">{{ state.broadcastLabel }}</div><div style=\"margin-top:8px;display:flex;gap:4px;justify-content:center\"><button id=\"power\" style=\"background:#403429;color:#f2e6cf;border:1px solid #a88550;padding:7px 3px;font-size:12px;font-family:Georgia,serif\">Power</button><button id=\"tune\" style=\"background:#403429;color:#f2e6cf;border:1px solid #a88550;padding:7px 3px;font-size:12px;font-family:Georgia,serif\">Tune</button><button id=\"next\" style=\"background:#403429;color:#f2e6cf;border:1px solid #a88550;padding:7px 3px;font-size:12px;font-family:Georgia,serif\">Next</button></div><div style=\"margin-top:4px;font-size:10px;line-height:14px;letter-spacing:1px;color:#c4a778\">{{ state.songNumber | pad 2 }} / {{ state.songCount | pad 2 }}</div></div></div>"
+  template: templates/home-devices.js#radio
+home-root/home-sconce-board:
+  overrides:
+    children: [{feetPosition: {x: 0, y: 0.145, z: -0.24}, id: home-sconce-board-light, light: {color: "#eee2d3", decay: 0.5, distance: 3.8, intensity: 0.23, kind: point, shadow: {enabled: true}}, template: templates/home-sconce.js#warmPool}]
+    feetPosition: {x: 11.00449671326164, y: 2.0199999999999996, z: -0.9237355288041527}
+    parent: home-root
+    rotation: {yaw: 135}
+    state.along: 4.35
+    state.fixtureMinY: 26.02
+    state.projection: 0.1725
+    state.wall: wing-right
+  template: templates/home-sconce.js#sconce
+home-root/home-sconce-den-back:
+  overrides:
+    children: [{feetPosition: {x: 0, y: 0.145, z: -0.24}, id: home-sconce-den-back-light, light: {color: "#eee2d3", decay: 0.5, distance: 3.8, intensity: 0.23, kind: point, shadow: {enabled: true}}, template: templates/home-sconce.js#warmPool}]
+    feetPosition: {x: 1.45, y: 2.0199999999999996, z: 5.899}
+    parent: home-root
+    rotation: {yaw: 0}
+    state.along: 1.45
+    state.fixtureMinY: 26.02
+    state.projection: 0.1725
+    state.wall: den-back
+  template: templates/home-sconce.js#sconce
+home-root/home-sconce-den-hip:
+  overrides:
+    children: [{feetPosition: {x: 0, y: 0.145, z: -0.24}, id: home-sconce-den-hip-light, light: {color: "#eee2d3", decay: 0.5, distance: 3.8, intensity: 0.23, kind: point, shadow: {enabled: true}}, template: templates/home-sconce.js#warmPool}]
+    feetPosition: {x: 7.550483614797111, y: 2.0199999999999996, z: 5.011970870750421}
+    parent: home-root
+    rotation: {yaw: 29.35775354279127}
+    state.along: 1.8357559750685821
+    state.fixtureMinY: 26.02
+    state.projection: 0.1725
+    state.wall: den-hip-wall
+  template: templates/home-sconce.js#sconce
+home-root/home-sconce-spare:
+  overrides:
+    children: [{feetPosition: {x: 0, y: 0.145, z: -0.24}, id: home-sconce-spare-light, light: {color: "#eee2d3", decay: 0.5, distance: 3.8, intensity: 0.23, kind: point, shadow: {enabled: true}}, template: templates/home-sconce.js#warmPool}]
+    feetPosition: {x: 11.853024850685497, y: 2.0199999999999996, z: -0.07520739138029553}
+    parent: home-root
+    rotation: {yaw: 135}
+    state.along: 5.55
+    state.fixtureMinY: 26.02
+    state.projection: 0.1725
+    state.wall: wing-right
+  template: templates/home-sconce.js#sconce
+home-root/note-board:
+  overrides:
+    feetPosition: {x: 9.696661, y: 1.32, z: 1.161099}
+    parent: home-root
+    rotation: {yaw: 45}
+    state.words: game night with friends?
+  template: templates/den-furniture.js#note
+home-root/note-couch:
+  overrides:
+    feetPosition: {x: 4.62, y: 1.35, z: 5.9}
+    parent: home-root
+    rotation: {yaw: 0}
+    state.words: a couch here, facing the lake?
+  template: templates/den-furniture.js#note
+home-root/note-reading:
+  overrides:
+    feetPosition: {x: 7.11452, y: 1.3, z: 5.25767}
+    parent: home-root
+    rotation: {yaw: 29.36}
+    state.words: a reading nook for rainy days?
+  template: templates/den-furniture.js#note
+home-root/note-spare:
+  overrides:
+    feetPosition: {x: 8.933, y: 1.32, z: 2.236}
+    parent: home-root
+    rotation: {yaw: 225}
+    state.words: an art studio?
+  template: templates/den-furniture.js#note
+home-root/room-board:
+  feetPosition: {x: 8, y: 0, z: -0.536}
+  id: home-root/room-board
+  parent: home-root
+  physics: none
+  rotation: {yaw: 45}
+  state: {area: 25, floor: [[4.464, -0.536], [8, -4.071], [11.536, -0.536], [8, 3]], purpose: "the board-game room: round oak table and four chairs; keep the metre behind the chairs clear", room: board}
+  tags: [marker, room]
+home-root/room-den:
+  feetPosition: {x: 3.717, y: 0, z: 3.166}
+  id: home-root/room-den
+  parent: home-root
+  physics: none
+  rotation: {yaw: 0}
+  state: {area: 43.5, floor: [[0, 0], [5, 0], [9.2, 4.2], [6, 6], [0, 6]], purpose: "the den: the living room where the owner arrives; hearth, shelves, rug, picture window, front door", room: den}
+  tags: [marker, room]
+home-root/room-spare:
+  feetPosition: {x: 11.182, y: 0, z: 2.646}
+  id: home-root/room-spare
+  parent: home-root
+  physics: none
+  rotation: {yaw: 45}
+  state: {area: 20, floor: [[8, 3], [11.536, -0.536], [14.364, 2.293], [10.828, 5.828]], purpose: "the spare room: empty on purpose, for what the owner brings", room: spare}
+  tags: [marker, room]
+home-root/spot-den-bookshelf:
+  feetPosition: {x: 5.3, y: 0, z: 5.74}
+  id: home-root/spot-den-bookshelf
+  parent: home-root
+  physics: none
+  rotation: {yaw: 0}
+  state: {footprint: {depth: 0.3, width: 0.9}, purpose: "a bookshelf against the rear wall, right of the window", room: den}
+  tags: [marker, spot]
+home-root/spot-den-cat:
+  feetPosition: {x: 1.62, y: 0, z: 5.45}
+  id: home-root/spot-den-cat
+  parent: home-root
+  physics: none
+  rotation: {yaw: 0}
+  state: {footprint: {depth: 0.64, width: 0.64}, purpose: "a cat bed beside the hearth, in its warmth", room: den}
+  tags: [marker, spot]
+home-root/spot-den-couch:
+  feetPosition: {x: 3.3, y: 0, z: 5.35}
+  id: home-root/spot-den-couch
+  parent: home-root
+  physics: none
+  rotation: {yaw: 0}
+  state: {footprint: {depth: 0.9, width: 2}, purpose: "a couch or a loveseat: back to the rear window, facing the picture window across the rug", room: den}
+  tags: [marker, spot]
+home-root/spot-den-reading:
+  feetPosition: {x: 7.33, y: 0, z: 4.621}
+  id: home-root/spot-den-reading
+  parent: home-root
+  physics: none
+  rotation: {yaw: 29.36}
+  state: {footprint: {depth: 0.9, width: 0.9}, purpose: "a reading armchair and a small side table under the hip-wall sconce, facing into the den", room: den}
+  tags: [marker, spot]
+home-root/spot-den-reading-lamp:
+  feetPosition: {x: 7.87, y: 0, z: 4.316}
+  id: home-root/spot-den-reading-lamp
+  parent: home-root
+  physics: none
+  rotation: {yaw: 29.36}
+  state: {footprint: {depth: 0.44, width: 0.44}, purpose: "a floor lamp at the reading chair's right hand", room: den}
+  tags: [marker, spot]
+home-root/spot-den-reading-table:
+  feetPosition: {x: 6.7, y: 0, z: 4.975}
+  id: home-root/spot-den-reading-table
+  parent: home-root
+  physics: none
+  rotation: {yaw: 29.36}
+  state: {footprint: {depth: 0.46, width: 0.46}, purpose: "a small side table at the reading chair's left hand", room: den}
+  tags: [marker, spot]
+home-root/spot-spare-bed:
+  feetPosition: {x: 11.111, y: 0, z: 1.586}
+  id: home-root/spot-spare-bed
+  parent: home-root
+  physics: none
+  rotation: {yaw: 225}
+  state: {footprint: {depth: 2.1, width: 1.6}, purpose: "a bed: headboard on the partition wall, foot toward the rear window", room: spare}
+  tags: [marker, spot]
+home-root/spot-spare-desk:
+  feetPosition: {x: 10.305, y: 0, z: 4.796}
+  id: home-root/spot-spare-desk
+  parent: home-root
+  physics: none
+  rotation: {yaw: -45}
+  state: {footprint: {depth: 0.6, width: 1.2}, purpose: "a desk against the wall past the door, clear of the bed", room: spare}
+  tags: [marker, spot]
+home-root/spot-spare-easel:
+  feetPosition: {x: 11.96, y: 0, z: 3.707}
+  id: home-root/spot-spare-easel
+  parent: home-root
+  physics: none
+  rotation: {yaw: 45}
+  state: {footprint: {depth: 0.6, width: 0.7}, purpose: "an easel by the rear window, its painter clear of the bed and the side door", room: spare}
+  tags: [marker, spot]
+home-root/spot-terrace:
+  feetPosition: {x: 5.525, y: 0, z: -3.152}
+  id: home-root/spot-terrace
+  parent: home-root
+  physics: none
+  rotation: {yaw: 45}
+  state: {footprint: {depth: 0.7, width: 1.6}, purpose: "a bench or a little table on the terrace in front of the board-room window, facing the lake", room: terrace}
+  tags: [marker, spot]
+home-spare-door:
+  castShadow: true
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-spare-door
+  material: {color: "#ffffff", pbr: true, roughness: 0.83}
+  parent: home-spare-door-hinge
+  physics: kinematic
+  pivot: {x: 0, y: 0, z: 0}
+  primitive: {kind: scripted, params: {height: 2.35, width: 1.18}, script: scripts/gen/home-architecture-door.js}
+  receiveShadow: true
+  rotation: {w: 1, x: 0, y: 0, z: 0}
+  state: {colliderBounds: {max: [0, 2.385, 0.038], min: [-1.18, 0.035, -0.038]}, height: 2.35, hinge: home-spare-door-hinge, localDrawBounds: {max: [0.0245, 2.385, 0.1705], min: [-1.18, 0.035, -0.1705]}, width: 1.18}
+  tags: [home-architecture, door-leaf]
+home-spare-door-hinge:
+  behavior: scripts/home-door.js
+  blueprint: {category: Architecture, icon: door-open, label: "Oak room door · right hinge"}
+  feetPosition: {x: 0.01, y: 0, z: 0}
+  id: home-spare-door-hinge
+  parent: home-architecture-work/home-architecture-den/home-architecture-wing/home-spare-door-frame
+  pivot: {x: 0, y: 0, z: 0}
+  rotation: {w: 1, x: 0, y: 0, z: 0}
+  state: {closedYaw: 0, currentYaw: -100, leafId: home-spare-door, open: true, openYaw: -100, openingWidth: 1.2, ready: true}
+  tags: [home-architecture, door-hinge, interactable]
+home-spare-door/handle-label-back:
+  overrides:
+    feetPosition: {x: -0.75, y: 1.33, z: 0.3}
+    parent: home-spare-door
+    state.hinge: home-spare-door-hinge
+    state.side: 1
+    state.verb: Close
+  template: templates/home-door-label.js#handleLabel
+home-spare-door/handle-label-front:
+  overrides:
+    feetPosition: {x: -0.75, y: 1.33, z: -0.3}
+    parent: home-spare-door
+    state.hinge: home-spare-door-hinge
+    state.side: -1
+    state.verb: Close
+  template: templates/home-door-label.js#handleLabel
+home-valley-air:
+  overrides:
+    feetPosition: {x: -8, y: 26, z: -9}
+  template: templates/home-atmosphere.js#valleyAir
+home-weather-controller:
+  behavior: scripts/home-weather.js
+  feetPosition: {x: 0, y: 24, z: 0}
+  id: home-weather-controller
+  state: {epoch: 0, solarEpoch: -2700000}
+  tags: [weather, home-weather-controller]
+home-window-garden:
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: home-window-garden
+  state: {contract: scripts/lib/data/window-garden.js, windows: [{center: {x: -1.5, y: 25.85, z: -3}, normal: {x: 0, z: -1}, sill: 24.85, tangent: {x: 1, z: 0}, width: 2.3, windowId: den-front}, {center: {x: 0.125, y: 25.725, z: 3}, normal: {x: 0, z: 1}, sill: 24.9, tangent: {x: 1, z: 0}, width: 2.1500000000000004, windowId: den-back}, {center: {x: 3.232233047033631, y: 25.745, z: -5.303300858899107}, normal: {x: -0.7071067811865476, z: -0.7071067811865476}, sill: 24.82, tangent: {x: 0.7071067811865476, z: -0.7071067811865476}, width: 3.5999999999999996, windowId: wing-front}, {center: {x: 6.537957249080741, y: 25.75, z: -5.533110562784735}, normal: {x: 0.7071067811865476, z: -0.7071067811865476}, sill: 24.85, tangent: {x: 0.7071067811865476, z: 0.7071067811865476}, width: 2.85, windowId: wing-right-1}, {center: {x: 9.98510280736516, y: 25.74, z: -2.0859650045003155}, normal: {x: 0.7071067811865476, z: -0.7071067811865476}, sill: 24.88, tangent: {x: 0.7071067811865476, z: 0.7071067811865476}, width: 1.9000000000000004, windowId: wing-right-2}, {center: {x: 9.613871747242223, y: 25.75, z: 1.0429825022501573}, normal: {x: 0.7071067811865476, z: 0.7071067811865476}, sill: 24.86, tangent: {x: 0.7071067811865476, z: -0.7071067811865476}, width: 3.55, windowId: wing-rear}]}
+  tags: [window-garden-root]
+home-window-garden/window-garden-den-back-daisies:
+  overrides:
+    feetPosition: {x: 0.22499999999999998, y: {terrain: 0}, z: 5.25}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {flowerHeight: 0.35, flowerVariation: 0.07, flowers: 3, grassHeight: 0.25, grassVariation: 0.05, kind: meadow, rx: 0.27, rz: 0.23, tufts: 7}, script: scripts/gen/home-garden-planting.js, seed: 316}
+    state.facadeDistance: 2.25
+    state.groundAtPlant: 23.55
+    state.windowId: den-back
+    tags: [window-garden, den-back]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#planting
+home-window-garden/window-garden-den-back-fern:
+  overrides:
+    feetPosition: {x: -1.025, y: {terrain: 0}, z: 5.369999999999999}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 315}
+    state.facadeDistance: 2.3699999999999997
+    state.groundAtPlant: 23.55
+    state.windowId: den-back
+    tags: [window-garden, den-back]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#planting
+home-window-garden/window-garden-den-back-stone:
+  overrides:
+    feetPosition: {x: -0.42500000000000004, y: {terrain: 0}, z: 5.05}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {d: 0.64, h: 0.32, w: 0.82}, script: scripts/gen/home-garden-rock.js, seed: 314}
+    state.facadeDistance: 2.05
+    state.groundAtPlant: 23.55
+    state.windowId: den-back
+    tags: [window-garden, den-back]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#rock
+home-window-garden/window-garden-den-front-birch:
+  overrides:
+    feetPosition: {x: -5.8, y: {terrain: 0}, z: -6.3}
+    parent: home-window-garden
+    physics: static
+    primitive: {kind: scripted, params: {height: 3.8, spread: 1.05}, script: scripts/gen/home-garden-birch.js, seed: 401}
+    state.facadeDistance: 3.3
+    state.groundAtPlant: 23.482198409250024
+    state.windowId: den-front
+    tags: [window-garden, den-front]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#birch
+home-window-garden/window-garden-den-front-daisies:
+  overrides:
+    feetPosition: {x: -0.25, y: {terrain: 0}, z: -6.35}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {flowerHeight: 0.35, flowerVariation: 0.07, flowers: 3, grassHeight: 0.25, grassVariation: 0.05, kind: meadow, rx: 0.27, rz: 0.23, tufts: 7}, script: scripts/gen/home-garden-planting.js, seed: 303}
+    state.facadeDistance: 3.35
+    state.groundAtPlant: 23.55
+    state.windowId: den-front
+    tags: [window-garden, den-front]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#planting
+home-window-garden/window-garden-den-front-fern:
+  overrides:
+    feetPosition: {x: -1.5, y: {terrain: 0}, z: -6.47}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 302}
+    state.facadeDistance: 3.4699999999999998
+    state.groundAtPlant: 23.55
+    state.windowId: den-front
+    tags: [window-garden, den-front]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#planting
+home-window-garden/window-garden-den-front-stone:
+  overrides:
+    feetPosition: {x: -0.9, y: {terrain: 0}, z: -6.15}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {d: 0.64, h: 0.32, w: 0.82}, script: scripts/gen/home-garden-rock.js, seed: 301}
+    state.facadeDistance: 3.15
+    state.groundAtPlant: 23.55
+    state.windowId: den-front
+    tags: [window-garden, den-front]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#rock
+home-window-garden/window-garden-wing-front-birch:
+  overrides:
+    feetPosition: {x: 4.681801948466053, y: {terrain: 0}, z: -11.349063838044088}
+    parent: home-window-garden
+    physics: static
+    primitive: {kind: scripted, params: {height: 4.3, spread: 1.1}, script: scripts/gen/home-garden-birch.js, seed: 419}
+    state.facadeDistance: 3.25
+    state.groundAtPlant: 23.55
+    state.windowId: wing-front
+    tags: [window-garden, wing-front]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#birch
+home-window-garden/window-garden-wing-front-daisies:
+  overrides:
+    feetPosition: {x: 1.676598128423226, y: {terrain: 0}, z: -8.555992052357226}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {flowerHeight: 0.35, flowerVariation: 0.07, flowers: 3, grassHeight: 0.25, grassVariation: 0.05, kind: meadow, rx: 0.27, rz: 0.23, tufts: 7}, script: scripts/gen/home-garden-planting.js, seed: 329}
+    state.facadeDistance: 3.4000000000000004
+    state.groundAtPlant: 23.55
+    state.windowId: wing-front
+    tags: [window-garden, wing-front]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#planting
+home-window-garden/window-garden-wing-front-fern:
+  overrides:
+    feetPosition: {x: 0.7078618381976565, y: {terrain: 0}, z: -7.756961389616427}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 328}
+    state.facadeDistance: 3.52
+    state.groundAtPlant: 23.55
+    state.windowId: wing-front
+    tags: [window-garden, wing-front]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#planting
+home-window-garden/window-garden-wing-front-stone:
+  overrides:
+    feetPosition: {x: 1.3584000768892799, y: {terrain: 0}, z: -7.954951288348661}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {d: 0.64, h: 0.32, w: 0.82}, script: scripts/gen/home-garden-rock.js, seed: 327}
+    state.facadeDistance: 3.2
+    state.groundAtPlant: 23.55
+    state.windowId: wing-front
+    tags: [window-garden, wing-front]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#rock
+home-window-garden/window-garden-wing-rear-birch:
+  overrides:
+    feetPosition: {x: 15.05859396237864, y: {terrain: 0}, z: -0.44194173824159266}
+    parent: home-window-garden
+    physics: static
+    primitive: {kind: scripted, params: {height: 3.6, spread: 1}, script: scripts/gen/home-garden-birch.js, seed: 443}
+    state.facadeDistance: 2.8
+    state.groundAtPlant: 23.55
+    state.windowId: wing-rear
+    tags: [window-garden, wing-rear]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#birch
+home-window-garden/window-garden-wing-rear-daisies:
+  overrides:
+    feetPosition: {x: 11.452349378327247, y: {terrain: 0}, z: 2.6693280989792165}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {flowerHeight: 0.35, flowerVariation: 0.07, flowers: 3, grassHeight: 0.25, grassVariation: 0.05, kind: meadow, rx: 0.27, rz: 0.23, tufts: 7}, script: scripts/gen/home-garden-planting.js, seed: 368}
+    state.facadeDistance: 2.45
+    state.groundAtPlant: 23.55
+    state.windowId: wing-rear
+    tags: [window-garden, wing-rear]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#planting
+home-window-garden/window-garden-wing-rear-fern:
+  overrides:
+    feetPosition: {x: 10.653318715586447, y: {terrain: 0}, z: 3.638064389204787}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 367}
+    state.facadeDistance: 2.57
+    state.groundAtPlant: 23.55
+    state.windowId: wing-rear
+    tags: [window-garden, wing-rear]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#planting
+home-window-garden/window-garden-wing-rear-stone:
+  overrides:
+    feetPosition: {x: 10.851308614318683, y: {terrain: 0}, z: 2.9875261505131636}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {d: 0.64, h: 0.32, w: 0.82}, script: scripts/gen/home-garden-rock.js, seed: 366}
+    state.facadeDistance: 2.25
+    state.groundAtPlant: 23.55
+    state.windowId: wing-rear
+    tags: [window-garden, wing-rear]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#rock
+home-window-garden/window-garden-wing-right-1-daisies:
+  overrides:
+    feetPosition: {x: 8.235013523928455, y: {terrain: 0}, z: -7.08874548139514}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {flowerHeight: 0.35, flowerVariation: 0.07, flowers: 3, grassHeight: 0.25, grassVariation: 0.05, kind: meadow, rx: 0.27, rz: 0.23, tufts: 7}, script: scripts/gen/home-garden-planting.js, seed: 342}
+    state.facadeDistance: 2.3000000000000003
+    state.groundAtPlant: 23.55
+    state.windowId: wing-right-1
+    tags: [window-garden, wing-right-1]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#planting
+home-window-garden/window-garden-wing-right-1-fern:
+  overrides:
+    feetPosition: {x: 7.435982861187657, y: {terrain: 0}, z: -8.05748177162071}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 341}
+    state.facadeDistance: 2.42
+    state.groundAtPlant: 23.55
+    state.windowId: wing-right-1
+    tags: [window-garden, wing-right-1]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#planting
+home-window-garden/window-garden-wing-right-1-stone:
+  overrides:
+    feetPosition: {x: 7.63397275991989, y: {terrain: 0}, z: -7.406943532929087}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {d: 0.64, h: 0.32, w: 0.82}, script: scripts/gen/home-garden-rock.js, seed: 340}
+    state.facadeDistance: 2.1
+    state.groundAtPlant: 23.55
+    state.windowId: wing-right-1
+    tags: [window-garden, wing-right-1]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#rock
+home-window-garden/window-garden-wing-right-2-daisies:
+  overrides:
+    feetPosition: {x: 12.389265863399423, y: {terrain: 0}, z: -2.9344931419241727}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {flowerHeight: 0.35, flowerVariation: 0.07, flowers: 3, grassHeight: 0.25, grassVariation: 0.05, kind: meadow, rx: 0.27, rz: 0.23, tufts: 7}, script: scripts/gen/home-garden-planting.js, seed: 355}
+    state.facadeDistance: 2.3000000000000003
+    state.groundAtPlant: 23.55
+    state.windowId: wing-right-2
+    tags: [window-garden, wing-right-2]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#planting
+home-window-garden/window-garden-wing-right-2-fern:
+  overrides:
+    feetPosition: {x: 11.590235200658624, y: {terrain: 0}, z: -3.9032294321497423}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {kind: fern}, script: scripts/gen/home-garden-planting.js, seed: 354}
+    state.facadeDistance: 2.42
+    state.groundAtPlant: 23.55
+    state.windowId: wing-right-2
+    tags: [window-garden, wing-right-2]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#planting
+home-window-garden/window-garden-wing-right-2-stone:
+  overrides:
+    feetPosition: {x: 11.788225099390857, y: {terrain: 0}, z: -3.2526911934581193}
+    parent: home-window-garden
+    physics: none
+    primitive: {kind: scripted, params: {d: 0.64, h: 0.32, w: 0.82}, script: scripts/gen/home-garden-rock.js, seed: 353}
+    state.facadeDistance: 2.1
+    state.groundAtPlant: 23.55
+    state.windowId: wing-right-2
+    tags: [window-garden, wing-right-2]
+    visibleRange: {max: 95}
+  template: templates/home-garden.js#rock
+spot-garden:
+  feetPosition: {x: 8, y: {terrain: 0}, z: -11}
+  id: spot-garden
+  physics: none
+  state: {clearRadius: 2, purpose: "open lawn below the terrace for a flower bed, a pond or a bench; keep the lake view from the picture window clear"}
+  tags: [marker, spot]
+"square-door":
+  "behavior": "scripts/square-door.js"
+  "feetPosition": {"x": 9.95, "y": 24, "z": -2.121}
+  "rotation": {"yaw": 135}
+  "physics": "none"
+  "state": {"near": 0, "role": "side-door-to-the-square", "link": "@@squaresrc/the-square +main#den-door"}
+  "tags": ["portal", "den-side-door"]
+  "children": [{"id": "glass", "feetPosition": {"x": 0, "y": 0, "z": 0.05}, "primitive": {"kind": "box", "width": 1.12, "height": 2.42, "depth": 0.02}, "material": {"color": "#000000", "opacity": 0, "transparent": true, "depthWrite": false}, "visible": false, "physics": "none", "castShadow": false, "receiveShadow": false}, {"id": "passage", "feetPosition": {"x": 0, "y": 0, "z": 0.05}, "behavior": "scripts/square-door.js", "physics": {"body": "static", "trigger": true}, "primitive": {"kind": "box", "width": 0.9, "height": 2.2, "depth": 0.3}, "visible": false, "state": {"kind": "passage"}}, {"id": "approach", "feetPosition": {"x": 0, "y": -0.1, "z": -1.6}, "behavior": "scripts/square-door.js", "physics": {"body": "static", "trigger": true}, "primitive": {"kind": "box", "width": 3.0, "height": 3.0, "depth": 3.2}, "visible": false, "state": {"kind": "approach"}}]
+"square-door-hinge":
+  "parent": "square-door"
+  "behavior": "scripts/home-door.js"
+  "feetPosition": {"x": -0.545, "y": 0, "z": 0}
+  "rotation": {"yaw": 180}
+  "state": {"closedYaw": 180, "currentYaw": 180, "openYaw": 280, "open": false, "leafId": "square-door-leaf", "openingWidth": 1.1}
+  "tags": ["home-architecture", "door-hinge"]
+"square-door-leaf":
+  "parent": "square-door-hinge"
+  "feetPosition": {"x": 0, "y": 0, "z": 0}
+  "primitive": {"kind": "scripted", "params": {"height": 2.36, "width": 1.09}, "script": "scripts/gen/home-architecture-door.js"}
+  "material": {"color": "#ffffff", "pbr": true, "roughness": 0.83}
+  "physics": "kinematic"
+  "castShadow": true
+  "receiveShadow": true
+  "state": {"hinge": "square-door-hinge", "width": 1.09, "height": 2.36}
+  "tags": ["home-architecture", "door-leaf"]
+
+"spare-door-plaque":
+  "feetPosition": {"x": 5.3889, "y": 24, "z": 0.3889}
+  "rotation": {"yaw": 135}
+  "physics": "none"
+  "state": {"role": "plaque-to-the-square", "over": "home-spare-door-frame"}
+  "children": [{"id": "plaque-frame", "feetPosition": {"x": 0, "y": 2.62, "z": -0.1125}, "primitive": {"kind": "box", "width": 0.8, "height": 0.21, "depth": 0.025}, "material": {"color": "#432716", "roughness": 0.7, "pbr": true}, "physics": "none", "castShadow": false, "receiveShadow": true}, {"id": "plaque-panel", "feetPosition": {"x": 0, "y": 2.65, "z": -0.129}, "primitive": {"kind": "box", "width": 0.74, "height": 0.15, "depth": 0.008}, "material": {"color": "#6e4428", "roughness": 0.62, "pbr": true}, "physics": "none", "castShadow": false, "receiveShadow": true}, {"id": "plaque-face", "feetPosition": {"x": 0, "y": 2.725, "z": -0.1345}, "visibleRange": {"min": 0, "max": 14}, "vector": "<svg viewBox='0 0 300 62' width='0.7m'><text x='150' y='50' text-anchor='middle' font-family='display' font-size='62' fill='#f1dfb8'>the square</text></svg>"}]

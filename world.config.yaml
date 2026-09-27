@@ -1,0 +1,29 @@
+# name: the game's name — fill it once you know what this is. description: one line for the box art.
+camera: templates/camera.js#camera
+lighting: scripts/lighting.js
+defaultPlace: main
+engine:
+  behaviors:
+    - scripts/arrival.js
+  networking:
+    mode: multiplayer
+  ui:
+    theme:
+      font: Georgia, 'Times New Roman', serif
+inputs:
+  actions:
+    interact:
+      keys: [e]
+    jump:
+      keys:
+        - space
+  axes:
+    moveX:
+      keys: a/d
+    moveZ:
+      keys: s/w
+  touch:
+    surfaces: {default: {buttons: [{action: interact, label: USE, size: primary, slot: 1}, {action: jump, label: JUMP, slot: 2}], look: true, orientation: any, pinch: false, sticks: [{x: moveX, y: moveZ, zone: left}]}}
+player: templates/player.js#player
+name: The First Den
+description: A warm little home above a lake, with room for whatever you make next.

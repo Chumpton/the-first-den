@@ -1,0 +1,12 @@
+const solid={pbr:true,color:'#ffffff',roughness:.83};
+export const architecture={tags:['home-architecture','architecture-root'],state:{revision:'crafted-01',rooms:3,area:88.5,floorY:24,wingYaw:45},blueprint:{label:'Three-room lake den · shell',category:'Architecture',icon:'house'}};
+export const foundation={tags:['home-architecture','foundation'],primitive:{kind:'scripted',script:'scripts/gen/home-architecture-foundation.js'},physics:'static',material:solid,castShadow:true,receiveShadow:true};
+export const floor={tags:['home-architecture','floor'],primitive:{kind:'scripted',script:'scripts/gen/home-architecture-floor.js'},physics:'static',material:solid,castShadow:true,receiveShadow:true};
+export const wall={tags:['home-architecture','wall'],primitive:{kind:'scripted',script:'scripts/gen/home-architecture-walls.js'},physics:'static',material:solid,castShadow:true,receiveShadow:true};
+export const joinery={tags:['home-architecture','timber','joinery'],primitive:{kind:'scripted',script:'scripts/gen/home-architecture-joinery.js'},material:solid,castShadow:true,receiveShadow:true};
+export const glazing={tags:['home-architecture','glazing'],primitive:{kind:'scripted',script:'scripts/gen/home-architecture-glass.js'},physics:'static',material:{pbr:true,color:'#ffffff',roughness:.12,metalness:0,depthWrite:false},castShadow:false,receiveShadow:false};
+export const roof={tags:['home-architecture','roof'],primitive:{kind:'scripted',script:'scripts/gen/home-architecture-roof.js'},physics:'static',material:solid,castShadow:true,receiveShadow:true};
+export const roofTrim={tags:['home-architecture','roof','joinery'],primitive:{kind:'scripted',script:'scripts/gen/home-architecture-roof-trim.js'},material:solid,castShadow:true,receiveShadow:true};
+export const timber={tags:['home-architecture','timber','truss'],primitive:{kind:'scripted',script:'scripts/gen/home-architecture-timber.js'},material:solid,castShadow:true,receiveShadow:true};
+export const door={tags:['home-architecture','door','interactable'],primitive:{kind:'scripted',script:'scripts/gen/home-architecture-door.js'},physics:'kinematic',material:solid,pivot:{x:0,y:0,z:0},castShadow:true,receiveShadow:true,blueprint:{label:'Hand-joined oak door',category:'Architecture',icon:'door-open'},state:{ready:false,closedYaw:0,openYaw:-103}};
+export const chimney={tags:['home-architecture','chimney'],primitive:{kind:'scripted',script:'scripts/gen/home-architecture-chimney.js'},physics:'static',material:solid,castShadow:true,receiveShadow:true};

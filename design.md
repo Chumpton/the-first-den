@@ -1,0 +1,34 @@
+# The First Den
+The owner's own home in Spawn: a timber-and-plaster house above a lake, warm, built and mostly empty on purpose. Things come in when the owner asks.
+
+## Where things are
+Indoor rows hang under `home-root` (world -3, 24, -3): local x/z are the floor plan in metres, y 0 is the floor. The two-room wing is turned 45°: wing (u, v) is x = 4.4645 + (u+v)·0.7071, z = −0.5355 + (v−u)·0.7071, and yaw 45 squares a piece to its walls.
+
+Markers are empty rows tagged `marker` (no mesh, no collider). Copy a marker's feetPosition and rotation into the piece; rotation aims its front (−z, as on the chairs). Its state says what the spot is for.
+- Rooms: `home-root/room-den` (hearth, shelves, rug, picture window), `home-root/room-board` (table, four chairs; keep the metre behind the chairs clear), `home-root/room-spare` (empty).
+- Shelves: `home-root/furniture-shelf-0`, `-1`, `-2` on the den's left wall, tops at 0.8, 1.55, 2.3 m. Four slots each, `…/furniture-shelf-N/slot-shelf-N-a` to `-d`, a at the window end; a slot holds one game box or one small thing.
+- Open spots: `home-root/spot-den-couch`, `spot-den-reading` (with `-reading-table`, `-reading-lamp`), `spot-den-bookshelf`, `spot-den-cat`, `spot-spare-bed`, `spot-spare-desk`, `spot-spare-easel`, `spot-terrace`; `home-portal/spot-arch-landing`, `spot-garden` (lawn below the terrace).
+- Life: `den-life-gulls`, `den-life-fish` and `den-life-butterflies` are renderer effects (`scripts/effects-den-*.fx.js`), the picture window's curtains `home-root/den-curtain-*` sway on the GPU — none costs a tick.
+- Notes: idea cards where they belong — `home-root/note-couch`, `note-board`, `note-spare`, `note-reading`, `den-note-arch/card`, `den-note-garden/card` (`templates/den-furniture.js#note`, the words in `state.words`). When the owner does not know what to make, point them at a note; when a piece answers a note, take the note down.
+- Standing: `home-root/furniture-table`, `furniture-chair-0`…`3`, `furniture-stool` with its blanket, the rug `home-furnishing-work`, `furniture-hearth` (fire inside, `home-radio` on the mantel), `home-clock`. Doors: `home-front-door-hinge`, `home-spare-door-hinge`. `square-door`, the oak door in the spare room's far wall, opens onto the square as you walk up (`scripts/square-door.js`); keep its approach clear. `spare-door-plaque`, over the spare room's door on the den side, tells the den the square is through there; its left end lines up with the door's trim, clear of the roof brace that comes down above the door's right half. Outside: the terrace `home-garden-work`, its steps to the garden path, and `home-portal-path` up the hill to the arch `home-portal`.
+
+## Bringing things in
+The catalog is ready: a catalog piece is one `run_script` spawn and it lands in seconds, drawn exactly as its template says —
+`spawn("furniture-couch", { template: "templates/den-catalog.js#couch", parent: "home-root", feetPosition: { x: 3.3, y: 0, z: 5.35 }, rotation: { yaw: 0 } })`.
+Tell them it's in the moment the spawn answers; a look there only makes them wait a minute for a piece that is already right.
+The pieces (template export, then its spot: feet, yaw): couch (3.3, 0, 5.35) 0 · armchair (7.33, 0, 4.62) 29.36 · floorLamp (7.87, 0, 4.316) 29.36 · sideTable (6.7, 0, 4.975) 29.36 · bookshelf (5.3, 0, 5.74) 0 · catBed (1.62, 0, 5.45) 0 · bed (11.111, 0, 1.586) 225 · desk (10.305, 0, 4.796) -45 · easel (11.96, 0, 3.707) 45 · boardGame on the table (parent `home-root/furniture-table`, feet (-0.2, 0.74, 0.12)) · recordPlayer on a shelf (parent `home-root/furniture-shelf-1/slot-shelf-1-d`, feet 0) · `templates/den-furniture.js#plant` and `#wateringCan` by a window, on the floor · a small rug: `templates/den-furniture.js#rug` with `primitive.params.radiusX: 0.7`, `radiusZ: 0.5`. The spots are the markers of the same names (`spot-den-couch`, `spot-den-reading`, …).
+Each piece does one thing (its `state.does`) and leaves one need open (`state.needs`): offer that next.
+
+Anything else is new. Block it out first (a box its size at its spot in the blueprint look, material `{ kind: "scripted", script: "engine/blueprint" }`), then build it into one family, in the den's style: an export in `templates/den-furniture.js` drawn by an `item` branch of `scripts/gen/den-furniture.js` (DEFAULTS, a builder in BUILDERS, a `collider()` branch of `solid()` boxes). Feet at y 0, front toward −z, metres. From `den-furniture-mesh.js`: `bevel`, `solid`, `lathe`, `beam`, `rod`, `cloth`; `paint(m, kind)` before each part — oak, walnut; flax, oat, cream, moss, teal (linen); brass, iron; limestone, plaster. A `seat` param (its height) makes it sittable; a press behaviour like `scripts/den-piece.js` makes it do its one thing.
+
+## After each piece
+What you bring in moves and reacts first — it sways, bobs, flickers or glows, and a press gets back what the thing does (a door swings, a lamp lights, a drawer slides out), as the fire, the curtains, the radio, the doors and the clock do: a hanging or leafy thing wears `scripts/material-den-sway.js` (a GPU sway, no tick), a flame or glow is an `fx`. Second, it may leave one need open that your next idea meets: a plant — "it's in. it'll want water in a day or so — want me to make a watering can so you can water it?"; a couch — "walk over and press E to sit. want a blanket for it?". Say where to look from where they stand. After a few pieces, point to the arch: "ready for your first game? the arch is waiting."
+
+## Their wisps
+The flames the owner keeps in Spawn, the pets on their chat bar, are theirs: `player.wisps` on the owner's row lists them, `[{ id, name, color, shape?, burnStyle?, stage }]`, the same list in every world while they are here, and `spawn me` names them too. To bring one home, stand a `wisp: { color, shape, burnStyle, size }` row by the hearth or where they ask, its name on a child row over the flame: text stands on its row's feet and the flame burns in the lower half of the wisp's `size`, so the child's `feetPosition` is `{ x: 0, y: size * 0.7, z: 0 }` with `text: { content: name, size: 0.12 }`. Keep the list in `ctx.world.state` so the flame stays when they are out.
+
+## The arch
+`home-portal`, the stone arch up the hill, is the door to the owner's first game. When they name it, it is its own world: `spawn new-game "<brief>"` makes it and opens no door. Write the link its answer names into `home-portal`'s `state.link` and set `state.phase` to `linked`; the arch then crosses whoever walks through, and its glass shows the game live to whoever walks up to it (`scripts/home-portal-glass.js` follows the link; its words are in `templates/home-portal-invitation.js`). The new world's Savi starts on your brief.
+
+## Limits
+No win or loss, no progression, no scores. Keep the house uncluttered: one piece per ask; the spare room and the shelves stay mostly empty until the owner fills them.
