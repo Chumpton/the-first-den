@@ -310,7 +310,11 @@ function camp(ctx, p, lod) {
   }
   // log seats
   for (const a of p.seats ?? [85, 175, 310]) logSeat(ctx, [2.25 * Math.cos(a * D), 0.21, 2.25 * Math.sin(a * D)], -a + 90 - 90 + (a % 2 ? 4 : -4) + 90, 1.3, 0.21, lod);
-  // woodpile
+  // woodpile (props: false = the camp-ring rows carry the woodpile, block and kettle)
+  if (p.props !== false) campProps(ctx, p, lod, rnd);
+  campPost(ctx, p, lod);
+}
+function campProps(ctx, p, lod, rnd) {
   const wp = p.woodpile ?? [-3.95, -1.5, 70];
   withXF([wp[0], 0, wp[1]], wp[2], () => {
     if (lod >= 4) { paint(ctx, "bark"); box(ctx, 0, 0, 0, 1.3, 0.6, 0.5); return; }
@@ -329,23 +333,26 @@ function camp(ctx, p, lod) {
     paint(ctx, "oklch(0.74 0.08 70)"); cyl(ctx, [0, 0.47, 0.05], [0, 0.98, 0.5], 0.022, 0.02, 5, 1);
     if (lod <= 2) { paint(ctx, ENDGRAIN); for (let i = 0; i < 5; i++) rbox(ctx, [0.3 + rnd() * 0.4, 0.015, (rnd() - 0.5) * 0.6], 0.08, 0.02, 0.05, rnd() * 180); }
   });
-  // lantern on a post
-  const lp = p.post ?? [3.0, -1.2];
-  withXF([lp[0], 0, lp[1]], 0, () => {
-    paint(ctx, "wood"); box(ctx, 0, 0, 0, 0.1, 1.8, 0.1); rbox(ctx, [-0.2, 1.72, 0], 0.45, 0.07, 0.07);
-    if (lod <= 3) { metal(ctx, IRON); cyl(ctx, [-0.36, 1.69, 0], [-0.36, 1.55, 0], 0.01, 0.01, 3, 0); lanternHead(ctx, [-0.36, 1.2, 0], lod, 1.3); }
-  });
   // a tin mug and a kettle-stone
   if (lod <= 2) {
     paint(ctx, "stone"); blob(ctx, [0.9, 0.08, 1.0], 0.2, 0.1, 0.18, 6, 3);
     metal(ctx, "oklch(0.72 0.02 230)", 0.6, 0.4); cyl(ctx, [0.9, 0.17, 1.0], [0.9, 0.28, 1.0], 0.045, 0.045, 7, 2);
   }
 }
+function campPost(ctx, p, lod) {
+  const lp = p.post ?? [3.0, -1.2];
+  withXF([lp[0], 0, lp[1]], 0, () => {
+    paint(ctx, "wood"); box(ctx, 0, 0, 0, 0.1, 1.8, 0.1); rbox(ctx, [-0.2, 1.72, 0], 0.45, 0.07, 0.07);
+    if (lod <= 3) { metal(ctx, IRON); cyl(ctx, [-0.36, 1.69, 0], [-0.36, 1.55, 0], 0.01, 0.01, 3, 0); lanternHead(ctx, [-0.36, 1.2, 0], lod, 1.3); }
+  });
+}
 function campCollider(ctx, p) {
   cyl(ctx, [0, 0, 0], [0, 0.25, 0], 0.78, 0.7, 8, 3);
   for (const a of p.seats ?? [85, 175, 310]) rbox(ctx, [2.25 * Math.cos(a * D), 0.21, 2.25 * Math.sin(a * D)], 1.3, 0.42, 0.42, -a + 90 + (a % 2 ? 4 : -4));
-  const wp = p.woodpile ?? [-3.95, -1.5, 70]; rbox(ctx, [wp[0], 0.35, wp[1]], 1.45, 0.7, 0.55, wp[2]);
-  const st = p.stump ?? [-2.3, 2.75]; cyl(ctx, [st[0], 0, st[1]], [st[0], 0.42, st[1]], 0.33, 0.3, 6, 3);
+  if (p.props !== false) {
+    const wp = p.woodpile ?? [-3.95, -1.5, 70]; rbox(ctx, [wp[0], 0.35, wp[1]], 1.45, 0.7, 0.55, wp[2]);
+    const st = p.stump ?? [-2.3, 2.75]; cyl(ctx, [st[0], 0, st[1]], [st[0], 0.42, st[1]], 0.33, 0.3, 6, 3);
+  }
   const lp = p.post ?? [3.0, -1.2]; rbox(ctx, [lp[0], 0.9, lp[1]], 0.12, 1.8, 0.12);
 }
 // ---------- tent (A-frame, opening to −Z) ----------
@@ -525,7 +532,7 @@ function lantern(ctx, p, lod) {
 function stones(ctx, p, lod) {
   const pts = p.points ?? [], rnd = () => ctx.random(), n = lod <= 2 ? 7 : 5;
   for (const [x, z] of pts) {
-    const r = 0.22 + rnd() * 0.1, c = [x, 0.05, z], v = [];
+    const r = (p.r ?? 0.22) + rnd() * 0.1, c = [x, 0.05, z], v = [];
     for (let i = 0; i < n; i++) { const a = (i / n) * 6.283 + rnd() * 0.3, rr = r * (0.8 + rnd() * 0.35); v.push([x + Math.cos(a) * rr, 0.05, z + Math.sin(a) * rr]); }
     paint(ctx, "stone", jitColor(ctx, 0.93, 0.01, 80, 0.08, 20));
     for (let i = 0; i < n; i++) { const a = v[i], b = v[(i + 1) % n]; triOut(ctx, c, a, b, [0, 1, 0]); if (lod <= 3) quadOut(ctx, [a[0], -0.02, a[2]], [b[0], -0.02, b[2]], b, a, [(a[0] + b[0]) / 2 - x, 0, (a[2] + b[2]) / 2 - z]); }
