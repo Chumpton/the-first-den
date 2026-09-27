@@ -3621,6 +3621,38 @@ home-portal-stonework/home-portal-lantern-right:
     parent: home-portal-stonework
     rotation: 0
   template: templates/home-portal-stonework.js#lantern
+horizon-hills:
+  castShadow: false
+  feetPosition: {x: 0, y: 0.3, z: 20}
+  id: horizon-hills
+  material: {kind: scripted, params: {hazeDist: 1400, hazeFar: 0.5, hazeLow: 0.22, hazeTop: 140}, script: scripts/material-far-range.js}
+  primitive: {kind: scripted, params: {amp: 62, base: 14, gaps: [[-16.5, 12, 28], [-161, 14, 30]], layer: hills, r0: 500, r1: 650}, script: scripts/gen/horizon-ring.js, seed: 11}
+  receiveShadow: false
+  tags: [horizon]
+  visibleRange: {max: 3000}
+horizon-mist:
+  castShadow: false
+  feetPosition: {x: 0, y: 0.2, z: 20}
+  id: horizon-mist
+  primitive: {kind: scripted, params: {banks: [[-442, -101, 70, 25, 13, -103], [328, -209, 77, 32, 11, -238], [-392, 145, 89, 24, 13, -70], [-258, -300, 104, 27, 14, -139], [-377, -231, 83, 30, 12, -121], [289, -377, 82, 32, 13, -217], [-196, 351, 85, 35, 15, -29], [374, 280, 62, 35, 13, 53], [32, 447, 70, 29, 14, 4], [333, -27, 66, 32, 10, -265], [-321, -98, 95, 28, 10, -107], [247, 380, 93, 25, 11, 33]]}, script: scripts/gen/mist-banks.js}
+  receiveShadow: false
+  tags: [horizon]
+  visibleRange: {max: 2000}
+horizon-peaks:
+  castShadow: false
+  feetPosition: {x: 0, y: 0.3, z: 20}
+  id: horizon-peaks
+  material: {kind: scripted, params: {hazeDist: 1500, hazeFar: 0.55, hazeLow: 0.3, hazeTop: 420}, script: scripts/material-far-range.js}
+  primitive: {kind: scripted, params: {amp: 230, base: 40, gaps: [[-16.5, 12, 28], [-161, 14, 30]], layer: peaks, r0: 630, r1: 870}, script: scripts/gen/horizon-ring.js, seed: 23}
+  receiveShadow: false
+  tags: [horizon]
+  visibleRange: {max: 3500}
+horizon-reeds:
+  feetPosition: {x: 0, y: {terrain: 0}, z: 20}
+  id: horizon-reeds
+  scatter: {bounds: {innerRadius: 150, outerRadius: 560, shape: ring}, count: 9000, filter: {materials: [mud], maxSlope: 0.4}, seed: 41, templates: [{castShadow: false, primitive: {kind: scripted, params: {height: 1.9, kind: reed}, script: scripts/gen/forest-plant.js}, visibleRange: {max: 260}, weight: 3}, {castShadow: false, primitive: {kind: scripted, params: {height: 2.5, kind: reed}, script: scripts/gen/forest-plant.js}, visibleRange: {max: 260}, weight: 1}], variation: {scale: [1.2, 2.2], yaw: [0, 360]}}
+  tags: [horizon]
+  visibleRange: {max: 700}
 house-birdbath:
   feetPosition: {x: -1.95, y: {terrain: 0}, z: -12.9}
   id: house-birdbath
