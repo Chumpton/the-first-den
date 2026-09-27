@@ -1,0 +1,96 @@
+# The town square's crowd: every number scripts/town-crowd.js reads. A new townsperson is one roster row.
+fountain: {x: 0, z: 100, rimR: 5.1, sitR: 5.5, avoidR: 6.8}
+bounds: {x0: -19, x1: 19, z0: 81, z1: 119}
+stalls:                      # stall footprints the walkers route around (the square lane's stalls)
+  - {x: -13, z: 100, w: 4, d: 3}
+  - {x: 13, z: 100, w: 4, d: 3}
+visibleRange: 160
+turnRate: 7                  # heading ease per second
+reach: 4                     # E-press: the townsperson nearest the presser within this many m answers
+pressSecs: 3.5
+models:
+  rikki: {model: cdn/value.4e8cfc46aa686457318bd415e398a96e69d57ec5cacb0ad4d18f00a2cdbd4bed.png.glb, layout: {maxExtents: {y: 1.85}, minExtents: {y: 1.85}}}
+  campton: {model: "https://www.spawn.co/magic/character-character-54ug69f6.glb?animations=Idle,Walk,Run"}
+audio:
+  murmur: {clip: /cdn/moodboard-lowpoly-cozy/sfx-town-square-crowd-murmur-loop.mp3, gain: 0.15, loop: true, spatial: true, maxDistance: 40}
+  busker: {clip: /cdn/moodboard-lowpoly-cozy/sfx-busker-lute-strumming-loop.mp3, gain: 0.22, loop: true, spatial: true, maxDistance: 18}
+walk:
+  speed: [1.1, 1.5]
+  kidSpeed: [1.4, 1.8]
+  kidRun: 3.6
+  kidRunChance: 0.35
+  restSecs: [2, 7]
+  gestureChance: 0.35
+  gestures: [cdn/clip-point.glb, cdn/clip-shrug.glb, cdn/clip-waving-single-hand-loop.glb, cdn/clip-nod-yes.glb]
+  gestureSecs: 2.4
+  clearR: 7.5                # goals stay this far from the fountain
+  spotClear: 2.5             # and this far from chat groups / the busker
+  stuckSecs: 2
+tag:
+  r: 8.6
+  wobble: 0.9
+  lead: 0.45                 # radians of circle ahead a runner steers at
+  run: 3.5
+  flee: 4.3
+  fleeDist: 4.5
+  chase: 4.4
+  directDist: 5              # the chaser cuts straight at a runner this close
+  tagDist: 1.2
+  freezeSecs: 1.6            # the new "it" counts before chasing
+  flipChance: 0.35
+  cry: "Tag! You're it!"
+groups:
+  g1: {at: [-10, 86], r: 0.85}
+  g2: {at: [9, 114], r: 1.0}
+chat:
+  secs: [2.5, 6]
+  clips: [cdn/clip-talk-loop.glb, cdn/clip-talk-loop.glb, null, cdn/clip-laugh-loop.glb, cdn/clip-nod-yes.glb, cdn/clip-shrug.glb, null]
+sit:
+  secs: [4, 10]
+  clips: [cdn/clip-sit-loop.glb, cdn/clip-sitting-talking-loop.glb, cdn/clip-sit-loop.glb, cdn/clip-sitting-laughing-loop.glb, cdn/clip-sitting-clapping-loop.glb]
+vendor:
+  secs: [3, 7]
+  clips: [cdn/clip-talk-loop.glb, null, cdn/clip-waving-single-hand-loop.glb, cdn/clip-point.glb, null]
+  callRange: 6
+  callEverySecs: 30
+  calls: ["Fresh bread, still warm!", "Apples from the orchard!", "Come have a look!"]
+busker:
+  secs: [5, 9]
+  clips: [cdn/clip-step-hip-hop-dance-loop.glb, cdn/clip-clap-loop.glb, cdn/clip-wave-hip-hop-dance-loop.glb, cdn/clip-cheer-loop.glb]
+lines:
+  - "Lovely day for it, isn't it?"
+  - "Have you seen the dragon on the tower? Sleeps all day!"
+  - "The fountain's water comes all the way from the hills."
+  - "Welcome to town, friend!"
+  - "Mind the little ones, they never stop running."
+  - "Try the honey cakes at the stall. Trust me."
+  - "The clock tower bell rings on the hour."
+  - "I walked here from Hearthmere. Worth every step."
+  - "Nice to see a new face around the square."
+  - "If you're lost, the den's just down the lane."
+  - "The busker knows three songs. I've heard them all today."
+  - "Stay a while, the benches are warm in the sun."
+kidLines: ["You can't catch me!", "Wanna play tag?", "I saw the dragon blink!"]
+roster:
+  # adults
+  - {id: crowd-pip, model: campton, name: Pip, role: busker, at: [4.5, 84.5], face: [0, 100], scale: 1.0, audio: busker}
+  - {id: crowd-marta, model: rikki, name: Marta, role: vendor, at: [-15.2, 100], face: [0, 100], scale: 0.98}
+  - {id: crowd-bram, model: campton, name: Bram, role: vendor, at: [15.2, 100], face: [0, 100], scale: 1.04}
+  - {id: crowd-a1, model: rikki, role: chat, group: g1, slot: 0, scale: 0.96}
+  - {id: crowd-a2, model: campton, role: chat, group: g1, slot: 180, scale: 1.02}
+  - {id: crowd-wren, model: rikki, name: Wren, role: chat, group: g2, slot: 90, scale: 0.95}
+  - {id: crowd-a4, model: campton, role: chat, group: g2, slot: 210, scale: 1.05}
+  - {id: crowd-a5, model: rikki, role: chat, group: g2, slot: 330, scale: 1.0}
+  - {id: crowd-a6, model: campton, role: sit, angle: -112, scale: 0.97}
+  - {id: crowd-a7, model: rikki, role: sit, angle: -72, scale: 0.99}
+  - {id: crowd-a8, model: rikki, role: walk, at: [-16, 112], scale: 1.01}
+  - {id: crowd-a9, model: campton, role: walk, at: [15, 88], scale: 0.95}
+  - {id: crowd-a10, model: rikki, role: walk, at: [-4, 118], scale: 0.97}
+  - {id: crowd-a11, model: campton, role: walk, at: [12, 118], scale: 1.03}
+  # kids
+  - {id: crowd-tobi, model: campton, name: Tobi, kid: true, role: tag, angle: 0, scale: 0.62}
+  - {id: crowd-k2, model: rikki, kid: true, role: tag, angle: 120, scale: 0.6}
+  - {id: crowd-k3, model: campton, kid: true, role: tag, angle: 240, scale: 0.64}
+  - {id: crowd-k4, model: rikki, kid: true, role: walk, at: [-12, 84], scale: 0.62}
+  - {id: crowd-k5, model: campton, kid: true, role: walk, at: [10, 92], scale: 0.6}
+  - {id: crowd-k6, model: rikki, kid: true, role: sit, angle: -40, scale: 0.63}
