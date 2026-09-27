@@ -1,0 +1,8 @@
+{
+  "note": "Main roads: one cubic Bezier each (P0 gate, P1/P2 controls, P3 city approach). Layout: fence 1 m outside the 8 m road, posts every 3 m; lanterns every 24 m alternating sides.",
+  "width": 8, "fenceOffset": 5, "postStep": 3, "fenceRun": 99, "lampStep": 24, "lampFirst": 12, "lampOffset": 4.6, "lampRun": 96, "startGap": 10, "endGap": 8,
+  "roads": {
+    "east": { "bez": [[0, 10], [300, 10], [542, -203], [920, -235]], "bridges": ["bridge-e0", "bridge-e1"] },
+    "west": { "bez": [[0, 10], [-800, 10], [-609, -262], [-830, -465]], "bridges": ["bridge-w0", "bridge-w1", "bridge-w2"] }
+  }
+}
