@@ -3988,7 +3988,7 @@ horizon-hills:
   castShadow: false
   feetPosition: {x: 0, y: 0.3, z: 20}
   id: horizon-hills
-  material: {kind: scripted, params: {hazeDist: 1400, hazeFar: 0.5, hazeLow: 0.22, hazeTop: 140}, script: scripts/material-far-range.js}
+  material: {kind: scripted, params: {hazeDist: 1400, hazeFar: 0.5, hazeLow: 0.42, hazeTop: 120}, script: scripts/material-far-range.js}
   primitive: {kind: scripted, params: {amp: 62, base: 14, gaps: [[-16.5, 12, 28], [-161, 14, 30]], layer: hills, r0: 500, r1: 650}, script: scripts/gen/horizon-ring.js, seed: 11}
   receiveShadow: false
   tags: [horizon]
@@ -4005,7 +4005,7 @@ horizon-peaks:
   castShadow: false
   feetPosition: {x: 0, y: 0.3, z: 20}
   id: horizon-peaks
-  material: {kind: scripted, params: {hazeDist: 1500, hazeFar: 0.55, hazeLow: 0.3, hazeTop: 420}, script: scripts/material-far-range.js}
+  material: {kind: scripted, params: {hazeDist: 1500, hazeFar: 0.55, hazeLow: 0.62, hazeTop: 280}, script: scripts/material-far-range.js}
   primitive: {kind: scripted, params: {amp: 230, base: 40, gaps: [[-16.5, 12, 28], [-161, 14, 30]], layer: peaks, r0: 630, r1: 870}, script: scripts/gen/horizon-ring.js, seed: 23}
   receiveShadow: false
   tags: [horizon]
