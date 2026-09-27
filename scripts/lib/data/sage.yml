@@ -64,7 +64,7 @@ greet:
   notice: 9
   leave: 14
   hold: 8
-  stay: 6
+  stay: 8
   glide: 1.4
   max: 2
   again: 60
