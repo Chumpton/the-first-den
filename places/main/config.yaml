@@ -179,6 +179,8 @@ terrain:
     town-lane: {clearScatter: true, edgeMaterial: gravel, falloff: 3.5, grade: true, kind: path, material: cobblepale, noise: 0.5, points: [[0, 12], [0, 80]], width: 7}
     town-square: {center: {x: 0, z: 100}, edgeMaterial: gravel, falloff: 4, height: 0.55, kind: flatten, material: cobblepale, shape: {depth: 46, kind: rectangle, width: 46}}
     town-clear: {center: {x: 0, z: 110}, kind: clear-scatter, shape: {depth: 70, kind: rectangle, width: 80}}
+    garden-flat: {center: {x: 57, z: -26}, falloff: 3, height: 0.5, kind: flatten, material: yard, shape: {kind: path, points: [[43, -26], [71, -26]], width: 26}}
+    garden-clear: {center: {x: 57, z: -26}, kind: clear-scatter, shape: {kind: path, points: [[41, -26], [73, -26]], width: 30}}
   decorations:
     settings: {enabled: true, budget: 75000, maxDistance: 420, fadeDistance: 25}
     bindings:

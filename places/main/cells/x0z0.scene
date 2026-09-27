@@ -2749,6 +2749,13 @@ fox-meadow:
   state: {home: {x: 30, z: 32}, mode: idle, range: 20, scale: 1, sp: fox, until: 0, yaw: 105}
   tags: [fauna-ground, interactable, animal, fox]
   visibleRange: {max: 180}
+garden-beds-bp:
+  feetPosition: {x: 58, y: 0.5, z: -22}
+  id: garden-beds-bp
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 11, height: 0.5, kind: box, width: 26}
+  tags: [blueprint]
 garden-gazebo:
   castShadow: true
   children: [{feetPosition: {x: 0, y: 1.85, z: 0}, id: lamp, light: {color: oklch(0.85 0.1 70), distance: 9, intensity: 6, kind: point}}]
@@ -2774,6 +2781,13 @@ garden-gazebo/gazebo-bloom:
   primitive: {kind: scripted, script: scripts/gen/gazebo-bloom.js, seed: 5}
   tags: [garden, flora]
   visibleRange: {max: 140}
+garden-greenhouse:
+  feetPosition: {x: 58, y: 0.5, z: -33}
+  id: garden-greenhouse
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 7, height: 3.6, kind: box, width: 24}
+  tags: [blueprint]
 garden-paths:
   feetPosition: {x: 0, y: 0.5, z: -40}
   id: garden-paths
@@ -2783,6 +2797,20 @@ garden-paths:
   receiveShadow: true
   tags: [garden, garden-paths]
   visibleRange: {max: 180}
+garden-pump:
+  feetPosition: {x: 44.5, y: 0.5, z: -27}
+  id: garden-pump
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 1, height: 1.6, kind: box, width: 1}
+  tags: [blueprint]
+garden-seeds:
+  feetPosition: {x: 44.5, y: 0.5, z: -19.5}
+  id: garden-seeds
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 1.6, height: 2.4, kind: box, width: 3}
+  tags: [blueprint]
 garden-shed:
   castShadow: true
   children: [{feetPosition: {x: 0, y: 1.9, z: 0}, id: lamp, light: {color: oklch(0.85 0.1 70), distance: 6, intensity: 4, kind: point}}]
