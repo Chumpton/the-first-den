@@ -56,7 +56,7 @@ function interior(D) {
   B("plank", [-ix, 0, -iz, ix, 0.12, iz], true); B("plank", [-DOOR, 0, -d / 2 - 0.02, DOOR, 0.12, -iz], true);
   for (const x of [-ix * 0.5, 0, ix * 0.5]) B("darkwood", [x - 0.12, H - 0.3, -iz, x + 0.12, H - (F > 1 ? 0 : 0.05), iz]);
   if (kind === "tavern") {
-    B("stone", [-1.2, 0.12, iz - 0.85, 1.2, 1.5, iz], true); B("soot", [-0.62, 0.18, iz - 0.87, 0.62, 0.95, iz - 0.84]);
+    B("stone", [-1.2, 0.12, iz - 0.85, -0.6, 1.5, iz], true); B("stone", [0.6, 0.12, iz - 0.85, 1.2, 1.5, iz], true); B("stone", [-0.6, 0.12, iz - 0.25, 0.6, 1.5, iz], true); B("stone", [-0.6, 1.0, iz - 0.85, 0.6, 1.5, iz - 0.25]); B("soot", [-0.6, 0.12, iz - 0.27, 0.6, 1.0, iz - 0.25]); B("stone", [-0.6, 0.12, iz - 0.85, 0.6, 0.16, iz - 0.25]);
     B("darkwood", [-1.4, 1.5, iz - 1.0, 1.4, 1.64, iz - 0.5]); B("stone", [-0.85, 1.64, iz - 0.62, 0.85, H, iz]);
     B("darkwood", [ix - 2.1, 0.12, -1.6, ix - 1.55, 1.05, 2.4], true); B("timber", [ix - 2.25, 1.05, -1.7, ix - 1.45, 1.12, 2.5]);
     for (const z of [-0.9, 0.5, 1.9]) { C("darkwood", [ix - 0.55, z], [0.12, 1.05], [0.42, 0.42], true, 8); C("iron", [ix - 0.55, z], [0.3, 0.38], [0.44, 0.44], false, 8); C("iron", [ix - 0.55, z], [0.8, 0.88], [0.44, 0.44], false, 8); }
