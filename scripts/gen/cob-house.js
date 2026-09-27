@@ -335,6 +335,7 @@ function build(ctx, collide) {
     stone(); obox(ctx, [n[0] * (AO + 0.22), 0, n[2] * (AO + 0.22)], t, n, H.doorW + 0.6, 0.27, 0.44);
     obox(ctx, [n[0] * (AO + 0.66), 0, n[2] * (AO + 0.66)], t, n, H.doorW + 0.9, 0.13, 0.44);
   }
+  if (collide) portico(ctx, 1, true);
   roof(ctx, lod, collide);
   if (!collide) { ctx.albedo(TX.bark); ctx.color("#8b7a66"); ctx.roughness(0.95); }
   trunk(ctx, lod, collide);
@@ -345,32 +346,9 @@ function build(ctx, collide) {
     const { n, t } = faceFrame(k), Lo = AO * TAN30, o = AO + 0.9, Lx = o * TAN30;
     Q(ctx, [n[0] * AO - t[0] * Lo, 0.06, n[2] * AO - t[2] * Lo], [n[0] * AO + t[0] * Lo, 0.06, n[2] * AO + t[2] * Lo], [n[0] * o + t[0] * Lx, 0.06, n[2] * o + t[2] * Lx], [n[0] * o - t[0] * Lx, 0.06, n[2] * o - t[2] * Lx], [0, 1, 0]);
     Q(ctx, [n[0] * o - t[0] * Lx, -0.3, n[2] * o - t[2] * Lx], [n[0] * o + t[0] * Lx, -0.3, n[2] * o + t[2] * Lx], [n[0] * o + t[0] * Lx, 0.06, n[2] * o + t[2] * Lx], [n[0] * o - t[0] * Lx, 0.06, n[2] * o - t[2] * Lx], n);
-    const pa = AO + 0.07, Lp = pa * TAN30;
-    Q(ctx, [n[0] * pa - t[0] * Lp, 0.06, n[2] * pa - t[2] * Lp], [n[0] * pa + t[0] * Lp, 0.06, n[2] * pa + t[2] * Lp], [n[0] * pa + t[0] * Lp, 0.36, n[2] * pa + t[2] * Lp], [n[0] * pa - t[0] * Lp, 0.36, n[2] * pa - t[2] * Lp], n);
-    Q(ctx, [n[0] * pa - t[0] * Lp, 0.36, n[2] * pa - t[2] * Lp], [n[0] * pa + t[0] * Lp, 0.36, n[2] * pa + t[2] * Lp], [n[0] * AO + t[0] * Lo, 0.36, n[2] * AO + t[2] * Lo], [n[0] * AO - t[0] * Lo, 0.36, n[2] * AO - t[2] * Lo], [0, 1, 0]);
+    wainscot(ctx, k, lod);
   }
-  // timber: lintels over every opening, door frames, window sills with flower boxes, glass
-  for (let k = 0; k < 6; k++) {
-    const { n, t } = faceFrame(k);
-    for (const h of holesFor(k)) {
-      beams();
-      const c = [n[0] * (AO + 0.02), h.y1, n[2] * (AO + 0.02)];
-      obox(ctx, c, t, n, h.w + 0.5, 0.24, 0.14);
-      if (h.door) { for (const s of [-1, 1]) obox(ctx, [c[0] + t[0] * s * (h.w / 2 + 0.06), h.y0, c[2] + t[2] * s * (h.w / 2 + 0.06)], t, n, 0.12, h.y1 - h.y0, 0.12); continue; }
-      obox(ctx, [n[0] * (AO + 0.05), h.y0 - 0.08, n[2] * (AO + 0.05)], t, n, h.w + 0.2, 0.08, 0.2);
-      if (lod < 3) { for (const s of [-1, 1]) obox(ctx, [n[0] * (AO - 0.18), h.y0, n[2] * (AO - 0.18)].map((v, i) => i === 1 ? v : v + (i === 0 ? t[0] : t[2]) * s * (h.w / 2 - 0.03)), t, n, 0.06, h.y1 - h.y0, 0.07); obox(ctx, [n[0] * (AO - 0.18), (h.y0 + h.y1) / 2 - 0.03, n[2] * (AO - 0.18)], t, n, h.w, 0.06, 0.07); }
-      ctx.albedo(null); ctx.color("oklch(0.88 0.03 220)", 0.28); ctx.roughness(0.05); ctx.metalness(0.1);
-      const g = AO - 0.2, a = [n[0] * g + t[0] * (-h.w / 2), 0, n[2] * g + t[2] * (-h.w / 2)], b = [n[0] * g + t[0] * (h.w / 2), 0, n[2] * g + t[2] * (h.w / 2)];
-      Q(ctx, [a[0], h.y0, a[2]], [b[0], h.y0, b[2]], [b[0], h.y1, b[2]], [a[0], h.y1, a[2]], n);
-      ctx.metalness(0);
-      if (h.y0 < H.A && lod < 3) {
-        // flower box under the ground-floor windows
-        beams(); obox(ctx, [n[0] * (AO + 0.22), h.y0 - 0.38, n[2] * (AO + 0.22)], t, n, h.w + 0.1, 0.28, 0.3);
-        ctx.albedo(null);
-        for (let f = 0; f < 9; f++) { const u = -h.w / 2 + (f + 0.5) * h.w / 9, x = n[0] * (AO + 0.22) + t[0] * u, z = n[2] * (AO + 0.22) + t[2] * u; blob(ctx, x, h.y0 - 0.05, z, 0.09, 0.08, 0.09, 4, [f % 3 === 0 ? "#d9485f" : f % 3 === 1 ? "#f2c14e" : "#b06bd6", "#4f8a3c"]); }
-      }
-    }
-  }
+  windows(ctx, lod, beams);
   // ivy climbing the west faces
   if (lod < 3) {
     ctx.albedo(null);
@@ -390,21 +368,11 @@ function build(ctx, collide) {
     obox(ctx, c, t, n, 0.26, H.wallTop - 0.3, 0.26);
     const { n: fn, t: ft } = faceFrame(k);
     obox(ctx, [fn[0] * (AO + 0.05), H.A - 0.2, fn[2] * (AO + 0.05)], ft, fn, 2 * AO * TAN30, 0.22, 0.14);
-    for (const h of holesFor(k)) {
-      if (h.door || h.y0 > H.A || lod >= 3) continue;
-      ctx.albedo(TX.timber); ctx.color("oklch(0.55 0.08 150)"); ctx.roughness(0.8);
-      for (const sgn of [-1, 1]) {
-        const u = h.u + sgn * (h.w / 2 + 0.24), c2 = [fn[0] * (AO + 0.06) + ft[0] * u, h.y0 - 0.02, fn[2] * (AO + 0.06) + ft[2] * u];
-        obox(ctx, c2, ft, fn, 0.42, h.y1 - h.y0 + 0.04, 0.05);
-        beams(); for (const yy of [0.25, 0.75]) obox(ctx, [c2[0] + fn[0] * 0.03, c2[1] + (h.y1 - h.y0) * yy, c2[2] + fn[2] * 0.03], ft, fn, 0.36, 0.05, 0.02);
-        ctx.albedo(TX.timber); ctx.color("oklch(0.55 0.08 150)");
-      }
-      beams();
-    }
   }
   for (const k of [1, 4]) {
     const { n, t } = faceFrame(k), y = H.G + H.doorH + 0.35;
     beams();
+    if (k === 1) portico(ctx, lod, false, stone, beams); else {
     for (const sgn of [-1, 1]) beam(ctx, [n[0] * AO + t[0] * sgn * 1.05, y - 0.7, n[2] * AO + t[2] * sgn * 1.05], [n[0] * (AO + 1.1) + t[0] * sgn * 1.05, y, n[2] * (AO + 1.1) + t[2] * sgn * 1.05], 0.12, 0.12);
     const e0 = [n[0] * AO, y + 0.45, n[2] * AO], e1 = [n[0] * (AO + 1.35), y - 0.05, n[2] * (AO + 1.35)];
     const P = (e, u) => [e[0] + t[0] * u, e[1], e[2] + t[2] * u];
@@ -412,6 +380,7 @@ function build(ctx, collide) {
     ctx.albedo(TX.turf); ctx.color("oklch(0.93 0.05 130)"); ctx.roughness(1);
     const up = 0.1; Q(ctx, P([e0[0], e0[1] + up, e0[2]], -1.3), P([e0[0], e0[1] + up, e0[2]], 1.3), P([e1[0], e1[1] + up, e1[2]], 1.3), P([e1[0], e1[1] + up, e1[2]], -1.3), [n[0] * 0.35, 1, n[2] * 0.35]);
     beams(); Q(ctx, P([e1[0], e1[1], e1[2]], -1.3), P(e1, 1.3), P([e1[0], e1[1] + up, e1[2]], 1.3), P([e1[0], e1[1] + up, e1[2]], -1.3), n);
+    }
     // a lantern either side of the door
     for (const sgn of [-1, 1]) {
       const c = [n[0] * (AO + 0.18) + t[0] * sgn * 1.25, H.G + 1.75, n[2] * (AO + 0.18) + t[2] * sgn * 1.25];
@@ -428,6 +397,118 @@ function build(ctx, collide) {
   const sx = Math.cos(150 * D2R) * 4.1, sz = Math.sin(150 * D2R) * 4.1;
   box(ctx, sx - 0.13, 6.0, sz - 0.13, sx + 0.13, 8.4, sz + 0.13); box(ctx, sx - 0.24, 8.4, sz - 0.24, sx + 0.24, 8.5, sz + 0.24);
   ctx.metalness(0);
+}
+// ---- exterior dressing that reads from the path (lod <= 3) ----
+const TX2 = { shingle: "cdn/texture-weathered-cedar-shingle-roof.png", mat: "cdn/texture-woven-jute-doormat-herringbone.png" };
+const atF = (n, t, u, v, y) => [n[0] * v + t[0] * u, y, n[2] * v + t[2] * u];
+// river-rock wainscot: two courses of proud fieldstones and a coped ledge along the foot of every face
+function wainscot(ctx, k, lod) {
+  const { n, t } = faceFrame(k), L = AO * TAN30 - 0.14, door = k === 1 || k === 4, gapW = H.doorW / 2 + 0.5;
+  const spans = door ? [[-L, -gapW], [gapW, L]] : [[-L, L]];
+  ctx.albedo(TX.stone); ctx.roughness(0.95); ctx.metalness(0);
+  if (lod >= 3) {
+    ctx.color("oklch(0.8 0.02 70)");
+    for (const [u0, u1] of spans) obox(ctx, atF(n, t, (u0 + u1) / 2, AO + 0.035, 0), t, n, u1 - u0, 0.46, 0.07);
+  } else {
+    const cols = ["oklch(0.8 0.02 70)", "oklch(0.7 0.03 55)", "oklch(0.86 0.015 90)", "oklch(0.68 0.02 240)", "oklch(0.76 0.035 45)", "oklch(0.62 0.02 60)"];
+    for (const [u0, u1] of spans) for (const [ry, rh, off] of [[0.03, 0.22, 0], [0.26, 0.2, 0.2]]) {
+      let u = u0 + off * ctx.random();
+      while (u < u1 - 0.12) {
+        const w = Math.min(u1 - u, 0.32 + ctx.random() * 0.32), c = u + w / 2; u += w + 0.025;
+        const h = rh * (0.78 + ctx.random() * 0.22), dd = 0.12 + ctx.random() * 0.04;
+        ctx.color(cols[Math.floor(ctx.random() * cols.length)]);
+        obox(ctx, atF(n, t, c, AO + 0.075 - dd / 2, ry + (rh - h) / 2), t, n, w, h, dd);
+      }
+    }
+  }
+  ctx.color("oklch(0.9 0.015 80)");
+  for (const [u0, u1] of spans) {
+    obox(ctx, atF(n, t, (u0 + u1) / 2, AO + 0.04, 0.46), t, n, u1 - u0, 0.06, 0.14);
+    obox(ctx, atF(n, t, (u0 + u1) / 2, AO + 0.02, 0.52), t, n, u1 - u0, 0.03, 0.09);
+  }
+}
+// windows: proud honey-oak frames, walnut lintels, dark warm glass in a deep reveal, sage shutters swung open, flower boxes
+function windows(ctx, lod, beams) {
+  const honey = () => { ctx.albedo(TX.timber); ctx.color("oklch(0.93 0.08 72)"); ctx.roughness(0.8); ctx.metalness(0); ctx.emissive(null); };
+  const walnut = () => { ctx.albedo(TX.timber); ctx.color("oklch(0.6 0.07 50)"); ctx.roughness(0.8); ctx.metalness(0); };
+  const sage = () => { ctx.albedo(TX.timber); ctx.color("#b9cca3"); ctx.roughness(0.85); ctx.metalness(0); };
+  const bloom = ["#e8485f", "#f6c945", "#f4f0ea", "#c46be0", "#ff8a4c"], green = "#4f8a3c", SA = 50 * D2R;
+  for (let k = 0; k < 6; k++) {
+    const { n, t } = faceFrame(k), A = (u, v, y) => atF(n, t, u, v, y);
+    for (const h of holesFor(k)) {
+      walnut(); obox(ctx, A(h.u, AO + 0.06, h.y1), t, n, h.w + (h.door ? 0.6 : 0.5), 0.3, 0.24);
+      honey();
+      for (const s of [-1, 1]) obox(ctx, A(h.u + s * (h.w / 2 + 0.06), AO + 0.03, h.door ? h.y0 : h.y0 - 0.02), t, n, 0.12, h.y1 - h.y0 + 0.02, 0.15);
+      if (h.door) continue;
+      obox(ctx, A(h.u, AO + 0.07, h.y0 - 0.1), t, n, h.w + 0.34, 0.1, 0.26);
+      if (lod < 3) { for (const s of [-1, 1]) obox(ctx, A(h.u + s * (h.w / 2 - 0.03), AO - 0.2, h.y0), t, n, 0.06, h.y1 - h.y0, 0.06); obox(ctx, A(h.u, AO - 0.2, (h.y0 + h.y1) / 2 - 0.03), t, n, h.w, 0.06, 0.06); obox(ctx, A(h.u, AO - 0.2, h.y0), t, n, 0.05, h.y1 - h.y0, 0.06); }
+      ctx.albedo(null); ctx.color("oklch(0.34 0.04 62)", 0.72); ctx.roughness(0.06); ctx.metalness(0.3);
+      const g0 = A(h.u - h.w / 2, AO - 0.23, 0), g1 = A(h.u + h.w / 2, AO - 0.23, 0);
+      Q(ctx, [g0[0], h.y0, g0[2]], [g1[0], h.y0, g1[2]], [g1[0], h.y1, g1[2]], [g0[0], h.y1, g0[2]], n);
+      ctx.metalness(0);
+      if (h.y0 > H.A) continue;
+      // shutters, hinged on the frame and swung out 50° from the wall
+      for (const s of [-1, 1]) {
+        const sw = h.w / 2 + 0.03, hinge = A(h.u + s * (h.w / 2 + 0.12), AO + 0.1, 0);
+        const d = [t[0] * s * Math.cos(SA) + n[0] * Math.sin(SA), 0, t[2] * s * Math.cos(SA) + n[2] * Math.sin(SA)], pn = [d[2], 0, -d[0]];
+        const out = pn[0] * n[0] + pn[2] * n[2] > 0 ? pn : [-pn[0], 0, -pn[2]], c = [hinge[0] + d[0] * sw / 2, h.y0 + 0.02, hinge[2] + d[2] * sw / 2];
+        sage(); obox(ctx, c, d, out, sw, h.y1 - h.y0 - 0.04, 0.05);
+        if (lod < 3) { walnut(); for (const f of [0.2, 0.8]) obox(ctx, [c[0] + out[0] * 0.035, c[1] + (h.y1 - h.y0) * f - 0.03, c[2] + out[2] * 0.035], d, out, sw - 0.06, 0.06, 0.025); obox(ctx, [c[0] + out[0] * 0.035, c[1] + 0.1, c[2] + out[2] * 0.035], d, out, 0.05, h.y1 - h.y0 - 0.24, 0.02); }
+      }
+      // flower box, spilling bright blooms
+      walnut(); obox(ctx, A(h.u, AO + 0.2, h.y0 - 0.44), t, n, h.w + 0.16, 0.3, 0.28);
+      ctx.albedo(null); ctx.roughness(0.9);
+      const nb = lod < 3 ? Math.round(h.w * 8) : 3;
+      for (let f = 0; f < nb; f++) { const u = h.u - h.w / 2 + (f + 0.5) * h.w / nb, c = A(u, AO + 0.2 + (f % 2 ? 0.05 : -0.03), 0); blob(ctx, c[0], h.y0 - 0.12 + (f % 2) * 0.04, c[2], 0.13, 0.12, 0.13, 4, [bloom[(f + k) % bloom.length], green]); }
+      if (lod < 3) for (let f = 0; f < 3; f++) { const u = h.u + (f - 1) * h.w * 0.35, c = A(u, AO + 0.36, 0); blob(ctx, c[0], h.y0 - 0.5, c[2], 0.1, 0.16, 0.08, 4, [green, "#3f7a33"]); }
+    }
+  }
+}
+// the front portico: two rustic posts on stone pads 1.8 m out, a beam, a gabled shingle roof, a stone stoop and a mat
+function portico(ctx, lod, collide, stone, beams) {
+  const { n, t } = faceFrame(1), A = (u, v, y) => atF(n, t, u, v, y);
+  const vp = AO + 1.8, up = 1.55, top = H.G + H.doorH + 0.45, bt = top + 0.26, ridge = bt + 0.9, ew = up + 0.5, v0 = AO + 0.02, v1 = vp + 0.42;
+  if (collide) { for (const s of [-1, 1]) obox(ctx, A(s * up, vp, 0), t, n, 0.3, top, 0.3); obox(ctx, A(0, (AO + 0.88 + vp + 0.35) / 2, 0), t, n, 3.8, 0.07, vp + 0.35 - AO - 0.88); return; }
+  ctx.metalness(0);
+  // stoop and mat
+  ctx.albedo(TX.flags); ctx.color("oklch(0.86 0.02 75)"); ctx.roughness(0.9);
+  obox(ctx, A(0, (AO + 0.88 + vp + 0.35) / 2, 0), t, n, 3.8, 0.07, vp + 0.35 - AO - 0.88);
+  ctx.albedo(TX2.mat); ctx.color("oklch(0.9 0.06 78)"); ctx.roughness(1);
+  obox(ctx, A(0, AO + 1.25, 0.07), t, n, 1.25, 0.018, 0.72);
+  ctx.albedo(null); ctx.color("oklch(0.5 0.1 35)");
+  for (const s of [-1, 1]) obox(ctx, A(s * 0.54, AO + 1.25, 0.075), t, n, 0.07, 0.016, 0.66);
+  // pads and posts
+  stone(); ctx.color("oklch(0.8 0.02 70)");
+  for (const s of [-1, 1]) { obox(ctx, A(s * up, vp, 0), t, n, 0.5, 0.2, 0.5); obox(ctx, A(s * up, vp, 0.2), t, n, 0.4, 0.06, 0.4); }
+  ctx.albedo(TX.timber); ctx.color("oklch(0.66 0.07 52)"); ctx.roughness(0.85);
+  for (const s of [-1, 1]) {
+    obox(ctx, A(s * up, vp, 0.26), t, n, 0.26, top - 0.26, 0.26);
+    if (lod < 3) { obox(ctx, A(s * up, vp, 0.26), t, n, 0.32, 0.12, 0.32); obox(ctx, A(s * up, vp, top - 0.14), t, n, 0.32, 0.14, 0.32); }
+    beam(ctx, A(s * up, vp, top - 0.62), A(s * (up - 0.6), vp, top), 0.12, 0.12);
+    beam(ctx, A(s * up, vp, top - 0.62), A(s * up, vp - 0.6, top), 0.12, 0.12);
+    obox(ctx, A(s * up, (AO + vp) / 2 + 0.07, top), t, n, 0.2, 0.24, vp - AO + 0.14);
+  }
+  obox(ctx, A(0, vp, top), t, n, 2 * up + 0.7, 0.26, 0.28);
+  obox(ctx, A(0, AO + 0.08, top), t, n, 2 * up + 0.4, 0.26, 0.16);
+  // gable roof, ridge running out from the wall
+  const R = (u, v, y) => A(u, v, y);
+  for (const s of [-1, 1]) {
+    const r0 = R(0, v0, ridge), r1 = R(0, v1, ridge), e0 = R(s * ew, v0, bt - 0.06), e1 = R(s * ew, v1, bt - 0.06), up3 = [0, 0.1, 0];
+    const lift = (p) => [p[0], p[1] + 0.1, p[2]], nrmS = [t[0] * s * 0.7, 1, t[2] * s * 0.7];
+    ctx.albedo(TX.timber); ctx.color("oklch(0.8 0.05 65)"); ctx.roughness(0.85);
+    Q(ctx, r0, r1, e1, e0, [-nrmS[0], -1, -nrmS[2]]);
+    Q(ctx, e0, e1, lift(e1), lift(e0), [t[0] * s, 0, t[2] * s]);
+    ctx.albedo(TX2.shingle); ctx.color("oklch(0.82 0.05 50)"); ctx.roughness(0.95);
+    Q(ctx, lift(r0), lift(r1), lift(e1), lift(e0), nrmS);
+    if (lod < 3) for (let c = 1; c <= 3; c++) { const f = c / 4, a = [r0[0] + (e0[0] - r0[0]) * f, r0[1] + (e0[1] - r0[1]) * f + 0.12, r0[2] + (e0[2] - r0[2]) * f], b = [r1[0] + (e1[0] - r1[0]) * f, r1[1] + (e1[1] - r1[1]) * f + 0.12, r1[2] + (e1[2] - r1[2]) * f]; beam(ctx, a, b, 0.05, 0.035); }
+    ctx.albedo(TX.timber); ctx.color("oklch(0.6 0.07 50)");
+    beam(ctx, R(s * (ew + 0.02), v1 + 0.02, bt - 0.02), R(0, v1 + 0.02, ridge + 0.1), 0.07, 0.2);
+  }
+  ctx.albedo(TX.timber); ctx.color("oklch(0.6 0.07 50)"); beam(ctx, R(0, v0, ridge + 0.14), R(0, v1 + 0.05, ridge + 0.14), 0.14, 0.1);
+  // gable boards
+  ctx.color("oklch(0.93 0.08 72)");
+  T3(ctx, R(-up - 0.35, vp + 0.15, bt), R(up + 0.35, vp + 0.15, bt), R(0, vp + 0.15, ridge - 0.05), n);
+  if (lod < 3) { ctx.color("oklch(0.6 0.07 50)"); for (const u of [-0.7, 0, 0.7]) obox(ctx, R(u, vp + 0.17, bt), t, n, 0.05, (ridge - bt) * (1 - Math.abs(u) / (up + 0.35)) - 0.05, 0.02); }
 }
 function greenery(ctx) {
   const lod = Number(ctx.lod ?? 1); ctx.flat(); ctx.albedo(null); ctx.roughness(0.95);
