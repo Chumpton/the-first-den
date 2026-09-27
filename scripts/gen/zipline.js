@@ -58,7 +58,7 @@ function landing(ctx, p, f, lod, rnd) {
   oq(ctx, 1.85, 0, Y + 0.08, 1.7, 0.55, 0.5);
   if (lod <= 2) { paint(ctx, 'walnut', 'oklch(0.6 0.06 55)', 0.85); for (const u of [-0.5, 0.5]) oq(ctx, 1.85, u, Y + 0.075, 0.08, 0.565, 0.52); }
   // the iron end post on a limestone footing, its pulley arm, and a guy line to a stake
-  const b = p.b, gB = p.gB, S = [b[0] + f.d[0] * 1.8, p.gS, b[2] + f.d[1] * 1.8];
+  const b = p.b, gB = p.gB, k = p.stake ?? 1.8, S = [b[0] + f.d[0] * k, p.gS, b[2] + f.d[1] * k];
   paint(ctx, 'stone', 'oklch(0.9 0.025 82)', 0.9); obox(ctx, b[0], gB - 0.3, b[2], 0.62, 0.62, 0.62, Math.atan2(-f.d[0], -f.d[1]));
   paint(ctx, null, IRON, 0.5, 0.6); prism(ctx, ngon(lod <= 2 ? 8 : 4, 0.08, b[0], b[2]), gB + 0.3, b[1] + 0.32);
   if (lod <= 2) { gem(ctx, b[0], b[1] + 0.32, b[2], 0.11, 0.18, 0.02, 8); prism(ctx, ngon(8, 0.11, b[0], b[2]), gB + 0.3, gB + 0.42); }
