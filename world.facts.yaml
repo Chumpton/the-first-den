@@ -35,6 +35,7 @@ assets:
     "anim/fox.yml#sniff": clips/anim-fox-yml-sniff-459554f1.json
     "anim/fox.yml#walk": clips/anim-fox-yml-walk-1d210e7e.json
     "anim/golem.yml#look": clips/anim-golem-yml-look-69dc55ff.json
+    "anim/golem.yml#walk": clips/anim-golem-yml-walk-c21b9915.json
     "anim/pollinator.yml#bee-fly": clips/anim-pollinator-yml-bee-fly-5e11c434.json
     "anim/pollinator.yml#bee-sip": clips/anim-pollinator-yml-bee-sip-70efd955.json
     "anim/pollinator.yml#butterfly-fly": clips/anim-pollinator-yml-butterfly-fly-da04c7a7.json
