@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "basedOnSpecVersion": 43,
-  "updatedAt": "2026-09-27T03:02:28.230Z",
-  "summary": "The First Den is currently a sunny, effectively endless forest floor crossed by winding rivers, with the spawn clearing and square door amid procedural woodland. One main place combines generated terrain and multi-layer forest scatter with a sparse set of authored cells; player movement, first-person camera, interaction hooks and a conditional dragon-riding HUD remain wired, while the dragon itself is currently represented only by a blueprint placeholder.",
+  "basedOnSpecVersion": 63,
+  "updatedAt": "2026-09-27T03:14:43.993Z",
+  "summary": "The First Den is a forest home base at the spawn clearing: a three-storey cob house, lake grounds and authored camp/door details sit in terrain shaped by winding rivers and procedural woodland. The main place now also lays long east- and westbound cobbled routes toward Lumenvale and Hearthmere, with authored bridges, waylamps, milestones and rest stops; player movement includes a double-tap flight toggle.",
   "scriptPaths": [
     "scripts/arrival.js",
     "scripts/camera.js",
@@ -22,6 +22,7 @@
     "scripts/gen/castle-decor.js",
     "scripts/gen/castle-furnish.js",
     "scripts/gen/castle-keep.js",
+    "scripts/gen/cob-house.js",
     "scripts/gen/den-blanket.js",
     "scripts/gen/den-catalog.js",
     "scripts/gen/den-curtain.js",
@@ -55,6 +56,8 @@
     "scripts/gen/home-portal-veil.js",
     "scripts/gen/home-sconce.js",
     "scripts/gen/jade-dragon.js",
+    "scripts/gen/road-bridge.js",
+    "scripts/gen/road-dressing.js",
     "scripts/gen/valley-meadow.js",
     "scripts/gen/valley-mesh.js",
     "scripts/gen/valley-outcrop.js",
@@ -95,10 +98,12 @@
     "scripts/lib/home-interaction.js",
     "scripts/lib/portal-path.js",
     "scripts/lib/radio-panel.js",
+    "scripts/lib/road-solid.js",
     "scripts/lighting.js",
     "scripts/look-den.js",
     "scripts/material-den-sway.js",
     "scripts/player.js",
+    "scripts/road-rest.js",
     "scripts/square-door.js",
     "scripts/templates/camera.js",
     "scripts/templates/den-catalog.js",
@@ -135,77 +140,82 @@
     "scripts/ui.js"
   ],
   "places": [
-    "places/main - sole live 3D place; forest-terrain drives the heightmap and river sea mark, with forest decoration layers and authored forest/door/ambience rows",
-    "places/main/cells/x0z0.scene - spawn clearing, square-door assembly, sunbeam effect, forest ambience, forest scatter roots and the jade-dragon blueprint placeholder",
-    "places/main/cells/x-1z0.scene - authored river-sound emitter at the river near the spawn region",
-    "places/main/cells/ - remaining cells carry sparse authored landscape/forest rows around the spawn; x0z-1.scene and x0z1.scene are empty"
+    "places/main - sole live place; forest-terrain heightmap/materials, river and road marks, procedural forest scatter, and authored house/grounds plus distant road cells",
+    "places/main/cells/x0z0.scene - spawn clearing and active cob-house/home grounds, square-door assembly, camp, garden, signpost, ambience and dragon blueprint placeholder",
+    "places/main/cells/ - authored road corridor cells: bridges, lamps, milestones and one roadside rest area; x-1z0.scene also carries the river-sound emitter"
   ],
   "roots": [
-    "world.config.yaml - world entry for default place main, multiplayer, arrival behavior, player/camera, lighting, input and UI render hook",
-    "templates/player.js#player - character root with player movement, humanoid locomotion and home-player-feel behavior",
+    "world.config.yaml - world entry for default place main, multiplayer, player/camera, lighting, input, arrival and UI hooks",
+    "templates/player.js#player - character root with movement, humanoid locomotion and home interaction behaviors",
     "templates/camera.js#camera - custom first-person camera driven by look orientation",
-    "places/main/config.yaml - place runtime root: spawn/gravity, forest heightmap and materials, river mark, clearing and procedural vegetation layers",
-    "places/main/cells/x0z0.scene#square-door - authored portal/door root to the square with approach/passages, framing and sign",
-    "places/main/cells/x0z0.scene#jade-dragon - blueprint box at the west lawn; no jade-dragon behavior or procedural dragon geometry is attached",
-    "places/main/cells/x0z0.scene#sunbeams - follow-camera forest pollen/sunbeam particle effect"
+    "places/main/config.yaml - terrain, spawn/gravity, river/road/clearing/home marks and forest decoration layers",
+    "places/main/cells/x0z0.scene#cob-house - active three-storey cob home generator at the cleared home site",
+    "places/main/cells/x0z0.scene#square-door - authored square portal/door assembly and passage behavior",
+    "places/main/cells/x0z0.scene#road-signpost - authored arms label routes to Lumenvale, Hearthmere and Home",
+    "places/main/cells/x0z0.scene#jade-dragon - blueprint box, not the articulated dragon actor"
   ],
   "shared": [
-    "scripts/forest-terrain.js - place heightAt/materialAt contract for ground, winding water channels and terrain material bands",
-    "scripts/gen/forest-plant.js + scripts/gen/valley-mesh.js - forest vegetation geometry helpers; place layers reuse forest-plant variants",
-    "scripts/lib/data/dragon.js - shared dragon tuning imported by camera, rider helper, clip code and dragon behavior",
-    "scripts/lib/dragon-rider.js - rider-side mount handoff/seat/step-off logic used by scripts/home-player-feel.js",
-    "scripts/lib/home-interaction.js + scripts/lib/data/home-feel.js - interaction search/tuning retained by player feel behavior",
+    "scripts/forest-terrain.js - main place heightAt/materialAt terrain contract, including river channels and material bands",
+    "scripts/gen/forest-plant.js + scripts/gen/valley-mesh.js - procedural vegetation geometry used by forest decoration layers",
+    "scripts/lib/road-solid.js - outward-wound solid/face helpers shared by road bridge and road dressing generators",
+    "scripts/lib/dragon-rider.js + scripts/lib/data/dragon.js - conditional rider handoff and shared dragon tuning used by player feel/camera/dragon integrations",
+    "scripts/lib/home-interaction.js + scripts/lib/data/home-feel.js - shared interaction targeting and tuning for home/player interactions",
+    "scripts/lib/data/player.yml - movement, turning and flight tuning consumed by scripts/player.js",
     "scripts/lib/data/camera.yml - first-person camera tuning consumed by scripts/camera.js"
   ],
   "notableExports": [
-    "scripts/forest-terrain.js - exports GROUND, heightAt(ctx), materialAt(ctx)",
-    "scripts/flat-terrain.js - exports constant-zero heightAt and white materialAt",
-    "scripts/gen/forest-plant.js - exports geometry(ctx), collider(ctx) for broadleaf, sapling, shrub, fern, reed and log",
-    "scripts/gen/jade-dragon.js - exports radiusAt, centreY, skeleton, weightsAt, geometry and collider for the articulated body",
-    "scripts/jade-dragon.js - exports ears, onSpawn, onControlEnd, onInput and update for the dragon actor",
-    "scripts/lib/dragon-clips.js - exports restClip() and flyClip()",
-    "scripts/lib/dragon-rider.js - exports wantMount(ctx,target) and dragonRide(ctx)",
-    "scripts/camera.js - exports finiteNumber and update(ctx,dt); scripts/ui.js - default render function for dragon riding controls"
+    "scripts/forest-terrain.js - exports GROUND, SITES, LAKE, heightAt(ctx), materialAt(ctx)",
+    "scripts/player.js - exports onSpawn(ctx), onInput(ctx,input), update(ctx,dt)",
+    "scripts/gen/cob-house.js - exports HOUSE, geometry(ctx), collider(ctx)",
+    "scripts/gen/road-bridge.js - exports geometry(ctx), collider(ctx)",
+    "scripts/gen/road-dressing.js - exports geometry(ctx), collider(ctx) for lamp, milestone, bench, well, signpost arm",
+    "scripts/lib/road-solid.js - exports Q, T, solid, prism, box, ngon, gem",
+    "scripts/road-rest.js - exports onSpawn(ctx)",
+    "scripts/jade-dragon.js - exports ears, onSpawn, onControlEnd, onInput, update; still conditional, no active actor row"
   ],
   "ownership": [
-    "places/main/config.yaml + scripts/forest-terrain.js - own configured terrain generator/seed/material mapping and derived terrain height and material selection",
-    "places/main/config.yaml - owns forest scatter layer densities, constraints, seeds, variant parameters, river/clearing terrain marks and decoration budget",
-    "places/main/cells/*.scene - own authored row ids, placements, transforms and row state; current jade-dragon row is only a blueprint placeholder",
-    "scripts/player.js - owns player movement input and body velocity/jump behavior; scripts/humanoid-locomotion.js owns locomotion/yaw channels",
-    "scripts/home-player-feel.js + scripts/lib/dragon-rider.js - write player interaction and mount/rider attachment state when a dragon target is present",
-    "scripts/camera.js - writes local camera position/view and hides the local player; dragon seat-eye placement is conditional on controlled target state.kind === 'dragon'",
-    "scripts/jade-dragon.js - if attached to a live actor, owns its mode/rider and flight/landing state; scripts/lib/data/dragon.js owns shared movement, saddle, sound and clip tuning"
+    "places/main/config.yaml + scripts/forest-terrain.js - configured terrain generator/seed/materials and derived terrain height/material selection",
+    "places/main/config.yaml - owns forest scatter and terrain marks, including road corridors, home site and spawn clearing",
+    "places/main/cells/*.scene - own authored scene row ids, placements, transforms, tags and row state; includes active cob-house and authored roadside features",
+    "scripts/player.js + scripts/lib/data/player.yml - own player movement/velocity/jump and flying toggle; per-body last-jump/flying scratch is in ctx.session, flying indicator is mirrored to player state",
+    "scripts/humanoid-locomotion.js - owns player yaw and gait channels; scripts/camera.js owns local camera placement/view and local-player hiding",
+    "scripts/road-rest.js - reads each rest row's state.say/state.sound on press and emits text/audio; cell state supplies the content",
+    "scripts/jade-dragon.js - if attached to a live actor, owns its mode/rider and flight/landing state; current scene has no such actor"
   ],
   "flows": [
-    "places/main/config.yaml terrain.generator + seed -> scripts/forest-terrain.js heightAt/materialAt(ctx) -> engine terrain heightmap and forest/river material bands",
-    "place decorations layers/bindings -> scripts/gen/forest-plant.js variants and valley-tree.js -> seeded canopy, midstory, shrubs, ferns, ground, logs and reeds",
-    "moveX/moveZ and camera aim input -> scripts/player.js -> player movement intent/velocity and jump; place gravity applies to character body",
+    "places/main/config.yaml terrain.generator + seed -> scripts/forest-terrain.js heightAt/materialAt(ctx) -> engine terrain and forest/river material bands",
+    "places/main/config.yaml forest decoration layers -> scripts/gen/forest-plant.js and scripts/gen/valley-tree.js -> seeded forest vegetation variants",
+    "places/main/config.yaml road marks -> terrain cobble corridors and cleared scatter edges; authored road cell rows add bridges and roadside dressing along east/west routes",
+    "moveX/moveZ + camera aim input -> scripts/player.js -> movement intent, velocity and jump; place gravity applies to character body",
+    "jump presses -> scripts/player.js + player.yml flyTapWindow -> double-tap flying toggle, player.state.flying and lift/descend sound; while flying, space/shift control climb",
     "move/look input -> scripts/humanoid-locomotion.js -> player yaw and gait channels",
-    "player body target -> scripts/camera.js -> first-person eye position/view; controlled dragon target instead uses DRAGON.seatEye",
-    "interact input -> scripts/home-player-feel.js + scripts/lib/home-interaction.js -> nearest in-reach/look-aligned interactable press; dragon tags also request mount through dragon-rider.js",
-    "mountWant/rider state <-> scripts/lib/dragon-rider.js and scripts/jade-dragon.js -> dragon assigns rider/control and rider helper seats or steps off; no live dragon behavior row currently receives this flow",
-    "dragon actor mode -> restClip()/flyClip() -> articulated spine animation; scripts/ui.js reads player.controlling.state.kind/mode and shows ride/landing controls only for a dragon",
-    "scene square-door approach/passage triggers -> scripts/square-door.js -> portal link/door behavior and authored sign/frame provide the square transition",
-    "forest-ambience row and x-1z0.scene river-sound row -> spatial/non-spatial Ambience audio playback"
+    "player body -> scripts/camera.js -> first-person eye/view; a controlled dragon conditionally uses DRAGON.seatEye",
+    "interact input -> scripts/home-player-feel.js + scripts/lib/home-interaction.js -> nearest in-range/look-aligned interactable press; dragon tags conditionally request mount via dragon-rider.js",
+    "road-rest row press -> scripts/road-rest.js -> emits row state.say as damage-number text and optionally plays state.sound",
+    "square-door approach/passage triggers -> scripts/square-door.js -> portal link/door transition; authored frame/sign rows provide the assembly",
+    "forest-ambience and x-1z0.scene river-sound rows -> spatial/non-spatial Ambience audio playback",
+    "dragon actor mode -> dragon clips/UI conditional integrations; no live dragon behavior row currently receives this flow"
   ],
   "behaviorFamilies": [
-    "scripts/gen/forest-plant.js + scripts/gen/valley-mesh.js - one procedural forest plant kit reused for canopy broadleaf trees, saplings, shrubs, ferns, reeds and logs, varied by kind, dimensions and seeds",
-    "places/main/config.yaml decoration layers - multi-scale forest scatter, varied by material binding, density, height/slope/water constraints, seed and wind settings; some layers reuse valley-tree.js",
-    "scripts/gen/valley-tree.js + valley-mesh.js + valley-outcrop.js - retained procedural forest tree and authored outcrop families, varied by crown/size/seed",
-    "scripts/jade-dragon.js + scripts/gen/jade-dragon.js + scripts/lib/dragon-clips.js - articulated rideable dragon behavior, procedural body and rest/fly clips; no active scene instance at this version",
-    "scripts/player.js + scripts/humanoid-locomotion.js + scripts/home-player-feel.js - player controls, gait and interaction/rider integration attached by templates/player.js",
-    "scripts/gen/home-architecture-*.js, home-garden-*.js, castle-*.js, den-furniture*.js - legacy reusable building, garden, keep and furnishing families retained in the tree; current cleared spawn scene no longer instantiates the former keep/den layout"
+    "scripts/gen/forest-plant.js + scripts/gen/valley-mesh.js - procedural forest plant kit reused for broadleaf trees, saplings, shrubs, ferns, reeds and logs, varied by kind/dimensions/seed",
+    "places/main/config.yaml decoration layers - multi-scale scatter varied by material binding, density, terrain constraints, seed, wind and range; some layers use valley-tree.js",
+    "scripts/gen/cob-house.js - one authored procedural hexagonal three-storey cob-house geometry/collider, configured as the active spawn home",
+    "scripts/gen/road-bridge.js + scripts/lib/road-solid.js - pale-stone/timber bridge geometry and collider reused for road crossings, varied by length, width and seed",
+    "scripts/gen/road-dressing.js + scripts/lib/road-solid.js - shared roadside geometry/collider builders varied by kind, hue, direction and length; placed as lamps, milestones, rest furnishings and sign arms",
+    "scripts/player.js + scripts/humanoid-locomotion.js + scripts/home-player-feel.js - player movement, gait, interaction and conditional rider integration attached through templates/player.js",
+    "scripts/jade-dragon.js + scripts/gen/jade-dragon.js + scripts/lib/dragon-clips.js - retained articulated rideable dragon family; scene dragon is only a blueprint placeholder"
   ],
   "probableOrphans": [
     "scripts/flat-terrain.js - no current place config selects it; main uses scripts/forest-terrain.js",
-    "scripts/gen/jade-dragon.js - no current scene or template references the generator; dragon row is a blueprint box",
-    "scripts/jade-dragon.js - no current scene row attaches the actor behavior; home-player-feel/camera/UI contain conditional dragon integration only"
+    "scripts/gen/jade-dragon.js - no current scene/template references its geometry; current dragon row is a blueprint box",
+    "scripts/jade-dragon.js - no current scene row attaches the actor behavior; player/camera/UI retain conditional integration only"
   ],
   "migrationNotes": [
-    "forest-terrain.js takes a context object for heightAt/materialAt; places/main uses a river sea mark at y=0, ground around y=0.5 and a flattening clearing centered at (0,-3), height 0.5.",
-    "places/main/config.yaml's forest decoration layers consume the specific terrain material ids litter, moss, mud and pebbles; preserve layer bindings and terrain return ids together.",
-    "The previous five-floor keep/den placement set was cleared from x0z0.scene; current home-root/building descriptions in design.md and older castle/home map facts do not describe the active spawn scene.",
-    "The current jade-dragon row is an engine/blueprint box, not the authored articulated actor. Dragon camera/player/UI integrations remain conditional; do not treat the old version-31 dragon instance as present.",
-    "scripts/gen/forest-plant.js reuses valley-mesh.js ring/loft/cap helpers; its feet are ground level and +Y is up, matching terrain decoration placements."
+    "forest-terrain.js takes a context object for heightAt/materialAt; main uses river sea level y=0, ground around y=0.5 and a spawn clearing centered at (0,-3), height 0.5.",
+    "places/main/config.yaml decoration layers depend on terrain material ids litter, moss, mud and pebbles; preserve layer bindings and terrain return ids together. Road marks additionally use cobble and litter edges.",
+    "The cob-house is now active at (0, 0.5, -26); homeSite/homeClear terrain marks and its placement must remain aligned. The previous cleared-scene note is obsolete.",
+    "Road terrain marks and authored bridge/dressing cells are coordinated across long routes; bridge origins are at road level y=0.5, length runs along local Z, and road-solid winding controls face orientation.",
+    "scripts/player.js keeps flight toggle scratch in ctx.session per body to avoid per-tick replicated writes; player.state.flying mirrors the toggle, and flyTapWindow is in milliseconds.",
+    "The jade-dragon row remains a blueprint box rather than the authored articulated actor; dragon camera/player/UI integrations remain conditional."
   ]
 }
