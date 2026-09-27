@@ -1,4 +1,11 @@
 # spawn-scene v2 yaml x1z1
+hill-boulders:
+  castShadow: false
+  feetPosition: {x: 172, y: 20, z: 90}
+  id: hill-boulders
+  scatter: {bounds: {innerRadius: 27, outerRadius: 55, shape: ring}, count: 70, templates: [{primitive: {kind: scripted, params: {item: boulder}, script: scripts/gen/village-kit.js, seed: 2}, weight: 1}], variation: {scale: [0.6, 2.2], yaw: [0, 360]}}
+  tags: [village]
+  visibleRange: {max: 150}
 hill-crags:
   castShadow: true
   feetPosition: {x: 172, y: 20, z: 90}
@@ -17,6 +24,13 @@ hill-fingerpost:
   rotation: {yaw: 90}
   tags: [village]
   visibleRange: {max: 80}
+hill-pines:
+  castShadow: true
+  feetPosition: {x: 172, y: 20, z: 90}
+  id: hill-pines
+  scatter: {bounds: {innerRadius: 31, outerRadius: 58, shape: ring}, count: 140, templates: [{physics: static, primitive: {kind: scripted, params: {crown: pine, height: 8, radius: 2.2}, script: scripts/gen/valley-tree.js, seed: 43}, weight: 1}, {physics: static, primitive: {kind: scripted, params: {crown: fir, height: 10, radius: 1.8}, script: scripts/gen/valley-tree.js, seed: 44}, weight: 0.6}], variation: {scale: [0.7, 1.25], yaw: [0, 360]}}
+  tags: [village]
+  visibleRange: {max: 320}
 hill-trail:
   castShadow: false
   feetPosition: {x: 127, y: 10.41897348334815, z: 85}
