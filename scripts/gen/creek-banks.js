@@ -8,16 +8,18 @@ function rock(ctx, x, y, z, s, yaw, wet, moss, lod) {
   const n = lod <= 2 ? 7 : 5, R = () => 0.78 + ctx.random() * 0.4;
   const base = ngon(n, s, 0, 0, yaw).map(([a, b]) => { const k = R(); return [x + a * k, z + b * k * 0.8]; });
   const mid = base.map(([a, b]) => [x + (a - x) * 0.92, z + (b - z) * 0.92]);
-  const top = base.map(([a, b]) => [x + (a - x) * (0.45 + ctx.random() * 0.15), z + (b - z) * (0.45 + ctx.random() * 0.15)]);
+  const ox = (ctx.random() - 0.5) * s * 0.35, oz = (ctx.random() - 0.5) * s * 0.35;
+  const top = base.map(([a, b]) => { const k = 0.35 + ctx.random() * 0.3; return [x + ox + (a - x) * k, z + oz + (b - z) * k]; });
   const h = s * (0.55 + ctx.random() * 0.35);
-  const l = wet ? 0.46 + ctx.random() * 0.1 : 0.66 + ctx.random() * 0.12;
-  ctx.albedo(STONE); ctx.color(`oklch(${l.toFixed(3)} ${wet ? 0.02 : 0.018} ${Math.round(wet ? 200 + ctx.random() * 40 : 70 + ctx.random() * 30)})`); ctx.roughness(wet ? 0.35 : 0.9);
-  solid(ctx, base.map(([a, b]) => [a, y - s * 0.3, b]), mid.map(([a, b]) => [a, y + h * 0.55, b]), false);
-  solid(ctx, mid.map(([a, b]) => [a, y + h * 0.55, b]), top.map(([a, b]) => [a, y + h, b]));
+  const l = wet ? 0.42 + ctx.random() * 0.1 : 0.52 + ctx.random() * 0.14;
+  ctx.albedo(STONE); ctx.color(`oklch(${l.toFixed(3)} ${wet ? 0.02 : 0.012} ${Math.round(wet ? 200 + ctx.random() * 40 : 90 + ctx.random() * 60)})`); ctx.roughness(wet ? 0.35 : 0.9);
+  const sink = wet ? s * 0.3 : h * 0.4, ty = top.map(() => h * (0.82 + ctx.random() * 0.25));
+  solid(ctx, base.map(([a, b]) => [a, y - sink, b]), mid.map(([a, b], i) => [a, y - sink + h * (0.45 + (i % 2) * 0.12), b]), false);
+  solid(ctx, mid.map(([a, b], i) => [a, y - sink + h * (0.45 + (i % 2) * 0.12), b]), top.map(([a, b], i) => [a, y - sink + ty[i], b]));
   if (moss && lod <= 3) {
     ctx.albedo(MOSS); ctx.color(`oklch(${(0.6 + ctx.random() * 0.1).toFixed(3)} 0.12 ${Math.round(125 + ctx.random() * 15)})`); ctx.roughness(1);
-    const cap = top.map(([a, b]) => [x + (a - x) * 1.12, z + (b - z) * 1.12]);
-    solid(ctx, cap.map(([a, b]) => [a, y + h - 0.02, b]), cap.map(([a, b]) => [x + (a - x) * 0.6, y + h + 0.05, z + (b - z) * 0.6]));
+    const cx = x + ox, cz = z + oz, half = top.slice(0, Math.ceil(n / 2) + 1), cap = half.map(([a, b]) => [cx + (a - cx) * 1.05, cz + (b - cz) * 1.05]);
+    const my = y - sink + h * 0.8; solid(ctx, cap.map(([a, b]) => [a, my, b]), cap.map(([a, b]) => [cx + (a - cx) * 0.7, my + h * 0.3, cz + (b - cz) * 0.7]));
   }
 }
 // a blade: a thin tapered double-sided card from the ground up, leaning
