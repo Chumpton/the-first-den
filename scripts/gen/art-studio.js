@@ -80,7 +80,7 @@ function shell(ctx, p) {
   }
   ctx.emissive(null);
   // the root bench: a hexagon of walnut round the trunk, a cool light spilling under its lip
-  const R0 = 1.05, R1 = 1.75, y = 0.45;
+  const R0 = p.benchR0 ?? 2.05, R1 = p.benchR1 ?? 2.75, y = 0.45;
   for (let k = 0; k < 6; k++) {
     const a0 = hex(R0 * Math.cos(Math.PI / 6), k), a1 = hex(R0 * Math.cos(Math.PI / 6), k + 1), b0 = hex(R1 * Math.cos(Math.PI / 6), k), b1 = hex(R1 * Math.cos(Math.PI / 6), k + 1);
     paint(ctx, WALNUT, 0.45, 0, PLANK);
@@ -89,6 +89,8 @@ function shell(ctx, p) {
     paint(ctx, "oklch(0.25 0.01 250)", 0.5);
     const c0 = hex((R1 - 0.12) * Math.cos(Math.PI / 6), k), c1 = hex((R1 - 0.12) * Math.cos(Math.PI / 6), k + 1);
     Q(ctx, [c0[0], 0, c0[1]], [c1[0], 0, c1[1]], [c1[0], y - 0.08, c1[1]], [c0[0], y - 0.08, c0[1]], [c0[0] + c1[0], 0, c0[1] + c1[1]]);
+    const i0 = hex((R0 + 0.06) * Math.cos(Math.PI / 6), k), i1 = hex((R0 + 0.06) * Math.cos(Math.PI / 6), k + 1);
+    Q(ctx, [i0[0], 0, i0[1]], [i1[0], 0, i1[1]], [i1[0], y, i1[1]], [i0[0], y, i0[1]], [-(i0[0] + i1[0]), 0, -(i0[1] + i1[1])]);
     paint(ctx, WHITE); ctx.emissive(0.6, 2.0, 2.4);
     const e0 = hex((R1 - 0.1) * Math.cos(Math.PI / 6), k), e1 = hex((R1 - 0.1) * Math.cos(Math.PI / 6), k + 1);
     Q(ctx, [e0[0], 0.04, e0[1]], [e1[0], 0.04, e1[1]], [e1[0], 0.07, e1[1]], [e0[0], 0.07, e0[1]], [e0[0] + e1[0], 0, e0[1] + e1[1]]);
@@ -243,25 +245,26 @@ function rug(ctx, p) {
 }
 // the planter ring round the tree: walnut boxes on the hex's face centres, ferns, snake plants, a few blooms. Origin = the house centre.
 function planters(ctx, p) {
-  const R = p.r ?? 2.35, skip = p.skip ?? [270];
-  for (const deg of [30, 90, 150, 210, 270, 330]) {
-    if (skip.includes(deg)) continue;
-    const a = deg * Math.PI / 180, c = [Math.cos(a) * R, Math.sin(a) * R], t = [-Math.sin(a), 0, Math.cos(a)], n = [Math.cos(a), 0, Math.sin(a)];
-    const W = 1.15, D = 0.55, Hh = 0.5, P = (u, v, y) => [c[0] + t[0] * u + n[0] * v, y, c[1] + t[2] * u + n[2] * v];
+  const r0 = p.r0 ?? 0.85, r1 = p.r1 ?? 1.9, Hh = p.h ?? 0.7, wall = 0.07;
+  const V = (r, k, y) => { const a = 60 * k * Math.PI / 180; return [Math.cos(a) * r, y, Math.sin(a) * r]; };
+  const bl = ["oklch(0.75 0.16 30)", "oklch(0.9 0.12 95)", "oklch(0.7 0.15 330)", "oklch(0.95 0.02 90)"];
+  for (let k = 0; k < 6; k++) {
+    const nm = [Math.cos((60 * k + 30) * Math.PI / 180), 0, Math.sin((60 * k + 30) * Math.PI / 180)];
     paint(ctx, WALNUT, 0.55, 0, PLANK);
-    for (const [u0, u1, v0, v1] of [[-W / 2, W / 2, -D / 2, -D / 2 + 0.05], [-W / 2, W / 2, D / 2 - 0.05, D / 2], [-W / 2, -W / 2 + 0.05, -D / 2, D / 2], [W / 2 - 0.05, W / 2, -D / 2, D / 2]]) {
-      const pts = [P(u0, v0, 0), P(u1, v0, 0), P(u1, v1, 0), P(u0, v1, 0)];
-      const top = pts.map((q) => [q[0], Hh, q[2]]);
-      Q(ctx, ...top, [0, 1, 0]); for (let i = 0; i < 4; i++) { const j = (i + 1) % 4, m = [(pts[i][0] + pts[j][0]) / 2 - (c[0]), 0, (pts[i][2] + pts[j][2]) / 2 - c[1]]; Q(ctx, pts[i], pts[j], top[j], top[i], m); }
-    }
-    paint(ctx, STEEL, 0.4, 0.8); for (const u of [-W / 2 + 0.06, W / 2 - 0.06]) { const q = P(u, 0, 0); cbox(ctx, q[0], 0, q[2], 0.04, 0.04, 0.04); }
-    paint(ctx, "oklch(0.3 0.04 50)", 1); Q(ctx, P(-W / 2 + 0.05, -D / 2 + 0.05, Hh - 0.06), P(W / 2 - 0.05, -D / 2 + 0.05, Hh - 0.06), P(W / 2 - 0.05, D / 2 - 0.05, Hh - 0.06), P(-W / 2 + 0.05, D / 2 - 0.05, Hh - 0.06), [0, 1, 0]);
-    // a fern at each end, snake plant blades in the middle, a few blooms
-    for (const u of [-0.3, 0.3]) { const o = P(u, 0, Hh - 0.06); for (let i = 0; i < 9; i++) { const aa = i / 9 * 6.28 + deg, d = [Math.cos(aa) * 0.9, 0.35, Math.sin(aa) * 0.9]; ctx.albedo(null); ctx.color(LEAF[i % 3]); leaf(ctx, o, d, 0.42); } }
-    const o = P(0, 0, Hh - 0.06); ctx.color("oklch(0.5 0.1 140)");
-    for (let i = 0; i < 6; i++) { const aa = i * 1.1 + deg, x = o[0] + Math.cos(aa) * 0.07, z = o[2] + Math.sin(aa) * 0.07, h = 0.45 + (i % 3) * 0.15; ctx.tri(x - 0.035, o[1], z, x + 0.035, o[1], z, x + Math.cos(aa) * 0.06, o[1] + h, z + Math.sin(aa) * 0.06); ctx.tri(x + 0.035, o[1], z, x - 0.035, o[1], z, x + Math.cos(aa) * 0.06, o[1] + h, z + Math.sin(aa) * 0.06); }
-    const bl = ["oklch(0.75 0.16 30)", "oklch(0.9 0.12 95)", "oklch(0.7 0.15 330)"];
-    for (let i = 0; i < 4; i++) { const q = P(-0.45 + i * 0.3, (i % 2 ? 0.14 : -0.14), Hh + 0.12 + (i % 2) * 0.06); paint(ctx, bl[(i + deg) % 3], 0.8); cbox(ctx, q[0], q[1], q[2], 0.07, 0.05, 0.07); }
+    Q(ctx, V(r1, k, 0), V(r1, k + 1, 0), V(r1, k + 1, Hh), V(r1, k, Hh), nm); // outer face
+    Q(ctx, V(r0, k, 0), V(r0, k + 1, 0), V(r0, k + 1, Hh), V(r0, k, Hh), [-nm[0], 0, -nm[2]]);
+    Q(ctx, V(r1, k, Hh), V(r1, k + 1, Hh), V(r1 - wall, k + 1, Hh), V(r1 - wall, k, Hh), [0, 1, 0]); // caps
+    Q(ctx, V(r0 + wall, k, Hh), V(r0 + wall, k + 1, Hh), V(r0, k + 1, Hh), V(r0, k, Hh), [0, 1, 0]);
+    Q(ctx, V(r1 - wall, k, Hh), V(r1 - wall, k + 1, Hh), V(r1 - wall, k + 1, Hh - 0.08), V(r1 - wall, k, Hh - 0.08), [-nm[0], 0, -nm[2]]);
+    paint(ctx, STEEL, 0.4, 0.8); { const q = V(r1 + 0.01, k, 0); cbox(ctx, q[0], 0, q[2], 0.05, Hh + 0.01, 0.05); } // steel corner straps
+    paint(ctx, "oklch(0.3 0.04 50)", 1); Q(ctx, V(r0 + wall, k, Hh - 0.08), V(r0 + wall, k + 1, Hh - 0.08), V(r1 - wall, k + 1, Hh - 0.08), V(r1 - wall, k, Hh - 0.08), [0, 1, 0]);
+    // planting along this side: two ferns, snake-plant blades, blooms spilling at the lip
+    const mid = (f, rr) => { const a = V(rr, k, 0), b = V(rr, k + 1, 0); return [a[0] + (b[0] - a[0]) * f, Hh - 0.08, a[2] + (b[2] - a[2]) * f]; };
+    const rm = (r0 + r1) / 2;
+    ctx.albedo(null);
+    for (const f of [0.28, 0.75]) { const o = mid(f, rm); for (let i = 0; i < 8; i++) { const aa = i / 8 * 6.28 + k, d = [Math.cos(aa) * 0.9, 0.4, Math.sin(aa) * 0.9]; ctx.color(LEAF[i % 3]); leaf(ctx, o, d, 0.4); } }
+    { const o = mid(0.5, rm); ctx.color("oklch(0.5 0.1 140)"); for (let i = 0; i < 5; i++) { const aa = i * 1.3 + k, x = o[0] + Math.cos(aa) * 0.06, z = o[2] + Math.sin(aa) * 0.06, h = 0.5 + (i % 3) * 0.15; ctx.tri(x - 0.035, o[1], z, x + 0.035, o[1], z, x + Math.cos(aa) * 0.05, o[1] + h, z + Math.sin(aa) * 0.05); ctx.tri(x + 0.035, o[1], z, x - 0.035, o[1], z, x + Math.cos(aa) * 0.05, o[1] + h, z + Math.sin(aa) * 0.05); } }
+    for (let i = 0; i < 4; i++) { const o = mid(0.15 + i * 0.23, r1 - 0.18); paint(ctx, bl[(i + k) % 4], 0.8); cbox(ctx, o[0], o[1] + 0.1 + (i % 2) * 0.05, o[2], 0.07, 0.05, 0.07); }
   }
 }
 // an industrial rubber mat: ribbed black, hazard-yellow edge
@@ -384,11 +387,11 @@ export function geometry(ctx) {
 }
 export function collider(ctx) {
   const item = ctx.params?.item, p2w = () => ctx.params?.w ?? 2.4;
-  if (item === "planters") { for (const deg of [30, 90, 150, 210, 270, 330]) { if ((ctx.params?.skip ?? [270]).includes(deg)) continue; const a = deg * Math.PI / 180, R = ctx.params?.r ?? 2.35; const c = [Math.cos(a) * R, Math.sin(a) * R]; box(ctx, c[0] - 0.4, 0, c[1] - 0.4, c[0] + 0.4, 0.5, c[1] + 0.4); } return; }
+  if (item === "planters") { const r1 = ctx.params?.r1 ?? 1.9, H = ctx.params?.h ?? 0.7; for (let k = 0; k < 6; k++) { const a = k * Math.PI / 3, b = (k + 1) * Math.PI / 3, m = a + Math.PI / 6; Q(ctx, [Math.cos(a) * r1, 0, Math.sin(a) * r1], [Math.cos(b) * r1, 0, Math.sin(b) * r1], [Math.cos(b) * r1, H, Math.sin(b) * r1], [Math.cos(a) * r1, H, Math.sin(a) * r1], [Math.cos(m), 0, Math.sin(m)]); T(ctx, [0, H, 0], [Math.cos(a) * r1, H, Math.sin(a) * r1], [Math.cos(b) * r1, H, Math.sin(b) * r1], [0, 1, 0]); } return; }
   if (item === "shell") {
     // the root bench is a seat you can step onto
     const hex = (ap, k) => { const a = (60 * k) * Math.PI / 180, r = ap / Math.cos(Math.PI / 6); return [Math.cos(a) * r, Math.sin(a) * r]; };
-    for (let k = 0; k < 6; k++) { const a = hex(0.9, k), b = hex(0.9, k + 1), c = hex(1.52, k + 1), d = hex(1.52, k); Q(ctx, [a[0], 0.45, a[1]], [b[0], 0.45, b[1]], [c[0], 0.45, c[1]], [d[0], 0.45, d[1]], [0, 1, 0]); Q(ctx, [d[0], 0, d[1]], [c[0], 0, c[1]], [c[0], 0.45, c[1]], [d[0], 0.45, d[1]], [c[0] + d[0], 0, c[1] + d[1]]); }
+    for (let k = 0; k < 6; k++) { const a = hex(1.78, k), b = hex(1.78, k + 1), c = hex(2.38, k + 1), d = hex(2.38, k); Q(ctx, [a[0], 0.45, a[1]], [b[0], 0.45, b[1]], [c[0], 0.45, c[1]], [d[0], 0.45, d[1]], [0, 1, 0]); Q(ctx, [d[0], 0, d[1]], [c[0], 0, c[1]], [c[0], 0.45, c[1]], [d[0], 0.45, d[1]], [c[0] + d[0], 0, c[1] + d[1]]); }
     return;
   }
   const B = { robotarm: [0.9, 0.5, 0.9, 0, 0], holo: [1.1, 0.62, 1.1, 0, 0], desk: [2.2, 0.95, 0.8, 0, 0], shelf: [3.6, 2.2, 0.5, 0, 0.25], lounge: [3.5, 0.5, 0.95, 0, 0], easel: [1.0, 1.2, 0.6, 0, 0.3], toolrack: [0.65, 0.68, 0.42, -0.1, -0.25], bench: [p2w(), 0.6, 0.42, 0, -0.21], partition: [1.8, 2.0, 0.1, 0, 0], arclamp: [0.4, 0.12, 0.4, 0, 0] }[item];
