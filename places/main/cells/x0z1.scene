@@ -10,26 +10,47 @@ town-apothecary:
   feetPosition: {x: 28, y: 0.5302985096870096, z: 88}
   id: town-apothecary
   physics: static
-  primitive: {kind: scripted, params: {d: 9, floors: 2, lamp: true, plaster: oklch(0.93 0.04 130), roof: {kind: gz, pitch: 56, tex: teal, tint: oklch(0.97 0.01 190)}, seed: 4, shop: true, sign: apothecary, trim: oklch(0.55 0.08 195), w: 8}, script: scripts/gen/town-house.js, seed: 4}
+  primitive: {kind: scripted, params: {barrels: 2, d: 9, dormers: 1, eave: 0.9, floors: 2, lamp: true, plaster: oklch(0.93 0.04 130), roof: {kind: gz, pitch: 56, tex: teal, tint: oklch(0.97 0.01 190)}, seed: 4, shop: true, sign: apothecary, trim: oklch(0.55 0.08 195), vane: fish, w: 8}, script: scripts/gen/town-house.js, seed: 4}
   rotation: {yaw: 90}
   tags: [town, building]
   visibleRange: {max: 170}
+town-apothecary/smoke:
+  feetPosition: {x: -2.06, y: 11.45, z: 2.7}
+  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
+  id: town-apothecary/smoke
+  parent: town-apothecary
+  tags: [town, chimney-smoke]
+  visibleRange: {max: 120}
 town-bakery:
   feetPosition: {x: -28, y: 0.7724079094924621, z: 88.5}
   id: town-bakery
   physics: static
-  primitive: {kind: scripted, params: {awning: oklch(0.62 0.13 40), base: stone, chimney: [2.5, 2], d: 9, floors: 2, plaster: oklch(0.96 0.045 88), roof: {kind: gx, pitch: 42, tex: clay, tint: oklch(0.95 0.03 45)}, seed: 1, shop: true, sign: bakery, trim: oklch(0.62 0.08 195), w: 9}, script: scripts/gen/town-house.js, seed: 1}
+  primitive: {kind: scripted, params: {awning: oklch(0.62 0.13 40), barrels: -3, base: stone, chimney: [2.5, 2], d: 9, dormers: 2, eave: 0.85, floors: 2, plaster: oklch(0.96 0.045 88), roof: {kind: gx, pitch: 42, tex: clay, tint: oklch(0.95 0.03 45)}, seed: 1, shop: true, sign: bakery, trim: oklch(0.62 0.08 195), vane: rooster, w: 9}, script: scripts/gen/town-house.js, seed: 1}
   rotation: {yaw: -90}
   tags: [town, building]
   visibleRange: {max: 170}
+town-bakery/smoke:
+  feetPosition: {x: 2.5, y: 10.35, z: 2}
+  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
+  id: town-bakery/smoke
+  parent: town-bakery
+  tags: [town, chimney-smoke]
+  visibleRange: {max: 120}
 town-cheese:
   feetPosition: {x: -13.5, y: 0.45989450915449076, z: 72.25}
   id: town-cheese
   physics: static
-  primitive: {kind: scripted, params: {awning: oklch(0.7 0.08 130), d: 8.5, floors: 2, plaster: oklch(0.97 0.02 85), roof: {kind: hip, pitch: 30, tex: teal, tint: oklch(0.95 0.02 190)}, seed: 7, shop: true, sign: books, trim: oklch(0.62 0.13 40), w: 10}, script: scripts/gen/town-house.js, seed: 7}
+  primitive: {kind: scripted, params: {awning: oklch(0.7 0.08 130), barrels: 2, d: 8.5, dormers: 2, floors: 2, plaster: oklch(0.97 0.02 85), roof: {kind: hip, pitch: 30, tex: teal, tint: oklch(0.95 0.02 190)}, seed: 7, shop: true, sign: cheese, trim: oklch(0.62 0.13 40), w: 10}, script: scripts/gen/town-house.js, seed: 7}
   rotation: {yaw: 180}
   tags: [town, building]
   visibleRange: {max: 170}
+town-cheese/smoke:
+  feetPosition: {x: 3.72, y: 8.75, z: 2.65}
+  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
+  id: town-cheese/smoke
+  parent: town-cheese
+  tags: [town, chimney-smoke]
+  visibleRange: {max: 120}
 town-crowd:
   audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-town-square-crowd-murmur-loop.mp3, gain: 0.15, loop: true, maxDistance: 40, spatial: true}
   behavior: scripts/town-crowd.js
@@ -100,46 +121,107 @@ town-hall:
   primitive: {kind: scripted, params: {roostY: 21.584}, script: scripts/gen/town-hall.js, seed: 15}
   tags: [town, roost]
   visibleRange: {max: 400}
+town-hall/drape-l:
+  feetPosition: {x: -5.1, y: 7.98, z: -6.35}
+  id: town-hall/drape-l
+  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.3}, script: scripts/material-banner-wave.js}
+  parent: town-hall
+  primitive: {kind: scripted, params: {h: 3.4, kind: drape, point: 0.45, w: 1.1}, script: scripts/gen/town-banner.js}
+  tags: [town, banner]
+  visibleRange: {max: 250}
+town-hall/drape-r:
+  feetPosition: {x: 5.1, y: 7.98, z: -6.35}
+  id: town-hall/drape-r
+  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.3}, script: scripts/material-banner-wave.js}
+  parent: town-hall
+  primitive: {kind: scripted, params: {h: 3.4, kind: drape, point: 0.45, w: 1.1}, script: scripts/gen/town-banner.js}
+  tags: [town, banner]
+  visibleRange: {max: 250}
+town-hall/flag:
+  castShadow: true
+  feetPosition: {x: 7.59, y: 14.15, z: -8.6}
+  id: town-hall/flag
+  material: {kind: scripted, params: {ax: 0.28, ay: 0, k: 4, reach: 0.32, speed: 2.6}, script: scripts/material-banner-wave.js}
+  parent: town-hall
+  primitive: {kind: scripted, params: {L: 3.6, h: 2.3, kind: flag}, script: scripts/gen/town-banner.js}
+  rotation: {yaw: 0}
+  tags: [town, banner]
+  visibleRange: {max: 300}
 town-house-e:
   feetPosition: {x: 28, y: 0.4311763555940418, z: 111}
   id: town-house-e
   physics: static
-  primitive: {kind: scripted, params: {chimney: [-2.5, 2.5], d: 9, floors: 3, plaster: oklch(0.94 0.035 190), roof: {kind: gx, pitch: 34, tex: clay, tint: oklch(0.9 0.05 40)}, seed: 6, trim: oklch(0.55 0.07 135), w: 9}, script: scripts/gen/town-house.js, seed: 6}
+  primitive: {kind: scripted, params: {barrels: -2, chimney: [-2.5, 2.5], d: 9, dormers: 1, floors: 3, plaster: oklch(0.94 0.035 190), roof: {kind: gx, pitch: 34, tex: clay, tint: oklch(0.9 0.05 40)}, seed: 6, sign: smith, trim: oklch(0.55 0.07 135), w: 9}, script: scripts/gen/town-house.js, seed: 6}
   rotation: {yaw: 90}
   tags: [town, building]
   visibleRange: {max: 170}
+town-house-e/smoke:
+  feetPosition: {x: -2.5, y: 12.14, z: 2.5}
+  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
+  id: town-house-e/smoke
+  parent: town-house-e
+  tags: [town, chimney-smoke]
+  visibleRange: {max: 120}
 town-house-ne:
   feetPosition: {x: 19, y: 0.1803013263502008, z: 127}
   id: town-house-ne
   physics: static
-  primitive: {kind: scripted, params: {awning: oklch(0.66 0.11 10), d: 9, floors: 2, plaster: oklch(0.93 0.04 130), roof: {kind: hip, pitch: 52, tex: clay, tint: oklch(0.95 0.04 55)}, seed: 10, shop: true, trim: oklch(0.6 0.12 40), w: 9}, script: scripts/gen/town-house.js, seed: 10}
+  primitive: {kind: scripted, params: {awning: oklch(0.66 0.11 10), d: 9, dormers: 1, floors: 2, plaster: oklch(0.93 0.04 130), roof: {kind: hip, pitch: 52, tex: clay, tint: oklch(0.95 0.04 55)}, seed: 10, shop: true, sign: lantern, trim: oklch(0.6 0.12 40), w: 9}, script: scripts/gen/town-house.js, seed: 10}
   rotation: {yaw: 0}
   tags: [town, building]
   visibleRange: {max: 170}
+town-house-ne/smoke:
+  feetPosition: {x: -3.22, y: 10.34, z: 2.9}
+  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
+  id: town-house-ne/smoke
+  parent: town-house-ne
+  tags: [town, chimney-smoke]
+  visibleRange: {max: 120}
 town-house-nw:
   feetPosition: {x: -19, y: 0.5489051862959411, z: 127}
   id: town-house-nw
   physics: static
-  primitive: {kind: scripted, params: {chimney: [2.5, 2], d: 9, floors: 2, plaster: oklch(0.94 0.04 40), roof: {kind: gx, pitch: 55, tex: cedar, tint: oklch(0.92 0.03 60)}, seed: 9, trim: oklch(0.62 0.08 195), w: 9}, script: scripts/gen/town-house.js, seed: 9}
+  primitive: {kind: scripted, params: {chimney: [2.5, 2], d: 9, dormers: 1, eave: 0.85, floors: 2, plaster: oklch(0.94 0.04 40), roof: {kind: gx, pitch: 55, tex: cedar, tint: oklch(0.92 0.03 60)}, seed: 9, sign: key, trim: oklch(0.62 0.08 195), vane: rooster, w: 9}, script: scripts/gen/town-house.js, seed: 9}
   rotation: {yaw: 0}
   tags: [town, building]
   visibleRange: {max: 170}
+town-house-nw/smoke:
+  feetPosition: {x: 2.5, y: 11.93, z: 2}
+  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
+  id: town-house-nw/smoke
+  parent: town-house-nw
+  tags: [town, chimney-smoke]
+  visibleRange: {max: 120}
 town-house-se:
   feetPosition: {x: 13.5, y: 0.407376225462724, z: 72.25}
   id: town-house-se
   physics: static
-  primitive: {kind: scripted, params: {chimney: [3, 2], d: 8.5, floors: 3, plaster: oklch(0.96 0.045 88), roof: {kind: gz, pitch: 38, tex: slate, tint: oklch(0.93 0.015 250)}, seed: 8, trim: oklch(0.62 0.08 195), w: 10}, script: scripts/gen/town-house.js, seed: 8}
+  primitive: {kind: scripted, params: {barrels: 2, chimney: [3, 2], d: 8.5, dormers: 1, floors: 3, plaster: oklch(0.96 0.045 88), roof: {kind: gz, pitch: 38, tex: slate, tint: oklch(0.93 0.015 250)}, seed: 8, sign: lantern, trim: oklch(0.62 0.08 195), w: 10}, script: scripts/gen/town-house.js, seed: 8}
   rotation: {yaw: 180}
   tags: [town, building]
   visibleRange: {max: 170}
+town-house-se/smoke:
+  feetPosition: {x: 3, y: 12.59, z: 2}
+  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
+  id: town-house-se/smoke
+  parent: town-house-se
+  tags: [town, chimney-smoke]
+  visibleRange: {max: 120}
 town-house-w:
   feetPosition: {x: -28, y: 0.42423883697257864, z: 112.5}
   id: town-house-w
   physics: static
-  primitive: {kind: scripted, params: {d: 9, floors: 3, plaster: oklch(0.97 0.02 85), roof: {kind: hip, pitch: 40, tex: slate, tint: oklch(0.95 0.01 250)}, seed: 3, trim: oklch(0.6 0.12 40), w: 8}, script: scripts/gen/town-house.js, seed: 3}
+  primitive: {kind: scripted, params: {d: 9, dormers: 1, eave: 0.9, floors: 3, plaster: oklch(0.97 0.02 85), roof: {kind: hip, pitch: 40, tex: slate, tint: oklch(0.95 0.01 250)}, seed: 3, sign: lantern, trim: oklch(0.6 0.12 40), w: 8}, script: scripts/gen/town-house.js, seed: 3}
   rotation: {yaw: -90}
   tags: [town, building]
   visibleRange: {max: 170}
+town-house-w/smoke:
+  feetPosition: {x: 2.84, y: 12.21, z: 2.9}
+  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
+  id: town-house-w/smoke
+  parent: town-house-w
+  tags: [town, chimney-smoke]
+  visibleRange: {max: 120}
 town-market:
   feetPosition: {x: 0, y: 0.55, z: 100}
   id: town-market
@@ -168,18 +250,32 @@ town-tailor:
   feetPosition: {x: 28, y: 0.4220246443605373, z: 99.5}
   id: town-tailor
   physics: static
-  primitive: {kind: scripted, params: {awning: oklch(0.62 0.08 195), d: 9, floors: 2, plaster: oklch(0.96 0.045 88), roof: {kind: salt, pitch: 45, ridge: 0.38, tex: gold, tint: oklch(0.96 0.02 80)}, seed: 5, shop: true, sign: tailor, trim: oklch(0.66 0.11 10), w: 10}, script: scripts/gen/town-house.js, seed: 5}
+  primitive: {kind: scripted, params: {awning: oklch(0.62 0.08 195), d: 9, dormers: 1, eave: 0.85, floors: 2, plaster: oklch(0.96 0.045 88), roof: {kind: salt, pitch: 45, ridge: 0.38, tex: gold, tint: oklch(0.96 0.02 80)}, seed: 5, shop: true, sign: tailor, trim: oklch(0.66 0.11 10), w: 10}, script: scripts/gen/town-house.js, seed: 5}
   rotation: {yaw: 90}
   tags: [town, building]
   visibleRange: {max: 170}
+town-tailor/smoke:
+  feetPosition: {x: 3.72, y: 8.89, z: 2.9}
+  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
+  id: town-tailor/smoke
+  parent: town-tailor
+  tags: [town, chimney-smoke]
+  visibleRange: {max: 120}
 town-tavern:
   feetPosition: {x: -28.5, y: 0.6568747900200451, z: 100.5}
   id: town-tavern
   physics: static
-  primitive: {kind: scripted, params: {d: 10, floors: 3, lamp: true, plaster: oklch(0.94 0.04 40), roof: {kind: gz, pitch: 38, tex: cedar, tint: oklch(0.95 0.02 70)}, seed: 2, shop: true, sign: tavern, trim: oklch(0.55 0.07 135), w: 11}, script: scripts/gen/town-house.js, seed: 2}
+  primitive: {kind: scripted, params: {barrels: 3, d: 10, dormers: 2, eave: 0.9, floors: 3, lamp: true, plaster: oklch(0.94 0.04 40), roof: {kind: gz, pitch: 38, tex: cedar, tint: oklch(0.95 0.02 70)}, seed: 2, shop: true, sign: tavern, trim: oklch(0.55 0.07 135), vane: dragon, w: 11}, script: scripts/gen/town-house.js, seed: 2}
   rotation: {yaw: -90}
   tags: [town, building]
   visibleRange: {max: 170}
+town-tavern/smoke:
+  feetPosition: {x: -2.87, y: 13.08, z: 3.2}
+  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
+  id: town-tavern/smoke
+  parent: town-tavern
+  tags: [town, chimney-smoke]
+  visibleRange: {max: 120}
 town-wall-e1:
   feetPosition: {x: 0, y: 0, z: 100}
   id: town-wall-e1
