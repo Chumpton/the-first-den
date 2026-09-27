@@ -162,7 +162,7 @@ town-tavern:
   feetPosition: {x: -28.5, y: 0.6568747900200451, z: 100.5}
   id: town-tavern
   physics: static
-  primitive: {kind: scripted, params: {chimney: [-3.5, 3], d: 10, floors: 3, lamp: true, plaster: oklch(0.94 0.04 40), roof: {kind: gz, pitch: 48, tex: cedar, tint: oklch(0.95 0.02 70)}, seed: 2, shop: true, sign: tavern, trim: oklch(0.55 0.07 135), w: 11}, script: scripts/gen/town-house.js, seed: 2}
+  primitive: {kind: scripted, params: {d: 10, floors: 3, lamp: true, plaster: oklch(0.94 0.04 40), roof: {kind: gz, pitch: 38, tex: cedar, tint: oklch(0.95 0.02 70)}, seed: 2, shop: true, sign: tavern, trim: oklch(0.55 0.07 135), w: 11}, script: scripts/gen/town-house.js, seed: 2}
   rotation: {yaw: -90}
   tags: [town, building]
   visibleRange: {max: 170}
