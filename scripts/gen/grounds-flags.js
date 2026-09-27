@@ -1,4 +1,4 @@
-// laid limestone flag walks + hub rings, moss in the joints. params: { walks: [[[x,z],...],...], hubs: [[x,z,R],...], width }
+// laid limestone flag walks + hub rings, moss in the joints. params: { walks: [[[x,z],...],...], hubs: [[x,z,R],...], width } 
 import { paint, T, Q, TAU } from '../lib/yard-kit.js';
 export function geometry(ctx) {
   const p = ctx.params || {}, lod = ctx.lod || 1, W = p.width ?? 1.6, walks = p.walks || [], hubs = p.hubs || [];
