@@ -8,12 +8,12 @@ atmosphere:
     frozen: 11
   clouds:
     enabled: true
-    density: 0.48
-    opacity: 0.92
+    density: 0.36
+    opacity: 0.85
     speed: 4
-    altitude: 650
+    altitude: 1100
     color: "#ffffff"
-    thickness: 520
+    thickness: 800
   fog:
     kind: linear
     near: 70
