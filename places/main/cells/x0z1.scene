@@ -291,6 +291,12 @@ pasture-west:
   rotation: {yaw: 0}
   state: {piece: pasture-west}
   tags: [farm, pasture]
+pasture-west/chimney-smoke:
+  feetPosition: {x: 9.83, y: 5.35, z: -2.68}
+  fx: {script: "fx\npop smoke rate=?mobile:3|5 on=disc(.12) life=3..5 v=up(.7..1.1)+sdir()*.1 size=.35..0.55 acc=buoy(.25)+curl(.3)*.4+drag(.5) sz=$size*(.6>3) col=<.84,.82,.8>><.62,.62,.64> a=0>.3:.4>.7:.2>0 rot=spin(.15) r=sprite(smoke-puff,alpha)"}
+  id: pasture-west/chimney-smoke
+  parent: pasture-west
+  visibleRange: {max: 200}
 pasture-west/farmhouse:
   castShadow: true
   feetPosition: {x: 8, y: 0, z: -4}
