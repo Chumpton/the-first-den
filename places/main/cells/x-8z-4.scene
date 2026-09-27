@@ -4,6 +4,42 @@ hearthmere:
   id: hearthmere
   state: {town: Hearthmere}
   tags: [hearthmere]
+hearthmere/hearth-folk-0:
+  behavior: scripts/hearth-folk.js
+  feetPosition: {x: 36, y: 0, z: 0}
+  id: hearthmere/hearth-folk-0
+  parent: hearthmere
+  primitive: {kind: scripted, params: {apron: oklch(0.95 0.02 85), hat: wide, hatColor: oklch(0.8 0.12 85), robe: oklch(0.62 0.12 30)}, script: scripts/gen/hearth-folk.js, seed: 1}
+  state: {i: 1, lines: [Fresh honey buns at the bakery!, The tree gives more light every year.], name: Maren, route: [[36, 0], [31.2, 18], [18, 31.2], [0, 36], [-18, 31.2], [-31.2, 18], [-36, 0], [-31.2, -18], [-18, -31.2], [0, -36], [18, -31.2], [31.2, -18]], speed: 0}
+  tags: [interactable, hearth-folk]
+  visibleRange: {max: 160}
+hearthmere/hearth-folk-2:
+  behavior: scripts/hearth-folk.js
+  feetPosition: {x: 36, y: 0, z: 3}
+  id: hearthmere/hearth-folk-2
+  parent: hearthmere
+  primitive: {kind: scripted, params: {hat: scarf, hatColor: oklch(0.7 0.15 20), robe: oklch(0.62 0.1 150)}, script: scripts/gen/hearth-folk.js, seed: 1}
+  state: {i: 1, lines: ["Welcome in, the gate is always open.", Lanterns are lit by wishes here.], name: Ada, route: [[36, 3], [70, 6], [105, 17], [130, 21], [105, 17], [70, 6]], speed: 0}
+  tags: [interactable, hearth-folk]
+  visibleRange: {max: 160}
+hearthmere/hearth-folk-3:
+  behavior: scripts/hearth-folk.js
+  feetPosition: {x: -38, y: 0, z: 0}
+  id: hearthmere/hearth-folk-3
+  parent: hearthmere
+  primitive: {kind: scripted, params: {hat: wide, hatColor: oklch(0.55 0.08 60), robe: oklch(0.85 0.03 85)}, script: scripts/gen/hearth-folk.js, seed: 1}
+  state: {i: 1, lines: [Ring the bell and breathe out slowly., Calm is a thing you practice.], name: Old Wen, route: [[-38, 0], [-55, -4], [-66, -7], [-55, -4]], speed: 0.7}
+  tags: [interactable, hearth-folk]
+  visibleRange: {max: 160}
+hearthmere/hearth-folk-4:
+  behavior: scripts/hearth-folk.js
+  feetPosition: {x: 0, y: 0, z: 38}
+  id: hearthmere/hearth-folk-4
+  parent: hearthmere
+  primitive: {kind: scripted, params: {apron: oklch(0.55 0.08 60), hat: pointed, hatColor: oklch(0.6 0.14 25), robe: oklch(0.7 0.13 70)}, script: scripts/gen/hearth-folk.js, seed: 1}
+  state: {i: 1, lines: ["The ducks like crumbs, not hats.", I'm helping at the windmill today!], name: Pip, route: [[0, 38], [-6, 52], [-14, 62], [-20, 66], [-10, 57]], speed: 0}
+  tags: [interactable, hearth-folk]
+  visibleRange: {max: 160}
 hearthmere/hearth-great-tree:
   feetPosition: {x: 0, y: 0, z: 0}
   fx: {script: "fx\npop leaves n=?mobile:40|90 on=disc(15).c(24) life=5..9 v=up(-.25..-.5)+sdir()*.2 size=.14..0.24 spin=-1.5..1.5 acc=curl(.3)*.6+drag(.6) col=hdr(2.6,1.8,.55)>hdr(1.8,1.1,.3) a=0>.15:1>.8:.9>0 sz=$size rot=$age*$spin floor=die r=sprite(leaf,add)\npop flies n=?mobile:30|60 on=disc(22).c(1.8) life=3..6 v=sdir()*.25 size=.05..0.09 acc=curl(.5)*.8+drag(1) col=hdr(3.4,2.6,.9) a=(0>.2:1>.8:1>0)*flick(2.2,.6) sz=$size r=sprite(mote,add)\npop motes n=?mobile:20|40 on=disc(5).c(8) life=4..7 v=up(.3..0.6) size=.06..0.1 acc=curl(.4)+drag(.5) col=hdr(2.4,2,1) a=0>.2:.9>.8:.8>0 sz=$size r=sprite(mote,add)"}
@@ -471,6 +507,21 @@ hearthmere/hearth-temple:
   primitive: {kind: scripted, params: {kind: temple}, script: scripts/gen/hearth-civic.js, seed: 1}
   rotation: {yaw: -90}
   tags: [hearth-temple]
+hearthmere/hearth-temple/hearth-bell:
+  behavior: scripts/hearth-bell.js
+  feetPosition: {x: 0, y: 3.06, z: 0}
+  id: hearthmere/hearth-temple/hearth-bell
+  parent: hearthmere/hearth-temple
+  pivot: top
+  primitive: {kind: scripted, params: {kind: bell}, script: scripts/gen/hearth-civic.js, seed: 1}
+  tags: [interactable, hearth-bell]
+hearthmere/hearth-temple/hearth-bell-cord:
+  behavior: scripts/hearth-bell.js
+  feetPosition: {x: 0, y: 1.9, z: -1.2}
+  id: hearthmere/hearth-temple/hearth-bell-cord
+  parent: hearthmere/hearth-temple
+  state: {bell: hearthmere/hearth-temple/hearth-bell}
+  tags: [interactable]
 path-lamp-hearthLaneMarket-0:
   castShadow: true
   feetPosition: {x: -972.1814213807412, y: {terrain: 0}, z: -531.0098558836892}

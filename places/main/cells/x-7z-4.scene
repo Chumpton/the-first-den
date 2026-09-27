@@ -1,4 +1,13 @@
 # spawn-scene v2 yaml x-7z-4
+hearthmere/hearth-folk-1:
+  behavior: scripts/hearth-folk.js
+  feetPosition: {x: 59, y: 0, z: -46}
+  id: hearthmere/hearth-folk-1
+  parent: hearthmere
+  primitive: {kind: scripted, params: {hat: pointed, hatColor: oklch(0.45 0.1 280), robe: oklch(0.55 0.1 250)}, script: scripts/gen/hearth-folk.js, seed: 1}
+  state: {i: 1, lines: [Potions for sleepy afternoons!, "Mind the fountain, it winks."], name: Tobin, route: [[59, -46], [56.9, -41.1], [52, -39], [47.1, -41.1], [45, -46], [47.1, -50.9], [52, -53], [56.9, -50.9]], speed: 0}
+  tags: [interactable, hearth-folk]
+  visibleRange: {max: 160}
 hearthmere/hearth-fountain:
   feetPosition: {x: 52, y: 0, z: -46}
   fx: {script: "fx\npop spray rate=?mobile:40|70 on=disc(.12).c(2.4) life=.9..1.3 v=up(2.6..3.2)+cone(18)*(.6..1.1) size=.05..0.09 acc=grav() col=<.8,.9,1> a=.8>.6:.8>0 sz=$size floor=die r=sprite(droplet,alpha,velocity,.03)\npop sparkle rate=6 on=disc(2.6).c(.7) life=.6..1.2 size=.05..0.08 col=hdr(2.4,2.1,1.2) a=(0>.3:1>0)*flick(6,.5) sz=$size r=sprite(mote,add)"}
@@ -25,6 +34,11 @@ hearthmere/hearth-home:
   rotation: {yaw: -8.1}
   tags: [hearth-house, hearth-enterable]
   visibleRange: {max: 700}
+hearthmere/hearth-home/hearth-light:
+  feetPosition: {x: 0, y: 2.2, z: 0.4}
+  id: hearthmere/hearth-home/hearth-light
+  light: {color: oklch(0.82 0.13 65), distance: 12, intensity: 5, kind: point}
+  parent: hearthmere/hearth-home
 hearthmere/hearth-house-bakery:
   feetPosition: {x: 42.6, y: 0, z: -19.86}
   id: hearthmere/hearth-house-bakery
@@ -34,6 +48,11 @@ hearthmere/hearth-house-bakery:
   rotation: {yaw: 115}
   tags: [hearth-house, hearth-enterable]
   visibleRange: {max: 700}
+hearthmere/hearth-house-bakery/hearth-light:
+  feetPosition: {x: 0, y: 2.2, z: 0.4}
+  id: hearthmere/hearth-house-bakery/hearth-light
+  light: {color: oklch(0.82 0.13 65), distance: 12, intensity: 6, kind: point}
+  parent: hearthmere/hearth-house-bakery
 hearthmere/hearth-house-m1:
   feetPosition: {x: 82, y: 0, z: -7}
   id: hearthmere/hearth-house-m1
@@ -97,6 +116,16 @@ hearthmere/hearth-house-tavern:
   rotation: {yaw: 62}
   tags: [hearth-house, hearth-enterable]
   visibleRange: {max: 700}
+hearthmere/hearth-house-tavern/hearth-light:
+  feetPosition: {x: 0, y: 2.2, z: 0.4}
+  id: hearthmere/hearth-house-tavern/hearth-light
+  light: {color: oklch(0.82 0.13 65), distance: 12, intensity: 7, kind: point}
+  parent: hearthmere/hearth-house-tavern
+hearthmere/hearth-house-tavern/hearth-tavern-fire:
+  feetPosition: {x: 0, y: 0.17, z: 3.15}
+  fx: {script: "fx\npop coals n=8 on=disc(.25) size=.06..0.13 tint=<2.6,1,.28>..<1.2,.35,.09> sz=$size*flick(.5,.12) col=$tint*flick(.8,.3) a=.9 r=sprite(soft-disc,add)\npop flame rate=flick(.45,.2)*40 on=disc(.22) life=.4..0.8 v=up(1.2)+cone(20)*(.3..0.7) size=.18..0.32 acc=curl(.5)*1.1+buoy(2)+drag(1.5) sz=$size*(.5>.25:1>.7:.7>.14) col=hdr(4.6,3.4,1.4)>.3:hdr(3.2,1.4,.3)>.65:hdr(1.8,.5,.1)>hdr(.6,.12,.03) a=0>.12:1>.75:.85>0 rot=spin(.2) r=sprite(flame-wisp,add)\npop embers rate=3 on=disc(.2) life=.6..1.2 v=up(1.8)+cone(25)*(.3..0.9) size=.02..0.04 acc=curl(.8)+grav()*.4+drag(.5) col=hdr(5,2.8,.8)>hdr(1,.22,.04) a=(0>.1:1>.7:.9>0)*flick(11,.35) sz=$size r=sprite(ember,add,velocity,.02)"}
+  id: hearthmere/hearth-house-tavern/hearth-tavern-fire
+  parent: hearthmere/hearth-house-tavern
 hearthmere/hearth-lanterns-main-0:
   castShadow: false
   feetPosition: {x: 134.53, y: 0, z: 21.39}
@@ -232,6 +261,11 @@ hearthmere/hearth-lanterns-market-3:
   rotation: {yaw: -157.5}
   tags: [hearth-lanterns]
   visibleRange: {max: 200}
+hearthmere/hearth-market-bed:
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-gentle-market-murmur-and-birdsong-loop.mp3, gain: 0.2, loop: true, maxDistance: 200, spatial: true}
+  feetPosition: {x: 52, y: 1.5, z: -46}
+  id: hearthmere/hearth-market-bed
+  parent: hearthmere
 hearthmere/hearth-stall-0:
   feetPosition: {x: 62.16, y: 0, z: -41.79}
   id: hearthmere/hearth-stall-0
@@ -358,6 +392,11 @@ hearthmere/hearth-workshop:
   rotation: {yaw: 180}
   tags: [hearth-house, hearth-enterable]
   visibleRange: {max: 700}
+hearthmere/hearth-workshop/hearth-light:
+  feetPosition: {x: 0, y: 2.2, z: 0.4}
+  id: hearthmere/hearth-workshop/hearth-light
+  light: {color: oklch(0.82 0.13 65), distance: 12, intensity: 6, kind: point}
+  parent: hearthmere/hearth-workshop
 path-lamp-hearthLaneGate-0:
   castShadow: true
   feetPosition: {x: -835.0857841027286, y: {terrain: 0}, z: -463.1526082189439}
