@@ -6,7 +6,7 @@ far-range-a6:
   id: far-range-a6
   material: {kind: scripted, params: {}, script: scripts/material-far-range.js}
   physics: none
-  primitive: {kind: scripted, params: {depth: 1428, height: 1150, peaks: 5, width: 3400}, script: scripts/gen/far-range.js, seed: 73}
+  primitive: {kind: scripted, params: {depth: 1928, height: 2070, peaks: 5, width: 5440}, script: scripts/gen/far-range.js, seed: 73}
   receiveShadow: false
   rotation: {lookAt: {x: 0, y: 0, z: -26}}
   tags: [far-range, backdrop]
