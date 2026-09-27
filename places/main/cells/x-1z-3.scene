@@ -1,11 +1,1 @@
 # spawn-scene v2 yaml x-1z-3
-valley-chalk-far-cleft:
-  castShadow: true
-  feetPosition: {x: -126, y: {terrain: 0}, z: -379}
-  id: valley-chalk-far-cleft
-  material: {color: oklch(0.98 0.009 194), pbr: true, roughness: 0.93}
-  physics: static
-  primitive: {kind: scripted, params: {depth: 13, height: 14, width: 25}, script: scripts/gen/valley-outcrop.js, seed: 29}
-  receiveShadow: true
-  state: {region: west-bank, role: weathered-limestone}
-  tags: [valley-landscape, valley-outcrop]

@@ -1,11 +1,1 @@
 # spawn-scene v2 yaml x2z-3
-valley-chalk-east-shoulder:
-  castShadow: true
-  feetPosition: {x: 300, y: {terrain: 0}, z: -321}
-  id: valley-chalk-east-shoulder
-  material: {color: oklch(0.98 0.009 194), pbr: true, roughness: 0.93}
-  physics: static
-  primitive: {kind: scripted, params: {depth: 17, height: 15, width: 26}, script: scripts/gen/valley-outcrop.js, seed: 47}
-  receiveShadow: true
-  state: {region: east-bank, role: weathered-limestone}
-  tags: [valley-landscape, valley-outcrop]

@@ -1,9 +1,1 @@
 # spawn-scene v2 yaml objects
-den-life-fish:
-  overrides:
-    feetPosition: {x: -4, y: 0, z: -90}
-  template: templates/den-life.js#fish
-den-life-gulls:
-  overrides:
-    feetPosition: {x: -62, y: 27, z: -74}
-  template: templates/den-life.js#gulls
