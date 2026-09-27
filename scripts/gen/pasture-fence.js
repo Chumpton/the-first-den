@@ -89,7 +89,7 @@ function gate(ctx) {
 }
 export function geometry(ctx) { if (ctx.params.kind === 'gate') gate(ctx); else loop(ctx); }
 export function collider(ctx) {
-  if (ctx.params.kind === 'gate') { const w = ctx.params.w ?? 2.9; return { kind: 'box', width: w, height: 1.25, depth: 0.14, center: [w / 2, 0.72, 0] }; }
+  if (ctx.params.kind === 'gate') { const w = ctx.params.w ?? 2.9; box(ctx, 0.02, 0.1, -0.07, w, 1.35, 0.07); return; }
   const p = { w: 28, d: 20, gateX: 8, gateW: 3.2, gatepostH: 3.1, ...ctx.params }, hd = p.d / 2, g0 = p.gateX - p.gateW / 2, g1 = p.gateX + p.gateW / 2, t = 0.13, y0 = -0.5, y1 = 1.45;
   for (const s of sides(p)) for (const [a, b] of s.segs) {
     if (s.axis === 'x') box(ctx, a - t, y0, s.c - t, b + t, y1, s.c + t); else box(ctx, s.c - t, y0, a - t, s.c + t, y1, b + t);
