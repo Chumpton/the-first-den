@@ -1258,13 +1258,97 @@ cob-in-g-table:
   rotation: {yaw: 0}
   tags: [cob-interior, furniture, den-furniture]
   visibleRange: {max: 200}
+coop-gate:
+  behavior: scripts/coop-gate.js
+  castShadow: true
+  feetPosition: {x: 26.31, y: 0.47, z: -26.04}
+  id: coop-gate
+  physics: kinematic
+  primitive: {kind: scripted, script: scripts/gen/coop-gate.js}
+  rotation: {yaw: -35}
+  state: {baseYaw: -35, open: false}
+  tags: [coop]
 coop-site:
-  feetPosition: {x: 27, y: 0.5, z: -28}
+  behavior: scripts/coop-flock.js
+  castShadow: true
+  feetPosition: {x: 27, y: 0.47, z: -28}
   id: coop-site
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 6, height: 3, kind: box, width: 7}
-  tags: [blueprint]
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/coop.js, seed: 4}
+  receiveShadow: true
+  rotation: {yaw: -35}
+  tags: [homestead, coop]
+coop-site/coop-bird-0:
+  castShadow: true
+  feetPosition: {x: -0.3, y: 0.012, z: -0.8}
+  id: coop-site/coop-bird-0
+  parent: coop-site
+  primitive: {kind: scripted, params: {variant: buff}, script: scripts/gen/coop-hen.js}
+  rotation: {yaw: 0}
+  state: {kind: hen, variant: buff, x: -0.3, z: -0.8}
+  tags: [coop-bird]
+coop-site/coop-bird-1:
+  castShadow: true
+  feetPosition: {x: 0.6, y: 0.012, z: 0.7}
+  id: coop-site/coop-bird-1
+  parent: coop-site
+  primitive: {kind: scripted, params: {variant: red}, script: scripts/gen/coop-hen.js}
+  rotation: {yaw: 50}
+  state: {kind: hen, variant: red, x: 0.6, z: 0.7}
+  tags: [coop-bird]
+coop-site/coop-bird-2:
+  castShadow: true
+  feetPosition: {x: 1.4, y: 0.012, z: -0.2}
+  id: coop-site/coop-bird-2
+  parent: coop-site
+  primitive: {kind: scripted, params: {variant: white}, script: scripts/gen/coop-hen.js}
+  rotation: {yaw: 100}
+  state: {kind: hen, variant: white, x: 1.4, z: -0.2}
+  tags: [coop-bird]
+coop-site/coop-bird-3:
+  castShadow: true
+  feetPosition: {x: 2.2, y: 0.012, z: 0.9}
+  id: coop-site/coop-bird-3
+  parent: coop-site
+  primitive: {kind: scripted, params: {variant: speckle}, script: scripts/gen/coop-hen.js}
+  rotation: {yaw: 150}
+  state: {kind: hen, variant: speckle, x: 2.2, z: 0.9}
+  tags: [coop-bird]
+coop-site/coop-bird-4:
+  castShadow: true
+  feetPosition: {x: 2.6, y: 0.012, z: -0.5}
+  id: coop-site/coop-bird-4
+  parent: coop-site
+  primitive: {kind: scripted, params: {variant: buff}, script: scripts/gen/coop-hen.js}
+  rotation: {yaw: 200}
+  state: {kind: hen, variant: buff, x: 2.6, z: -0.5}
+  tags: [coop-bird]
+coop-site/coop-bird-5:
+  castShadow: true
+  feetPosition: {x: 0.2, y: 0.012, z: 0.1}
+  id: coop-site/coop-bird-5
+  parent: coop-site
+  primitive: {kind: scripted, params: {variant: red}, script: scripts/gen/coop-hen.js}
+  rotation: {yaw: 250}
+  state: {kind: hen, variant: red, x: 0.2, z: 0.1}
+  tags: [coop-bird]
+coop-site/coop-bird-6:
+  castShadow: true
+  feetPosition: {x: 1.2, y: 0.012, z: 0.9}
+  id: coop-site/coop-bird-6
+  parent: coop-site
+  primitive: {kind: scripted, params: {variant: rooster}, script: scripts/gen/coop-hen.js}
+  rotation: {yaw: 300}
+  state: {kind: rooster, variant: rooster, x: 1.2, z: 0.9}
+  tags: [coop-bird]
+coop-site/coop-nest-lid:
+  behavior: scripts/coop-nest.js
+  feetPosition: {x: -2.65, y: 1.47, z: 1.08}
+  id: coop-site/coop-nest-lid
+  parent: coop-site
+  primitive: {kind: scripted, script: scripts/gen/coop-lid.js}
+  state: {eggs: 0}
+  tags: [interactable, coop]
 critter-bird-f1-1:
   castShadow: false
   feetPosition: {x: 0, y: 30, z: -30}

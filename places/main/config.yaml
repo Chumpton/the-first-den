@@ -119,6 +119,10 @@ terrain:
     clear-treehouse-span: {center: {x: -22.5, z: -23.5}, kind: clear-scatter, shape: {kind: path, points: [[-27, -18], [-18, -29]], width: 8}}
     pasture-flatten: {center: {x: -38, z: -73}, falloff: 5, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 17}}
     pasture-clear: {center: {x: -38, z: -73}, kind: clear-scatter, shape: {kind: circle, radius: 19.5}}
+    coop-ground: {center: {x: 27, z: -28}, falloff: 4, height: 0.47, kind: flatten, shape: {kind: circle, radius: 4.6}}
+    coop-clear: {center: {x: 27, z: -28}, kind: clear-scatter, shape: {kind: circle, radius: 5.5}}
+    hive-ground: {center: {x: 31, z: -46}, falloff: 3, height: 0.68, kind: flatten, shape: {kind: circle, radius: 3}}
+    hive-clear: {center: {x: 31, z: -46}, kind: clear-scatter, shape: {kind: circle, radius: 3.5}}
   decorations:
     settings: {enabled: true, budget: 75000, maxDistance: 420, fadeDistance: 25}
     bindings:
