@@ -2,6 +2,7 @@ import { FEEL } from './lib/data/home-feel.js';
 import { HOME } from './lib/data/home.js';
 import { nearestInteractable } from './lib/home-interaction.js';
 import { sitPointsOf } from './gen/den-furniture.js';
+import { dragonRide, wantMount } from './lib/dragon-rider.js';
 function scratch(ctx) { const s=(ctx.session.homeWalk??={}); return s[ctx.self.id]??=( {distance:0,last:null} ); }
 function inside(p,poly) { let hit=false; for(let i=0,j=poly.length-1;i<poly.length;j=i++) { const a=poly[i],b=poly[j]; if((a[1]>p.z)!==(b[1]>p.z) && p.x<(b[0]-a[0])*(p.z-a[1])/(b[1]-a[1])+a[0]) hit=!hit; } return hit; }
 function floorKind(ctx,p) {
@@ -39,6 +40,7 @@ function standUp(ctx){
 }
 export function onInput(ctx,input) {
   const me=ctx.self;
+  if(me.state.mountedOn){if(input.pressed.interact)ctx.emit('press',{by:me.id},{to:me.state.mountedOn});return;}
   if(me.state.seatedOn){if(input.pressed.interact||input.pressed.jump)standUp(ctx);return;}
   if(!input.pressed.interact) return;
   const nearest=nearestInteractable(ctx,me,input),seat=nearestSeat(ctx,me),p=me.worldFeetPosition||me.feetPosition;
@@ -46,9 +48,10 @@ export function onInput(ctx,input) {
   const touched=seat&&seat.d<=dNear?seat.o:nearest;
   if(touched)ctx.emit('haptic',{kind:'soft'},{audience:{player:me.id}});
   if(seat&&seat.d<=dNear){me.parent=seat.o.id;me.feetPosition={x:seat.pt.x,y:seat.pt.y,z:seat.pt.z};me.rotation={yaw:0};me.state.seatedOn=seat.o.id;me.state.seatPoint=seat.pt;return;}
-  if(nearest) ctx.emit('press',{by:me.id},{to:nearest.id});
+  if(nearest){wantMount(ctx,nearest);ctx.emit('press',{by:me.id},{to:nearest.id});}
 }
 export function update(ctx,dt) {
+  if(dragonRide(ctx)) return;
   const state=scratch(ctx), p=ctx.self.feetPosition;
   if(ctx.self.parent) {state.last=null;return;}
   const old=state.last; state.last={x:p.x,y:p.y,z:p.z};

@@ -9,6 +9,8 @@
 // dies with the rig), never a flag on the camera def: a rewrite to an orbit rig shows the body again
 // with nothing to un-set.
 import CAMERA from './lib/data/camera.yml'
+import { DRAGON } from './lib/data/dragon.js'
+import { rotate } from 'builtin/vec3'
 
 const RAD_TO_DEG = 180 / Math.PI
 
@@ -27,7 +29,11 @@ export function update(ctx, dt) {
   // in the world, since a rider's own feet are the seat's.
   const eyeHeight = finiteNumber(CAMERA.eyeHeight, 1.6) * finiteNumber(target.effectiveScale.y, 1) * (target.parent ? 0.72 : 1)
   const pos = target.worldFeetPosition ?? target.feetPosition
-  ctx.self.feetPosition = { x: pos.x, y: pos.y + eyeHeight, z: pos.z }
+  // Riding the jade dragon (it is the controlled target): the eye is the saddle's, turned with the dragon.
+  if (target.state?.kind === 'dragon') {
+    const o = rotate(target.rotation ?? 0, DRAGON.seatEye)
+    ctx.self.feetPosition = { x: pos.x + o.x, y: pos.y + o.y, z: pos.z + o.z }
+  } else ctx.self.feetPosition = { x: pos.x, y: pos.y + eyeHeight, z: pos.z }
 
   // The presented facing (radians) as the one rotation grammar (degrees) — undefined before the first frame.
   const view = ctx.self.view
