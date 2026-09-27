@@ -4015,3 +4015,10 @@ wolf-lead:
   state: {home: {x: -40, z: 40}, mode: idle, range: 45, scale: 1, sp: wolf, until: 0, yaw: -97}
   tags: [fauna-ground, interactable, animal, wolf]
   visibleRange: {max: 180}
+zipline:
+  feetPosition: {x: -15, y: 4, z: -35}
+  id: zipline
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 30, height: 8, kind: box, width: 6}
+  tags: [blueprint]
