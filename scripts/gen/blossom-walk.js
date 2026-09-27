@@ -17,7 +17,7 @@ const sec = (P, a, y0, y1, w) => [P(a, y0, -w / 2), P(a, y0, w / 2), P(a, y1, w 
 const bar = (ctx, P, a0, a1, y0, y1, w) => loft(ctx, [sec(P, a0, y0, y1, w), sec(P, a1, y0, y1, w)]);
 // chamfered slab along a: octagon section (w across b, h up), ends chamfered
 function slab(ctx, P, a0, a1, y0, h, w, bv, lod) {
-  const oct = (a, s) => { const hw = w / 2 - s, e = bv; return lod <= 2 ? [[-hw, y0 + e], [-hw + e, y0 + s * 0], [hw - e, y0], [hw, y0 + e], [hw, y0 + h - e], [hw - e, y0 + h], [-hw + e, y0 + h], [-hw, y0 + h - e]].map(([b, y]) => P(a, s ? y + (y > y0 + h / 2 ? -s : s) : y, b)) : [[-hw, y0], [hw, y0], [hw, y0 + h], [-hw, y0 + h]].map(([b, y]) => P(a, y, b)); };
+  const oct = (a, s = 0) => { const hw = w / 2 - s, e = bv; return lod <= 2 ? [[-hw, y0 + e], [-hw + e, y0 + s * 0], [hw - e, y0], [hw, y0 + e], [hw, y0 + h - e], [hw - e, y0 + h], [-hw + e, y0 + h], [-hw, y0 + h - e]].map(([b, y]) => P(a, s ? y + (y > y0 + h / 2 ? -s : s) : y, b)) : [[-hw, y0], [hw, y0], [hw, y0 + h], [-hw, y0 + h]].map(([b, y]) => P(a, y, b)); };
   loft(ctx, lod <= 2 ? [oct(a0, bv * 0.6), oct(a0 + bv), oct(a1 - bv), oct(a1, bv * 0.6)] : [oct(a0, 0), oct(a1, 0)]);
 }
 const ring = (n, r, y, cx, cz, rot = 0) => ngon(n, r, cx, cz, rot).map(([x, z]) => [x, y, z]);
