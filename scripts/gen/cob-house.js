@@ -2,17 +2,19 @@
 // front door in the +Z face. Levels (local y): cellar B, ground G, attic A, roof deck D. A spiral stair winds round
 // the trunk from the cellar floor to the roof in one helix, 19 steps a storey.
 export const HOUSE = {
-  R: 9.2, T: 0.5, B: -3.0, G: 0.4, A: 3.8, D: 7.2, wallBottom: -3.25, wallTop: 5.25,
+  R: 9.2, T: 0.5, B: -6.1, G: 0.4, A: 3.8, D: 7.2, wallBottom: -6.35, wallTop: 5.25,
   eaveR: 10.1, eaveY: 4.75, deckR: 4.8, roofT: 0.45, hole: 1.6, rail: 1.7, trunkR: 0.35, stepR: 1.55,
   rise: 0.2, run: 0.21, treads: 17, flightW: 1.0,
-  // straight flights hugging the front and back walls: bottom point, run direction, floor they start on
+  // straight flights hugging the walls: bottom point, run direction, floor they start on
   flights: [
-    { x: 4.62, z: 6.4, dx: -1, dz: 0, y: -3.0 },
-    { x: 4.62, z: -6.4, dx: -1, dz: 0, y: 0.4 },
+    { x: 4.28, z: -6.94, dx: -1, dz: 0, y: 0.4 },
     { x: -1.8, z: 3.3, dx: 1, dz: 0, y: 3.8 },
   ],
+  // the studio stair: floating treads cantilevered off the front wall, a landing in the corner, then down the
+  // front-right wall to the studio floor. 32 risers, B → G.
+  studioStair: { w: 1.1, run: 0.27, risers: 32, upper: 9, topX: 1.23 },
   // floor openings [x0, z0, x1, z1]
-  hatchG: [1.05, 5.9, 4.62, 6.9], hatchA: [1.05, -6.9, 4.62, -5.9], hatchD: [-1.8, 2.8, 1.8, 3.8],
+  hatchG: [1.12, 5.85, 4.78, 7.6], hatchA: [0.6, -7.55, 4.42, -6.38], hatchD: [-1.8, 2.8, 1.8, 3.8],
   trunkHole: 0.42, doorW: 1.6, doorH: 2.5,
   // the roof deck opens toward the guest treehouse's bridge (local angle atan2(z, x), radians)
   deckGaps: [3.307], deckGapW: 0.3,
@@ -153,7 +155,7 @@ function hatchRail(ctx, y, h, open, collide) {
   const [x0, z0, x1, z1] = h, o = 0.05;
   const sides = [["z0", [x0 - o, z0 - o], [x1 + o, z0 - o]], ["z1", [x0 - o, z1 + o], [x1 + o, z1 + o]], ["x0", [x0 - o, z0 - o], [x0 - o, z1 + o]], ["x1", [x1 + o, z0 - o], [x1 + o, z1 + o]]];
   for (const [id, a, b] of sides) {
-    if (id === open) continue;
+    if ([].concat(open).includes(id)) continue;
     if (collide) { const dx = b[0] - a[0], dz = b[1] - a[1]; Q(ctx, [a[0], y, a[1]], [b[0], y, b[1]], [b[0], y + 1.0, b[1]], [a[0], y + 1.0, a[1]], [dz, 0, -dx]); continue; }
     beam(ctx, [a[0], y + 0.95, a[1]], [b[0], y + 0.95, b[1]], 0.07, 0.06);
     beam(ctx, [a[0], y + 0.5, a[1]], [b[0], y + 0.5, b[1]], 0.04, 0.04);
@@ -180,6 +182,64 @@ function flight(ctx, F, collide, paintStone, paintOak) {
     const b0 = at(0.1, side), b1 = at(L - 0.05, side);
     beam(ctx, [b0[0], F.y + 0.2 + 0.9, b0[1]], [b1[0], F.y + H.treads * H.rise + 0.9, b1[1]], 0.07, 0.06);
     for (const f of [0.1, 0.5, 0.9]) { const p = at(L * f, side), y = F.y + Math.ceil(H.treads * f) * H.rise; box(ctx, p[0] - 0.035, y, p[1] - 0.035, p[0] + 0.035, y + 0.9 + H.rise, p[1] + 0.035); }
+  }
+}
+// the studio stair: walnut treads floating off the wall on hidden steel, an LED under each nose, a glass balustrade
+// on the open side. Upper run along the front wall (+z), a corner landing, the long run down the front-right wall.
+export function studioStairTreads() {
+  const S = H.studioStair, w = S.w, ap = AI - w / 2 - 0.03, apIn = ap - w / 2;
+  const r = (H.G - H.B) / S.risers, lower = S.risers - 1 - S.upper - 1; // treads below the landing
+  const Ii = [apIn * TAN30, apIn], n0 = [COS30, 0.5], d0 = [0.5, -COS30];
+  const Ic = [Ii[0] + n0[0] * w / 2, Ii[1] + n0[1] * w / 2];
+  const T = [];
+  // upper run: from the landing edge toward -x, climbing to G
+  for (let k = 0; k < S.upper; k++) T.push({ c: [Ii[0] - (k + 0.5) * S.run, ap], t: [-1, 0, 0], n: [0, 0, 1], top: H.B + (lower + 2 + k) * r });
+  // lower run: from the landing edge along d0, descending
+  for (let j = 0; j < lower; j++) T.push({ c: [Ic[0] + d0[0] * (j + 0.5) * S.run, Ic[1] + d0[1] * (j + 0.5) * S.run], t: [d0[0], 0, d0[1]], n: [n0[0], 0, n0[1]], top: H.B + (lower - j) * r });
+  const landing = { top: H.B + (lower + 1) * r, pts: [Ii, [Ii[0], ap + w / 2], [(ap + w / 2) * TAN30, ap + w / 2], [Ii[0] + n0[0] * w, Ii[1] + n0[1] * w]] };
+  return { T, landing, r, Ii, d0, lower, ap, apIn, w };
+}
+function prism(ctx, pts, y0, y1, collide) {
+  const [a, b, c, d] = pts.map((p) => [p[0], y1, p[1]]), [e, f, g, h] = pts.map((p) => [p[0], y0, p[1]]);
+  Q(ctx, a, b, c, d, [0, 1, 0]);
+  if (collide) return;
+  Q(ctx, e, f, g, h, [0, -1, 0]);
+  const top = [a, b, c, d], bot = [e, f, g, h], cx = pts.reduce((s, p) => s + p[0], 0) / 4, cz = pts.reduce((s, p) => s + p[1], 0) / 4;
+  for (let i = 0; i < 4; i++) { const j = (i + 1) % 4, m = [(top[i][0] + top[j][0]) / 2 - cx, 0, (top[i][2] + top[j][2]) / 2 - cz]; Q(ctx, bot[i], bot[j], top[j], top[i], m); }
+}
+function studioStair(ctx, collide) {
+  const { T, landing, Ii, d0, lower, apIn, w } = studioStairTreads(), S = H.studioStair, th = 0.075;
+  for (const s of T) {
+    const c = [s.c[0], s.top - (collide ? 0.25 : th), s.c[1]];
+    if (collide) { obox(ctx, c, s.t, s.n, S.run + 0.01, 0.25, w); continue; }
+    ctx.albedo(TX.plank); ctx.color("oklch(0.62 0.07 55)"); ctx.roughness(0.45); ctx.metalness(0);
+    obox(ctx, c, s.t, s.n, S.run + 0.01, th, w);
+    // the LED strip tucked under the nose, on the open side of each tread
+    ctx.albedo(null); ctx.color("oklch(0.95 0.03 220)"); ctx.emissive(1.6, 2.4, 3.0);
+    obox(ctx, [c[0] - s.n[0] * (w / 2 - 0.05), c[1] - 0.012, c[2] - s.n[2] * (w / 2 - 0.05)], s.t, s.n, S.run * 0.8, 0.012, 0.03);
+    ctx.emissive(null);
+    // the steel cantilever plate into the wall
+    ctx.color("oklch(0.3 0.01 250)"); ctx.metalness(0.8); ctx.roughness(0.35);
+    obox(ctx, [c[0] + s.n[0] * (w / 2 - 0.06), c[1] - 0.06, c[2] + s.n[2] * (w / 2 - 0.06)], s.t, s.n, S.run * 0.6, 0.06, 0.12);
+    ctx.metalness(0);
+  }
+  if (!collide) { ctx.albedo(TX.plank); ctx.color("oklch(0.62 0.07 55)"); ctx.roughness(0.45); }
+  prism(ctx, landing.pts, landing.top - 0.14, landing.top, collide);
+  // glass balustrade along the open edge: upper run, then the lower run, each a sloped panel under a steel rail
+  const up0 = [Ii[0] - S.upper * S.run, apIn], lo1 = [Ii[0] + d0[0] * lower * S.run, Ii[1] + d0[1] * lower * S.run];
+  const runs = [[up0, H.G, Ii, landing.top], [Ii, landing.top, lo1, H.B + H.studioStair.risers * 0 + (H.G - H.B) / S.risers]];
+  for (const [a, ya, b, yb] of runs) {
+    const A0 = [a[0], ya, a[1]], B0 = [b[0], yb, b[1]], A1 = [a[0], ya + 1.0, a[1]], B1 = [b[0], yb + 1.0, b[1]];
+    const nrm = [-(b[1] - a[1]), 0, b[0] - a[0]];
+    if (collide) { Q(ctx, A0, B0, B1, A1, nrm); continue; }
+    ctx.albedo(null); ctx.color("oklch(0.9 0.03 210)", 0.22); ctx.roughness(0.05);
+    Q(ctx, [a[0], ya + 0.06, a[1]], [b[0], yb + 0.06, b[1]], [b[0], yb + 0.92, b[1]], [a[0], ya + 0.92, a[1]], nrm);
+    ctx.color("oklch(0.32 0.01 250)"); ctx.metalness(0.85); ctx.roughness(0.3);
+    beam(ctx, [a[0], ya + 1.0, a[1]], [b[0], yb + 1.0, b[1]], 0.06, 0.045);
+    beam(ctx, [a[0], ya + 0.03, a[1]], [b[0], yb + 0.03, b[1]], 0.04, 0.05);
+    const L = Math.hypot(b[0] - a[0], b[1] - a[1]), n = Math.max(1, Math.round(L / 1.3));
+    for (let i = 0; i <= n; i++) { const f = i / n, x = a[0] + (b[0] - a[0]) * f, z = a[1] + (b[1] - a[1]) * f, y = ya + (yb - ya) * f; box(ctx, x - 0.025, y, z - 0.025, x + 0.025, y + 1.0, z + 0.025); }
+    ctx.metalness(0);
   }
 }
 function blob(ctx, cx, cy, cz, rx, ry, rz, seg, colors) {
@@ -303,6 +363,7 @@ function build(ctx, collide) {
   const P = (tx, col, rough) => () => { if (collide) return; ctx.albedo(tx); ctx.color(col); ctx.roughness(rough); };
   const cobOut = P(TX.cob, "oklch(0.95 0.03 75)", 0.95), limeIn = P(TX.lime, "oklch(0.80 0.05 75)", 0.9), stone = P(TX.stone, "oklch(0.93 0.02 80)", 0.95);
   const plankTop = P(TX.plank, "oklch(0.95 0.03 75)", 0.75), plankIn = P(TX.plank, "oklch(0.52 0.06 55)", 0.7), beams = P(TX.timber, "oklch(0.88 0.04 65)", 0.85), flags = P(TX.flags, "oklch(0.94 0.02 80)", 0.9);
+  const studioWall = P("cdn/texture-smooth-matte-white-gallery-plaster-wall.png", "oklch(0.97 0.004 250)", 0.7), concrete = P("cdn/texture-polished-grey-concrete-floor-seamless.png", "oklch(0.95 0.005 250)", 0.28);
   if (!collide) ctx.flat();
   if (lod >= 4) {
     // far: the hex drum, the roof and the crown
@@ -312,21 +373,22 @@ function build(ctx, collide) {
     return;
   }
   for (let k = 0; k < 6; k++) {
-    wallBand(ctx, k, H.wallBottom, 0.3, [], stone, stone, collide);
+    wallBand(ctx, k, H.wallBottom, 0.3, [], stone, studioWall, collide);
     wallBand(ctx, k, 0.3, H.wallTop, holesFor(k), cobOut, limeIn, collide);
     if (!collide) { cobOut(); wallTop(ctx, k, H.wallTop); }
   }
   if (!collide && lod < 3) {
     ctx.albedo(null); ctx.color("oklch(0.36 0.05 50)"); ctx.roughness(0.6);
-    for (let k = 0; k < 6; k++) { baseboard(ctx, k, H.B, []); baseboard(ctx, k, H.G, holesFor(k)); baseboard(ctx, k, H.A, holesFor(k)); }
+    for (let k = 0; k < 6; k++) { baseboard(ctx, k, H.G, holesFor(k)); baseboard(ctx, k, H.A, holesFor(k)); }
   }
   const th = H.trunkHole, TH = [-th, -th, th, th];
-  floorSlab(ctx, H.B, 0.25, AI + 0.1, [], flags, flags, collide);
+  floorSlab(ctx, H.B, 0.25, AI + 0.1, [], concrete, concrete, collide);
   floorSlab(ctx, H.G, 0.3, AI + 0.1, [TH, H.hatchG], plankIn, beams, collide);
   floorSlab(ctx, H.A, 0.3, AI + 0.1, [TH, H.hatchB ?? H.hatchA], plankIn, beams, collide);
   floorSlab(ctx, H.D, H.roofT, H.deckR * COS30, [TH, H.hatchD], plankTop, beams, collide);
   for (const F of H.flights) flight(ctx, F, collide, stone, beams);
-  beams(); hatchRail(ctx, H.G, H.hatchG, "x0", collide); hatchRail(ctx, H.A, H.hatchA, "x0", collide); hatchRail(ctx, H.D, H.hatchD, "x1", collide);
+  studioStair(ctx, collide);
+  beams(); hatchRail(ctx, H.G, H.hatchG, ["x0", "z1"], collide); hatchRail(ctx, H.A, H.hatchA, ["x0", "z0"], collide); hatchRail(ctx, H.D, H.hatchD, "x1", collide);
   beams(); deckRail(ctx, collide);
   // door thresholds and the two steps up to each door — solid, so the doorway walks
   for (const k of [1, 4]) {
