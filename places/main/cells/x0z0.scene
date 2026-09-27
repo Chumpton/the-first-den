@@ -1,4 +1,193 @@
 # spawn-scene v2 yaml x0z0
+bee-0:
+  castShadow: false
+  feetPosition: {x: 1.6, y: 1.1, z: -11.6}
+  id: bee-0
+  primitive: {kind: scripted, params: {kind: bee, variant: null}, script: scripts/gen/pollinator.js}
+  scale: 1.4
+  state: {kind: bee}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+bee-1:
+  castShadow: false
+  feetPosition: {x: -13.200000000000001, y: 1.1, z: -10.2}
+  id: bee-1
+  primitive: {kind: scripted, params: {kind: bee, variant: null}, script: scripts/gen/pollinator.js}
+  scale: 1.4
+  state: {kind: bee}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+bee-10:
+  castShadow: false
+  feetPosition: {x: 7.699999999999999, y: 1.1, z: -53.4}
+  id: bee-10
+  primitive: {kind: scripted, params: {kind: bee, variant: null}, script: scripts/gen/pollinator.js}
+  scale: 1.4
+  state: {kind: bee}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+bee-11:
+  castShadow: false
+  feetPosition: {x: 12, y: 1.1, z: -51.4}
+  id: bee-11
+  primitive: {kind: scripted, params: {kind: bee, variant: null}, script: scripts/gen/pollinator.js}
+  scale: 1.4
+  state: {kind: bee}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+bee-2:
+  castShadow: false
+  feetPosition: {x: -3.8, y: 1.1, z: -15.6}
+  id: bee-2
+  primitive: {kind: scripted, params: {kind: bee, variant: null}, script: scripts/gen/pollinator.js}
+  scale: 1.4
+  state: {kind: bee}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+bee-3:
+  castShadow: false
+  feetPosition: {x: 12.799999999999999, y: 1.1, z: -16.2}
+  id: bee-3
+  primitive: {kind: scripted, params: {kind: bee, variant: null}, script: scripts/gen/pollinator.js}
+  scale: 1.4
+  state: {kind: bee}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+bee-4:
+  castShadow: false
+  feetPosition: {x: -13.200000000000001, y: 1.1, z: -28.4}
+  id: bee-4
+  primitive: {kind: scripted, params: {kind: bee, variant: null}, script: scripts/gen/pollinator.js}
+  scale: 1.4
+  state: {kind: bee}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+bee-5:
+  castShadow: false
+  feetPosition: {x: -16.099999999999998, y: 1.1, z: -12.2}
+  id: bee-5
+  primitive: {kind: scripted, params: {kind: bee, variant: null}, script: scripts/gen/pollinator.js}
+  scale: 1.4
+  state: {kind: bee}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+bee-6:
+  castShadow: false
+  feetPosition: {x: 15.6, y: 1.1, z: -16.4}
+  id: bee-6
+  primitive: {kind: scripted, params: {kind: bee, variant: null}, script: scripts/gen/pollinator.js}
+  scale: 1.4
+  state: {kind: bee}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+bee-7:
+  castShadow: false
+  feetPosition: {x: 11.799999999999999, y: 1.1, z: -36.4}
+  id: bee-7
+  primitive: {kind: scripted, params: {kind: bee, variant: null}, script: scripts/gen/pollinator.js}
+  scale: 1.4
+  state: {kind: bee}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+bee-8:
+  castShadow: false
+  feetPosition: {x: -10.6, y: 1.1, z: -13.9}
+  id: bee-8
+  primitive: {kind: scripted, params: {kind: bee, variant: null}, script: scripts/gen/pollinator.js}
+  scale: 1.4
+  state: {kind: bee}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+bee-9:
+  castShadow: false
+  feetPosition: {x: -16.3, y: 1.1, z: -22.2}
+  id: bee-9
+  primitive: {kind: scripted, params: {kind: bee, variant: null}, script: scripts/gen/pollinator.js}
+  scale: 1.4
+  state: {kind: bee}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+butterfly-0:
+  castShadow: false
+  feetPosition: {x: 12.4, y: 1.5, z: -51.4}
+  id: butterfly-0
+  primitive: {kind: scripted, params: {kind: butterfly, variant: monarch}, script: scripts/gen/pollinator.js}
+  scale: 1.5
+  state: {kind: butterfly}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+butterfly-1:
+  castShadow: false
+  feetPosition: {x: -13.200000000000001, y: 1.5, z: -10.2}
+  id: butterfly-1
+  primitive: {kind: scripted, params: {kind: butterfly, variant: blue}, script: scripts/gen/pollinator.js}
+  scale: 1.5
+  state: {kind: butterfly}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+butterfly-2:
+  castShadow: false
+  feetPosition: {x: 12.6, y: 1.5, z: -36.4}
+  id: butterfly-2
+  primitive: {kind: scripted, params: {kind: butterfly, variant: white}, script: scripts/gen/pollinator.js}
+  scale: 1.5
+  state: {kind: butterfly}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+butterfly-3:
+  castShadow: false
+  feetPosition: {x: 3.4, y: 1.5, z: -15.6}
+  id: butterfly-3
+  primitive: {kind: scripted, params: {kind: butterfly, variant: lemon}, script: scripts/gen/pollinator.js}
+  scale: 1.5
+  state: {kind: butterfly}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+butterfly-4:
+  castShadow: false
+  feetPosition: {x: 12.799999999999999, y: 1.5, z: -16.2}
+  id: butterfly-4
+  primitive: {kind: scripted, params: {kind: butterfly, variant: pink}, script: scripts/gen/pollinator.js}
+  scale: 1.5
+  state: {kind: butterfly}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+butterfly-5:
+  castShadow: false
+  feetPosition: {x: -15.5, y: 1.5, z: -22.2}
+  id: butterfly-5
+  primitive: {kind: scripted, params: {kind: butterfly, variant: monarch}, script: scripts/gen/pollinator.js}
+  scale: 1.5
+  state: {kind: butterfly}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+butterfly-6:
+  castShadow: false
+  feetPosition: {x: 16, y: 1.5, z: -29.5}
+  id: butterfly-6
+  primitive: {kind: scripted, params: {kind: butterfly, variant: blue}, script: scripts/gen/pollinator.js}
+  scale: 1.5
+  state: {kind: butterfly}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+butterfly-7:
+  castShadow: false
+  feetPosition: {x: -16.099999999999998, y: 1.5, z: -12.2}
+  id: butterfly-7
+  primitive: {kind: scripted, params: {kind: butterfly, variant: white}, script: scripts/gen/pollinator.js}
+  scale: 1.5
+  state: {kind: butterfly}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+butterfly-8:
+  castShadow: false
+  feetPosition: {x: 12.8, y: 1.5, z: -51.4}
+  id: butterfly-8
+  primitive: {kind: scripted, params: {kind: butterfly, variant: lemon}, script: scripts/gen/pollinator.js}
+  scale: 1.5
+  state: {kind: butterfly}
+  tags: [pollinator]
+  visibleRange: {max: 45}
 camp-spot:
   castShadow: true
   feetPosition: {x: -18, y: 0.5, z: -50}
@@ -1873,6 +2062,51 @@ den-tea-tea-pot:
   material: {color: oklch(0.72 0.08 190), roughness: 0.35}
   primitive: {kind: sphere, radius: 0.09}
   tags: [cob-interior]
+dragonfly-0:
+  castShadow: false
+  feetPosition: {x: 16.4, y: 1.9, z: -16.4}
+  id: dragonfly-0
+  primitive: {kind: scripted, params: {kind: dragonfly, variant: teal}, script: scripts/gen/pollinator.js}
+  scale: 1.6
+  state: {kind: dragonfly}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+dragonfly-1:
+  castShadow: false
+  feetPosition: {x: 12.6, y: 1.9, z: -36.4}
+  id: dragonfly-1
+  primitive: {kind: scripted, params: {kind: dragonfly, variant: red}, script: scripts/gen/pollinator.js}
+  scale: 1.6
+  state: {kind: dragonfly}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+dragonfly-2:
+  castShadow: false
+  feetPosition: {x: -9.799999999999999, y: 1.9, z: -13.9}
+  id: dragonfly-2
+  primitive: {kind: scripted, params: {kind: dragonfly, variant: blue}, script: scripts/gen/pollinator.js}
+  scale: 1.6
+  state: {kind: dragonfly}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+dragonfly-3:
+  castShadow: false
+  feetPosition: {x: -15.5, y: 1.9, z: -22.2}
+  id: dragonfly-3
+  primitive: {kind: scripted, params: {kind: dragonfly, variant: teal}, script: scripts/gen/pollinator.js}
+  scale: 1.6
+  state: {kind: dragonfly}
+  tags: [pollinator]
+  visibleRange: {max: 45}
+dragonfly-4:
+  castShadow: false
+  feetPosition: {x: 8.5, y: 1.9, z: -53.4}
+  id: dragonfly-4
+  primitive: {kind: scripted, params: {kind: dragonfly, variant: red}, script: scripts/gen/pollinator.js}
+  scale: 1.6
+  state: {kind: dragonfly}
+  tags: [pollinator]
+  visibleRange: {max: 45}
 dune:
   behavior: scripts/dune.js
   castShadow: true
@@ -2834,6 +3068,11 @@ path-lamp-pathLake-0:
   primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
   rotation: {lookAt: {x: 1.2168871427900494, y: 0, z: -39.30685128452787}}
   tags: [path-lamp]
+pollinator-keeper:
+  behavior: scripts/pollinators.js
+  feetPosition: {x: 0, y: 0.5, z: -30}
+  id: pollinator-keeper
+  tags: [manager]
 raincatch-site:
   castShadow: true
   feetPosition: {x: 9.82, y: 0.5, z: -23.2}
