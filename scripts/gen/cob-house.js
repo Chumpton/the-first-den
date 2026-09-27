@@ -2,8 +2,8 @@
 // front door in the +Z face. Levels (local y): cellar B, ground G, attic A, roof deck D. A spiral stair winds round
 // the trunk from the cellar floor to the roof in one helix, 19 steps a storey.
 export const HOUSE = {
-  R: 6.5, T: 0.5, B: -3.0, G: 0.4, A: 3.8, D: 7.2, wallBottom: -3.25, wallTop: 5.25,
-  eaveR: 7.4, eaveY: 4.75, deckR: 3.4, roofT: 0.45, hole: 1.6, rail: 1.7, trunkR: 0.35, stepR: 1.55,
+  R: 9.2, T: 0.5, B: -3.0, G: 0.4, A: 3.8, D: 7.2, wallBottom: -3.25, wallTop: 5.25,
+  eaveR: 10.1, eaveY: 4.75, deckR: 4.8, roofT: 0.45, hole: 1.6, rail: 1.7, trunkR: 0.35, stepR: 1.55,
   rise: 0.2, run: 0.28, treads: 16, flightW: 1.0,
   // straight flights: bottom point, run direction, which floor they start on
   flights: [
@@ -399,8 +399,8 @@ function greenery(ctx) {
   for (let k = 0; k < 6; k++) {
     const { n, t } = faceFrame(k), L = AO * TAN30, door = k === 1 || k === 4;
     // bushes along the foot of the wall
-    for (let i = 0; i < 7; i++) {
-      const u = -L + 0.6 + (i / 6) * (2 * L - 1.2) + (ctx.random() - 0.5) * 0.3;
+    for (let i = 0; i < 10; i++) {
+      const u = -L + 0.6 + (i / 9) * (2 * L - 1.2) + (ctx.random() - 0.5) * 0.3;
       if (door && Math.abs(u) < 1.75) continue;
       const r = 0.45 + ctx.random() * 0.3, d = AO + 0.55 + ctx.random() * 0.35;
       blob(ctx, n[0] * d + t[0] * u, r * 0.75, n[2] * d + t[2] * u, r, r * 0.85, r, seg, leaf);
@@ -408,7 +408,7 @@ function greenery(ctx) {
     }
     if (lod >= 3) continue;
     // climbing roses on a trellis beside the windows
-    if (!door) for (const u of [-2.5, 2.5]) {
+    if (!door) for (const u of [-3.4, 3.4]) {
       ctx.color("#8a6a48"); for (let j = 0; j < 4; j++) { const uu = u - 0.3 + j * 0.2; obox(ctx, [n[0] * (AO + 0.06) + t[0] * uu, 0.1, n[2] * (AO + 0.06) + t[2] * uu], t, n, 0.03, 3.2, 0.03); }
       for (let j = 0; j < 22; j++) { const uu = u + (ctx.random() - 0.5) * 0.8, y = 0.3 + ctx.random() * 3.1, c = [n[0] * (AO + 0.12) + t[0] * uu, y, n[2] * (AO + 0.12) + t[2] * uu];
         blob(ctx, c[0], c[1], c[2], 0.16, 0.14, 0.16, 4, leaf); if (j % 3 === 0) { ctx.color("#d9485f"); box(ctx, c[0] - 0.05 + n[0] * 0.1, y, c[2] - 0.05 + n[2] * 0.1, c[0] + 0.05 + n[0] * 0.1, y + 0.08, c[2] + 0.05 + n[2] * 0.1); } }
