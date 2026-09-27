@@ -53,8 +53,18 @@ function alchemyHud(player) {
   }
   return h;
 }
+
+// Boat fishing (scripts/rowboat.js): the "2 · fish" hint while seated, and the item-get banner while a catch is held up.
+function fishHud(player) {
+  const c = player?.controlling, st = player?.state || {};
+  if (c?.state?.kind !== 'boat') return '';
+  const g = st.fishGet, ph = c.state.fishing?.phase;
+  if (g) return `<div style="position:fixed;left:50%;top:18%;transform:translateX(-50%);pointer-events:none;text-align:center;padding:12px 28px;border-radius:16px;background:rgba(20,16,10,.8);border:2px solid ${g.color};box-shadow:0 0 24px ${g.color}66;font-family:Georgia,serif;color:#f7eedd"><div style="font-size:13px;letter-spacing:.2em;opacity:.8">${g.fish ? (g.rare ? '✦ RARE CATCH ✦' : 'YOU CAUGHT') : 'YOU FISHED UP'}</div><div style="font-size:30px;color:${g.color};margin-top:2px">${g.name}${g.fish ? '!' : '…'}</div>${g.fish ? `<div style="font-size:12px;opacity:.7;margin-top:4px">${g.n} caught</div>` : ''}</div>`;
+  const tip = ph === 'bite' ? '<b style="color:#ffd24a">[2] HOOK IT!</b>' : ph === 'wait' || ph === 'cast' ? 'waiting for a bite… · [2] reel in' : 'W/S row · A/D turn · <b>[2] fish</b> · E step out';
+  return `<div style="position:fixed;left:50%;bottom:26px;transform:translateX(-50%);pointer-events:none;padding:7px 16px;border-radius:999px;background:rgba(29,23,18,.72);border:1px solid rgba(242,230,207,.3);color:#f7eedd;font-family:Georgia,serif;font-size:14px">${tip}</div>`;
+}
 export default function (ctx, player) {
-  const hud = secretHint(player) + secretCount(player) + courierHud(ctx, player) + travelHud(player) + alchemyHud(player);
+  const hud = secretHint(player) + secretCount(player) + courierHud(ctx, player) + travelHud(player) + alchemyHud(player) + fishHud(player);
   const c = player?.controlling;
   if (player?.state?.deleteMode) return `<div style="position:fixed;left:50%;top:50%;width:10px;height:10px;margin:-5px 0 0 -5px;border:2px solid #ff6b5b;border-radius:50%;pointer-events:none"></div><div style="position:fixed;left:50%;top:22px;transform:translateX(-50%);pointer-events:none;padding:7px 16px;border-radius:999px;background:rgba(120,24,18,.8);border:1px solid rgba(255,160,150,.5);color:#fff1ee;font-family:Georgia,serif;font-size:14px">delete mode · look at a thing · 9 removes it · 8 exits</div>`;
   if (c?.state?.kind === 'purple-dragon') {
