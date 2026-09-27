@@ -4,6 +4,7 @@ import { COURIER as CR } from './lib/data/courier.js';
 import { TRAVEL as TV } from './lib/data/travel.js';
 import { ALCHEMY } from './lib/data/alchemy.js';
 import { GARDEN as GD } from './lib/data/garden.js';
+import { MUSHROOMS } from './lib/data/mushrooms.js';
 // Tomas the Courier: the city picker by his horse, the rider's line while riding, and 'on the road' for everyone else near his post.
 const CPILL = 'position:fixed;left:50%;transform:translateX(-50%);padding:8px 16px;border-radius:14px;background:rgba(40,28,14,.78);border:1px solid rgba(242,214,160,.45);color:#f7eedd;font-family:Georgia,serif;font-size:14px;white-space:nowrap';
 const CBTN = 'pointer-events:auto;cursor:pointer;margin:0 4px;padding:6px 12px;border-radius:10px;border:1px solid rgba(255,220,150,.6);background:rgba(120,78,30,.85);color:#fff3d8;font-family:Georgia,serif;font-size:14px';
@@ -55,6 +56,14 @@ function alchemyHud(player) {
   return h;
 }
 
+// Wild mushrooms (scripts/wild-mushroom.js): one chip stacked above the alchemy chips, shown once any are picked.
+function mushroomHud(player) {
+  const st = player?.state || {}, m = st.mushrooms || {}, total = Object.values(m).reduce((a, n) => a + (n || 0), 0);
+  if (!total) return '';
+  const below = ((st.harvest ?? 0) > 0) + ((st.seeds ?? 0) > 0) + ((st.fish ?? 0) > 0) + (st.buff && st.buffLeft > 0 ? 1 : 0);
+  const dots = Object.entries(MUSHROOMS.kinds).filter(([k]) => m[k] > 0).map(([k, K]) => `<span style="display:inline-flex;align-items:center;gap:3px;margin-left:7px;opacity:.9"><span style="width:7px;height:7px;border-radius:50%;background:${K.css}"></span>${m[k]}</span>`).join('');
+  return `<div style="position:fixed;left:18px;bottom:${58 + below * 29}px;pointer-events:none;padding:4px 11px;border-radius:999px;background:rgba(40,28,14,.6);color:#f7eedd;font-family:Georgia,serif;font-size:13px;white-space:nowrap">&#127812; mushrooms ${total}<span style="font-size:11px">${dots}</span></div>`;
+}
 // Boat fishing (scripts/rowboat.js): the "2 · fish" hint while seated, and the item-get banner while a catch is held up.
 function fishHud(player) {
   const c = player?.controlling, st = player?.state || {};
@@ -78,7 +87,7 @@ function gardenHud(player) {
   return `<div style="position:fixed;right:78px;bottom:24px;display:flex;flex-direction:column;align-items:flex-end;gap:5px;pointer-events:none"><div style="font-family:Georgia,serif;font-size:12px;color:#ffe7a8;letter-spacing:.12em;text-shadow:0 1px 2px #0008">TOWER GARDENS · E seeds › plant › water › harvest</div>${rows.join('')}</div>`;
 }
 export default function (ctx, player) {
-  const hud = secretHint(player) + secretCount(player) + courierHud(ctx, player) + travelHud(player) + alchemyHud(player) + fishHud(player) + gardenHud(player);
+  const hud = secretHint(player) + secretCount(player) + courierHud(ctx, player) + travelHud(player) + alchemyHud(player) + mushroomHud(player) + fishHud(player) + gardenHud(player);
   const c = player?.controlling;
   if (player?.state?.deleteMode) return `<div style="position:fixed;left:50%;top:50%;width:10px;height:10px;margin:-5px 0 0 -5px;border:2px solid #ff6b5b;border-radius:50%;pointer-events:none"></div><div style="position:fixed;left:50%;top:22px;transform:translateX(-50%);pointer-events:none;padding:7px 16px;border-radius:999px;background:rgba(120,24,18,.8);border:1px solid rgba(255,160,150,.5);color:#fff1ee;font-family:Georgia,serif;font-size:14px">delete mode · look at a thing · 9 removes it · 8 exits</div>`;
   if (c?.state?.kind === 'purple-dragon') {
