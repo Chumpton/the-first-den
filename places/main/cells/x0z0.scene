@@ -1598,17 +1598,6 @@ cob-in-g-roundrug:
   receiveShadow: true
   tags: [cob-interior]
   visibleRange: {max: 60}
-cob-in-g-rug-dining:
-  castShadow: false
-  feetPosition: {x: -4, y: 0.905, z: -26.3}
-  id: cob-in-g-rug-dining
-  material: {pbr: true, roughness: 1}
-  physics: none
-  primitive: {kind: scripted, params: {c1: "#b0553a", c2: "#e9d2ad", c3: "#4f3828", item: arearug, l: 2.9, w: 2.9}, script: scripts/gen/cob-furnish.js}
-  receiveShadow: true
-  rotation: {yaw: 0}
-  tags: [cob-interior, rug]
-  visibleRange: {max: 140}
 cob-in-g-rug-entry:
   castShadow: false
   feetPosition: {x: -5.196152422706632, y: 0.905, z: -23}
