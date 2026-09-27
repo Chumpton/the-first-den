@@ -3519,11 +3519,11 @@ warden-s:
   behavior: [scripts/tower-warden.js]
   castShadow: true
   children: [{feetPosition: {x: 0, y: 2.2, z: 0}, id: tag, text: {color: "#bff0d8", content: Warden Briar, size: 0.3}}, {castShadow: true, feetPosition: {x: 0, y: 0, z: 0}, id: cloak, primitive: {kind: scripted, script: scripts/gen/warden-cloak.js}}, {attachment: {bone: RightHand}, castShadow: true, feetPosition: {x: 0, y: 0, z: 0}, id: staff, primitive: {kind: scripted, script: scripts/gen/warden-staff.js}}]
-  feetPosition: {x: 11.6, y: 11.858170200856565, z: 23}
+  feetPosition: {x: 29.6, y: 11.762826137334228, z: -4}
   id: warden-s
   model: "https://www.spawn.co/magic/character-character-54ug69f6.glb?animations=Idle,Walk,Run"
   physics: none
-  state: {center: {x: 10, y: 11.858170200856565, z: 23}, name: Warden Briar, tower: s}
+  state: {center: {x: 28, y: 11.762826137334228, z: -4}, name: Warden Briar, tower: s}
   tags: [interactable, npc, warden]
 warden-tower-e:
   castShadow: true
@@ -3538,12 +3538,12 @@ warden-tower-e:
 warden-tower-s:
   castShadow: true
   children: [{behavior: scripts/warden-crystal.js, castShadow: false, feetPosition: {x: 0, y: 17.95, z: 0}, fx: {script: "fx\npop motes rate=6 on=sphere(1.2) life=2..4 v=up(.2)+curl(.3) size=.04..0.08 acc=curl(.4)+drag(.6) col=hdr(.6,2.4,1.8) a=0>.2:1>.8:1>0 sz=$size*flick(3,.3) r=sprite(soft-disc,add)\npop halo n=1 size=1.6 col=hdr(.25,.9,.7) a=.35*flick(.4,.3) sz=$size r=sprite(soft-disc,add)"}, id: crystal, primitive: {kind: scripted, params: {part: crystal}, script: scripts/gen/warden-tower.js}}, {feetPosition: {x: 0, y: 18.7, z: 0}, id: glow, light: {color: "#5fe8c4", distance: 18, intensity: 4, kind: point}}]
-  feetPosition: {x: 10, y: 0.858170200856565, z: 23}
+  feetPosition: {x: 28, y: 0.7628261373342284, z: -4}
   id: warden-tower-s
   physics: static
   primitive: {kind: scripted, params: {}, script: scripts/gen/warden-tower.js, seed: 37}
   receiveShadow: true
-  rotation: {yaw: 11.534620653644717}
+  rotation: {yaw: 51.84277341263093}
   tags: [grounds, warden-tower]
 waylamp-east-0:
   feetPosition: {x: 35.209477844110445, y: {terrain: 0}, z: 10.689127905552567}
