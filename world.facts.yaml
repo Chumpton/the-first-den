@@ -31,6 +31,7 @@ assets:
     "anim/dog.yml#trot": clips/anim-dog-yml-trot-0dbc9103.json
     "anim/dog.yml#wag": clips/anim-dog-yml-wag-f016903f.json
     "anim/dog.yml#walk": clips/anim-dog-yml-walk-1f9abb93.json
+    "anim/fairy.yml#flutter": clips/anim-fairy-yml-flutter-1dc0bc8b.json
     "anim/fox.yml#sniff": clips/anim-fox-yml-sniff-459554f1.json
     "anim/fox.yml#walk": clips/anim-fox-yml-walk-1d210e7e.json
     "anim/pollinator.yml#bee-fly": clips/anim-pollinator-yml-bee-fly-5e11c434.json
