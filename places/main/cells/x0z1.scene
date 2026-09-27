@@ -11,6 +11,39 @@ corridor-road-bp/marker-2:
   tags: [town-lane, mile-marker]
   ui: "<div face=\"front\" at=\"0.5 0.52\" width=\"0.32m\" style=\"height:560px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:#e4d9c1;border:10px solid #cbbd9e;border-radius:26px;color:#5a4330;font-family:serif;font-weight:700;text-align:center\"><div style=\"width:0;height:0;border-left:46px solid transparent;border-right:46px solid transparent;border-bottom:64px solid #5a4330\"></div><div style=\"font-size:70px;letter-spacing:6px;line-height:1.05;text-shadow:0 4px 0 rgba(255,250,235,.7)\">DEN</div><div style=\"font-size:120px;letter-spacing:6px;line-height:1.05;text-shadow:0 4px 0 rgba(255,250,235,.7)\">1</div><div style=\"font-size:40px;letter-spacing:6px;line-height:1.05;text-shadow:0 4px 0 rgba(255,250,235,.7)\">mile</div></div>"
   visibleRange: {max: 70}
+link-east:
+  castShadow: false
+  feetPosition: {x: 22, y: 0, z: 104.25}
+  id: link-east
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: lane, lamps: [[27.12, 0.5, -3.96, -1]]}, script: scripts/gen/town-link.js}
+  tags: [town, town-link]
+  visibleRange: {max: 110}
+link-east/light:
+  feetPosition: {x: 26.37, y: 4.5, z: -3.96}
+  id: link-east/light
+  light: {color: oklch(0.85 0.1 70), distance: 11, intensity: 3, kind: point}
+  parent: link-east
+link-ring/light:
+  feetPosition: {x: -93.42, y: 4.5, z: 48.16}
+  id: link-ring/light
+  light: {color: oklch(0.85 0.1 70), distance: 11, intensity: 3, kind: point}
+  parent: link-ring
+link-west:
+  castShadow: false
+  feetPosition: {x: -22, y: 0, z: 105}
+  id: link-west
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: lane, lamps: [[-22.82, 0.5, -9.67, -1]]}, script: scripts/gen/town-link.js}
+  tags: [town, town-link]
+  visibleRange: {max: 110}
+link-west/light:
+  feetPosition: {x: -23.57, y: 4.5, z: -9.67}
+  id: link-west/light
+  light: {color: oklch(0.85 0.1 70), distance: 11, intensity: 3, kind: point}
+  parent: link-west
 royal-district:
   feetPosition: {x: 0, y: 0.5, z: 190}
   id: royal-district
@@ -18,6 +51,84 @@ royal-district:
   physics: none
   primitive: {depth: 72, height: 8, kind: box, width: 110}
   tags: [blueprint]
+sign-link-east:
+  castShadow: false
+  feetPosition: {x: 44, y: 0.5847130529688586, z: 108}
+  id: sign-link-east
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: post}, script: scripts/gen/town-link.js}
+  tags: [town, town-link, signpost]
+  visibleRange: {max: 70}
+sign-link-east/finger-0:
+  castShadow: false
+  feetPosition: {x: 0, y: 2.72, z: 0}
+  id: sign-link-east/finger-0
+  material: {pbr: true}
+  parent: sign-link-east
+  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
+  rotation: {yaw: 168.6900675259798}
+  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Market Square &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Market Square</div>"
+  visibleRange: {max: 45}
+sign-link-east/finger-1:
+  castShadow: false
+  feetPosition: {x: 0, y: 2.3200000000000003, z: 0}
+  id: sign-link-east/finger-1
+  material: {pbr: true}
+  parent: sign-link-east
+  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
+  rotation: {yaw: 59.03624346792648}
+  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Magic District &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Magic District</div>"
+  visibleRange: {max: 45}
+sign-link-east/finger-2:
+  castShadow: false
+  feetPosition: {x: 0, y: 1.9200000000000002, z: 0}
+  id: sign-link-east/finger-2
+  material: {pbr: true}
+  parent: sign-link-east
+  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
+  rotation: {yaw: 168.6900675259798}
+  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Garden Market &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Garden Market</div>"
+  visibleRange: {max: 45}
+sign-link-west:
+  castShadow: false
+  feetPosition: {x: -44, y: 0.3134496893616706, z: 108.5}
+  id: sign-link-west
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: post}, script: scripts/gen/town-link.js}
+  tags: [town, town-link, signpost]
+  visibleRange: {max: 70}
+sign-link-west/finger-0:
+  castShadow: false
+  feetPosition: {x: 0, y: 2.72, z: 0}
+  id: sign-link-west/finger-0
+  material: {pbr: true}
+  parent: sign-link-west
+  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
+  rotation: {yaw: 11.309932474020213}
+  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Market Square &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Market Square</div>"
+  visibleRange: {max: 45}
+sign-link-west/finger-1:
+  castShadow: false
+  feetPosition: {x: 0, y: 2.3200000000000003, z: 0}
+  id: sign-link-west/finger-1
+  material: {pbr: true}
+  parent: sign-link-west
+  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
+  rotation: {yaw: 120.96375653207352}
+  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Garden Market &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Garden Market</div>"
+  visibleRange: {max: 45}
+sign-link-west/finger-2:
+  castShadow: false
+  feetPosition: {x: 0, y: 1.9200000000000002, z: 0}
+  id: sign-link-west/finger-2
+  material: {pbr: true}
+  parent: sign-link-west
+  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
+  rotation: {yaw: 11.309932474020213}
+  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Magic District &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Magic District</div>"
+  visibleRange: {max: 45}
 town-alleys:
   feetPosition: {x: 0, y: 0, z: 100}
   id: town-alleys

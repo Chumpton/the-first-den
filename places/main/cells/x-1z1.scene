@@ -6,6 +6,35 @@ garden-district:
   physics: none
   primitive: {depth: 46, height: 6, kind: box, width: 46}
   tags: [blueprint]
+sign-ring-west:
+  castShadow: false
+  feetPosition: {x: -87, y: 0.42651934244879447, z: 104}
+  id: sign-ring-west
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: post}, script: scripts/gen/town-link.js}
+  tags: [town, town-link, signpost]
+  visibleRange: {max: 70}
+sign-ring-west/finger-0:
+  castShadow: false
+  feetPosition: {x: 0, y: 2.72, z: 0}
+  id: sign-ring-west/finger-0
+  material: {pbr: true}
+  parent: sign-ring-west
+  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
+  rotation: {yaw: -63.43494882292201}
+  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Magic District &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Magic District</div>"
+  visibleRange: {max: 45}
+sign-ring-west/finger-1:
+  castShadow: false
+  feetPosition: {x: 0, y: 2.3200000000000003, z: 0}
+  id: sign-ring-west/finger-1
+  material: {pbr: true}
+  parent: sign-ring-west
+  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
+  rotation: {yaw: 30.96375653207352}
+  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Garden Market &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Garden Market</div>"
+  visibleRange: {max: 45}
 wild-mushroom-18:
   behavior: scripts/wild-mushroom.js
   castShadow: false
