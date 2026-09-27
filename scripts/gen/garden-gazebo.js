@@ -1,17 +1,28 @@
 // Open hexagonal honey-oak gazebo: limestone plinth, six posts, lattice rails with the entrance (−Z side) open,
-// a bench ring, a verdigris copper dome with a brass finial and a hanging lantern. Feet at plinth base centre.
+// a round limestone bench ring round a birdbath fountain, a stone entrance step, a verdigris copper dome with a brass finial and a hanging lantern. Feet at plinth base centre.
 import { beam, lathe, lantern, paint, prism, box, gem, Q, T, solid } from '../lib/garden-kit.js';
 const R = 2.05, POST = 2.42, EAVE = 2.5, RE = 2.6, APEX = 3.55, ENT = 4, FL = 0.1;
+export const GZ = { R, POST, EAVE, RE, APEX, ENT, FL };
 const ang = (k) => k * Math.PI / 3;
 const V = (r, k, y = 0) => [Math.cos(ang(k)) * r, y, Math.sin(ang(k)) * r];
 const hex = (r) => [0, 1, 2, 3, 4, 5].map((k) => [Math.cos(ang(k)) * r, Math.sin(ang(k)) * r]);
 const lerp = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
 const OAK = 'oklch(0.95 0.03 75)', STONE = 'oklch(0.94 0.015 85)', COPPER = 'oklch(0.95 0.03 170)';
-function seats() { // bench ring trapezoids on the five railed sides
-  const A = R * Math.cos(Math.PI / 6), ro = (A - 0.13) / Math.cos(Math.PI / 6), ri = (A - 0.52) / Math.cos(Math.PI / 6), out = [];
-  for (let k = 0; k < 6; k++) if (k !== ENT) out.push([[V(ro, k)[0], V(ro, k)[2]], [V(ro, k + 1)[0], V(ro, k + 1)[2]], [V(ri, k + 1)[0], V(ri, k + 1)[2]], [V(ri, k)[0], V(ri, k)[2]]]);
+// round stone bench ring in the middle: three arcs, gaps toward the entrance and the two back corners
+const BR0 = 0.58, BR1 = 0.9, BH = 0.44, GAPS = [-Math.PI / 2, Math.PI / 6, 5 * Math.PI / 6], GW = 0.38;
+export const BATH = { top: 0.9 }; // spout tip height above feet
+function arcs(n, r0, r1) { // convex trapezoids along each bench arc
+  const out = [];
+  for (let i = 0; i < 3; i++) {
+    const a0 = GAPS[i] + GW, a1 = GAPS[(i + 1) % 3] + (i === 2 ? Math.PI * 2 : 0) - GW;
+    for (let j = 0; j < n; j++) {
+      const b0 = a0 + (a1 - a0) * j / n, b1 = a0 + (a1 - a0) * (j + 1) / n, P = (r, b) => [Math.cos(b) * r, Math.sin(b) * r];
+      out.push([P(r0, b0), P(r1, b0), P(r1, b1), P(r0, b1)]);
+    }
+  }
   return out;
 }
+const STEP = [[-1.42, -2.0], [1.42, -2.0], [1.42, -2.64], [-1.42, -2.64]];
 function domeRings(J, scale = 1, dy = 0) {
   const rings = [];
   for (let j = 0; j <= J; j++) {
@@ -65,11 +76,23 @@ export function geometry(ctx) {
       }
     } else if (lod === 3) for (let i = 1; i < 4; i++) beam(ctx, at(L * i / 4, 0.26), at(L * i / 4, 0.92), 0.04);
   }
-  // bench ring
-  for (const q of seats()) {
-    prism(ctx, q, 0.42, 0.47);
-    if (lod <= 2) { const m = (a, b) => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]; for (const t of [m(q[2], q[3])]) box(ctx, t[0] - 0.05, FL, t[1] - 0.05, t[0] + 0.05, 0.42, t[1] + 0.05); }
+  // entrance step
+  paint(ctx, 'stone', STONE, 0.9); prism(ctx, STEP, g + 0.1, 0.05);
+  // round stone bench ring: pedestal under an overhanging seat slab
+  paint(ctx, 'stone', 'oklch(0.93 0.02 85)', 0.9);
+  if (lod <= 2) { for (const q of arcs(lod <= 1 ? 5 : 3, BR0 + 0.07, BR1 - 0.07)) prism(ctx, q, FL, BH - 0.07); for (const q of arcs(lod <= 1 ? 5 : 3, BR0 - 0.02, BR1 + 0.03)) prism(ctx, q, BH - 0.07, BH); }
+  else for (const q of arcs(2, BR0, BR1)) prism(ctx, q, FL, BH);
+  // birdbath fountain: pedestal, bowl, still teal water, a little spout
+  const bn = lod <= 1 ? 12 : lod <= 3 ? 8 : 5, c0 = [0, FL, 0];
+  paint(ctx, 'stone', 'oklch(0.9 0.02 85)', 0.85);
+  lathe(ctx, [[0.2, 0], [0.2, 0.06], [0.12, 0.1], [0.08, 0.16], [0.07, 0.5], [0.1, 0.58], [0.28, 0.68], [0.31, 0.74], [0.27, 0.75], [0.25, 0.63]], bn, c0);
+  if (lod <= 3) {
+    ctx.albedo(null); ctx.color('oklch(0.64 0.09 195)'); ctx.roughness(0.06); ctx.metalness(0.15); ctx.emissive(null);
+    lathe(ctx, [[0, 0.72], [0.272, 0.72]], bn, c0);
+    paint(ctx, 'stone', 'oklch(0.88 0.02 85)', 0.85);
+    lathe(ctx, [[0.06, 0.6], [0.035, 0.7], [0.03, 0.74], [0.055, 0.78], [0, BATH.top - FL]], bn > 6 ? 6 : 4, c0);
   }
+  if (lod <= 1) { paint(ctx, null, 'oklch(0.55 0.06 60)', 0.8); gem(ctx, 0.26, FL + 0.8, 0.08, 0.04, 0.035, 0.03, 5); gem(ctx, 0.29, FL + 0.84, 0.09, 0.022, 0.02, 0.015, 4); }
   // dome: copper outside, oak ceiling inside
   const J = lod <= 1 ? 6 : lod <= 3 ? 3 : 2, outer = domeRings(J);
   paint(ctx, 'copper', COPPER, 0.55, 0.35);
@@ -100,5 +123,7 @@ export function collider(ctx) {
   prism(ctx, hex(R + 0.3), -0.2, FL);
   for (let k = 0; k < 6; k++) { const [x, , z] = V(R - 0.08, k); box(ctx, x - 0.09, FL, z - 0.09, x + 0.09, POST, z + 0.09); }
   for (let k = 0; k < 6; k++) if (k !== ENT) beam(ctx, lerp(V(R - 0.08, k, 0.55), V(R - 0.08, k + 1, 0.55), 0.03), lerp(V(R - 0.08, k, 0.55), V(R - 0.08, k + 1, 0.55), 0.97), 0.1, 0.9);
-  for (const q of seats()) prism(ctx, q, FL, 0.47);
+  prism(ctx, STEP, -0.2, 0.05);
+  for (const q of arcs(2, BR0, BR1)) prism(ctx, q, FL, BH);
+  box(ctx, -0.3, FL, -0.3, 0.3, FL + 0.76, 0.3);
 }
