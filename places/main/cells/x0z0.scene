@@ -3325,6 +3325,13 @@ lake-rowboat:
   rotation: {yaw: 180}
   tags: [interactable, mount, boat]
   visibleRange: {max: 200}
+lamplight:
+  feetPosition: {x: -10, y: 0.5, z: -25}
+  id: lamplight
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 40, height: 6, kind: box, width: 40}
+  tags: [blueprint]
 lawn-flowers-coop-walk:
   feetPosition: {x: 21.03, y: {terrain: 0}, z: -21.55}
   id: lawn-flowers-coop-walk
