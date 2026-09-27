@@ -100,8 +100,8 @@ export function update(ctx, dt) {
     while (d < 0.35 && m.i < path.length - 1) { m.i++; t = path[m.i]; dx = t[0] - f.x; dz = t[1] - f.z; d = Math.hypot(dx, dz) }
     const last = m.i >= path.length - 1
     // stuck guard: no progress for 4 s → hop to the next point
-    m.best = Math.min(m.best ?? 1e9, d); m.stuck = d < m.best + 0.01 && d >= m.best - 0.01 ? (m.stuck ?? 0) + dt : 0
-    if (d < m.best - 0.05) { m.best = d; m.stuck = 0 }
+    if (m.bestFor !== m.i) { m.bestFor = m.i; m.best = d; m.stuck = 0 }
+    if (d < (m.best ?? 1e9) - 0.05) { m.best = d; m.stuck = 0 } else m.stuck = (m.stuck ?? 0) + dt
     if (m.stuck > 4) { ctx.self.feetPosition = { x: t[0], y: f.y + 0.1, z: t[1] }; m.stuck = 0; m.best = 1e9; if (!last) m.i++ ; return }
     if (last && d < 0.3) {
       ctx.self.velocity = { x: 0, y: 0, z: 0 }; m.best = 1e9
