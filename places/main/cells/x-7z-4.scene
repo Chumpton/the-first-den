@@ -358,3 +358,99 @@ hearthmere/hearth-workshop:
   rotation: {yaw: 180}
   tags: [hearth-house, hearth-enterable]
   visibleRange: {max: 700}
+path-lamp-hearthLaneGate-0:
+  castShadow: true
+  feetPosition: {x: -835.0857841027286, y: {terrain: 0}, z: -463.1526082189439}
+  id: path-lamp-hearthLaneGate-0
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -833.6966711680672, y: 0, z: -466.52794009222043}}
+  tags: [path-lamp]
+path-lamp-hearthLaneGate-1:
+  castShadow: true
+  feetPosition: {x: -845.1050746690865, y: {terrain: 0}, z: -475.34236171722483}
+  id: path-lamp-hearthLaneGate-1
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -846.5806874031725, y: 0, z: -472.00393887716945}}
+  tags: [path-lamp]
+path-lamp-hearthLaneHome-0:
+  castShadow: true
+  feetPosition: {x: -891.9651365698595, y: {terrain: 0}, z: -479.28353609456565}
+  id: path-lamp-hearthLaneHome-0
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -894.6019851239159, y: 0, z: -479.01985123916006}}
+  tags: [path-lamp]
+path-lamp-hearthLaneMain-0:
+  castShadow: true
+  feetPosition: {x: -864.3203630633354, y: {terrain: 0}, z: -475.03721756598185}
+  id: path-lamp-hearthLaneMain-0
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -863.9778842207138, y: 0, z: -478.419924801667}}
+  tags: [path-lamp]
+path-lamp-hearthLaneMain-1:
+  castShadow: true
+  feetPosition: {x: -877.4263563455061, y: {terrain: 0}, z: -483.35312783590916}
+  id: path-lamp-hearthLaneMain-1
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -877.8890893337377, y: 0, z: -479.98476351748957}}
+  tags: [path-lamp]
+path-lamp-hearthLaneMain-2:
+  castShadow: true
+  feetPosition: {x: -892.4016047051807, y: {terrain: 0}, z: -478.9498483061087}
+  id: path-lamp-hearthLaneMain-2
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -891.6980763767951, y: 0, z: -482.27626498042343}}
+  tags: [path-lamp]
+path-lamp-hearthLaneMain-3:
+  castShadow: true
+  feetPosition: {x: -904.2077043139386, y: {terrain: 0}, z: -489.10623131969925}
+  id: path-lamp-hearthLaneMain-3
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -905.2244120090327, y: 0, z: -485.86180448854145}}
+  tags: [path-lamp]
+path-lamp-hearthLaneMain-4:
+  castShadow: true
+  feetPosition: {x: -919.6925431970732, y: {terrain: 0}, z: -487.1208936778385}
+  id: path-lamp-hearthLaneMain-4
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -918.4977560060139, y: 0, z: -490.3040499052456}}
+  tags: [path-lamp]
+path-lamp-hearthLaneMain-5:
+  castShadow: true
+  feetPosition: {x: -931.3260615140313, y: {terrain: 0}, z: -497.7137826263829}
+  id: path-lamp-hearthLaneMain-5
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -931.872842427954, y: 0, z: -494.3580367134494}}
+  tags: [path-lamp]
+path-lamp-hearthLaneMain-6:
+  castShadow: true
+  feetPosition: {x: -946.0194701823397, y: {terrain: 0}, z: -492.3056234934207}
+  id: path-lamp-hearthLaneMain-6
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -945.8011973895377, y: 0, z: -495.6986099342899}}
+  tags: [path-lamp]
+path-lamp-hearthLaneMain-7:
+  castShadow: true
+  feetPosition: {x: -959.5397131326589, y: {terrain: 0}, z: -500.1043776580181}
+  id: path-lamp-hearthLaneMain-7
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -959.7642404279081, y: 0, z: -496.71179936213633}}
+  tags: [path-lamp]
+path-lamp-hearthLaneRing-0:
+  castShadow: true
+  feetPosition: {x: -959.2690400470391, y: {terrain: 0}, z: -495.729029774248}
+  id: path-lamp-hearthLaneRing-0
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -962.405495733054, y: 0, z: -496.0208271862743}}
+  tags: [path-lamp]

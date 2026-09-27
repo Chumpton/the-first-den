@@ -120,3 +120,59 @@ hearthmere/hearth-wall-9:
   rotation: {yaw: 175.5}
   tags: [hearth-wall]
   visibleRange: {max: 300}
+path-lamp-hearthLaneMill-0:
+  castShadow: true
+  feetPosition: {x: -1018.7625872954558, y: {terrain: 0}, z: -431.10576098456636}
+  id: path-lamp-hearthLaneMill-0
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -1019.7358034119543, y: 0, z: -433.5705835726216}}
+  tags: [path-lamp]
+path-lamp-hearthLaneMill-1:
+  castShadow: true
+  feetPosition: {x: -1033.6563344249018, y: {terrain: 0}, z: -431.1733152534855}
+  id: path-lamp-hearthLaneMill-1
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -1032.8399824728235, y: 0, z: -428.65219060556785}}
+  tags: [path-lamp]
+path-lamp-hearthLaneMill-2:
+  castShadow: true
+  feetPosition: {x: -1045.8460889760042, y: {terrain: 0}, z: -422.53711609349585}
+  id: path-lamp-hearthLaneMill-2
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -1046.3847305335255, y: 0, z: -425.1317962804382}}
+  tags: [path-lamp]
+path-lamp-hearthLaneMill-3:
+  castShadow: true
+  feetPosition: {x: -1060.0742170033332, y: {terrain: 0}, z: -426.74374250860365}
+  id: path-lamp-hearthLaneMill-3
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -1060.2985734454164, y: 0, z: -424.103256911806}}
+  tags: [path-lamp]
+path-lamp-hearthLaneMill-4:
+  castShadow: true
+  feetPosition: {x: -1074.485503803613, y: {terrain: 0}, z: -423.27235774066}
+  id: path-lamp-hearthLaneMill-4
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -1074.1795462355822, y: 0, z: -425.9046362150173}}
+  tags: [path-lamp]
+path-lamp-hearthLaneMill-5:
+  castShadow: true
+  feetPosition: {x: -1087.79675010112, y: {terrain: 0}, z: -430.08252064626396}
+  id: path-lamp-hearthLaneMill-5
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -1088.0940332913583, y: 0, z: -427.4492484034448}}
+  tags: [path-lamp]
+path-lamp-hearthLaneSouth-1:
+  castShadow: true
+  feetPosition: {x: -1010.265274184347, y: {terrain: 0}, z: -447.6000792487976}
+  id: path-lamp-hearthLaneSouth-1
+  physics: static
+  primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: -1007.8974386993466, y: 0, z: -445.9257569632227}}
+  tags: [path-lamp]

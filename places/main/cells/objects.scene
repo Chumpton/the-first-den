@@ -1,0 +1,221 @@
+# spawn-scene v2 yaml objects
+fence-hearthLaneGate-l-13:
+  id: fence-hearthLaneGate-l-13
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -836.29, y: {terrain: 0}, z: -464.19}, {x: -838.14, y: {terrain: 0}, z: -464.95}, {x: -840, y: {terrain: 0}, z: -465.73}, {x: -841.86, y: {terrain: 0}, z: -466.51}, {x: -843.71, y: {terrain: 0}, z: -467.31}, {x: -845.56, y: {terrain: 0}, z: -468.11}, {x: -847.4, y: {terrain: 0}, z: -468.92}, {x: -849.23, y: {terrain: 0}, z: -469.73}, {x: -851.06, y: {terrain: 0}, z: -470.55}, {x: -852.89, y: {terrain: 0}, z: -471.37}, {x: -854.72, y: {terrain: 0}, z: -472.19}, {x: -856.54, y: {terrain: 0}, z: -473}, {x: -858.37, y: {terrain: 0}, z: -473.82}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneGate-r-14:
+  id: fence-hearthLaneGate-r-14
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -833.88, y: {terrain: 0}, z: -470.01}, {x: -835.72, y: {terrain: 0}, z: -470.77}, {x: -837.56, y: {terrain: 0}, z: -471.54}, {x: -839.38, y: {terrain: 0}, z: -472.31}, {x: -841.21, y: {terrain: 0}, z: -473.09}, {x: -843.03, y: {terrain: 0}, z: -473.88}, {x: -844.85, y: {terrain: 0}, z: -474.68}, {x: -846.67, y: {terrain: 0}, z: -475.49}, {x: -848.49, y: {terrain: 0}, z: -476.3}, {x: -850.32, y: {terrain: 0}, z: -477.12}, {x: -852.14, y: {terrain: 0}, z: -477.94}, {x: -853.97, y: {terrain: 0}, z: -478.75}, {x: -855.79, y: {terrain: 0}, z: -479.57}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneMain-l-15:
+  id: fence-hearthLaneMain-l-15
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -863.78, y: {terrain: 0}, z: -475.48}, {x: -865.76, y: {terrain: 0}, z: -475.69}, {x: -867.75, y: {terrain: 0}, z: -475.89}, {x: -869.75, y: {terrain: 0}, z: -476.09}, {x: -871.76, y: {terrain: 0}, z: -476.3}, {x: -873.76, y: {terrain: 0}, z: -476.53}, {x: -875.77, y: {terrain: 0}, z: -476.78}, {x: -877.79, y: {terrain: 0}, z: -477.04}, {x: -879.79, y: {terrain: 0}, z: -477.33}, {x: -881.78, y: {terrain: 0}, z: -477.62}, {x: -883.78, y: {terrain: 0}, z: -477.93}, {x: -885.78, y: {terrain: 0}, z: -478.25}, {x: -887.78, y: {terrain: 0}, z: -478.59}, {x: -889.77, y: {terrain: 0}, z: -478.95}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneMain-l-16:
+  id: fence-hearthLaneMain-l-16
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -899.76, y: {terrain: 0}, z: -481.23}, {x: -901.72, y: {terrain: 0}, z: -481.78}, {x: -903.67, y: {terrain: 0}, z: -482.35}, {x: -905.6, y: {terrain: 0}, z: -482.94}, {x: -907.52, y: {terrain: 0}, z: -483.54}, {x: -909.44, y: {terrain: 0}, z: -484.15}, {x: -911.34, y: {terrain: 0}, z: -484.75}, {x: -913.28, y: {terrain: 0}, z: -485.37}, {x: -915.23, y: {terrain: 0}, z: -486.02}, {x: -917.15, y: {terrain: 0}, z: -486.71}, {x: -919.05, y: {terrain: 0}, z: -487.41}, {x: -920.92, y: {terrain: 0}, z: -488.12}, {x: -922.75, y: {terrain: 0}, z: -488.79}, {x: -924.59, y: {terrain: 0}, z: -489.44}, {x: -926.42, y: {terrain: 0}, z: -490.04}, {x: -928.25, y: {terrain: 0}, z: -490.58}, {x: -930.09, y: {terrain: 0}, z: -491.04}, {x: -931.94, y: {terrain: 0}, z: -491.42}, {x: -933.74, y: {terrain: 0}, z: -491.72}, {x: -935.66, y: {terrain: 0}, z: -491.98}, {x: -937.6, y: {terrain: 0}, z: -492.19}, {x: -939.55, y: {terrain: 0}, z: -492.36}, {x: -941.52, y: {terrain: 0}, z: -492.51}, {x: -943.5, y: {terrain: 0}, z: -492.65}, {x: -945.49, y: {terrain: 0}, z: -492.77}, {x: -947.5, y: {terrain: 0}, z: -492.9}, {x: -949.52, y: {terrain: 0}, z: -493.05}, {x: -951.52, y: {terrain: 0}, z: -493.22}, {x: -953.5, y: {terrain: 0}, z: -493.37}, {x: -955.48, y: {terrain: 0}, z: -493.52}, {x: -957.46, y: {terrain: 0}, z: -493.65}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneMain-r-17:
+  id: fence-hearthLaneMain-r-17
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -863.18, y: {terrain: 0}, z: -481.25}, {x: -865.18, y: {terrain: 0}, z: -481.46}, {x: -867.17, y: {terrain: 0}, z: -481.66}, {x: -869.15, y: {terrain: 0}, z: -481.86}, {x: -871.12, y: {terrain: 0}, z: -482.07}, {x: -873.09, y: {terrain: 0}, z: -482.29}, {x: -875.05, y: {terrain: 0}, z: -482.53}, {x: -877, y: {terrain: 0}, z: -482.79}, {x: -878.96, y: {terrain: 0}, z: -483.07}, {x: -880.93, y: {terrain: 0}, z: -483.36}, {x: -882.88, y: {terrain: 0}, z: -483.66}, {x: -884.83, y: {terrain: 0}, z: -483.97}, {x: -886.78, y: {terrain: 0}, z: -484.3}, {x: -888.71, y: {terrain: 0}, z: -484.65}, {x: -890.64, y: {terrain: 0}, z: -485.02}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneMain-r-18:
+  id: fence-hearthLaneMain-r-18
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -896.32, y: {terrain: 0}, z: -486.31}, {x: -898.22, y: {terrain: 0}, z: -486.82}, {x: -900.11, y: {terrain: 0}, z: -487.35}, {x: -902, y: {terrain: 0}, z: -487.91}, {x: -903.89, y: {terrain: 0}, z: -488.49}, {x: -905.79, y: {terrain: 0}, z: -489.08}, {x: -907.69, y: {terrain: 0}, z: -489.68}, {x: -909.6, y: {terrain: 0}, z: -490.28}, {x: -911.47, y: {terrain: 0}, z: -490.88}, {x: -913.31, y: {terrain: 0}, z: -491.5}, {x: -915.16, y: {terrain: 0}, z: -492.16}, {x: -917.01, y: {terrain: 0}, z: -492.84}, {x: -918.88, y: {terrain: 0}, z: -493.55}, {x: -920.81, y: {terrain: 0}, z: -494.26}, {x: -922.74, y: {terrain: 0}, z: -494.94}, {x: -924.71, y: {terrain: 0}, z: -495.58}, {x: -926.71, y: {terrain: 0}, z: -496.17}, {x: -928.76, y: {terrain: 0}, z: -496.69}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneMain-r-19:
+  id: fence-hearthLaneMain-r-19
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -939.08, y: {terrain: 0}, z: -498.14}, {x: -941.1, y: {terrain: 0}, z: -498.3}, {x: -943.12, y: {terrain: 0}, z: -498.43}, {x: -945.12, y: {terrain: 0}, z: -498.56}, {x: -947.1, y: {terrain: 0}, z: -498.69}, {x: -949.06, y: {terrain: 0}, z: -498.83}, {x: -951.05, y: {terrain: 0}, z: -499}, {x: -953.06, y: {terrain: 0}, z: -499.15}, {x: -955.07, y: {terrain: 0}, z: -499.3}, {x: -957.08, y: {terrain: 0}, z: -499.44}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneMarket-l-27:
+  id: fence-hearthLaneMarket-l-27
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -970.73, y: {terrain: 0}, z: -531.67}, {x: -969.23, y: {terrain: 0}, z: -533.04}, {x: -967.69, y: {terrain: 0}, z: -534.39}, {x: -966.09, y: {terrain: 0}, z: -535.72}, {x: -964.38, y: {terrain: 0}, z: -537}, {x: -962.63, y: {terrain: 0}, z: -538.19}, {x: -960.91, y: {terrain: 0}, z: -539.27}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneMarket-r-28:
+  id: fence-hearthLaneMarket-r-28
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -967.15, y: {terrain: 0}, z: -527.76}, {x: -965.7, y: {terrain: 0}, z: -529.08}, {x: -964.24, y: {terrain: 0}, z: -530.37}, {x: -962.76, y: {terrain: 0}, z: -531.59}, {x: -961.26, y: {terrain: 0}, z: -532.71}, {x: -959.71, y: {terrain: 0}, z: -533.76}, {x: -958.04, y: {terrain: 0}, z: -534.82}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneMill-l-24:
+  id: fence-hearthLaneMill-l-24
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -1025.95, y: {terrain: 0}, z: -428.81}, {x: -1027.85, y: {terrain: 0}, z: -428.1}, {x: -1029.76, y: {terrain: 0}, z: -427.41}, {x: -1031.7, y: {terrain: 0}, z: -426.76}, {x: -1033.66, y: {terrain: 0}, z: -426.15}, {x: -1035.62, y: {terrain: 0}, z: -425.59}, {x: -1037.55, y: {terrain: 0}, z: -425.06}, {x: -1039.52, y: {terrain: 0}, z: -424.53}, {x: -1041.49, y: {terrain: 0}, z: -424.03}, {x: -1043.47, y: {terrain: 0}, z: -423.56}, {x: -1045.46, y: {terrain: 0}, z: -423.13}, {x: -1047.47, y: {terrain: 0}, z: -422.74}, {x: -1049.49, y: {terrain: 0}, z: -422.4}, {x: -1051.6, y: {terrain: 0}, z: -422.13}, {x: -1053.66, y: {terrain: 0}, z: -421.93}, {x: -1055.75, y: {terrain: 0}, z: -421.83}, {x: -1057.84, y: {terrain: 0}, z: -421.83}, {x: -1059.92, y: {terrain: 0}, z: -421.92}, {x: -1062.03, y: {terrain: 0}, z: -422.1}, {x: -1064.05, y: {terrain: 0}, z: -422.33}, {x: -1066.06, y: {terrain: 0}, z: -422.59}, {x: -1068.06, y: {terrain: 0}, z: -422.88}, {x: -1070.04, y: {terrain: 0}, z: -423.17}, {x: -1072.01, y: {terrain: 0}, z: -423.46}, {x: -1073.93, y: {terrain: 0}, z: -423.71}, {x: -1075.9, y: {terrain: 0}, z: -423.93}, {x: -1077.89, y: {terrain: 0}, z: -424.15}, {x: -1079.88, y: {terrain: 0}, z: -424.37}, {x: -1081.87, y: {terrain: 0}, z: -424.59}, {x: -1083.86, y: {terrain: 0}, z: -424.81}, {x: -1085.85, y: {terrain: 0}, z: -425.03}, {x: -1087.84, y: {terrain: 0}, z: -425.26}, {x: -1089.82, y: {terrain: 0}, z: -425.48}, {x: -1091.81, y: {terrain: 0}, z: -425.7}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneMill-r-25:
+  id: fence-hearthLaneMill-r-25
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -1027.48, y: {terrain: 0}, z: -432.83}, {x: -1029.32, y: {terrain: 0}, z: -432.14}, {x: -1031.17, y: {terrain: 0}, z: -431.47}, {x: -1033.03, y: {terrain: 0}, z: -430.85}, {x: -1034.89, y: {terrain: 0}, z: -430.28}, {x: -1036.78, y: {terrain: 0}, z: -429.73}, {x: -1038.7, y: {terrain: 0}, z: -429.2}, {x: -1040.59, y: {terrain: 0}, z: -428.7}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneMill-r-26:
+  id: fence-hearthLaneMill-r-26
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -1052.03, y: {terrain: 0}, z: -426.4}, {x: -1053.95, y: {terrain: 0}, z: -426.23}, {x: -1055.86, y: {terrain: 0}, z: -426.13}, {x: -1057.76, y: {terrain: 0}, z: -426.13}, {x: -1059.68, y: {terrain: 0}, z: -426.21}, {x: -1061.56, y: {terrain: 0}, z: -426.37}, {x: -1063.51, y: {terrain: 0}, z: -426.59}, {x: -1065.46, y: {terrain: 0}, z: -426.85}, {x: -1067.43, y: {terrain: 0}, z: -427.13}, {x: -1069.4, y: {terrain: 0}, z: -427.43}, {x: -1071.39, y: {terrain: 0}, z: -427.72}, {x: -1073.43, y: {terrain: 0}, z: -427.98}, {x: -1075.44, y: {terrain: 0}, z: -428.21}, {x: -1077.43, y: {terrain: 0}, z: -428.42}, {x: -1079.41, y: {terrain: 0}, z: -428.64}, {x: -1081.4, y: {terrain: 0}, z: -428.86}, {x: -1083.38, y: {terrain: 0}, z: -429.08}, {x: -1085.37, y: {terrain: 0}, z: -429.31}, {x: -1087.36, y: {terrain: 0}, z: -429.53}, {x: -1089.34, y: {terrain: 0}, z: -429.75}, {x: -1091.33, y: {terrain: 0}, z: -429.98}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneNorth-l-29:
+  id: fence-hearthLaneNorth-l-29
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -1010.95, y: {terrain: 0}, z: -544.07}, {x: -1011.69, y: {terrain: 0}, z: -546.24}, {x: -1012.11, y: {terrain: 0}, z: -548.43}, {x: -1012.07, y: {terrain: 0}, z: -550.94}, {x: -1011.74, y: {terrain: 0}, z: -553.12}, {x: -1011.21, y: {terrain: 0}, z: -555.3}, {x: -1010.48, y: {terrain: 0}, z: -557.32}, {x: -1009.42, y: {terrain: 0}, z: -559.39}, {x: -1008, y: {terrain: 0}, z: -561.35}, {x: -1006.2, y: {terrain: 0}, z: -563.08}, {x: -1004.19, y: {terrain: 0}, z: -564.34}, {x: -1002.09, y: {terrain: 0}, z: -565.16}, {x: -999.87, y: {terrain: 0}, z: -565.7}, {x: -997.76, y: {terrain: 0}, z: -566.03}, {x: -995.66, y: {terrain: 0}, z: -566.22}, {x: -993.57, y: {terrain: 0}, z: -566.32}, {x: -991.5, y: {terrain: 0}, z: -566.35}, {x: -989.45, y: {terrain: 0}, z: -566.32}, {x: -987.43, y: {terrain: 0}, z: -566.26}, {x: -985.39, y: {terrain: 0}, z: -566.16}, {x: -983.37, y: {terrain: 0}, z: -566.04}, {x: -981.36, y: {terrain: 0}, z: -565.89}, {x: -979.35, y: {terrain: 0}, z: -565.74}, {x: -977.35, y: {terrain: 0}, z: -565.57}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneNorth-l-30:
+  id: fence-hearthLaneNorth-l-30
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -971.37, y: {terrain: 0}, z: -565.05}, {x: -969.38, y: {terrain: 0}, z: -564.88}, {x: -967.4, y: {terrain: 0}, z: -564.71}, {x: -965.43, y: {terrain: 0}, z: -564.56}, {x: -963.44, y: {terrain: 0}, z: -564.43}, {x: -961.48, y: {terrain: 0}, z: -564.31}, {x: -959.5, y: {terrain: 0}, z: -564.22}, {x: -957.55, y: {terrain: 0}, z: -564.17}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneNorth-r-31:
+  id: fence-hearthLaneNorth-r-31
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -1006.97, y: {terrain: 0}, z: -545.7}, {x: -1007.52, y: {terrain: 0}, z: -547.32}, {x: -1007.85, y: {terrain: 0}, z: -549.05}, {x: -1007.79, y: {terrain: 0}, z: -550.54}, {x: -1007.52, y: {terrain: 0}, z: -552.31}, {x: -1007.11, y: {terrain: 0}, z: -554.01}, {x: -1006.48, y: {terrain: 0}, z: -555.75}, {x: -1005.7, y: {terrain: 0}, z: -557.22}, {x: -1004.78, y: {terrain: 0}, z: -558.5}, {x: -1003.72, y: {terrain: 0}, z: -559.57}, {x: -1002.36, y: {terrain: 0}, z: -560.45}, {x: -1000.74, y: {terrain: 0}, z: -561.08}, {x: -999.08, y: {terrain: 0}, z: -561.48}, {x: -997.24, y: {terrain: 0}, z: -561.76}, {x: -995.36, y: {terrain: 0}, z: -561.93}, {x: -993.45, y: {terrain: 0}, z: -562.02}, {x: -991.51, y: {terrain: 0}, z: -562.05}, {x: -989.57, y: {terrain: 0}, z: -562.02}, {x: -987.59, y: {terrain: 0}, z: -561.96}, {x: -985.63, y: {terrain: 0}, z: -561.87}, {x: -983.66, y: {terrain: 0}, z: -561.75}, {x: -981.68, y: {terrain: 0}, z: -561.61}, {x: -979.7, y: {terrain: 0}, z: -561.45}, {x: -977.72, y: {terrain: 0}, z: -561.29}, {x: -975.73, y: {terrain: 0}, z: -561.11}, {x: -973.74, y: {terrain: 0}, z: -560.94}, {x: -971.74, y: {terrain: 0}, z: -560.76}, {x: -969.75, y: {terrain: 0}, z: -560.59}, {x: -967.74, y: {terrain: 0}, z: -560.43}, {x: -965.73, y: {terrain: 0}, z: -560.27}, {x: -963.72, y: {terrain: 0}, z: -560.13}, {x: -961.69, y: {terrain: 0}, z: -560.02}, {x: -959.68, y: {terrain: 0}, z: -559.92}, {x: -957.63, y: {terrain: 0}, z: -559.87}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneRing-l-32:
+  id: fence-hearthLaneRing-l-32
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -960.2, y: {terrain: 0}, z: -492.13}, {x: -960.63, y: {terrain: 0}, z: -490}, {x: -961.21, y: {terrain: 0}, z: -487.92}, {x: -961.93, y: {terrain: 0}, z: -485.81}, {x: -962.73, y: {terrain: 0}, z: -483.85}, {x: -963.61, y: {terrain: 0}, z: -481.94}, {x: -964.59, y: {terrain: 0}, z: -480.06}, {x: -965.67, y: {terrain: 0}, z: -478.24}, {x: -966.9, y: {terrain: 0}, z: -476.39}, {x: -968.17, y: {terrain: 0}, z: -474.7}, {x: -969.52, y: {terrain: 0}, z: -473.07}, {x: -970.96, y: {terrain: 0}, z: -471.51}, {x: -972.58, y: {terrain: 0}, z: -469.94}, {x: -974.19, y: {terrain: 0}, z: -468.57}, {x: -975.87, y: {terrain: 0}, z: -467.28}, {x: -977.61, y: {terrain: 0}, z: -466.08}, {x: -979.4, y: {terrain: 0}, z: -464.97}, {x: -981.35, y: {terrain: 0}, z: -463.9}, {x: -983.26, y: {terrain: 0}, z: -462.99}, {x: -985.21, y: {terrain: 0}, z: -462.17}, {x: -987.19, y: {terrain: 0}, z: -461.45}, {x: -989.21, y: {terrain: 0}, z: -460.83}, {x: -991.38, y: {terrain: 0}, z: -460.29}, {x: -993.46, y: {terrain: 0}, z: -459.9}, {x: -995.55, y: {terrain: 0}, z: -459.61}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneRing-l-33:
+  id: fence-hearthLaneRing-l-33
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -1006.22, y: {terrain: 0}, z: -459.85}, {x: -1008.29, y: {terrain: 0}, z: -460.23}, {x: -1010.35, y: {terrain: 0}, z: -460.71}, {x: -1012.5, y: {terrain: 0}, z: -461.34}, {x: -1014.49, y: {terrain: 0}, z: -462.05}, {x: -1016.44, y: {terrain: 0}, z: -462.85}, {x: -1018.35, y: {terrain: 0}, z: -463.75}, {x: -1020.22, y: {terrain: 0}, z: -464.74}, {x: -1022.12, y: {terrain: 0}, z: -465.9}, {x: -1023.86, y: {terrain: 0}, z: -467.09}, {x: -1025.55, y: {terrain: 0}, z: -468.36}, {x: -1027.17, y: {terrain: 0}, z: -469.73}, {x: -1028.72, y: {terrain: 0}, z: -471.18}, {x: -1030.27, y: {terrain: 0}, z: -472.82}, {x: -1031.63, y: {terrain: 0}, z: -474.44}, {x: -1032.9, y: {terrain: 0}, z: -476.13}, {x: -1034.09, y: {terrain: 0}, z: -477.87}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneRing-l-34:
+  id: fence-hearthLaneRing-l-34
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -1040.39, y: {terrain: 0}, z: -504.44}, {x: -1040.1, y: {terrain: 0}, z: -506.53}, {x: -1039.71, y: {terrain: 0}, z: -508.61}, {x: -1039.18, y: {terrain: 0}, z: -510.77}, {x: -1038.56, y: {terrain: 0}, z: -512.8}, {x: -1037.84, y: {terrain: 0}, z: -514.78}, {x: -1037.02, y: {terrain: 0}, z: -516.73}, {x: -1036.11, y: {terrain: 0}, z: -518.64}, {x: -1035.04, y: {terrain: 0}, z: -520.59}, {x: -1033.92, y: {terrain: 0}, z: -522.38}, {x: -1032.72, y: {terrain: 0}, z: -524.12}, {x: -1031.44, y: {terrain: 0}, z: -525.8}, {x: -1030.06, y: {terrain: 0}, z: -527.41}, {x: -1028.5, y: {terrain: 0}, z: -529.03}, {x: -1026.94, y: {terrain: 0}, z: -530.47}, {x: -1025.31, y: {terrain: 0}, z: -531.82}, {x: -1023.62, y: {terrain: 0}, z: -533.09}, {x: -1021.77, y: {terrain: 0}, z: -534.33}, {x: -1019.95, y: {terrain: 0}, z: -535.4}, {x: -1018.08, y: {terrain: 0}, z: -536.38}, {x: -1016.16, y: {terrain: 0}, z: -537.27}, {x: -1014.2, y: {terrain: 0}, z: -538.06}, {x: -1012.09, y: {terrain: 0}, z: -538.79}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneRing-l-35:
+  id: fence-hearthLaneRing-l-35
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -1001.59, y: {terrain: 0}, z: -540.61}, {x: -999.47, y: {terrain: 0}, z: -540.64}, {x: -997.35, y: {terrain: 0}, z: -540.55}, {x: -995.25, y: {terrain: 0}, z: -540.35}, {x: -993.16, y: {terrain: 0}, z: -540.05}, {x: -990.97, y: {terrain: 0}, z: -539.62}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneRing-l-36:
+  id: fence-hearthLaneRing-l-36
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -986.9, y: {terrain: 0}, z: -538.45}, {x: -984.92, y: {terrain: 0}, z: -537.72}, {x: -982.98, y: {terrain: 0}, z: -536.89}, {x: -980.98, y: {terrain: 0}, z: -535.91}, {x: -979.14, y: {terrain: 0}, z: -534.87}, {x: -977.35, y: {terrain: 0}, z: -533.75}, {x: -975.62, y: {terrain: 0}, z: -532.54}, {x: -973.95, y: {terrain: 0}, z: -531.24}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneRing-l-37:
+  id: fence-hearthLaneRing-l-37
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -967.98, y: {terrain: 0}, z: -525.06}, {x: -966.72, y: {terrain: 0}, z: -523.36}, {x: -965.51, y: {terrain: 0}, z: -521.5}, {x: -964.45, y: {terrain: 0}, z: -519.67}, {x: -963.48, y: {terrain: 0}, z: -517.79}, {x: -962.6, y: {terrain: 0}, z: -515.87}, {x: -961.79, y: {terrain: 0}, z: -513.8}, {x: -961.12, y: {terrain: 0}, z: -511.79}, {x: -960.56, y: {terrain: 0}, z: -509.7}, {x: -960.16, y: {terrain: 0}, z: -507.57}, {x: -959.89, y: {terrain: 0}, z: -505.47}, {x: -959.69, y: {terrain: 0}, z: -503.42}, {x: -959.5, y: {terrain: 0}, z: -501.49}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneRing-r-38:
+  id: fence-hearthLaneRing-r-38
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -965.44, y: {terrain: 0}, z: -492.96}, {x: -965.8, y: {terrain: 0}, z: -491.17}, {x: -966.29, y: {terrain: 0}, z: -489.4}, {x: -966.87, y: {terrain: 0}, z: -487.73}, {x: -967.58, y: {terrain: 0}, z: -485.98}, {x: -968.37, y: {terrain: 0}, z: -484.27}, {x: -969.25, y: {terrain: 0}, z: -482.6}, {x: -970.21, y: {terrain: 0}, z: -480.98}, {x: -971.2, y: {terrain: 0}, z: -479.5}, {x: -972.32, y: {terrain: 0}, z: -477.99}, {x: -973.52, y: {terrain: 0}, z: -476.54}, {x: -974.8, y: {terrain: 0}, z: -475.16}, {x: -976.05, y: {terrain: 0}, z: -473.95}, {x: -977.48, y: {terrain: 0}, z: -472.73}, {x: -978.98, y: {terrain: 0}, z: -471.58}, {x: -980.53, y: {terrain: 0}, z: -470.5}, {x: -982.13, y: {terrain: 0}, z: -469.51}, {x: -983.68, y: {terrain: 0}, z: -468.66}, {x: -985.39, y: {terrain: 0}, z: -467.84}, {x: -987.13, y: {terrain: 0}, z: -467.11}, {x: -988.9, y: {terrain: 0}, z: -466.47}, {x: -990.7, y: {terrain: 0}, z: -465.91}, {x: -992.42, y: {terrain: 0}, z: -465.49}, {x: -994.27, y: {terrain: 0}, z: -465.14}, {x: -996.14, y: {terrain: 0}, z: -464.88}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneRing-r-39:
+  id: fence-hearthLaneRing-r-39
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -1003.53, y: {terrain: 0}, z: -464.84}, {x: -1005.4, y: {terrain: 0}, z: -465.09}, {x: -1007.26, y: {terrain: 0}, z: -465.42}, {x: -1009.09, y: {terrain: 0}, z: -465.86}, {x: -1010.79, y: {terrain: 0}, z: -466.36}, {x: -1012.57, y: {terrain: 0}, z: -466.99}, {x: -1014.31, y: {terrain: 0}, z: -467.71}, {x: -1016.02, y: {terrain: 0}, z: -468.51}, {x: -1017.68, y: {terrain: 0}, z: -469.4}, {x: -1019.2, y: {terrain: 0}, z: -470.32}, {x: -1020.76, y: {terrain: 0}, z: -471.38}, {x: -1022.26, y: {terrain: 0}, z: -472.52}, {x: -1023.7, y: {terrain: 0}, z: -473.73}, {x: -1025.07, y: {terrain: 0}, z: -475.01}, {x: -1026.26, y: {terrain: 0}, z: -476.29}, {x: -1027.47, y: {terrain: 0}, z: -477.73}, {x: -1028.61, y: {terrain: 0}, z: -479.23}, {x: -1029.67, y: {terrain: 0}, z: -480.79}, {x: -1030.59, y: {terrain: 0}, z: -482.31}, {x: -1031.48, y: {terrain: 0}, z: -483.97}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneRing-r-40:
+  id: fence-hearthLaneRing-r-40
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -1035.12, y: {terrain: 0}, z: -503.85}, {x: -1034.87, y: {terrain: 0}, z: -505.72}, {x: -1034.51, y: {terrain: 0}, z: -507.57}, {x: -1034.09, y: {terrain: 0}, z: -509.29}, {x: -1033.54, y: {terrain: 0}, z: -511.09}, {x: -1032.9, y: {terrain: 0}, z: -512.86}, {x: -1032.17, y: {terrain: 0}, z: -514.6}, {x: -1031.35, y: {terrain: 0}, z: -516.3}, {x: -1030.5, y: {terrain: 0}, z: -517.86}, {x: -1029.5, y: {terrain: 0}, z: -519.46}, {x: -1028.43, y: {terrain: 0}, z: -521.01}, {x: -1027.28, y: {terrain: 0}, z: -522.51}, {x: -1026.06, y: {terrain: 0}, z: -523.94}, {x: -1024.85, y: {terrain: 0}, z: -525.2}, {x: -1023.47, y: {terrain: 0}, z: -526.47}, {x: -1022.02, y: {terrain: 0}, z: -527.67}, {x: -1020.51, y: {terrain: 0}, z: -528.8}, {x: -1019.04, y: {terrain: 0}, z: -529.79}, {x: -1017.41, y: {terrain: 0}, z: -530.75}, {x: -1015.74, y: {terrain: 0}, z: -531.62}, {x: -1014.03, y: {terrain: 0}, z: -532.42}, {x: -1012.28, y: {terrain: 0}, z: -533.12}, {x: -1010.61, y: {terrain: 0}, z: -533.7}, {x: -1008.8, y: {terrain: 0}, z: -534.22}, {x: -1006.96, y: {terrain: 0}, z: -534.64}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneRing-r-41:
+  id: fence-hearthLaneRing-r-41
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -1003.23, y: {terrain: 0}, z: -535.19}, {x: -1001.47, y: {terrain: 0}, z: -535.32}, {x: -999.59, y: {terrain: 0}, z: -535.34}, {x: -997.71, y: {terrain: 0}, z: -535.26}, {x: -995.83, y: {terrain: 0}, z: -535.09}, {x: -993.97, y: {terrain: 0}, z: -534.82}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneRing-r-42:
+  id: fence-hearthLaneRing-r-42
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -990.41, y: {terrain: 0}, z: -534}, {x: -988.61, y: {terrain: 0}, z: -533.44}, {x: -986.84, y: {terrain: 0}, z: -532.78}, {x: -985.11, y: {terrain: 0}, z: -532.04}, {x: -983.52, y: {terrain: 0}, z: -531.25}, {x: -981.87, y: {terrain: 0}, z: -530.33}, {x: -980.27, y: {terrain: 0}, z: -529.33}, {x: -978.73, y: {terrain: 0}, z: -528.24}, {x: -977.24, y: {terrain: 0}, z: -527.09}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneRing-r-43:
+  id: fence-hearthLaneRing-r-43
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -972.13, y: {terrain: 0}, z: -521.77}, {x: -971.02, y: {terrain: 0}, z: -520.25}, {x: -970.05, y: {terrain: 0}, z: -518.76}, {x: -969.1, y: {terrain: 0}, z: -517.13}, {x: -968.24, y: {terrain: 0}, z: -515.46}, {x: -967.46, y: {terrain: 0}, z: -513.74}, {x: -966.8, y: {terrain: 0}, z: -512.09}, {x: -966.21, y: {terrain: 0}, z: -510.3}, {x: -965.73, y: {terrain: 0}, z: -508.53}, {x: -965.39, y: {terrain: 0}, z: -506.74}, {x: -965.15, y: {terrain: 0}, z: -504.87}, {x: -964.97, y: {terrain: 0}, z: -502.93}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneSouth-l-22:
+  id: fence-hearthLaneSouth-l-22
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -998.97, y: {terrain: 0}, z: -457.9}, {x: -999.67, y: {terrain: 0}, z: -455.98}, {x: -1000.43, y: {terrain: 0}, z: -454.04}, {x: -1001.28, y: {terrain: 0}, z: -452.1}, {x: -1002.26, y: {terrain: 0}, z: -450.19}, {x: -1003.34, y: {terrain: 0}, z: -448.38}, {x: -1004.48, y: {terrain: 0}, z: -446.63}, {x: -1005.65, y: {terrain: 0}, z: -444.95}, {x: -1006.83, y: {terrain: 0}, z: -443.31}, {x: -1007.99, y: {terrain: 0}, z: -441.69}, {x: -1009.18, y: {terrain: 0}, z: -440.03}, {x: -1010.39, y: {terrain: 0}, z: -438.41}, {x: -1011.61, y: {terrain: 0}, z: -436.81}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneSouth-r-23:
+  id: fence-hearthLaneSouth-r-23
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -1004.15, y: {terrain: 0}, z: -457.7}, {x: -1004.85, y: {terrain: 0}, z: -455.92}, {x: -1005.6, y: {terrain: 0}, z: -454.2}, {x: -1006.45, y: {terrain: 0}, z: -452.55}, {x: -1007.41, y: {terrain: 0}, z: -450.92}, {x: -1008.46, y: {terrain: 0}, z: -449.32}, {x: -1009.57, y: {terrain: 0}, z: -447.72}, {x: -1010.72, y: {terrain: 0}, z: -446.11}, {x: -1011.89, y: {terrain: 0}, z: -444.48}, {x: -1013.04, y: {terrain: 0}, z: -442.89}, {x: -1014.22, y: {terrain: 0}, z: -441.31}, {x: -1015.42, y: {terrain: 0}, z: -439.72}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneWest-l-20:
+  id: fence-hearthLaneWest-l-20
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -1041.98, y: {terrain: 0}, z: -498.52}, {x: -1043.92, y: {terrain: 0}, z: -499.01}, {x: -1045.86, y: {terrain: 0}, z: -499.49}, {x: -1047.8, y: {terrain: 0}, z: -499.98}, {x: -1049.74, y: {terrain: 0}, z: -500.46}, {x: -1051.69, y: {terrain: 0}, z: -500.96}, {x: -1053.65, y: {terrain: 0}, z: -501.47}, {x: -1055.58, y: {terrain: 0}, z: -501.99}, {x: -1057.51, y: {terrain: 0}, z: -502.5}, {x: -1059.38, y: {terrain: 0}, z: -502.97}, {x: -1061.27, y: {terrain: 0}, z: -503.4}, {x: -1063.14, y: {terrain: 0}, z: -503.76}, {x: -1065.04, y: {terrain: 0}, z: -504.04}, {x: -1066.97, y: {terrain: 0}, z: -504.26}, {x: -1068.97, y: {terrain: 0}, z: -504.47}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-hearthLaneWest-r-21:
+  id: fence-hearthLaneWest-r-21
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -1042.75, y: {terrain: 0}, z: -503.66}, {x: -1044.69, y: {terrain: 0}, z: -504.15}, {x: -1046.63, y: {terrain: 0}, z: -504.63}, {x: -1048.57, y: {terrain: 0}, z: -505.12}, {x: -1050.5, y: {terrain: 0}, z: -505.61}, {x: -1052.41, y: {terrain: 0}, z: -506.11}, {x: -1054.34, y: {terrain: 0}, z: -506.62}, {x: -1056.28, y: {terrain: 0}, z: -507.14}, {x: -1058.29, y: {terrain: 0}, z: -507.64}, {x: -1060.3, y: {terrain: 0}, z: -508.1}, {x: -1062.36, y: {terrain: 0}, z: -508.49}, {x: -1064.42, y: {terrain: 0}, z: -508.8}, {x: -1066.46, y: {terrain: 0}, z: -509.03}, {x: -1068.43, y: {terrain: 0}, z: -509.24}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-pathCamp-l-11:
+  id: fence-pathCamp-l-11
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -2.38, y: {terrain: 0}, z: -39.66}, {x: -4.27, y: {terrain: 0}, z: -40.4}, {x: -6.17, y: {terrain: 0}, z: -41.21}, {x: -8.04, y: {terrain: 0}, z: -42.13}, {x: -9.88, y: {terrain: 0}, z: -43.14}, {x: -11.62, y: {terrain: 0}, z: -44.17}, {x: -13.34, y: {terrain: 0}, z: -45.21}, {x: -15.06, y: {terrain: 0}, z: -46.32}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-pathCamp-r-12:
+  id: fence-pathCamp-r-12
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -1.17, y: {terrain: 0}, z: -42.83}, {x: -2.99, y: {terrain: 0}, z: -43.55}, {x: -4.77, y: {terrain: 0}, z: -44.31}, {x: -6.49, y: {terrain: 0}, z: -45.16}, {x: -8.16, y: {terrain: 0}, z: -46.08}, {x: -9.86, y: {terrain: 0}, z: -47.08}, {x: -11.56, y: {terrain: 0}, z: -48.11}, {x: -13.21, y: {terrain: 0}, z: -49.16}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-pathFront-l-7:
+  id: fence-pathFront-l-7
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -2.96, y: {terrain: 0}, z: -9.42}, {x: -2.76, y: {terrain: 0}, z: -11.56}, {x: -2.45, y: {terrain: 0}, z: -13.64}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-pathFront-r-8:
+  id: fence-pathFront-r-8
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: 1.04, y: {terrain: 0}, z: -9.29}, {x: 1.21, y: {terrain: 0}, z: -11.13}, {x: 1.5, y: {terrain: 0}, z: -13}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-pathLake-l-9:
+  id: fence-pathLake-l-9
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: 1.61, y: {terrain: 0}, z: -43.43}, {x: 2.67, y: {terrain: 0}, z: -44.77}, {x: 3.39, y: {terrain: 0}, z: -46.19}, {x: 3.76, y: {terrain: 0}, z: -47.8}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-pathLake-r-10:
+  id: fence-pathLake-r-10
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: 4.58, y: {terrain: 0}, z: -41.05}, {x: 5.96, y: {terrain: 0}, z: -42.87}, {x: 7, y: {terrain: 0}, z: -45.02}, {x: 7.52, y: {terrain: 0}, z: -47.3}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-road-east-0-l-0:
+  id: fence-road-east-0-l-0
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: 4.11, y: {terrain: 0}, z: 5.6}, {x: 6.09, y: {terrain: 0}, z: 5.86}, {x: 8.07, y: {terrain: 0}, z: 6.12}, {x: 10.06, y: {terrain: 0}, z: 6.38}, {x: 12.04, y: {terrain: 0}, z: 6.64}, {x: 14.02, y: {terrain: 0}, z: 6.89}, {x: 16, y: {terrain: 0}, z: 7.15}, {x: 17.99, y: {terrain: 0}, z: 7.41}, {x: 19.99, y: {terrain: 0}, z: 7.68}, {x: 21.99, y: {terrain: 0}, z: 7.96}, {x: 23.99, y: {terrain: 0}, z: 8.24}, {x: 25.97, y: {terrain: 0}, z: 8.53}, {x: 27.94, y: {terrain: 0}, z: 8.81}, {x: 29.91, y: {terrain: 0}, z: 9.08}, {x: 31.87, y: {terrain: 0}, z: 9.35}, {x: 33.84, y: {terrain: 0}, z: 9.61}, {x: 35.81, y: {terrain: 0}, z: 9.87}, {x: 37.8, y: {terrain: 0}, z: 10.12}, {x: 39.78, y: {terrain: 0}, z: 10.38}, {x: 41.77, y: {terrain: 0}, z: 10.64}, {x: 43.75, y: {terrain: 0}, z: 10.9}, {x: 45.73, y: {terrain: 0}, z: 11.16}, {x: 47.71, y: {terrain: 0}, z: 11.41}, {x: 49.7, y: {terrain: 0}, z: 11.67}, {x: 51.68, y: {terrain: 0}, z: 11.93}, {x: 53.66, y: {terrain: 0}, z: 12.19}, {x: 55.65, y: {terrain: 0}, z: 12.45}, {x: 57.64, y: {terrain: 0}, z: 12.71}, {x: 59.64, y: {terrain: 0}, z: 12.97}, {x: 61.64, y: {terrain: 0}, z: 13.25}, {x: 63.64, y: {terrain: 0}, z: 13.53}, {x: 65.62, y: {terrain: 0}, z: 13.82}, {x: 67.59, y: {terrain: 0}, z: 14.1}, {x: 69.56, y: {terrain: 0}, z: 14.37}, {x: 71.52, y: {terrain: 0}, z: 14.64}, {x: 73.48, y: {terrain: 0}, z: 14.9}, {x: 75.46, y: {terrain: 0}, z: 15.16}, {x: 77.45, y: {terrain: 0}, z: 15.42}, {x: 79.43, y: {terrain: 0}, z: 15.68}, {x: 81.42, y: {terrain: 0}, z: 15.94}, {x: 83.4, y: {terrain: 0}, z: 16.2}, {x: 85.39, y: {terrain: 0}, z: 16.46}, {x: 87.37, y: {terrain: 0}, z: 16.72}, {x: 89.35, y: {terrain: 0}, z: 16.98}, {x: 91.33, y: {terrain: 0}, z: 17.24}, {x: 93.32, y: {terrain: 0}, z: 17.5}, {x: 95.3, y: {terrain: 0}, z: 17.76}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-road-east-0-l-1:
+  id: fence-road-east-0-l-1
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: 128.99, y: {terrain: 0}, z: 22.27}, {x: 130.98, y: {terrain: 0}, z: 22.53}, {x: 132.96, y: {terrain: 0}, z: 22.79}, {x: 134.95, y: {terrain: 0}, z: 23.05}, {x: 136.93, y: {terrain: 0}, z: 23.31}, {x: 138.91, y: {terrain: 0}, z: 23.57}, {x: 140.99, y: {terrain: 0}, z: 23.88}, {x: 143.08, y: {terrain: 0}, z: 24.24}, {x: 144.93, y: {terrain: 0}, z: 24.56}, {x: 146.67, y: {terrain: 0}, z: 24.8}, {x: 148.28, y: {terrain: 0}, z: 24.89}, {x: 149.83, y: {terrain: 0}, z: 24.81}, {x: 151.19, y: {terrain: 0}, z: 24.59}, {x: 152.99, y: {terrain: 0}, z: 24.21}, {x: 154.88, y: {terrain: 0}, z: 23.75}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-road-east-0-r-2:
+  id: fence-road-east-0-r-2
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: 2.83, y: {terrain: 0}, z: 15.31}, {x: 4.82, y: {terrain: 0}, z: 15.57}, {x: 6.8, y: {terrain: 0}, z: 15.83}, {x: 8.78, y: {terrain: 0}, z: 16.1}, {x: 10.77, y: {terrain: 0}, z: 16.35}, {x: 12.76, y: {terrain: 0}, z: 16.61}, {x: 14.73, y: {terrain: 0}, z: 16.87}, {x: 16.71, y: {terrain: 0}, z: 17.13}, {x: 18.68, y: {terrain: 0}, z: 17.39}, {x: 20.64, y: {terrain: 0}, z: 17.66}, {x: 22.6, y: {terrain: 0}, z: 17.94}, {x: 24.58, y: {terrain: 0}, z: 18.23}, {x: 26.57, y: {terrain: 0}, z: 18.51}, {x: 28.56, y: {terrain: 0}, z: 18.79}, {x: 30.56, y: {terrain: 0}, z: 19.06}, {x: 32.56, y: {terrain: 0}, z: 19.33}, {x: 34.55, y: {terrain: 0}, z: 19.59}, {x: 36.54, y: {terrain: 0}, z: 19.84}, {x: 38.52, y: {terrain: 0}, z: 20.1}, {x: 40.5, y: {terrain: 0}, z: 20.36}, {x: 42.49, y: {terrain: 0}, z: 20.62}, {x: 44.47, y: {terrain: 0}, z: 20.87}, {x: 46.45, y: {terrain: 0}, z: 21.13}, {x: 48.43, y: {terrain: 0}, z: 21.39}, {x: 50.42, y: {terrain: 0}, z: 21.65}, {x: 52.4, y: {terrain: 0}, z: 21.91}, {x: 54.38, y: {terrain: 0}, z: 22.16}, {x: 56.36, y: {terrain: 0}, z: 22.42}, {x: 58.33, y: {terrain: 0}, z: 22.69}, {x: 60.29, y: {terrain: 0}, z: 22.96}, {x: 62.25, y: {terrain: 0}, z: 23.23}, {x: 64.23, y: {terrain: 0}, z: 23.52}, {x: 66.21, y: {terrain: 0}, z: 23.8}, {x: 68.21, y: {terrain: 0}, z: 24.08}, {x: 70.21, y: {terrain: 0}, z: 24.35}, {x: 72.21, y: {terrain: 0}, z: 24.62}, {x: 74.2, y: {terrain: 0}, z: 24.88}, {x: 76.18, y: {terrain: 0}, z: 25.14}, {x: 78.16, y: {terrain: 0}, z: 25.39}, {x: 80.14, y: {terrain: 0}, z: 25.65}, {x: 82.13, y: {terrain: 0}, z: 25.91}, {x: 84.11, y: {terrain: 0}, z: 26.17}, {x: 86.09, y: {terrain: 0}, z: 26.43}, {x: 88.08, y: {terrain: 0}, z: 26.69}, {x: 90.06, y: {terrain: 0}, z: 26.95}, {x: 92.04, y: {terrain: 0}, z: 27.22}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-road-east-0-r-3:
+  id: fence-road-east-0-r-3
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: 101.96, y: {terrain: 0}, z: 28.51}, {x: 103.94, y: {terrain: 0}, z: 28.77}, {x: 105.92, y: {terrain: 0}, z: 29.03}, {x: 107.89, y: {terrain: 0}, z: 29.29}, {x: 109.85, y: {terrain: 0}, z: 29.56}, {x: 111.81, y: {terrain: 0}, z: 29.84}, {x: 113.79, y: {terrain: 0}, z: 30.13}, {x: 115.78, y: {terrain: 0}, z: 30.41}, {x: 117.77, y: {terrain: 0}, z: 30.69}, {x: 119.78, y: {terrain: 0}, z: 30.96}, {x: 121.78, y: {terrain: 0}, z: 31.22}, {x: 123.77, y: {terrain: 0}, z: 31.48}, {x: 125.75, y: {terrain: 0}, z: 31.73}, {x: 127.73, y: {terrain: 0}, z: 31.99}, {x: 129.71, y: {terrain: 0}, z: 32.25}, {x: 131.69, y: {terrain: 0}, z: 32.51}, {x: 133.67, y: {terrain: 0}, z: 32.77}, {x: 135.65, y: {terrain: 0}, z: 33.03}, {x: 137.64, y: {terrain: 0}, z: 33.29}, {x: 139.51, y: {terrain: 0}, z: 33.57}, {x: 141.36, y: {terrain: 0}, z: 33.89}, {x: 143.45, y: {terrain: 0}, z: 34.25}, {x: 145.68, y: {terrain: 0}, z: 34.55}, {x: 148.06, y: {terrain: 0}, z: 34.69}, {x: 150.51, y: {terrain: 0}, z: 34.59}, {x: 153.1, y: {terrain: 0}, z: 34.2}, {x: 155.21, y: {terrain: 0}, z: 33.75}, {x: 157.21, y: {terrain: 0}, z: 33.27}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-road-west-0-l-4:
+  id: fence-road-west-0-l-4
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -3.74, y: {terrain: 0}, z: 14.72}, {x: -5.74, y: {terrain: 0}, z: 14.62}, {x: -7.74, y: {terrain: 0}, z: 14.52}, {x: -9.73, y: {terrain: 0}, z: 14.42}, {x: -11.73, y: {terrain: 0}, z: 14.32}, {x: -13.73, y: {terrain: 0}, z: 14.22}, {x: -15.73, y: {terrain: 0}, z: 14.12}, {x: -17.72, y: {terrain: 0}, z: 14.02}, {x: -19.72, y: {terrain: 0}, z: 13.92}, {x: -21.72, y: {terrain: 0}, z: 13.82}, {x: -23.72, y: {terrain: 0}, z: 13.72}, {x: -25.71, y: {terrain: 0}, z: 13.62}, {x: -27.71, y: {terrain: 0}, z: 13.52}, {x: -29.71, y: {terrain: 0}, z: 13.42}, {x: -31.71, y: {terrain: 0}, z: 13.32}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-road-west-0-l-5:
+  id: fence-road-west-0-l-5
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -53.68, y: {terrain: 0}, z: 12.22}, {x: -55.67, y: {terrain: 0}, z: 12.12}, {x: -57.67, y: {terrain: 0}, z: 12.02}, {x: -59.67, y: {terrain: 0}, z: 11.92}, {x: -61.67, y: {terrain: 0}, z: 11.82}, {x: -63.67, y: {terrain: 0}, z: 11.72}, {x: -65.66, y: {terrain: 0}, z: 11.62}, {x: -67.66, y: {terrain: 0}, z: 11.52}, {x: -69.66, y: {terrain: 0}, z: 11.42}, {x: -71.66, y: {terrain: 0}, z: 11.32}, {x: -73.65, y: {terrain: 0}, z: 11.22}, {x: -75.65, y: {terrain: 0}, z: 11.12}, {x: -77.65, y: {terrain: 0}, z: 11.02}, {x: -79.65, y: {terrain: 0}, z: 10.92}, {x: -81.64, y: {terrain: 0}, z: 10.82}, {x: -83.64, y: {terrain: 0}, z: 10.72}, {x: -85.64, y: {terrain: 0}, z: 10.62}, {x: -87.64, y: {terrain: 0}, z: 10.52}, {x: -89.63, y: {terrain: 0}, z: 10.42}, {x: -91.63, y: {terrain: 0}, z: 10.32}, {x: -93.63, y: {terrain: 0}, z: 10.22}, {x: -95.63, y: {terrain: 0}, z: 10.12}, {x: -97.62, y: {terrain: 0}, z: 10.02}, {x: -99.62, y: {terrain: 0}, z: 9.92}, {x: -101.62, y: {terrain: 0}, z: 9.82}, {x: -103.62, y: {terrain: 0}, z: 9.72}, {x: -105.61, y: {terrain: 0}, z: 9.62}, {x: -107.61, y: {terrain: 0}, z: 9.52}, {x: -109.61, y: {terrain: 0}, z: 9.42}, {x: -111.61, y: {terrain: 0}, z: 9.32}, {x: -113.6, y: {terrain: 0}, z: 9.22}, {x: -115.6, y: {terrain: 0}, z: 9.12}, {x: -117.6, y: {terrain: 0}, z: 9.02}, {x: -119.6, y: {terrain: 0}, z: 8.92}, {x: -121.59, y: {terrain: 0}, z: 8.82}, {x: -123.59, y: {terrain: 0}, z: 8.72}, {x: -125.59, y: {terrain: 0}, z: 8.62}, {x: -127.59, y: {terrain: 0}, z: 8.52}, {x: -129.58, y: {terrain: 0}, z: 8.42}, {x: -131.58, y: {terrain: 0}, z: 8.32}, {x: -133.58, y: {terrain: 0}, z: 8.22}, {x: -135.57, y: {terrain: 0}, z: 8.12}, {x: -137.57, y: {terrain: 0}, z: 8.02}, {x: -139.57, y: {terrain: 0}, z: 7.92}, {x: -141.57, y: {terrain: 0}, z: 7.82}, {x: -143.57, y: {terrain: 0}, z: 7.72}, {x: -145.56, y: {terrain: 0}, z: 7.62}, {x: -147.56, y: {terrain: 0}, z: 7.52}, {x: -149.56, y: {terrain: 0}, z: 7.42}, {x: -151.56, y: {terrain: 0}, z: 7.32}, {x: -153.55, y: {terrain: 0}, z: 7.22}, {x: -155.55, y: {terrain: 0}, z: 7.12}, {x: -157.55, y: {terrain: 0}, z: 7.02}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
+fence-road-west-0-r-6:
+  id: fence-road-west-0-r-6
+  physics: static
+  spline: {height: 0.7, kind: fence, points: [{x: -3.25, y: {terrain: 0}, z: 4.93}, {x: -5.25, y: {terrain: 0}, z: 4.83}, {x: -7.25, y: {terrain: 0}, z: 4.73}, {x: -9.24, y: {terrain: 0}, z: 4.63}, {x: -11.24, y: {terrain: 0}, z: 4.53}, {x: -13.24, y: {terrain: 0}, z: 4.43}, {x: -15.24, y: {terrain: 0}, z: 4.33}, {x: -17.23, y: {terrain: 0}, z: 4.23}, {x: -19.23, y: {terrain: 0}, z: 4.13}, {x: -21.23, y: {terrain: 0}, z: 4.03}, {x: -23.23, y: {terrain: 0}, z: 3.93}, {x: -25.22, y: {terrain: 0}, z: 3.83}, {x: -27.22, y: {terrain: 0}, z: 3.73}, {x: -29.22, y: {terrain: 0}, z: 3.63}, {x: -31.22, y: {terrain: 0}, z: 3.53}, {x: -33.21, y: {terrain: 0}, z: 3.43}, {x: -35.21, y: {terrain: 0}, z: 3.33}, {x: -37.21, y: {terrain: 0}, z: 3.23}, {x: -39.21, y: {terrain: 0}, z: 3.13}, {x: -41.2, y: {terrain: 0}, z: 3.03}, {x: -43.2, y: {terrain: 0}, z: 2.93}, {x: -45.2, y: {terrain: 0}, z: 2.83}, {x: -47.19, y: {terrain: 0}, z: 2.73}, {x: -49.19, y: {terrain: 0}, z: 2.63}, {x: -51.19, y: {terrain: 0}, z: 2.53}, {x: -53.19, y: {terrain: 0}, z: 2.43}, {x: -55.19, y: {terrain: 0}, z: 2.33}, {x: -57.18, y: {terrain: 0}, z: 2.23}, {x: -59.18, y: {terrain: 0}, z: 2.13}, {x: -61.18, y: {terrain: 0}, z: 2.03}, {x: -63.18, y: {terrain: 0}, z: 1.93}, {x: -65.17, y: {terrain: 0}, z: 1.83}, {x: -67.17, y: {terrain: 0}, z: 1.73}, {x: -69.17, y: {terrain: 0}, z: 1.63}, {x: -71.17, y: {terrain: 0}, z: 1.53}, {x: -73.16, y: {terrain: 0}, z: 1.43}, {x: -75.16, y: {terrain: 0}, z: 1.33}, {x: -77.16, y: {terrain: 0}, z: 1.23}, {x: -79.16, y: {terrain: 0}, z: 1.13}, {x: -81.15, y: {terrain: 0}, z: 1.03}, {x: -83.15, y: {terrain: 0}, z: 0.93}, {x: -85.15, y: {terrain: 0}, z: 0.83}, {x: -87.15, y: {terrain: 0}, z: 0.73}, {x: -89.14, y: {terrain: 0}, z: 0.63}, {x: -91.14, y: {terrain: 0}, z: 0.53}, {x: -93.14, y: {terrain: 0}, z: 0.43}, {x: -95.14, y: {terrain: 0}, z: 0.33}, {x: -97.13, y: {terrain: 0}, z: 0.23}, {x: -99.13, y: {terrain: 0}, z: 0.13}, {x: -101.13, y: {terrain: 0}, z: 0.03}, {x: -103.13, y: {terrain: 0}, z: -0.07}, {x: -105.12, y: {terrain: 0}, z: -0.17}, {x: -107.12, y: {terrain: 0}, z: -0.27}, {x: -109.12, y: {terrain: 0}, z: -0.37}, {x: -111.12, y: {terrain: 0}, z: -0.47}, {x: -113.11, y: {terrain: 0}, z: -0.57}, {x: -115.11, y: {terrain: 0}, z: -0.67}, {x: -117.11, y: {terrain: 0}, z: -0.77}, {x: -119.11, y: {terrain: 0}, z: -0.87}, {x: -121.1, y: {terrain: 0}, z: -0.97}, {x: -123.1, y: {terrain: 0}, z: -1.07}, {x: -125.1, y: {terrain: 0}, z: -1.17}, {x: -127.09, y: {terrain: 0}, z: -1.27}, {x: -129.09, y: {terrain: 0}, z: -1.37}, {x: -131.09, y: {terrain: 0}, z: -1.47}, {x: -133.09, y: {terrain: 0}, z: -1.57}, {x: -135.09, y: {terrain: 0}, z: -1.67}, {x: -137.08, y: {terrain: 0}, z: -1.77}, {x: -139.08, y: {terrain: 0}, z: -1.87}, {x: -141.08, y: {terrain: 0}, z: -1.97}, {x: -143.08, y: {terrain: 0}, z: -2.07}, {x: -145.07, y: {terrain: 0}, z: -2.17}, {x: -147.07, y: {terrain: 0}, z: -2.27}, {x: -149.07, y: {terrain: 0}, z: -2.37}, {x: -151.07, y: {terrain: 0}, z: -2.47}, {x: -153.06, y: {terrain: 0}, z: -2.57}, {x: -155.06, y: {terrain: 0}, z: -2.67}, {x: -157.06, y: {terrain: 0}, z: -2.77}], snapToTerrain: true, spacing: 2.4, style: wood}
+  tags: [path-fence]
