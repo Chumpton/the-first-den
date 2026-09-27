@@ -27,9 +27,9 @@ export function geometry(ctx) {
       let mass = 0.3 * Math.exp(-(v * v) / 0.3);
       for (const p of P) mass += p.a * Math.exp(-(((u - p.u) / p.ru) ** 2 + ((v - p.v) / p.rv) ** 2));
       mass = mass / (1 + mass * 0.35) * 1.35; // soft cap, so massifs merge into a chain
-      const r1 = N.ridged({ x, z, frequency: 1 / 1100, octaves: 5 }) / 1.9;
+      const r1 = N.ridged({ x, z, frequency: 1 / 1400, octaves: 5 }) / 1.9;
       const r2 = N.ridged({ x: x + 917, z: z - 311, frequency: 1 / 330, octaves: 3 }) / 1.75;
-      let h = height * mass * endX * edgeZ * (0.55 + 0.55 * r1 + 0.18 * r2);
+      let h = height * mass * endX * edgeZ * (0.6 + 0.5 * r1 + 0.1 * r2);
       h -= 140 * (1 - endX * edgeZ); // the skirt sinks under the far haze
       row.push(Math.max(-140, h));
     }
@@ -44,13 +44,13 @@ export function geometry(ctx) {
     const hm = (a + b + c + d) / 4, f = hm / height;
     const slope = Math.hypot((d + c - a - b) / (2 * dx), (b + c - a - d) / (2 * dz));
     const n = N.fbm2({ x: x0 + 3000, z: z0, frequency: 1 / 420, octaves: 3 });
-    const line = 0.52 + n * 0.12 + ctx.random() * 0.05;
-    const snow = SS(line, line + 0.08, f) * SS(1.35, 0.85, slope);
+    const line = 0.4 + n * 0.1 + ctx.random() * 0.06;
+    const snow = SS(line, line + 0.06, f) * (SS(2.4, 1.3, slope) * 0.85 + 0.15 + (ctx.random() < f - 0.35 ? 0.4 : 0));
     if (snow > 0.5) {
       const l = 0.9 + 0.07 * snow; ctx.color(`oklch(${l.toFixed(3)} 0.012 245)`);
     } else if (f > 0.22) {
-      const l = 0.5 + ctx.random() * 0.07 + snow * 0.2 + (f - 0.22) * 0.12;
-      ctx.color(`oklch(${l.toFixed(3)} 0.028 ${(245 + n * 30).toFixed(0)})`);
+      const l = 0.42 + ctx.random() * 0.08 + snow * 0.25 + (f - 0.22) * 0.1;
+      ctx.color(`oklch(${l.toFixed(3)} 0.035 ${(245 + n * 30).toFixed(0)})`);
     } else {
       const t = SS(0.02, 0.22, f); // low flanks under forest, bluing into rock
       ctx.color(`oklch(${(0.4 + t * 0.12).toFixed(3)} ${(0.045 - t * 0.017).toFixed(3)} ${(170 + t * 75).toFixed(0)})`);
