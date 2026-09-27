@@ -31,12 +31,14 @@ keepOuts:
     - { name: gazebo, x: -8, z: -42, r: 9 }
     - { name: gate, x: 0, z: 5, r: 6 }
     - { name: arch-treehouse, x: -19, z: -16, r: 6 }
-    - { name: bed-front, x: 6, z: -11, r: 5 }
+    - { name: wizard-tower, x: 30.5, z: -18.5, r: 10 }
   rects:
     - { name: avenue, x0: -6, x1: 6, z0: -18, z1: 7 }
     - { name: gate-walls, x0: -15, x1: 15, z0: 0, z1: 9 }
     - { name: garden-east, x0: 9, x1: 22, z0: -38, z1: -12 }
     - { name: garden-south, x0: -10, x1: 12, z0: -53, z1: -33 }
+    - { name: veg-garden, x0: 5, x1: 18, z0: -15, z1: -1 }
+    - { name: tower-walk, x0: 14, x1: 27, z0: -21, z1: -16 }
     - { name: garden-west, x0: -22, x1: -1, z0: -18, z1: -5 }
 sounds:
   step: /cdn/moodboard-lowpoly-cozy/sfx-stone-golem-heavy-footstep-thud.mp3
