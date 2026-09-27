@@ -11,6 +11,13 @@ corridor-road-bp/marker-2:
   tags: [town-lane, mile-marker]
   ui: "<div face=\"front\" at=\"0.5 0.52\" width=\"0.32m\" style=\"height:560px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:#e4d9c1;border:10px solid #cbbd9e;border-radius:26px;color:#5a4330;font-family:serif;font-weight:700;text-align:center\"><div style=\"width:0;height:0;border-left:46px solid transparent;border-right:46px solid transparent;border-bottom:64px solid #5a4330\"></div><div style=\"font-size:70px;letter-spacing:6px;line-height:1.05;text-shadow:0 4px 0 rgba(255,250,235,.7)\">DEN</div><div style=\"font-size:120px;letter-spacing:6px;line-height:1.05;text-shadow:0 4px 0 rgba(255,250,235,.7)\">1</div><div style=\"font-size:40px;letter-spacing:6px;line-height:1.05;text-shadow:0 4px 0 rgba(255,250,235,.7)\">mile</div></div>"
   visibleRange: {max: 70}
+ember-roost:
+  feetPosition: {x: 0, y: 0.5, z: 130}
+  id: ember-roost
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 14, height: 22, kind: box, width: 14}
+  tags: [blueprint]
 folk-crowd:
   behavior: scripts/folk-crowd.js
   feetPosition: {x: 0, y: 0.4140134773960745, z: 128}
