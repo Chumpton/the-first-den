@@ -245,7 +245,7 @@ function lantern(ctx, p, fine) {
   box(ctx, 0, L0 + 0.26, 0, 0.24, 0.02, 0.24);
   const ap = [0, L0 + 0.36, 0], c = [[-0.12, 0.12], [0.12, 0.12], [0.12, -0.12], [-0.12, -0.12]];
   for (let i = 0; i < 4; i++) { const a = c[i], b = c[(i + 1) % 4]; ctx.tri(a[0], L0 + 0.28, a[1], ...ap, b[0], L0 + 0.28, b[1]); }
-  P(ctx, '#ffe2a8'); glow(ctx, 1.3, 0.85, 0.35);
+  P(ctx, '#ffd0a0'); glow(ctx, 1.5, 0.75, 0.28);
   for (const [nx, nz] of [[0, -1], [1, 0], [0, 1], [-1, 0]]) {
     const tx = -nz, tz = nx, o = 0.095;
     ctx.quad(nx * o - tx * 0.085, L0 + 0.04, nz * o - tz * 0.085, nx * o + tx * 0.085, L0 + 0.04, nz * o + tz * 0.085, nx * o + tx * 0.085, L0 + 0.25, nz * o + tz * 0.085, nx * o - tx * 0.085, L0 + 0.25, nz * o - tz * 0.085);
@@ -304,8 +304,8 @@ function lamp(ctx, p, fine) {
   const h = p.h;
   P(ctx, 'iron'); lathe(ctx, [[0, 0.16], [0.03, 0.15], [0.04, 0.04]], 10, 0, 0);
   P(ctx, 'brass'); lathe(ctx, [[0.04, 0.016], [h - 0.28, 0.016]], 6, 0, 0, false);
-  P(ctx, 'oat'); glow(ctx, 1.2, 0.8, 0.42); lathe(ctx, [[h - 0.34, 0.23], [h - 0.02, 0.13]], 10, 0, 0, false);
-  P(ctx, '#fff0c8'); glow(ctx, 3.2, 2.1, 0.9); blob(ctx, 0, h - 0.22, 0, 0.05, 6); ctx.emissive(null);
+  P(ctx, '#f0c9a0'); glow(ctx, 1.5, 0.72, 0.26); lathe(ctx, [[h - 0.34, 0.23], [h - 0.02, 0.13]], 10, 0, 0, false);
+  P(ctx, '#ffd0a0'); glow(ctx, 3.4, 1.7, 0.6); blob(ctx, 0, h - 0.22, 0, 0.05, 6); ctx.emissive(null);
 }
 function nightstand(ctx, p, fine) {
   const w = p.w, d = p.d, h = p.h;
