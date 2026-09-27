@@ -171,6 +171,12 @@ cob-house/cob-greenery:
   id: cob-house/cob-greenery
   parent: cob-house
   primitive: {kind: scripted, params: {part: greenery}, script: scripts/gen/cob-house.js}
+cob-house/cob-roofbloom:
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: cob-house/cob-roofbloom
+  parent: cob-house
+  primitive: {kind: scripted, params: {part: roofbloom}, script: scripts/gen/cob-house.js, seed: 5}
 cob-house/cob-sun-cellar:
   feetPosition: {x: -2.8, y: -1.2, z: 1.6}
   id: cob-house/cob-sun-cellar
