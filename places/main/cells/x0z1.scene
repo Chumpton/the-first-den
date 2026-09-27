@@ -224,7 +224,7 @@ sign-link-east/finger-1:
   parent: sign-link-east
   primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
   rotation: {yaw: 59.03624346792648}
-  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Magic District &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Magic District</div>"
+  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Mirror Tarn &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Mirror Tarn</div>"
   visibleRange: {max: 45}
 sign-link-east/finger-2:
   castShadow: false
@@ -273,7 +273,7 @@ sign-link-west/finger-2:
   parent: sign-link-west
   primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
   rotation: {yaw: 11.309932474020213}
-  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Magic District &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Magic District</div>"
+  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Mirror Tarn &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Mirror Tarn</div>"
   visibleRange: {max: 45}
 town-alleys:
   feetPosition: {x: 0, y: 0, z: 100}

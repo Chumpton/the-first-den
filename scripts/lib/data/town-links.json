@@ -1,5 +1,5 @@
 {
- "_": "The lanes joining the three squares (market, magic, garden): world x/z polylines. Each is a terrain path + flatten mark (places/main/config.yaml link-*) and a scripts/gen/town-link.js kind lane row (lamps). A new lane is one row here.",
+ "_": "The lanes joining the three squares (market, tarn, garden): world x/z polylines. Each is a terrain path + flatten mark (places/main/config.yaml link-*) and a scripts/gen/town-link.js kind lane row (lamps). A new lane is one row here.",
  "width": 4.5,
  "lampEvery": 18,
  "lanes": {
@@ -10,12 +10,12 @@
   "link-ring": [[82,101],[80,110],[72,124],[58,138],[40,148],[20,152],[0,153],[-20,152],[-40,148],[-58,138],[-72,124],[-80,110],[-82,101]]
  },
  "posts": {
-  "sign-fork-east": {"at": [9,29.5], "to": [["Magic District",1,0.2],["Market Square",0,1],["The Den",0,-1]]},
+  "sign-fork-east": {"at": [9,29.5], "to": [["Mirror Tarn",1,0.2],["Market Square",0,1],["The Den",0,-1]]},
   "sign-fork-west": {"at": [-9,29.5], "to": [["Garden Market",-1,0.2],["Market Square",0,1],["The Den",0,-1]]},
-  "sign-link-east": {"at": [44,108], "to": [["Market Square",-1,-0.2],["Magic District",0.6,-1],["Garden Market",-1,-0.2]]},
-  "sign-link-west": {"at": [-44,108.5], "to": [["Market Square",1,-0.2],["Garden Market",-0.6,-1],["Magic District",1,-0.2]]},
-  "sign-ring-east": {"at": [87,104], "to": [["Garden Market",-0.5,1],["Magic District",-1,-0.6]]},
-  "sign-ring-west": {"at": [-87,104], "to": [["Magic District",0.5,1],["Garden Market",1,-0.6]]}
+  "sign-link-east": {"at": [44,108], "to": [["Market Square",-1,-0.2],["Mirror Tarn",0.6,-1],["Garden Market",-1,-0.2]]},
+  "sign-link-west": {"at": [-44,108.5], "to": [["Market Square",1,-0.2],["Garden Market",-0.6,-1],["Mirror Tarn",1,-0.2]]},
+  "sign-ring-east": {"at": [87,104], "to": [["Garden Market",-0.5,1],["Mirror Tarn",-1,-0.6]]},
+  "sign-ring-west": {"at": [-87,104], "to": [["Mirror Tarn",0.5,1],["Garden Market",1,-0.6]]}
  },
- "arch": {"title": "THE THREE SQUARES", "sub": "Market · Magic · Garden"}
+ "arch": {"title": "THE THREE SQUARES", "sub": "Market · Tarn · Garden"}
 }
