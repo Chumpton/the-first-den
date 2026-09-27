@@ -24,6 +24,7 @@ assets:
     "anim/deer.yml#alert": clips/anim-deer-yml-alert-5438d344.json
     "anim/deer.yml#graze": clips/anim-deer-yml-graze-2d27b1c3.json
     "anim/deer.yml#walk": clips/anim-deer-yml-walk-0c41543f.json
+    "anim/dog.yml#sniff": clips/anim-dog-yml-sniff-a2d6901e.json
     "anim/dog.yml#trot": clips/anim-dog-yml-trot-0dbc9103.json
     "anim/dog.yml#wag": clips/anim-dog-yml-wag-f016903f.json
     "anim/dog.yml#walk": clips/anim-dog-yml-walk-1f9abb93.json
