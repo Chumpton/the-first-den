@@ -1,8 +1,19 @@
 // Heraldic cloth: burgundy field, gold border, a gold dragon rampant. Origin at the top of the hoist.
 // params.kind 'flag' (hoist at x 0, flies toward +x, swallow-tailed) | 'drape' (hangs down from y 0, pointed hem).
+// params.field/field2/trim recolour it; params.beast 'dragon' (default) | 'lion' (a lion rampant, the royal district's).
 // Worn with scripts/material-banner-wave.js (ax/ay say which way the wave runs); vertex paint, no textures.
-const BUR = 'oklch(0.42 0.14 18)', BUR2 = 'oklch(0.36 0.12 16)', GOLD = 'oklch(0.8 0.13 82)';
-function dragon(ctx, cx, cy, s, z, col) {
+const BUR0 = 'oklch(0.42 0.14 18)', BUR20 = 'oklch(0.36 0.12 16)', GOLD0 = 'oklch(0.8 0.13 82)';
+const LION = [
+  [[-0.15, -0.25], [0.12, -0.2], [0.2, 0.25], [-0.05, 0.3]], [[0.02, 0.25], [0.28, 0.2], [0.4, 0.45], [0.26, 0.68], [0.04, 0.62], [-0.07, 0.42]], [[0.3, 0.38], [0.48, 0.43], [0.46, 0.54], [0.3, 0.57]],
+  [[0.15, 0.15], [0.42, 0.25], [0.44, 0.17], [0.18, 0.04]], [[0.42, 0.25], [0.53, 0.35], [0.51, 0.2], [0.44, 0.17]], [[0.13, -0.02], [0.4, -0.03], [0.39, -0.11], [0.12, -0.12]],
+  [[-0.15, -0.25], [0.05, -0.22], [0.1, -0.55], [-0.02, -0.58]], [[0.1, -0.55], [0.24, -0.6], [0.22, -0.66], [-0.02, -0.62]], [[-0.14, -0.18], [-0.06, -0.26], [-0.26, -0.6], [-0.34, -0.57]],
+  [[-0.12, -0.12], [-0.36, 0.0], [-0.4, 0.12], [-0.14, -0.04]], [[-0.4, 0.12], [-0.5, 0.27], [-0.31, 0.2]], [[0.22, 0.62], [0.26, 0.78], [0.3, 0.64]],
+];
+function lion(ctx, cx, cy, s, z, col) {
+  ctx.color(col);
+  for (const poly of LION) { const q = poly.map(([u, v]) => [cx + u * s, cy + v * s, z]); for (let i = 1; i + 1 < q.length; i++) ctx.tri(...q[0], ...q[i], ...q[i + 1]); }
+}
+function dragonArt(ctx, cx, cy, s, z, col) {
   ctx.color(col);
   const P = [
     [[0, 0.1], [0.18, 0.28], [0.1, -0.3], [-0.12, -0.25]], [[0.18, 0.28], [0.3, 0.55], [0.22, 0.6], [0.1, 0.3]], [[0.22, 0.6], [0.3, 0.55], [0.46, 0.62], [0.32, 0.72]],
@@ -13,7 +24,8 @@ function dragon(ctx, cx, cy, s, z, col) {
   for (const poly of P) { const q = poly.map(([u, v]) => [cx + u * s, cy + v * s, z]); if (q.length === 3) ctx.tri(...q[0], ...q[1], ...q[2]); else ctx.quad(...q[0], ...q[1], ...q[2], ...q[3]); }
 }
 export function geometry(ctx) {
-  const { kind = 'flag', L = 3.6, h = 2.3, w = 1.0, notch = 0.7, point = 0.4 } = ctx.params, lod = ctx.lod || 1;
+  const { kind = 'flag', L = 3.6, h = 2.3, w = 1.0, notch = 0.7, point = 0.4, field: BUR = BUR0, field2: BUR2 = BUR20, trim: GOLD = GOLD0, beast = 'dragon' } = ctx.params, lod = ctx.lod || 1;
+  const dragon = beast === 'lion' ? lion : dragonArt;
   const nu = lod <= 2 ? 16 : 6, nv = lod <= 2 ? 8 : 3;
   const pos = kind === 'flag'
     ? (u, v) => [u * (L - notch * (1 - Math.abs(2 * v - 1))), -v * h]
