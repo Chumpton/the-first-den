@@ -61,7 +61,7 @@ export function geometry(ctx) {
   glow(ctx);
   const yr = Y + 0.002, nr = hi ? 64 : 24;
   annulus(ctx, 0, 0, 3.47, 3.53, yr, nr); annulus(ctx, 0, 0, 4.18, 4.24, yr, nr);
-  for (let i = 0; i < 16; i++) { const a = ((i + 0.5) / 16) * TAU; glyph(ctx, Math.cos(a) * 3.855, Math.sin(a) * 3.855, a, 0.5, yr, 0.05); }
+  if (L <= 3) for (let i = 0; i < 16; i++) { const a = ((i + 0.5) / 16) * TAU; glyph(ctx, Math.cos(a) * 3.855, Math.sin(a) * 3.855, a, 0.5, yr, 0.05); }
   const S = []; for (let i = 0; i < 5; i++) { const a = -Math.PI / 2 + (i / 5) * TAU; S.push([Math.cos(a) * 1.22, Math.sin(a) * 1.22]); }
   for (let i = 0; i < 5; i++) { const a = S[i], b = S[(i + 2) % 5]; strip(ctx, a[0], a[1], b[0], b[1], 0.06, yr); }
   annulus(ctx, 0, 0, 1.3, 1.37, yr, hi ? 40 : 20);
@@ -76,7 +76,7 @@ export function geometry(ctx) {
     if (fine) { paint(ctx, 'moss', 'oklch(0.92 0.06 130)', 0.95); const c = A[2]; blob(ctx, c[0], y + 0.005, c[2], 0.12, 0.04, 0.09, 4, () => ctx.random()); }
   }
   // rune discs in the turf
-  for (const [x, z, y, rot, r] of p.glyphs || []) {
+  if (hi) for (const [x, z, y, rot, r] of p.glyphs || []) {
     paint(ctx, null, SLATE, 0.75); solid(ctx, ring(hi ? 10 : 6, r, y - 0.06, x, z, rot), ring(hi ? 10 : 6, r * 0.97, y + 0.012, x, z, rot));
     glow(ctx); annulus(ctx, x, z, r * 0.76, r * 0.84, y + 0.02, hi ? 16 : 8); glyph(ctx, x, z, rot, r * 1.05, y + 0.02, r * 0.1);
   }
