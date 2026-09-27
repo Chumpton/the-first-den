@@ -4,6 +4,15 @@ hearthmere:
   id: hearthmere
   state: {town: Hearthmere}
   tags: [hearthmere]
+hearthmere/hearth-great-tree:
+  feetPosition: {x: 0, y: 0, z: 0}
+  fx: {script: "fx\npop leaves n=?mobile:40|90 on=disc(15).c(24) life=5..9 v=up(-.25..-.5)+sdir()*.2 size=.14..0.24 spin=-1.5..1.5 acc=curl(.3)*.6+drag(.6) col=hdr(2.6,1.8,.55)>hdr(1.8,1.1,.3) a=0>.15:1>.8:.9>0 sz=$size rot=$age*$spin floor=die r=sprite(leaf,add)\npop flies n=?mobile:30|60 on=disc(22).c(1.8) life=3..6 v=sdir()*.25 size=.05..0.09 acc=curl(.5)*.8+drag(1) col=hdr(3.4,2.6,.9) a=(0>.2:1>.8:1>0)*flick(2.2,.6) sz=$size r=sprite(mote,add)\npop motes n=?mobile:20|40 on=disc(5).c(8) life=4..7 v=up(.3..0.6) size=.06..0.1 acc=curl(.4)+drag(.5) col=hdr(2.4,2,1) a=0>.2:.9>.8:.8>0 sz=$size r=sprite(mote,add)"}
+  id: hearthmere/hearth-great-tree
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {h: 36, kind: tree}, script: scripts/gen/hearth-civic.js, seed: 7}
+  rotation: {yaw: 0}
+  tags: [hearth-tree]
 hearthmere/hearth-house-r1:
   feetPosition: {x: 30.21, y: 0, z: 36}
   id: hearthmere/hearth-house-r1
@@ -103,3 +112,11 @@ hearthmere/hearth-house-w2:
   rotation: {yaw: 0}
   tags: [hearth-house]
   visibleRange: {max: 700}
+hearthmere/hearth-temple:
+  feetPosition: {x: -80, y: 0, z: -8}
+  id: hearthmere/hearth-temple
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: temple}, script: scripts/gen/hearth-civic.js, seed: 1}
+  rotation: {yaw: -90}
+  tags: [hearth-temple]

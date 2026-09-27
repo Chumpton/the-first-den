@@ -11,3 +11,66 @@ fox-hearth-5:
   state: {home: {x: -980, z: -700}, mode: idle, range: 25, scale: 1, sp: fox, until: 0, yaw: 174}
   tags: [fauna-ground, interactable, animal, fox]
   visibleRange: {max: 180}
+hearthmere/hearth-wall-25:
+  feetPosition: {x: -87.53, y: 0, z: -111.46}
+  id: hearthmere/hearth-wall-25
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: wall, len: 21.62}, script: scripts/gen/hearth-civic.js, seed: 2}
+  rotation: {yaw: 38.1}
+  tags: [hearth-wall]
+  visibleRange: {max: 300}
+hearthmere/hearth-wall-26:
+  feetPosition: {x: -69.91, y: 0, z: -123.28}
+  id: hearthmere/hearth-wall-26
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: wall, len: 21.62}, script: scripts/gen/hearth-civic.js, seed: 3}
+  rotation: {yaw: 29.6}
+  tags: [hearth-wall]
+  visibleRange: {max: 300}
+hearthmere/hearth-wall-27:
+  feetPosition: {x: -50.72, y: 0, z: -132.33}
+  id: hearthmere/hearth-wall-27
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: wall, len: 21.62}, script: scripts/gen/hearth-civic.js, seed: 4}
+  rotation: {yaw: 21}
+  tags: [hearth-wall]
+  visibleRange: {max: 300}
+hearthmere/hearth-wall-28:
+  feetPosition: {x: -30.4, y: 0, z: -138.42}
+  id: hearthmere/hearth-wall-28
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: wall, len: 21.62}, script: scripts/gen/hearth-civic.js, seed: 1}
+  rotation: {yaw: 12.4}
+  tags: [hearth-wall]
+  visibleRange: {max: 300}
+hearthmere/hearth-wall-29:
+  feetPosition: {x: -9.39, y: 0, z: -141.41}
+  id: hearthmere/hearth-wall-29
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: wall, len: 21.62}, script: scripts/gen/hearth-civic.js, seed: 2}
+  rotation: {yaw: 3.8}
+  tags: [hearth-wall]
+  visibleRange: {max: 300}
+hearthmere/hearth-wall-30:
+  feetPosition: {x: 11.82, y: 0, z: -141.22}
+  id: hearthmere/hearth-wall-30
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: wall, len: 21.62}, script: scripts/gen/hearth-civic.js, seed: 3}
+  rotation: {yaw: -4.8}
+  tags: [hearth-wall]
+  visibleRange: {max: 300}
+hearthmere/hearth-wall-31:
+  feetPosition: {x: 32.77, y: 0, z: -137.88}
+  id: hearthmere/hearth-wall-31
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: wall, len: 21.62}, script: scripts/gen/hearth-civic.js, seed: 4}
+  rotation: {yaw: -13.4}
+  tags: [hearth-wall]
+  visibleRange: {max: 300}

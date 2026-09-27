@@ -1,4 +1,21 @@
 # spawn-scene v2 yaml x-7z-4
+hearthmere/hearth-fountain:
+  feetPosition: {x: 52, y: 0, z: -46}
+  fx: {script: "fx\npop spray rate=?mobile:40|70 on=disc(.12).c(2.4) life=.9..1.3 v=up(2.6..3.2)+cone(18)*(.6..1.1) size=.05..0.09 acc=grav() col=<.8,.9,1> a=.8>.6:.8>0 sz=$size floor=die r=sprite(droplet,alpha,velocity,.03)\npop sparkle rate=6 on=disc(2.6).c(.7) life=.6..1.2 size=.05..0.08 col=hdr(2.4,2.1,1.2) a=(0>.3:1>0)*flick(6,.5) sz=$size r=sprite(mote,add)"}
+  id: hearthmere/hearth-fountain
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: fountain, r: 3.2}, script: scripts/gen/hearth-civic.js, seed: 1}
+  rotation: {yaw: 0}
+  tags: [hearth-fountain]
+hearthmere/hearth-gatehouse:
+  feetPosition: {x: 140, y: 0, z: 22}
+  id: hearthmere/hearth-gatehouse
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: gatehouse}, script: scripts/gen/hearth-civic.js, seed: 1}
+  rotation: {yaw: -98.9}
+  tags: [hearth-gatehouse]
 hearthmere/hearth-home:
   feetPosition: {x: 104, y: 0, z: 33}
   id: hearthmere/hearth-home
@@ -80,6 +97,123 @@ hearthmere/hearth-house-tavern:
   rotation: {yaw: 62}
   tags: [hearth-house, hearth-enterable]
   visibleRange: {max: 700}
+hearthmere/hearth-stall-0:
+  feetPosition: {x: 62.16, y: 0, z: -41.79}
+  id: hearthmere/hearth-stall-0
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: fruit, stripe: 0}, script: scripts/gen/hearth-stall.js, seed: 1}
+  rotation: {yaw: 67.5}
+  tags: [hearth-fruit]
+  visibleRange: {max: 180}
+hearthmere/hearth-stall-1:
+  feetPosition: {x: 56.21, y: 0, z: -35.84}
+  id: hearthmere/hearth-stall-1
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: flowers, stripe: 1}, script: scripts/gen/hearth-stall.js, seed: 2}
+  rotation: {yaw: 22.5}
+  tags: [hearth-flowers]
+  visibleRange: {max: 180}
+hearthmere/hearth-stall-2:
+  feetPosition: {x: 47.79, y: 0, z: -35.84}
+  id: hearthmere/hearth-stall-2
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: potions, stripe: 2}, script: scripts/gen/hearth-stall.js, seed: 3}
+  rotation: {yaw: -22.5}
+  tags: [hearth-potions]
+  visibleRange: {max: 180}
+hearthmere/hearth-stall-3:
+  feetPosition: {x: 41.84, y: 0, z: -41.79}
+  id: hearthmere/hearth-stall-3
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: fruit, stripe: 3}, script: scripts/gen/hearth-stall.js, seed: 4}
+  rotation: {yaw: -67.5}
+  tags: [hearth-fruit]
+  visibleRange: {max: 180}
+hearthmere/hearth-stall-4:
+  feetPosition: {x: 41.84, y: 0, z: -50.21}
+  id: hearthmere/hearth-stall-4
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: flowers, stripe: 0}, script: scripts/gen/hearth-stall.js, seed: 5}
+  rotation: {yaw: -112.5}
+  tags: [hearth-flowers]
+  visibleRange: {max: 180}
+hearthmere/hearth-stall-5:
+  feetPosition: {x: 47.79, y: 0, z: -56.16}
+  id: hearthmere/hearth-stall-5
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: potions, stripe: 1}, script: scripts/gen/hearth-stall.js, seed: 6}
+  rotation: {yaw: -157.5}
+  tags: [hearth-potions]
+  visibleRange: {max: 180}
+hearthmere/hearth-stall-6:
+  feetPosition: {x: 56.21, y: 0, z: -56.16}
+  id: hearthmere/hearth-stall-6
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: fruit, stripe: 2}, script: scripts/gen/hearth-stall.js, seed: 7}
+  rotation: {yaw: 157.5}
+  tags: [hearth-fruit]
+  visibleRange: {max: 180}
+hearthmere/hearth-stall-7:
+  feetPosition: {x: 62.16, y: 0, z: -50.21}
+  id: hearthmere/hearth-stall-7
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: flowers, stripe: 3}, script: scripts/gen/hearth-stall.js, seed: 8}
+  rotation: {yaw: 112.5}
+  tags: [hearth-flowers]
+  visibleRange: {max: 180}
+hearthmere/hearth-wall-0:
+  feetPosition: {x: 135.36, y: 0, z: 41.96}
+  id: hearthmere/hearth-wall-0
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: wall, len: 21.62}, script: scripts/gen/hearth-civic.js, seed: 1}
+  rotation: {yaw: -107.2}
+  tags: [hearth-wall]
+  visibleRange: {max: 300}
+hearthmere/hearth-wall-37:
+  feetPosition: {x: 128.32, y: 0, z: -60.16}
+  id: hearthmere/hearth-wall-37
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: wall, len: 21.62}, script: scripts/gen/hearth-civic.js, seed: 2}
+  rotation: {yaw: -64.9}
+  tags: [hearth-wall]
+  visibleRange: {max: 300}
+hearthmere/hearth-wall-38:
+  feetPosition: {x: 135.86, y: 0, z: -40.33}
+  id: hearthmere/hearth-wall-38
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: wall, len: 21.62}, script: scripts/gen/hearth-civic.js, seed: 3}
+  rotation: {yaw: -73.5}
+  tags: [hearth-wall]
+  visibleRange: {max: 300}
+hearthmere/hearth-wall-39:
+  feetPosition: {x: 140.36, y: 0, z: -19.59}
+  id: hearthmere/hearth-wall-39
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: wall, len: 21.62}, script: scripts/gen/hearth-civic.js, seed: 4}
+  rotation: {yaw: -82.1}
+  tags: [hearth-wall]
+  visibleRange: {max: 300}
+hearthmere/hearth-wall-40:
+  feetPosition: {x: 141.71, y: 0, z: 1.58}
+  id: hearthmere/hearth-wall-40
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: wall, len: 21.62}, script: scripts/gen/hearth-civic.js, seed: 1}
+  rotation: {yaw: -90.6}
+  tags: [hearth-wall]
+  visibleRange: {max: 300}
 hearthmere/hearth-workshop:
   feetPosition: {x: 60, y: 0, z: -9}
   id: hearthmere/hearth-workshop

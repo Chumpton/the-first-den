@@ -11,3 +11,21 @@ bear-hearth-4:
   state: {home: {x: -1120, z: -660}, mode: idle, range: 25, scale: 1, sp: bear, until: 0, yaw: -135}
   tags: [fauna-ground, interactable, animal, bear]
   visibleRange: {max: 180}
+hearthmere/hearth-wall-23:
+  feetPosition: {x: -116.53, y: 0, z: -80.65}
+  id: hearthmere/hearth-wall-23
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: wall, len: 21.62}, script: scripts/gen/hearth-civic.js, seed: 4}
+  rotation: {yaw: 55.3}
+  tags: [hearth-wall]
+  visibleRange: {max: 300}
+hearthmere/hearth-wall-24:
+  feetPosition: {x: -103.19, y: 0, z: -97.14}
+  id: hearthmere/hearth-wall-24
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: wall, len: 21.62}, script: scripts/gen/hearth-civic.js, seed: 1}
+  rotation: {yaw: 46.7}
+  tags: [hearth-wall]
+  visibleRange: {max: 300}
