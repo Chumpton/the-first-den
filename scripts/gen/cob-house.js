@@ -430,7 +430,7 @@ function greenery(ctx) {
 // The living roof in bloom (params.part "roofbloom"): moss mounds and sedum cushions for texture, drifts of wildflowers
 // in colour patches (poppy, cornflower, oxeye, buttercup, clover, lavender, coneflower), and vines trailing off the eave edge.
 function roofBloom(ctx) {
-  const lod = Number(ctx.lod ?? 1); if (lod >= 4) return;
+  const lod = Number(ctx.lod ?? 1);
   ctx.flat(); ctx.albedo(null); ctx.roughness(0.95);
   const eAp = H.eaveR * COS30, dAp = H.deckR * COS30, dy = H.D - H.eaveY;
   const V = (r, k) => [Math.cos(60 * k * D2R) * r, Math.sin(60 * k * D2R) * r];
@@ -444,6 +444,7 @@ function roofBloom(ctx) {
     ["#e0413a", "#2a1a14", 0.42, 0.09], ["#4f7fe0", "#2c3f86", 0.38, 0.07], ["#f6f2e6", "#f0c22e", 0.4, 0.08],
     ["#f2cf2e", "#d99a1c", 0.3, 0.06], ["#e59ac8", "#c2548d", 0.2, 0.06], ["#9a74d8", "#6e4aa8", 0.45, 0.05], ["#ec7d3a", "#5a2f18", 0.5, 0.1],
   ];
+  if (lod >= 4) { const cols = F.map((f) => f[0]); for (let k = 0; k < 6; k++) for (let i = 0; i < 5; i++) { const [x, y, z] = at(k, 0.1 + ctx.random() * 0.8, 0.1 + ctx.random() * 0.7), r = 0.5 + ctx.random() * 0.4; ctx.color(cols[(k * 5 + i) % cols.length]); ctx.tri(x - r, y + 0.1, z, x + r * 0.5, y + 0.1, z + r * 0.87, x + r * 0.5, y + 0.1, z - r * 0.87); } return; }
   const moss = ["#5f8a3a", "#6f9a44", "#809f4c", "#8aa35a"], sedum = ["#a8b458", "#c18a6a", "#b4c070"];
   for (let k = 0; k < 6; k++) {
     // texture: low moss mounds and sedum cushions
