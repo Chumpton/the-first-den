@@ -70,7 +70,8 @@ terrain:
     campSite: {center: {x: -18, z: -50}, falloff: 5, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 6}}
     campClear: {center: {x: -18, z: -50}, kind: clear-scatter, shape: {kind: circle, radius: 8}}
     lakeClear: {center: {x: 4, z: -76}, kind: clear-scatter, shape: {kind: circle, radius: 24}}
-    pathFront: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[0.25, 7], [0, -16.5]], width: 5, edgeMaterial: yard, falloff: 3.5}
+    pathFront-gate: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[0.25, 7], [0.2, 4.2]], width: 5, edgeMaterial: yard, falloff: 2}
+    pathFront: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[0, -4.2], [0, -16.5]], width: 5, edgeMaterial: yard, falloff: 3.5}
     pathLake: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[0, -35.5], [1.5, -40], [5, -45], [6, -50]], width: 2, edgeMaterial: yard, falloff: 3.5}
     pathCamp: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[1.5, -40], [-6, -43], [-13, -47], [-16, -49]], width: 1.6, edgeMaterial: yard, falloff: 3.5}
     lumenvaleClear: {center: {x: 1100, z: -250}, kind: clear-scatter, shape: {kind: circle, radius: 190}}
@@ -137,7 +138,8 @@ terrain:
     garden-clear-front: {center: {x: 5.5, z: -13}, kind: clear-scatter, shape: {depth: 6, kind: rectangle, width: 12}}
     mazeGround: {center: {x: -8, z: -127}, falloff: 4, height: 0.5, kind: flatten, material: litter, shape: {kind: circle, radius: 24}}
     mazeClear: {center: {x: -8, z: -127}, kind: clear-scatter, shape: {kind: circle, radius: 28}}
-    pathMaze: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[-16, -49], [-26, -62], [-30, -80], [-25, -97], [-14, -106], [-8, -112]], width: 2, edgeMaterial: yard, falloff: 3.5}
+    pathMaze-a: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[-16, -49], [-20.9, -55.4]], width: 2, edgeMaterial: yard, falloff: 2}
+    pathMaze: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[-25.1, -60.8], [-26, -62], [-30, -80], [-25, -97], [-14, -106], [-8, -112]], width: 2, edgeMaterial: yard, falloff: 3.5}
     verge-pathMaze: {center: {x: -26, z: -62}, kind: clear-scatter, shape: {kind: path, points: [[-16, -49], [-26, -62], [-30, -80], [-25, -97], [-14, -106], [-8, -112]], width: 9}}
     den-creek: {kind: river, width: 1.8, depth: 0.7, bedMaterial: pebbles, points: [[16, -1], [9, 0.3], [3, 0.2], [0, 0], [-4, -0.2], [-10, 0.4], [-16, -2.5], [-21, -7], [-25.5, -14], [-27.5, -22], [-28.2, -31], [-28, -40], [-27.6, -48], [-25.5, -56], [-20, -62], [-14, -66.5], [-9, -69]], liquid: {kind: water, color: oklch(0.6 0.08 185), clarity: 0.85, caustics: 0.4, refraction: 0.3, shoreFoam: 0.08, turbulence: 0.25, waves: 0.03, flow: 0.6}}
     den-creekClear: {kind: clear-scatter, center: {x: -14, z: -30}, shape: {kind: path, points: [[16, -1], [0, 0], [-10, 0.4], [-21, -7], [-27.5, -22], [-28, -40], [-25.5, -56], [-14, -66.5]], width: 5}}
