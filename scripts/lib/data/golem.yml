@@ -38,7 +38,8 @@ keepOuts:
     - { name: gate-walls, x0: -15, x1: 15, z0: 0, z1: 9 }
     - { name: garden-east, x0: 9, x1: 22, z0: -38, z1: -12 }
     - { name: garden-south, x0: -10, x1: 12, z0: -53, z1: -33 }
-    - { name: veg-garden, x0: 5, x1: 18, z0: -15, z1: -1 }
+    - { name: quad-garden, x0: 4, x1: 25, z0: -15, z1: -1 }
+    - { name: garden-east-walk, x0: 20, x1: 26, z0: -19, z1: -8 }
     - { name: tower-walk, x0: 14, x1: 27, z0: -21, z1: -16 }
     - { name: garden-west, x0: -22, x1: -1, z0: -18, z1: -5 }
 sounds:
