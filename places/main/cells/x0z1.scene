@@ -1,10 +1,15 @@
 # spawn-scene v2 yaml x0z1
 town-dragon:
-  feetPosition: {x: 0, y: {terrain: 0}, z: 131}
+  behavior: scripts/town-dragon.js
+  children: [{feetPosition: {x: 0.2, y: 3.4, z: -1.2}, id: ember-tag, text: {color: oklch(0.92 0.12 80), content: Ember, size: 0.8}}]
+  feetPosition: {x: 0, y: 22, z: 130}
   id: town-dragon
-  material: {kind: scripted, script: engine/blueprint}
   physics: none
-  primitive: {depth: 8, height: 5, kind: box, width: 10}
+  primitive: {kind: scripted, script: scripts/gen/roost-dragon.js}
+  rotation: {yaw: 0}
+  state: {}
+  tags: [dragon, town]
+  visibleRange: {max: 170}
 town-fountain:
   feetPosition: {x: 0, y: {terrain: 0}, z: 100}
   id: town-fountain
