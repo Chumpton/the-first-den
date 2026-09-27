@@ -3057,10 +3057,11 @@ garden-gazebo/gazebo-bloom:
 garden-greenhouse:
   feetPosition: {x: 58, y: 0.5, z: -33}
   id: garden-greenhouse
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 7, height: 3.6, kind: box, width: 24}
-  tags: [blueprint]
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/tg-greenhouse.js}
+  tags: [tower-gardens]
+  visibleRange: {max: 140}
 garden-paths:
   feetPosition: {x: 0, y: 0.5, z: -40}
   id: garden-paths
@@ -5021,6 +5022,54 @@ sunbeams:
   feetPosition: {x: 0, y: 0.5, z: 0}
   fx: {script: "fx follow=camera\npop motes n=?mobile:60|160 on=box(24,8,24).c(3) wrap=24;8;24 life=4..7 v=up(.02..0.08)+sdir()*.05 size=.02..0.04 acc=curl(.2)*.2 col=hdr(1.6,1.4,.9) a=0>.3:.6>.7:.5>0 sz=$size r=sprite(mote,add)"}
   id: sunbeams
+tg-border:
+  castShadow: false
+  feetPosition: {x: 57, y: 0.5, z: -26.5}
+  id: tg-border
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {item: border, ox: 57, oz: -26.5}, script: scripts/gen/tg-grounds.js}
+  receiveShadow: true
+  tags: [tower-gardens]
+  visibleRange: {max: 80}
+tg-dressing:
+  castShadow: false
+  feetPosition: {x: 58, y: 0.5, z: -27}
+  id: tg-dressing
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {item: dressing, ox: 58, oz: -27}, script: scripts/gen/tg-grounds.js}
+  receiveShadow: true
+  tags: [tower-gardens]
+  visibleRange: {max: 90}
+tg-fence:
+  castShadow: false
+  feetPosition: {x: 57, y: 0.5, z: -26}
+  id: tg-fence
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {item: fence, ox: 57, oz: -26}, script: scripts/gen/tg-grounds.js}
+  receiveShadow: true
+  tags: [tower-gardens]
+  visibleRange: {max: 110}
+tg-paths:
+  castShadow: false
+  feetPosition: {x: 56, y: 0.5, z: -24}
+  id: tg-paths
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {item: paths, ox: 56, oz: -24}, script: scripts/gen/tg-grounds.js}
+  receiveShadow: true
+  tags: [tower-gardens]
+  visibleRange: {max: 110}
+tg-sign:
+  castShadow: false
+  feetPosition: {x: 41.74, y: 2.72, z: -22}
+  id: tg-sign
+  material: {color: "#4f3828", roughness: 0.8}
+  primitive: {depth: 0.04, height: 0.42, kind: box, width: 1.5}
+  rotation: {yaw: 90}
+  tags: [tower-gardens]
+  ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#4f3828;border:18px solid #ba8950;border-radius:30px;color:#f2e6cf;font-family:serif;font-size:190px;letter-spacing:8px\">Tower Gardens</div>"
+  visibleRange: {max: 70}
 tower-dais:
   castShadow: false
   feetPosition: {x: 30.8, y: 0.47, z: -8.9}
