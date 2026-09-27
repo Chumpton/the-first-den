@@ -1,23 +1,25 @@
 // The pond falls: a mossy limestone boulder stack where a spring culvert spills over three stepped ledges into the den-creek's
 // mouth at the lake. params.part "rock" (default): boulders, ledges, headwall + spout, one draw, a stepped collider.
 // params.part "water": the spout stream, three basin sheets and three falls curtains (wear scripts/material-falls-water.js), no collider.
+// Any spring cascade is this file by params: tiers, falls, boulders, steps (collider boxes), wall: false (no headwall/culvert),
+// spring { x, y, z, drop, reach, w0, w1 } (the stream feeding the top basin). Left out: the pond falls' own layout.
 // Origin = the plunge foot at water level (y 0 = lake surface); front (−Z) is the way the water falls.
 import { TAU, TEX, paint } from '../lib/yard-kit.js';
 import { Q, T, box, solid } from '../lib/road-solid.js';
 const ROCK = 'oklch(0.86 0.025 80)', MOSS = 'oklch(0.78 0.09 132)', DARK = 'oklch(0.3 0.02 230)';
 // tiers: centre, radii, ledge top; the water sits 0.04 above
-const TIERS = [
+const TIERS0 = [
   { cx: 0, cz: 2.0, rx: 0.95, rz: 0.85, top: 2.3 },
   { cx: 0.2, cz: 0.35, rx: 1.05, rz: 0.7, top: 1.4 },
   { cx: 0, cz: -0.85, rx: 1.12, rz: 0.65, top: 0.6 },
 ];
 // falls: lip x, lip z, from y, to y, width, throw
-const FALLS = [
+const FALLS0 = [
   { x: 0, z: 1.15, y0: 2.34, y1: 1.44, w: 0.8, out: 0.25 },
   { x: 0.25, z: -0.35, y0: 1.44, y1: 0.64, w: 1.0, out: 0.25 },
   { x: 0, z: -1.5, y0: 0.64, y1: -0.05, w: 1.2, out: 0.32 },
 ];
-const BOULDERS = [
+const BOULDERS0 = [
   [-1.6, 1.4, 2.9, 1.2, 1.7, 1.1], [1.7, 1.1, 2.7, 1.3, 1.5, 1.2], [0.2, 1.5, 4.0, 1.5, 1.5, 0.9],
   [-1.45, 1.3, 1.5, 0.9, 1.3, 0.9], [1.4, 1.4, 1.4, 0.85, 1.2, 0.9],
   [-1.45, 0.55, 0.15, 0.9, 1.0, 0.9], [1.8, 0.6, 0.1, 0.85, 1.0, 0.8],
@@ -51,13 +53,14 @@ function ledgeLoop(t, y, s, lod, seed) {
   for (let i = 0; i < n; i++) { const a = (i / n) * TAU, j = 0.9 + r() * 0.16; A.push([t.cx + Math.cos(a) * t.rx * j * s, y, t.cz + Math.sin(a) * t.rz * j * s]); }
   return A;
 }
-function rocks(ctx, lod) {
-  const faces = [];
+function rocks(ctx, lod, P) {
+  const faces = [], TIERS = P.tiers ?? TIERS0, BOULDERS = P.boulders ?? BOULDERS0;
   BOULDERS.forEach((b, i) => { if (lod >= 4 && Math.max(b[3], b[5]) < 0.6) return; boulder(faces, b, i, lod); });
   paint(ctx, 'stone', ROCK, 0.92);
   // ledges: irregular slabs, the top a touch smaller, a moss rim cap drawn after
   TIERS.forEach((t, i) => solid(ctx, ledgeLoop(t, -1, 1.05, lod, 40 + i), ledgeLoop(t, t.top, 1, lod, 40 + i)));
   for (const f of faces) if (!f.moss) Q(ctx, ...f.q, f.o);
+  if (P.wall === false) { paint(ctx, 'moss', MOSS, 0.95); for (const f of faces) if (f.moss) Q(ctx, ...f.q, f.o); return; }
   // headwall: coursed limestone with the culvert
   if (lod <= 2) {
     for (let c = 0; c < 4; c++) { const y0 = 0.6 + c * 0.65, off = (c % 2) * 0.35;
@@ -83,15 +86,17 @@ function strip(ctx, pts, w0, w1) { // a curtain down a centreline, width taperin
     ctx.quad(x0 - a / 2, y0, z0, x0 + a / 2, y0, z0, x1 + b / 2, y1, z1, x1 - b / 2, y1, z1);
   }
 }
-function water(ctx, lod) {
+function water(ctx, lod, P) {
+  const TIERS = P.tiers ?? TIERS0, FALLS = P.falls ?? FALLS0;
+  const S = P.spring ?? (P.wall === false ? null : { x: 0, y: 2.8, z: 2.62, drop: 0.46, reach: 0.4, w0: 0.2, w1: 0.3 });
   ctx.albedo(null); ctx.color('oklch(0.72 0.08 195)', 0.8); ctx.roughness(0.1); ctx.metalness(0);
   const seg = lod <= 2 ? 6 : 3;
   // basins
   TIERS.forEach((t, i) => { const L = ledgeLoop(t, t.top + 0.04, 0.9, lod, 40 + i), c = [t.cx, t.top + 0.04, t.cz];
     for (let k = 0; k < L.length; k++) ctx.tri(...c, ...L[(k + 1) % L.length], ...L[k]); });
   // spout stream: out of the bore, down into the top basin
-  const sp = []; for (let i = 0; i <= seg; i++) { const s = i / seg; sp.push([0, 2.8 - 0.46 * s * s, 2.62 - 0.4 * Math.sin(s * Math.PI / 2)]); }
-  strip(ctx, sp, 0.2, 0.3);
+  if (S) { const sp = []; for (let i = 0; i <= seg; i++) { const s = i / seg; sp.push([S.x, S.y - S.drop * s * s, S.z - S.reach * Math.sin(s * Math.PI / 2)]); }
+    strip(ctx, sp, S.w0 ?? 0.2, S.w1 ?? 0.3); }
   // falls curtains
   for (const f of FALLS) { const p = []; for (let i = 0; i <= seg; i++) { const s = i / seg; p.push([f.x, f.y0 - (f.y0 - f.y1) * s * s, f.z - f.out * Math.sin(s * Math.PI / 2)]); }
     strip(ctx, p, f.w, f.w * 1.12); }
@@ -99,10 +104,12 @@ function water(ctx, lod) {
 export function geometry(ctx) {
   ctx.flat();
   const lod = ctx.lod || 1;
-  if (ctx.params.part === 'water') water(ctx, lod); else rocks(ctx, lod);
+  const P = ctx.params || {};
+  if (P.part === 'water') water(ctx, lod, P); else rocks(ctx, lod, P);
 }
 export function collider(ctx) {
   if (ctx.params.part === 'water') return null;
+  if (ctx.params.steps) { for (const b of ctx.params.steps) box(ctx, ...b); return; }
   box(ctx, -2.7, -1, 2.3, 2.9, 3.0, 4.8);
   box(ctx, -2.3, -1, 1.1, 2.2, 2.3, 2.3);
   box(ctx, -2.3, -1, -0.4, 2.6, 1.4, 1.1);
