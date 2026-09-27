@@ -1,8 +1,8 @@
 // The grand gate off the main road. params.kind "frame": two limestone piers with lantern caps, a wrought-iron arch with
 // the house name, low limestone wing walls ending in small piers. Opening params.w wide along local X, centred; local -Z faces the road.
-// params.kind "leaf": one oak-and-iron door, hinge at the origin, running params.w along local X * params.dir.
+// params.kind "leaf": one wrought-iron door, hinge at the origin, running params.w along local X * params.dir.
 import { paint, obox, beam, TAU } from '../lib/yard-kit.js';
-import { box, prism, ngon } from '../lib/road-solid.js';
+import { box, prism, ngon, gem } from '../lib/road-solid.js';
 const LIME = () => 'oklch(0.9 0.025 85)', IRON = 'oklch(0.3 0.015 60)';
 function pier(ctx, x, s, h, lod, rnd) {
   paint(ctx, 'stone', 'oklch(0.86 0.025 80)', 0.9); obox(ctx, x, 0, 0, s + 0.16, 0.35, s + 0.16);           // plinth
@@ -35,22 +35,37 @@ function frame(ctx, p, lod) {
   paint(ctx, null, IRON, 0.5, 0.6); gemTop(ctx, 0, y0 + rise + 0.05);
 }
 function gemTop(ctx, x, y) { prism(ctx, ngon(4, 0.12, x, 0, TAU / 8), y, y + 0.35, 0.05); }
-function leaf(ctx, p, lod) {
-  const w = p.w ?? 2.2, d = p.dir ?? 1, h = p.h ?? 2.7, rnd = () => ctx.random();
-  const X = (a) => a * d;
-  paint(ctx, 'oak', 'oklch(0.78 0.07 65)', 0.8);
-  const boards = lod <= 2 ? 7 : 1, bw = (w - 0.1) / boards;
-  for (let i = 0; i < boards; i++) { const top = h - 0.35 + Math.sin(((i + 0.5) / boards) * Math.PI * 0.5 + (d < 0 ? Math.PI * 0.5 : 0)) * 0.35; paint(ctx, 'oak', `oklch(${(0.74 + rnd() * 0.07).toFixed(3)} 0.07 ${(58 + rnd() * 12).toFixed(0)})`, 0.8); obox(ctx, X(0.05 + bw * (i + 0.5)), 0.12, 0, bw - 0.015, top - 0.12, 0.07); }
-  paint(ctx, null, IRON, 0.5, 0.6);
-  for (const y of [0.45, 1.35, 2.2]) obox(ctx, X(w / 2), y, -0.05, w - 0.04, 0.09, 0.03);
-  obox(ctx, X(w / 2), 0.12, 0.05, w - 0.04, 0.09, 0.03);
-  for (const y of [0.45, 2.2]) obox(ctx, X(0.03), y - 0.05, 0, 0.1, 0.2, 0.12);
-  if (lod <= 2) { for (let i = 0; i < 6; i++) obox(ctx, X(0.25 + i * (w - 0.4) / 5), 1.335, -0.075, 0.035, 0.035, 0.02); obox(ctx, X(w - 0.22), 1.1, -0.08, 0.05, 0.28, 0.05); }
+function leaf(ctx, p, lod) { // wrought iron: stiles, three rails, spear-topped pickets rising to the meeting stile, a scroll band, gilt tips
+  const w = p.w ?? 2.2, d = p.dir ?? 1, h = p.h ?? 2.7, X = (a) => a * d;
+  const top = (t) => h - 0.3 + Math.sin(t * Math.PI / 2) * 0.45;
+  const IR = 'oklch(0.26 0.012 250)', GILT = 'oklch(0.78 0.12 85)';
+  paint(ctx, null, IR, 0.38, 0.85);
+  obox(ctx, X(0.05), 0.04, 0, 0.1, top(0) + 0.1, 0.1);                       // hinge stile
+  obox(ctx, X(w - 0.05), 0.04, 0, 0.1, top(1) + 0.1, 0.1);                   // meeting stile
+  for (const y of [0.18, 1.05, 1.42]) obox(ctx, X(w / 2), y, 0, w - 0.1, 0.07, 0.08);
+  const seg = lod <= 2 ? 10 : 4;                                              // arched top rail following the picket line
+  for (let i = 0; i < seg; i++) { const t0 = i / seg, t1 = (i + 1) / seg; beam(ctx, [X(0.05 + t0 * (w - 0.1)), top(t0), 0], [X(0.05 + t1 * (w - 0.1)), top(t1), 0], 0.08, 0.07); }
+  for (const hy of [0.45, top(0) - 0.35]) { obox(ctx, X(-0.02), hy - 0.08, 0, 0.14, 0.16, 0.14); }       // hinge knuckles
+  const n = lod <= 2 ? Math.round((w - 0.1) / 0.13) : 6, step = (w - 0.1) / n;
+  for (let i = 1; i < n; i++) {
+    const x = 0.05 + i * step, t = (x - 0.05) / (w - 0.1), yt = top(t);
+    paint(ctx, null, IR, 0.38, 0.85); obox(ctx, X(x), 0.18, 0, 0.032, yt + 0.12 - 0.18, 0.032);
+    if (lod <= 2) { paint(ctx, null, GILT, 0.3, 0.9); gem(ctx, X(x), yt + 0.12, 0, 0.045, 0.16, 0.05, 4); }
+    if (lod <= 2 && i % 2) { paint(ctx, null, IR, 0.38, 0.85); obox(ctx, X(x + step / 2), 0.04, 0, 0.022, 0.14, 0.022); } // dog bars
+  }
+  if (lod <= 2) { // scroll band between the middle rails: C-scrolls, back to back
+    paint(ctx, null, IR, 0.38, 0.85);
+    const k = Math.max(3, Math.round((w - 0.1) / 0.36)), cw = (w - 0.1) / k, r = 0.13;
+    for (let j = 0; j < k; j++) { const cx = 0.05 + cw * (j + 0.5), cy = 1.235; let prev = null;
+      for (let q = 0; q <= 10; q++) { const a = q / 10 * Math.PI * 2, pt = [X(cx + Math.cos(a) * r * 0.95), cy + Math.sin(a) * r * 0.95, 0.045]; if (prev) beam(ctx, prev, pt, 0.022, 0.03); prev = pt; } }
+    paint(ctx, null, GILT, 0.3, 0.9); gem(ctx, X(w - 0.05), top(1) + 0.14, 0, 0.08, 0.26, 0.08, 4);                // crown finial on the meeting stile
+    obox(ctx, X(w - 0.2), 1.0, -0.07, 0.06, 0.3, 0.05); obox(ctx, X(w - 0.2), 1.0, 0.07, 0.06, 0.3, 0.05);          // pull rings, both faces
+  }
 }
 export function geometry(ctx) { const p = ctx.params || {}, lod = ctx.lod || 1; ctx.flat(); if (p.kind === 'leaf') leaf(ctx, p, lod); else frame(ctx, p, lod); ctx.albedo(null); }
 export function collider(ctx) {
   const p = ctx.params || {};
-  if (p.kind === 'leaf') { const w = p.w ?? 2.2, d = p.dir ?? 1; box(ctx, Math.min(0, w * d), 0, -0.06, Math.max(0, w * d), p.h ?? 2.7, 0.06); return; }
+  if (p.kind === 'leaf') { const w = p.w ?? 2.2, d = p.dir ?? 1; box(ctx, Math.min(0, w * d), 0, -0.07, Math.max(0, w * d), (p.h ?? 2.7) + 0.2, 0.07); return; }
   const hw = (p.w ?? 4.4) / 2, s = 0.95, wing = p.wing ?? 8;
   for (const sx of [-1, 1]) { const a = sx * hw, b = sx * (hw + s + wing + 0.6); box(ctx, Math.min(a, b), 0, -0.3, Math.max(a, b), sx ? 1.1 : 0, 0.3); const c = sx * hw, e = sx * (hw + s); box(ctx, Math.min(c, e), 0, -0.55, Math.max(c, e), 3.9, 0.55); }
 }
