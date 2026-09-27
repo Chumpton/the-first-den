@@ -4,7 +4,16 @@
 export const HOUSE = {
   R: 6.5, T: 0.5, B: -3.0, G: 0.4, A: 3.8, D: 7.2, wallBottom: -3.25, wallTop: 5.25,
   eaveR: 7.4, eaveY: 4.75, deckR: 3.4, roofT: 0.45, hole: 1.6, rail: 1.7, trunkR: 0.35, stepR: 1.55,
-  a0: 36, stepDeg: 18, rise: 3.4 / 19, steps: 57,
+  rise: 0.2, run: 0.28, treads: 16, flightW: 1.0,
+  // straight flights: bottom point, run direction, which floor they start on
+  flights: [
+    { x: 3.7, z: 2.3, dx: 0, dz: -1, y: -3.0 },
+    { x: -2.5, z: 2.3, dx: 0, dz: -1, y: 0.4 },
+    { x: -3.08, z: 1.5, dx: 1, dz: 0, y: 3.8 },
+  ],
+  // floor openings [x0, z0, x1, z1] and the side left open for arrival
+  hatchG: [3.15, -2.25, 4.25, 1.0], hatchA: [-3.05, -2.25, -1.95, 1.0], hatchD: [-2.3, 0.95, 1.42, 2.05],
+  trunkHole: 0.42, doorW: 1.6, doorH: 2.5,
 };
 const H = HOUSE, D2R = Math.PI / 180, COS30 = Math.cos(30 * D2R), TAN30 = Math.tan(30 * D2R);
 const AO = H.R * COS30, AI = AO - H.T;
@@ -55,11 +64,13 @@ function faceFrame(k) {
   return { n, t: [n[2], 0, -n[0]] };
 }
 // openings by face (u from face centre, along t)
-function holesFor(k) {
+export function holesFor(k) {
   const L = [];
-  if (k === 1 || k === 4) L.push({ u: 0, w: 1.2, y0: H.G, y1: H.G + 2.3, door: true });
-  else L.push({ u: 0, w: 1.1, y0: H.G + 0.95, y1: H.G + 2.25 });
-  L.push({ u: 0, w: 0.7, y0: H.A + 0.3, y1: H.A + 0.9 });
+  if (k === 1 || k === 4) {
+    L.push({ u: 0, w: H.doorW, y0: 0.3, y1: H.G + H.doorH, door: true });
+    for (const u of [-2.05, 2.05]) L.push({ u, w: 0.65, y0: H.G + 1.0, y1: H.G + 2.1 });
+  } else for (const u of [-1.3, 1.3]) L.push({ u, w: 0.95, y0: H.G + 0.9, y1: H.G + 2.2 });
+  L.push({ u: 0, w: 0.85, y0: H.A + 0.28, y1: H.A + 0.9 });
   return L;
 }
 function wallBand(ctx, k, y0, y1, holes, paintOut, paintIn, collide) {
@@ -98,52 +109,76 @@ function wallTop(ctx, k, y) {
   const { n, t } = faceFrame(k), Lo = AO * TAN30, Li = AI * TAN30;
   Q(ctx, [n[0] * AO - t[0] * Lo, y, n[2] * AO - t[2] * Lo], [n[0] * AO + t[0] * Lo, y, n[2] * AO + t[2] * Lo], [n[0] * AI + t[0] * Li, y, n[2] * AI + t[2] * Li], [n[0] * AI - t[0] * Li, y, n[2] * AI - t[2] * Li], [0, 1, 0]);
 }
-const hexR = (ap, phiDeg) => ap / Math.cos((((phiDeg % 60) + 60) % 60 - 30) * D2R);
-// a hex slab (apothem ap) with a round hole (rh) at the centre; top at y
-function floorRing(ctx, y, thick, rh, ap, paintTop, paintBot, collide) {
-  const N = 24;
-  const at = (r, phi, yy) => [Math.cos(phi * D2R) * r, yy, Math.sin(phi * D2R) * r];
-  for (let j = 0; j < N; j++) {
-    const p0 = j * 15, p1 = (j + 1) * 15, b0 = hexR(ap, p0), b1 = hexR(ap, p1);
-    paintTop();
-    if (rh > 0) Q(ctx, at(rh, p0, y), at(rh, p1, y), at(b1, p1, y), at(b0, p0, y), [0, 1, 0]);
-    else T3(ctx, [0, y, 0], at(b1, p1, y), at(b0, p0, y), [0, 1, 0]);
-    if (collide) continue;
-    paintBot();
-    if (rh > 0) {
-      Q(ctx, at(rh, p0, y - thick), at(rh, p1, y - thick), at(b1, p1, y - thick), at(b0, p0, y - thick), [0, -1, 0]);
-      const c = (p0 + p1) / 2 * D2R;
-      Q(ctx, at(rh, p0, y - thick), at(rh, p1, y - thick), at(rh, p1, y), at(rh, p0, y), [-Math.cos(c), 0, -Math.sin(c)]);
-    } else T3(ctx, [0, y - thick, 0], at(b1, p1, y - thick), at(b0, p0, y - thick), [0, -1, 0]);
+// a hex slab (apothem ap, vertices on ±x) with rectangular holes; top at y
+function hexX(ap, z) { return Math.max(0, (ap - Math.abs(z) * 0.5) / COS30); }
+function floorSlab(ctx, y, thick, ap, holes, paintTop, paintBot, collide) {
+  const zs = new Set([-ap, 0, ap]);
+  for (const h of holes) { zs.add(Math.max(-ap, Math.min(ap, h[1]))); zs.add(Math.max(-ap, Math.min(ap, h[3]))); }
+  const Z = [...zs].sort((a, b) => a - b);
+  for (let i = 0; i < Z.length - 1; i++) {
+    const z0 = Z[i], z1 = Z[i + 1], zm = (z0 + z1) / 2;
+    if (z1 - z0 < 1e-4) continue;
+    const cut = holes.filter((h) => zm > h[1] && zm < h[3]).map((h) => [h[0], h[2]]).sort((a, b) => a[0] - b[0]);
+    let segs = [[null, null]];
+    for (const [c0, c1] of cut) { const last = segs.pop(); segs.push([last[0], c0], [c1, last[1]]); }
+    for (const [sa, sb] of segs) {
+      const xa0 = sa ?? -hexX(ap, z0), xa1 = sa ?? -hexX(ap, z1), xb0 = sb ?? hexX(ap, z0), xb1 = sb ?? hexX(ap, z1);
+      if (Math.max(xb0, xb1) - Math.min(xa0, xa1) < 1e-3) continue;
+      paintTop(); Q(ctx, [xa0, y, z0], [xb0, y, z0], [xb1, y, z1], [xa1, y, z1], [0, 1, 0]);
+      if (collide) continue;
+      paintBot(); Q(ctx, [xa0, y - thick, z0], [xb0, y - thick, z0], [xb1, y - thick, z1], [xa1, y - thick, z1], [0, -1, 0]);
+    }
   }
-}
-// ring railing round a floor opening, open over [gap-22°, gap+22°]
-function stairRail(ctx, y, gapDeg, collide) {
-  const r = H.rail, N = 24, at = (phi, yy) => [Math.cos(phi * D2R) * r, yy, Math.sin(phi * D2R) * r];
-  const inGap = (phi) => { const d = ((phi - gapDeg) % 360 + 540) % 360 - 180; return Math.abs(d) < 22; };
-  for (let j = 0; j < N; j++) {
-    const p0 = j * 15, p1 = p0 + 15, c = (p0 + 7.5) * D2R, n = [Math.cos(c), 0, Math.sin(c)];
-    if (inGap(p0) || inGap(p1)) continue;
-    if (collide) { Q(ctx, at(p0, y), at(p1, y), at(p1, y + 1.0), at(p0, y + 1.0), n); continue; }
-    const a = at(p0, y + 0.95), b = at(p1, y + 0.95), a2 = at(p0, y + 1.02), b2 = at(p1, y + 1.02);
-    Q(ctx, a, b, b2, a2, n); Q(ctx, a, b, b2, a2, [-n[0], 0, -n[2]]);
-    const m = at(p0, y + 0.5), mm = at(p1, y + 0.5), m2 = at(p0, y + 0.55), mm2 = at(p1, y + 0.55);
-    Q(ctx, m, mm, mm2, m2, n);
-    const p = at(p0, y), s = 0.035; box(ctx, p[0] - s, y, p[2] - s, p[0] + s, y + 1.0, p[2] + s);
-  }
-}
-function step(ctx, i, collide) {
-  const phi = H.a0 + i * H.stepDeg, pa = (phi - 10) * D2R, pb = (phi + 10) * D2R;
-  const top = H.B + (i + 1) * H.rise, bot = top - (collide ? H.rise : 0.1);
-  const r0 = H.trunkR - 0.05, r1 = H.stepR;
-  const P = (r, a, y) => [Math.cos(a) * r, y, Math.sin(a) * r];
-  const nA = [Math.sin(pa), 0, -Math.cos(pa)], nB = [-Math.sin(pb), 0, Math.cos(pb)], nO = [Math.cos(phi * D2R), 0, Math.sin(phi * D2R)];
-  Q(ctx, P(r0, pa, top), P(r1, pa, top), P(r1, pb, top), P(r0, pb, top), [0, 1, 0]);
-  Q(ctx, P(r0, pa, bot), P(r1, pa, bot), P(r1, pa, top), P(r0, pa, top), nA);
-  Q(ctx, P(r1, pa, bot), P(r1, pb, bot), P(r1, pb, top), P(r1, pa, top), nO);
   if (collide) return;
-  Q(ctx, P(r0, pa, bot), P(r1, pa, bot), P(r1, pb, bot), P(r0, pb, bot), [0, -1, 0]);
-  Q(ctx, P(r0, pb, bot), P(r1, pb, bot), P(r1, pb, top), P(r0, pb, top), nB);
+  paintBot();
+  for (const h of holes) { const [x0, z0, x1, z1] = h, yb = y - thick;
+    Q(ctx, [x0, yb, z0], [x1, yb, z0], [x1, y, z0], [x0, y, z0], [0, 0, 1]); Q(ctx, [x0, yb, z1], [x1, yb, z1], [x1, y, z1], [x0, y, z1], [0, 0, -1]);
+    Q(ctx, [x0, yb, z0], [x0, yb, z1], [x0, y, z1], [x0, y, z0], [1, 0, 0]); Q(ctx, [x1, yb, z0], [x1, yb, z1], [x1, y, z1], [x1, y, z0], [-1, 0, 0]); }
+}
+// a sloped or level timber between two points, square section w×h
+function beam(ctx, a, b, w, h) {
+  const d = sub(b, a), L = Math.hypot(...d); if (L < 1e-4) return;
+  const f = [d[0] / L, d[1] / L, d[2] / L];
+  let sd = crs(f, [0, 1, 0]); let sl = Math.hypot(...sd); if (sl < 1e-3) { sd = [1, 0, 0]; sl = 1; } sd = sd.map((v) => v / sl);
+  const up = crs(sd, f), hw = w / 2, hh = h / 2;
+  const P = (p, s, u) => [p[0] + sd[0] * s + up[0] * u, p[1] + sd[1] * s + up[1] * u, p[2] + sd[2] * s + up[2] * u];
+  const A = [P(a, -hw, -hh), P(a, hw, -hh), P(a, hw, hh), P(a, -hw, hh)], B = [P(b, -hw, -hh), P(b, hw, -hh), P(b, hw, hh), P(b, -hw, hh)];
+  for (let i = 0; i < 4; i++) { const j = (i + 1) % 4, n = [(A[i][0] + A[j][0]) / 2 - a[0], (A[i][1] + A[j][1]) / 2 - a[1], (A[i][2] + A[j][2]) / 2 - a[2]]; Q(ctx, A[i], A[j], B[j], B[i], n); }
+  Q(ctx, ...A, [-f[0], -f[1], -f[2]]); Q(ctx, ...B, f);
+}
+// railing on three sides of a hatch; open = which side is left open for the stair's arrival: "z0" | "x1"
+function hatchRail(ctx, y, h, open, collide) {
+  const [x0, z0, x1, z1] = h, o = 0.05;
+  const sides = [["z0", [x0 - o, z0 - o], [x1 + o, z0 - o]], ["z1", [x0 - o, z1 + o], [x1 + o, z1 + o]], ["x0", [x0 - o, z0 - o], [x0 - o, z1 + o]], ["x1", [x1 + o, z0 - o], [x1 + o, z1 + o]]];
+  for (const [id, a, b] of sides) {
+    if (id === open) continue;
+    if (collide) { const dx = b[0] - a[0], dz = b[1] - a[1]; Q(ctx, [a[0], y, a[1]], [b[0], y, b[1]], [b[0], y + 1.0, b[1]], [a[0], y + 1.0, a[1]], [dz, 0, -dx]); continue; }
+    beam(ctx, [a[0], y + 0.95, a[1]], [b[0], y + 0.95, b[1]], 0.07, 0.06);
+    beam(ctx, [a[0], y + 0.5, a[1]], [b[0], y + 0.5, b[1]], 0.04, 0.04);
+    const L = Math.hypot(b[0] - a[0], b[1] - a[1]), n = Math.max(1, Math.round(L / 0.9));
+    for (let i = 0; i <= n; i++) { const x = a[0] + (b[0] - a[0]) * i / n, z = a[1] + (b[1] - a[1]) * i / n; box(ctx, x - 0.04, y, z - 0.04, x + 0.04, y + 1.0, z + 0.04); }
+  }
+}
+// one straight flight: solid stone steps capped in oak, a handrail on each side
+function flight(ctx, F, collide, paintStone, paintOak) {
+  const w = H.flightW / 2, sx = -F.dz, sz = F.dx;
+  const at = (along, side) => [F.x + F.dx * along + sx * side, F.z + F.dz * along + sz * side];
+  for (let i = 0; i < H.treads; i++) {
+    const top = F.y + (i + 1) * H.rise, a = at(i * H.run, -w), b = at((i + 1) * H.run, w);
+    const x0 = Math.min(a[0], b[0]), x1 = Math.max(a[0], b[0]), z0 = Math.min(a[1], b[1]), z1 = Math.max(a[1], b[1]);
+    if (collide) { box(ctx, x0, F.y, z0, x1, top, z1); continue; }
+    paintStone(); box(ctx, x0, F.y, z0, x1, top - 0.05, z1);
+    paintOak(); const na = at(i * H.run - 0.03, -w - 0.02), nb = at((i + 1) * H.run, w + 0.02);
+    box(ctx, Math.min(na[0], nb[0]), top - 0.05, Math.min(na[1], nb[1]), Math.max(na[0], nb[0]), top, Math.max(na[1], nb[1]));
+  }
+  if (collide) return;
+  paintOak();
+  const L = H.treads * H.run;
+  for (const side of [-w - 0.02, w + 0.02]) {
+    const b0 = at(0.1, side), b1 = at(L - 0.05, side);
+    beam(ctx, [b0[0], F.y + 0.2 + 0.9, b0[1]], [b1[0], F.y + H.treads * H.rise + 0.9, b1[1]], 0.07, 0.06);
+    for (const f of [0.1, 0.5, 0.9]) { const p = at(L * f, side), y = F.y + Math.ceil(H.treads * f) * H.rise; box(ctx, p[0] - 0.035, y, p[1] - 0.035, p[0] + 0.035, y + 0.9 + H.rise, p[1] + 0.035); }
+  }
 }
 function blob(ctx, cx, cy, cz, rx, ry, rz, seg, colors) {
   const lat = Math.max(3, seg - 2), pts = [];
@@ -249,13 +284,21 @@ function build(ctx, collide) {
     wallBand(ctx, k, 0.3, H.wallTop, holesFor(k), cobOut, limeIn, collide);
     if (!collide) { cobOut(); wallTop(ctx, k, H.wallTop); }
   }
-  floorRing(ctx, H.B, 0.25, 0, AI + 0.1, flags, flags, collide);
-  floorRing(ctx, H.G, 0.3, H.hole, AI + 0.1, plankTop, beams, collide);
-  floorRing(ctx, H.A, 0.3, H.hole, AI + 0.1, plankTop, beams, collide);
-  floorRing(ctx, H.D, H.roofT, H.hole, H.deckR * COS30, plankTop, beams, collide);
-  beams(); for (let i = 0; i < H.steps; i++) step(ctx, i, collide);
-  beams(); stairRail(ctx, H.G, H.a0 + 18 * H.stepDeg, collide); stairRail(ctx, H.A, H.a0 + 37 * H.stepDeg, collide); stairRail(ctx, H.D, H.a0 + 56 * H.stepDeg, collide);
+  const th = H.trunkHole, TH = [-th, -th, th, th];
+  floorSlab(ctx, H.B, 0.25, AI + 0.1, [], flags, flags, collide);
+  floorSlab(ctx, H.G, 0.3, AI + 0.1, [TH, H.hatchG], plankTop, beams, collide);
+  floorSlab(ctx, H.A, 0.3, AI + 0.1, [TH, H.hatchB ?? H.hatchA], plankTop, beams, collide);
+  floorSlab(ctx, H.D, H.roofT, H.deckR * COS30, [TH, H.hatchD], plankTop, beams, collide);
+  for (const F of H.flights) flight(ctx, F, collide, stone, beams);
+  beams(); hatchRail(ctx, H.G, H.hatchG, "z0", collide); hatchRail(ctx, H.A, H.hatchA, "z0", collide); hatchRail(ctx, H.D, H.hatchD, "x1", collide);
   beams(); deckRail(ctx, collide);
+  // door thresholds and the two steps up to each door — solid, so the doorway walks
+  for (const k of [1, 4]) {
+    const { n, t } = faceFrame(k), W = H.doorW / 2;
+    beams(); obox(ctx, [n[0] * (AO + AI) / 2, 0.1, n[2] * (AO + AI) / 2], t, n, H.doorW + 0.02, H.G - 0.1, AO - AI + 0.1);
+    stone(); obox(ctx, [n[0] * (AO + 0.22), 0, n[2] * (AO + 0.22)], t, n, H.doorW + 0.6, 0.27, 0.44);
+    obox(ctx, [n[0] * (AO + 0.66), 0, n[2] * (AO + 0.66)], t, n, H.doorW + 0.9, 0.13, 0.44);
+  }
   roof(ctx, lod, collide);
   if (!collide) { ctx.albedo(TX.bark); ctx.color("#8b7a66"); ctx.roughness(0.95); }
   trunk(ctx, lod, collide);
@@ -269,7 +312,6 @@ function build(ctx, collide) {
     const pa = AO + 0.07, Lp = pa * TAN30;
     Q(ctx, [n[0] * pa - t[0] * Lp, 0.06, n[2] * pa - t[2] * Lp], [n[0] * pa + t[0] * Lp, 0.06, n[2] * pa + t[2] * Lp], [n[0] * pa + t[0] * Lp, 0.36, n[2] * pa + t[2] * Lp], [n[0] * pa - t[0] * Lp, 0.36, n[2] * pa - t[2] * Lp], n);
     Q(ctx, [n[0] * pa - t[0] * Lp, 0.36, n[2] * pa - t[2] * Lp], [n[0] * pa + t[0] * Lp, 0.36, n[2] * pa + t[2] * Lp], [n[0] * AO + t[0] * Lo, 0.36, n[2] * AO + t[2] * Lo], [n[0] * AO - t[0] * Lo, 0.36, n[2] * AO - t[2] * Lo], [0, 1, 0]);
-    if (k === 1 || k === 4) obox(ctx, [n[0] * (AO + 0.45), 0.06, n[2] * (AO + 0.45)], t, n, 1.8, 0.16, 0.9);
   }
   // timber: lintels over every opening, door frames, window sills with flower boxes, glass
   for (let k = 0; k < 6; k++) {
