@@ -347,11 +347,79 @@ function build(ctx, collide) {
       }
     }
   }
+  // oak corner posts on every hex corner, a timber belt at the attic floor, shutters, porch hoods, lanterns
+  beams();
+  for (let k = 0; k < 6; k++) {
+    const a = 60 * k * D2R, r = H.R - 0.05, c = [Math.cos(a) * r, 0.3, Math.sin(a) * r], n = [Math.cos(a), 0, Math.sin(a)], t = [n[2], 0, -n[0]];
+    obox(ctx, c, t, n, 0.26, H.wallTop - 0.3, 0.26);
+    const { n: fn, t: ft } = faceFrame(k);
+    obox(ctx, [fn[0] * (AO + 0.05), H.A - 0.2, fn[2] * (AO + 0.05)], ft, fn, 2 * AO * TAN30, 0.22, 0.14);
+    for (const h of holesFor(k)) {
+      if (h.door || h.y0 > H.A || lod >= 3) continue;
+      ctx.albedo(TX.timber); ctx.color("oklch(0.55 0.08 150)"); ctx.roughness(0.8);
+      for (const sgn of [-1, 1]) {
+        const u = h.u + sgn * (h.w / 2 + 0.24), c2 = [fn[0] * (AO + 0.06) + ft[0] * u, h.y0 - 0.02, fn[2] * (AO + 0.06) + ft[2] * u];
+        obox(ctx, c2, ft, fn, 0.42, h.y1 - h.y0 + 0.04, 0.05);
+        beams(); for (const yy of [0.25, 0.75]) obox(ctx, [c2[0] + fn[0] * 0.03, c2[1] + (h.y1 - h.y0) * yy, c2[2] + fn[2] * 0.03], ft, fn, 0.36, 0.05, 0.02);
+        ctx.albedo(TX.timber); ctx.color("oklch(0.55 0.08 150)");
+      }
+      beams();
+    }
+  }
+  for (const k of [1, 4]) {
+    const { n, t } = faceFrame(k), y = H.G + H.doorH + 0.35;
+    beams();
+    for (const sgn of [-1, 1]) beam(ctx, [n[0] * AO + t[0] * sgn * 1.05, y - 0.7, n[2] * AO + t[2] * sgn * 1.05], [n[0] * (AO + 1.1) + t[0] * sgn * 1.05, y, n[2] * (AO + 1.1) + t[2] * sgn * 1.05], 0.12, 0.12);
+    const e0 = [n[0] * AO, y + 0.45, n[2] * AO], e1 = [n[0] * (AO + 1.35), y - 0.05, n[2] * (AO + 1.35)];
+    const P = (e, u) => [e[0] + t[0] * u, e[1], e[2] + t[2] * u];
+    Q(ctx, P(e0, -1.3), P(e0, 1.3), P(e1, 1.3), P(e1, -1.3), [0, -1, 0]);
+    ctx.albedo(TX.turf); ctx.color("oklch(0.93 0.05 130)"); ctx.roughness(1);
+    const up = 0.1; Q(ctx, P([e0[0], e0[1] + up, e0[2]], -1.3), P([e0[0], e0[1] + up, e0[2]], 1.3), P([e1[0], e1[1] + up, e1[2]], 1.3), P([e1[0], e1[1] + up, e1[2]], -1.3), [n[0] * 0.35, 1, n[2] * 0.35]);
+    beams(); Q(ctx, P([e1[0], e1[1], e1[2]], -1.3), P(e1, 1.3), P([e1[0], e1[1] + up, e1[2]], 1.3), P([e1[0], e1[1] + up, e1[2]], -1.3), n);
+    // a lantern either side of the door
+    for (const sgn of [-1, 1]) {
+      const c = [n[0] * (AO + 0.18) + t[0] * sgn * 1.25, H.G + 1.75, n[2] * (AO + 0.18) + t[2] * sgn * 1.25];
+      ctx.albedo(null); ctx.color("oklch(0.3 0.02 60)"); ctx.metalness(0.5);
+      box(ctx, c[0] - 0.12, c[1] + 0.34, c[2] - 0.12, c[0] + 0.12, c[1] + 0.4, c[2] + 0.12);
+      box(ctx, c[0] - 0.13, c[1] - 0.04, c[2] - 0.13, c[0] + 0.13, c[1], c[2] + 0.13);
+      ctx.metalness(0); ctx.color("oklch(0.93 0.1 80)"); ctx.emissive(3.2, 2.0, 0.7);
+      box(ctx, c[0] - 0.09, c[1], c[2] - 0.09, c[0] + 0.09, c[1] + 0.34, c[2] + 0.09);
+      ctx.emissive(null);
+    }
+  }
   // stovepipe through the roof from the hearth side
   ctx.albedo(null); ctx.color("oklch(0.35 0.01 60)"); ctx.metalness(0.6); ctx.roughness(0.5);
   const sx = Math.cos(150 * D2R) * 4.1, sz = Math.sin(150 * D2R) * 4.1;
   box(ctx, sx - 0.13, 6.0, sz - 0.13, sx + 0.13, 8.4, sz + 0.13); box(ctx, sx - 0.24, 8.4, sz - 0.24, sx + 0.24, 8.5, sz + 0.24);
   ctx.metalness(0);
 }
-export function geometry(ctx) { build(ctx, false); }
-export function collider(ctx) { build(ctx, true); }
+function greenery(ctx) {
+  const lod = Number(ctx.lod ?? 1); ctx.flat(); ctx.albedo(null); ctx.roughness(0.95);
+  const leaf = ["#3f7a33", "#4f8a3c", "#6a9f45"], seg = lod >= 3 ? 4 : 6;
+  for (let k = 0; k < 6; k++) {
+    const { n, t } = faceFrame(k), L = AO * TAN30, door = k === 1 || k === 4;
+    // bushes along the foot of the wall
+    for (let i = 0; i < 7; i++) {
+      const u = -L + 0.6 + (i / 6) * (2 * L - 1.2) + (ctx.random() - 0.5) * 0.3;
+      if (door && Math.abs(u) < 1.75) continue;
+      const r = 0.45 + ctx.random() * 0.3, d = AO + 0.55 + ctx.random() * 0.35;
+      blob(ctx, n[0] * d + t[0] * u, r * 0.75, n[2] * d + t[2] * u, r, r * 0.85, r, seg, leaf);
+      if (lod < 3 && ctx.random() < 0.55) { ctx.color(["#e8697c", "#f4d35e", "#f7f1e8", "#b784e0"][i % 4]); for (let f = 0; f < 5; f++) { const a = ctx.random() * 6.28, rr = r * 0.8; const x = n[0] * d + t[0] * u + Math.cos(a) * rr * 0.7, z = n[2] * d + t[2] * u + Math.sin(a) * rr * 0.7, y = r * 0.75 + r * 0.5; box(ctx, x - 0.05, y, z - 0.05, x + 0.05, y + 0.08, z + 0.05); } }
+    }
+    if (lod >= 3) continue;
+    // climbing roses on a trellis beside the windows
+    if (!door) for (const u of [-2.5, 2.5]) {
+      ctx.color("#8a6a48"); for (let j = 0; j < 4; j++) { const uu = u - 0.3 + j * 0.2; obox(ctx, [n[0] * (AO + 0.06) + t[0] * uu, 0.1, n[2] * (AO + 0.06) + t[2] * uu], t, n, 0.03, 3.2, 0.03); }
+      for (let j = 0; j < 22; j++) { const uu = u + (ctx.random() - 0.5) * 0.8, y = 0.3 + ctx.random() * 3.1, c = [n[0] * (AO + 0.12) + t[0] * uu, y, n[2] * (AO + 0.12) + t[2] * uu];
+        blob(ctx, c[0], c[1], c[2], 0.16, 0.14, 0.16, 4, leaf); if (j % 3 === 0) { ctx.color("#d9485f"); box(ctx, c[0] - 0.05 + n[0] * 0.1, y, c[2] - 0.05 + n[2] * 0.1, c[0] + 0.05 + n[0] * 0.1, y + 0.08, c[2] + 0.05 + n[2] * 0.1); } }
+    }
+    // potted ferns flanking the steps
+    if (door) for (const sgn of [-1, 1]) {
+      const c = [n[0] * (AO + 0.45) + t[0] * sgn * 1.45, 0, n[2] * (AO + 0.45) + t[2] * sgn * 1.45];
+      ctx.color("oklch(0.55 0.1 45)"); obox(ctx, c, t, n, 0.5, 0.45, 0.5);
+      blob(ctx, c[0], 0.75, c[2], 0.38, 0.4, 0.38, seg, leaf);
+    }
+  }
+}
+export function geometry(ctx) { if (ctx.params?.part === "greenery") return greenery(ctx); build(ctx, false); }
+export function collider(ctx) { if (ctx.params?.part === "greenery") return; build(ctx, true); }
