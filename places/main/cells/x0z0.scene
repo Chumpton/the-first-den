@@ -3495,13 +3495,23 @@ lawn-sprigs-ring-b:
   id: lawn-sprigs-ring-b
   scatter: {bounds: {innerRadius: 12, outerRadius: 34, shape: ring}, count: 500, templates: [{castShadow: false, primitive: {kind: scripted, params: {kind: tuft}, script: scripts/gen/lawn-sprig.js}, visibleRange: {max: 45}, weight: 4}, {castShadow: false, primitive: {kind: scripted, params: {kind: clover}, script: scripts/gen/lawn-sprig.js}, visibleRange: {max: 45}, weight: 3}, {castShadow: false, primitive: {kind: scripted, params: {kind: violet}, script: scripts/gen/lawn-sprig.js}, visibleRange: {max: 45}, weight: 2}, {castShadow: false, primitive: {kind: scripted, params: {kind: daisy}, script: scripts/gen/lawn-sprig.js}, visibleRange: {max: 45}, weight: 2}, {castShadow: false, primitive: {kind: scripted, params: {kind: buttercup}, script: scripts/gen/lawn-sprig.js}, visibleRange: {max: 45}, weight: 1}], variation: {scale: [0.8, 1.5], yaw: [0, 360]}}
   tags: [grounds, lawn-sprigs]
+mandala-crystal:
+  behavior: scripts/mandala-crystal.js
+  feetPosition: {x: 13, y: 2.03, z: -8.5}
+  fx: {script: "fx\npop motes n=14 on=sphere(.5) life=1.5..3 v=up(.12..0.28) size=.025..0.05 sz=$size*(.5>1:1>.3) col=hdr(.5,1.9,2)>hdr(1.3,.7,2.2) a=0>.2:1>.8:1>0 r=sprite(soft-disc,add)"}
+  id: mandala-crystal
+  light: {color: oklch(0.8 0.12 200), distance: 7, intensity: 1.5, kind: point}
+  primitive: {kind: scripted, params: {size: 1}, script: scripts/gen/mandala-crystal.js, seed: 3}
+  state: {act: Harvest, baseY: 2.03, bob: 0.07, cooldown: 4, prompt: Harvest, spin: 16}
+  tags: [interactable, mandala, harvest]
+  visibleRange: {max: 60}
 mandala-terrace:
   feetPosition: {x: 13, y: 0.5, z: -8.5}
   id: mandala-terrace
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 12, height: 2, kind: box, width: 17}
-  tags: [blueprint]
+  physics: static
+  primitive: {kind: scripted, params: {gate: 0.95, gates: [w, "n", e], h: 0.45, rx: 8.1, rz: 5.55, t: 0.44}, script: scripts/gen/mandala-terrace.js, seed: 7}
+  tags: [grounds, garden, mandala]
+  visibleRange: {max: 90}
 outbuilding-glasshouse:
   castShadow: true
   feetPosition: {x: 14, y: 0.5, z: -56}
