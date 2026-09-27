@@ -39,7 +39,7 @@ cob-door-front-l:
   id: cob-door-front-l
   physics: {body: kinematic, collider: box}
   primitive: {kind: scripted, params: {height: 2.42, width: 0.78}, script: scripts/gen/home-architecture-door.js}
-  rotation: 0
+  rotation: {yaw: 0}
   tags: [cob-door-leaf]
 cob-door-front-pad-in:
   feetPosition: {x: 0, y: 0.9, z: -19.382566285183163}
@@ -57,7 +57,7 @@ cob-door-front-r:
   id: cob-door-front-r
   physics: {body: kinematic, collider: box}
   primitive: {kind: scripted, params: {height: 2.42, width: 0.78}, script: scripts/gen/home-architecture-door.js}
-  rotation: 180
+  rotation: {yaw: 180}
   tags: [cob-door-leaf]
 cob-door-garden:
   behavior: scripts/cob-door.js
@@ -74,7 +74,7 @@ cob-door-garden-l:
   id: cob-door-garden-l
   physics: {body: kinematic, collider: box}
   primitive: {kind: scripted, params: {height: 2.42, width: 0.78}, script: scripts/gen/home-architecture-door.js}
-  rotation: 180
+  rotation: {yaw: 180}
   tags: [cob-door-leaf]
 cob-door-garden-pad-in:
   feetPosition: {x: 0, y: 0.9, z: -32.61743371481683}
@@ -92,7 +92,7 @@ cob-door-garden-r:
   id: cob-door-garden-r
   physics: {body: kinematic, collider: box}
   primitive: {kind: scripted, params: {height: 2.42, width: 0.78}, script: scripts/gen/home-architecture-door.js}
-  rotation: 0
+  rotation: {yaw: 0}
   tags: [cob-door-leaf]
 cob-house:
   castShadow: true
