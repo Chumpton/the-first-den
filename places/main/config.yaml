@@ -59,7 +59,7 @@ terrain:
     violetClear: {kind: clear-scatter, center: {x: 30.5, z: -7.6}, shape: {kind: circle, radius: 7.5}}
     spawnClear: {kind: clear-scatter, center: {x: 0, z: -3}, shape: {kind: circle, radius: 7}}
     townClear: {kind: clear-scatter, center: {x: 0, z: 108}, shape: {kind: circle, radius: 40}}
-    townLaneClear: {kind: clear-scatter, center: {x: 0, z: 45}, shape: {kind: path, points: [[0, 12], [0, 80]], width: 14}}
+    townLaneClear: {kind: clear-scatter, center: {x: 0, z: 45}, shape: {kind: path, points: [[0, 12], [0, 17], [1.33, 26.4], [4.0, 32.8], [5.19, 37.8], [3.95, 42.8], [0, 48.5], [-3.95, 54.2], [-5.19, 59.2], [-4.0, 64.2], [-1.33, 70.5], [0, 80]], width: 14}}
     townEdgeClear: {kind: clear-scatter, center: {x: 0, z: 100}, shape: {kind: path, points: [[-9, 65.5], [-20.5, 65.5], [-35.8, 80], [-35.8, 134], [-13, 134], [-13, 138.8], [13, 138.8], [13, 134], [35.8, 134], [35.8, 80], [20.5, 65.5], [9, 65.5]], width: 7}}
     homeSite: {center: {x: 0, z: -27}, falloff: 8, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 18}, edgeMaterial: yard}
     grounds-lawn-front: {kind: path, grade: false, material: lawn, edgeMaterial: yard, falloff: 3, points: [[0, -6], [0, 4.4]], width: 30}
@@ -176,7 +176,7 @@ terrain:
     corral-flatten: {center: {x: -50, z: -50}, falloff: 3, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 14}}
     corral-clear: {center: {x: -50, z: -50}, kind: clear-scatter, shape: {kind: circle, radius: 16}}
     path-corral: {clearScatter: true, edgeMaterial: pebbles, falloff: 2, grade: true, kind: path, material: gravel, noise: 0.4, points: [[-26.2, -62.2], [-30, -61.3], [-35, -60.2], [-40, -58.5], [-43, -56.8]], width: 2.2}
-    town-lane: {clearScatter: true, edgeMaterial: gravel, falloff: 3.5, grade: true, kind: path, material: cobblepale, noise: 0.5, points: [[0, 12], [0, 80]], width: 7}
+    town-lane: {clearScatter: true, edgeMaterial: gravel, falloff: 3.5, grade: true, kind: path, material: cobblepale, noise: 0.5, points: [[0, 12], [0, 17], [1.33, 26.4], [4.0, 32.8], [5.19, 37.8], [3.95, 42.8], [0, 48.5], [-3.95, 54.2], [-5.19, 59.2], [-4.0, 64.2], [-1.33, 70.5], [0, 80]], width: 7}
     town-square: {center: {x: 0, z: 100}, edgeMaterial: gravel, falloff: 4, height: 0.55, kind: flatten, material: cobblepale, shape: {depth: 46, kind: rectangle, width: 46}}
     town-clear: {center: {x: 0, z: 110}, kind: clear-scatter, shape: {depth: 70, kind: rectangle, width: 80}}
     garden-flat: {center: {x: 57, z: -26}, falloff: 3, height: 0.5, kind: flatten, material: yard, shape: {kind: path, points: [[43, -26], [71, -26]], width: 26}}

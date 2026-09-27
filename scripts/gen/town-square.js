@@ -52,7 +52,7 @@ function stall(ctx, P, s, rnd, lod) {
   if (lod <= 3) { paint(ctx, null, COL.iron, 0.5, 0.6); for (const x of [-W / 2 + 0.1, W / 2 - 0.1]) beam(P, [x, fh, fz], [x, fh - 0.3, fz], 0.02, 0.02); lantern(ctx, P, -W / 2 + 0.1, fh - 0.3, fz, 0.8); lantern(ctx, P, W / 2 - 0.1, fh - 0.3, fz, 0.8); }
   if (lod <= 2 && s.hang) { paint(ctx, null, s.hang, 0.7); for (let i = 0; i < 4; i++) { const x = -0.9 + i * 0.6; beam(P, [x, fh - 0.02, fz + 0.1], [x, fh - 0.3, fz + 0.1], 0.015, 0.015); blob(P, x, fh - 0.55, fz + 0.1, 0.1, 0.25, 0.1, 5); } }
 }
-function bench(ctx, P, lod) {
+export function bench(ctx, P, lod) {
   paint(ctx, 'lime', COL.lime, 0.9); for (const x of [-0.75, 0.75]) box(P, x - 0.12, 0, -0.22, x + 0.12, 0.42, 0.22);
   paint(ctx, 'oak', COL.oak, 0.8);
   if (lod <= 2) { for (let i = 0; i < 4; i++) box(P, -1.0, 0.42, -0.24 + i * 0.125, 1.0, 0.47, -0.24 + i * 0.125 + 0.1); for (let i = 0; i < 3; i++) slab(P, [-1.0, 0.62 + i * 0.13, 0.26 + i * 0.02], [1.0, 0.62 + i * 0.13, 0.26 + i * 0.02], [1.0, 0.62 + i * 0.13, 0.33 + i * 0.02], [-1.0, 0.62 + i * 0.13, 0.33 + i * 0.02], 0.1); paint(ctx, null, COL.iron, 0.5, 0.6); for (const x of [-0.75, 0.75]) beam(P, [x, 0.42, 0.24], [x, 1.0, 0.33], 0.05, 0.05); }
@@ -73,15 +73,15 @@ function tree(ctx, P, rnd, lod) {
   const cl = [[0, 3.0, 0, 2.1, 1.9], [0.9, 3.3, 0.5, 1.4, 1.5], [-0.8, 3.4, -0.4, 1.4, 1.5], [0.1, 4.2, -0.1, 1.5, 1.4], [-0.3, 3.3, 0.9, 1.2, 1.2]];
   for (let i = 0; i < (lod <= 2 ? cl.length : 2); i++) { const [x, y, z, r, h] = cl[i]; paint(ctx, 'leaf', i % 2 ? 'oklch(0.9 0.07 135)' : 'oklch(0.94 0.06 125)', 0.9); blob(P, x, y, z, r, h, r, lod <= 2 ? 7 : 5, rnd); }
 }
-function lamp(ctx, P, x, z, lod) {
-  const s = x < 0 ? 1 : -1, H = 4.2;
-  paint(ctx, 'lime', COL.lime, 0.9); box(P, x - 0.28, 0, z - 0.28, x + 0.28, 0.45, z + 0.28);
+function lamp(ctx, P, x, z, lod, sa, y = 0) { // sa: which way the arm reaches (±1 along x, default toward x = 0); y: the post's ground
+  const s = sa ? Math.sign(sa) : (x < 0 ? 1 : -1), H = 4.2;
+  paint(ctx, 'lime', COL.lime, 0.9); box(P, x - 0.28, y - 0.3, z - 0.28, x + 0.28, y + 0.45, z + 0.28);
   paint(ctx, null, COL.iron, 0.45, 0.7);
-  lathe(P, [[0.16, 0.45], [0.1, 0.8], [0.07, H], [0.11, H + 0.08], [0, H + 0.08]], lod <= 2 ? 8 : 5, x, 0, z);
-  if (lod <= 2) lathe(P, [[0.12, 1.2], [0.12, 1.3], [0, 1.3]], 8, x, 0, z);
-  beam(P, [x, H - 0.1, z], [x + s * 0.75, H - 0.1, z], 0.05, 0.05);
-  if (lod <= 2) beam(P, [x, H - 0.6, z], [x + s * 0.5, H - 0.12, z], 0.035, 0.035);
-  lantern(ctx, P, x + s * 0.75, H - 0.2, z, 1.25);
+  lathe(P, [[0.16, 0.45], [0.1, 0.8], [0.07, H], [0.11, H + 0.08], [0, H + 0.08]], lod <= 2 ? 8 : 5, x, y, z);
+  if (lod <= 2) lathe(P, [[0.12, 1.2], [0.12, 1.3], [0, 1.3]], 8, x, y, z);
+  beam(P, [x, y + H - 0.1, z], [x + s * 0.75, y + H - 0.1, z], 0.05, 0.05);
+  if (lod <= 2) beam(P, [x, y + H - 0.6, z], [x + s * 0.5, y + H - 0.12, z], 0.035, 0.035);
+  lantern(ctx, P, x + s * 0.75, y + H - 0.2, z, 1.25);
 }
 function arch(ctx, P, z0, lod) {
   const zf = z0 - 0.55, zb = z0 + 0.55, spring = 4.2, a = 4.35, b = 1.6;
@@ -270,7 +270,7 @@ function floor(ctx, P, p, lod) {
 export function geometry(ctx) {
   const p = ctx.params, lod = ctx.lod || 1, P = ctx, rnd = () => ctx.random();
   if (p.kind === 'lane') {
-    for (const [x, z] of p.lamps || []) lamp(ctx, P, x, z, lod);
+    for (const [x, z, s, y] of p.lamps || []) lamp(ctx, P, x, z, lod, s, y);
     arch(ctx, P, p.archZ ?? 4, lod);
   } else if (p.kind === 'market') {
     for (const s of p.stalls || []) stall(ctx, XF(P, s.x, 0, s.z, faceYaw(s)), s, rnd, lod);
@@ -288,7 +288,7 @@ export function geometry(ctx) {
 export function collider(ctx) {
   const p = ctx.params, C = ctx;
   if (p.kind === 'lane') {
-    for (const [x, z] of p.lamps || []) box(C, x - 0.28, 0, z - 0.28, x + 0.28, 4.3, z + 0.28);
+    for (const [x, z, , y = 0] of p.lamps || []) box(C, x - 0.28, y, z - 0.28, x + 0.28, y + 4.3, z + 0.28);
     const z0 = p.archZ ?? 4; for (const s of [-1, 1]) box(C, s < 0 ? -5.75 : 4.35, 0, z0 - 0.65, s < 0 ? -4.35 : 5.75, 8.0, z0 + 0.65);
     box(C, -5.8, 6.2, z0 - 0.6, 5.8, 8.0, z0 + 0.6);
   } else if (p.kind === 'market') {
