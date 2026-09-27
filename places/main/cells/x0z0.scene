@@ -2761,6 +2761,13 @@ home-weather-controller:
   id: home-weather-controller
   state: {epoch: 0, solarEpoch: -2700000}
   tags: [weather, home-weather-controller]
+jade-dragon:
+  feetPosition: {x: -14, y: 24, z: 12}
+  id: jade-dragon
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 14, height: 3, kind: box, width: 5}
+  tags: [blueprint]
 spare-door-plaque:
   children: [{castShadow: false, feetPosition: {x: 0, y: 2.62, z: -0.1125}, id: plaque-frame, material: {color: "#432716", pbr: true, roughness: 0.7}, physics: none, primitive: {depth: 0.025, height: 0.21, kind: box, width: 0.8}, receiveShadow: true}, {castShadow: false, feetPosition: {x: 0, y: 2.65, z: -0.129}, id: plaque-panel, material: {color: "#6e4428", pbr: true, roughness: 0.62}, physics: none, primitive: {depth: 0.008, height: 0.15, kind: box, width: 0.74}, receiveShadow: true}, {feetPosition: {x: 0, y: 2.725, z: -0.1345}, id: plaque-face, vector: "<svg viewBox='0 0 300 62' width='0.7m'><text x='150' y='50' text-anchor='middle' font-family='display' font-size='62' fill='#f1dfb8'>the square</text></svg>", visibleRange: {max: 14, min: 0}}]
   feetPosition: {x: 5.3889, y: 24, z: 0.3889}
