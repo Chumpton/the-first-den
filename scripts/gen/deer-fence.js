@@ -75,6 +75,39 @@ function obb(ctx, a, b, ya, yb, h0, h1, t) { // a block along a->b (xz), bottom 
   solid(ctx, B, T);
 }
 function lime(ctx) { const l = 0.84 + ctx.random() * 0.1; ctx.albedo(LIME_TEX); ctx.color(`oklch(${l.toFixed(3)} ${(0.018 + ctx.random() * 0.02).toFixed(3)} ${Math.round(70 + ctx.random() * 25)})`); ctx.roughness(0.92); }
+// trailing vines spilling down from the coping on both faces: leafy strands with bloom clusters
+const BLOOMS = ['oklch(0.78 0.14 350)', 'oklch(0.96 0.02 95)', 'oklch(0.66 0.15 300)', 'oklch(0.86 0.15 90)', 'oklch(0.72 0.16 25)'];
+function dtri(ctx, a, b, c) { ctx.tri(a[0], a[1], a[2], b[0], b[1], b[2], c[0], c[1], c[2]); ctx.tri(a[0], a[1], a[2], c[0], c[1], c[2], b[0], b[1], b[2]); }
+function vines(ctx, a, b, lod) {
+  const dx = b[0] - a[0], dz = b[2] - a[2], L = Math.hypot(dx, dz) || 1, tx = dx / L, tz = dz / L, nx = -tz, nz = tx;
+  const bloom = BLOOMS[Math.floor(ctx.random() * BLOOMS.length)];
+  for (const side of [-1, 1]) {
+    for (let d = 0.3 + ctx.random() * 0.5; d < L - 0.2; d += 0.9 + ctx.random() * 1.1) {
+      if (ctx.random() < 0.25) continue;
+      const t = d / L, gy = a[1] + (b[1] - a[1]) * t, off = ST / 2 + 0.045;
+      const bx = a[0] + dx * t + nx * off * side, bz = a[2] + dz * t + nz * off * side;
+      const len = 0.6 + ctx.random() * (SH - 0.7), n = lod <= 2 ? 6 : 3;
+      let px = bx, py = gy + SH + 0.04, pz = bz, sw = (ctx.random() - 0.5) * 0.3;
+      for (let k = 1; k <= n; k++) {
+        const y = gy + SH + 0.04 - len * k / n, w = Math.sin(k * 1.7 + sw * 9) * 0.12 + sw * k / n, x = bx + tx * w, z = bz + tz * w;
+        ctx.albedo(null); ctx.color('oklch(0.45 0.08 135)'); ctx.roughness(0.9);
+        dtri(ctx, [px - tx * 0.012, py, pz - tz * 0.012], [px + tx * 0.012, py, pz + tz * 0.012], [x, y, z]);
+        ctx.color(`oklch(${(0.5 + ctx.random() * 0.14).toFixed(3)} 0.13 ${Math.round(128 + ctx.random() * 16)})`);
+        for (const lr of [-1, 1]) { const lx = x + tx * lr * 0.13, lz = z + tz * lr * 0.13, oy = y + 0.04;
+          dtri(ctx, [x, y, z], [lx + nx * side * 0.03, oy + 0.05, lz + nz * side * 0.03], [lx, oy - 0.05, lz]); }
+        if (lod <= 2 && ctx.random() < 0.45) {
+          ctx.color(ctx.random() < 0.8 ? bloom : BLOOMS[Math.floor(ctx.random() * BLOOMS.length)]); ctx.roughness(0.7);
+          const fx = x + nx * side * 0.035, fz = z + nz * side * 0.035, fy = y + 0.02, r = 0.05 + ctx.random() * 0.03;
+          for (let j = 0; j < 5; j++) { const a0 = j / 5 * Math.PI * 2, a1 = a0 + 0.55, a2 = a0 - 0.55;
+            const P = (ang, rr) => [fx + tx * Math.cos(ang) * rr, fy + Math.sin(ang) * rr, fz + tz * Math.cos(ang) * rr];
+            dtri(ctx, [fx, fy, fz], P(a2, r * 0.45), P(a0, r)); dtri(ctx, [fx, fy, fz], P(a0, r), P(a1, r * 0.45)); }
+          ctx.color('oklch(0.85 0.15 85)'); const c = r * 0.28; dtri(ctx, [fx + nx * side * 0.006 - tx * c, fy, fz + nz * side * 0.006 - tz * c], [fx + nx * side * 0.006 + tx * c, fy - c, fz + nz * side * 0.006 + tz * c], [fx + nx * side * 0.006 + tx * c, fy + c, fz + nz * side * 0.006 + tz * c]);
+        }
+        px = x; py = y; pz = z;
+      }
+    }
+  }
+}
 function stoneRun(ctx, pts, lod) {
   const P = (i, t) => { const a = pts[i], b = pts[i + 1]; return [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; };
   for (let i = 0; i < pts.length - 1; i++) {
@@ -104,7 +137,8 @@ function stoneRun(ctx, pts, lod) {
       if (lod <= 2) { const C = P(i, ctx.random() * 0.6), D = P(i, Math.min(1, ctx.random() * 0.4 + 0.6)); obb(ctx, [C[0], C[2]], [D[0], D[2]], C[1], D[1], -0.05, 0.14 + ctx.random() * 0.12, ST + 0.18); }
     }
     // ivy curtain crawling up both faces on some runs
-    if (lod <= 2 && ctx.random() < 0.45) {
+    if (lod <= 3) vines(ctx, a, b, lod);
+    if (lod <= 2 && ctx.random() < 0.7) {
       ctx.albedo(IVY_TEX); ctx.color(`oklch(${(0.62 + ctx.random() * 0.1).toFixed(3)} 0.12 ${Math.round(128 + ctx.random() * 18)})`); ctx.roughness(0.9);
       const tc = 0.2 + ctx.random() * 0.6, w = (0.5 + ctx.random() * 0.9) / L, top = 0.9 + ctx.random() * (SH - 0.9);
       const A = P(i, Math.max(0, tc - w)), B = P(i, Math.min(1, tc + w));
