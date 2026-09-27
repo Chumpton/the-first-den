@@ -67,6 +67,7 @@ function clump(ctx, t, x, y, z, s, rot, lod) {
 }
 // rim cluster / reed patch: items [t, x, y, z, s, rot]; t 0 = mossy boulder (not in reed patches)
 function rim(ctx, p, lod) {
+  paint(ctx, null, COL.blade[0], 0.9);
   for (const [t, x, y, z, s, r] of p.items || []) {
     if (t === 0) rock(ctx, x, y, z, 0.42 * s, 0.5 * s, r, lod <= 2 ? 7 : 5, true, COL.stone);
     else if (lod <= 4 || t !== 3) clump(ctx, t, x, y, z, s, r, lod);
@@ -75,6 +76,7 @@ function rim(ctx, p, lod) {
 // lily field: items [x, z, r, bloom, rot]; a pad is a notched disc just over the water, a bloom two rings of pink petals
 function lilies(ctx, p, lod) {
   const y = p.y ?? 0.02, n = lod <= 2 ? 9 : 6;
+  paint(ctx, null, COL.pad[0], 0.55);
   for (const [x, z, r, bloom, rot] of p.items || []) {
     ctx.color(pick(ctx, COL.pad));
     const gap = 0.55;
@@ -165,7 +167,7 @@ function boathouse(ctx, p, lod) {
     // inside: a crate, a coil of rope, an oar against the back wall
     paint(ctx, 'oak', 'oklch(0.88 0.05 70)', 0.9); obox(ctx, 0.85, f, 1.1, 0.55, 0.45, 0.5, 0.2);
     paint(ctx, 'oak', COL.oak, 0.8); beam(ctx, [-0.9, f, 1.55], [-0.75, f + 1.7, 1.62], 0.05, 0.03); obox(ctx, -0.915, f + 0.05, 1.53, 0.16, 0.42, 0.03, -0.1);
-    paint(ctx, null, 'oklch(0.78 0.06 85)', 0.95); prism(ctx, ngon(7, 0.2, 0.9, 1.15), f + 0.45, f + 0.55, 0.6);
+    paint(ctx, null, 'oklch(0.78 0.06 85)', 0.95); prism(ctx, ngon(7, 0.2, 0.9, 1.15), f + 0.45, f + 0.55);
   }
   // roof: plank deck with a sod blanket and a fringe of grass
   const slopes = [-1, 1], zf = -hd - ov, zb = hd + ov * 0.7;
