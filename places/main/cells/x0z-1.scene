@@ -317,6 +317,13 @@ secret-mushrooms:
   rotation: 0
   state: {key: mushrooms}
   tags: [interactable, secret]
+shore-dressing:
+  feetPosition: {x: 4, y: 0.2, z: -70}
+  id: shore-dressing
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 40, height: 2, kind: box, width: 44}
+  tags: [blueprint]
 warden-n:
   behavior: [scripts/tower-warden.js]
   castShadow: true
