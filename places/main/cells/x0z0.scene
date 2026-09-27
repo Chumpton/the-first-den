@@ -4404,7 +4404,7 @@ studio-holo:
   visibleRange: {max: 60}
 studio-lounge:
   castShadow: false
-  feetPosition: {x: 0, y: -5.6, z: -28.7}
+  feetPosition: {x: 0, y: -5.6, z: -30.3}
   id: studio-lounge
   physics: {body: static, collider: mesh}
   primitive: {kind: scripted, params: {item: lounge}, script: scripts/gen/art-studio.js}
