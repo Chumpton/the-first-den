@@ -151,6 +151,7 @@ function bench(ctx, P, lod) {                                                  /
   obox(P, 0, 0.62, 0.21, 1.55, 0.1, 0.035); if (lod <= 2) obox(P, 0, 0.78, 0.21, 1.55, 0.1, 0.035);
 }
 function market(ctx, p, lod) {
+  if (!p.slab || !p.stalls) { paint(ctx, 'stone', C.lime(0.5), 0.9); obox(ctx, 0, 0, 0, 2, 0.05, 2); return; }
   const H = ground(p);
   paving(ctx, p, H, lod);
   mosaic(ctx, p.mosaic[0], p.mosaic[1], H, lod);
@@ -174,6 +175,7 @@ function butt(ctx, P, lod) {                                                  //
   if (lod <= 2) { paint(ctx, null, C.rope, 0.9); for (const y of [0.08, 0.2]) lathe(B, [[0.565, y], [0.57, y + 0.015], [0.565, y + 0.03]], n); }
 }
 function yard(ctx, p, lod) {
+  if (!p.pad) return;
   const H = ground(p), [X0, X1, Z0, Z1] = p.pad, st = lod <= 2 ? 0.93 : (X1 - X0) / 2;
   ctx.albedo(SAND); ctx.color('oklch(0.96 0.03 80)'); ctx.roughness(1); ctx.metalness(0); ctx.emissive(null);
   const nx = Math.round((X1 - X0) / st), nz = Math.round((Z1 - Z0) / st), J = {};
@@ -195,7 +197,7 @@ function dummy(ctx, lod) {
   ctx.albedo(STRAW); ctx.color(C.straw); ctx.roughness(1); ctx.metalness(0); ctx.emissive(null);
   lathe(ctx, [[0, 0.74], [0.2, 0.78], [0.28, 0.95], [0.3, 1.18], [0.27, 1.4], [0.16, 1.5], [0, 1.52]], n);
   beam(ctx, [-0.64, 1.33, 0], [0.64, 1.33, 0], 0.13, 0.12);
-  if (lod <= 2) for (const s of [-1, 1]) { prism(ctx, ngon(5, 0.09, 0, 0), 0, 0.001); obox(ctx, s * 0.7, 1.26, 0, 0.14, 0.14, 0.16); }
+  if (lod <= 2) for (const s of [-1, 1]) { obox(ctx, s * 0.7, 1.26, 0, 0.14, 0.14, 0.16); }
   paint(ctx, null, C.rope, 0.9);
   if (lod <= 2) { lathe(ctx, [[0.285, 0.9], [0.3, 0.93], [0.3, 0.97], [0.285, 1.0]], n); lathe(ctx, [[0.285, 1.26], [0.3, 1.29], [0.3, 1.33], [0.28, 1.36]], n); for (const s of [-1, 1]) obox(ctx, s * 0.5, 1.26, 0, 0.05, 0.145, 0.14); }
   ctx.albedo('cdn/texture-woven-linen-canvas.png'); ctx.color('oklch(0.86 0.05 75)'); ctx.roughness(1);
@@ -210,6 +212,7 @@ export function geometry(ctx) {
 export function collider(ctx) {
   const p = ctx.params || {};
   if (p.kind === 'dummy') { obox(ctx, 0, 0, 0, 0.55, 1.85, 0.55); return; }
+  if (!p.slab && !p.pad) return null;
   const H = ground(p);
   if (p.kind === 'yard') {
     const [px, pz, L] = p.planter; obox(ctx, px, H(px, pz) - 0.1, pz, 0.95, 0.67, L + 0.1);
