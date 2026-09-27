@@ -132,10 +132,135 @@ link-west/light:
 orchard-east:
   feetPosition: {x: 41, y: 0.5, z: 70}
   id: orchard-east
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 40, height: 5, kind: box, width: 24}
-  tags: [blueprint]
+  rotation: {yaw: 0}
+  state: {piece: orchard-east}
+  tags: [farm, orchard]
+orchard-east/apple-11:
+  feetPosition: {x: -11.13, y: -0.18, z: -4.88}
+  id: orchard-east/apple-11
+  parent: orchard-east
+  physics: static
+  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 4}
+  rotation: {yaw: 17}
+  tags: [apple-tree]
+  visibleRange: {max: 240}
+orchard-east/apple-12:
+  feetPosition: {x: -4.5, y: -0.29, z: -5}
+  id: orchard-east/apple-12
+  parent: orchard-east
+  physics: static
+  primitive: {kind: scripted, params: {item: apple, s: 1.1, windfall: 7}, script: scripts/gen/farm-props.js, seed: 1}
+  rotation: {yaw: 84}
+  tags: [apple-tree]
+  visibleRange: {max: 240}
+orchard-east/apple-13:
+  feetPosition: {x: 2.13, y: -0.38, z: -3.88}
+  id: orchard-east/apple-13
+  parent: orchard-east
+  physics: static
+  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 2}
+  rotation: {yaw: 151}
+  tags: [apple-tree]
+  visibleRange: {max: 240}
+orchard-east/apple-14:
+  feetPosition: {x: 8.75, y: -0.24, z: -4}
+  id: orchard-east/apple-14
+  parent: orchard-east
+  physics: static
+  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 3}
+  rotation: {yaw: 218}
+  tags: [apple-tree]
+  visibleRange: {max: 240}
+orchard-east/apple-15:
+  feetPosition: {x: -11.25, y: -0.11, z: 2}
+  id: orchard-east/apple-15
+  parent: orchard-east
+  physics: static
+  primitive: {kind: scripted, params: {item: apple, s: 1.1, windfall: 7}, script: scripts/gen/farm-props.js, seed: 4}
+  rotation: {yaw: 285}
+  tags: [apple-tree]
+  visibleRange: {max: 240}
+orchard-east/apple-16:
+  feetPosition: {x: -4.63, y: -0.22, z: 1.88}
+  id: orchard-east/apple-16
+  parent: orchard-east
+  physics: static
+  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 1}
+  rotation: {yaw: 352}
+  tags: [apple-tree]
+  visibleRange: {max: 240}
+orchard-east/apple-17:
+  feetPosition: {x: 2, y: -0.25, z: 1.75}
+  id: orchard-east/apple-17
+  parent: orchard-east
+  physics: static
+  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 2}
+  rotation: {yaw: 59}
+  tags: [apple-tree]
+  visibleRange: {max: 240}
+orchard-east/apple-18:
+  feetPosition: {x: 8.63, y: -0.15, z: 1.63}
+  id: orchard-east/apple-18
+  parent: orchard-east
+  physics: static
+  primitive: {kind: scripted, params: {item: apple, s: 1.1, windfall: 7}, script: scripts/gen/farm-props.js, seed: 3}
+  rotation: {yaw: 126}
+  tags: [apple-tree]
+  visibleRange: {max: 240}
+orchard-east/apple-19:
+  feetPosition: {x: -11.38, y: -0.11, z: 8.88}
+  id: orchard-east/apple-19
+  parent: orchard-east
+  physics: static
+  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 4}
+  rotation: {yaw: 193}
+  tags: [apple-tree]
+  visibleRange: {max: 240}
+orchard-east/apple-20:
+  feetPosition: {x: -4.75, y: -0.15, z: 8.75}
+  id: orchard-east/apple-20
+  parent: orchard-east
+  physics: static
+  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 1}
+  rotation: {yaw: 260}
+  tags: [apple-tree]
+  visibleRange: {max: 240}
+orchard-east/apple-21:
+  feetPosition: {x: 1.88, y: -0.13, z: 8.63}
+  id: orchard-east/apple-21
+  parent: orchard-east
+  physics: static
+  primitive: {kind: scripted, params: {item: apple, s: 1.1, windfall: 7}, script: scripts/gen/farm-props.js, seed: 2}
+  rotation: {yaw: 327}
+  tags: [apple-tree]
+  visibleRange: {max: 240}
+orchard-east/apple-22:
+  feetPosition: {x: 8.5, y: -0.15, z: 8.5}
+  id: orchard-east/apple-22
+  parent: orchard-east
+  physics: static
+  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 3}
+  rotation: {yaw: 34}
+  tags: [apple-tree]
+  visibleRange: {max: 240}
+orchard-east/apple-23:
+  feetPosition: {x: -11.5, y: -0.01, z: 14.5}
+  id: orchard-east/apple-23
+  parent: orchard-east
+  physics: static
+  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 4}
+  rotation: {yaw: 101}
+  tags: [apple-tree]
+  visibleRange: {max: 240}
+orchard-east/cider-barrels-2:
+  castShadow: false
+  feetPosition: {x: -11.5, y: -0.12, z: 6}
+  id: orchard-east/cider-barrels-2
+  parent: orchard-east
+  physics: static
+  primitive: {kind: scripted, params: {item: barrels, n: 3}, script: scripts/gen/farm-props.js, seed: 2}
+  rotation: {yaw: -30}
+  visibleRange: {max: 140}
 pasture-west:
   feetPosition: {x: -41, y: 0.5, z: 70}
   id: pasture-west

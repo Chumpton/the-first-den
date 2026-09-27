@@ -231,6 +231,7 @@ terrain:
     farm-west-bed-0: {center: {x: 0, z: 0}, falloff: 2.5, height: 0.5, kind: flatten, shape: {kind: path, points: [[-58.14, 26.45], [-36.19, 17.67]], width: 4.7}}
     farm-west-bed-1: {center: {x: 0, z: 0}, falloff: 2.5, height: 0.5, kind: flatten, shape: {kind: path, points: [[-58.24, 30.26], [-26.76, 17.67]], width: 4.7}}
     farm-west-yard: {center: {x: -67, z: 30}, falloff: 3, height: 0.5, kind: flatten, shape: {kind: ellipse, radiusX: 10, radiusZ: 10}}
+    orchard-east-clear: {center: {x: 41, z: 68}, kind: clear-scatter, shape: {depth: 42, kind: rectangle, width: 28}}
   decorations:
     settings: {enabled: true, budget: 75000, maxDistance: 420, fadeDistance: 25}
     bindings:
