@@ -1,5 +1,5 @@
 // The side door to the square: the house's oak door swings open while someone stands on its approach, the opening behind it
-// shows the square live, and its passage crosses whoever steps through. The root sleeps between writes.
+// shows the square live, and its passage crosses whoever steps in from the approach while it stands open. The root sleeps between writes.
 import { SQUARE_DOOR as D } from './lib/data/square-door.js';
 import { FEEL } from './lib/data/home-feel.js';
 
@@ -38,7 +38,11 @@ export function onTriggerEnter(ctx, other) {
   const root = ctx.getObject(D.id);
   if (!root) return;
   if (ctx.self.state.kind === 'passage') {
-    ctx.cross(other, D.link);
+    // Shut, or from behind, the doorway shows no square, so it is a plain doorway: it takes you only open and from its approach.
+    const a = ctx.getObject(D.approach)?.worldFeetPosition, d = ctx.self.worldFeetPosition, v = other.velocity, q = other.worldFeetPosition;
+    const out = a && d ? { x: a.x - d.x, z: a.z - d.z } : null, heading = out && v ? v.x * out.x + v.z * out.z : 0;
+    const fromApproach = !out || (Math.abs(heading) > 0.1 ? heading < 0 : !q || (q.x - d.x) * out.x + (q.z - d.z) * out.z > 0);
+    if ((root.state.near | 0) > 0 && fromApproach) ctx.cross(other, D.link);
     return;
   }
   recount(ctx, root);
