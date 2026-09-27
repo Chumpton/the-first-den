@@ -272,6 +272,32 @@ function deckRail(ctx, collide) {
     if (!collide) { const p = V(k, H.D); box(ctx, p[0] - 0.06, H.D, p[2] - 0.06, p[0] + 0.06, H.D + 1.08, p[2] + 0.06); }
   }
 }
+// walnut baseboard on a face's inside at floor y: a profile swept along the wall, mitred at the corners, broken at
+// openings that reach the floor. Drawn only (the collider never sees it).
+const BASE_PROFILE = [[0, 0], [0.025, 0], [0.025, 0.11], [0.031, 0.117], [0.033, 0.127], [0.028, 0.136], [0.016, 0.141], [0, 0.143]];
+function baseboard(ctx, k, fy, holes) {
+  const { n, t } = faceFrame(k);
+  const L = (off) => (AI - off) * TAN30;
+  const cuts = holes.filter((h) => h.y0 <= fy + 0.15).map((h) => [h.u - h.w / 2, h.u + h.w / 2]).sort((a, b) => a[0] - b[0]);
+  const segs = []; let a = null;
+  for (const c of cuts) { segs.push([a, c[0]]); a = c[1]; }
+  segs.push([a, null]);
+  const P = (u, off, y) => [n[0] * (AI - off) + t[0] * u, fy + y, n[2] * (AI - off) + t[2] * u];
+  for (const [ua, ub] of segs) {
+    const U0 = (off) => ua == null ? -L(off) : ua, U1 = (off) => ub == null ? L(off) : ub;
+    for (let i = 0; i < BASE_PROFILE.length - 1; i++) {
+      const [o0, y0] = BASE_PROFILE[i], [o1, y1] = BASE_PROFILE[i + 1];
+      const no = y1 - y0, ny = -(o1 - o0), m = Math.hypot(no, ny) || 1;
+      Q(ctx, P(U0(o0), o0, y0), P(U1(o0), o0, y0), P(U1(o1), o1, y1), P(U0(o1), o1, y1), [-n[0] * no / m, ny / m, -n[2] * no / m]);
+    }
+    // end caps where the run stops at an opening
+    for (const [u, s] of [[ua, -1], [ub, 1]]) {
+      if (u == null) continue;
+      const c = P(u, 0.012, 0.07), N = [t[0] * s, 0, t[2] * s];
+      for (let i = 0; i < BASE_PROFILE.length - 1; i++) T3(ctx, c, P(u, ...BASE_PROFILE[i]), P(u, ...BASE_PROFILE[i + 1]), N);
+    }
+  }
+}
 function build(ctx, collide) {
   const lod = collide ? 1 : Number(ctx.lod ?? 1);
   const P = (tx, col, rough) => () => { if (collide) return; ctx.albedo(tx); ctx.color(col); ctx.roughness(rough); };
@@ -289,6 +315,10 @@ function build(ctx, collide) {
     wallBand(ctx, k, H.wallBottom, 0.3, [], stone, stone, collide);
     wallBand(ctx, k, 0.3, H.wallTop, holesFor(k), cobOut, limeIn, collide);
     if (!collide) { cobOut(); wallTop(ctx, k, H.wallTop); }
+  }
+  if (!collide && lod < 3) {
+    ctx.albedo(null); ctx.color("oklch(0.36 0.05 50)"); ctx.roughness(0.6);
+    for (let k = 0; k < 6; k++) { baseboard(ctx, k, H.B, []); baseboard(ctx, k, H.G, holesFor(k)); baseboard(ctx, k, H.A, holesFor(k)); }
   }
   const th = H.trunkHole, TH = [-th, -th, th, th];
   floorSlab(ctx, H.B, 0.25, AI + 0.1, [], flags, flags, collide);
