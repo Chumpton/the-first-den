@@ -144,6 +144,8 @@ assets:
     "/cdn/moodboard-lowpoly-cozy/music-first-light-cozy-unhurried-nylon-guitar-cello-duet-major-pentatonic-arpeggios-instrumental-no-vocals-even-dynamics-no-crescendo-loop.mp3": {duration: 127.0065}
     "/cdn/moodboard-lowpoly-cozy/music-homeward-cozy-unhurried-mandolin-light-acoustic-guitar-modal-folk-lilting-melody-instrumental-no-vocals-even-dynamics-no-crescendo-loop.mp3": {duration: 113.0065}
     "/cdn/moodboard-lowpoly-cozy/music-open-window-cozy-unhurried-steel-string-fingerstyle-guitar-upright-bass-syncopated-folk-six-eight-instrumental-no-vocals-even-dynamics-no-crescendo-loop.mp3": {duration: 176.3565}
+    "/cdn/moodboard-lowpoly-cozy/sfx-bees-buzzing-flower-garden-loop.mp3": {duration: 6}
+    "/cdn/moodboard-lowpoly-cozy/sfx-creek-babbling-gentle-brook-loop.mp3": {duration: 6}
     "/cdn/moodboard-lowpoly-cozy/sfx-delicate-brass-and-glass-doorway-welcome-chime.mp3": {duration: 1.9674583333333333}
     "/cdn/moodboard-lowpoly-cozy/sfx-lakeside-birch-leaves-breeze-distant-songbirds-loop.mp3": {duration: 5.976}
     "/cdn/moodboard-lowpoly-cozy/sfx-lakeside-crickets-water-rustling-birches-night-loop.mp3": {duration: 7}
@@ -157,6 +159,7 @@ assets:
     "/cdn/moodboard-lowpoly-cozy/sfx-small-wood-hearth-crackle-loop.mp3": {duration: 6}
     "/cdn/moodboard-lowpoly-cozy/sfx-teleport-soft-chime-whoosh.mp3": {duration: 1.32}
     "/cdn/moodboard-lowpoly-cozy/sfx-water-lapping-against-wooden-jetty-with-distant-gulls-loop.mp3": {duration: 7}
+    "/cdn/moodboard-lowpoly-cozy/sfx-water-wheel-creak-splash-loop.mp3": {duration: 6}
     "/cdn/sfx-gas-fire-ribbon-burner-hissing-loop.mp3": {duration: 5}
     "/cdn/sfx-marine-diesel-engine-exhaust-pulses-injector-tick-machinery-loop.mp3": {duration: 6}
     "/cdn/sfx-small-sea-waves-against-yacht-hull-distant-gulls-summer-loop.mp3": {duration: 5}
