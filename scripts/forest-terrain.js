@@ -3,6 +3,14 @@
 const clamp01 = (v) => Math.min(1, Math.max(0, v));
 const smooth = (a, b, v) => { const t = clamp01((v - a) / (b - a)); return t * t * (3 - 2 * t); };
 export const GROUND = 0.5;
+// Places the rivers bend away from (dry, level ground): home and the two far cities. r = dry radius, f = fade.
+export const SITES = [
+  { id: "home", x: 0, z: -30, r: 70, f: 60 },
+  { id: "lumenvale", x: 1100, z: -250, r: 190, f: 80 },
+  { id: "hearthmere", x: -1000, z: -500, r: 190, f: 80 },
+];
+// The home lake: a round bowl filled by the water level at 0.
+export const LAKE = { x: 4, z: -76, r: 26, depth: 2.6 };
 function riverT(ctx) {
   const { x, z, noise, seedOffset } = ctx;
   const a = noise.domainWarp2({ x: x + 900, z: z - 400, warpAmp: 60, warpFrequency: 1 / 300, frequency: 1 / 700, octaves: 2, seed: seedOffset(11) });
@@ -13,10 +21,14 @@ function riverT(ctx) {
 export function heightAt(ctx) {
   const { x, z, noise, seedOffset } = ctx;
   const roll = noise.fbm2({ x, z, frequency: 1 / 90, octaves: 3, seed: seedOffset(1) }) * 0.35;
-  const t = riverT(ctx);
+  let dry = 0;
+  for (const S of SITES) dry = Math.max(dry, 1 - smooth(S.r, S.r + S.f, Math.hypot(x - S.x, z - S.z)));
+  const t = riverT(ctx) + dry * 10;
   const land = GROUND + roll * smooth(1.2, 2.2, t);
   const s = smooth(0.3, 1.25, t);
-  return -1.7 * (1 - s) + land * s;
+  const h = -1.7 * (1 - s) + land * s;
+  const ld = Math.hypot(x - LAKE.x, z - LAKE.z), ls = smooth(LAKE.r * 0.45, LAKE.r * 1.05, ld);
+  return Math.min(h, -LAKE.depth * (1 - ls) + h * ls);
 }
 export function materialAt(ctx) {
   const { x, z, noise, seedOffset, worldHeight } = ctx;
