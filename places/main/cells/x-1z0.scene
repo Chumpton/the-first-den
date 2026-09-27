@@ -37,6 +37,7 @@ deer-fence-1-1:
   physics: static
   primitive: {kind: scripted, params: {kind: run, pts: [[0, 0, 0], [0.805, -0.043, 3.3], [1.764, -0.111, 6.559], [2.876, -0.162, 9.769], [4.138, -0.173, 12.923], [5.548, -0.152, 16.013], [7.101, -0.107, 19.034], [8.796, -0.073, 21.978], [10.627, -0.071, 24.839], [12.592, -0.098, 27.611], [14.685, -0.14, 30.286]]}, script: scripts/gen/deer-fence.js}
   tags: [deer-fence]
+  visibleRange: {max: 160}
 river-sound:
   audio: {bus: Ambience, clip: /cdn/moodboard-realistic-gritty/sfx-gentle-forest-river-flowing-over-stones-loop.mp3, gain: 0.5, loop: true, maxDistance: 60, spatial: true}
   feetPosition: {x: -69, y: 0.2, z: 40}
