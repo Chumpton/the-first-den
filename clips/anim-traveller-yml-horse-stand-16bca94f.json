@@ -1,0 +1,10 @@
+{"contentHash":"808:e327a9c2","duration":4,"fps":30,"tracks":[
+{"bone":"legFL","prop":"rotation","times":[0,4],"values":[0,0,0,1,0,0,0,1]},
+{"bone":"legBL","prop":"rotation","times":[0,4],"values":[0,0,0,1,0,0,0,1]},
+{"bone":"legFR","prop":"rotation","times":[0,4],"values":[0,0,0,1,0,0,0,1]},
+{"bone":"legBR","prop":"rotation","times":[0,4],"values":[0,0,0,1,0,0,0,1]},
+{"bone":"neck","prop":"rotation","times":[0,2,4],"values":[-0.02618,0,0,0.99966,0.0349,0,0,0.99939,-0.02618,0,0,0.99966]},
+{"bone":"head","prop":"rotation","times":[0,2,4],"values":[0,0,0,1,-0.03485,0.0523,-0.00183,0.99802,0,0,0,1]},
+{"bone":"tail","prop":"rotation","times":[0,1,2,3,4],"values":[0,-0.10453,0,0.99452,0,0.10453,0,0.99452,0,-0.0349,0,0.99939,0,0.08716,0,0.99619,0,-0.10453,0,0.99452]},
+{"bone":"root","prop":"position","times":[0,4],"values":[0,0,0,0,0,0]}
+]}

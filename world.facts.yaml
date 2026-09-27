@@ -19,6 +19,7 @@ assets:
     "anim/deer.yml#walk": clips/anim-deer-yml-walk-0c41543f.json
     "anim/fox.yml#sniff": clips/anim-fox-yml-sniff-459554f1.json
     "anim/fox.yml#walk": clips/anim-fox-yml-walk-1d210e7e.json
+    "anim/traveller.yml#horse-stand": clips/anim-traveller-yml-horse-stand-16bca94f.json
     "anim/traveller.yml#horse-walk": clips/anim-traveller-yml-horse-walk-7d34830c.json
     "anim/traveller.yml#walk": clips/anim-traveller-yml-walk-8a1a5ce0.json
     "anim/traveller.yml#wheels": clips/anim-traveller-yml-wheels-fc8a984d.json
