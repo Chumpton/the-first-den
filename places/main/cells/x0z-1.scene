@@ -753,6 +753,33 @@ shore-rim-6:
   receiveShadow: true
   tags: [shore, decor]
   visibleRange: {max: 90}
+shoreline-reeds:
+  castShadow: true
+  feetPosition: {x: -7.58, y: 0, z: -95.82}
+  id: shoreline-reeds
+  material: {kind: scripted, params: {base: 0.15, h: 1.6, reach: 0.08, speed: 1.1}, script: scripts/material-shore-sway.js}
+  primitive: {kind: scripted, params: {items: [[1, -8.25, 0.13, 5.64, 1, 3.87], [3, -8.05, 0.16, 4.97, 1.1, 4.32], [1, -5.43, -0.13, 3.71, 1.36, 1.18], [2, -6.63, 0.01, 4.21, 1.13, 4.55], [1, -6.09, -0.03, 3.77, 1.02, 6.19], [1, 2.73, -0.09, -1.88, 1.05, 0.5], [1, 3.22, -0.02, -2.38, 0.9, 3.8], [1, 4.49, -0.05, -2.6, 1.17, 0.38], [3, 4.98, 0.02, -3.09, 1.29, 0.96], [2, 6.46, 0.06, -3.68, 1.03, 2.6], [1, 6.96, 0.13, -4.17, 0.9, 2.6], [0, 5.62, 0.24, -4.52, 0.59, 5.8]], kind: rim}, script: scripts/gen/shore-kit.js}
+  receiveShadow: true
+  tags: [shore, decor]
+  visibleRange: {max: 120}
+shoreline-south:
+  castShadow: true
+  feetPosition: {x: -14.86, y: 0, z: -100.71}
+  id: shoreline-south
+  material: {kind: scripted, params: {base: 0.15, h: 1.6, reach: 0.08, speed: 1.1}, script: scripts/material-shore-sway.js}
+  primitive: {kind: scripted, params: {items: [[3, -7.94, 0.39, 5.9, 0.93, 4.83], [3, -6.42, 0.37, 4.71, 1.35, 0.23], [0, -3.2, 0.34, 4.2, 1.06, 5.54], [3, -3.52, 0.34, 4.08, 1.15, 3.51], [3, -1.4, 0.29, 2.73, 0.97, 3.12], [3, -1.08, 0.29, 0.23, 1.16, 3.53], [3, 4.77, 0.5, -2.65, 0.91, 4.79], [0, 4.29, 0.5, -5.1, 0.87, 6.24], [0, 5.8, 0.5, -6.59, 0.6, 1.71], [3, 8.74, 0.5, -7.55, 1.3, 4.16]], kind: rim}, script: scripts/gen/shore-kit.js}
+  receiveShadow: true
+  tags: [shore, decor]
+  visibleRange: {max: 120}
+shoreline-west:
+  castShadow: true
+  feetPosition: {x: -22.77, y: 0, z: -79.4}
+  id: shoreline-west
+  material: {kind: scripted, params: {base: 0.15, h: 1.6, reach: 0.08, speed: 1.1}, script: scripts/material-shore-sway.js}
+  primitive: {kind: scripted, params: {items: [[3, -0.27, 0.5, 15.87, 1.24, 3.99], [0, 0.26, 0.38, -15.87, 0.89, 0.02]], kind: rim}, script: scripts/gen/shore-kit.js}
+  receiveShadow: true
+  tags: [shore, decor]
+  visibleRange: {max: 120}
 warden-n:
   behavior: [scripts/tower-warden.js]
   castShadow: true
