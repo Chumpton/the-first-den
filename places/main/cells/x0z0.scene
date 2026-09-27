@@ -1969,12 +1969,16 @@ courier-tomas:
   tags: [interactable, courier]
   visibleRange: {max: 220}
 courtyard-life:
-  feetPosition: {x: 14, y: 0.5, z: -47}
+  castShadow: true
+  feetPosition: {x: 14, y: 0.4791726164562685, z: -47}
   id: courtyard-life
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 22, height: 3, kind: box, width: 22}
-  tags: [blueprint]
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {items: [[bench, -3.94, -2.56, 37.5, 0.021, {}], [bench, 4.3, -2.7, 0, 0.034, {canGround: true, lamp: true, trays: 1}], [barrow, 2.4, -2.2, -25, 0.014, {}], [urn, -9.4, -4.6, 0, 0.021, {}], [urn, -3.2, -4.5, 30, 0.021, {}], [urn, -6.8, 1.2, 60, 0.018, {}], [urn, 6, -3.4, 15, 0.063, {}]]}, script: scripts/gen/yard-life.js, seed: 51}
+  receiveShadow: true
+  rotation: {yaw: 0}
+  tags: [yard, courtyard]
+  visibleRange: {max: 90}
 creek-banks:
   castShadow: true
   feetPosition: {x: 0, y: 0, z: 0}
@@ -4428,6 +4432,40 @@ wolf-lead:
   state: {home: {x: -40, z: 40}, mode: idle, range: 45, scale: 1, sp: wolf, until: 0, yaw: -97}
   tags: [fauna-ground, interactable, animal, wolf]
   visibleRange: {max: 180}
+yard-apiary:
+  castShadow: true
+  feetPosition: {x: 22.6, y: 0.5733738754349487, z: -55.2}
+  fx: {script: "fx\npop bees n=?mobile:8|16 on=box(1.4,.3,.4).c(1.1) life=1.5..3 v=sdir()*.4 size=.025..0.04 acc=curl(1.4)*1.6+drag(1.5) col=hdr(1.6,1.1,.2) a=0>.1:1>.85:1>0 sz=$size r=sprite(soft-disc,add)"}
+  id: yard-apiary
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {items: [[meadow, 0, 0, 0, 0, {n: 90, r: 2.2}], [apiary, 0, 0.1, 0, -0.001, {}], [wattle, 0, 1.75, 180, -0.039, {bow: 0.3, len: 3.8}]]}, script: scripts/gen/yard-life.js, seed: 103}
+  receiveShadow: true
+  rotation: {yaw: -90}
+  tags: [yard, courtyard]
+  visibleRange: {max: 90}
+yard-herbrack:
+  castShadow: true
+  feetPosition: {x: 21.9, y: 0.530752887423321, z: -48.9}
+  id: yard-herbrack
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {items: [[herbrack, 0, 0, 0, 0, {}]]}, script: scripts/gen/yard-life.js, seed: 104}
+  receiveShadow: true
+  rotation: {yaw: 30}
+  tags: [yard, courtyard]
+  visibleRange: {max: 60}
+yard-woodshed:
+  castShadow: true
+  feetPosition: {x: 9.3, y: 0.5, z: -41.8}
+  id: yard-woodshed
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {items: [[woodshed, 0, 0, 0, 0, {}]]}, script: scripts/gen/yard-life.js, seed: 23}
+  receiveShadow: true
+  rotation: {yaw: 90}
+  tags: [yard, courtyard]
+  visibleRange: {max: 90}
 zipline:
   feetPosition: {x: -14.34, y: 0.5, z: -35.34}
   id: zipline
