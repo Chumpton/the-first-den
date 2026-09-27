@@ -1,10 +1,29 @@
 # spawn-scene v2 yaml x0z0
 camp-spot:
-  feetPosition: {x: -16, y: 0.5, z: -52}
+  castShadow: true
+  feetPosition: {x: -18, y: 0.5, z: -50}
   id: camp-spot
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 7, height: 2, kind: box, width: 7}
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: camp}, script: scripts/gen/grounds-kit.js, seed: 7}
+  tags: [grounds, camp]
+  visibleRange: {max: 220}
+camp-spot/campfire-fx:
+  audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-campfire-crackle-loop.mp3, gain: 0.25, loop: true, maxDistance: 25, spatial: true}
+  feetPosition: {x: 0, y: 0.05, z: 0}
+  fx: {script: "fx\npop coals n=10 on=disc(.22) size=.07..0.15 tint=<2.6,1,.28>..<1.2,.35,.09> sz=$size*flick(.5,.12) col=$tint*flick(.8,.3) a=.9 r=sprite(soft-disc,add)\npop flame rate=flick(.45,.2)*?mobile:40|70 on=disc(.24) life=.5..0.95 v=up(1.6)+cone(24)*(.35..0.9) size=.22..0.42 acc=curl(.5)*1.3+buoy(2.4)+drag(1.5)\n  sz=$size*(.5>.25:1>.7:.72>.14) col=hdr(4.8,3.6,1.5)>.3:hdr(3.4,1.5,.35)>.65:hdr(1.9,.55,.12)>hdr(.7,.14,.03) a=0>.12:1>.75:.85>0 rot=spin(.2) r=sprite(flame-wisp,add)\npop embers rate=5 on=disc(.22) life=.7..1.5 v=up(2.4)+cone(32)*(.4..1.3) size=.02..0.05 acc=curl(.8)*1.1+grav()*.45+drag(.5)\n  sz=$size*(1>.7:.8>.3) col=hdr(5,2.8,.8)>.6:hdr(2.4,.8,.15)>hdr(1,.22,.04) a=(0>.08:1>.65:.9>0)*flick(11,.35) r=sprite(ember,add,velocity,.02)\npop smoke on=@flame?.22 inh=p;v:$v*.4 life=1.8..3.2 size=.16..0.26 acc=buoy(.9)+curl(.35)*.5+drag(.8) sz=$size*(.7>3.4) col=<.3,.28,.26>><.15,.15,.16> a=0>.25:.3>.7:.21>0 rot=spin(.15) r=sprite(smoke-puff,alpha)\npop hearth n=1 at=disc(.22).c(.55) glo=fire()*(#flame/45)~ r=light(<1,.55,.24>,$glo*25,12)"}
+  id: camp-spot/campfire-fx
+  parent: camp-spot
+camp-spot/tent:
+  castShadow: true
+  feetPosition: {x: -0.6, y: 0, z: -4.4}
+  id: camp-spot/tent
+  material: {pbr: true}
+  parent: camp-spot
+  physics: static
+  primitive: {kind: scripted, params: {kind: tent}, script: scripts/gen/grounds-kit.js, seed: 9}
+  rotation: {yaw: 185}
+  visibleRange: {max: 220}
 cob-house:
   castShadow: true
   feetPosition: {x: 0, y: 0.5, z: -26}
