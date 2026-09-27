@@ -82,6 +82,18 @@ export function update(ctx, dt) {
   }
   if (s.phase === 'go') {
     if (now < (s.pauseUntil ?? 0)) { ctx.self.velocity = { x: 0, y: ctx.self.velocity.y, z: 0 }; return }
+    if (s.waving) { s.waving = false; pose(ctx, null) }
+    const m0 = mem(ctx), f0 = ctx.self.feetPosition
+    for (const pl of ctx.place.players) {
+      const pf = pl.feetPosition; if (!pf || Math.hypot(pf.x - f0.x, pf.z - f0.z) > FOLK.waveRange || Math.abs(pf.y - f0.y) > 2) continue
+      const seen = (m0.waved ??= {}); if (now - (seen[pl.id] ?? -1e12) < FOLK.waveEveryMs) continue
+      seen[pl.id] = now; s.waving = true; s.pauseUntil = now + 2600
+      ctx.self.velocity = { x: 0, y: ctx.self.velocity.y, z: 0 }
+      ctx.self.rotation = { yaw: yawTo(f0, [pf.x, pf.z]) }
+      pose(ctx, 'cdn/clip-waving-single-hand-loop.glb')
+      ctx.emit('damageNumber', { position: { x: f0.x, y: f0.y + 2.3, z: f0.z }, text: `${s.name}: hey ${pl.displayName ?? 'you'}!`, color: '#ffe2a0', lifetime: 2.5, size: 0.6 })
+      return
+    }
     const path = route(ctx, s.target); if (!path) return
     const m = mem(ctx), f = ctx.self.feetPosition
     let t = path[m.i] ?? s.target, dx = t[0] - f.x, dz = t[1] - f.z, d = Math.hypot(dx, dz)
@@ -96,7 +108,8 @@ export function update(ctx, dt) {
       if (s.homeBound) { s.homeBound = false; return sitDown(ctx) }
       const c = F.chores[s.plan[s.step]]
       ctx.self.rotation = { yaw: yawTo(f, c.face) }
-      s.phase = 'work'; s.until = now + rnd(ctx, FOLK.workSecs) * 1000
+      s.phase = 'work'; s.until = now + rnd(ctx, FOLK.workSecs) * 1000 * (c.long ? 2.2 : 1)
+      ctx.emit('damageNumber', { position: { x: f.x, y: f.y + 2.25, z: f.z }, text: `${s.name} · ${c.label}`, color: '#f7e7c4', lifetime: 2.5, size: 0.5 })
       return pose(ctx, c.clip)
     }
     const v = FOLK.walk
