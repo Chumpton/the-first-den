@@ -1,1 +1,51 @@
 # spawn-scene v2 yaml x3z-1
+bridge-e3:
+  children: [{feetPosition: {x: 0, y: 1.8, z: 0}, id: glow, light: {color: "#ffb35a", distance: 20, intensity: 6, kind: point}}]
+  feetPosition: {x: 441.41, y: 0.5, z: -104.67}
+  id: bridge-e3
+  physics: static
+  primitive: {kind: scripted, params: {length: 22, seed: 4, width: 9}, script: scripts/gen/road-bridge.js}
+  rotation: {lookAt: {x: 450.7260361787556, y: 0.5, z: -108.29540356435744}}
+  tags: [road-bridge]
+  visibleRange: {max: 700}
+hw-east-fence-l-6:
+  castShadow: false
+  feetPosition: {x: 395.8, y: 0.41, z: -92.14}
+  id: hw-east-fence-l-6
+  physics: static
+  primitive: {kind: scripted, params: {runs: [[[0, 0, 0], [2.83, 0.07, -1.13], [5.62, 0.11, -2.22], [8.42, 0.13, -3.31], [11.21, 0.15, -4.4], [13.97, 0.18, -5.49], [16.76, 0.21, -6.6], [19.54, 0.2, -7.71], [22.4, 0.17, -8.83], [25.2, 0.13, -9.9], [28, 0.1, -10.98], [30.8, 0.08, -12.05]]]}, script: scripts/gen/road-rail.js}
+  tags: [highway-fence]
+  visibleRange: {max: 160}
+hw-east-fence-r-5:
+  castShadow: false
+  feetPosition: {x: 407.85, y: 0.44, z: -86.13}
+  id: hw-east-fence-r-5
+  physics: static
+  primitive: {kind: scripted, params: {runs: [[[0, 0, 0], [2.79, -0.01, -1.09], [5.62, 0, -2.21], [8.4, 0.01, -3.32], [11.19, 0.02, -4.43], [13.92, 0.02, -5.5], [16.72, 0, -6.57], [19.53, -0.03, -7.65], [22.33, -0.06, -8.72]]]}, script: scripts/gen/road-rail.js}
+  tags: [highway-fence]
+  visibleRange: {max: 160}
+hw-east-lamps-2:
+  castShadow: false
+  feetPosition: {x: 336.3097527637726, y: 0.6202564568061679, z: -68.8568320601912}
+  id: hw-east-lamps-2
+  physics: static
+  primitive: {kind: scripted, params: {lamps: [[0, 0, 0, 0.349, 0.937], [25.68, 0, 0.08, -0.358, -0.934], [44.79, -0.15, -17.06, 0.363, 0.932], [70.46, -0.18, -17.29, -0.363, -0.932]]}, script: scripts/gen/road-lamps.js}
+  tags: [highway-lamps]
+  visibleRange: {max: 180}
+hw-east-lamps-3:
+  castShadow: false
+  feetPosition: {x: 425.8094367240595, y: 0.48431133688307215, z: -103.4570826473371}
+  id: hw-east-lamps-3
+  physics: static
+  primitive: {kind: scripted, params: {lamps: [[0, 0, 0, 0.358, 0.934], [44.61, 0.2, -17.61, 0.366, 0.931], [70.33, 0.14, -17.71, -0.361, -0.933], [89.46, -0.11, -34.87, 0.354, 0.935]]}, script: scripts/gen/road-lamps.js}
+  tags: [highway-lamps]
+  visibleRange: {max: 180}
+milestone-east-2:
+  feetPosition: {x: 399.96, y: {terrain: 0}, z: -81.75}
+  id: milestone-east-2
+  physics: static
+  primitive: {kind: scripted, params: {kind: milestone}, script: scripts/gen/road-dressing.js}
+  rotation: {lookAt: {x: 397.6548334580761, y: 0.5, z: -87.50193338323044}}
+  tags: [road-dressing, milestone, road-east]
+  ui: "<div face=\"front\" offset=\"0.004m\" style=\"width:480px;height:520px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Georgia,serif;color:#4f3828;text-align:center\"><div style=\"font-size:78px\">Lumenvale</div><div style=\"font-size:120px;font-weight:bold\">0.6 km</div></div>"
+  visibleRange: {max: 150}

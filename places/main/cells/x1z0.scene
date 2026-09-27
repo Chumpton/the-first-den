@@ -1,4 +1,13 @@
 # spawn-scene v2 yaml x1z0
+bridge-e0:
+  children: [{feetPosition: {x: 0, y: 1.8, z: 0}, id: glow, light: {color: "#ffb35a", distance: 20, intensity: 6, kind: point}}]
+  feetPosition: {x: 128.22, y: 0.5, z: -2.35}
+  id: bridge-e0
+  physics: static
+  primitive: {kind: scripted, params: {length: 62, seed: 1, width: 9}, script: scripts/gen/road-bridge.js}
+  rotation: {lookAt: {x: 138.06629791744314, y: 0.5, z: -4.125933625139768}}
+  tags: [road-bridge]
+  visibleRange: {max: 700}
 critter-squirrel-05:
   behavior: scripts/critter-press.js
   feetPosition: {x: 82.0601635171762, y: 0.4620701195073558, z: -7.77807011856671}
@@ -31,27 +40,35 @@ fox-road-east:
   state: {home: {x: 150, z: 38}, mode: idle, range: 15, scale: 1, sp: fox, until: 0, yaw: 50}
   tags: [fauna-ground, interactable, animal, fox]
   visibleRange: {max: 180}
-waylamp-east-1:
-  feetPosition: {x: 78.77318065836097, y: {terrain: 0}, z: 24.565160584670956}
-  id: waylamp-east-1
+hw-east-fence-l-2:
+  castShadow: false
+  feetPosition: {x: 84.12, y: 0.4, z: -0.47}
+  id: hw-east-fence-l-2
   physics: static
-  primitive: {kind: scripted, params: {hue: 195, kind: lamp}, script: scripts/gen/road-dressing.js}
-  rotation: {yaw: 80}
-  tags: [road-dressing, waylamp, road-east]
-  visibleRange: {max: 200}
-waylamp-east-2:
-  feetPosition: {x: 123.38272418135388, y: {terrain: 0}, z: 30.516412532681358}
-  id: waylamp-east-2
+  primitive: {kind: scripted, params: {runs: [[[0, 0, 0], [2.98, 0.06, -0.39], [5.95, 0.08, -0.78], [8.82, 0.07, -1.21], [11.79, 0.06, -1.65]]]}, script: scripts/gen/road-rail.js}
+  tags: [highway-fence]
+  visibleRange: {max: 160}
+hw-east-fence-l-3:
+  castShadow: false
+  feetPosition: {x: 160.37, y: 0.41, z: -14.15}
+  id: hw-east-fence-l-3
   physics: static
-  primitive: {kind: scripted, params: {hue: 85, kind: lamp}, script: scripts/gen/road-dressing.js}
-  rotation: {yaw: 305}
-  tags: [road-dressing, waylamp, road-east]
-  visibleRange: {max: 200}
-waylamp-east-3:
-  feetPosition: {x: 169.1517881626551, y: {terrain: 0}, z: 29.311927541359005}
-  id: waylamp-east-3
+  primitive: {kind: scripted, params: {runs: [[[0, 0, 0], [2.92, 0.03, -0.69], [5.84, 0.09, -1.37], [8.71, 0.17, -2.05], [11.63, 0.24, -2.76], [14.54, 0.27, -3.48], [17.45, 0.26, -4.19], [20.32, 0.29, -4.91], [23.22, 0.36, -5.65], [26.13, 0.43, -6.39], [28.99, 0.47, -7.13], [31.89, 0.45, -7.9], [34.79, 0.4, -8.67], [37.69, 0.38, -9.44], [40.53, 0.39, -10.22], [43.43, 0.41, -11.02], [46.32, 0.34, -11.82]]]}, script: scripts/gen/road-rail.js}
+  tags: [highway-fence]
+  visibleRange: {max: 160}
+hw-east-fence-r-1:
+  castShadow: false
+  feetPosition: {x: 162.65, y: 0.48, z: -4.42}
+  id: hw-east-fence-r-1
   physics: static
-  primitive: {kind: scripted, params: {hue: 195, kind: lamp}, script: scripts/gen/road-dressing.js}
-  rotation: {yaw: 170}
-  tags: [road-dressing, waylamp, road-east]
-  visibleRange: {max: 200}
+  primitive: {kind: scripted, params: {runs: [[[0, 0, 0], [2.92, 0.08, -0.68], [5.84, 0.16, -1.37], [8.81, 0.22, -2.07], [11.72, 0.23, -2.78], [14.64, 0.22, -3.49], [17.55, 0.21, -4.21], [20.51, 0.22, -4.95], [23.41, 0.25, -5.69], [26.32, 0.28, -6.43], [29.27, 0.29, -7.2], [32.17, 0.27, -7.97], [35.07, 0.2, -8.74], [37.97, 0.12, -9.5], [40.91, 0.06, -10.31], [43.8, 0.03, -11.11], [46.69, 0.01, -11.91]]]}, script: scripts/gen/road-rail.js}
+  tags: [highway-fence]
+  visibleRange: {max: 160}
+hw-east-lamps-1:
+  castShadow: false
+  feetPosition: {x: 179.13518197285083, y: 0.6948586590031571, z: -8.776763587155674}
+  id: hw-east-lamps-1
+  physics: static
+  primitive: {kind: scripted, params: {lamps: [[0, 0, 0, -0.238, -0.971], [20.91, 0.09, -14.94, 0.266, 0.964], [66.74, -0.08, -28.58, 0.304, 0.953], [137.86, 0.08, -43.08, -0.343, -0.94]]}, script: scripts/gen/road-lamps.js}
+  tags: [highway-lamps]
+  visibleRange: {max: 180}
