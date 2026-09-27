@@ -1,4 +1,10 @@
 # spawn-scene v2 yaml objects
+corn-maze:
+  feetPosition: {x: -8, y: 0.5, z: -127}
+  id: corn-maze
+  physics: static
+  primitive: {kind: scripted, params: {cell: 3, n: 11, seed: 7}, script: scripts/gen/corn-maze.js, seed: 3}
+  tags: [maze]
 critter-duck-1:
   castShadow: false
   feetPosition: {x: 10.86066101375036, y: 0.02, z: -76}
@@ -101,6 +107,92 @@ fox-lakewood:
   state: {home: {x: -35, z: -115}, mode: idle, range: 20, scale: 1, sp: fox, until: 0, yaw: -153}
   tags: [fauna-ground, interactable, animal, fox]
   visibleRange: {max: 180}
+maze-bale-0:
+  feetPosition: {x: -4.8, y: 0.5, z: -129.6}
+  id: maze-bale-0
+  physics: static
+  primitive: {kind: scripted, params: {kind: bale}, script: scripts/gen/maze-dressing.js, seed: 0}
+  rotation: 20
+  tags: [maze]
+maze-bale-1:
+  feetPosition: {x: -11.4, y: 0.5, z: -124.6}
+  id: maze-bale-1
+  physics: static
+  primitive: {kind: scripted, params: {kind: bale}, script: scripts/gen/maze-dressing.js, seed: 1}
+  rotation: -40
+  tags: [maze]
+maze-bale-2:
+  feetPosition: {x: -5.2, y: 0.5, z: -123.9}
+  id: maze-bale-2
+  physics: static
+  primitive: {kind: scripted, params: {kind: bale}, script: scripts/gen/maze-dressing.js, seed: 2}
+  rotation: 70
+  tags: [maze]
+maze-bale-out-0:
+  feetPosition: {x: -11.6, y: 0.5, z: -107}
+  id: maze-bale-out-0
+  physics: static
+  primitive: {kind: scripted, params: {kind: bale}, script: scripts/gen/maze-dressing.js, seed: 10}
+  rotation: 80
+  tags: [maze]
+maze-bale-out-1:
+  feetPosition: {x: -4.6, y: 0.5, z: -107.6}
+  id: maze-bale-out-1
+  physics: static
+  primitive: {kind: scripted, params: {kind: bale}, script: scripts/gen/maze-dressing.js, seed: 11}
+  rotation: 100
+  tags: [maze]
+maze-bale-out-2:
+  feetPosition: {x: -13, y: 0.5, z: -108.8}
+  id: maze-bale-out-2
+  physics: static
+  primitive: {kind: scripted, params: {kind: bale}, script: scripts/gen/maze-dressing.js, seed: 12}
+  rotation: 30
+  tags: [maze]
+maze-gate:
+  feetPosition: {x: -8, y: 0.5, z: -110.5}
+  id: maze-gate
+  physics: static
+  primitive: {kind: scripted, params: {kind: gate}, script: scripts/gen/maze-dressing.js, seed: 3}
+  tags: [maze]
+maze-gate-sign:
+  feetPosition: {x: -8, y: 3.2, z: -110.56}
+  id: maze-gate-sign
+  rotation: 180
+  ui: "<div face=\"front\" width=\"2.3m\" class=\"flex items-center justify-center\" style=\"height:420px;font-family:serif;color:#4f2a12;font-size:190px;font-weight:700\">🌻 THE MAZE</div>"
+maze-gate-sign-out:
+  feetPosition: {x: -8, y: 3.2, z: -110.44}
+  id: maze-gate-sign-out
+  ui: "<div face=\"front\" width=\"2.3m\" class=\"flex items-center justify-center\" style=\"height:420px;font-family:serif;color:#4f2a12;font-size:190px;font-weight:700\">🌻 THE MAZE</div>"
+maze-heart:
+  behavior: scripts/secret.js
+  feetPosition: {x: -8, y: 0.5, z: -127}
+  id: maze-heart
+  light: {color: oklch(0.9 0.12 85), distance: 8, intensity: 1.5, kind: point}
+  physics: static
+  primitive: {kind: scripted, params: {kind: giant}, script: scripts/gen/maze-dressing.js, seed: 3}
+  state: {key: heart}
+  tags: [maze, interactable, secret]
+maze-heart-zone:
+  behavior: scripts/maze-run.js
+  feetPosition: {x: -8, y: 0.5, z: -127}
+  id: maze-heart-zone
+  physics: {body: static, trigger: true}
+  primitive: {height: 2.5, kind: cylinder, radiusBottom: 3, radiusTop: 3}
+  state: {role: heart}
+  visible: false
+maze-lantern-l:
+  feetPosition: {x: -10.1, y: 3.3, z: -110.3}
+  id: maze-lantern-l
+  light: {color: oklch(0.85 0.12 70), distance: 7, intensity: 1.2, kind: point}
+maze-start:
+  behavior: scripts/maze-run.js
+  feetPosition: {x: -8, y: 0.5, z: -111.5}
+  id: maze-start
+  physics: {body: static, trigger: true}
+  primitive: {depth: 1, height: 2.5, kind: box, width: 2.6}
+  state: {role: gate}
+  visible: false
 pasture-bales:
   feetPosition: {x: -38.5, y: {terrain: 0}, z: -81.3}
   id: pasture-bales
@@ -183,3 +275,19 @@ pasture-trough:
   primitive: {kind: scripted, params: {kind: trough}, script: scripts/gen/pasture-yard.js}
   rotation: {yaw: 90}
   tags: [pasture]
+secret-bottle:
+  behavior: scripts/secret.js
+  feetPosition: {x: 27.5, y: 0.1, z: -80}
+  id: secret-bottle
+  primitive: {kind: scripted, params: {kind: bottle}, script: scripts/gen/secret-trinket.js, seed: 3}
+  rotation: 35
+  state: {key: bottle}
+  tags: [interactable, secret]
+secret-mushrooms:
+  behavior: scripts/secret.js
+  feetPosition: {x: 58, y: 0.54, z: -92}
+  id: secret-mushrooms
+  primitive: {kind: scripted, params: {kind: mushrooms}, script: scripts/gen/secret-trinket.js, seed: 3}
+  rotation: 0
+  state: {key: mushrooms}
+  tags: [interactable, secret]

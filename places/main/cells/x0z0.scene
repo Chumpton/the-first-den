@@ -2531,6 +2531,38 @@ road-travellers:
   physics: none
   state: {}
   tags: [manager]
+secret-fairydoor:
+  behavior: scripts/secret.js
+  feetPosition: {x: -44, y: 0.4, z: -12}
+  id: secret-fairydoor
+  primitive: {kind: scripted, params: {kind: fairydoor}, script: scripts/gen/secret-trinket.js, seed: 3}
+  rotation: 200
+  state: {key: fairydoor}
+  tags: [interactable, secret]
+secret-frog:
+  behavior: scripts/secret.js
+  feetPosition: {x: -23.5, y: 0.49, z: -55}
+  id: secret-frog
+  primitive: {kind: scripted, params: {kind: frog}, script: scripts/gen/secret-trinket.js, seed: 3}
+  rotation: 60
+  state: {key: frog}
+  tags: [interactable, secret]
+secret-gnome:
+  behavior: scripts/secret.js
+  feetPosition: {x: -6.8, y: -2.5, z: -25}
+  id: secret-gnome
+  primitive: {kind: scripted, params: {kind: gnome}, script: scripts/gen/secret-trinket.js, seed: 3}
+  rotation: 120
+  state: {key: gnome}
+  tags: [interactable, secret]
+secret-nest:
+  behavior: scripts/secret.js
+  feetPosition: {x: -2.5, y: 7.7, z: -29.5}
+  id: secret-nest
+  primitive: {kind: scripted, params: {kind: nest}, script: scripts/gen/secret-trinket.js, seed: 3}
+  rotation: 30
+  state: {key: nest}
+  tags: [interactable, secret]
 sky-dragons:
   behavior: scripts/sky-dragons.js
   feetPosition: {x: 0, y: {terrain: 2}, z: -40}
