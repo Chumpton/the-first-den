@@ -193,9 +193,14 @@ terrain:
     link-arch-west: {clearScatter: true, edgeMaterial: gravel, falloff: 2, grade: false, kind: path, material: cobblepale, noise: 0.4, points: [[-2.5, 24], [-12, 25.5], [-26, 29], [-42, 34], [-58, 40.5], [-71, 47], [-78, 51.5], [-82, 55]], width: 4.5}
     link-arch-west-bed: {center: {x: 0, z: 0}, falloff: 4, height: 0.5, kind: flatten, shape: {kind: path, points: [[-2.5, 24], [-12, 25.5], [-26, 29], [-42, 34], [-58, 40.5], [-71, 47], [-78, 51.5], [-82, 55]], width: 6}}
     link-arch-west-clear: {center: {x: 0, z: 0}, kind: clear-scatter, shape: {kind: path, points: [[-2.5, 24], [-12, 25.5], [-26, 29], [-42, 34], [-58, 40.5], [-71, 47], [-78, 51.5], [-82, 55]], width: 10}}
-    link-ring: {clearScatter: true, edgeMaterial: gravel, falloff: 2, grade: false, kind: path, material: cobblepale, noise: 0.4, points: [[82, 101], [80, 110], [72, 124], [58, 138], [40, 148], [20, 152], [0, 153], [-20, 152], [-40, 148], [-58, 138], [-72, 124], [-80, 110], [-82, 101]], width: 4.5}
-    link-ring-bed: {center: {x: 0, z: 0}, falloff: 4, height: 0.5, kind: flatten, shape: {kind: path, points: [[82, 101], [80, 110], [72, 124], [58, 138], [40, 148], [20, 152], [0, 153], [-20, 152], [-40, 148], [-58, 138], [-72, 124], [-80, 110], [-82, 101]], width: 6}}
-    link-ring-clear: {center: {x: 0, z: 0}, kind: clear-scatter, shape: {kind: path, points: [[82, 101], [80, 110], [72, 124], [58, 138], [40, 148], [20, 152], [0, 153], [-20, 152], [-40, 148], [-58, 138], [-72, 124], [-80, 110], [-82, 101]], width: 10}}
+    link-ring: {clearScatter: true, edgeMaterial: gravel, falloff: 2, grade: false, kind: path, material: cobblepale, noise: 0.4, points: [[82, 101], [80, 110], [72, 124], [58, 138], [40, 148], [20, 146.5], [0, 147], [-20, 146.5], [-40, 148], [-58, 138], [-72, 124], [-80, 110], [-82, 101]], width: 4.5}
+    link-ring-bed: {center: {x: 0, z: 0}, falloff: 4, height: 0.5, kind: flatten, shape: {kind: path, points: [[82, 101], [80, 110], [72, 124], [58, 138], [40, 148], [20, 146.5], [0, 147], [-20, 146.5], [-40, 148], [-58, 138], [-72, 124], [-80, 110], [-82, 101]], width: 6}}
+    link-ring-clear: {center: {x: 0, z: 0}, kind: clear-scatter, shape: {kind: path, points: [[82, 101], [80, 110], [72, 124], [58, 138], [40, 148], [20, 146.5], [0, 147], [-20, 146.5], [-40, 148], [-58, 138], [-72, 124], [-80, 110], [-82, 101]], width: 10}}
+    royalDistrict: {kind: flatten, center: {x: 0, z: 186}, height: 0.5, falloff: 4, shape: {kind: rectangle, width: 118, depth: 72}}
+    royalDistrictClear: {kind: clear-scatter, center: {x: 0, z: 186}, shape: {kind: rectangle, width: 120, depth: 76}}
+    royalMoat: {kind: flatten, center: {x: 0, z: 155.8}, height: -1.8, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 124, depth: 9.2}}
+    royalMoatWater: {kind: sea, level: 0, reach: {shape: rectangle, width: 124, depth: 9.4, center: {x: 0, z: 155.8}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
+    royalAvenue: {kind: path, points: [[0, 144], [0, 150]], width: 11, grade: false, material: cobblepale, clearScatter: true, falloff: 1}
     garden-flat: {center: {x: 57, z: -26}, falloff: 3, height: 0.5, kind: flatten, material: yard, shape: {kind: path, points: [[43, -26], [71, -26]], width: 26}}
     garden-clear: {center: {x: 57, z: -26}, kind: clear-scatter, shape: {kind: path, points: [[41, -26], [73, -26]], width: 30}}
   decorations:
