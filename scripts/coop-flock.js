@@ -20,7 +20,7 @@ export function update(ctx, dt) {
   const rows = ctx.query({ tags: ['coop-bird'] });
   for (const o of rows) {
     const s = o.state || {}, kind = s.kind || 'hen';
-    const P = (S.pos[o.id] ??= { x: o.feetPosition.x, z: o.feetPosition.z });
+    const P = (S.pos[o.id] ??= { x: s.x ?? o.feetPosition.x, z: s.z ?? o.feetPosition.z });
     const m = (S.mode[o.id] ??= { mode: 'idle', until: now + rr(ctx, 0.3, 2.5) * 1000 });
     if (m.mode === 'walk') {
       const dx = m.tx - P.x, dz = m.tz - P.z, d = Math.hypot(dx, dz);
