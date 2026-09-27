@@ -2728,10 +2728,39 @@ farm-east/scarecrow:
 farm-west:
   feetPosition: {x: -46, y: 0.5, z: 28}
   id: farm-west
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 18, height: 3, kind: box, width: 56}
-  tags: [blueprint]
+  rotation: {yaw: 21.8}
+  state: {piece: farm-west}
+  tags: [farm]
+farm-west/crops-0:
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: -7.699999999999999}
+  id: farm-west/crops-0
+  parent: farm-west
+  primitive: {kind: scripted, params: {crop: lavender, strip: 0.9, w: 2.6, x0a: -8.45, x0b: -9.7, x1a: 3.2, x1b: 11.95}, script: scripts/gen/farm-crops.js, seed: 11}
+  tags: [farm-crop]
+  visibleRange: {max: 220}
+farm-west/crops-1:
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: -4.199999999999999}
+  id: farm-west/crops-1
+  parent: farm-west
+  primitive: {kind: scripted, params: {crop: wheat, strip: 0.9, w: 2.6, x0a: -9.7, x0b: -11.2, x1a: 11.95, x1b: 20.7}, script: scripts/gen/farm-crops.js, seed: 12}
+  tags: [farm-crop]
+  visibleRange: {max: 220}
+farm-west/fence:
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: farm-west/fence
+  parent: farm-west
+  physics: static
+  primitive: {kind: scripted, params: {closed: true, gates: [{open: 75, seg: 2, t: 0.6, w: 3}], points: [[-9.45, -8.5], [-10.7, -4.2], [-12.2, 0.1], [21.7, 0.1], [12.95, -4.2], [4.2, -8.5]], post: 2.6, style: split}, script: scripts/gen/farm-fence.js}
+  visibleRange: {max: 160}
+farm-west/scarecrow:
+  feetPosition: {x: -1.88, y: 0, z: -1.15}
+  id: farm-west/scarecrow
+  parent: farm-west
+  primitive: {kind: scripted, params: {item: scarecrow}, script: scripts/gen/farm-props.js, seed: 12}
+  rotation: {yaw: 200}
 fauna-ground:
   behavior: scripts/fauna-ground.js
   feetPosition: {x: 0, y: {terrain: 0}, z: 0}
