@@ -1,0 +1,23 @@
+# Tower wardens (scripts/tower-warden.js). Distances in metres, times in seconds.
+patrolRadius: 1.6
+speed: 0.6
+walkClipSpeed: 0.5
+pauseRange: [8, 14]      # walk this long between look-outs
+lookSecs: [4, 6]         # how long a look-out lasts
+lookSweep: 35            # degrees either side while looking out
+greetRange: 12           # horizontal, from the platform centre
+greetHysteresis: 3       # leave this much farther before a new greeting
+greetSecs: 3.2
+greetClip: cdn/clip-waving-single-hand-loop.glb
+chime: /cdn/moodboard-lowpoly-cozy/sfx-warden-staff-chime-greeting.mp3
+wakeRange: 150
+sleepSecs: 4
+lineCooldownMs: 2500
+names: { n: Rowan, e: Ash, s: Briar, w: Willow }
+lines:
+  - The forest watches with us.
+  - Roots run deep here. So does the welcome.
+  - I saw a heron over the lake at dawn.
+  - Mind the stair; the moss is slick after rain.
+  - Nothing crosses the fence I do not greet.
+  - The crystal hums louder when friends are near.
