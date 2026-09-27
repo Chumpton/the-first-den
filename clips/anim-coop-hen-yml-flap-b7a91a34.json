@@ -1,0 +1,5 @@
+{"contentHash":"369:959a7e5b","duration":0.3,"fps":30,"tracks":[
+{"bone":"wingL","prop":"rotation","times":[0,0.15,0.3],"values":[0,0,0,1,0,0,-0.57358,0.81915,0,0,0,1]},
+{"bone":"wingR","prop":"rotation","times":[0,0.15,0.3],"values":[0,0,0,1,0,0,0.57358,0.81915,0,0,0,1]},
+{"bone":"body","prop":"rotation","times":[0,0.15,0.3],"values":[0.04362,0,0,0.99905,0.10453,0,0,0.99452,0.04362,0,0,0.99905]}
+]}
