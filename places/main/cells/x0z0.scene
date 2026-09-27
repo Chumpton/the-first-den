@@ -26,7 +26,7 @@ camp-spot/tent:
   visibleRange: {max: 220}
 cob-door-front:
   behavior: scripts/cob-door.js
-  feetPosition: {x: 0, y: 0.5, z: -20.621000000000002}
+  feetPosition: {x: 0, y: 0.5, z: -18.282566285183165}
   id: cob-door-front
   physics: {body: static, collider: box, trigger: true}
   primitive: {depth: 5.4, height: 2.6, kind: box, width: 2.8}
@@ -35,25 +35,25 @@ cob-door-front:
   visible: false
 cob-door-front-l:
   castShadow: true
-  feetPosition: {x: 0.8, y: 0.9, z: -20.621000000000002}
+  feetPosition: {x: 0.8, y: 0.9, z: -18.282566285183165}
   id: cob-door-front-l
   physics: {body: kinematic, collider: box}
   primitive: {kind: scripted, params: {height: 2.42, width: 0.78}, script: scripts/gen/home-architecture-door.js}
   rotation: 0
   tags: [cob-door-leaf]
 cob-door-front-pad-in:
-  feetPosition: {x: 0, y: 0.9, z: -21.721}
+  feetPosition: {x: 0, y: 0.9, z: -19.382566285183163}
   id: cob-door-front-pad-in
   physics: static
   primitive: {kind: scripted, params: {}, script: scripts/gen/door-pad.js}
 cob-door-front-pad-out:
-  feetPosition: {x: 0, y: 0.5, z: -18.971}
+  feetPosition: {x: 0, y: 0.5, z: -16.632566285183167}
   id: cob-door-front-pad-out
   physics: static
   primitive: {kind: scripted, params: {}, script: scripts/gen/door-pad.js}
 cob-door-front-r:
   castShadow: true
-  feetPosition: {x: -0.8, y: 0.9, z: -20.621000000000002}
+  feetPosition: {x: -0.8, y: 0.9, z: -18.282566285183165}
   id: cob-door-front-r
   physics: {body: kinematic, collider: box}
   primitive: {kind: scripted, params: {height: 2.42, width: 0.78}, script: scripts/gen/home-architecture-door.js}
@@ -61,7 +61,7 @@ cob-door-front-r:
   tags: [cob-door-leaf]
 cob-door-garden:
   behavior: scripts/cob-door.js
-  feetPosition: {x: 0, y: 0.5, z: -31.378999999999998}
+  feetPosition: {x: 0, y: 0.5, z: -33.717433714816835}
   id: cob-door-garden
   physics: {body: static, collider: box, trigger: true}
   primitive: {depth: 5.4, height: 2.6, kind: box, width: 2.8}
@@ -70,25 +70,25 @@ cob-door-garden:
   visible: false
 cob-door-garden-l:
   castShadow: true
-  feetPosition: {x: -0.8, y: 0.9, z: -31.378999999999998}
+  feetPosition: {x: -0.8, y: 0.9, z: -33.717433714816835}
   id: cob-door-garden-l
   physics: {body: kinematic, collider: box}
   primitive: {kind: scripted, params: {height: 2.42, width: 0.78}, script: scripts/gen/home-architecture-door.js}
   rotation: 180
   tags: [cob-door-leaf]
 cob-door-garden-pad-in:
-  feetPosition: {x: 0, y: 0.9, z: -30.279}
+  feetPosition: {x: 0, y: 0.9, z: -32.61743371481683}
   id: cob-door-garden-pad-in
   physics: static
   primitive: {kind: scripted, params: {}, script: scripts/gen/door-pad.js}
 cob-door-garden-pad-out:
-  feetPosition: {x: 0, y: 0.5, z: -33.028999999999996}
+  feetPosition: {x: 0, y: 0.5, z: -35.36743371481683}
   id: cob-door-garden-pad-out
   physics: static
   primitive: {kind: scripted, params: {}, script: scripts/gen/door-pad.js}
 cob-door-garden-r:
   castShadow: true
-  feetPosition: {x: 0.8, y: 0.9, z: -31.378999999999998}
+  feetPosition: {x: 0.8, y: 0.9, z: -33.717433714816835}
   id: cob-door-garden-r
   physics: {body: kinematic, collider: box}
   primitive: {kind: scripted, params: {height: 2.42, width: 0.78}, script: scripts/gen/home-architecture-door.js}
