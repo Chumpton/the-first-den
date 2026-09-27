@@ -54,6 +54,8 @@ terrain:
     river-s: {kind: sea, level: 0, reach: {shape: rectangle, width: 8000, depth: 4000, center: {x: 0, z: 1984}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
     river-w: {kind: sea, level: 0, reach: {shape: rectangle, width: 3990, depth: 20, center: {x: -2005, z: -26}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
     river-e: {kind: sea, level: 0, reach: {shape: rectangle, width: 3990, depth: 20, center: {x: 2005, z: -26}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
+    gardenDistrictFlat: {kind: flatten, center: {x: -82, z: 78}, height: 0.5, falloff: 4, shape: {kind: path, points: [[-82, 54], [-82, 102]], width: 48}, material: lawn}
+    gardenDistrictClear: {kind: clear-scatter, center: {x: -82, z: 78}, shape: {kind: path, points: [[-82, 52], [-82, 104]], width: 54}}
     spawnClearing: {kind: flatten, center: {x: 0, z: -3}, height: 0.5, falloff: 6, shape: {kind: circle, radius: 9}, material: lawn}
     violetRest: {kind: flatten, center: {x: 30.5, z: -7.6}, height: 0.55, falloff: 3, shape: {kind: circle, radius: 5}}
     violetClear: {kind: clear-scatter, center: {x: 30.5, z: -7.6}, shape: {kind: circle, radius: 7.5}}
