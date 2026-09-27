@@ -2,7 +2,7 @@
 home: { x: 0, z: -30 }
 wakeRadius: 70          # sleeps when no player this close
 hive: { x: 31, y: 1.2, z: -46 }
-lawn: { radius: 26 }    # dragonflies patrol inside this of home
+# dragonflies dart between points 1-4 m off the beds
 bee: { speed: [2.2, 3.2], sip: [1.8, 4], visitsPerTrip: [3, 6], sipY: [0.35, 0.9] }
 butterfly: { speed: [0.9, 1.4], sip: [4, 9], sipY: [0.4, 1.0], flyY: [1.0, 2.2] }
 dragonfly: { speed: [4, 6.5], hover: [0.6, 2.2], flyY: [0.9, 1.8] }

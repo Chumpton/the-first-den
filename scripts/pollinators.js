@@ -20,7 +20,7 @@ function leg(ctx, o, s, to, speed, mode) {
   s.from = { ...p }; s.to = to; s.t0 = ctx.now(); s.dur = Math.max(0.4, d / speed) * 1000; s.mode = mode;
 }
 function spot(ctx, b, yr) { const a = ctx.random() * TAU, rr = ctx.random() * 0.8; return { x: b.x + Math.cos(a) * rr, y: b.y + r(ctx, yr), z: b.z + Math.sin(a) * rr }; }
-function lawnPoint(ctx) { const a = ctx.random() * TAU, rr = 8 + ctx.random() * (P.lawn.radius - 8), x = P.home.x + Math.cos(a) * rr, z = P.home.z + Math.sin(a) * rr; return { x, y: (ctx.place.terrain.heightAt(x, z) ?? 0.5) + r(ctx, P.dragonfly.flyY), z }; }
+function lawnPoint(ctx) { const b = beds[Math.floor(ctx.random() * beds.length)], a = ctx.random() * TAU, rr = 1.2 + ctx.random() * 2.5, x = b.x + Math.cos(a) * rr, z = b.z + Math.sin(a) * rr; return { x, y: (ctx.place.terrain.heightAt(x, z) ?? 0.5) + r(ctx, P.dragonfly.flyY), z }; }
 function next(ctx, o, s) {
   const k = s.kind, now = ctx.now();
   if (s.mode === 'sip' || s.mode === 'hover' || s.mode === 'hive') {
@@ -31,7 +31,7 @@ function next(ctx, o, s) {
       return leg(ctx, o, s, spot(ctx, beds[Math.floor(ctx.random() * beds.length)], P.bee.sipY), r(ctx, P.bee.speed), 'fly');
     }
     if (k === 'butterfly') { if (s.mode === 'sip') ctx.emit('fx', { position: s.p, script: POLLEN }); return leg(ctx, o, s, spot(ctx, beds[Math.floor(ctx.random() * beds.length)], P.butterfly.sipY), r(ctx, P.butterfly.speed), 'fly'); }
-    return leg(ctx, o, s, ctx.random() < 0.4 && beds.length ? spot(ctx, beds[Math.floor(ctx.random() * beds.length)], [1, 1.5]) : lawnPoint(ctx), r(ctx, P.dragonfly.speed), 'fly');
+    return leg(ctx, o, s, lawnPoint(ctx), r(ctx, P.dragonfly.speed), 'fly');
   }
   // arrived from a flight
   s.from = { ...s.p }; s.to = s.p; s.t0 = now;
