@@ -3365,6 +3365,13 @@ square-door/sign:
   id: square-door/sign
   parent: square-door
   text: {color: oklch(0.35 0.03 250), content: to the square, size: 0.28}
+stone-golem:
+  feetPosition: {x: 24, y: 0.5, z: -18}
+  id: stone-golem
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 1.8, height: 4.2, kind: box, width: 2.4}
+  tags: [blueprint]
 sunbeams:
   feetPosition: {x: 0, y: 0.5, z: 0}
   fx: {script: "fx follow=camera\npop motes n=?mobile:60|160 on=box(24,8,24).c(3) wrap=24;8;24 life=4..7 v=up(.02..0.08)+sdir()*.05 size=.02..0.04 acc=curl(.2)*.2 col=hdr(1.6,1.4,.9) a=0>.3:.6>.7:.5>0 sz=$size r=sprite(mote,add)"}
