@@ -2204,6 +2204,12 @@ road-travellers:
   physics: none
   state: {}
   tags: [manager]
+sky-dragons:
+  behavior: scripts/sky-dragons.js
+  feetPosition: {x: 0, y: {terrain: 2}, z: -40}
+  id: sky-dragons
+  state: {}
+  tags: [sky-dragons]
 square-door:
   behavior: scripts/square-door.js
   children: [{castShadow: false, feetPosition: {x: 0, y: 0, z: 0.05}, id: glass, material: {color: "#000000", depthWrite: false, opacity: 0, transparent: true}, physics: none, primitive: {depth: 0.02, height: 2.42, kind: box, width: 1.12}, receiveShadow: false, visible: false}, {behavior: scripts/square-door.js, feetPosition: {x: 0, y: 0, z: 0.05}, id: passage, physics: {body: static, trigger: true}, primitive: {depth: 0.3, height: 2.2, kind: box, width: 0.9}, state: {kind: passage}, visible: false}, {behavior: scripts/square-door.js, feetPosition: {x: 0, y: -0.1, z: -1.6}, id: approach, physics: {body: static, trigger: true}, primitive: {depth: 3.2, height: 3, kind: box, width: 3}, state: {kind: approach}, visible: false}]
