@@ -34,6 +34,7 @@ assets:
     "anim/fairy.yml#flutter": clips/anim-fairy-yml-flutter-1dc0bc8b.json
     "anim/fox.yml#sniff": clips/anim-fox-yml-sniff-459554f1.json
     "anim/fox.yml#walk": clips/anim-fox-yml-walk-1d210e7e.json
+    "anim/golem.yml#idle": clips/anim-golem-yml-idle-24fd688e.json
     "anim/golem.yml#look": clips/anim-golem-yml-look-69dc55ff.json
     "anim/golem.yml#walk": clips/anim-golem-yml-walk-c21b9915.json
     "anim/pollinator.yml#bee-fly": clips/anim-pollinator-yml-bee-fly-5e11c434.json
