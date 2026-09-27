@@ -2285,7 +2285,7 @@ garden-paths:
 garden-shed:
   castShadow: true
   children: [{feetPosition: {x: 0, y: 1.9, z: 0}, id: lamp, light: {color: oklch(0.85 0.1 70), distance: 6, intensity: 4, kind: point}}]
-  feetPosition: {x: 21.6, y: 0.7792375492311574, z: -4.2}
+  feetPosition: {x: 21.6, y: {terrain: 0}, z: -4.2}
   id: garden-shed
   material: {pbr: true}
   physics: static
