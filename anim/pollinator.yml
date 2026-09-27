@@ -1,0 +1,29 @@
+bee-fly:
+  duration: 0.06
+  tracks:
+    wingL: { roll: [-55, 30, -55] }
+    wingR: { roll: [55, -30, 55] }
+bee-sip:
+  duration: 0.07
+  tracks:
+    wingL: { roll: [-40, 25, -40] }
+    wingR: { roll: [40, -25, 40] }
+    root: { pitch: [-18, -18] }
+butterfly-fly:
+  duration: 0.34
+  tracks:
+    wingL: { roll: [-70, 10, 55, 10, -70] }
+    wingR: { roll: [70, -10, -55, -10, 70] }
+    root: { y: [0, 0.01, 0, -0.012, 0] }
+butterfly-sip:
+  duration: 2.2
+  tracks:
+    wingL: { roll: [-80, -80, -30, -80, -80, -55, -80] }
+    wingR: { roll: [80, 80, 30, 80, 80, 55, 80] }
+dragonfly-fly:
+  duration: 0.05
+  tracks:
+    wingL: { roll: [-30, 25, -30] }
+    wingR: { roll: [30, -25, 30] }
+    wingL2: { roll: [25, -30, 25] }
+    wingR2: { roll: [-25, 30, -25] }
