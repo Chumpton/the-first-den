@@ -1,3 +1,4 @@
+export const FROZEN_HOUR=10.5; // always a nice day (owner's ask); null brings the day/night cycle back
 export const DAY={cycleMs:7200000,dayMs:5400000,nightMs:1800000,sunrise:6,sunset:18};
 const mod=(n,d)=>((n%d)+d)%d;
 export function epochAtHour(now,hour){
@@ -16,6 +17,7 @@ export function dayAt(now,epoch){
   return {phase,hour:mod(startHour+(now-startsAt)/duration*hours,24),nextAt:startsAt+duration,periodMs,epoch:startsAt-periodMs*startHour/24};
 }
 export function syncDay(ctx,force=false){
+  if(FROZEN_HOUR!==null){const a=ctx.place.atmosphere;if(a.cycle?.frozen!==FROZEN_HOUR){a.cycle={frozen:FROZEN_HOUR};a.timeOfDay=FROZEN_HOUR;}ctx.self.state.solarPhase='day';return;}
   const s=ctx.self.state,now=ctx.now();
   if(s.solarEpoch===undefined)s.solarEpoch=epochAtHour(now,ctx.place.atmosphere.timeOfDay);
   const d=dayAt(now,s.solarEpoch);

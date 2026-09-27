@@ -1,10 +1,8 @@
 export const WEATHER={
   dayMs:1440000,cycleMs:660000,blendMs:45000,startHour:16.7,
+  // always a nice day (2026-09-27, owner's ask): one fair phase, no clouding or rain
   phases:[
-    {id:'fair',label:'Fair',duration:240000,cloud:.22,opacity:.68,wind:1.7,fogNear:220,fogFar:1250,rain:0,wet:0},
-    {id:'clouding',label:'Clouding over',duration:120000,cloud:.78,opacity:.88,wind:3.2,fogNear:140,fogFar:930,rain:0,wet:.02},
-    {id:'rain',label:'Gentle rain',duration:210000,cloud:.88,opacity:.94,wind:4.1,fogNear:65,fogFar:610,rain:1,wet:.64},
-    {id:'clearing',label:'Clearing',duration:90000,cloud:.30,opacity:.72,wind:2.2,fogNear:180,fogFar:1180,rain:0,wet:.18}
+    {id:'fair',label:'Fair',duration:660000,cloud:.12,opacity:.62,wind:1.5,fogNear:260,fogFar:1350,rain:0,wet:0}
   ],
   rainClip:'/cdn/moodboard-lowpoly-cozy/sfx-rain-falling-on-leaves-and-distant-roof-loop.mp3',
   nightClip:'/cdn/moodboard-lowpoly-cozy/sfx-lakeside-crickets-water-rustling-birches-night-loop.mp3',
