@@ -2,8 +2,8 @@
 wakeRadius: 90        # m (horizontal): no player this close = no bone writes, the dragon sleeps its update
 trackRadius: 40       # m (horizontal from the head): nearest player in the square is watched
 square: { x0: -22, x1: 22, z0: 78, z1: 122 }
-head: { x: -0.75, y: 1.45, z: -4.5 }       # local, for aiming
-nostril: { x: -0.9, y: 1.36, z: -5.5 }     # local, for the yawn puff
+head: { x: -3, y: 5.8, z: -18 }       # local, for aiming
+nostril: { x: -3.6, y: 5.44, z: -22 }     # local, for the yawn puff
 breath: 5.5           # s per breath
 actGap: [20, 40]      # s between acts
 roarEvery: [150, 210] # s between rumbles
