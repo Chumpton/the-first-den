@@ -3,12 +3,12 @@ alchemy-bench:
   audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-gentle-potion-bubbling-loop.mp3, gain: 0.15, loop: true, maxDistance: 18, spatial: true}
   behavior: scripts/alchemy-bench.js
   children: [{feetPosition: {x: 0.08, y: 1.15, z: 0.93}, fx: {script: "fx\npop bub rate=flick(.6,.3)*9 on=disc(.14) life=.6..1.1 v=up(.25..0.45) size=.012..0.025 acc=curl(.6)*.2 tint=<.4,1.6,1.5>..<1.4,.5,1.6> col=$tint a=0>.1:.9>.8:.6>0 sz=$size r=sprite(soft-disc,add)\npop wisp rate=3 on=disc(.12) life=1.2..2 v=up(.2) size=.06..0.1 acc=buoy(.3)+curl(.4)*.3+drag(.8) col=<.6,.9,.9> a=0>.2:.18>0 sz=$size*(.6>2) r=sprite(smoke-puff,alpha)"}, id: bubbles}, {feetPosition: {x: 0, y: 1.47, z: 1.29}, id: sign, material: {color: "#343c43", roughness: 0.95}, primitive: {depth: 0.02, height: 0.26, kind: box, width: 0.62}, ui: "<div face=\"front\" style=\"width:620px;height:260px;display:flex;flex-direction:column;align-items:center;justify-content:center;border:14px solid #ba8950;box-sizing:border-box;background:#343c43;color:#f2e6cf;font-family:Georgia,serif\"><div style=\"font-size:78px;letter-spacing:6px\">ALCHEMY</div><div style=\"font-size:40px;opacity:.85\">brew with harvest · E</div></div>"}]
-  feetPosition: {x: 3.39, y: 0.8999999761581421, z: -57.9}
+  feetPosition: {x: 22.3, y: 0.8752034505812383, z: -51.4}
   id: alchemy-bench
   material: {pbr: true}
   physics: static
   primitive: {kind: scripted, params: {}, script: scripts/gen/alchemy-bench.js}
-  rotation: {yaw: -90}
+  rotation: {yaw: 0}
   state: {act: Brew}
   tags: [interactable, alchemy-bench]
   visibleRange: {max: 80}
@@ -3951,12 +3951,16 @@ pollinator-keeper:
   id: pollinator-keeper
   tags: [manager]
 pond-falls:
-  feetPosition: {x: -12, y: 0.5, z: -60}
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-small-waterfall-splash-loop.mp3, gain: 0.15, loop: true, maxDistance: 16, spatial: true}
+  children: [{castShadow: false, id: falls-water, material: {kind: scripted, params: {speed: 5}, script: scripts/material-falls-water.js}, primitive: {kind: scripted, params: {part: water}, script: scripts/gen/pond-falls.js}, visibleRange: {max: 100}}, {feetPosition: {x: 0, y: 2.36, z: 2.2}, fx: {script: "fx\npop foam rate=flick(.7,.3)*6 on=disc(0.12) life=.35..0.7 v=up(.6..1.2)+sdir()*(.3..0.6) size=.08..0.16 acc=grav()*.8+drag(1.5) col=<1,1,1> a=.85>0 sz=$size*(.7>1.5) rot=spin(.4) r=sprite(soft-disc,alpha)"}, id: falls-foam-spout}, {feetPosition: {x: 0, y: 1.46, z: 0.92}, fx: {script: "fx\npop foam rate=flick(.7,.3)*10 on=disc(0.3) life=.35..0.7 v=up(.6..1.2)+sdir()*(.3..0.6) size=.08..0.16 acc=grav()*.8+drag(1.5) col=<1,1,1> a=.85>0 sz=$size*(.7>1.5) rot=spin(.4) r=sprite(soft-disc,alpha)"}, id: falls-foam-1}, {feetPosition: {x: 0.25, y: 0.66, z: -0.6}, fx: {script: "fx\npop foam rate=flick(.7,.3)*10 on=disc(0.35) life=.35..0.7 v=up(.6..1.2)+sdir()*(.3..0.6) size=.08..0.16 acc=grav()*.8+drag(1.5) col=<1,1,1> a=.85>0 sz=$size*(.7>1.5) rot=spin(.4) r=sprite(soft-disc,alpha)"}, id: falls-foam-2}, {feetPosition: {x: 0, y: 0.02, z: -1.85}, fx: {script: "fx\npop foam rate=flick(.7,.3)*10 on=disc(0.45) life=.35..0.7 v=up(.6..1.2)+sdir()*(.3..0.6) size=.08..0.16 acc=grav()*.8+drag(1.5) col=<1,1,1> a=.85>0 sz=$size*(.7>1.5) rot=spin(.4) r=sprite(soft-disc,alpha)\npop mist rate=4 on=disc(.6) life=2..3.2 v=up(.25..0.5)+sdir()*.2 size=.5..0.9 acc=buoy(.2)+curl(.3)*.3+drag(.6) col=<.95,.98,1> a=0>.2:.18>.6:.1>0 sz=$size*(.6>1.8) rot=spin(.1) r=sprite(smoke-puff,alpha)"}, id: falls-foam-3}]
+  feetPosition: {x: -14, y: 0, z: -61.5}
   id: pond-falls
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 8, height: 3, kind: box, width: 8}
-  tags: [blueprint]
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {part: rock}, script: scripts/gen/pond-falls.js}
+  rotation: {lookAt: {x: -16, y: 0, z: -66}}
+  tags: [pond-falls, scenery]
+  visibleRange: {max: 100}
 purple-dragon-blueprint:
   behavior: scripts/purple-dragon.js
   feetPosition: {x: 30.8, y: 0.72, z: -8.9}
