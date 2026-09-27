@@ -61,6 +61,13 @@ magic-district:
   physics: none
   primitive: {depth: 46, height: 6, kind: box, width: 46}
   tags: [blueprint]
+mountain-tarn:
+  feetPosition: {x: 82, y: 0.5, z: 78}
+  id: mountain-tarn
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 46, height: 8, kind: box, width: 46}
+  tags: [blueprint]
 sign-ring-east:
   castShadow: false
   feetPosition: {x: 87, y: 0.5458947365269218, z: 104}
