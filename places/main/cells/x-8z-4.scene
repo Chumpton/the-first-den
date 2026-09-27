@@ -1,0 +1,8 @@
+# spawn-scene v2 yaml x-8z-4
+hearthmere:
+  feetPosition: {x: -1000, y: 0.5, z: -500}
+  id: hearthmere
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 320, height: 45, kind: box, width: 320}
+  tags: [blueprint]
