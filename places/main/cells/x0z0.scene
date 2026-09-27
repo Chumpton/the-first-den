@@ -3410,7 +3410,7 @@ stone-golem:
   tags: [golem, interactable, creature]
 sun-rays:
   feetPosition: {x: 0, y: {terrain: 0}, z: 0}
-  fx: {script: "fx follow=player\npop rays n=?mobile:6|12 on=box(38,1,38).c(16) wrap=76;0;76 life=9..16 size=2.5..6 warm=.8..1.1\n  col=hdr(1.5,1.25,.85)*$warm a=0>.3:.07>.7:.07>0 sz=$size r=sprite(soft-disc,add,axis,34,.8,axis=<.32,.9,.28>)\npop motes n=?mobile:150|400 on=box(14,4,14).c(3) wrap=28;8;28 life=6..10 v=sdir()*.05 acc=curl(.15)*.2 size=.015..0.03\n  col=hdr(1.6,1.4,1) a=0>.2:.35>.8:.35>0 sz=$size r=sprite(mote,add)"}
+  fx: {script: "fx follow=player\npop rays n=?mobile:8|18 on=box(55,1,55).c(14) wrap=110;0;110 life=10..18 size=.9..2.4 warm=.8..1.1\n  col=hdr(1.4,1.2,.85)*$warm a=0>.3:.055>.7:.055>0 sz=$size r=sprite(soft-disc,add,axis,30,.8,axis=<.32,.9,.28>)\npop motes n=?mobile:150|400 on=box(14,4,14).c(3) wrap=28;8;28 life=6..10 v=sdir()*.05 acc=curl(.15)*.2 size=.015..0.03\n  col=hdr(1.6,1.4,1) a=0>.2:.35>.8:.35>0 sz=$size r=sprite(mote,add)"}
   id: sun-rays
   tags: [sky, sun-rays]
 sunbeams:
