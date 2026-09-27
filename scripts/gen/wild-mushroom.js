@@ -15,7 +15,7 @@ function lathe(ctx, prof, n, cx, cy, cz, wob = 0, ph = 0) {
 }
 function paint(ctx, c, rough = 0.8, glow = null) { ctx.color(c); ctx.roughness(rough); ctx.metalness(0); glow ? ctx.emissive(...glow) : ctx.emissive(null); }
 function cap(ctx, K, x, y, z, s, lod, R) {
-  const n = lod <= 1 ? 10 : lod === 2 ? 8 : lod === 3 ? 6 : lod === 4 ? 5 : 4;
+  const n = lod <= 1 ? 10 : lod === 2 ? 8 : lod <= 4 ? 6 : 5; // tiny objects reach far lods early: keep the silhouette round
   const h = K.h * s, r = K.r * s, sr = K.stemR * s, lean = (R() - 0.5) * 0.3 * h;
   const tx = x + lean, tz = z + lean * 0.6;
   paint(ctx, K.stem, 0.9);
@@ -34,9 +34,9 @@ function cap(ctx, K, x, y, z, s, lod, R) {
   if (lod <= 3) lathe(ctx, [[0, -0.004], [r * 0.98, r * 0.07]], n, tx, y + h, tz);
   paint(ctx, K.cap, K.shape === 'dome' ? 0.55 : 0.8, K.glow || null);
   lathe(ctx, prof, n, tx, y + h, tz);
-  if (K.spots && lod <= 2) { // fly agaric's white warts
+  if (K.spots && lod <= 4) { // fly agaric's white warts
     paint(ctx, K.spots, 0.9);
-    const ns = lod === 1 ? 7 : 4;
+    const ns = lod === 1 ? 7 : lod <= 3 ? 5 : 3;
     for (let i = 0; i < ns; i++) {
       const a = R() * TAU, t = 0.25 + R() * 0.6, rr = r * (0.2 + 0.72 * t), yy = y + h + r * (0.82 - 0.7 * t * t) + 0.004, d = r * (0.1 + R() * 0.06);
       const px = tx + Math.cos(a) * rr, pz = tz + Math.sin(a) * rr;
@@ -73,7 +73,7 @@ export function geometry(ctx) {
     }
   }
   // the caps: the biggest near the middle, the rest round it
-  const n = lod >= 5 ? 1 : lod === 4 ? Math.min(2, count) : count, S = M.sizeScale;
+  const n = lod >= 5 ? Math.min(2, count) : count, S = M.sizeScale;
   for (let i = 0; i < n; i++) {
     const a = R() * TAU, d = i === 0 ? R() * 0.06 : 0.1 + R() * 0.2, s = S * (i === 0 ? 1.1 : 0.6 + R() * 0.45);
     cap(ctx, K, Math.cos(a) * d, 0.02, Math.sin(a) * d, s, lod, R);
