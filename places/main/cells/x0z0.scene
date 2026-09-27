@@ -1,4 +1,16 @@
 # spawn-scene v2 yaml x0z0
+camp-spot:
+  feetPosition: {x: -16, y: 0.5, z: -52}
+  id: camp-spot
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 7, height: 2, kind: box, width: 7}
+cob-house:
+  feetPosition: {x: 0, y: 0.5, z: -26}
+  id: cob-house
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {height: 9, kind: cylinder, radialSegments: 6, radiusBottom: 6, radiusTop: 6}
 forest-ambience:
   audio: {bus: Ambience, clip: /cdn/moodboard-realistic-gritty/sfx-sunny-forest-birdsong-leaves-rustling-ambience-loop.mp3, gain: 0.18, loop: true, spatial: false}
   feetPosition: {x: 0, y: 1, z: 0}
@@ -63,6 +75,12 @@ home-portal-stonework/home-portal-lantern-right:
     parent: home-portal-stonework
     rotation: 0
   template: templates/home-portal-stonework.js#lantern
+lake-dock:
+  feetPosition: {x: 6, y: 0.3, z: -62}
+  id: lake-dock
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 10, height: 0.4, kind: box, width: 2.4}
 square-door:
   behavior: scripts/square-door.js
   children: [{castShadow: false, feetPosition: {x: 0, y: 0, z: 0.05}, id: glass, material: {color: "#000000", depthWrite: false, opacity: 0, transparent: true}, physics: none, primitive: {depth: 0.02, height: 2.42, kind: box, width: 1.12}, receiveShadow: false, visible: false}, {behavior: scripts/square-door.js, feetPosition: {x: 0, y: 0, z: 0.05}, id: passage, physics: {body: static, trigger: true}, primitive: {depth: 0.3, height: 2.2, kind: box, width: 0.9}, state: {kind: passage}, visible: false}, {behavior: scripts/square-door.js, feetPosition: {x: 0, y: -0.1, z: -1.6}, id: approach, physics: {body: static, trigger: true}, primitive: {depth: 3.2, height: 3, kind: box, width: 3}, state: {kind: approach}, visible: false}]
