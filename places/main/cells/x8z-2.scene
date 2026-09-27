@@ -1,0 +1,24 @@
+# spawn-scene v2 yaml x8z-2
+lumenvale/lumen-bridge-west:
+  feetPosition: {x: -35.875647296815664, y: 0, z: 2.989637274734644}
+  id: lumenvale/lumen-bridge-west
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {kind: bridge}, script: scripts/gen/lumen-civic.js}
+  rotation: {yaw: 94.76364169072619}
+lumenvale/lumen-fountain-0:
+  feetPosition: {x: -21.220896498657453, y: 0, z: -17.881164721384003}
+  fx: {script: "fx\npop spill rate=?mobile:24|48 on=ci()*.95 life=.35..0.5 v=sdir()*.15+<0,-.4,0> size=.04..0.07 acc=grav() col=<.8,.95,1> a=.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop jet rate=?mobile:14|26 on=point() life=.8..1.0 v=up(3.2..3.8)+cone(12)*(.4..0.7) size=.05..0.08 acc=grav() col=<.85,.97,1> a=.85>.6:.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)"}
+  id: lumenvale/lumen-fountain-0
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {kind: fountain}, script: scripts/gen/lumen-civic.js}
+  visibleRange: {max: 200}
+lumenvale/lumen-fountain-3:
+  feetPosition: {x: -17.881164721384007, y: 0, z: 21.22089649865745}
+  fx: {script: "fx\npop spill rate=?mobile:24|48 on=ci()*.95 life=.35..0.5 v=sdir()*.15+<0,-.4,0> size=.04..0.07 acc=grav() col=<.8,.95,1> a=.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop jet rate=?mobile:14|26 on=point() life=.8..1.0 v=up(3.2..3.8)+cone(12)*(.4..0.7) size=.05..0.08 acc=grav() col=<.85,.97,1> a=.85>.6:.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)"}
+  id: lumenvale/lumen-fountain-3
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {kind: fountain}, script: scripts/gen/lumen-civic.js}
+  visibleRange: {max: 200}

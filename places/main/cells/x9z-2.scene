@@ -2,7 +2,108 @@
 lumenvale:
   feetPosition: {x: 1100, y: 0.5, z: -250}
   id: lumenvale
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 320, height: 50, kind: box, width: 320}
-  tags: [blueprint]
+  physics: static
+  primitive: {kind: scripted, params: {kind: plaza}, script: scripts/gen/lumen-civic.js}
+  tags: [lumenvale, city]
+lumenvale/lumen-ambience:
+  audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-lumenvale-wind-chimes-and-distant-fountain-ambience.mp3, gain: 0.2, loop: true, maxDistance: 220, spatial: true}
+  feetPosition: {x: 0, y: 2, z: 0}
+  id: lumenvale/lumen-ambience
+  parent: lumenvale
+lumenvale/lumen-bridge-east:
+  feetPosition: {x: 35.86300913130284, y: 0, z: -3.137606738915694}
+  id: lumenvale/lumen-bridge-east
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {kind: bridge}, script: scripts/gen/lumen-civic.js}
+  rotation: {yaw: -85}
+lumenvale/lumen-bridge-north:
+  feetPosition: {x: -3.137606738915697, y: 0, z: -35.86300913130284}
+  id: lumenvale/lumen-bridge-north
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {kind: bridge}, script: scripts/gen/lumen-civic.js}
+  rotation: {yaw: 5.000000000000004}
+lumenvale/lumen-bridge-south:
+  feetPosition: {x: 3.137606738915693, y: 0, z: 35.86300913130284}
+  id: lumenvale/lumen-bridge-south
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {kind: bridge}, script: scripts/gen/lumen-civic.js}
+  rotation: {yaw: -175.00000000000003}
+lumenvale/lumen-canal:
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: lumenvale/lumen-canal
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {kind: canal}, script: scripts/gen/lumen-civic.js}
+lumenvale/lumen-fountain-1:
+  feetPosition: {x: 17.837356168801463, y: 0, z: -21.257733296551642}
+  fx: {script: "fx\npop spill rate=?mobile:24|48 on=ci()*.95 life=.35..0.5 v=sdir()*.15+<0,-.4,0> size=.04..0.07 acc=grav() col=<.8,.95,1> a=.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop jet rate=?mobile:14|26 on=point() life=.8..1.0 v=up(3.2..3.8)+cone(12)*(.4..0.7) size=.05..0.08 acc=grav() col=<.85,.97,1> a=.85>.6:.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)"}
+  id: lumenvale/lumen-fountain-1
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {kind: fountain}, script: scripts/gen/lumen-civic.js}
+  visibleRange: {max: 200}
+lumenvale/lumen-fountain-2:
+  feetPosition: {x: 21.25773329655164, y: 0, z: 17.837356168801463}
+  fx: {script: "fx\npop spill rate=?mobile:24|48 on=ci()*.95 life=.35..0.5 v=sdir()*.15+<0,-.4,0> size=.04..0.07 acc=grav() col=<.8,.95,1> a=.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop jet rate=?mobile:14|26 on=point() life=.8..1.0 v=up(3.2..3.8)+cone(12)*(.4..0.7) size=.05..0.08 acc=grav() col=<.85,.97,1> a=.85>.6:.7>0 sz=$size r=sprite(droplet,alpha,velocity,.03)"}
+  id: lumenvale/lumen-fountain-2
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {kind: fountain}, script: scripts/gen/lumen-civic.js}
+  visibleRange: {max: 200}
+lumenvale/lumen-garden-0:
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: lumenvale/lumen-garden-0
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {angle: 220.1181791546369, half: 37.881820845363094, kind: garden}, script: scripts/gen/lumen-civic.js}
+lumenvale/lumen-garden-1:
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: lumenvale/lumen-garden-1
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {angle: 310, half: 38, kind: garden}, script: scripts/gen/lumen-civic.js}
+lumenvale/lumen-garden-2:
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: lumenvale/lumen-garden-2
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {angle: 40, half: 38, kind: garden}, script: scripts/gen/lumen-civic.js}
+lumenvale/lumen-garden-3:
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: lumenvale/lumen-garden-3
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {angle: 130.1181791546369, half: 38.118179154636906, kind: garden}, script: scripts/gen/lumen-civic.js}
+lumenvale/lumen-motes:
+  feetPosition: {x: 0, y: 0, z: 0}
+  fx: {script: "fx\npop motes n=?mobile:70|160 on=box(24,7,24).c(7.5) life=5..9 v=up(.05..0.2)+sdir()*.15 size=.05..0.11 tint=<.5,1.6,1.5>..<1.4,.8,1.8> acc=curl(.25)*.3+drag(.4) col=$tint*flick(1.2,.35) a=0>.2:1>.8:1>0 sz=$size r=sprite(mote,add)\npop tip rate=5 on=sphere(4).c(44) life=2..4 v=sdir()*(.3..0.8) size=.12..0.22 acc=drag(.6) col=hdr(1.2,2.4,2.4) a=0>.2:1>0 sz=$size r=sprite(ember,add)"}
+  id: lumenvale/lumen-motes
+  parent: lumenvale
+lumenvale/lumen-spire:
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: lumenvale/lumen-spire
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {kind: spire}, script: scripts/gen/lumen-civic.js}
+  tags: [lumen-spire]
+lumenvale/lumen-spire-light:
+  feetPosition: {x: 0, y: 3.5, z: 0}
+  id: lumenvale/lumen-spire-light
+  light: {color: oklch(0.88 0.1 195), distance: 18, intensity: 8, kind: point}
+  parent: lumenvale
+lumenvale/lumen-spire-shards:
+  behavior: scripts/lumen-float.js
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: lumenvale/lumen-spire-shards
+  parent: lumenvale
+  primitive: {kind: scripted, params: {kind: shards}, script: scripts/gen/lumen-civic.js}
+  state: {spin: 150}
+lumenvale/lumen-wall:
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: lumenvale/lumen-wall
+  parent: lumenvale
+  physics: static
+  primitive: {kind: scripted, params: {gate: 175.2363583092738, kind: wall, radius: 165}, script: scripts/gen/lumen-civic.js}
