@@ -3175,6 +3175,13 @@ pollinator-keeper:
   feetPosition: {x: 0, y: 0.5, z: -30}
   id: pollinator-keeper
   tags: [manager]
+purple-dragon-blueprint:
+  feetPosition: {x: 31.5, y: 0.5, z: -8.5}
+  id: purple-dragon-blueprint
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 5, height: 6, kind: box, width: 10}
+  tags: [blueprint]
 quad-garden:
   castShadow: true
   feetPosition: {x: 13, y: {terrain: 0}, z: -8.5}
