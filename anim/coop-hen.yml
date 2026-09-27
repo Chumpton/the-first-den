@@ -1,0 +1,39 @@
+idle:
+  duration: 3
+  tracks:
+    head: { yaw: [0, 0, 32, 32, 0, -28, -28, 0], pitch: [0, 0, 0, 6, 0, 0, 6, 0] }
+    tail: { pitch: [0, 0, 0, 0, 6, 0, 0, 0] }
+walk:
+  duration: 0.5
+  tracks:
+    legL: { pitch: [30, -30, 30] }
+    legR: { pitch: [-30, 30, -30] }
+    root: { y: [0, 0.012, 0, 0.012, 0] }
+    body: { roll: [3, 0, -3, 0, 3] }
+    head: { z: [0.014, -0.014, 0.014, -0.014, 0.014] }
+peck:
+  duration: 1.1
+  tracks:
+    body: { pitch: [-8, -30, -30, -30, -30, -8] }
+    head: { pitch: [0, -45, -18, -52, -14, 0] }
+    tail: { pitch: [0, 10, 10, 10, 10, 0] }
+scratch:
+  duration: 0.9
+  tracks:
+    body: { pitch: [-10, -14, -10, -14, -10] }
+    legR: { pitch: [0, 38, -26, 0, 0] }
+    legL: { pitch: [0, 0, 0, 38, -26] }
+    head: { pitch: [-20, -26, -20, -26, -20] }
+flap:
+  duration: 0.3
+  tracks:
+    wingL: { roll: [0, -70, 0] }
+    wingR: { roll: [0, 70, 0] }
+    body: { pitch: [5, 12, 5] }
+crow:
+  duration: 2.2
+  tracks:
+    body: { pitch: [0, 10, 12, 12, 10, 0] }
+    head: { pitch: [0, 22, 40, 40, 25, 0] }
+    wingL: { roll: [0, -20, -30, -30, -10, 0] }
+    wingR: { roll: [0, 20, 30, 30, 10, 0] }
