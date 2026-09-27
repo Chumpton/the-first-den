@@ -154,36 +154,6 @@ fence-hearthLaneWest-r-21:
   physics: static
   spline: {height: 0.7, kind: fence, points: [{x: -1042.75, y: {terrain: 0}, z: -503.66}, {x: -1044.69, y: {terrain: 0}, z: -504.15}, {x: -1046.63, y: {terrain: 0}, z: -504.63}, {x: -1048.57, y: {terrain: 0}, z: -505.12}, {x: -1050.5, y: {terrain: 0}, z: -505.61}, {x: -1052.41, y: {terrain: 0}, z: -506.11}, {x: -1054.34, y: {terrain: 0}, z: -506.62}, {x: -1056.28, y: {terrain: 0}, z: -507.14}, {x: -1058.29, y: {terrain: 0}, z: -507.64}, {x: -1060.3, y: {terrain: 0}, z: -508.1}, {x: -1062.36, y: {terrain: 0}, z: -508.49}, {x: -1064.42, y: {terrain: 0}, z: -508.8}, {x: -1066.46, y: {terrain: 0}, z: -509.03}, {x: -1068.43, y: {terrain: 0}, z: -509.24}], snapToTerrain: true, spacing: 2.4, style: wood}
   tags: [path-fence]
-fence-pathCamp-l-11:
-  id: fence-pathCamp-l-11
-  physics: static
-  spline: {height: 0.7, kind: fence, points: [{x: -2.38, y: {terrain: 0}, z: -39.66}, {x: -4.27, y: {terrain: 0}, z: -40.4}, {x: -6.17, y: {terrain: 0}, z: -41.21}, {x: -8.04, y: {terrain: 0}, z: -42.13}, {x: -9.88, y: {terrain: 0}, z: -43.14}, {x: -11.62, y: {terrain: 0}, z: -44.17}, {x: -13.34, y: {terrain: 0}, z: -45.21}, {x: -15.06, y: {terrain: 0}, z: -46.32}], snapToTerrain: true, spacing: 2.4, style: wood}
-  tags: [path-fence]
-fence-pathCamp-r-12:
-  id: fence-pathCamp-r-12
-  physics: static
-  spline: {height: 0.7, kind: fence, points: [{x: -1.17, y: {terrain: 0}, z: -42.83}, {x: -2.99, y: {terrain: 0}, z: -43.55}, {x: -4.77, y: {terrain: 0}, z: -44.31}, {x: -6.49, y: {terrain: 0}, z: -45.16}, {x: -8.16, y: {terrain: 0}, z: -46.08}, {x: -9.86, y: {terrain: 0}, z: -47.08}, {x: -11.56, y: {terrain: 0}, z: -48.11}, {x: -13.21, y: {terrain: 0}, z: -49.16}], snapToTerrain: true, spacing: 2.4, style: wood}
-  tags: [path-fence]
-fence-pathFront-l-7:
-  id: fence-pathFront-l-7
-  physics: static
-  spline: {height: 0.7, kind: fence, points: [{x: -2.96, y: {terrain: 0}, z: -9.42}, {x: -2.76, y: {terrain: 0}, z: -11.56}, {x: -2.45, y: {terrain: 0}, z: -13.64}], snapToTerrain: true, spacing: 2.4, style: wood}
-  tags: [path-fence]
-fence-pathFront-r-8:
-  id: fence-pathFront-r-8
-  physics: static
-  spline: {height: 0.7, kind: fence, points: [{x: 1.04, y: {terrain: 0}, z: -9.29}, {x: 1.21, y: {terrain: 0}, z: -11.13}, {x: 1.5, y: {terrain: 0}, z: -13}], snapToTerrain: true, spacing: 2.4, style: wood}
-  tags: [path-fence]
-fence-pathLake-l-9:
-  id: fence-pathLake-l-9
-  physics: static
-  spline: {height: 0.7, kind: fence, points: [{x: 1.61, y: {terrain: 0}, z: -43.43}, {x: 2.67, y: {terrain: 0}, z: -44.77}, {x: 3.39, y: {terrain: 0}, z: -46.19}, {x: 3.76, y: {terrain: 0}, z: -47.8}], snapToTerrain: true, spacing: 2.4, style: wood}
-  tags: [path-fence]
-fence-pathLake-r-10:
-  id: fence-pathLake-r-10
-  physics: static
-  spline: {height: 0.7, kind: fence, points: [{x: 4.58, y: {terrain: 0}, z: -41.05}, {x: 5.96, y: {terrain: 0}, z: -42.87}, {x: 7, y: {terrain: 0}, z: -45.02}, {x: 7.52, y: {terrain: 0}, z: -47.3}], snapToTerrain: true, spacing: 2.4, style: wood}
-  tags: [path-fence]
 fence-road-east-0-l-0:
   id: fence-road-east-0-l-0
   physics: static
