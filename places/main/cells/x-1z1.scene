@@ -1,6 +1,6 @@
 # spawn-scene v2 yaml x-1z1
 garden-district:
-  feetPosition: {x: -82, y: 0.5, z: 100}
+  feetPosition: {x: -82, y: 0.5, z: 78}
   id: garden-district
   material: {kind: scripted, script: engine/blueprint}
   physics: none

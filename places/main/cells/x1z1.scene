@@ -1,6 +1,6 @@
 # spawn-scene v2 yaml x1z1
 magic-district:
-  feetPosition: {x: 82, y: 0.5, z: 100}
+  feetPosition: {x: 82, y: 0.5, z: 78}
   id: magic-district
   material: {kind: scripted, script: engine/blueprint}
   physics: none
