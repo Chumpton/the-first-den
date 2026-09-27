@@ -24,7 +24,7 @@ atmosphere:
 defaultSpawnPoint:
   x: 0
   y: 0.55
-  z: 0
+  z: -2.6
 gravity:
   x: 0
   y: -24
