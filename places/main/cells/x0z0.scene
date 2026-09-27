@@ -4913,11 +4913,41 @@ yard-woodshed:
   rotation: {yaw: 90}
   tags: [yard, courtyard]
   visibleRange: {max: 90}
+zip-landing:
+  castShadow: true
+  feetPosition: {x: -8.60000015258789, y: 0.5471037194008981, z: -50.60000015258789}
+  id: zip-landing
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {items: {bell: {dy: -0.05117943917452733, x: -2.25, yaw: 0, z: 0.55}, coil: {dy: -0.46246170466100534, x: 0.95, yaw: 0, z: -2.95}, desk: {dy: -0.07754432337464967, x: -2.4, yaw: 90, z: -1.2}, sign: {dy: -0.290695201646914, x: -2.3, yaw: 80, z: -3.35}}, kind: post, seed: 11}, script: scripts/gen/zip-landing.js}
+  rotation: {lookAt: {x: -8.244121229390313, y: 0.5471037194008981, z: -51.53453222374635}}
+  state: {does: the zip-line landing post}
+  tags: [zipline, zip-landing]
+  visibleRange: {max: 90}
+zip-landing/bell:
+  behavior: scripts/hearth-bell.js
+  castShadow: true
+  feetPosition: {x: -1.83, y: 1.7888205608254728, z: 0.55}
+  id: zip-landing/bell
+  material: {pbr: true}
+  parent: zip-landing
+  pivot: top
+  primitive: {kind: scripted, params: {kind: bell}, script: scripts/gen/zip-landing.js}
+  state: {act: Ring, clip: /cdn/moodboard-lowpoly-cozy/sfx-brass-ships-bell-double-ring.mp3, motes: false, text: "ding-ding · rider in!"}
+  tags: [interactable, zip-bell]
+zip-landing/plaque:
+  feetPosition: {x: -2.315756924048195, y: 0.719304798353086, z: -3.352778370842671}
+  id: zip-landing/plaque
+  material: {color: "#f2e6cf"}
+  parent: zip-landing
+  primitive: {depth: 0.02, height: 0.4, kind: box, width: 1.2}
+  rotation: {yaw: 80}
+  ui: "<div face=\"front\" width=\"1.2m\" style=\"width:1200px;height:400px;box-sizing:border-box;background:#f2e6cf;border:16px solid #4f3828;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center\"><div style=\"font-family:serif;font-weight:800;font-size:124px;letter-spacing:8px;color:#4f3828;line-height:1\">ZIP LANDING</div><div style=\"width:720px;height:8px;background:#c0643c;margin:14px 0 10px;border-radius:4px\"></div><div style=\"font-family:serif;font-size:46px;letter-spacing:6px;color:#3f8f8b\">~ riders in · ring the bell ~</div></div>"
 zipline:
   feetPosition: {x: -14.34, y: 0.5, z: -35.34}
   id: zipline
   physics: static
-  primitive: {kind: scripted, params: {C: [-3.66, 7, 6.340000000000003], P: [5.74, 0.04710371940089808, -15.259999999999998], a: [-0.20999999999999996, 9.6, 0.3646000000000029], b: [6.772048877272976, 2.217774593673918, -17.97014300635955], gB: -0.3822254063260824, gS: -0.5190055856913036, n: [0.5, -0.866], sag: 0.5, stake: 0.8000000000000003}, script: scripts/gen/zipline.js, seed: 3}
+  primitive: {kind: scripted, params: {C: [-3.66, 7, 6.340000000000003], P: [5.74, 0.04710371940089808, -15.259999999999998], a: [-0.20999999999999996, 9.6, 0.3646000000000029], b: [6.772048877272976, 2.217774593673918, -17.97014300635955], gB: -0.3822254063260824, gS: -0.5190055856913036, n: [0.5, -0.866], sag: 1, stake: 0.8000000000000003}, script: scripts/gen/zipline.js, seed: 3}
   state: {does: "treehouse-b launch platform, rope and sand pit landing; the trolley zipline-trolley rides it"}
   tags: [zipline]
   visibleRange: {max: 90}
@@ -4927,6 +4957,6 @@ zipline-trolley:
   id: zipline-trolley
   primitive: {kind: scripted, params: {hang: 0.95}, script: scripts/gen/zipline-trolley.js}
   rotation: {yaw: -20.847321164424727}
-  state: {a: [-14.55, 10.1, -34.9754], act: Ride, b: [-7.567951122727024, 2.717774593673918, -53.31014300635955], does: rides the zip-line from the treehouse to the lake sand pit, drop: {x: -8.6, y: 0.627103719400898, yaw: -20.847321164424727, z: -50.6}, phase: idle, s: 0.4, sStop: 18.233543055933854, sag: 0.5, seat: {x: 0, y: -1.45, z: 0.15}, seatYaw: 0, thirdPerson: false}
+  state: {a: [-14.55, 10.1, -34.9754], act: Ride, b: [-7.567951122727024, 2.717774593673918, -53.31014300635955], does: rides the zip-line from the treehouse to the lake sand pit, drop: {x: -8.6, y: 0.627103719400898, yaw: -20.847321164424727, z: -50.6}, phase: idle, s: 0.4, sStop: 18.47, sag: 1, seat: {x: 0, y: -1.45, z: 0.15}, seatYaw: 0, thirdPerson: false}
   tags: [mount, interactable, zipline]
   visibleRange: {max: 80}
