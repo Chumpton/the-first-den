@@ -5,9 +5,10 @@ const OAK = "cdn/texture-weathered-honey-oak-deck-planks.png";
 const ropeMat = (c) => { c.albedo(null); c.color("oklch(0.72 0.06 75)"); c.roughness(1); c.emissive(null); };
 function strand(c, pts, r) { for (let i = 0; i < pts.length - 1; i++) { const a = pts[i], b = pts[i + 1];
   solid(c, ngon(4, r, a[0], a[2]).map(([x, z]) => [x, a[1], z]), ngon(4, r, b[0], b[2]).map(([x, z]) => [x, b[1], z])); } }
-const y = (t, sag) => -sag * 4 * t * (1 - t);
+let RISE = 0; // params.rise: the far end sits this much higher than the near one
+const y = (t, sag) => -sag * 4 * t * (1 - t) + RISE * t;
 export function geometry(c) {
-  c.flat();
+  c.flat(); RISE = c.params.rise ?? 0;
   if (c.params.rope) { const L = c.params.length ?? 7; ropeMat(c);
     prism(c, ngon(6, 0.05), -L, 0.2);
     for (let k = 1; k * 0.55 < L - 0.3; k++) prism(c, ngon(6, 0.09), -k * 0.55 - 0.08, -k * 0.55 + 0.08, 0.7);
@@ -28,7 +29,7 @@ export function geometry(c) {
     if (c.lod <= 3) for (let k = 1; k < seg; k++) strand(c, [low[k], rail[k]], 0.02); }
 }
 export function collider(c) {
-  if (c.params.rope) return null;
+  if (c.params.rope) return null; RISE = c.params.rise ?? 0;
   const L = c.params.length ?? 10, sag = c.params.sag ?? 0.6, W = 0.8, n = 10;
   for (let i = 0; i < n; i++) { const t0 = i / n, t1 = (i + 1) / n, y0 = y(t0, sag), y1 = y(t1, sag);
     solid(c, [[-W, y0 - 0.2, t0 * L], [W, y0 - 0.2, t0 * L], [W, y1 - 0.2, t1 * L], [-W, y1 - 0.2, t1 * L]], [[-W, y0, t0 * L], [W, y0, t0 * L], [W, y1, t1 * L], [-W, y1, t1 * L]]);

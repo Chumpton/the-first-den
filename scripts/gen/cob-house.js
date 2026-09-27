@@ -14,6 +14,8 @@ export const HOUSE = {
   // floor openings [x0, z0, x1, z1]
   hatchG: [1.05, 5.9, 4.62, 6.9], hatchA: [1.05, -6.9, 4.62, -5.9], hatchD: [-1.8, 2.8, 1.8, 3.8],
   trunkHole: 0.42, doorW: 1.6, doorH: 2.5,
+  // the roof deck opens toward the guest treehouse's bridge (local angle atan2(z, x), radians)
+  deckGaps: [3.307], deckGapW: 0.3,
 };
 const H = HOUSE, D2R = Math.PI / 180, COS30 = Math.cos(30 * D2R), TAN30 = Math.tan(30 * D2R);
 const AO = H.R * COS30, AI = AO - H.T;
@@ -252,18 +254,22 @@ function roof(ctx, lod, collide) {
     ctx.tri(x, y, z - w, x, y, z + w, x + (ctx.random() - 0.5) * 0.1, y + h, z);
   }
 }
+// the roof-deck railing, six sides in six bays each; a bay whose middle lies within deckGapW of a deckGaps angle is left open (a bridge lands there)
 function deckRail(ctx, collide) {
   const V = (k, y) => [Math.cos(60 * k * D2R) * (H.deckR - 0.08), y, Math.sin(60 * k * D2R) * (H.deckR - 0.08)];
+  const open = (x, z) => (H.deckGaps ?? []).some((g) => { const a = Math.atan2(z, x) - g; return Math.abs(Math.atan2(Math.sin(a), Math.cos(a))) < (H.deckGapW ?? 0.3); });
   for (let k = 0; k < 6; k++) {
-    const th = (30 + 60 * k) * D2R, n = [Math.cos(th), 0, Math.sin(th)];
-    if (collide) { Q(ctx, V(k, H.D), V(k + 1, H.D), V(k + 1, H.D + 1.05), V(k, H.D + 1.05), n); continue; }
-    for (const [y, h] of [[H.D + 0.98, 0.08], [H.D + 0.5, 0.05]]) {
-      const a = V(k, y), b = V(k + 1, y), c = [(a[0] + b[0]) / 2, y, (a[2] + b[2]) / 2], t = [n[2], 0, -n[0]];
-      obox(ctx, c, t, n, H.deckR, h, 0.08);
+    const th = (30 + 60 * k) * D2R, n = [Math.cos(th), 0, Math.sin(th)], t = [n[2], 0, -n[0]], a = V(k, 0), b = V(k + 1, 0), bay = H.deckR / 6;
+    const P = (s) => [a[0] + (b[0] - a[0]) * s, 0, a[2] + (b[2] - a[2]) * s];
+    for (let s = 0; s < 6; s++) {
+      const p0 = P(s / 6), p1 = P((s + 1) / 6), m = P((s + 0.5) / 6);
+      if (open(m[0], m[2])) continue;
+      if (collide) { Q(ctx, [p0[0], H.D, p0[2]], [p1[0], H.D, p1[2]], [p1[0], H.D + 1.05, p1[2]], [p0[0], H.D + 1.05, p0[2]], n); continue; }
+      for (const [y, h] of [[H.D + 0.98, 0.08], [H.D + 0.5, 0.05]]) obox(ctx, [m[0], y, m[2]], t, n, bay, h, 0.08);
+      box(ctx, p0[0] - 0.03, H.D, p0[2] - 0.03, p0[0] + 0.03, H.D + 0.98, p0[2] + 0.03);
+      box(ctx, p1[0] - 0.03, H.D, p1[2] - 0.03, p1[0] + 0.03, H.D + 0.98, p1[2] + 0.03);
     }
-    const p = V(k, H.D); box(ctx, p[0] - 0.06, H.D, p[2] - 0.06, p[0] + 0.06, H.D + 1.08, p[2] + 0.06);
-    // balusters
-    for (let s = 1; s < 6; s++) { const a = V(k, 0), b = V(k + 1, 0), x = a[0] + (b[0] - a[0]) * s / 6, z = a[2] + (b[2] - a[2]) * s / 6; box(ctx, x - 0.02, H.D, z - 0.02, x + 0.02, H.D + 0.98, z + 0.02); }
+    if (!collide) { const p = V(k, H.D); box(ctx, p[0] - 0.06, H.D, p[2] - 0.06, p[0] + 0.06, H.D + 1.08, p[2] + 0.06); }
   }
 }
 function build(ctx, collide) {
