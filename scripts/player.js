@@ -54,7 +54,7 @@ export function onInput(ctx, input) {
   walk.climb = (input.held.jump ? 1 : 0) - (input.held.descend ? 1 : 0)
   walk.ropeUp = input.held.jump || moveZ > 0.3
   walk.ropeDown = input.held.descend || moveZ < -0.3
-  const speed = walk.flying ? PLAYER.flySpeed : PLAYER.walkSpeed
+  const speed = walk.flying ? PLAYER.flySpeed : PLAYER.walkSpeed * (ctx.self.state.speedMul || 1)
   walk.moveIntent = {
     x: (facingCos * nx - facingSin * nz) * speed,
     z: -(facingSin * nx + facingCos * nz) * speed,

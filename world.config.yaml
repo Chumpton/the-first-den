@@ -27,6 +27,7 @@ inputs:
     travelMenu: {keys: [j]}
     travelClose: {keys: [escape]}
     travelGo: {}
+    brew: {}
     travelHome: {keys: ['1']}
     travelLumen: {keys: ['2']}
     travelHearth: {keys: ['3']}
