@@ -6,13 +6,71 @@ alchemy-bench:
   physics: none
   primitive: {depth: 2, height: 2.2, kind: box, width: 4}
   tags: [blueprint]
+amb-bees-quad:
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-bees-buzzing-flower-garden-loop.mp3, gain: 0.14, loop: true, maxDistance: 16, spatial: true}
+  feetPosition: {x: 13, y: 1.5, z: -11}
+  id: amb-bees-quad
+  tags: [ambience, marker]
+amb-bees-studio-beds:
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-bees-buzzing-flower-garden-loop.mp3, gain: 0.13, loop: true, maxDistance: 14, spatial: true}
+  feetPosition: {x: -11.8, y: 1.5, z: -36}
+  id: amb-bees-studio-beds
+  tags: [ambience, marker]
+amb-bees-west-beds:
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-bees-buzzing-flower-garden-loop.mp3, gain: 0.13, loop: true, maxDistance: 15, spatial: true}
+  feetPosition: {x: -11, y: 1.49912255184043, z: -11.5}
+  id: amb-bees-west-beds
+  tags: [ambience, marker]
+amb-bees-workshop-beds:
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-bees-buzzing-flower-garden-loop.mp3, gain: 0.13, loop: true, maxDistance: 14, spatial: true}
+  feetPosition: {x: 15, y: 1.5, z: -36}
+  id: amb-bees-workshop-beds
+  tags: [ambience, marker]
+amb-chimes-a:
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-wind-chimes-soft-breeze-loop.mp3, gain: 0.14, loop: true, maxDistance: 16, spatial: true}
+  feetPosition: {x: -27, y: 0.4286930563516429, z: -18}
+  id: amb-chimes-a
+  tags: [ambience, marker]
+amb-chimes-b:
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-wind-chimes-soft-breeze-loop.mp3, gain: 0.14, loop: true, maxDistance: 16, spatial: true}
+  feetPosition: {x: -18, y: 1.4999151732982103, z: -29}
+  id: amb-chimes-b
+  tags: [ambience, marker]
+amb-creek-east:
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-creek-babbling-gentle-brook-loop.mp3, gain: 0.16, loop: true, maxDistance: 18, spatial: true}
+  feetPosition: {x: 8, y: 1.366358010704811, z: -1}
+  id: amb-creek-east
+  tags: [ambience, marker]
+amb-creek-west:
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-creek-babbling-gentle-brook-loop.mp3, gain: 0.16, loop: true, maxDistance: 18, spatial: true}
+  feetPosition: {x: -10, y: 0.6054687705448824, z: 0.4}
+  id: amb-creek-west
+  tags: [ambience, marker]
+amb-frogs-south:
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-frogs-croaking-lake-shore-loop.mp3, gain: 0.15, loop: true, maxDistance: 18, spatial: true}
+  feetPosition: {x: 4, y: 1.5, z: -49}
+  id: amb-frogs-south
+  tags: [ambience, marker]
+amb-frogs-west:
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-frogs-croaking-lake-shore-loop.mp3, gain: 0.15, loop: true, maxDistance: 18, spatial: true}
+  feetPosition: {x: -16, y: 1.248856226660674, z: -60}
+  id: amb-frogs-west
+  tags: [ambience, marker]
+amb-lap-south:
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-water-lapping-gentle-shore-loop.mp3, gain: 0.13, loop: true, maxDistance: 16, spatial: true}
+  feetPosition: {x: 3, y: 1.306668532174832, z: -52}
+  id: amb-lap-south
+  tags: [ambience, marker]
+amb-lap-west:
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-water-lapping-gentle-shore-loop.mp3, gain: 0.13, loop: true, maxDistance: 16, spatial: true}
+  feetPosition: {x: -14.5, y: 0.633878633725649, z: -63}
+  id: amb-lap-west
+  tags: [ambience, marker]
 ambience-nodes:
   feetPosition: {x: 0, y: 0.5, z: -30}
   id: ambience-nodes
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 2, height: 2, kind: box, width: 2}
-  tags: [blueprint]
+  state: {does: "index of the grounds ambience beds (amb-*), path verges (verge-*) and wind chimes (chime-*)"}
+  tags: [marker, ambience]
 avenue-bed-door-e:
   feetPosition: {x: 3.2, y: {terrain: 0}, z: -13.4}
   id: avenue-bed-door-e
@@ -377,6 +435,20 @@ catio-sootie:
   scale: 0.85
   state: {coat: black, name: Sootie, pitch: 1.12}
   tags: [catio, catio-cat, interactable]
+chime-treehouse-a:
+  castShadow: false
+  feetPosition: {x: -23.75, y: 7.46, z: -16.2}
+  id: chime-treehouse-a
+  primitive: {kind: scripted, params: {drop: 0.32, tint: 75, tubes: 6}, script: scripts/gen/wind-chime.js, seed: 17}
+  tags: [decor, wind-chime]
+  visibleRange: {max: 80}
+chime-treehouse-b:
+  castShadow: false
+  feetPosition: {x: -14, y: 7.46, z: -27.5}
+  id: chime-treehouse-b
+  primitive: {kind: scripted, params: {drop: 0.32, tint: 190, tubes: 6}, script: scripts/gen/wind-chime.js, seed: 17}
+  tags: [decor, wind-chime]
+  visibleRange: {max: 80}
 cob-door-front:
   behavior: scripts/cob-door.js
   feetPosition: {x: 0, y: 0.5, z: -18.282566285183165}
@@ -3931,6 +4003,70 @@ treehouse-rope:
   primitive: {kind: scripted, params: {length: 7.2, rope: true}, script: scripts/gen/rope-bridge.js}
   rotation: 90
   tags: [treehouse, climb-rope]
+verge-path-grounds-rope:
+  castShadow: false
+  feetPosition: {x: -1.2, y: 0.5, z: -9}
+  id: verge-path-grounds-rope
+  primitive: {kind: scripted, params: {items: [[-7.65, -0.01, -0.47, 1, 1.13], [-6.14, 0, -4.5, 0, 0.82], [-7.96, -0.021, -0.31, 0, 1.23], [-10.27, -0.038, -0.67, 0, 1.36], [-11.02, -0.001, -6.3, 1, 0.81], [-11.67, -0.001, -6.13, 1, 1.33], [-14.84, -0.059, -1.89, 0, 0.81], [-18.59, -0.094, -3.73, 1, 0.92], [-20.52, -0.069, -5.9, 1, 1.33]]}, script: scripts/gen/path-verge.js, seed: 17}
+  receiveShadow: true
+  tags: [decor, path-verge]
+  visibleRange: {max: 80}
+verge-path-outbuilding-glasshouse:
+  castShadow: false
+  feetPosition: {x: 6.2, y: 0.5, z: -50}
+  id: verge-path-outbuilding-glasshouse
+  primitive: {kind: scripted, params: {items: [[4.42, 0, -1.01, 1, 0.87], [2.91, 0, -5.6, 0, 1.22]]}, script: scripts/gen/path-verge.js, seed: 27}
+  receiveShadow: true
+  tags: [decor, path-verge]
+  visibleRange: {max: 80}
+verge-path-outbuilding-studio:
+  castShadow: false
+  feetPosition: {x: -17.4, y: 0.5, z: -14.4}
+  id: verge-path-outbuilding-studio
+  primitive: {kind: scripted, params: {items: [[2.84, 0, -2.23, 1, 0.9], [2.04, -0.003, -5.41, 1, 0.88], [-2.03, -0.019, -6.24, 1, 0.99], [2, -0.002, -6.15, 1, 0.81], [-2.63, -0.046, -8, 1, 1.06], [1.97, 0, -9.27, 0, 0.92], [2.59, 0, -8.76, 1, 1.39], [-0.81, -0.001, -13.27, 1, 0.86], [3.53, 0, -9.74, 0, 1.19], [0.35, 0, -14.45, 1, 1.25], [5, 0, -12, 0, 1.35], [1.37, 0, -16.83, 0, 1.3], [2.3, 0, -17.3, 1, 0.87], [6.86, 0, -18.61, 1, 1.32], [4.17, 0, -22.32, 1, 1], [2.78, 0, -23.17, 0, 0.96]]}, script: scripts/gen/path-verge.js, seed: 23}
+  receiveShadow: true
+  tags: [decor, path-verge]
+  visibleRange: {max: 80}
+verge-path-outbuilding-workshop:
+  castShadow: false
+  feetPosition: {x: 10.8, y: 0.5, z: -16.2}
+  id: verge-path-outbuilding-workshop
+  primitive: {kind: scripted, params: {items: [[-0.99, 0, -2.15, 1, 1.38], [1.77, 0, 1.21, 0, 1.37], [0.87, 0, -4.44, 0, 1.02], [0.6, 0, -3.2, 0, 1.38], [4.99, 0, -2.61, 1, 1.13], [0.91, 0, -5.04, 1, 0.95], [6, 0, -5.95, 1, 1.28], [1.56, 0, -8.24, 0, 1.39], [5.74, 0, -7.68, 1, 1.21], [1.88, 0, -9.47, 1, 1.31], [6.57, 0, -8.84, 1, 1.35], [1.51, 0, -10.33, 0, 1.33], [6.26, 0, -10.47, 0, 1.36], [1.65, 0, -12.12, 0, 1.04], [5.83, 0, -12.24, 1, 0.86], [1.18, 0, -13.42, 0, 1.19], [6.29, 0, -13.56, 0, 1.3], [0.57, 0, -16.01, 0, 1.4], [6.36, 0, -16.17, 1, 1.23], [6.31, 0, -16.55, 1, 0.98], [6.22, -0.001, -18.4, 1, 1.31], [2.43, 0, -21.66, 0, 1]]}, script: scripts/gen/path-verge.js, seed: 25}
+  receiveShadow: true
+  tags: [decor, path-verge]
+  visibleRange: {max: 80}
+verge-pathCamp:
+  castShadow: false
+  feetPosition: {x: 1.5, y: 0.5, z: -40}
+  id: verge-pathCamp
+  primitive: {kind: scripted, params: {items: [[-2.92, 0, 1.02, 1, 1.04], [-1.4, 0, -2.78, 1, 1.1], [-4.38, 0, -3.58, 0, 1.28], [-7.21, 0, -0.51, 0, 1.21], [-9.36, 0, -0.96, 1, 1.02], [-8.16, -0.007, -5.31, 1, 1.12], [-9.21, -0.07, -7.14, 1, 1.3], [-13.03, -0.017, -3.26, 0, 1.12], [-10.96, -0.031, -6.9, 0, 1.19], [-14.66, -0.006, -4.14, 0, 1.33], [-15.63, 0, -4.89, 0, 1.09], [-16.51, 0, -5.07, 1, 1.15], [-17.92, 0, -6, 1, 1.18]]}, script: scripts/gen/path-verge.js, seed: 8}
+  receiveShadow: true
+  tags: [decor, path-verge]
+  visibleRange: {max: 80}
+verge-pathFront:
+  castShadow: false
+  feetPosition: {x: 0, y: 0.5, z: -4.2}
+  id: verge-pathFront
+  primitive: {kind: scripted, params: {items: [[-3.96, 0, -2.52, 0, 0.84], [4.11, 0, -2.52, 0, 1.23], [4.48, 0, -4.51, 1, 0.89], [3.57, 0, -7.76, 0, 0.9], [-3.91, 0, -10.38, 1, 1.24], [4.2, 0, -10.38, 1, 0.92]]}, script: scripts/gen/path-verge.js, seed: 9}
+  receiveShadow: true
+  tags: [decor, path-verge]
+  visibleRange: {max: 80}
+verge-pathFront-gate:
+  castShadow: false
+  feetPosition: {x: 0.25, y: 0.5375542362795345, z: 7}
+  id: verge-pathFront-gate
+  primitive: {kind: scripted, params: {items: []}, script: scripts/gen/path-verge.js, seed: 14}
+  receiveShadow: true
+  tags: [decor, path-verge]
+  visibleRange: {max: 80}
+verge-pathLake:
+  castShadow: false
+  feetPosition: {x: 0, y: 0.5, z: -35.5}
+  id: verge-pathLake
+  primitive: {kind: scripted, params: {items: [[-2.2, 0, -1.37, 1, 1.17], [2.95, 0, 0.35, 0, 1.3], [0.45, 0, -8.19, 1, 1.16], [4.42, 0, -5.41, 1, 1.05], [1.56, 0, -9.58, 0, 1.17], [5.58, 0, -6.76, 0, 0.96], [2.97, -0.009, -11.92, 1, 1.12], [2.64, -0.016, -13.17, 0, 1.29], [7.97, -0.003, -12.11, 0, 1.32]]}, script: scripts/gen/path-verge.js, seed: 8}
+  receiveShadow: true
+  tags: [decor, path-verge]
+  visibleRange: {max: 80}
 violet-pad-back:
   children: []
   feetPosition: {x: 35.4, y: 0.55, z: -8.9}
