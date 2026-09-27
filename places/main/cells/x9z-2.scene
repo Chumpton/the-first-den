@@ -1,4 +1,40 @@
 # spawn-scene v2 yaml x9z-2
+lumen-district-canal:
+  castShadow: false
+  feetPosition: {x: 1100, y: {terrain: 0}, z: -250}
+  id: lumen-district-canal
+  physics: static
+  primitive: {kind: scripted, params: {a0: -40, a1: 60, canal: true, kind: district, style: canal}, script: scripts/gen/lumen-grand.js}
+  receiveShadow: true
+  tags: [lumenvale, lumen-grand]
+  visibleRange: {max: 650}
+lumen-district-old:
+  castShadow: false
+  feetPosition: {x: 1100, y: {terrain: 0}, z: -250}
+  id: lumen-district-old
+  physics: static
+  primitive: {kind: scripted, params: {a0: 230, a1: 320, kind: district, style: mixed}, script: scripts/gen/lumen-grand.js}
+  receiveShadow: true
+  tags: [lumenvale, lumen-grand]
+  visibleRange: {max: 650}
+lumen-district-temple:
+  castShadow: false
+  feetPosition: {x: 1100, y: {terrain: 0}, z: -250}
+  id: lumen-district-temple
+  physics: static
+  primitive: {kind: scripted, params: {a0: 60, a1: 130, kind: district, style: stone}, script: scripts/gen/lumen-grand.js}
+  receiveShadow: true
+  tags: [lumenvale, lumen-grand]
+  visibleRange: {max: 650}
+lumen-district-trade:
+  castShadow: false
+  feetPosition: {x: 1100, y: {terrain: 0}, z: -250}
+  id: lumen-district-trade
+  physics: static
+  primitive: {kind: scripted, params: {a0: 130, a1: 230, kind: district, market: true, style: timber}, script: scripts/gen/lumen-grand.js}
+  receiveShadow: true
+  tags: [lumenvale, lumen-grand]
+  visibleRange: {max: 650}
 lumen-grand-wall:
   castShadow: true
   feetPosition: {x: 1100, y: {terrain: 0}, z: -250}
@@ -343,9 +379,3 @@ lumenvale/lumen-spire-shards:
   parent: lumenvale
   primitive: {kind: scripted, params: {kind: shards}, script: scripts/gen/lumen-civic.js}
   state: {spin: 150}
-lumenvale/lumen-wall:
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: lumenvale/lumen-wall
-  parent: lumenvale
-  physics: static
-  primitive: {kind: scripted, params: {gate: 175.2363583092738, kind: wall, radius: 165}, script: scripts/gen/lumen-civic.js}
