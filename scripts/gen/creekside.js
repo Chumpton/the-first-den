@@ -229,7 +229,7 @@ function willow(ctx, W, lod) {
   }
 }
 function curtain(ctx, lod, P) {
-  const r = rng(17), N = [0, 300, 190, 100, 36, 14][lod], S = lod <= 1 ? 6 : lod <= 3 ? 4 : 3, [wx, , wz] = P.o;
+  const r = rng(17), N = Math.round([0, 300, 190, 100, 36, 14][lod] * (P.density ?? 1)), S = lod <= 1 ? 6 : lod <= 3 ? 4 : 3, [wx, , wz] = P.o;
   const creekZ = (x) => (x > 9 ? -1 + (16 - x) * (1.3 / 7) : 0.3);
   for (let i = 0; i < N; i++) {
     const a = r() * Math.PI * 2, rr = 0.5 + 0.5 * Math.sqrt(r());
