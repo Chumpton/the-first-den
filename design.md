@@ -42,3 +42,5 @@ No win or loss, no progression, no scores. Keep the house uncluttered: one piece
 - Roads: cobble roads from the crossroads (0,10) east to Lumenvale (1100,-250) and west to Hearthmere (-1000,-500), bridged over each river; rivers bend round SITES in scripts/forest-terrain.js.
 - Animals: friendly only; press E to pet. Two managers (fauna-ground, fauna-small).
 - Flight: double tap space toggles, space up, shift down, sinking onto ground lands (scripts/lib/data/player.yml fly*).
+
+- 2026-09-27: all front-yard walks now start at the fountain plaza (0,-5.5). West walk curves out to the west hub, the treehouse arch, then along the creek to the studio. East walk goes into the new round four-quarter kitchen garden (quad-garden at 13,-8.5, long side east-west, gates W/N/E), then out the north gate to the east hub and the workshop, and out the east gate to the wizard tower. The old six-bed rectangle is gone; the garden shed and wheelbarrow now stand at the garden's east side. The back-garden walks still branch off the rear door. Creator: "adjust all pathways to begin from the fountain… garden bed area a more complete four section garden rotated horizontal and rounded".
