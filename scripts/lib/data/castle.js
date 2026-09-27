@@ -12,10 +12,11 @@ export const KEEP = {
   outer: { r1: 8.45, turns: 1.75, endA: 245, startDrop: 0.45, gapW: 12 },
   doors: [
     { id: "gate", a: 272.5, w: 14, h: 2.8 },          // the great door, facing the lake and the terrace
-    { id: "square", a: 322.5, w: 12, h: 2.5 }         // the side door that shows the square and crosses to it
+    { id: "square", a: 322.5, w: 12, h: 2.5 },        // the side door that shows the square and crosses to it
+    { id: "back", a: 97.5, w: 12, h: 2.6 }            // the back door, uphill toward the gateway arch
   ],
   windows: [
-    [122.5, 177.5, 212.5],
+    [132.5, 227.5],
     [2.5, 62.5, 152.5, 212.5, 302.5],
     [32.5, 92.5, 182.5, 242.5, 302.5],
     [2.5, 62.5, 122.5, 182.5, 262.5],
