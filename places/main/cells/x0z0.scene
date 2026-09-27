@@ -2442,6 +2442,13 @@ fireflies-camp:
   fx: {script: "fx\npop flies n=?mobile:10|24 on=box(18,2.5,18).c(1.2) life=4..8 v=sdir()*.15 size=.035..0.06 acc=curl(.4)*.6+drag(.8) blink=0..6.28 col=hdr(2.8,3.4,.9) a=(0>.15:1>.85:1>0)*(.5+.5*sin($age*3.4+$blink))^3 sz=$size r=sprite(soft-disc,add)"}
   id: fireflies-camp
   tags: [fireflies]
+forecourt-market:
+  feetPosition: {x: -6, y: 0.5, z: 17}
+  id: forecourt-market
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 9, height: 3, kind: box, width: 14}
+  tags: [blueprint]
 forest-ambience:
   audio: {bus: Ambience, clip: /cdn/moodboard-realistic-gritty/sfx-sunny-forest-birdsong-leaves-rustling-ambience-loop.mp3, gain: 0.18, loop: true, spatial: false}
   feetPosition: {x: 0, y: 1, z: 0}
