@@ -61,7 +61,7 @@ terrain:
     homeClear: {center: {x: 0, z: -30}, kind: clear-scatter, shape: {kind: circle, radius: 26}}
     grounds-lawn: {kind: path, grade: false, material: yard, edgeMaterial: yard, falloff: 3, points: [[-14, -30], [14, -30]], width: 36}
     grounds-mulch: {kind: path, grade: false, material: mulch, edgeMaterial: yard, falloff: 1.5, points: [[-3, -28], [3, -28]], width: 29}
-    grounds-yardClear: {kind: clear-scatter, center: {x: 0, z: -35}, shape: {kind: circle, radius: 34}}
+    grounds-yardClear: {kind: clear-scatter, center: {x: 0, z: -35}, shape: {kind: circle, radius: 40}}
     grounds-campClear: {kind: clear-scatter, center: {x: -18, z: -50}, shape: {kind: circle, radius: 11}}
     path-grounds-rope: {clearScatter: true, edgeMaterial: yard, falloff: 3, grade: true, kind: path, material: yard, points: [[-1.2, -9], [-4, -10.3], [-8, -11.8], [-13, -12.9], [-17.4, -14.4], [-20.6, -17.4]], width: 2}
     grounds-flat-rope: {kind: flatten, center: {x: -18, z: -15.5}, height: 0.5, shape: {kind: path, points: [[-15.5, -13.8], [-17.4, -14.4], [-20.9, -17.7]], width: 3}, falloff: 2.5}
