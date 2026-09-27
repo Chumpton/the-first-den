@@ -28,6 +28,14 @@ critter-squirrel-08:
   state: {kind: squirrel, mode: idle, until: 0}
   tags: [fauna-small, interactable, critter]
   visibleRange: {max: 150}
+farm-east/hay-wain:
+  feetPosition: {x: 23.95, y: 0.36, z: -7.43}
+  id: farm-east/hay-wain
+  parent: farm-east
+  physics: static
+  primitive: {kind: scripted, params: {item: wain}, script: scripts/gen/farm-props.js, seed: 9}
+  rotation: {yaw: 58}
+  visibleRange: {max: 180}
 fox-road-east:
   behavior: scripts/fauna-pet.js
   castShadow: true

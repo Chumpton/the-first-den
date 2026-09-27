@@ -2684,10 +2684,47 @@ far-haze-ring:
 farm-east:
   feetPosition: {x: 46, y: 0.5, z: 28}
   id: farm-east
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 18, height: 3, kind: box, width: 56}
-  tags: [blueprint]
+  rotation: {yaw: -21.8}
+  state: {piece: farm-east}
+  tags: [farm]
+farm-east/crops-0:
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: -11.2}
+  id: farm-east/crops-0
+  parent: farm-east
+  primitive: {kind: scripted, params: {crop: wheat, strip: 0.9, w: 2.6, x0a: 5.55, x0b: -3.2, x1a: 17.7, x1b: 19.2}, script: scripts/gen/farm-crops.js, seed: 1}
+  tags: [farm-crop]
+  visibleRange: {max: 220}
+farm-east/crops-1:
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: -7.699999999999999}
+  id: farm-east/crops-1
+  parent: farm-east
+  primitive: {kind: scripted, params: {crop: cabbage, strip: 0.9, w: 2.6, x0a: -3.2, x0b: -11.95, x1a: 19.2, x1b: 20.45}, script: scripts/gen/farm-crops.js, seed: 2}
+  tags: [farm-crop]
+  visibleRange: {max: 220}
+farm-east/crops-2:
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: -4.199999999999999}
+  id: farm-east/crops-2
+  parent: farm-east
+  primitive: {kind: scripted, params: {crop: lavender, strip: 0.9, w: 2.6, x0a: -11.95, x0b: -20.7, x1a: 20.45, x1b: 21.95}, script: scripts/gen/farm-crops.js, seed: 3}
+  tags: [farm-crop]
+  visibleRange: {max: 220}
+farm-east/fence:
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: farm-east/fence
+  parent: farm-east
+  physics: static
+  primitive: {kind: scripted, params: {closed: true, gates: [{open: 75, seg: 3, t: 0.35, w: 3}], points: [[4.55, -12], [-4.2, -7.7], [-12.95, -4.2], [-21.7, 0.1], [22.95, 0.1], [21.45, -4.2], [20.2, -7.7], [18.7, -12]], post: 2.6, style: split}, script: scripts/gen/farm-fence.js}
+  visibleRange: {max: 160}
+farm-east/scarecrow:
+  feetPosition: {x: 15.63, y: 0, z: -8.15}
+  id: farm-east/scarecrow
+  parent: farm-east
+  primitive: {kind: scripted, params: {item: scarecrow}, script: scripts/gen/farm-props.js, seed: 4}
+  rotation: {yaw: 160}
 farm-west:
   feetPosition: {x: -46, y: 0.5, z: 28}
   id: farm-west
