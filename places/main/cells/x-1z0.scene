@@ -47,6 +47,29 @@ deer-fence-1-1:
   primitive: {kind: scripted, params: {kind: run, noStartPier: true, pts: [[0, 0, 0], [0.805, -0.043, 3.3], [1.764, -0.111, 6.559], [2.876, -0.162, 9.769], [4.138, -0.173, 12.923], [5.548, -0.152, 16.013], [7.101, -0.107, 19.034], [8.796, -0.073, 21.978], [10.627, -0.071, 24.839], [12.592, -0.098, 27.611], [14.733976529192681, -0.14, 30.300917378266572]], style: stone}, script: scripts/gen/deer-fence.js}
   tags: [deer-fence]
   visibleRange: {max: 220}
+garden-gates/gate-s:
+  feetPosition: {x: 0, y: 0, z: -22.5}
+  id: garden-gates/gate-s
+  parent: garden-gates
+  physics: static
+  primitive: {kind: scripted, params: {part: gate}, script: scripts/gen/garden-gate.js, seed: 3}
+  rotation: {yaw: 0}
+  visibleRange: {max: 260}
+garden-gates/gate-s/plaque-in:
+  feetPosition: {x: 0, y: 3.93, z: 0.03}
+  id: garden-gates/gate-s/plaque-in
+  parent: garden-gates/gate-s
+  primitive: {kind: scripted, params: {part: plaque}, script: scripts/gen/garden-gate.js}
+  rotation: {yaw: 180}
+  ui: "<div face=\"front\" emissive style=\"width:2500px;height:460px;display:flex;align-items:center;justify-content:center;font-family:serif;font-size:250px;letter-spacing:40px;color:#e8c872;font-weight:bold\">GARDEN MARKET</div>"
+  visibleRange: {max: 120}
+garden-gates/gate-s/plaque-out:
+  feetPosition: {x: 0, y: 3.93, z: -0.03}
+  id: garden-gates/gate-s/plaque-out
+  parent: garden-gates/gate-s
+  primitive: {kind: scripted, params: {part: plaque}, script: scripts/gen/garden-gate.js}
+  ui: "<div face=\"front\" emissive style=\"width:2500px;height:460px;display:flex;align-items:center;justify-content:center;font-family:serif;font-size:250px;letter-spacing:40px;color:#e8c872;font-weight:bold\">GARDEN MARKET</div>"
+  visibleRange: {max: 120}
 hw-west-fence-l-2:
   castShadow: false
   feetPosition: {x: -151.18, y: 0.38, z: 11.24}

@@ -12,17 +12,90 @@ corridor-road-bp/marker-2:
   ui: "<div face=\"front\" at=\"0.5 0.52\" width=\"0.32m\" style=\"height:560px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:#e4d9c1;border:10px solid #cbbd9e;border-radius:26px;color:#5a4330;font-family:serif;font-weight:700;text-align:center\"><div style=\"width:0;height:0;border-left:46px solid transparent;border-right:46px solid transparent;border-bottom:64px solid #5a4330\"></div><div style=\"font-size:70px;letter-spacing:6px;line-height:1.05;text-shadow:0 4px 0 rgba(255,250,235,.7)\">DEN</div><div style=\"font-size:120px;letter-spacing:6px;line-height:1.05;text-shadow:0 4px 0 rgba(255,250,235,.7)\">1</div><div style=\"font-size:40px;letter-spacing:6px;line-height:1.05;text-shadow:0 4px 0 rgba(255,250,235,.7)\">mile</div></div>"
   visibleRange: {max: 70}
 ember-roost:
-  feetPosition: {x: 0, y: 0.5, z: 130}
+  feetPosition: {x: 0, y: 0.5, z: 141.4}
   id: ember-roost
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 14, height: 22, kind: box, width: 14}
-  tags: [blueprint]
+  physics: static
+  primitive: {kind: scripted, params: {part: tower, top: 21.5}, script: scripts/gen/ember-roost.js, seed: 7}
+  tags: [town, roost]
+  visibleRange: {max: 500}
+ember-roost/aqueduct:
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: ember-roost/aqueduct
+  parent: ember-roost
+  physics: static
+  primitive: {kind: scripted, params: {part: aqueduct}, script: scripts/gen/ember-roost.js, seed: 11}
+  visibleRange: {max: 450}
+ember-roost/banner-aq:
+  feetPosition: {x: 24, y: 9.8, z: -1.86}
+  id: ember-roost/banner-aq
+  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.3}, script: scripts/material-banner-wave.js}
+  parent: ember-roost
+  primitive: {kind: scripted, params: {h: 3, kind: drape, point: 0.45, w: 1.1}, script: scripts/gen/town-banner.js}
+  tags: [banner]
+  visibleRange: {max: 250}
+ember-roost/banner-e:
+  feetPosition: {x: 3.06, y: 18, z: 0}
+  id: ember-roost/banner-e
+  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.3}, script: scripts/material-banner-wave.js}
+  parent: ember-roost
+  primitive: {kind: scripted, params: {h: 5, kind: drape, point: 0.6, w: 1.8}, script: scripts/gen/town-banner.js}
+  rotation: {yaw: -90}
+  tags: [banner]
+  visibleRange: {max: 300}
+ember-roost/banner-n:
+  feetPosition: {x: 0, y: 18, z: 3.06}
+  id: ember-roost/banner-n
+  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.3}, script: scripts/material-banner-wave.js}
+  parent: ember-roost
+  primitive: {kind: scripted, params: {h: 5, kind: drape, point: 0.6, w: 1.8}, script: scripts/gen/town-banner.js}
+  rotation: {yaw: 180}
+  tags: [banner]
+  visibleRange: {max: 300}
+ember-roost/banner-w:
+  feetPosition: {x: -3.06, y: 18, z: 0}
+  id: ember-roost/banner-w
+  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.3}, script: scripts/material-banner-wave.js}
+  parent: ember-roost
+  primitive: {kind: scripted, params: {h: 5, kind: drape, point: 0.6, w: 1.8}, script: scripts/gen/town-banner.js}
+  rotation: {yaw: 90}
+  tags: [banner]
+  visibleRange: {max: 300}
+ember-roost/water:
+  castShadow: false
+  feetPosition: {x: 0, y: 0, z: 0}
+  id: ember-roost/water
+  material: {color: oklch(0.66 0.09 195), kind: water, opacity: 0.85, waveIntensity: 0.4}
+  parent: ember-roost
+  primitive: {kind: scripted, params: {part: water}, script: scripts/gen/ember-roost.js}
+  visibleRange: {max: 250}
 folk-crowd:
   behavior: scripts/folk-crowd.js
   feetPosition: {x: 0, y: 0.4140134773960745, z: 128}
   id: folk-crowd
   state: {}
+garden-gates/gate-e:
+  feetPosition: {x: 22.5, y: 0, z: 8}
+  id: garden-gates/gate-e
+  parent: garden-gates
+  physics: static
+  primitive: {kind: scripted, params: {part: gate}, script: scripts/gen/garden-gate.js, seed: 3}
+  rotation: {yaw: -90}
+  visibleRange: {max: 260}
+garden-gates/gate-e/plaque-in:
+  feetPosition: {x: 0, y: 3.93, z: 0.03}
+  id: garden-gates/gate-e/plaque-in
+  parent: garden-gates/gate-e
+  primitive: {kind: scripted, params: {part: plaque}, script: scripts/gen/garden-gate.js}
+  rotation: {yaw: 180}
+  ui: "<div face=\"front\" emissive style=\"width:2500px;height:460px;display:flex;align-items:center;justify-content:center;font-family:serif;font-size:250px;letter-spacing:40px;color:#e8c872;font-weight:bold\">GARDEN MARKET</div>"
+  visibleRange: {max: 120}
+garden-gates/gate-e/plaque-out:
+  feetPosition: {x: 0, y: 3.93, z: -0.03}
+  id: garden-gates/gate-e/plaque-out
+  parent: garden-gates/gate-e
+  primitive: {kind: scripted, params: {part: plaque}, script: scripts/gen/garden-gate.js}
+  ui: "<div face=\"front\" emissive style=\"width:2500px;height:460px;display:flex;align-items:center;justify-content:center;font-family:serif;font-size:250px;letter-spacing:40px;color:#e8c872;font-weight:bold\">GARDEN MARKET</div>"
+  visibleRange: {max: 120}
 link-east:
   castShadow: false
   feetPosition: {x: 22, y: 0, z: 104.25}

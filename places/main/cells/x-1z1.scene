@@ -43,6 +43,33 @@ garden-fountain:
   primitive: {kind: scripted, params: {item: fountain}, script: scripts/gen/garden-district.js, seed: 7}
   tags: [garden-district, garden-prop]
   visibleRange: {max: 180}
+garden-gates:
+  feetPosition: {x: -82, y: 0.5, z: 78}
+  id: garden-gates
+  tags: [garden]
+garden-gates/gate-n:
+  feetPosition: {x: 0, y: 0, z: 22.5}
+  id: garden-gates/gate-n
+  parent: garden-gates
+  physics: static
+  primitive: {kind: scripted, params: {part: gate}, script: scripts/gen/garden-gate.js, seed: 3}
+  rotation: {yaw: 180}
+  visibleRange: {max: 260}
+garden-gates/gate-n/plaque-in:
+  feetPosition: {x: 0, y: 3.93, z: 0.03}
+  id: garden-gates/gate-n/plaque-in
+  parent: garden-gates/gate-n
+  primitive: {kind: scripted, params: {part: plaque}, script: scripts/gen/garden-gate.js}
+  rotation: {yaw: 180}
+  ui: "<div face=\"front\" emissive style=\"width:2500px;height:460px;display:flex;align-items:center;justify-content:center;font-family:serif;font-size:250px;letter-spacing:40px;color:#e8c872;font-weight:bold\">GARDEN MARKET</div>"
+  visibleRange: {max: 120}
+garden-gates/gate-n/plaque-out:
+  feetPosition: {x: 0, y: 3.93, z: -0.03}
+  id: garden-gates/gate-n/plaque-out
+  parent: garden-gates/gate-n
+  primitive: {kind: scripted, params: {part: plaque}, script: scripts/gen/garden-gate.js}
+  ui: "<div face=\"front\" emissive style=\"width:2500px;height:460px;display:flex;align-items:center;justify-content:center;font-family:serif;font-size:250px;letter-spacing:40px;color:#e8c872;font-weight:bold\">GARDEN MARKET</div>"
+  visibleRange: {max: 120}
 garden-greengrocer:
   children: [{castShadow: false, feetPosition: {x: 1.6, y: 2.75, z: -2.87}, id: plaque, material: {color: oklch(0.45 0.06 60)}, primitive: {depth: 0.05, height: 0.42, kind: box, width: 1.7}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center bg-amber-50 text-emerald-900 font-bold text-[150px] tracking-widest border-[20px] border-amber-900\">GREENGROCER</div>", visibleRange: {max: 60}}]
   feetPosition: {x: -66.5, y: 0.5, z: 95}
