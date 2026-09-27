@@ -675,7 +675,7 @@ cob-house/cob-roofbloom:
 cob-house/cob-sun-cellar:
   feetPosition: {x: 0, y: -3, z: -2.6}
   id: cob-house/cob-sun-cellar
-  light: {color: oklch(0.96 0.02 240), distance: 13, intensity: 22, kind: point}
+  light: {color: oklch(0.9 0.08 70), distance: 13, intensity: 20, kind: point}
   parent: cob-house
 cob-house/house-porch-light:
   feetPosition: {x: 0, y: 2.85, z: 9}
@@ -685,12 +685,22 @@ cob-house/house-porch-light:
 cob-house/studio-light-gallery:
   feetPosition: {x: -4.2, y: -2.4, z: 1.2}
   id: cob-house/studio-light-gallery
-  light: {color: oklch(0.95 0.02 250), distance: 9, intensity: 12, kind: point}
+  light: {color: oklch(0.92 0.07 75), distance: 9, intensity: 12, kind: point}
+  parent: cob-house
+cob-house/studio-light-lamp:
+  feetPosition: {x: 1.6, y: -4.3, z: -3.3}
+  id: cob-house/studio-light-lamp
+  light: {color: oklch(0.85 0.12 65), distance: 6, intensity: 6, kind: point}
+  parent: cob-house
+cob-house/studio-light-neon:
+  feetPosition: {x: 0, y: -1.3, z: -6}
+  id: cob-house/studio-light-neon
+  light: {color: oklch(0.75 0.15 340), distance: 6, intensity: 5, kind: point}
   parent: cob-house
 cob-house/studio-light-robot:
   feetPosition: {x: 3.2, y: -2.6, z: -2}
   id: cob-house/studio-light-robot
-  light: {color: oklch(0.95 0.03 80), distance: 9, intensity: 12, kind: point}
+  light: {color: oklch(0.88 0.1 60), distance: 9, intensity: 12, kind: point}
   parent: cob-house
 cob-house/studio-light-screen:
   feetPosition: {x: 0, y: -3.6, z: -6.2}
@@ -4169,6 +4179,34 @@ stone-wall-west:
   receiveShadow: true
   tags: [deer-fence]
   visibleRange: {max: 220}
+studio-arclamp:
+  castShadow: false
+  feetPosition: {x: 2.3, y: -5.6, z: -28.6}
+  id: studio-arclamp
+  physics: {body: static, collider: mesh}
+  primitive: {kind: scripted, params: {item: arclamp}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 1.2, y: -5.6, z: -29.8}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-cable-desk:
+  castShadow: false
+  feetPosition: {x: -4.6, y: -5.6, z: -29.2}
+  id: studio-cable-desk
+  primitive: {kind: scripted, params: {item: cable, len: 3.8418745424597116}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: -6.999999999999999, y: -5.6, z: -26.199999999999996}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-cable-robot:
+  castShadow: false
+  feetPosition: {x: 3.3, y: -5.6, z: -26.5}
+  id: studio-cable-robot
+  primitive: {kind: scripted, params: {item: cable, len: 3.178049716414141}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 0.1999999999999993, y: -5.6, z: -25.8}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
 studio-desk:
   castShadow: false
   feetPosition: {x: -5.967468245269452, y: -5.6, z: -29.098909236273087}
@@ -4273,6 +4311,87 @@ studio-frame-koi/art:
   primitive: {depth: 0.02, height: 1.44, kind: box, width: 1.12}
   tags: [art-studio]
   visibleRange: {max: 60}
+studio-fshelf-0:
+  castShadow: false
+  feetPosition: {x: 3.699999999999999, y: -5.6, z: -33.467433714816835}
+  id: studio-fshelf-0
+  primitive: {kind: scripted, params: {item: floatshelf, kind: supplies, w: 0.95, y: 1.3}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 3.6999999999999997, y: -5.6, z: -28.467433714816835}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-fshelf-1:
+  castShadow: false
+  feetPosition: {x: 3.699999999999999, y: -5.6, z: -33.467433714816835}
+  id: studio-fshelf-1
+  primitive: {kind: scripted, params: {item: floatshelf, kind: figures, w: 0.95, y: 2}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 3.6999999999999997, y: -5.6, z: -28.467433714816835}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-fshelf-2:
+  castShadow: false
+  feetPosition: {x: 3.699999999999999, y: -5.6, z: -33.467433714816835}
+  id: studio-fshelf-2
+  primitive: {kind: scripted, params: {item: floatshelf, kind: canvases, w: 0.95, y: 2.7}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 3.6999999999999997, y: -5.6, z: -28.467433714816835}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-fshelf-3:
+  castShadow: false
+  feetPosition: {x: -3.7000000000000015, y: -5.6, z: -33.467433714816835}
+  id: studio-fshelf-3
+  primitive: {kind: scripted, params: {item: floatshelf, kind: gadgets, w: 0.95, y: 1.3}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: -3.7000000000000006, y: -5.6, z: -28.467433714816835}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-fshelf-4:
+  castShadow: false
+  feetPosition: {x: -3.7000000000000015, y: -5.6, z: -33.467433714816835}
+  id: studio-fshelf-4
+  primitive: {kind: scripted, params: {item: floatshelf, kind: canvases, w: 0.95, y: 2}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: -3.7000000000000006, y: -5.6, z: -28.467433714816835}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-fshelf-5:
+  castShadow: false
+  feetPosition: {x: -3.7000000000000015, y: -5.6, z: -33.467433714816835}
+  id: studio-fshelf-5
+  primitive: {kind: scripted, params: {item: floatshelf, kind: figures, w: 0.95, y: 2.7}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: -3.7000000000000006, y: -5.6, z: -28.467433714816835}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-fshelf-6:
+  castShadow: false
+  feetPosition: {x: 6.366987298107778, y: -5.6, z: -29.906921938165308}
+  id: studio-fshelf-6
+  primitive: {kind: scripted, params: {item: floatshelf, kind: canvases, w: 1.1, y: 2.75}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 2.0368602791855865, y: -5.6, z: -27.406921938165308}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-fshelf-7:
+  castShadow: false
+  feetPosition: {x: 6.916987298107779, y: -5.6, z: -28.954293994002427}
+  id: studio-fshelf-7
+  primitive: {kind: scripted, params: {item: floatshelf, kind: figures, w: 1.1, y: 3.4}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 2.5868602791855873, y: -5.6, z: -26.454293994002423}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-fshelf-8:
+  castShadow: false
+  feetPosition: {x: 5.816987298107779, y: -5.6, z: -30.85954988232819}
+  id: studio-fshelf-8
+  primitive: {kind: scripted, params: {item: floatshelf, kind: supplies, w: 1.1, y: 3.4}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 1.4868602791855867, y: -5.6, z: -28.35954988232819}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
 studio-holo:
   castShadow: false
   feetPosition: {x: -4.2, y: -5.6, z: -26.4}
@@ -4293,6 +4412,100 @@ studio-lounge:
   rotation: {lookAt: {x: 0, y: -5.6, z: -33}}
   tags: [cob-interior, art-studio]
   visibleRange: {max: 60}
+studio-mat-desk:
+  castShadow: false
+  feetPosition: {x: -5.967468245269452, y: -5.6, z: -29.098909236273087}
+  id: studio-mat-desk
+  primitive: {kind: scripted, params: {d: 2.3, item: mat, w: 2.9}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 0, y: -5.6, z: -26}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-neon:
+  castShadow: false
+  feetPosition: {x: -1.37174531950432e-15, y: -5.6, z: -33.467433714816835}
+  id: studio-neon
+  primitive: {kind: scripted, params: {item: neon, s: 2.4, y: 4.55}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: -4.532602201438052e-16, y: -5.6, z: -28.467433714816835}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-paintcorner:
+  castShadow: false
+  feetPosition: {x: -3.2, y: -5.6, z: -23}
+  id: studio-paintcorner
+  primitive: {kind: scripted, params: {item: paintcorner}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 0, y: -5.6, z: -26}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-partition:
+  castShadow: false
+  feetPosition: {x: -3, y: -5.6, z: -29.9}
+  id: studio-partition
+  physics: {body: static, collider: mesh}
+  primitive: {kind: scripted, params: {item: partition, w: 1.8}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 0.8999999999999999, y: -5.6, z: -32.9}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-planters:
+  castShadow: false
+  feetPosition: {x: 0, y: -5.6, z: -26}
+  id: studio-planters
+  physics: {body: static, collider: mesh}
+  primitive: {kind: scripted, params: {item: planters, r: 2.35, skip: [270]}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-pothos-0:
+  castShadow: false
+  feetPosition: {x: 3.6, y: -5.6, z: -26}
+  id: studio-pothos-0
+  primitive: {kind: scripted, params: {drop: 1.5, item: pothos, seed: 0, top: 6.12}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-pothos-1:
+  castShadow: false
+  feetPosition: {x: 2.2500000000000004, y: -5.6, z: -22.102885682970026}
+  id: studio-pothos-1
+  primitive: {kind: scripted, params: {drop: 1.95, item: pothos, seed: 1, top: 6.12}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-pothos-2:
+  castShadow: false
+  feetPosition: {x: -1.7999999999999992, y: -5.6, z: -22.88230854637602}
+  id: studio-pothos-2
+  primitive: {kind: scripted, params: {drop: 2.4, item: pothos, seed: 2, top: 6.12}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-pothos-3:
+  castShadow: false
+  feetPosition: {x: -4.5, y: -5.6, z: -26}
+  id: studio-pothos-3
+  primitive: {kind: scripted, params: {drop: 1.5, item: pothos, seed: 3, top: 6.12}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-pothos-4:
+  castShadow: false
+  feetPosition: {x: -1.8000000000000016, y: -5.6, z: -29.117691453623976}
+  id: studio-pothos-4
+  primitive: {kind: scripted, params: {drop: 1.95, item: pothos, seed: 4, top: 6.12}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-pothos-5:
+  castShadow: false
+  feetPosition: {x: 2.2500000000000004, y: -5.6, z: -29.897114317029974}
+  id: studio-pothos-5
+  primitive: {kind: scripted, params: {drop: 2.4, item: pothos, seed: 5, top: 6.12}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
 studio-robot:
   castShadow: false
   feetPosition: {x: 3.3, y: -5.6, z: -27}
@@ -4303,6 +4516,14 @@ studio-robot:
   rotation: {lookAt: {x: 3.3, y: -5.6, z: -30}}
   tags: [cob-interior, art-studio]
   visibleRange: {max: 60}
+studio-rug-tree:
+  castShadow: false
+  feetPosition: {x: 0, y: -5.6, z: -26}
+  id: studio-rug-tree
+  primitive: {kind: scripted, params: {item: rug, r0: 0.75, r1: 2.95}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
 studio-screenwall:
   castShadow: false
   feetPosition: {x: -1.37174531950432e-15, y: -5.6, z: -33.467433714816835}
@@ -4339,6 +4560,26 @@ studio-shell:
   receiveShadow: true
   tags: [cob-interior, art-studio]
   visibleRange: {max: 60}
+studio-stair-bench:
+  castShadow: false
+  feetPosition: {x: 5.549807621135331, y: -5.6, z: -21.231858428704207}
+  id: studio-stair-bench
+  physics: {body: static, collider: mesh}
+  primitive: {kind: scripted, params: {item: bench, w: 2.6}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 1.2196806022131383, y: -5.6, z: -23.731858428704207}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
+studio-toolrack:
+  castShadow: false
+  feetPosition: {x: 8.041987298107781, y: -5.6, z: -27.00573683548744}
+  id: studio-toolrack
+  physics: {body: static, collider: mesh}
+  primitive: {kind: scripted, params: {item: toolrack, w: 1.4}, script: scripts/gen/art-studio.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 3.711860279185589, y: -5.6, z: -24.50573683548744}}
+  tags: [cob-interior, art-studio]
+  visibleRange: {max: 45}
 sun-rays:
   feetPosition: {x: 0, y: {terrain: 0}, z: 0}
   fx: {script: "fx follow=player\npop rays n=?mobile:8|18 on=box(55,6,55).c(16) wrap=110;0;110 life=10..18 v=<-.32,-.9,-.28>*.5 size=.9..2.2 warm=.8..1.1\n  col=hdr(1.4,1.2,.85)*$warm a=0>.3:.05>.7:.05>0 sz=$size r=sprite(soft-disc,add,velocity,60,.8)\npop motes n=?mobile:150|400 on=box(14,4,14).c(3) wrap=28;8;28 life=6..10 v=sdir()*.05 acc=curl(.15)*.2 size=.015..0.03\n  col=hdr(1.6,1.4,1) a=0>.2:.35>.8:.35>0 sz=$size r=sprite(mote,add)"}
