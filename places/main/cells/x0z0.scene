@@ -5242,7 +5242,7 @@ town-road/arch-name-back:
   parent: town-road
   primitive: {kind: scripted, params: {h: 1.15, kind: plaque, w: 10.4}, script: scripts/gen/town-link.js}
   rotation: {yaw: 180}
-  ui: "<div face=\"front\" width=\"10.2m\" class=\"flex flex-col items-center justify-center\" style=\"width:10200px;text-align:center;align-items:center;height:1100px;color:#c9953a;font-family:serif;font-weight:700;text-shadow:0 8px 0 #7a5a2a,0 0 30px rgba(255,210,120,.6)\"><div style=\"font-size:520px;letter-spacing:70px;line-height:1\">THE THREE SQUARES</div><div style=\"font-size:230px;letter-spacing:40px;margin-top:40px\">Market &#183; Magic &#183; Garden</div></div>"
+  ui: "<div face=\"front\" width=\"10.2m\" class=\"flex flex-col items-center justify-center\" style=\"width:10200px;text-align:center;align-items:center;height:1100px;color:#c9953a;font-family:serif;font-weight:700;text-shadow:0 8px 0 #7a5a2a,0 0 30px rgba(255,210,120,.6)\"><div style=\"font-size:520px;letter-spacing:70px;line-height:1\">THE THREE SQUARES</div><div style=\"font-size:230px;letter-spacing:40px;margin-top:40px\">Market &#183; Tarn &#183; Garden</div></div>"
   visibleRange: {max: 170}
 town-road/arch-name-front:
   castShadow: false
@@ -5252,7 +5252,7 @@ town-road/arch-name-front:
   parent: town-road
   primitive: {kind: scripted, params: {h: 1.15, kind: plaque, w: 10.4}, script: scripts/gen/town-link.js}
   rotation: {yaw: 0}
-  ui: "<div face=\"front\" width=\"10.2m\" class=\"flex flex-col items-center justify-center\" style=\"width:10200px;text-align:center;align-items:center;height:1100px;color:#c9953a;font-family:serif;font-weight:700;text-shadow:0 8px 0 #7a5a2a,0 0 30px rgba(255,210,120,.6)\"><div style=\"font-size:520px;letter-spacing:70px;line-height:1\">THE THREE SQUARES</div><div style=\"font-size:230px;letter-spacing:40px;margin-top:40px\">Market &#183; Magic &#183; Garden</div></div>"
+  ui: "<div face=\"front\" width=\"10.2m\" class=\"flex flex-col items-center justify-center\" style=\"width:10200px;text-align:center;align-items:center;height:1100px;color:#c9953a;font-family:serif;font-weight:700;text-shadow:0 8px 0 #7a5a2a,0 0 30px rgba(255,210,120,.6)\"><div style=\"font-size:520px;letter-spacing:70px;line-height:1\">THE THREE SQUARES</div><div style=\"font-size:230px;letter-spacing:40px;margin-top:40px\">Market &#183; Tarn &#183; Garden</div></div>"
   visibleRange: {max: 170}
 town-road/lamp-light-0:
   feetPosition: {x: 4.88, y: 3.56, z: 37.29}
