@@ -3675,6 +3675,13 @@ sunbeams:
   feetPosition: {x: 0, y: 0.5, z: 0}
   fx: {script: "fx follow=camera\npop motes n=?mobile:60|160 on=box(24,8,24).c(3) wrap=24;8;24 life=4..7 v=up(.02..0.08)+sdir()*.05 size=.02..0.04 acc=curl(.2)*.2 col=hdr(1.6,1.4,.9) a=0>.3:.6>.7:.5>0 sz=$size r=sprite(mote,add)"}
   id: sunbeams
+tower-dais:
+  feetPosition: {x: 30.5, y: 0.5, z: -13}
+  id: tower-dais
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 16, height: 1, kind: box, width: 14}
+  tags: [blueprint]
 treehouse-a:
   castShadow: true
   feetPosition: {x: -27, y: 0.28518751604034187, z: -18}
