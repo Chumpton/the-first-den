@@ -1,0 +1,42 @@
+# Homestead east of the house: coop + flock, bee hives, rain catchment. Every tuned number lives here.
+coop:
+  yaw: -35
+  run: { x0: -1.2, x1: 3.2, z0: -1.72, z1: 1.72 }
+  avoid: [[-0.75, 0, 0.5], [-1.1, 0, 0.35], [2.9, 1.3, 0.55], [2.9, -1.35, 0.4], [1.35, -1.45, 0.3]]
+flock:
+  y: 0.012
+  wake: 70
+  speed: { hen: 0.42, rooster: 0.5 }
+  step: [0.35, 1.5]
+  space: 0.32
+  rest:
+    - [peck, 0.5, 1.5, 4]
+    - [idle, 0.25, 1, 3]
+    - [scratch, 0.17, 1, 2.2]
+    - [flap, 0.08, 0.5, 0.8]
+  cluckEvery: [4, 11]
+  crowEvery: [50, 120]
+  hearWithin: 28
+  clucks: [/cdn/moodboard-lowpoly-cozy/sfx-hen-soft-cluck.mp3, /cdn/moodboard-lowpoly-cozy/sfx-hen-contented-bawk-cluck.mp3]
+  crow: /cdn/moodboard-lowpoly-cozy/sfx-rooster-distant-crow.mp3
+nest:
+  openPitch: -55
+  speed: 220
+  holdMs: 1400
+  cooldownMs: 1200
+  text: "+1 egg"
+  color: "#f6ecd6"
+  sound: /cdn/moodboard-lowpoly-cozy/sfx-hen-soft-cluck.mp3
+gate:
+  width: 1.08
+  openYaw: 100
+  speed: 300
+  openAt: 2.3
+  closeAt: 3.2
+  open: /cdn/moodboard-lowpoly-cozy/sfx-wooden-gate-creak-open.mp3
+  shut: /cdn/moodboard-lowpoly-cozy/sfx-wooden-gate-latch-shut.mp3
+hive:
+  text: "a drop of honey"
+  color: "#f2b441"
+  cooldownMs: 900
+  buzz: /cdn/moodboard-lowpoly-cozy/sfx-honeybee-short-buzz.mp3
