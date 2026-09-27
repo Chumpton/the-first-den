@@ -171,6 +171,9 @@ terrain:
     corral-flatten: {center: {x: -50, z: -50}, falloff: 3, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 14}}
     corral-clear: {center: {x: -50, z: -50}, kind: clear-scatter, shape: {kind: circle, radius: 16}}
     path-corral: {clearScatter: true, edgeMaterial: pebbles, falloff: 2, grade: true, kind: path, material: gravel, noise: 0.4, points: [[-26.2, -62.2], [-30, -61.3], [-35, -60.2], [-40, -58.5], [-43, -56.8]], width: 2.2}
+    town-lane: {clearScatter: true, edgeMaterial: gravel, falloff: 3.5, grade: true, kind: path, material: cobblepale, noise: 0.5, points: [[0, 12], [0, 80]], width: 7}
+    town-square: {center: {x: 0, z: 100}, edgeMaterial: gravel, falloff: 4, height: 0.55, kind: flatten, material: cobblepale, shape: {depth: 46, kind: rectangle, width: 46}}
+    town-clear: {center: {x: 0, z: 110}, kind: clear-scatter, shape: {depth: 70, kind: rectangle, width: 80}}
   decorations:
     settings: {enabled: true, budget: 75000, maxDistance: 420, fadeDistance: 25}
     bindings:
