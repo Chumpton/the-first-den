@@ -1,4 +1,4 @@
-// The temple bell of calm: E rings a soft chime, the bell swings, a ring of golden motes breathes out.
+// A bell (state.clip / state.text / state.motes:false tune it; the temple bell of calm by default): E rings a soft chime, the bell swings, a ring of golden motes breathes out.
 import { animate } from "builtin/tween";
 const CHIME = "/cdn/moodboard-lowpoly-cozy/sfx-soft-temple-bell-chime.mp3";
 const RING = `fx
@@ -10,9 +10,9 @@ export function onSpawn(ctx) {
     const s = bell.state, now = ctx.now(); if (now < (s.next || 0)) return; s.next = now + 1600;
     s.rings = (s.rings || 0) + 1;
     const p = bell.worldFeetPosition || bell.feetPosition, c = { x: p.x, y: p.y + 0.5, z: p.z };
-    ctx.emit("playSound", { clip: CHIME, position: c, volume: 0.9, maxDistance: 120 });
-    ctx.emit("fx", { position: c, script: RING });
-    ctx.emit("damageNumber", { position: { x: p.x, y: p.y + 1.8, z: p.z }, text: "~ a calm chime ~", color: "#ffe7a8", lifetime: 2.5 });
+    ctx.emit("playSound", { clip: s.clip || CHIME, position: c, volume: 0.9, maxDistance: 120 });
+    if (s.motes !== false) ctx.emit("fx", { position: c, script: RING });
+    ctx.emit("damageNumber", { position: { x: p.x, y: p.y + 1.8, z: p.z }, text: s.text ?? "~ a calm chime ~", color: "#ffe7a8", lifetime: 2.5 });
     try { animate(ctx, bell, { "rotation.pitch": [0, 16, -11, 6, -3, 0] }, { duration: 2.4 }); } catch (e) { ctx.emit("shake", { target: bell.id, intensity: 0.2, duration: 1 }); }
   });
 }

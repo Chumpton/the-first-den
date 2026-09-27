@@ -2,13 +2,13 @@
 // presser its rider (scripts/lib/dragon-rider.js seats them under the handle, state.seat), the trolley runs the rope
 // down with gravity-like ease (slope pull minus air drag, braking over the last metres), sets the rider down in the sand
 // pit (state.dropAt) with a thud and a puff of sand, then after returnDelay rolls itself back up to the A-frame.
-// The rope is state.a → state.b (world) sagging state.sag at its middle; s = metres along it.
+// The rope is state.a → state.b (world) sagging ZIP.sag (data file; state.sag the fallback) at its middle; s = metres along it.
 import { ZIP } from './lib/data/zipline.js';
 const cache = {};
 function table(st) {
-  const k = st.a.join() + '|' + st.b.join() + '|' + st.sag; if (cache[k]) return cache[k];
+  const sag = ZIP.sag ?? st.sag, k = st.a.join() + '|' + st.b.join() + '|' + sag; if (cache[k]) return cache[k];
   const N = 64, P = [], L = [0];
-  for (let i = 0; i <= N; i++) { const t = i / N; P.push({ x: st.a[0] + (st.b[0] - st.a[0]) * t, y: st.a[1] + (st.b[1] - st.a[1]) * t - st.sag * 4 * t * (1 - t), z: st.a[2] + (st.b[2] - st.a[2]) * t });
+  for (let i = 0; i <= N; i++) { const t = i / N; P.push({ x: st.a[0] + (st.b[0] - st.a[0]) * t, y: st.a[1] + (st.b[1] - st.a[1]) * t - sag * 4 * t * (1 - t), z: st.a[2] + (st.b[2] - st.a[2]) * t });
     if (i) L.push(L[i - 1] + Math.hypot(P[i].x - P[i - 1].x, P[i].y - P[i - 1].y, P[i].z - P[i - 1].z)); }
   return (cache[k] = { P, L, total: L[N] });
 }

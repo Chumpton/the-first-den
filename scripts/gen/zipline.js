@@ -4,6 +4,8 @@
 // rim's outward [x,z], a rope start, b rope end (post top), sag, P pit centre [x, sand top, z], gB/gS ground at post/stake.
 import { paint, obox, beam, TAU } from '../lib/yard-kit.js';
 import { prism, ngon, gem } from '../lib/road-solid.js';
+import { ZIP } from '../lib/data/zipline.js';
+const SAG = (p) => ZIP.sag ?? p.sag;
 const IRON = 'oklch(0.3 0.015 60)', ROPE = 'oklch(0.7 0.06 75)', SAND = 'cdn/texture-soft-pale-beach-sand.png';
 function frames(p) {
   const C = p.C, n = p.n, r = [-n[1], n[0]], yN = Math.atan2(-n[0], -n[1]);
@@ -14,7 +16,7 @@ function frames(p) {
   const oq = (ctx, v, u, y0, su, sy, sv) => { const q = qt(v, u, 0); obox(ctx, q[0], y0, q[2], su, sy, sv, yD); };
   return { D: C[1], pt, ob, qt, oq, d };
 }
-const rope = (p, t) => [p.a[0] + (p.b[0] - p.a[0]) * t, p.a[1] + (p.b[1] - p.a[1]) * t - p.sag * 4 * t * (1 - t), p.a[2] + (p.b[2] - p.a[2]) * t];
+const rope = (p, t) => [p.a[0] + (p.b[0] - p.a[0]) * t, p.a[1] + (p.b[1] - p.a[1]) * t - SAG(p) * 4 * t * (1 - t), p.a[2] + (p.b[2] - p.a[2]) * t];
 function launch(ctx, p, f, lod) {
   const { D, pt, ob } = f;
   paint(ctx, 'walnut', 'oklch(0.66 0.06 55)', 0.85);            // joists, end beam, braces to the trunk
@@ -44,6 +46,35 @@ function cable(ctx, p, lod) {
   paint(ctx, null, ROPE, 0.9); const N = lod <= 2 ? 28 : lod <= 3 ? 12 : 5, w = lod <= 2 ? 0.04 : 0.06;
   for (let i = 0; i < N; i++) beam(ctx, rope(p, i / N), rope(p, (i + 1) / N), w, w);
 }
+// the festoon: a thin guide line ZIP.bunting.offset beside the rope, on the same catenary, pennants and warm lanterns on it
+function bunting(ctx, p, f, lod, rnd) {
+  if (lod >= 4) return;
+  const B = ZIP.bunting, sag = SAG(p), rd = [-f.d[1], f.d[0]], o = B.side * B.offset;
+  const ga = [p.a[0] + rd[0] * o, p.a[1] - B.drop, p.a[2] + rd[1] * o], gb = [p.b[0] + rd[0] * o, p.b[1] - B.drop, p.b[2] + rd[1] * o];
+  const g = (t) => [ga[0] + (gb[0] - ga[0]) * t, ga[1] + (gb[1] - ga[1]) * t - sag * 4 * t * (1 - t), ga[2] + (gb[2] - ga[2]) * t];
+  const L = Math.hypot(gb[0] - ga[0], gb[1] - ga[1], gb[2] - ga[2]);
+  paint(ctx, null, IRON, 0.5, 0.6);                               // hanger under the A-frame beam; arm and brace on the end post
+  beam(ctx, [ga[0], p.a[1] + 0.08, ga[2]], ga, 0.02, 0.02);
+  const b = p.b, arm = [b[0] + rd[0] * o * 1.25, b[1] - 0.1, b[2] + rd[1] * o * 1.25];
+  beam(ctx, [b[0], b[1] - 0.1, b[2]], arm, 0.05, 0.05); beam(ctx, [b[0], b[1] - 0.5, b[2]], [b[0] + rd[0] * o * 0.9, b[1] - 0.12, b[2] + rd[1] * o * 0.9], 0.03, 0.03);
+  paint(ctx, null, 'oklch(0.62 0.05 70)', 0.9); const N = lod <= 2 ? 28 : 12;
+  for (let i = 0; i < N; i++) beam(ctx, g(i / N), g((i + 1) / N), 0.016, 0.016);
+  const slots = Math.floor((L - 2 * B.margin) / B.spacing), fw = B.flag[0] / L;
+  let flag = 0;
+  for (let k = 0; k <= slots; k++) {
+    const t = (B.margin + k * B.spacing) / L, q = g(t);
+    if (k % B.every === B.every - 1) {                            // a little hanging lantern: wire, iron cap, glowing body
+      if (lod <= 2) { paint(ctx, null, IRON, 0.5, 0.6); beam(ctx, q, [q[0], q[1] - 0.08, q[2]], 0.008, 0.008); gem(ctx, q[0], q[1] - 0.1, q[2], 0.055, 0.035, 0.005, 4); gem(ctx, q[0], q[1] - 0.225, q[2], 0.035, 0.005, 0.03, 4); }
+      ctx.albedo(null); ctx.color('oklch(0.95 0.08 80)'); ctx.roughness(0.3); ctx.metalness(0); ctx.emissive(...B.glow);
+      obox(ctx, q[0], q[1] - 0.22, q[2], 0.075, 0.115, 0.075, 0); ctx.emissive(null);
+      continue;
+    }
+    const c = flag++ % B.colors.length; if (lod === 3 && flag % 2) continue;
+    const A = g(t - fw / 2), Z = g(t + fw / 2), j = (rnd() - 0.5) * 0.08;
+    paint(ctx, null, B.colors[c], 0.95);
+    ctx.tri(...A, ...Z, q[0] + rd[0] * j, q[1] - B.flag[1], q[2] + rd[1] * j);
+  }
+}
 function landing(ctx, p, f, lod, rnd) {
   const { oq } = f, Y = p.P[1], y0 = Y - 0.45;
   ctx.albedo(SAND); ctx.color('oklch(0.95 0.035 85)'); ctx.roughness(1); ctx.metalness(0); ctx.emissive(null);
@@ -68,7 +99,7 @@ function landing(ctx, p, f, lod, rnd) {
 }
 export function geometry(ctx) {
   ctx.flat(); const p = ctx.params, f = frames(p), lod = ctx.lod; let s = 11; const rnd = () => ((s = (s * 9301 + 49297) % 233280) / 233280);
-  launch(ctx, p, f, lod); cable(ctx, p, lod); landing(ctx, p, f, lod, rnd);
+  launch(ctx, p, f, lod); cable(ctx, p, lod); bunting(ctx, p, f, lod, rnd); landing(ctx, p, f, lod, rnd);
 }
 export function collider(ctx) {
   const p = ctx.params, f = frames(p), { D, ob, oq } = f, Y = p.P[1];
