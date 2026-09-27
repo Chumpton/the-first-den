@@ -148,6 +148,25 @@ const B = {
     if (lod <= 2) { P(ctx, null, C.terra, 0.9); lathe(ctx, [[0.06, 0.26], [0.09, 0.4], [0.1, 0.41]], 6, -0.25, -0.15); P(ctx, "stone", C.stone); gem(ctx, 0.25, 0.28, -0.18, 0.06, 0.05, 0.02, 5); }
     flowers(ctx, lod, [[-0.35, -0.2, 1.3], [0.4, 0.3, 1], [-0.62, 0.15, 1]]);
   },
+  lamps(ctx, lod) {
+    // a run of tall oak lampposts, local points in params.posts [[x,y,z]], arm toward −Z (the road), basket + lantern
+    for (const [x, y, z] of ctx.params.posts || [[0, 0, 0]]) {
+      P(ctx, "stone", C.stone, 0.92); box(ctx, x - 0.2, y, z - 0.2, x + 0.2, y + 0.2, z + 0.2);
+      P(ctx, "walnut", C.walnut); box(ctx, x - 0.08, y + 0.2, z - 0.08, x + 0.08, y + 3.4, z + 0.08); postCap(ctx, x, z, y + 3.4, 0.16);
+      beam(ctx, [x, y + 3.15, z], [x, y + 3.15, z - 0.8], 0.07);
+      if (lod <= 2) beam(ctx, [x, y + 2.7, z - 0.05], [x, y + 3.12, z - 0.5], 0.05);
+      P(ctx, null, C.iron, 0.5, 0.6); beam(ctx, [x, y + 3.12, z - 0.7], [x, y + 2.9, z - 0.7], 0.02);
+      prism(ctx, ngon(4, 0.13, x, z - 0.7, Math.PI / 4), y + 2.84, y + 2.9, 0.4);
+      glow(ctx); prism(ctx, ngon(4, 0.09, x, z - 0.7, Math.PI / 4), y + 2.6, y + 2.84);
+      if (lod <= 3) { P(ctx, null, C.iron, 0.5, 0.6); prism(ctx, ngon(4, 0.11, x, z - 0.7, Math.PI / 4), y + 2.56, y + 2.6); }
+      if (lod <= 3) { // flower basket hung from the post side
+        P(ctx, "straw", C.straw, 1); lathe(ctx, [[0.08, y + 2.05], [0.2, y + 2.2], [0.24, y + 2.3]], lod <= 2 ? 8 : 5, x + 0.3, z);
+        P(ctx, null, C.leaf, 0.95); blob(ctx, x + 0.3, y + 2.26, z, 0.26, 0.2, 0.26, 5);
+        if (lod <= 2) { P(ctx, null, C.petal, 0.8); gem(ctx, x + 0.2, y + 2.44, z - 0.12, 0.06, 0.04, 0.03, 4); gem(ctx, x + 0.42, y + 2.42, z + 0.05, 0.06, 0.04, 0.03, 4);
+          P(ctx, null, C.sun, 0.8); gem(ctx, x + 0.3, y + 2.47, z + 0.14, 0.05, 0.04, 0.03, 4);
+          P(ctx, null, C.iron); beam(ctx, [x + 0.08, y + 2.7, z], [x + 0.3, y + 2.3, z], 0.015); } }
+    }
+  },
 };
 export function geometry(ctx) { ctx.flat(); (B[ctx.params.kind] || B.milestone)(ctx, ctx.lod); ctx.emissive(null); }
 export function collider(ctx) {
@@ -156,5 +175,6 @@ export function collider(ctx) {
   if (k === "supplies") { box(ctx, -1.35, 0, -0.35, 1.15, 0.9, 0.45); box(ctx, -1.0, 0.9, -0.25, -0.2, 1.32, 0.4); return; }
   if (k === "shelter") { box(ctx, -1.75, 0, -1, 1.75, 0.12, 1); for (const x of [-1.45, 1.45]) for (const z of [-0.72, 0.72]) box(ctx, x - 0.07, 0.12, z - 0.07, x + 0.07, 2.15, z + 0.07); box(ctx, -1.2, 0.12, 0.12, 1.2, 0.52, 0.55); return; }
   if (k === "shrine") { box(ctx, -0.55, 0, -0.4, 0.55, 0.26, 0.4); box(ctx, -0.34, 0.26, -0.26, 0.34, 2.1, 0.26); return; }
+  if (k === "lamps") { for (const [x, y, z] of ctx.params.posts || [[0, 0, 0]]) box(ctx, x - 0.2, y, z - 0.2, x + 0.2, y + 3.4, z + 0.2); return; }
   box(ctx, -0.46, 0, -0.16, 0.46, 1.17, 0.36);
 }
