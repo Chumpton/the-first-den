@@ -1865,6 +1865,13 @@ courier-tomas:
   state: {pressTo: courier-horse, role: man}
   tags: [interactable, courier]
   visibleRange: {max: 220}
+courtyard-life:
+  feetPosition: {x: 14, y: 0.5, z: -47}
+  id: courtyard-life
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 22, height: 3, kind: box, width: 22}
+  tags: [blueprint]
 creek-banks:
   castShadow: true
   feetPosition: {x: 0, y: 0, z: 0}
