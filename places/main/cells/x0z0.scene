@@ -1241,6 +1241,13 @@ cob-in-g-table:
   rotation: {yaw: 0}
   tags: [cob-interior, furniture, den-furniture]
   visibleRange: {max: 200}
+coop-site:
+  feetPosition: {x: 27, y: 0.5, z: -28}
+  id: coop-site
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 6, height: 3, kind: box, width: 7}
+  tags: [blueprint]
 critter-bird-f1-1:
   castShadow: false
   feetPosition: {x: 0, y: 30, z: -30}
@@ -1656,6 +1663,13 @@ fox-meadow:
   state: {home: {x: 30, z: 32}, mode: idle, range: 20, scale: 1, sp: fox, until: 0, yaw: 105}
   tags: [fauna-ground, interactable, animal, fox]
   visibleRange: {max: 180}
+hive-site:
+  feetPosition: {x: 31, y: 0.5, z: -46}
+  id: hive-site
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 3, height: 1.5, kind: box, width: 5}
+  tags: [blueprint]
 home-garden:
   feetPosition: {x: -2, y: 0.5, z: -38}
   id: home-garden
@@ -2160,6 +2174,13 @@ path-lamp-pathLake-0:
   primitive: {kind: scripted, params: {hue: 60, kind: lamp}, script: scripts/gen/road-dressing.js}
   rotation: {lookAt: {x: 1.2168871427900494, y: 0, z: -39.30685128452787}}
   tags: [path-lamp]
+raincatch-site:
+  feetPosition: {x: 11.5, y: 0.5, z: -24}
+  id: raincatch-site
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 4, height: 2.5, kind: box, width: 2.5}
+  tags: [blueprint]
 road-signpost:
   children: [{feetPosition: {x: 0.1, y: 2.35, z: 0}, id: arm-east, primitive: {kind: scripted, params: {dir: 1, kind: arm, len: 1.35}, script: scripts/gen/road-dressing.js}, ui: "<div face=\"front\" offset=\"0.004m\" style=\"width:1150px;height:250px;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:140px;font-weight:bold;color:#3a2718;white-space:nowrap\">Lumenvale →</div>"}, {feetPosition: {x: -0.1, y: 2, z: 0}, id: arm-west, primitive: {kind: scripted, params: {dir: -1, kind: arm, len: 1.35}, script: scripts/gen/road-dressing.js}, ui: "<div face=\"front\" offset=\"0.004m\" style=\"width:1150px;height:250px;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:140px;font-weight:bold;color:#3a2718;white-space:nowrap\">← Hearthmere</div>"}, {feetPosition: {x: 0, y: 1.65, z: -0.1}, id: arm-home, primitive: {kind: scripted, params: {dir: 1, kind: arm, len: 1.1}, script: scripts/gen/road-dressing.js}, rotation: {yaw: 90}, ui: "<div face=\"front\" offset=\"0.004m\" style=\"width:1150px;height:250px;display:flex;align-items:center;justify-content:center;font-family:Georgia,serif;font-size:140px;font-weight:bold;color:#3a2718;white-space:nowrap\">Home</div>"}]
   feetPosition: {x: 3.2, y: {terrain: 0}, z: 14.6}
