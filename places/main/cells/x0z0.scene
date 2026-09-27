@@ -1670,6 +1670,20 @@ fox-meadow:
   state: {home: {x: 30, z: 32}, mode: idle, range: 20, scale: 1, sp: fox, until: 0, yaw: 105}
   tags: [fauna-ground, interactable, animal, fox]
   visibleRange: {max: 180}
+garden-gazebo:
+  feetPosition: {x: -8, y: 0.5, z: -42}
+  id: garden-gazebo
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 4.4, height: 3.8, kind: box, width: 4.4}
+  tags: [blueprint]
+garden-tunnel:
+  feetPosition: {x: 5, y: 0.5, z: -44}
+  id: garden-tunnel
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 9, height: 2.6, kind: box, width: 2.8}
+  tags: [blueprint]
 hive-site:
   feetPosition: {x: 31, y: 0.5, z: -46}
   id: hive-site
