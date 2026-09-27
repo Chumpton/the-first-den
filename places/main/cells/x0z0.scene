@@ -1837,12 +1837,51 @@ garden-tunnel:
   primitive: {depth: 9, height: 2.6, kind: box, width: 2.8}
   tags: [blueprint]
 hive-site:
-  feetPosition: {x: 31, y: 0.5, z: -46}
+  audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-honeybee-hive-soft-hum-loop.mp3, gain: 0.12, loop: true, maxDistance: 12, spatial: true}
+  castShadow: true
+  feetPosition: {x: 31, y: 0.68, z: -46}
+  fx: {script: "fx\npop bees n=?mobile:7|12 on=box(1.5,.35,.45).c(.95) life=2..3.5 v=sdir()*(.3..0.6) acc=curl(1.4)*2.2+drag(.9) size=.028..0.038 col=<1.25,.85,.12> a=0>.1:1>.9:1>0 sz=$size r=sprite(mote,alpha)\npop drones n=?mobile:3|6 on=box(1.5,.3,.45).c(.9) life=2..3.5 v=sdir()*(.3..0.5) acc=curl(1.4)*2.2+drag(.9) size=.024..0.03 col=<.12,.09,.04> a=0>.1:1>.9:1>0 sz=$size r=sprite(mote,alpha)\npop forage n=?mobile:3|6 on=disc(2) life=1.5..3 v=sdir()*(.2..0.4) acc=curl(.9)*1.6+drag(1) size=.028..0.034 col=<1.2,.8,.1> a=0>.15:1>.85:1>0 sz=$size r=sprite(mote,alpha)"}
   id: hive-site
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 3, height: 1.5, kind: box, width: 5}
-  tags: [blueprint]
+  physics: static
+  primitive: {kind: scripted, params: {kind: stand}, script: scripts/gen/hive-stand.js, seed: 7}
+  receiveShadow: true
+  rotation: {yaw: 120}
+  tags: [homestead, hive]
+hive-site/hive-box-0:
+  behavior: scripts/hive-press.js
+  castShadow: true
+  feetPosition: {x: -1.1, y: 0.44, z: 0}
+  id: hive-site/hive-box-0
+  parent: hive-site
+  primitive: {kind: scripted, params: {boxes: [deep, deep, medium], paint: [white, honey, white]}, script: scripts/gen/hive-box.js}
+  state: {}
+  tags: [interactable, hive]
+hive-site/hive-box-1:
+  behavior: scripts/hive-press.js
+  castShadow: true
+  feetPosition: {x: 0, y: 0.44, z: 0}
+  id: hive-site/hive-box-1
+  parent: hive-site
+  primitive: {kind: scripted, params: {boxes: [deep, medium, medium], paint: [honey, white, honey]}, script: scripts/gen/hive-box.js}
+  state: {}
+  tags: [interactable, hive]
+hive-site/hive-box-2:
+  behavior: scripts/hive-press.js
+  castShadow: true
+  feetPosition: {x: 1.1, y: 0.44, z: 0}
+  id: hive-site/hive-box-2
+  parent: hive-site
+  primitive: {kind: scripted, params: {boxes: [deep, deep], paint: [white, white]}, script: scripts/gen/hive-box.js}
+  state: {}
+  tags: [interactable, hive]
+hive-site/hive-sign:
+  castShadow: true
+  feetPosition: {x: -1.9, y: 0.85, z: -1.47}
+  id: hive-site/hive-sign
+  parent: hive-site
+  primitive: {kind: scripted, params: {kind: sign}, script: scripts/gen/hive-stand.js}
+  rotation: {yaw: 180}
+  ui: "<div face=\"front\" width=\"0.72m\" offset=\"0.004m\" class=\"flex flex-col items-center justify-center\" style=\"height:360px;color:#4f3828;font-family:serif\"><div style=\"font-size:120px;line-height:1;font-weight:700\">Honey</div><div style=\"font-size:52px;letter-spacing:6px\">✿ FROM THE DEN ✿</div></div>"
 home-garden:
   feetPosition: {x: -2, y: 0.5, z: -38}
   id: home-garden
@@ -2356,12 +2395,25 @@ path-lamp-pathLake-0:
   rotation: {lookAt: {x: 1.2168871427900494, y: 0, z: -39.30685128452787}}
   tags: [path-lamp]
 raincatch-site:
-  feetPosition: {x: 11.5, y: 0.5, z: -24}
+  castShadow: true
+  feetPosition: {x: 9.82, y: 0.5, z: -23.2}
   id: raincatch-site
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 4, height: 2.5, kind: box, width: 2.5}
-  tags: [blueprint]
+  physics: static
+  primitive: {kind: scripted, params: {kind: main}, script: scripts/gen/rain-catch.js, seed: 2}
+  receiveShadow: true
+  rotation: {yaw: 60}
+  tags: [homestead, raincatch]
+raincatch-site/raincatch-drip:
+  feetPosition: {x: 0, y: 0.54, z: 0.92}
+  fx: {script: "fx\npop drip rate=flick(.6,.5)*2.2 on=point() life=.35..0.45 v=<0,-.2,0> size=.018..0.024 acc=grav() col=<.75,.85,.95> a=.8 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop splash on=@drip inh=p life=.2..0.35 v=up(.4..0.8)+sdir()*(.2..0.4) size=.01..0.016 acc=grav() col=<.8,.9,1> a=.7>0 sz=$size r=sprite(droplet,alpha)"}
+  id: raincatch-site/raincatch-drip
+  parent: raincatch-site
+raincatch-site/raincatch-tap:
+  castShadow: true
+  feetPosition: {x: 0, y: 0.55, z: 0.92}
+  id: raincatch-site/raincatch-tap
+  parent: raincatch-site
+  primitive: {kind: scripted, params: {kind: tap}, script: scripts/gen/rain-catch.js}
 rikki:
   behavior: [scripts/den-folk.js, scripts/humanoid-locomotion.js]
   castShadow: true
