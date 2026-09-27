@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "basedOnSpecVersion": 704,
-  "updatedAt": "2026-09-27T17:21:06.097Z",
-  "summary": "The First Den is a forest world centered on Spawn: the owner's tree-centered home, lake and creek, activity sites, and roads connect it to Hearthmere and Lumenvale. Authored scene rows anchor places and actors; terrain marks, procedural builders, shared data kits, and manager behaviors supply landscape, structures, and inhabitants. The world now also has a working rowboat fishing loop, Tower Gardens crop cycle, collectible forest mushrooms, and a dressed curved town corridor with a rampart and distant horizon layers.",
+  "basedOnSpecVersion": 721,
+  "updatedAt": "2026-09-27T17:29:16.365Z",
+  "summary": "The First Den is a forest world centered on Spawn, with a lived-in home, lake and creek activities, Tower Gardens, and a market town connected to district squares by newly dressed cobbled lanes. Authored cell scenes place interactive systems and procedural structure families; terrain marks grade, clear, and surface their sites and routes. Garden Market and the royal quarter have blueprint anchors alongside new generator families and shared kits.",
   "scriptPaths": [
     "scripts/alchemy-bench.js",
     "scripts/alchemy-player.js",
@@ -95,6 +95,7 @@
     "scripts/gen/flower-bed.js",
     "scripts/gen/forecourt.js",
     "scripts/gen/forest-plant.js",
+    "scripts/gen/garden-district.js",
     "scripts/gen/garden-flagstones.js",
     "scripts/gen/garden-garb.js",
     "scripts/gen/garden-gazebo.js",
@@ -102,6 +103,7 @@
     "scripts/gen/garden-shed.js",
     "scripts/gen/garden-statue.js",
     "scripts/gen/garden-tunnel.js",
+    "scripts/gen/garden-wear.js",
     "scripts/gen/gazebo-bloom.js",
     "scripts/gen/glow-lamps.js",
     "scripts/gen/grand-avenue.js",
@@ -117,6 +119,7 @@
     "scripts/gen/hearth-lanterns.js",
     "scripts/gen/hearth-mesh.js",
     "scripts/gen/hearth-stall.js",
+    "scripts/gen/hex-cottage.js",
     "scripts/gen/hex-outbuilding.js",
     "scripts/gen/hive-box.js",
     "scripts/gen/hive-stand.js",
@@ -183,6 +186,9 @@
     "scripts/gen/road-rail.js",
     "scripts/gen/roost-dragon.js",
     "scripts/gen/rope-bridge.js",
+    "scripts/gen/royal-cathedral.js",
+    "scripts/gen/royal-district.js",
+    "scripts/gen/royal-statue.js",
     "scripts/gen/secret-trinket.js",
     "scripts/gen/shore-kit.js",
     "scripts/gen/stone-golem.js",
@@ -197,6 +203,7 @@
     "scripts/gen/town-hall.js",
     "scripts/gen/town-house.js",
     "scripts/gen/town-lane.js",
+    "scripts/gen/town-link.js",
     "scripts/gen/town-rampart.js",
     "scripts/gen/town-square.js",
     "scripts/gen/trade-road.js",
@@ -295,10 +302,12 @@
     "scripts/lib/purple-dragon-clips.js",
     "scripts/lib/radio-panel.js",
     "scripts/lib/road-solid.js",
+    "scripts/lib/royal-kit.js",
     "scripts/lib/sage-route.js",
     "scripts/lib/solid-kit.js",
     "scripts/lib/tg-kit.js",
     "scripts/lib/town-kit.js",
+    "scripts/lib/village-mesh.js",
     "scripts/lib/yard-kit.js",
     "scripts/lighting.js",
     "scripts/lilypad.js",
@@ -380,24 +389,24 @@
     "scripts/zipline.js"
   ],
   "places": [
-    "places/main - forest world linking Spawn/home and lake, creek sites, camps/corral, north market town, Hearthmere and Lumenvale",
-    "places/main/cells/x0z0.scene - Spawn hub: tree-centered home/studio, creek, activity sites and Tower Gardens behind the wizard tower at (57,-26); garden beds, seed stations, pump and greenhouse",
-    "places/main/cells/x0z-1.scene - lake/islet, maze, blossom walk and camps; dock/rowboat fishing reaches the lake and creek mouth",
-    "places/main/cells/x0z1.scene - market town around z≈100, square, hall/Ember, crowd, alleys and new low limestone town-rampart/service-yard boundary",
-    "places/main/cells/x-1z0.scene + neighboring west/north forest cells - highway verge and many interactable wild-mushroom patches; added cells extend collectible clusters through forest",
-    "places/main/cells/x0z0.scene + x0z1.scene - winding Spawn-to-town lane, mile markers and corridor greenbelt; horizon hills/peaks and mist are distant non-colliding scene layers",
-    "places/main/cells/x-1z1.scene - garden-district blueprint row; adjacent district areas are authored/streamed in neighboring cells",
-    "places/main/config.yaml - forest terrain/water, site/path/clearing marks and seeded vegetation; grading/clearing now follows the S-curve town lane and Tower Gardens ground"
+    "places/main - forest world linking Spawn/home and lake, creek sites, camps/corral, market town, Hearthmere and Lumenvale",
+    "places/main/cells/x0z0.scene - Spawn hub: tree-centered home/studio, creek, activities, Tower Gardens at (57,-26), and town-bound lane/signpost branches",
+    "places/main/cells/x0z-1.scene - lake/islet, maze, blossom walk and camps; dock/rowboat fishing reaches lake and creek mouth",
+    "places/main/cells/x0z1.scene - market square around z≈100, hall/Ember, crowd, alleys and rampart with openings onto new lanes; royal-district blueprint at (0,190)",
+    "places/main/cells/x-1z1.scene - Garden Market blueprint at (-82,78) and ring signpost; terrain is flattened/cleared for the district",
+    "places/main/cells/x1z1.scene - cobbled ring lane and signpost linking the three-squares route",
+    "places/main/cells/x0z2.scene - royal-castle and royal-cathedral blueprint anchors north of the market town",
+    "places/main/config.yaml - forest terrain/water, site/path/clearing marks and seeded vegetation; adds Garden Market flatten/clear and market-to-square/ring route marks"
   ],
   "roots": [
     "world.config.yaml - world entry: main place, player/camera templates, arrival, input actions and UI",
     "templates/player.js#player - player root with movement, locomotion, home interaction, delete, travel, alchemy and mount handlers",
-    "templates/camera.js#camera - custom first-/third-person camera; scripts/camera.js also pulls back when riding a controlled mount or seated rowboat",
+    "templates/camera.js#camera - custom first-/third-person camera; camera behavior accounts for controlled mounts and seated rowboat",
     "places/main/config.yaml + scripts/forest-terrain.js - configured terrain, height/material interface and landscape marks",
     "places/main/cells/x0z0.scene#cob-house - Spawn's tree-centered multilevel home and below-floor art studio",
-    "places/main/cells/x0z0.scene#studio-pixel + #corral - roaming studio cat and managed corral horses",
-    "places/main/cells/x0z0.scene#garden-greenhouse / garden-bed-* / garden-pump / garden-seeds - Tower Gardens structure and interactable crop cycle",
-    "places/main/cells/x0z1.scene#town-crowd / #town-dragon / #town-square / #town-rampart - citizens, Ember and market-town civic/district dressing"
+    "places/main/cells/x0z0.scene#garden-greenhouse / garden-bed-* / garden-pump / garden-seeds - Tower Gardens structure and crop cycle",
+    "places/main/cells/x0z1.scene#town-crowd / #town-dragon / #town-square / #town-rampart - citizens, Ember and active market civic/district geometry",
+    "places/main/cells/x-1z1.scene#garden-district and x0z1.scene#royal-district - blueprint anchors, not the new procedural district meshes"
   ],
   "shared": [
     "scripts/forest-terrain.js - main heightAt(ctx)/materialAt(ctx) contract for terrain and terrain-relative placements",
@@ -405,9 +414,9 @@
     "scripts/lib/road-solid.js + scripts/lib/solid-kit.js - shared solid/collider construction for road and site builders",
     "scripts/lib/home-interaction.js + scripts/lib/data/home-feel.js - player press targeting and interaction tuning",
     "scripts/lib/dragon-rider.js - mount/seat/dismount coordination shared by Violet, rowboat, courier horse and zipline trolley",
-    "scripts/lib/town-kit.js - town geometry/material helpers reused by town house, hall, square, fountain and festoon builders",
-    "scripts/lib/bloom-kit.js - flower/fern/mushroom geometry and seeded helpers reused by garden and landscape builders; scripts/lib/tg-kit.js serves Tower Gardens builders",
-    "scripts/lib/data/{garden,mushrooms,rowboat,tower-gardens}.js - tuning/data consumed by garden interactions and HUD, collectible mushroom behavior, fishing, and Tower Gardens layout"
+    "scripts/lib/town-kit.js - geometry/material helpers reused by town civic, lane, Garden Market, rampart and town-link builders",
+    "scripts/lib/royal-kit.js - white-stone/slate/gold geometry and arch/tower helpers for royal-district, royal-cathedral, royal-house and royal-statue builders",
+    "scripts/lib/data/{garden,mushrooms,rowboat,tower-gardens}.js and scripts/lib/data/{garden-district,town-links}.json - activity tuning plus Garden Market layout and town-link data"
   ],
   "notableExports": [
     "scripts/forest-terrain.js - GROUND, SITES, LAKE, heightAt(ctx), materialAt(ctx)",
@@ -416,8 +425,8 @@
     "scripts/rowboat.js - ears.press, onSpawn(ctx), onControlEnd(ctx,player), onInput(ctx,input), update(ctx,dt); scripts/fish-pose.js - present()",
     "scripts/garden-plot.js - grow(ctx,p), onSpawn(ctx), ears.press; scripts/garden-station.js - onSpawn(ctx), ears.press",
     "scripts/wild-mushroom.js - ears.press, vanish(ctx), regrow(ctx)",
-    "scripts/gen/{garden-plot,tg-greenhouse,tg-grounds,town-lane,town-rampart}.js - geometry(ctx); applicable builders also export collider(ctx)",
-    "scripts/gen/{horizon-ring,mist-banks,moss-boulder,wild-mushroom,catch-fish}.js - geometry(ctx); environmental builders export null collider where appropriate"
+    "scripts/gen/garden-district.js, royal-district.js, royal-cathedral.js, hex-cottage.js - geometry(ctx); solid builders also export collider(ctx)",
+    "scripts/gen/town-link.js - geometry(ctx), collider(ctx); scripts/gen/town-banner.js - geometry(ctx), collider()"
   ],
   "ownership": [
     "scripts/player.js + scripts/lib/data/player.yml - movement intent, velocity, jump, flight, rope and camera mode; movement scratch remains in ctx.session",
@@ -436,34 +445,38 @@
     "player presses mandala-crystal -> harvest; alchemy-bench press -> alchemyOpen -> alchemy-player brew spends harvest and sets buff -> scripts/ui.js displays panel/status",
     "pond seed trigger/pouch press -> scripts/pond-seed.js -> player seeds/gotSeeds; fishing-tackle press/cast/reel -> player fish count and catch feedback",
     "dock rowboat E -> rider seat/control; W/S/A/D -> scripts/rowboat.js movement bounded by terrain water/depth; E near shore exits",
-    "seated rowboat fish input (fish action) -> scripts/rowboat.js cast/wait/bite/hook/present phases -> catch-fish child mesh, fish-pose animation, rider fish/fishGet -> scripts/ui.js hint/banner",
-    "garden seed crate/pump press -> scripts/garden-station.js -> player.state.garden seeds/can; garden-bed press -> scripts/garden-plot.js plants, spends water, schedules stage growth, harvests into basket/HUD",
-    "greenhouse garden beds (gh:true) -> garden-plot growth behavior, which keeps watered greenhouse beds wet; Garden layout/geometry come from garden/tower-gardens data and tg builders",
-    "wild-mushroom scene patches -> scripts/wild-mushroom.js press/pick, timed regrow -> mushroom inventory/HUD in scripts/ui.js; patch shape and species tuning from mushrooms data",
-    "west-pasture manager + pasture-flock.yml -> tagged sheep/alpaca goals and species clips; corral site/data -> corral-horses.js managed horse poses/clips",
-    "town-crowd.yml roster -> town-crowd.js citizens; town scene + town.json -> town square/house/hall/fountain/festoon/alleys and rampart builders; terrain path marks align with road geometry"
+    "seated rowboat fish input -> scripts/rowboat.js cast/wait/bite/hook/present phases -> catch-fish child mesh, fish-pose animation and rider fish/fishGet -> scripts/ui.js hint/banner",
+    "garden seed crate/pump press -> scripts/garden-station.js -> player.state.garden seeds/can; garden-bed press -> scripts/garden-plot.js plants, spends water, schedules growth, harvests to basket/HUD",
+    "greenhouse garden beds (gh:true) -> garden-plot growth behavior, which keeps watered greenhouse beds wet; Tower Gardens layout/geometry use garden data and tg builders",
+    "wild-mushroom scene patches -> scripts/wild-mushroom.js press/pick and timed regrow -> mushroom inventory/HUD in scripts/ui.js",
+    "town-crowd.yml roster -> scripts/town-crowd.js citizens; town scene + town data -> square/house/hall/fountain/festoon/alleys and rampart builders",
+    "main config link-* path/bed/clear marks -> terrain paving and cleared route; town-link scene rows in x0z0/x0z1/x1z1/x-1z1 -> lamp lanes and finger-post geometry, while child-row UI supplies sign text"
   ],
   "behaviorFamilies": [
     "places/main/config.yaml decoration layers + scripts/gen/forest-plant.js / valley-mesh.js - seeded forest flora varied by layer, kind and terrain",
-    "scripts/gen/cob-house.js + scripts/gen/cob-furnish.js - tree-centered multilevel home/furnishing varied by item, dimensions, palette and seed; art-studio builder supplies lower-level workroom props",
+    "scripts/gen/cob-house.js + scripts/gen/cob-furnish.js - tree-centered multilevel home/furnishing varied by item, dimensions, palette and seed; art-studio builder supplies lower-level props",
     "scripts/gen/road-bridge.js + scripts/lib/road-solid.js - bridge geometry/collider varied by dimensions and seed; terrain roads separately supply edges/shoulders",
-    "scripts/gen/town-lane.js - road surface, benches/lamps/mile-marker forms and wagon-rut detail vary by item, points and seed; rampart builder supplies boundary/service-yard props",
-    "scripts/gen/town-square.js + town-kit - town/civic geometry varied by kind, palette, seed and placement; town-hall flags use banner shader",
-    "scripts/gen/garden-plot.js + scripts/gen/tg-greenhouse.js + scripts/gen/tg-grounds.js - Tower Gardens beds, greenhouse tunnel, paths/fence/flower borders vary by crop/layout/item",
-    "scripts/gen/wild-mushroom.js + scripts/wild-mushroom.js - collectible patch clusters vary by five configured kinds, count and seed; regrow/pick state per patch",
-    "scripts/gen/{horizon-ring,mist-banks,moss-boulder}.js - noninteractive distant terrain silhouettes/mist and seeded greenbelt rocks varied by layer/parameters"
+    "scripts/gen/town-lane.js + town-rampart.js - road/dressing and limestone boundary/service-yard geometry varied by points, gaps, item and seed",
+    "scripts/gen/town-square.js + town-kit - town/civic geometry varied by kind, palette, seed and placement; town-banner adds dragon/lion heraldic cloth",
+    "scripts/gen/town-link.js + scripts/lib/data/town-links.json - lamped lane, signpost/finger and name-plaque forms varied by kind and placed text; terrain config provides matching paving paths",
+    "scripts/gen/garden-district.js + scripts/lib/data/garden-district.json - Garden Market ground, fountain, stalls, dressing and pondwater vary by item and authored layout",
+    "scripts/gen/royal-district.js + royal-cathedral.js + royal-statue.js + royal-kit.js - white-stone/slate royal walls, avenue, cathedral and knight geometry vary by part and dimensions; hex-cottage uses village-mesh for hill-village homes"
   ],
   "probableOrphans": [
     "scripts/flat-terrain.js - no current place config selects it; main uses forest-terrain",
     "scripts/jade-dragon.js - no scene behavior row attaches this actor script; scripts/gen/jade-dragon.js geometry may still be used",
-    "scripts/gen/garden-garb.js - crown/skirt geometry builder has no current scene or template references"
+    "scripts/gen/garden-garb.js - crown/skirt geometry builder has no current scene or template references",
+    "scripts/gen/garden-wear.js - hat/apron/basket wear builder has no current scene or template references",
+    "scripts/gen/hex-cottage.js - generator has no current scene/template reference",
+    "scripts/gen/royal-cathedral.js and scripts/gen/royal-statue.js - builders exist but current cathedral/royal-quarter scene rows are blueprint anchors",
+    "scripts/gen/garden-district.js and scripts/gen/royal-district.js - district builder files are not yet attached to their blueprint scene anchors"
   ],
   "migrationNotes": [
     "forest-terrain heightAt/materialAt take a context object; main river is at sea level y=0, ground around y=0.5, Spawn clearing near (0,-3).",
-    "Keep terrain material IDs, clear/flatten marks and decoration bindings coordinated with scene placements; Spawn/home near (0,-27), corral (-50,-50), Tower Gardens centered (57,-26), town square z≈100.",
-    "Terrain path marks grade/materialize routes and clear scatter; scene road/path builders draw visible paving and do not replace terrain jobs. Keep curved town-lane marks aligned with its scene geometry and dressing.",
+    "Keep terrain material IDs, clear/flatten marks and decoration bindings coordinated with scene placements; Spawn/home near (0,-27), corral (-50,-50), Tower Gardens centered (57,-26), market square z≈100, Garden Market (-82,78), royal quarter z≈190.",
+    "Terrain path marks grade/materialize routes and clear scatter; scene road/link builders draw visible paving and do not replace terrain jobs. Keep link-* marks aligned with town-link lanes and rampart openings.",
     "The cob-house studio is below the main house floor; art-studio piece origins use feet on studio floor and face -Z; preserve the sunk-studio dry terrain pocket.",
-    "Tower Gardens beds and structures use ground feet at y=0.5; greenhouse is centered (58,-33), garden stations/bed coordinates and tower-gardens path/fence layout share the garden data datum. greenhouse beds stay wet during timed growth.",
-    "Rowboat bow is local +Z; it is kinematic and movement is constrained by terrain depth/open-water range. Fish animation masks from Spine so seated legs stay put; release/leave clears the fishing children and rider animation."
+    "Tower Gardens beds and structures use ground feet at y=0.5; greenhouse is centered (58,-33), garden stations/bed coordinates share the tower-gardens data datum, and greenhouse beds stay wet during timed growth.",
+    "Rowboat bow is local +Z; it is kinematic and constrained by terrain depth/open-water range. Fish animation masks from Spine so seated legs stay put; release/leave clears fishing children and rider animation."
   ]
 }
