@@ -139,10 +139,10 @@ terrain:
     mazeClear: {center: {x: -8, z: -127}, kind: clear-scatter, shape: {kind: circle, radius: 28}}
     pathMaze: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[-16, -49], [-26, -62], [-30, -80], [-25, -97], [-14, -106], [-8, -112]], width: 2, edgeMaterial: yard, falloff: 3.5}
     verge-pathMaze: {center: {x: -26, z: -62}, kind: clear-scatter, shape: {kind: path, points: [[-16, -49], [-26, -62], [-30, -80], [-25, -97], [-14, -106], [-8, -112]], width: 9}}
-  decorations:
-    settings: {enabled: true, budget: 75000, maxDistance: 420, fadeDistance: 25}
     den-creek: {kind: river, width: 1.8, depth: 0.7, bedMaterial: pebbles, points: [[16, -1], [9, 0.3], [3, 0.2], [0, 0], [-4, -0.2], [-10, 0.4], [-16, -2.5], [-21, -7], [-25.5, -14], [-27.5, -22], [-28.2, -31], [-28, -40], [-27.6, -48], [-25.5, -56], [-20, -62], [-14, -66.5], [-9, -69]], liquid: {kind: water, color: oklch(0.6 0.08 185), clarity: 0.85, caustics: 0.4, refraction: 0.3, shoreFoam: 0.08, turbulence: 0.25, waves: 0.03, flow: 0.6}}
     den-creekClear: {kind: clear-scatter, center: {x: -14, z: -30}, shape: {kind: path, points: [[16, -1], [0, 0], [-10, 0.4], [-21, -7], [-27.5, -22], [-28, -40], [-25.5, -56], [-14, -66.5]], width: 5}}
+  decorations:
+    settings: {enabled: true, budget: 75000, maxDistance: 420, fadeDistance: 25}
     bindings:
       litter: [canopy, ancients, midstory, shrubs, ferns, logs, wildflowers]
       moss: [canopy, ancients, midstory, shrubs, ferns, ground, wildflowers]
