@@ -4936,7 +4936,7 @@ zip-landing:
   id: zip-landing
   material: {pbr: true}
   physics: static
-  primitive: {kind: scripted, params: {items: {bell: {dy: -0.05117943917452733, x: -2.25, yaw: 0, z: 0.55}, coil: {dy: -0.46246170466100534, x: 0.95, yaw: 0, z: -2.95}, desk: {dy: -0.07754432337464967, x: -2.4, yaw: 90, z: -1.2}, sign: {dy: -0.290695201646914, x: -2.3, yaw: 80, z: -3.35}}, kind: post, seed: 11}, script: scripts/gen/zip-landing.js}
+  primitive: {kind: scripted, params: {items: {bell: {dy: -0.05117943917452733, x: -2.25, yaw: 0, z: 0.55}, coil: {dy: -0.46246170466100534, x: 0.95, yaw: 0, z: -2.95}, desk: {dy: -0.07754432337464967, x: -2.4, yaw: 90, z: -1.2}, sign: {dy: -0.047480270375141964, x: -3.4, yaw: 20, z: -0.2}}, kind: post, seed: 11}, script: scripts/gen/zip-landing.js}
   rotation: {lookAt: {x: -8.244121229390313, y: 0.5471037194008981, z: -51.53453222374635}}
   state: {does: the zip-line landing post}
   tags: [zipline, zip-landing]
@@ -4953,12 +4953,12 @@ zip-landing/bell:
   state: {act: Ring, clip: /cdn/moodboard-lowpoly-cozy/sfx-brass-ships-bell-double-ring.mp3, motes: false, text: "ding-ding · rider in!"}
   tags: [interactable, zip-bell]
 zip-landing/plaque:
-  feetPosition: {x: -2.315756924048195, y: 0.719304798353086, z: -3.352778370842671}
+  feetPosition: {x: -3.4054723222932104, y: 0.962519729624858, z: -0.21503508193257453}
   id: zip-landing/plaque
   material: {color: "#f2e6cf"}
   parent: zip-landing
   primitive: {depth: 0.02, height: 0.4, kind: box, width: 1.2}
-  rotation: {yaw: 80}
+  rotation: {yaw: 20}
   ui: "<div face=\"front\" width=\"1.2m\" style=\"width:1200px;height:400px;box-sizing:border-box;background:#f2e6cf;border:16px solid #4f3828;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center\"><div style=\"font-family:serif;font-weight:800;font-size:124px;letter-spacing:8px;color:#4f3828;line-height:1\">ZIP LANDING</div><div style=\"width:720px;height:8px;background:#c0643c;margin:14px 0 10px;border-radius:4px\"></div><div style=\"font-family:serif;font-size:46px;letter-spacing:6px;color:#3f8f8b\">~ riders in · ring the bell ~</div></div>"
 zipline:
   feetPosition: {x: -14.34, y: 0.5, z: -35.34}
