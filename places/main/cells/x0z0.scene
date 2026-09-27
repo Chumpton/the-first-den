@@ -4272,13 +4272,54 @@ town-road:
   material: {kind: scripted, script: engine/blueprint}
   physics: none
   primitive: {depth: 56, height: 0.3, kind: box, width: 8}
+trade-banner-e:
+  castShadow: true
+  feetPosition: {x: 2.925, y: 1.35, z: 5.95}
+  id: trade-banner-e
+  material: {kind: scripted, params: {drop: 2.4, reach: 0.06, speed: 0.6}, script: scripts/material-den-sway.js}
+  physics: none
+  primitive: {kind: scripted, params: {drop: 2.4, kind: banner, w: 0.8}, script: scripts/gen/trade-road.js}
+  tags: [trade]
+  visibleRange: {max: 90}
+trade-banner-w:
+  castShadow: true
+  feetPosition: {x: -2.425, y: 1.35, z: 5.95}
+  id: trade-banner-w
+  material: {kind: scripted, params: {drop: 2.4, reach: 0.06, speed: 0.6}, script: scripts/material-den-sway.js}
+  physics: none
+  primitive: {kind: scripted, params: {drop: 2.4, kind: banner, w: 0.8}, script: scripts/gen/trade-road.js}
+  tags: [trade]
+  visibleRange: {max: 90}
+trade-brazier-e:
+  feetPosition: {x: 4.3, y: 2.325, z: 6}
+  fx: {script: "fx\npop coals n=6 on=disc(.26) size=.07..0.14 tint=<2.6,1,.28>..<1.2,.35,.09> sz=$size*flick(.5,.12) col=$tint*flick(.8,.3) a=.9 r=sprite(soft-disc,add)\npop flame rate=flick(.45,.2)*22 on=disc(.22) life=.45..0.8 v=up(1.4)+cone(22)*(.3..0.8) size=.2..0.36 acc=curl(.5)*1.2+buoy(2.2)+drag(1.5) sz=$size*(.5>.25:1>.7:.72>.14) col=hdr(4.8,3.6,1.5)>.3:hdr(3.4,1.5,.35)>.65:hdr(1.9,.55,.12)>hdr(.7,.14,.03) a=0>.12:1>.75:.85>0 rot=spin(.2) r=sprite(flame-wisp,add)\npop embers rate=3 on=disc(.2) life=.7..1.3 v=up(2.2)+cone(30)*(.4..1.2) size=.02..0.045 acc=curl(.8)+grav()*.45+drag(.5) sz=$size*(1>.3) col=hdr(5,2.8,.8)>hdr(1,.22,.04) a=(0>.08:1>.65:.9>0)*flick(11,.35) r=sprite(ember,add,velocity,.02)\npop smoke on=@flame?.2 inh=p;v:$v*.4 life=1.6..2.6 size=.14..0.22 acc=buoy(.9)+curl(.35)*.5+drag(.8) sz=$size*(.7>3) col=<.3,.28,.26>><.16,.16,.17> a=0>.22:.28>.7:.18>0 rot=spin(.15) r=sprite(smoke-puff,alpha)\npop glow n=1 at=point().c(.4) glo=fire()*(#flame/16)~ r=light(<1,.55,.24>,$glo*8,9)"}
+  id: trade-brazier-e
+  tags: [trade]
+trade-brazier-w:
+  feetPosition: {x: -3.8, y: 2.214, z: 6}
+  fx: {script: "fx\npop coals n=6 on=disc(.26) size=.07..0.14 tint=<2.6,1,.28>..<1.2,.35,.09> sz=$size*flick(.5,.12) col=$tint*flick(.8,.3) a=.9 r=sprite(soft-disc,add)\npop flame rate=flick(.45,.2)*22 on=disc(.22) life=.45..0.8 v=up(1.4)+cone(22)*(.3..0.8) size=.2..0.36 acc=curl(.5)*1.2+buoy(2.2)+drag(1.5) sz=$size*(.5>.25:1>.7:.72>.14) col=hdr(4.8,3.6,1.5)>.3:hdr(3.4,1.5,.35)>.65:hdr(1.9,.55,.12)>hdr(.7,.14,.03) a=0>.12:1>.75:.85>0 rot=spin(.2) r=sprite(flame-wisp,add)\npop embers rate=3 on=disc(.2) life=.7..1.3 v=up(2.2)+cone(30)*(.4..1.2) size=.02..0.045 acc=curl(.8)+grav()*.45+drag(.5) sz=$size*(1>.3) col=hdr(5,2.8,.8)>hdr(1,.22,.04) a=(0>.08:1>.65:.9>0)*flick(11,.35) r=sprite(ember,add,velocity,.02)\npop smoke on=@flame?.2 inh=p;v:$v*.4 life=1.6..2.6 size=.14..0.22 acc=buoy(.9)+curl(.35)*.5+drag(.8) sz=$size*(.7>3) col=<.3,.28,.26>><.16,.16,.17> a=0>.22:.28>.7:.18>0 rot=spin(.15) r=sprite(smoke-puff,alpha)\npop glow n=1 at=point().c(.4) glo=fire()*(#flame/16)~ r=light(<1,.55,.24>,$glo*8,9)"}
+  id: trade-brazier-w
+  tags: [trade]
+trade-gate:
+  castShadow: true
+  feetPosition: {x: 0.25, y: 0.5, z: 5}
+  id: trade-gate
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: gate, ped: [0.054, 0.165]}, script: scripts/gen/trade-road.js, seed: 11}
+  receiveShadow: true
+  tags: [trade]
+  visibleRange: {max: 90}
 trade-road:
+  castShadow: true
   feetPosition: {x: 0, y: 0.5, z: 13}
   id: trade-road
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 6, height: 3, kind: box, width: 40}
-  tags: [blueprint]
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {items: [[crates, 12.2, 0.396, 5.2, 10], [barrels, 13.8, 0.406, 5.8, 0], [bales, 15.4, 0.398, 6.6, -8], [wagon, 18.8, 0.365, 6.8, 4], [mule, 22.2, 0.345, 6.4, 0], [mule, 25.2, 0.34, 6.4, 0], [crates, 27.4, 0.355, 5.6, -15], [barrels, 28.4, 0.333, 6.9, 0], [handcart, -15.5, -0.046, 5.4, 25], [crates, -17.4, -0.081, 5.9, -20], [bales, -19.3, -0.119, 6.4, 12], [lamp, 19, 0.411, 3.6, 0], [lamp, 33, 0.327, 3.6, 0], [patch, 16, 0.416, 4.1, 0], [patch, 23.5, 0.381, 4.1, 0], [patch, 35, 0.267, 4.3, 0], [patch, 41, 0.074, 4.2, 0]], kind: road}, script: scripts/gen/trade-road.js, seed: 7}
+  receiveShadow: true
+  tags: [trade]
+  visibleRange: {max: 90}
 trail-e-shelter:
   feetPosition: {x: 58.71, y: {terrain: 0}, z: 15.31}
   id: trail-e-shelter
