@@ -1845,6 +1845,13 @@ corral-shed:
   rotation: {yaw: 180}
   tags: [corral]
   visibleRange: {max: 120}
+corridor-greenbelt-bp:
+  feetPosition: {x: 0, y: 0.5, z: 48}
+  id: corridor-greenbelt-bp
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 70, height: 8, kind: box, width: 120}
+  tags: [blueprint]
 corridor-road-bp:
   feetPosition: {x: 0, y: 0.5, z: 46}
   id: corridor-road-bp
