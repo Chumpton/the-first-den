@@ -1,6 +1,6 @@
 // One leaf of the grand gate: swings inward as anyone walks up, eases shut once the way is clear. Hinge = the row's origin.
 // state: baseYaw (closed yaw), openBy (degrees added when open, sign picks the swing), cx/cz (the gate's centre).
-const OPEN_AT = 7, CLOSE_AT = 9, SPEED = 70;
+const OPEN_AT = 13, CLOSE_AT = 16, SPEED = 95;
 const CREAK = '/cdn/moodboard-lowpoly-cozy/sfx-heavy-oak-gate-creak-open.mp3', THUD = '/cdn/moodboard-lowpoly-cozy/sfx-heavy-oak-gate-close-thud.mp3';
 export function update(ctx, dt) {
   const me = ctx.self, s = me.state;
