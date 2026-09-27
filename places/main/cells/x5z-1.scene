@@ -1,0 +1,9 @@
+# spawn-scene v2 yaml x5z-1
+bridge-e3:
+  feetPosition: {x: 635.3, y: 0.5, z: -127.05000000000001}
+  id: bridge-e3
+  physics: static
+  primitive: {kind: scripted, params: {length: 28.06, seed: 4, width: 6}, script: scripts/gen/road-bridge.js}
+  rotation: {lookAt: {x: 647.1, y: 0.5, z: -129.4}}
+  tags: [road-bridge]
+  visibleRange: {max: 700}
