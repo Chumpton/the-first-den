@@ -41,6 +41,8 @@ function travelHud(player) {
 function alchemyHud(player) {
   const st = player?.state || {}, chips = [], F = "font-family:Georgia,serif";
   if ((st.harvest ?? 0) > 0) chips.push(`<span style="color:#b9e08f">&#10047;</span> harvest ${st.harvest}`);
+  if ((st.seeds ?? 0) > 0) chips.push(`<span style="color:#e6c77a">&#9679;</span> seeds ${st.seeds}`);
+  if ((st.fish ?? 0) > 0) chips.push(`<span style="color:#8fd0d6">&#10148;</span> fish ${st.fish}`);
   const bf = st.buff, br = bf && ALCHEMY.recipes[bf.kind];
   if (bf && st.buffLeft > 0) { const c = bf.color ? `rgb(${bf.color.map((v) => Math.round(v * 255)).join(',')})` : br?.css; chips.push(`<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${c};box-shadow:0 0 6px ${c}"></span> ${bf.name} · ${st.buffLeft}s`); }
   let h = chips.length ? `<div style="position:fixed;left:18px;bottom:58px;display:flex;flex-direction:column;gap:5px;pointer-events:none">${chips.map((c) => `<div style="padding:4px 11px;border-radius:999px;background:rgba(40,28,14,.6);color:#f7eedd;${F};font-size:13px">${c}</div>`).join('')}</div>` : '';
