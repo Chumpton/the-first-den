@@ -3204,7 +3204,7 @@ lake-rowboat:
   physics: kinematic
   primitive: {kind: scripted, params: {kind: boat}, script: scripts/gen/grounds-kit.js, seed: 5}
   receiveShadow: true
-  rotation: {yaw: 0}
+  rotation: {yaw: 180}
   tags: [interactable, mount, boat]
   visibleRange: {max: 200}
 lawn-flowers-coop-walk:
