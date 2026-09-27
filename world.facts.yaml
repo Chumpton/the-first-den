@@ -65,6 +65,7 @@ assets:
     "anim/villager.yml#garden": clips/anim-villager-yml-garden-4ffb93f9.json
     "anim/villager.yml#idle": clips/anim-villager-yml-idle-dea04d12.json
     "anim/villager.yml#sit": clips/anim-villager-yml-sit-36246f7c.json
+    "anim/villager.yml#talk": clips/anim-villager-yml-talk-473e5f6e.json
     "anim/villager.yml#walk": clips/anim-villager-yml-walk-0f281ce1.json
     "anim/wolf.yml#alert": clips/anim-wolf-yml-alert-0ed44828.json
     "anim/wolf.yml#sniff": clips/anim-wolf-yml-sniff-181ab4fe.json
