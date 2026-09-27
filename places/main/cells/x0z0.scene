@@ -4051,14 +4051,6 @@ verge-pathFront:
   receiveShadow: true
   tags: [decor, path-verge]
   visibleRange: {max: 80}
-verge-pathFront-gate:
-  castShadow: false
-  feetPosition: {x: 0.25, y: 0.5375542362795345, z: 7}
-  id: verge-pathFront-gate
-  primitive: {kind: scripted, params: {items: []}, script: scripts/gen/path-verge.js, seed: 14}
-  receiveShadow: true
-  tags: [decor, path-verge]
-  visibleRange: {max: 80}
 verge-pathLake:
   castShadow: false
   feetPosition: {x: 0, y: 0.5, z: -35.5}
