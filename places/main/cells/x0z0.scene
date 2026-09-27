@@ -2000,6 +2000,86 @@ creek-bridge-maze:
   primitive: {kind: scripted, params: {length: 5.6, seed: 4, width: 2}, script: scripts/gen/road-bridge.js}
   rotation: {lookAt: {x: -16, y: 0.5, z: -49}}
   tags: [grounds, creek-bridge]
+creek-lilies:
+  feetPosition: {x: -3, y: 0, z: 0}
+  id: creek-lilies
+  primitive: {kind: scripted, params: {items: [[16.82, -0.59, 0.21, 0, 5.68], [-3.62, -0.39, 0.21, 0, 0.22], [-5.81, -0.07, 0.26, 1, 5.99]], kind: lilies, y: 0.02}, script: scripts/gen/shore-kit.js, seed: 71}
+  receiveShadow: true
+  tags: [creek, decor]
+  visibleRange: {max: 60}
+creek-mist:
+  feetPosition: {x: -3, y: 0.12, z: 0}
+  fx: {script: "fx\npop mist n=?mobile:14|26 on=path(js{[[19,0,-1],[3,0,0],[-7,0,.4],[-18,0,-7],[-19.5,0,-8.5]]}) life=6..10 v=sdir()*.06+up(.02..0.05) size=1..1.9 acc=curl(.2)*.12+drag(.6) sz=$size*(.7>1.4) col=<.94,.96,.95> a=0>.3:.16>.7:.12>0 rot=spin(.04) r=sprite(smoke-puff,alpha)"}
+  id: creek-mist
+  tags: [creek, fx]
+  visibleRange: {max: 90}
+creek-reeds-0:
+  castShadow: true
+  feetPosition: {x: 13.26, y: 0, z: -0.83}
+  id: creek-reeds-0
+  material: {kind: scripted, params: {base: 0.05, h: 1.4, reach: 0.09, speed: 1.3}, script: scripts/material-shore-sway.js}
+  primitive: {kind: scripted, params: {items: [[3, 2.26, 0.08, -0.76, 0.89, 3.89], [2, 2.26, -0.25, 0.17, 0.99, 5], [2, 1.85, -0.1, 0.52, 0.84, 1.42], [1, 1.16, 0.34, -0.8, 0.89, 5.84], [2, 1.29, -0.11, 0.64, 0.71, 4.75], [2, 0.63, -0.09, 0.82, 1.07, 4.71], [3, -0.1, 0.35, -0.65, 0.91, 2.66], [2, -0.64, -0.25, 0.19, 1.08, 0.98], [2, -0.33, 0.32, 1.43, 0.82, 2.51], [2, -1, -0.1, 0.05, 0.71, 5.09], [1, -0.95, 0.07, 1.33, 0.74, 1.5], [2, -1.55, 0.24, -0.17, 0.72, 5.21], [1, -2.07, 0.35, -0.17, 1.02, 6.16], [1, -2.3, -0.13, 1.36, 1.06, 5.13], [1, -2.82, 0.35, -0.16, 0.71, 1.35]], kind: reeds}, script: scripts/gen/shore-kit.js, seed: 60}
+  tags: [creek, decor]
+  visibleRange: {max: 60}
+creek-reeds-1:
+  castShadow: true
+  feetPosition: {x: 7.22, y: 0, z: -0.45}
+  id: creek-reeds-1
+  material: {kind: scripted, params: {base: 0.05, h: 1.4, reach: 0.09, speed: 1.3}, script: scripts/material-shore-sway.js}
+  primitive: {kind: scripted, params: {items: [[1, 2.76, 0.34, -0.36, 0.94, 4.42], [2, 2.92, -0.05, -0.01, 0.86, 1.09], [2, 2.26, -0.07, 0.1, 0.74, 0.34], [3, 1.62, 0.25, -0.13, 0.97, 4.42], [3, 1.29, 0.03, 0.08, 1.07, 5.68], [3, 0.56, 0.04, 0.1, 0.96, 5.29], [3, 0.04, 0.22, -0.05, 0.95, 5.54], [1, -0.52, 0.12, 0.04, 0.78, 5.34], [1, -0.62, 0.34, -0.26, 0.75, 3.21], [3, -1.22, 0.06, 0.07, 0.85, 4.47], [2, -1.13, 0.22, -0.08, 1.07, 5.63], [2, -1.55, 0.34, -0.31, 0.75, 4.09], [2, -1.45, 0.34, 1.81, 0.79, 0.11], [3, -2.21, 0.29, -0.18, 0.86, 0.5], [3, -2.24, 0.08, 1.48, 0.83, 2.02]], kind: reeds}, script: scripts/gen/shore-kit.js, seed: 61}
+  tags: [creek, decor]
+  visibleRange: {max: 60}
+creek-reeds-3:
+  castShadow: true
+  feetPosition: {x: -6.59, y: 0, z: 0.26}
+  id: creek-reeds-3
+  material: {kind: scripted, params: {base: 0.05, h: 1.4, reach: 0.09, speed: 1.3}, script: scripts/material-shore-sway.js}
+  primitive: {kind: scripted, params: {items: [[2, 0.93, 0.18, 0.61, 0.88, 5.69], [3, 0.05, 0.13, 0.71, 0.88, 3.8], [1, -0.36, -0.07, 0.59, 0.89, 1.85]], kind: reeds}, script: scripts/gen/shore-kit.js, seed: 63}
+  tags: [creek, decor]
+  visibleRange: {max: 60}
+creek-reeds-4:
+  castShadow: true
+  feetPosition: {x: -9.34, y: 0, z: 0.37}
+  id: creek-reeds-4
+  material: {kind: scripted, params: {base: 0.05, h: 1.4, reach: 0.09, speed: 1.3}, script: scripts/material-shore-sway.js}
+  primitive: {kind: scripted, params: {items: [[1, 1.06, 0.01, 0.73, 0.81, 0.37], [1, 0.69, 0.31, 1.11, 0.8, 5.02], [1, 0.07, 0.04, 0.75, 0.72, 5.88], [2, -0.44, -0.16, 0.54, 0.71, 1.66], [1, -1.4, 0.3, 0.86, 0.83, 4.47]], kind: reeds}, script: scripts/gen/shore-kit.js, seed: 64}
+  tags: [creek, decor]
+  visibleRange: {max: 60}
+creek-reeds-5:
+  castShadow: true
+  feetPosition: {x: -16.39, y: 0, z: -3.9}
+  id: creek-reeds-5
+  material: {kind: scripted, params: {base: 0.05, h: 1.4, reach: 0.09, speed: 1.3}, script: scripts/material-shore-sway.js}
+  primitive: {kind: scripted, params: {items: [[2, 2.2, -0.11, 1.76, 0.98, 3.89], [2, 1.69, 0.03, 1.25, 0.75, 5.1], [2, 1.9, 0, 1.43, 0.97, 3.52], [1, 1.29, 0.13, 0.88, 1, 4.3], [1, 0.68, 0.03, 0.56, 1.01, 3.82], [2, 1.03, 0.18, 0.39, 1.06, 2.25], [2, 0.2, -0.07, 0.31, 0.71, 5.53], [2, 0.13, 0.17, -0.3, 0.99, 3], [3, -0.44, 0.16, -0.56, 0.78, 1.7], [2, -1.16, -0.3, 0.77, 0.93, 4.87], [2, -1.94, 0.16, 1, 0.97, 5.2], [1, -2.25, 0, 0.42, 0.77, 1.44], [1, -1.39, 0.18, -1.7, 0.92, 4.19]], kind: reeds}, script: scripts/gen/shore-kit.js, seed: 65}
+  tags: [creek, decor]
+  visibleRange: {max: 60}
+creek-reeds-6:
+  castShadow: true
+  feetPosition: {x: -20.95, y: 0, z: -6.97}
+  id: creek-reeds-6
+  material: {kind: scripted, params: {base: 0.05, h: 1.4, reach: 0.09, speed: 1.3}, script: scripts/material-shore-sway.js}
+  primitive: {kind: scripted, params: {items: [[2, 2.23, 0.15, 0.94, 0.76, 0.09], [2, 1.62, -0.12, 0.71, 0.72, 1.78], [2, 0.87, -0.15, 1.98, 0.78, 1.78], [3, 0.11, 0.15, 1.71, 0.73, 5.81], [1, 0.87, 0, -0.27, 0.74, 1.04], [1, -0.21, 0.15, 1.51, 1, 4.72], [1, -0.64, 0.16, 1.22, 0.96, 6.22], [1, 0.97, 0.15, -0.47, 0.77, 1.64], [3, -1.54, 0.15, 0.1, 1.07, 6.05], [1, -0.47, -0.21, -1.6, 1.08, 0.45], [2, -2.13, 0.13, -0.86, 0.73, 3.08], [2, -0.69, 0.04, -2.28, 0.93, 1.28], [2, -1.94, -0.3, -1.54, 0.76, 2.96]], kind: reeds}, script: scripts/gen/shore-kit.js, seed: 66}
+  tags: [creek, decor]
+  visibleRange: {max: 60}
+creek-stepping-stones:
+  castShadow: true
+  feetPosition: {x: -12, y: 0, z: -0.95}
+  id: creek-stepping-stones
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {items: [[-1.12, 0.28, 1.66, 0.35, 0.34, 5.88, 1], [-0.7, -0.14, 1.04, 0.35, 0.1, 4.53, 1], [-0.28, -0.41, 0.42, 0.35, 0.1, 2.69, 1], [0.14, 0.19, -0.21, 0.35, 0.25, 5.03, 1], [0.56, 0.38, -0.83, 0.35, 0.44, 5.06, 1]], kind: stones}, script: scripts/gen/shore-kit.js, seed: 72}
+  receiveShadow: true
+  tags: [creek, walkable]
+  visibleRange: {max: 90}
+creek-stones:
+  castShadow: true
+  feetPosition: {x: -3, y: 0, z: 0}
+  id: creek-stones
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {items: [[17.37, -0.33, -0.71, 0.16, 0.1, 6.27, 0], [16.21, -0.1, -1.48, 0.18, 0.08, 0.54, 0], [14.6, -0.1, -0.91, 0.3, 0.19, 2.7, 0], [8.52, -0.1, -1.14, 0.3, 0.06, 4.8, 0], [-1.92, -0.1, 0.93, 0.32, 0.12, 2.26, 0], [-11.93, -0.45, -2.12, 0.21, 0.1, 1.85, 0], [-14.94, -0.38, -4.55, 0.15, 0.07, 2.99, 0], [-16.47, -0.54, -5.22, 0.25, 0.15, 6.09, 0], [-18.17, -0.52, -6.9, 0.16, 0.07, 4.66, 0], [-17.66, -0.1, -7.86, 0.34, 0.07, 2.02, 0], [-19.81, -0.35, -8.47, 0.31, 0.06, 0.77, 0]], kind: stones}, script: scripts/gen/shore-kit.js, seed: 70}
+  receiveShadow: true
+  tags: [creek, decor]
+  visibleRange: {max: 60}
 critter-bird-f1-1:
   castShadow: false
   feetPosition: {x: 0, y: 30, z: -30}
