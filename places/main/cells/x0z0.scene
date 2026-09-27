@@ -1784,6 +1784,13 @@ coop-site/coop-nest-lid:
   primitive: {kind: scripted, script: scripts/gen/coop-lid.js}
   state: {eggs: 0}
   tags: [interactable, coop]
+courier-post:
+  feetPosition: {x: -9, y: 0.5, z: 16}
+  id: courier-post
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 4, height: 2.5, kind: box, width: 5}
+  tags: [blueprint]
 creek-banks:
   castShadow: true
   feetPosition: {x: 0, y: 0, z: 0}
