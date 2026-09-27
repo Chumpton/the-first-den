@@ -35,6 +35,8 @@ export function materialAt(ctx) {
   const n = noise.fbm2({ x, z, frequency: 1 / 25, octaves: 3, seed: seedOffset(5) });
   if (worldHeight < -0.2) return { pebbles: 1 };
   if (worldHeight < 0.28 + n * 0.1) return { mud: 1 };
-  const moss = clamp01(0.5 + n * 1.6);
+  // the greenbelt between the den and the market town wears moss-and-grass, not bare leaf litter
+  const belt = (1 - smooth(70, 84, Math.abs(x))) * smooth(14, 22, z) * (1 - smooth(84, 96, z));
+  const moss = clamp01(0.5 + n * 1.6 + belt * 0.45);
   return { litter: 1 - moss, moss };
 }
