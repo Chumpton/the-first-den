@@ -2681,6 +2681,20 @@ far-haze-ring:
   receiveShadow: false
   tags: [backdrop, far-haze]
   visibleRange: {max: 40000}
+farm-east:
+  feetPosition: {x: 46, y: 0.5, z: 28}
+  id: farm-east
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 18, height: 3, kind: box, width: 56}
+  tags: [blueprint]
+farm-west:
+  feetPosition: {x: -46, y: 0.5, z: 28}
+  id: farm-west
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 18, height: 3, kind: box, width: 56}
+  tags: [blueprint]
 fauna-ground:
   behavior: scripts/fauna-ground.js
   feetPosition: {x: 0, y: {terrain: 0}, z: 0}

@@ -49,6 +49,20 @@ link-west/light:
   id: link-west/light
   light: {color: oklch(0.85 0.1 70), distance: 11, intensity: 3, kind: point}
   parent: link-west
+orchard-east:
+  feetPosition: {x: 41, y: 0.5, z: 70}
+  id: orchard-east
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 40, height: 5, kind: box, width: 24}
+  tags: [blueprint]
+pasture-west:
+  feetPosition: {x: -41, y: 0.5, z: 70}
+  id: pasture-west
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 40, height: 3, kind: box, width: 24}
+  tags: [blueprint]
 royal-armoury:
   children: [{castShadow: false, feetPosition: {x: 0, y: 4.3, z: -4.72}, id: plaque, material: {color: oklch(0.32 0.1 262)}, primitive: {depth: 0.06, height: 0.62, kind: box, width: 3.4}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:300px;letter-spacing:12px\">ROYAL ARMOURY</div>", visibleRange: {max: 90}}]
   feetPosition: {x: 16.5, y: 0.5, z: 169.5}
