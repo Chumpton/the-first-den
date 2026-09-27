@@ -2652,6 +2652,12 @@ grounds-sundial:
   primitive: {kind: scripted, params: {kind: sundial}, script: scripts/gen/yard-furnish.js}
   rotation: {yaw: 0}
   tags: [grounds]
+grounds-walk-coop-hive:
+  feetPosition: {x: 0, y: 0.5, z: 0}
+  id: grounds-walk-coop-hive
+  primitive: {kind: scripted, params: {hubs: [], smooth: true, walks: [[[14.3, -24], [18.5, -23.2], [22.5, -23.1], [26.8, -24.6]], [[26.8, -24.6], [29.8, -23.9], [32.7, -26.2], [33.2, -32], [32.6, -38], [31, -42.4]]], width: 1.1}, script: scripts/gen/grounds-flags.js}
+  receiveShadow: true
+  tags: [grounds]
 hive-site:
   audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-honeybee-hive-soft-hum-loop.mp3, gain: 0.12, loop: true, maxDistance: 12, spatial: true}
   castShadow: true
