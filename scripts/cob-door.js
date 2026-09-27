@@ -19,7 +19,7 @@ function setOpen(ctx, open) {
   s.open = open
   for (const L of s.leaves ?? []) {
     const o = ctx.getObject(L.id)
-    if (o) animate(ctx, o, { 'rotation.yaw': open ? L.open : L.closed }, { duration: open ? 0.45 : 0.6, easing: 'easeOutCubic' })
+    if (o) o.rotation = { yaw: open ? L.open : L.closed }
   }
   for (const id of s.pads ?? []) {
     const p = ctx.getObject(id)
