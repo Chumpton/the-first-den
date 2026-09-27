@@ -53,7 +53,7 @@ function raisedBed(ctx, poly, lod) {
     ctx.quad(a[0], BED_H, a[1], ai[0], BED_H, ai[1], bi[0], BED_H, bi[1], b[0], BED_H, b[1]);
     ctx.quad(b[0], BED_H, b[1], bi[0], BED_H, bi[1], ai[0], BED_H, ai[1], a[0], BED_H, a[1]);
   }
-  paint(ctx, 'soil', 'oklch(0.42 0.05 55)', 0.97);
+  paint(ctx, 'soil', 'oklch(0.72 0.07 60)', 0.97);
   for (const t of triangulate(inner)) { const [p, q, r] = t.map((k) => inner[k]); ctx.tri(p[0], BED_H - 0.06, p[1], q[0], BED_H - 0.06, q[1], r[0], BED_H - 0.06, r[1]); ctx.tri(r[0], BED_H - 0.06, r[1], q[0], BED_H - 0.06, q[1], p[0], BED_H - 0.06, p[1]); }
   if (lod <= 2) for (let i = 0; i < n; i++) { const a = inner[i], b = inner[(i + 1) % n]; paint(ctx, 'stone', 'oklch(0.78 0.02 70)'); Q(ctx, [a[0], BED_H - 0.06, a[1]], [b[0], BED_H - 0.06, b[1]], [b[0], BED_H, b[1]], [a[0], BED_H, a[1]], [a[0] * 2 - cx, BED_H, a[1] * 2 - cz]); }
   return inner;
@@ -100,7 +100,7 @@ export function geometry(ctx) {
   paint(ctx, 'soil', 'oklch(0.5 0.06 60)', 0.98);
   { const n = 40; for (let i = 0; i < n; i++) { const a = i / n * TAU, b = (i + 1) / n * TAU, [x0, z0] = ringXZ(g, a, 1.0), [x1, z1] = ringXZ(g, b, 1.0); ctx.tri(0, 0.012, 0, x1, 0.012, z1, x0, 0.012, z0); } }
   // cross paths + hub: flagstones on gravel
-  paint(ctx, null, 'oklch(0.8 0.025 80)', 0.98);
+  paint(ctx, null, 'oklch(0.66 0.03 75)', 0.98);
   for (const [dx, dz, L] of [[1, 0, g.rx], [-1, 0, g.rx], [0, 1, g.rz], [0, -1, g.rz]]) { const nx = -dz * g.pw, nz = dx * g.pw; ctx.quad(nx, 0.02, nz, -nx, 0.02, -nz, dx * L - nx, 0.02, dz * L - nz, dx * L + nx, 0.02, dz * L + nz); ctx.quad(dx * L + nx, 0.02, dz * L + nz, dx * L - nx, 0.02, dz * L - nz, -nx, 0.02, -nz, nx, 0.02, nz); }
   for (const [dx, dz, L] of [[1, 0, g.rx + 0.5], [-1, 0, g.rx + 0.5], [0, 1, g.rz + 0.2], [0, -1, g.rz + 0.5]]) {
     const ang = Math.atan2(dz, dx); for (let d = g.hr + 0.45; d < L; d += 0.62) { if (ctx.random() < 0.5) { paint(ctx, 'stone', col(ctx, 0.92, 0.015, 80, 0.07, 20), 0.92); slab(ctx, dx * d, dz * d, 0.26, g.pw * 0.85, ang, 0.06); } else for (const s of [-1, 1]) { paint(ctx, 'stone', col(ctx, 0.92, 0.015, 80, 0.07, 20), 0.92); slab(ctx, dx * d - dz * s * g.pw * 0.45, dz * d + dx * s * g.pw * 0.45, 0.25, g.pw * 0.4, ang, 0.06); } }
