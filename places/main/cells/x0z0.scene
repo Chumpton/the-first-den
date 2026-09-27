@@ -3561,13 +3561,97 @@ waylamp-west-0:
   rotation: {yaw: 215}
   tags: [road-dressing, waylamp, road-west]
   visibleRange: {max: 200}
+wizard-portal-down:
+  behavior: scripts/wizard-portal.js
+  feetPosition: {x: 33.52, y: 18.098517805895344, z: -18.78}
+  id: wizard-portal-down
+  physics: {body: static, trigger: true}
+  primitive: {depth: 0.6, height: 2, kind: box, width: 1.2}
+  rotation: {yaw: 0}
+  state: {to: bottom}
+  tags: [wizard-tower, portal]
+  visible: false
+wizard-portal-glow:
+  feetPosition: {x: 30.5, y: 2.028517805895345, z: -18.5}
+  fx: {script: "fx\npop motes rate=?mobile:28|55 on=box(.05,.85,.85) life=1.2..2 v=sdir()*.15 size=.03..0.07 acc=attract(1.6)+curl(.8)*.6+drag(.8) tint=hdr(.4,2.4,2.2)..hdr(1.6,.6,2.6) col=$tint a=0>.2:1>.8:.8>0 sz=$size r=sprite(mote,add)\npop veil n=3 at=point() size=1.3..1.7 sz=$size*flick(.6,.08) col=<.25,.7,.8> a=.3*flick(1.3,.3) rot=spin(.15) r=sprite(soft-disc,add)\npop core n=1 at=point() size=.6 sz=$size*flick(2,.15) col=hdr(1.1,1.4,2.4) a=.45 r=sprite(soft-disc,add)\npop glow n=1 at=point() glo=flick(1.5,.25) r=light(<.45,.75,1>,$glo*7,7)"}
+  id: wizard-portal-glow
+  tags: [wizard-tower]
+wizard-portal-glow-top:
+  feetPosition: {x: 33.52, y: 19.128517805895346, z: -18.78}
+  fx: {script: "fx\npop motes rate=?mobile:28|55 on=box(.45,.75,.04) life=1.2..2 v=sdir()*.15 size=.03..0.07 acc=attract(1.6)+curl(.8)*.6+drag(.8) tint=hdr(.4,2.4,2.2)..hdr(1.6,.6,2.6) col=$tint a=0>.2:1>.8:.8>0 sz=$size r=sprite(mote,add)\npop veil n=3 at=point() size=1.3..1.7 sz=$size*flick(.6,.08) col=<.25,.7,.8> a=.3*flick(1.3,.3) rot=spin(.15) r=sprite(soft-disc,add)\npop core n=1 at=point() size=.6 sz=$size*flick(2,.15) col=hdr(1.1,1.4,2.4) a=.45 r=sprite(soft-disc,add)\npop glow n=1 at=point() glo=flick(1.5,.25) r=light(<.45,.75,1>,$glo*7,7)"}
+  id: wizard-portal-glow-top
+  tags: [wizard-tower]
+wizard-portal-up:
+  behavior: scripts/wizard-portal.js
+  feetPosition: {x: 30.5, y: 0.8785178058953451, z: -18.5}
+  id: wizard-portal-up
+  physics: {body: static, trigger: true}
+  primitive: {depth: 0.6, height: 2.2, kind: box, width: 1.4}
+  rotation: {yaw: 90}
+  state: {to: top}
+  tags: [wizard-tower, portal]
+  visible: false
 wizard-tower:
-  feetPosition: {x: 30.5, y: 0.55, z: -18.5}
+  castShadow: true
+  feetPosition: {x: 30.5, y: {terrain: 0}, z: -18.5}
   id: wizard-tower
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 8, height: 22, kind: box, width: 8}
-  tags: [blueprint]
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/wizard-tower.js, seed: 7}
+  receiveShadow: true
+  rotation: {lookAt: {x: 20, y: 0.5, z: -18.5}}
+  tags: [grounds, wizard-tower]
+  visibleRange: {max: 600}
+wizard-tower-runes:
+  behavior: scripts/lumen-float.js
+  feetPosition: {x: 30.42, y: 22.778517805895344, z: -18.78}
+  id: wizard-tower-runes
+  state: {spin: 48}
+  tags: [wizard-tower]
+wizard-tower-runes/rune-0:
+  behavior: scripts/lumen-float.js
+  feetPosition: {x: 3.3, y: -0.4, z: 0}
+  id: wizard-tower-runes/rune-0
+  parent: wizard-tower-runes
+  primitive: {kind: scripted, params: {part: rune}, script: scripts/gen/wizard-tower.js}
+  rotation: {roll: 8, yaw: 0}
+  state: {bob: 0.35, bobT: 2.6}
+  tags: [wizard-tower, rune]
+wizard-tower-runes/rune-1:
+  behavior: scripts/lumen-float.js
+  feetPosition: {x: -1.6499999999999992, y: -0.15000000000000002, z: 2.8578838324886475}
+  id: wizard-tower-runes/rune-1
+  parent: wizard-tower-runes
+  primitive: {kind: scripted, params: {part: rune}, script: scripts/gen/wizard-tower.js}
+  rotation: {roll: 8, yaw: -120.00883936713008}
+  state: {bob: 0.35, bobT: 3}
+  tags: [wizard-tower, rune]
+wizard-tower-runes/rune-2:
+  behavior: scripts/lumen-float.js
+  feetPosition: {x: -1.6500000000000015, y: 0.09999999999999998, z: -2.8578838324886466}
+  id: wizard-tower-runes/rune-2
+  parent: wizard-tower-runes
+  primitive: {kind: scripted, params: {part: rune}, script: scripts/gen/wizard-tower.js}
+  rotation: {roll: 8, yaw: -240.01767873426016}
+  state: {bob: 0.35, bobT: 3.4000000000000004}
+  tags: [wizard-tower, rune]
+wizard-tower/lamp:
+  feetPosition: {x: -1.7, y: 2.5, z: 1}
+  id: wizard-tower/lamp
+  light: {color: oklch(0.85 0.1 75), distance: 9, intensity: 16, kind: point}
+  parent: wizard-tower
+wizard-tower/orb-light:
+  feetPosition: {x: 0.4, y: 1.1, z: 2.2}
+  id: wizard-tower/orb-light
+  light: {color: oklch(0.75 0.14 230), distance: 4, intensity: 3, kind: point}
+  parent: wizard-tower
+wizard-tower/plaque:
+  feetPosition: {x: 1.79, y: 1.55, z: -3.42}
+  id: wizard-tower/plaque
+  material: {color: oklch(0.36 0.04 50), roughness: 0.8}
+  parent: wizard-tower
+  primitive: {depth: 0.04, height: 0.34, kind: box, width: 0.95}
+  rotation: {yaw: -27.6}
+  ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#4f3828;border:10px solid #ba8950;border-radius:14px;color:#f2e6cf;font-family:serif;font-size:118px;letter-spacing:4px\">The Watchtower</div>"
 wolf-2:
   behavior: scripts/fauna-pet.js
   castShadow: true
