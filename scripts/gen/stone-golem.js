@@ -34,6 +34,12 @@ function rock(ctx, cx, cy, cz, sx, sy, sz, r = {}, ch = 0.2, jit = 0.35) {
   const J = ctx.lod >= 4 ? 0 : jit;
   const levels = [[-hy, hx - c, hz - c, c * 0.6], [-hy + c, hx, hz, c], [hy - c, hx, hz, c], [hy, hx - c, hz - c, c * 0.6]];
   const o = [cx * S, cy * S, cz * S];
+  if (ctx.lod >= 4) { // far: a plain turned box, 12 triangles
+    const B = [-hy, hy].map((y) => [[hx, -hz], [hx, hz], [-hx, hz], [-hx, -hz]].map(([x, z]) => { const w = xf([x, y, z], r); return [o[0] + w[0], o[1] + w[1], o[2] + w[2]]; }));
+    for (let i = 0; i < 4; i++) { const j = (i + 1) % 4; Q(ctx, B[0][i], B[0][j], B[1][j], B[1][i], o); }
+    T(ctx, B[0][0], B[0][1], B[0][2], o); T(ctx, B[0][0], B[0][2], B[0][3], o); T(ctx, B[1][0], B[1][1], B[1][2], o); T(ctx, B[1][0], B[1][2], B[1][3], o);
+    return;
+  }
   const L = levels.map(([y, ax, az, k]) => oct(ax, az, k).map(([x, z]) => {
     const f = 1 - ctx.random() * J * c / Math.max(hx, hz), g = y + (ctx.random() - 0.5) * J * c;
     const w = xf([x * f, g, z * f], r); return [o[0] + w[0], o[1] + w[1], o[2] + w[2]];
@@ -49,7 +55,7 @@ function stone(ctx) {
 function moss(ctx, cx, cy, cz, rx, ry, rz) {
   ctx.albedo(MOSS); ctx.emissive(null); ctx.roughness(1);
   ctx.color(`oklch(${(0.9 + ctx.random() * 0.06).toFixed(3)} 0.06 ${(125 + ctx.random() * 20).toFixed(0)})`);
-  blob(ctx, cx * S, cy * S, cz * S, rx * S, ry * S, rz * S, ctx.lod >= 3 ? 5 : 8, () => ctx.random());
+  blob(ctx, cx * S, cy * S, cz * S, rx * S, ry * S, rz * S, ctx.lod >= 4 ? 4 : ctx.lod >= 3 ? 5 : 8, () => ctx.random());
 }
 function flower(ctx, x, y, z, petal) {
   if (ctx.lod >= 3) return;
@@ -109,7 +115,7 @@ export function geometry(ctx) {
     stone(ctx); rock(ctx, -0.5, 2.92, 0.62, 0.6, 0.5, 0.26, { roll: -6 });
     stone(ctx); rock(ctx, 0.62, 2.1, -0.46, 0.5, 0.36, 0.2, { roll: -10 });
   }
-  if (lod < 5) {
+  if (lod < 4) {
     // keystone with the rune
     stone(ctx); rock(ctx, 0, 2.72, -0.69, 0.66, 0.66, 0.12, {}, 0.15, 0);
     glow(ctx, 0.55);
