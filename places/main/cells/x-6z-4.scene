@@ -1,0 +1,9 @@
+# spawn-scene v2 yaml x-6z-4
+hearthmere/hearth-city-gatehouse:
+  feetPosition: {x: 168.47, y: 0, z: 34.69}
+  id: hearthmere/hearth-city-gatehouse
+  parent: hearthmere
+  physics: static
+  primitive: {kind: scripted, params: {kind: gatehouse}, script: scripts/gen/hearth-city.js}
+  rotation: {yaw: -101.634}
+  visibleRange: {max: 1400}
