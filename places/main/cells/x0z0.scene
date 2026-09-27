@@ -1837,6 +1837,13 @@ den-tea-tea-pot:
   material: {color: oklch(0.72 0.08 190), roughness: 0.35}
   primitive: {kind: sphere, radius: 0.09}
   tags: [cob-interior]
+dune:
+  feetPosition: {x: -3, y: 0.5, z: -12}
+  id: dune
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 1.1, height: 0.8, kind: box, width: 0.5}
+  tags: [blueprint]
 fauna-ground:
   behavior: scripts/fauna-ground.js
   feetPosition: {x: 0, y: {terrain: 0}, z: 0}
