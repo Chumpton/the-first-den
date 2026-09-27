@@ -25,12 +25,10 @@ function collar(ctx, lod) {
   if (lod <= 2) {
     // the tag hangs at the throat, forward-down off the collar's middle
     const m = at((C.from + C.to) / 2), dy = b[0] - a[0], dz = b[1] - a[1], n = Math.hypot(dy, dz), s = C.tagSize;
-    const down = [0, -dz / n * -1 * -1, 0]; // placeholder kept flat: see below
-    const ty = m[1] - (dy / n) * 0 - (Math.abs(dz) / n) * (C.r + 0.018), tz = m[2] - (dy / n) * (C.r + 0.018);
+    const ty = m[1] + (dz / n) * (C.r + 0.018), tz = m[2] - (dy / n) * (C.r + 0.018);
     ctx.color(C.tag); ctx.metalness(0.6); ctx.roughness(0.35);
     ctx.quad(0, ty + s, tz, -s * 0.8, ty, tz, 0, ty - s, tz, s * 0.8, ty, tz);
     ctx.metalness(0);
-    void down;
   }
   ctx.bone(null);
 }
