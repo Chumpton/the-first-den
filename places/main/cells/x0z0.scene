@@ -1839,7 +1839,7 @@ cob-in-g-tv:
 compost-corner:
   behavior: scripts/compost-tumbler.js
   children: [{feetPosition: {x: -0.35, y: 0.43, z: 0}, id: drum, material: {pbr: true}, pivot: center, primitive: {kind: scripted, params: {part: drum}, script: scripts/gen/compost-corner.js}, visibleRange: {max: 80}}]
-  feetPosition: {x: 20.7, y: 0.16554359124795281, z: -59.7}
+  feetPosition: {x: 25.2, y: 0.42, z: -59.9}
   id: compost-corner
   material: {pbr: true}
   physics: static
