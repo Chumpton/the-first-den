@@ -2085,6 +2085,28 @@ creek-stones:
   receiveShadow: true
   tags: [creek, decor]
   visibleRange: {max: 60}
+creekhead-falls:
+  audio: {bus: Ambience, clip: /cdn/moodboard-lowpoly-cozy/sfx-small-waterfall-splash-loop.mp3, gain: 0.15, loop: true, maxDistance: 18, spatial: true}
+  castShadow: true
+  children: [{castShadow: false, id: water, material: {kind: scripted, params: {speed: 5}, script: scripts/material-falls-water.js}, primitive: {kind: scripted, params: {falls: [{out: 0.3, w: 0.75, x: 0, y0: 3.09, y1: 1.94, z: 2.35}, {out: 0.3, w: 0.9, x: -0.1, y0: 1.94, y1: 0.84, z: 0.75}, {out: 0.35, w: 1.1, x: 0, y0: 0.84, y1: 0.2, z: -0.95}], part: water, spring: {drop: 0.86, reach: 0.45, w0: 0.32, w1: 0.5, x: 0, y: 3.95, z: 3.95}, tiers: [{cx: 0, cz: -0.2, rx: 1.1, rz: 0.75, top: 0.8}, {cx: -0.15, cz: 1.5, rx: 1, rz: 0.75, top: 1.9}, {cx: 0, cz: 3.1, rx: 0.9, rz: 0.72, top: 3.05}], wall: false}, script: scripts/gen/pond-falls.js}, visibleRange: {max: 120}}, {feetPosition: {x: 0, y: 3.1, z: 3.1}, fx: {script: "fx\npop spray rate=2.5 on=disc(.4) life=1.8..2.8 v=up(.4..0.8)+sdir()*.15 size=.4..0.7 acc=buoy(.3)+curl(.3)*.3+drag(.6) col=<.95,.98,1> a=0>.16:.14>.6:.08>0 sz=$size*(.6>1.8) rot=spin(.1) r=sprite(smoke-puff,alpha)"}, id: spray-top}, {feetPosition: {x: 0, y: 1.96, z: 1.2}, fx: {script: "fx\npop foam rate=flick(.7,.3)*9 on=disc(0.3) life=.35..0.7 v=up(.6..1.2)+sdir()*(.3..0.6) size=.08..0.16 acc=grav()*.8+drag(1.5) col=<1,1,1> a=.85>0 sz=$size*(.7>1.5) rot=spin(.4) r=sprite(soft-disc,alpha)"}, id: foam-1}, {feetPosition: {x: -0.1, y: 0.86, z: -0.5}, fx: {script: "fx\npop foam rate=flick(.7,.3)*9 on=disc(0.35) life=.35..0.7 v=up(.6..1.2)+sdir()*(.3..0.6) size=.08..0.16 acc=grav()*.8+drag(1.5) col=<1,1,1> a=.85>0 sz=$size*(.7>1.5) rot=spin(.4) r=sprite(soft-disc,alpha)"}, id: foam-2}, {feetPosition: {x: 0, y: -0.197095782075737, z: -1.35}, fx: {script: "fx\npop foam rate=flick(.7,.3)*9 on=disc(0.45) life=.35..0.7 v=up(.6..1.2)+sdir()*(.3..0.6) size=.08..0.16 acc=grav()*.8+drag(1.5) col=<1,1,1> a=.85>0 sz=$size*(.7>1.5) rot=spin(.4) r=sprite(soft-disc,alpha)\npop mist rate=4 on=disc(.7) life=2..3.2 v=up(.35..0.7)+sdir()*.2 size=.6..1.0 acc=buoy(.25)+curl(.3)*.3+drag(.6) col=<.95,.98,1> a=0>.2:.2>.6:.1>0 sz=$size*(.6>2) rot=spin(.1) r=sprite(smoke-puff,alpha)"}, id: foam-foot}]
+  feetPosition: {x: 17.6, y: 0, z: -0.9}
+  id: creekhead-falls
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {boulders: [[0.1, 3.4, 4.9, 1.5, 1.4, 1.1], [-1.45, 2.6, 3.6, 1, 1.3, 0.95], [1.25, 2.4, 3.8, 0.85, 1.2, 0.95], [-1.1, 1.8, 5.5, 1.1, 1.3, 0.95], [0.95, 1.5, 5.2, 0.85, 1.1, 0.8], [-1.45, 1.3, 1.8, 0.9, 1, 0.85], [1.1, 1.2, 1.6, 0.7, 1, 0.75], [-1.2, 0.55, 0, 0.65, 0.6, 0.7], [1.25, 0.5, -0.3, 0.7, 0.55, 0.7], [-0.95, 0.2, -1.3, 0.4, 0.35, 0.4], [1.05, 0.2, -1.4, 0.4, 0.3, 0.4], [-2.2, 0.6, 2.9, 0.6, 0.5, 0.55], [0, 4.55, 5.3, 0.6, 0.35, 0.5]], part: rock, steps: [[-1.9, -1, -1.2, 1.9, 0.8, 0.8], [-2.2, -1, 0.8, 1.8, 1.9, 2.4], [-2.3, -1, 2.4, 2, 3.05, 4], [-2.1, -1, 4, 1.8, 4.3, 6.3]], tiers: [{cx: 0, cz: -0.2, rx: 1.1, rz: 0.75, top: 0.8}, {cx: -0.15, cz: 1.5, rx: 1, rz: 0.75, top: 1.9}, {cx: 0, cz: 3.1, rx: 0.9, rz: 0.72, top: 3.05}], wall: false}, script: scripts/gen/pond-falls.js}
+  receiveShadow: true
+  rotation: {lookAt: {x: 10, y: 0, z: -0.9}}
+  tags: [creekhead-falls, scenery]
+  visibleRange: {max: 120}
+creekhead-falls-ferns:
+  castShadow: true
+  feetPosition: {x: 20, y: 0, z: 0}
+  id: creekhead-falls-ferns
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {items: [[3, -3.1, 0.51, -2.6, 1.1, 0], [3, -1.8, 0.56, -2.5, 1, 1.37], [3, -1.2, 0.68, 1.8, 1.2, 2.74], [3, 0.4, 0.72, 2.5, 1.1, 4.11], [3, 1.9, 0.74, 2.4, 1, 5.48], [3, 3.3, 0.75, 1.6, 1.2, 0.57], [3, 4.2, 0.76, 0.4, 1, 1.94], [3, -1.7, 0.68, 2.6, 0.9, 3.31], [3, -0.4, 0.65, -2.35, 0.9, 4.68], [3, 2.6, 0.75, 2.8, 0.8, 6.05], [4, -2.5, 0.65, 2.2, 1, 1.14], [4, 1.2, 0.74, 2.9, 1, 2.51], [4, 4.6, 0.77, -0.8, 1, 3.88], [5, -0.2, 0.71, 2.9, 1, 5.25], [5, 3.8, 0.75, 2.6, 0.9, 0.34], [5, -2.1, 0.51, -2.9, 0.9, 1.71], [1, 4.6, 0.75, 1.6, 0.45, 3.08], [1, -3.3, 0.42, -2, 0.35, 4.45], [6, -3.1, 0.51, 0.3, 1, 5.82], [6, -2.8, 0.52, -2.2, 1, 0.91], [2, -3.1, 0.43, -1.9, 1, 2.28]]}, script: scripts/gen/creek-banks.js}
+  receiveShadow: true
+  tags: [creekhead-falls, decor]
+  visibleRange: {max: 120}
 creekside:
   castShadow: true
   feetPosition: {x: 8, y: 0.5, z: -1}
