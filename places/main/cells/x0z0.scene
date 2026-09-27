@@ -353,13 +353,118 @@ butterfly-8:
   state: {kind: butterfly}
   tags: [pollinator]
   visibleRange: {max: 45}
+camp-ring-boulders:
+  castShadow: true
+  feetPosition: {x: -18, y: {terrain: 0}, z: -50}
+  id: camp-ring-boulders
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: boulders, points: [[-0.74, 3.22, 0.42, 0.45], [-2.97, 1.2, 0.34, 0.3], [-1.36, -2.67, 0.3, 0.24], [0.7, -3.28, 0.46, 0.5], [2.95, -2.06, 0.36, 0.34]]}, script: scripts/gen/grounds-kit.js, seed: 51}
+  tags: [grounds, camp-ring]
+  visibleRange: {max: 120}
+camp-ring-kettle:
+  castShadow: true
+  feetPosition: {x: -18.24949402898131, y: {terrain: 0}, z: -48.826222879119435}
+  id: camp-ring-kettle
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: kettle}, script: scripts/gen/grounds-kit.js, seed: 54}
+  rotation: {yaw: 30}
+  tags: [grounds, camp-ring]
+  visibleRange: {max: 120}
+camp-ring-log-0:
+  castShadow: true
+  feetPosition: {x: -17.404716196264204, y: {terrain: 0}, z: -47.778370599535144}
+  id: camp-ring-log-0
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: seatlog, r: 0.22, seat: 0.44, width: 1.25}, script: scripts/gen/grounds-kit.js, seed: 40}
+  rotation: {lookAt: {x: -18, y: 0.5, z: -50}}
+  tags: [den-furniture, camp-seat, grounds]
+  visibleRange: {max: 120}
+camp-ring-log-1:
+  castShadow: true
+  feetPosition: {x: -19.47841150227904, y: {terrain: 0}, z: -48.23809778082635}
+  id: camp-ring-log-1
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: seatlog, r: 0.22, seat: 0.44, width: 1.33}, script: scripts/gen/grounds-kit.js, seed: 41}
+  rotation: {lookAt: {x: -18, y: 0.5, z: -50}}
+  tags: [den-furniture, camp-seat, grounds]
+  visibleRange: {max: 120}
+camp-ring-log-2:
+  castShadow: true
+  feetPosition: {x: -20.291247805611015, y: {terrain: 0}, z: -50.20045820831961}
+  id: camp-ring-log-2
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: seatlog, r: 0.22, seat: 0.44, width: 1.41}, script: scripts/gen/grounds-kit.js, seed: 42}
+  rotation: {lookAt: {x: -18, y: 0.5, z: -50}}
+  tags: [den-furniture, camp-seat, grounds]
+  visibleRange: {max: 120}
+camp-ring-log-3:
+  castShadow: true
+  feetPosition: {x: -19.539000394625372, y: {terrain: 0}, z: -51.709233098598006}
+  id: camp-ring-log-3
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: seatlog, r: 0.22, seat: 0.44, width: 1.25}, script: scripts/gen/grounds-kit.js, seed: 43}
+  rotation: {lookAt: {x: -18, y: 0.5, z: -50}}
+  tags: [den-furniture, camp-seat, grounds]
+  visibleRange: {max: 120}
+camp-ring-log-4:
+  castShadow: true
+  feetPosition: {x: -16.85, y: {terrain: 0}, z: -51.991858428704205}
+  id: camp-ring-log-4
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: seatlog, r: 0.22, seat: 0.44, width: 1.33}, script: scripts/gen/grounds-kit.js, seed: 44}
+  rotation: {lookAt: {x: -18, y: 0.5, z: -50}}
+  tags: [den-furniture, camp-seat, grounds]
+  visibleRange: {max: 120}
+camp-ring-log-5:
+  castShadow: true
+  feetPosition: {x: -15.734942168071921, y: {terrain: 0}, z: -50.39939080863394}
+  id: camp-ring-log-5
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: seatlog, r: 0.22, seat: 0.44, width: 1.41}, script: scripts/gen/grounds-kit.js, seed: 45}
+  rotation: {lookAt: {x: -18, y: 0.5, z: -50}}
+  tags: [den-furniture, camp-seat, grounds]
+  visibleRange: {max: 120}
+camp-ring-roast:
+  castShadow: true
+  feetPosition: {x: -18, y: {terrain: 0}, z: -50}
+  id: camp-ring-roast
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {base: 1.95, kind: roast, sticks: [[75, toasted], [185, sausage], [300, mallows]]}, script: scripts/gen/grounds-kit.js, seed: 53}
+  tags: [grounds, camp-ring]
+  visibleRange: {max: 120}
+camp-ring-verge:
+  castShadow: false
+  feetPosition: {x: -18, y: {terrain: 0}, z: -50}
+  id: camp-ring-verge
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {avoid: [[-3.6252311481466, -1.6904730469627935, 1.2, false], [-0.6, -4.4, 1.8, false]], band: 0.7, clover: 40, edge: [[-30, 6.2], [-15, 6.5], [0, 5], [10, 5.5], [55, 4.3], [60, 4], [80, 3.1], [100, 3.75], [120, 3.75], [140, 4.7], [155, 4.6]], gaps: [[14, 52]], kind: verge, leafIn: 1.3, leafOut: 5, leaves: 90, rIn: 2.9, rOut: 5.5, tufts: 120}, script: scripts/gen/grounds-kit.js, seed: 56}
+  tags: [grounds, camp-ring]
+  visibleRange: {max: 90}
+camp-ring-woodpile:
+  castShadow: true
+  feetPosition: {x: -21.6252311481466, y: {terrain: 0}, z: -51.69047304696279}
+  id: camp-ring-woodpile
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {block: [1.3, -0.5], kind: firewood, w: 1.5}, script: scripts/gen/grounds-kit.js, seed: 52}
+  rotation: {lookAt: {x: -18, y: 0.5, z: -50}}
+  tags: [grounds, camp-ring]
+  visibleRange: {max: 120}
 camp-spot:
   castShadow: true
   feetPosition: {x: -18, y: 0.5, z: -50}
   id: camp-spot
   material: {pbr: true}
   physics: static
-  primitive: {kind: scripted, params: {kind: camp}, script: scripts/gen/grounds-kit.js, seed: 7}
+  primitive: {kind: scripted, params: {kind: camp, props: false, seats: []}, script: scripts/gen/grounds-kit.js, seed: 7}
   tags: [grounds, camp]
   visibleRange: {max: 220}
 camp-spot/campfire-fx:
@@ -378,6 +483,14 @@ camp-spot/tent:
   primitive: {kind: scripted, params: {kind: tent}, script: scripts/gen/grounds-kit.js, seed: 9}
   rotation: {yaw: 185}
   visibleRange: {max: 220}
+camp-steps:
+  castShadow: false
+  feetPosition: {x: -18, y: {terrain: 0}, z: -50}
+  id: camp-steps
+  material: {pbr: true}
+  primitive: {kind: scripted, params: {kind: stones, points: [[1.76, 1.06], [1.31, 0.73], [1.69, 0.3], [1.07, 1.42], [2.06, 1.5]], r: 0.2}, script: scripts/gen/grounds-kit.js, seed: 55}
+  tags: [grounds, camp-ring]
+  visibleRange: {max: 120}
 campton:
   behavior: [scripts/den-folk.js, scripts/humanoid-locomotion.js]
   castShadow: true
@@ -3278,7 +3391,7 @@ grounds-fence-rope:
 grounds-plan:
   feetPosition: {x: 0, y: 0.5, z: -35}
   id: grounds-plan
-  primitive: {kind: scripted, params: {hubs: [[-13, 22.1, 1.6], [13.6, 16.5, 1.6]], smooth: true, walks: [[[-3.9, 27.3], [-6.8, 25.7], [-9.9, 23.9], [-13, 22.1], [-16.6, 20.3], [-19, 19], [-20.6, 17.6]], [[-16.6, 20.3], [-18.8, 16.8], [-19.4, 13.4], [-18.6, 10.2], [-15.6, 7.4], [-13.4, 4], [-13.4, 0.6], [-16.2, -0.5]], [[13.6, 16.5], [14.6, 9], [14.4, 2], [16.06, -3.1]], [[6.2, -15], [11.86, -19.35]], [[0, -0.5], [1.5, -5], [5, -10], [6.2, -15]], [[1.5, -5], [-6, -8], [-13, -12], [-16, -14]], [[1, -1], [7, -2.4], [14.2, -2.6]], [[-1, -1], [-7.4, 0.3], [-13, 0.2]], [[15.2, 16.8], [18, 17], [22, 16.8], [25.8, 16.5]], [[3.9, 27.5], [5.2, 26.5]], [[13, 21.1], [13.1, 19.6], [13.5, 18.1]], [[20.8, 26.5], [22.4, 24.7], [23.4, 21.8], [23.6, 19], [23.8, 16.7]]], width: 1.4}, script: scripts/gen/grounds-flags.js, seed: 7}
+  primitive: {kind: scripted, params: {hubs: [[-13, 22.1, 1.6], [13.6, 16.5, 1.6]], smooth: true, walks: [[[-3.9, 27.3], [-6.8, 25.7], [-9.9, 23.9], [-13, 22.1], [-16.6, 20.3], [-19, 19], [-20.6, 17.6]], [[-16.6, 20.3], [-18.8, 16.8], [-19.4, 13.4], [-18.6, 10.2], [-15.6, 7.4], [-13.4, 4], [-13.4, 0.6], [-16.2, -0.5]], [[13.6, 16.5], [14.6, 9], [14.4, 2], [16.06, -3.1]], [[6.2, -15], [11.86, -19.35]], [[0, -0.5], [1.5, -5], [5, -10], [6.2, -15]], [[1.5, -5], [-6, -8], [-13, -12], [-15.77, -13.66]], [[1, -1], [7, -2.4], [14.2, -2.6]], [[-1, -1], [-7.4, 0.3], [-13, 0.2]], [[15.2, 16.8], [18, 17], [22, 16.8], [25.8, 16.5]], [[3.9, 27.5], [5.2, 26.5]], [[13, 21.1], [13.1, 19.6], [13.5, 18.1]], [[20.8, 26.5], [22.4, 24.7], [23.4, 21.8], [23.6, 19], [23.8, 16.7]]], width: 1.4}, script: scripts/gen/grounds-flags.js, seed: 7}
   tags: [grounds]
 grounds-round-door-l:
   feetPosition: {x: -3.4, y: {terrain: 0}, z: -15.6}

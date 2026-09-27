@@ -75,7 +75,7 @@ terrain:
     pathFront-gate: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[0.25, 7], [0.2, 4.2]], width: 5, edgeMaterial: pebbles, falloff: 1.2, noise: 0.35}
     pathFront: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[0, -4.2], [0, -16.5]], width: 5, edgeMaterial: pebbles, falloff: 1.2, noise: 0.35}
     pathLake: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[0, -35.5], [1.5, -40], [5, -45], [6, -50]], width: 2, edgeMaterial: pebbles, falloff: 1.2, noise: 0.35}
-    pathCamp: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[1.5, -40], [-6, -43], [-13, -47], [-16, -49]], width: 1.6, edgeMaterial: pebbles, falloff: 1.2, noise: 0.35}
+    pathCamp: {clearScatter: true, grade: true, kind: path, material: gravel, points: [[1.5, -40], [-6, -43], [-13, -47], [-15.77, -48.66]], width: 1.6, edgeMaterial: pebbles, falloff: 1.2, noise: 0.35}
     lumenvaleClear: {center: {x: 1100, z: -250}, kind: clear-scatter, shape: {kind: circle, radius: 222}}
     hearthmereClear: {center: {x: -1000, z: -500}, kind: clear-scatter, shape: {kind: circle, radius: 190}}
     cobCellar: {kind: hole, points: [[9.2, -26], [4.6, -18.03], [-4.6, -18.03], [-9.2, -26], [-4.6, -33.97], [4.6, -33.97]]}
