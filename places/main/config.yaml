@@ -86,7 +86,7 @@ terrain:
     verge-road-west-2: {center: {x: -704.1, z: -116.1}, kind: clear-scatter, shape: {kind: path, points: [[-704.1, -116.1], [-708.8, -124.9], [-713.4, -133.8], [-718, -142.6], [-719.9, -146.2]], width: 16}}
     verge-road-west-3: {center: {x: -733.8, z: -172.8}, kind: clear-scatter, shape: {kind: path, points: [[-733.8, -172.8], [-738.5, -181.6], [-743.1, -190.5], [-747.7, -199.3], [-752.4, -208.2]], width: 16}}
     verge-road-west-4: {center: {x: -772.8, z: -247.2}, kind: clear-scatter, shape: {kind: path, points: [[-772.8, -247.2], [-777.4, -256], [-782.1, -264.9], [-786.7, -273.7], [-790.4, -282], [-792.5, -291.7], [-794.6, -301.5], [-796.8, -311.3], [-798.9, -321.1], [-801, -330.8], [-803.1, -340.6], [-805.2, -350.4], [-807.3, -360.1], [-809.4, -369.9], [-811.6, -379.7], [-813.7, -389.5], [-815.8, -399.2], [-817.9, -409], [-820, -418.8], [-822.1, -428.6], [-824.2, -438.3], [-826.3, -448.1], [-828.5, -457.9], [-830, -465]], width: 16}}
-    verge-pathFront: {center: {x: 0, z: 10}, kind: clear-scatter, shape: {kind: path, points: [[0, 10], [0.5, 2], [-1, -8], [0, -16.5]], width: 9}}
+    verge-pathFront: {center: {x: 0, z: 10}, kind: clear-scatter, shape: {kind: path, points: [[0.25, 7], [0, -16.5]], width: 11}}
     verge-pathLake: {center: {x: 0, z: -35.5}, kind: clear-scatter, shape: {kind: path, points: [[0, -35.5], [1.5, -40], [5, -45], [6, -50]], width: 9}}
     verge-pathCamp: {center: {x: 1.5, z: -40}, kind: clear-scatter, shape: {kind: path, points: [[1.5, -40], [-6, -43], [-13, -47], [-16, -49]], width: 9}}
     hearthLaneGate: {clearScatter: true, grade: true, kind: path, material: cobble, points: [[-830, -465], [-842, -470], [-860, -478]], width: 4.5, edgeMaterial: yard, falloff: 3.5}
