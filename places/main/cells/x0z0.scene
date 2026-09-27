@@ -3915,6 +3915,13 @@ pollinator-keeper:
   feetPosition: {x: 0, y: 0.5, z: -30}
   id: pollinator-keeper
   tags: [manager]
+pond-falls:
+  feetPosition: {x: -12, y: 0.5, z: -60}
+  id: pond-falls
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 8, height: 3, kind: box, width: 8}
+  tags: [blueprint]
 purple-dragon-blueprint:
   behavior: scripts/purple-dragon.js
   feetPosition: {x: 30.8, y: 0.72, z: -8.9}
