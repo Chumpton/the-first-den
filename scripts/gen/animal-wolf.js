@@ -8,7 +8,7 @@ export const P = {
   ears: { x: 0.055, y: 0.96, z: -0.6, tx: 0.085, ty: 1.1, tz: -0.58, w: 0.035 },
   tail: [[0.7, 0.55, 0.05], [0.6, 0.68, 0.075], [0.46, 0.8, 0.08], [0.36, 0.87, 0.05]], tailEnd: [0.31, 0.9], tailTipFrom: 3,
   col: { top: 'oklch(0.5 0.015 250)', coat: 'oklch(0.67 0.015 250)', belly: 'oklch(0.92 0.025 85)', dark: 'oklch(0.25 0.01 250)', snout: 'oklch(0.9 0.025 85)', snoutTop: 'oklch(0.64 0.015 250)',
-    tip: 'oklch(0.93 0.02 85)', throat: 'oklch(0.92 0.025 85)', earIn: 'oklch(0.85 0.03 60)', earOut: 'oklch(0.45 0.015 250)', leg: 'oklch(0.72 0.015 250)' },
+    tip: 'oklch(0.93 0.02 85)', throat: 'oklch(0.92 0.025 85)', earIn: 'oklch(0.85 0.03 60)', earOut: 'oklch(0.45 0.015 250)', leg: 'oklch(0.58 0.015 250)' },
 };
 export function skeleton() { return rig(P); }
 export function geometry(ctx) { build(ctx, P); }
