@@ -167,6 +167,13 @@ fox-lakewood:
   state: {home: {x: -35, z: -115}, mode: idle, range: 20, scale: 1, sp: fox, until: 0, yaw: -153}
   tags: [fauna-ground, interactable, animal, fox]
   visibleRange: {max: 180}
+islet-life:
+  feetPosition: {x: -8, y: 0.3, z: -78.7}
+  id: islet-life
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 5, height: 5, kind: box, width: 5}
+  tags: [blueprint]
 maze-bale-0:
   feetPosition: {x: -4.8, y: 0.5, z: -129.6}
   id: maze-bale-0
