@@ -3811,6 +3811,15 @@ secret-nest:
   rotation: 30
   state: {key: nest}
   tags: [interactable, secret]
+shore-rim-7:
+  castShadow: true
+  feetPosition: {x: -9.91, y: 0, z: -56.14}
+  id: shore-rim-7
+  material: {kind: scripted, params: {base: 0.15, h: 1.6, reach: 0.08, speed: 1.1}, script: scripts/material-shore-sway.js}
+  primitive: {kind: scripted, params: {items: [[0, -0.46, 0.31, 1.38, 1.08, 0.18], [0, 0.45, 0.16, 1.4, 1.35, 4.35], [0, 0.51, 0.05, 0.82, 1.44, 6.16], [0, 0.69, 0.21, 2.06, 1.31, 1.37], [2, 0.72, -0.06, 0.32, 1, 0.14], [3, 1.72, -0.03, 1.38, 1.24, 1.93], [1, 0.86, 0.13, 1.4, 1.06, 3.91], [2, -0.71, -0.31, -1.99, 1, 2.72], [3, -1.71, -0.12, -2.16, 1.15, 5.28], [1, -1.27, -0.27, -2.33, 1.08, 2.65], [2, -0.37, -0.21, -1.31, 0.83, 2.32], [3, -0.16, -0.04, -0.47, 1.03, 3.41], [1, -0.15, -0.04, -0.48, 1.2, 5.94], [2, -0.2, 0.06, -0.1, 1.24, 4.07], [3, -0.29, -0.03, -0.57, 0.82, 1.8], [1, -2.08, 0.04, -1.91, 0.85, 1.51], [2, 1.2, -0.22, -0.03, 0.92, 0.89], [1, 1.47, -0.14, 0.59, 1.08, 4.75], [1, -2.13, 0.03, -1.98, 1.21, 4.83], [2, 2.52, -0.19, 1.05, 0.88, 0.24]], kind: rim}, script: scripts/gen/shore-kit.js, seed: 27}
+  receiveShadow: true
+  tags: [shore, decor]
+  visibleRange: {max: 90}
 sky-dragons:
   behavior: scripts/sky-dragons.js
   feetPosition: {x: 0, y: {terrain: 2}, z: -40}
