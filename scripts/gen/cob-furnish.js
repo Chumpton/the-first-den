@@ -132,21 +132,31 @@ function jarshelf(ctx, p, fine) {
 }
 // a bench, bent so its ends come forward (params.curve), frame + cushions; params.seat makes it sittable
 function sofa(ctx, p, fine) {
-  const W = p.width, D = p.depth, cv = p.curve, S = Math.max(1, Math.round(W / 0.4));
+  const W = p.width, D = p.depth, cv = p.curve, S = p.seats || Math.max(1, Math.round(W / 0.4)), wood = p.wood || 'oak';
   const T = (x, y, z) => [x, y, z - cv * (2 * x / W) ** 2];
   const sw = (W - 0.24) / S;
   for (let i = 0; i < S; i++) {
     const x = -W / 2 + 0.12 + sw * (i + 0.5);
-    P(ctx, 'oak'); box(ctx, x, 0.08, 0, sw + 0.002, 0.22, D, T); box(ctx, x, 0.3, D / 2 - 0.08, sw + 0.002, p.back, 0.16, T);
+    P(ctx, wood); box(ctx, x, 0.08, 0, sw + 0.002, 0.22, D, T); box(ctx, x, 0.3, D / 2 - 0.08, sw + 0.002, p.back, 0.16, T);
     P(ctx, p.cloth); box(ctx, x, 0.3, -0.06, sw - (i % 2 ? 0.02 : 0), p.seat - 0.3 + 0.02, D - 0.2, T);
     P(ctx, p.cloth2); box(ctx, x, p.seat, D / 2 - 0.22, sw - 0.03, p.back - 0.2, 0.14, T);
   }
-  P(ctx, 'oak');
+  P(ctx, p.arm || wood);
   for (const s of [-1, 1]) {
     box(ctx, s * (W / 2 - 0.06), 0.08, 0, 0.12, p.seat + 0.18, D, T);
+    P(ctx, wood);
     for (const zz of [-D / 2 + 0.06, D / 2 - 0.06]) box(ctx, s * (W / 2 - 0.08), 0, zz, 0.07, 0.08, 0.07, T);
   }
   if (!fine) return;
+  if (p.pillows?.length) {
+    const m = p.pillows.length;
+    for (let k = 0; k < m; k++) {
+      const x = -W / 2 + 0.42 + (W - 0.84) * (m > 1 ? k / (m - 1) : 0.5), yaw = (k % 2 ? 1 : -1) * 0.12;
+      P(ctx, p.pillows[k]); box(ctx, 0, p.seat + 0.02, 0, 0.4, 0.38, 0.13, (a, b, c) => { const ca = Math.cos(yaw), sa = Math.sin(yaw); return T(x + a * ca - c * sa, b + (c + D / 2 - 0.34 - D / 2) * 0.1, a * sa + c * ca + D / 2 - 0.34); });
+    }
+    if (p.throw) { P(ctx, p.throwColor || 'moss'); box(ctx, W / 2 - 0.5, p.seat + 0.001, -0.05, 0.5, 0.03, D - 0.25, T); box(ctx, W / 2 - 0.5, 0.2, -D / 2 - 0.005, 0.5, p.seat - 0.18, 0.03, T); }
+    return;
+  }
   const pal = ['teal', 'flax', 'moss'];
   for (let k = 0; k < (W > 1.2 ? 2 : 1); k++) {
     const s = W > 1.2 ? (k ? 1 : -1) : 0, x = s * (W / 2 - 0.4);
@@ -239,13 +249,13 @@ function herbs(ctx, p, fine) {
 function lantern(ctx, p, fine) {
   const D = p.drop, L0 = D > 0 ? -D - 0.34 : 0;
   P(ctx, 'iron');
-  if (D > 0) { ctx.quad(-0.008, 0, 0, 0.008, 0, 0, 0.008, L0 + 0.34, 0, -0.008, L0 + 0.34, 0); ctx.quad(0, 0, -0.008, 0, 0, 0.008, 0, L0 + 0.34, 0.008, 0, L0 + 0.34, -0.008); }
+  if (D > 0 && !p.chain) { ctx.quad(-0.008, 0, 0, 0.008, 0, 0, 0.008, L0 + 0.34, 0, -0.008, L0 + 0.34, 0); ctx.quad(0, 0, -0.008, 0, 0, 0.008, 0, L0 + 0.34, 0.008, 0, L0 + 0.34, -0.008); }
   box(ctx, 0, L0, 0, 0.22, 0.03, 0.22);
   for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(ctx, sx * 0.1, L0 + 0.03, sz * 0.1, 0.02, 0.24, 0.02);
   box(ctx, 0, L0 + 0.26, 0, 0.24, 0.02, 0.24);
   const ap = [0, L0 + 0.36, 0], c = [[-0.12, 0.12], [0.12, 0.12], [0.12, -0.12], [-0.12, -0.12]];
   for (let i = 0; i < 4; i++) { const a = c[i], b = c[(i + 1) % 4]; ctx.tri(a[0], L0 + 0.28, a[1], ...ap, b[0], L0 + 0.28, b[1]); }
-  P(ctx, '#ffd0a0'); glow(ctx, 1.5, 0.75, 0.28);
+  P(ctx, p.glass || '#ffd0a0'); glow(ctx, ...(p.glow || [1.5, 0.75, 0.28]));
   for (const [nx, nz] of [[0, -1], [1, 0], [0, 1], [-1, 0]]) {
     const tx = -nz, tz = nx, o = 0.095;
     ctx.quad(nx * o - tx * 0.085, L0 + 0.04, nz * o - tz * 0.085, nx * o + tx * 0.085, L0 + 0.04, nz * o + tz * 0.085, nx * o + tx * 0.085, L0 + 0.25, nz * o + tz * 0.085, nx * o - tx * 0.085, L0 + 0.25, nz * o - tz * 0.085);
@@ -392,7 +402,66 @@ function sideboard(ctx, p, fine) {
   P(ctx, '#efe3c8'); lathe(ctx, [[h, 0.03], [h + 0.14, 0.03]], 6, w * 0.36, 0);
   P(ctx, '#ffe2a8'); glow(ctx, 1.3, 0.75, 0.3); box(ctx, w * 0.36, h + 0.14, 0, 0.012, 0.035, 0.012); ctx.emissive(null);
 }
-const ITEMS = { roundrug, sideboard, counter, stove, jarshelf, sofa, planter, pot, hanging, herbs, lantern, crate, bed, desk, lamp, nightstand, candle, arearug, painting };
+// wall TV: origin at the screen centre, back on z = 0 (a bracket fills the gap behind to the wall). The picture itself is a
+// child box carrying the image material; this draws the bezel, a dark glass under it and the bracket.
+function tv(ctx, p, fine) {
+  const w = p.w, h = p.h, b = 0.022, d = 0.032;
+  P(ctx, '#141414'); ctx.roughness(0.35);
+  box(ctx, 0, h / 2, -d / 2, w + 2 * b, b, d); box(ctx, 0, -h / 2 - b, -d / 2, w + 2 * b, b, d);
+  box(ctx, -w / 2 - b / 2, -h / 2, -d / 2, b, h, d); box(ctx, w / 2 + b / 2, -h / 2, -d / 2, b, h, d);
+  P(ctx, '#0b0d10'); box(ctx, 0, -h / 2, -0.012, w, h, 0.012);
+  P(ctx, '#202020'); box(ctx, 0, -h / 2 + 0.05, -0.006, w - 0.1, h - 0.1, 0.012);
+  if (!fine) return;
+  P(ctx, 'iron'); box(ctx, 0, -0.12, p.gap / 2, 0.3, 0.24, p.gap);
+  P(ctx, '#ff9a4a'); glow(ctx, 2.5, 0.9, 0.3); box(ctx, w / 2 - 0.03, -h / 2 - b + 0.004, -d - 0.001, 0.008, 0.006, 0.002); ctx.emissive(null);
+  ctx.roughness(0.8);
+}
+// slim walnut media console: tapered legs, carcass, two linen-panelled doors and an open shelf; a plant and books on top
+function mediaconsole(ctx, p, fine) {
+  const w = p.w, d = p.d, h = p.h, lg = 0.14;
+  P(ctx, 'walnut');
+  for (const sx of [-1, 1]) for (const sz of [-1, 1]) box(ctx, sx * (w / 2 - 0.07), 0, sz * (d / 2 - 0.06), 0.035, lg + 0.01, 0.035);
+  box(ctx, 0, lg, 0, w, h - lg - 0.03, d);
+  P(ctx, 'walnut', '#8a6444'); box(ctx, 0, h - 0.03, -0.005, w + 0.03, 0.03, d + 0.02);
+  const dw = (w - 0.06) / 3;
+  P(ctx, '#2a1d14'); box(ctx, 0, lg + 0.04, -d / 2 - 0.004, dw - 0.02, h - lg - 0.11, 0.01);
+  for (const s of [-1, 1]) {
+    P(ctx, p.door); box(ctx, s * dw, lg + 0.035, -d / 2 - 0.008, dw - 0.03, h - lg - 0.1, 0.016);
+    if (fine) { P(ctx, 'brass'); box(ctx, s * (dw / 2 + 0.05), lg + (h - lg) * 0.45, -d / 2 - 0.022, 0.02, 0.06, 0.014); }
+  }
+  if (!fine) return;
+  // books lying in the open middle bay
+  const bk = ['#b0553a', '#efe3c8', '#5dada9'];
+  for (let i = 0; i < 3; i++) { P(ctx, bk[i]); box(ctx, (i % 2) * 0.01, lg + 0.04 + i * 0.035, 0, 0.26 - i * 0.02, 0.035, 0.2); }
+  // clay pot with a leafy plant at the left end
+  const px = -w / 2 + 0.2;
+  P(ctx, '#c97a52'); lathe(ctx, [[h, 0.07], [h + 0.16, 0.09], [h + 0.18, 0.1]], 8, px, 0);
+  P(ctx, '#4d392a'); lathe(ctx, [[h + 0.17, 0.09], [h + 0.17, 0.001]], 8, px, 0, false);
+  for (let i = 0; i < 9; i++) { const a = i * 2.39, up = 0.6 + (i % 3) * 0.2; P(ctx, i % 2 ? '#5d8a47' : '#7aa35a'); leaf(ctx, [px, h + 0.17, 0], norm(Math.cos(a) * 0.7, up, Math.sin(a) * 0.7), 0.2 + (i % 3) * 0.05, 0.05); }
+  // books standing at the right end between walnut bookends, and a candle
+  const bx = w / 2 - 0.3, cols = ['#9baf84', '#ba8950', '#efe3c8', '#b0553a', '#5dada9'];
+  for (let i = 0; i < 5; i++) { P(ctx, cols[i]); box(ctx, bx + i * 0.035, h, 0, 0.03, 0.2 + (i % 3) * 0.025, 0.16); }
+  P(ctx, 'walnut'); box(ctx, bx - 0.03, h, 0, 0.02, 0.14, 0.14); box(ctx, bx + 0.18, h, 0, 0.02, 0.14, 0.14);
+  P(ctx, '#efe3c8'); lathe(ctx, [[h, 0.028], [h + 0.1, 0.028]], 6, w / 2 - 0.06, -0.05);
+}
+// hanging lantern: origin at the ceiling. An iron rose, a chain of links, then the lantern (its glass warm amber).
+function hanglantern(ctx, p, fine) {
+  const c = p.chain;
+  P(ctx, 'iron'); ctx.roughness(0.55);
+  lathe(ctx, [[-0.03, 0.001], [-0.03, 0.07], [0, 0.07]], 8, 0, 0, false);
+  if (fine) {
+    const n = Math.round(c / 0.055), lh = c / n;
+    for (let i = 0; i < n; i++) {
+      const y1 = -0.03 - i * lh * ((c - 0.03) / c), y0 = y1 - lh * 1.15, r = 0.018, tk = 0.006;
+      const T = i % 2 ? (x, y, z) => [z, y, x] : null;
+      box(ctx, -r, y0, 0, tk, y1 - y0, tk, T); box(ctx, r, y0, 0, tk, y1 - y0, tk, T);
+      box(ctx, 0, y0, 0, 2 * r, tk, tk, T); box(ctx, 0, y1 - tk, 0, 2 * r, tk, tk, T);
+    }
+  } else box(ctx, 0, -c, 0, 0.012, c - 0.03, 0.012);
+  ctx.roughness(0.8);
+  lantern(ctx, { drop: c, chain: true, glass: p.glass, glow: p.glow }, fine);
+}
+const ITEMS = { roundrug, sideboard, counter, stove, jarshelf, sofa, planter, pot, hanging, herbs, lantern, crate, bed, desk, lamp, nightstand, candle, arearug, painting, tv, mediaconsole, hanglantern };
 export const DEFAULTS = {
   counter: { len: 2.4, d: 0.62, h: 0.9, sink: false, pots: false },
   stove: { w: 1.3, d: 0.95, pipe: 3.1 },
@@ -411,6 +480,9 @@ export const DEFAULTS = {
   candle: { n: 1 },
   arearug: { w: 2.6, l: 1.8, c1: '#b0553a', c2: '#efe3c8', c3: '#4f3828' },
   painting: { w: 1.2, h: 0.9 },
+  tv: { w: 1.3, h: 0.75, gap: 0.04 },
+  mediaconsole: { w: 1.5, d: 0.38, h: 0.52, door: '#e6d6b8' },
+  hanglantern: { chain: 0.5, glass: '#ffb45c', glow: [1.9, 0.8, 0.2] },
   roundrug: { ri: 0.65, ro: 3.8, t: 0.006, bands: ['#4f3828', '#efe3c8', '#b0553a', '#ba8950', '#efe3c8', '#9baf84', '#b0553a', '#5dada9', '#4f3828'], weights: null, fringe: '#efe3c8' },
   sideboard: { w: 1.4, d: 0.45, h: 0.8, door: '#9baf84' },
 };
@@ -418,14 +490,16 @@ const dims = (it, p) => ({
   counter: [p.len, p.h, p.d], stove: [p.w, 1.16, p.d], jarshelf: [p.w, p.h, p.d], sofa: [p.width, p.seat + 0.3, p.depth],
   planter: [p.len, p.h, p.d], pot: [p.r * 2.1, p.r * 1.6 + 0.07, p.r * 2.1], crate: [p.w, p.h, p.d], bed: [p.w, 0.6, p.l],
   desk: [p.w, p.h, p.d], nightstand: [p.w, p.h, p.d], lamp: [0.32, p.h, 0.32],
-  arearug: [p.w, 0.013, p.l], sideboard: [p.w, p.h, p.d],
+  arearug: [p.w, 0.013, p.l], sideboard: [p.w, p.h, p.d], mediaconsole: [p.w, p.h, p.d],
 })[it];
-const HULL_PAINT = { arearug: '#b98a60', counter: '#9baf84', stove: '#f0c9a0', jarshelf: '#8a6444', sofa: '#7d9a5a', sideboard: '#5a4030', planter: '#8aa672', pot: '#c97a52', crate: '#c9a27a', bed: '#9baf84', desk: '#8a6444', nightstand: '#8a6444', lamp: '#e9dcc0' };
+const HULL_PAINT = { arearug: '#b98a60', counter: '#9baf84', stove: '#f0c9a0', jarshelf: '#8a6444', sofa: '#7d9a5a', sideboard: '#5a4030', mediaconsole: '#5a4030', planter: '#8aa672', pot: '#c97a52', crate: '#c9a27a', bed: '#9baf84', desk: '#8a6444', nightstand: '#8a6444', lamp: '#e9dcc0' };
 export function geometry(ctx) {
   const it = ITEMS[ctx.params.item] ? ctx.params.item : 'crate', p = { ...DEFAULTS[it], ...ctx.params };
   ctx.flat(); ctx.roughness(0.8);
   if (ctx.lod >= 4) {
     const d = dims(it, p);
+    if (it === 'tv') { P(ctx, '#141414'); box(ctx, 0, -p.h / 2 - 0.02, -0.016, p.w + 0.04, p.h + 0.04, 0.032); return; }
+    if (it === 'hanglantern') { P(ctx, p.glass); glow(ctx, ...p.glow); box(ctx, 0, -p.chain - 0.34, 0, 0.2, 0.34, 0.2); ctx.emissive(null); return; }
     if (!d) { if (it === 'lantern' || it === 'candle') { P(ctx, '#ffe2a8'); glow(ctx, 1.3, 0.85, 0.35); box(ctx, 0, p.drop > 0 ? -p.drop - 0.34 : 0, 0, 0.2, 0.3, 0.2); ctx.emissive(null); } else { P(ctx, '#6a9f45'); box(ctx, 0, -(p.drop || 0.3) - 0.3, 0, 0.3, 0.3, 0.3); } return; }
     if (it === 'painting') { P(ctx, 'walnut'); box(ctx, 0, -p.h / 2 - 0.07, -0.02, p.w + 0.14, p.h + 0.14, 0.04); return; }
     if (it === 'arearug') { P(ctx, p.c1); box(ctx, 0, 0, 0, p.w, 0.013, p.l); return; }
