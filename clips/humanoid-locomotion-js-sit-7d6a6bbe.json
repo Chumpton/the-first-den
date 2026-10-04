@@ -1,4 +1,4 @@
-{"contentHash":"1832:f4d62c19","duration":0.1,"fps":30,"tracks":[
+{"contentHash":"1832:f4d62c19","duration":0.1,"fps":30,"identity":"humanoid-locomotion.js#sit","tracks":[
 {"bone":"Hips","prop":"position","times":[0,0.03333,0.06667,0.1],"values":[0,-0.5,0,0,-0.5,0,0,-0.5,0,0,-0.5,0],"units":"hips"},
 {"bone":"Spine02","prop":"rotation","times":[0,0.03333,0.06667,0.1],"values":[-0.06976,0,0,0.99756,-0.06976,0,0,0.99756,-0.06976,0,0,0.99756,-0.06976,0,0,0.99756]},
 {"bone":"LeftUpLeg","prop":"rotation","times":[0,0.03333,0.06667,0.1],"values":[-0.73728,0,0,0.67559,-0.73728,0,0,0.67559,-0.73728,0,0,0.67559,-0.73728,0,0,0.67559]},
