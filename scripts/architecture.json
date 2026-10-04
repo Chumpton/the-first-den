@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "basedOnSpecVersion": 832,
-  "updatedAt": "2026-10-04T22:52:45.403Z",
-  "summary": "The First Den is a forest world centered on Spawn, now spanning a home, lake and creek activities, farms and orchards, Mirror Tarn and linked market districts, Tower Gardens, a royal city/castle, and a hilltop village. Authored cell scenes combine interactive systems, procedural structure families, animated NPCs and wildlife; the player also has an elemental-bending combat/progression loop against den-based wolf packs.",
+  "basedOnSpecVersion": 838,
+  "updatedAt": "2026-10-04T23:11:19.619Z",
+  "summary": "The First Den is a forest world centered on Spawn, extending through home, lake and creek activities, farms, Mirror Tarn and linked market districts, Tower Gardens, a royal city/castle and hilltop village. Authored cell scenes combine interactive systems, procedural structure families, animated NPCs and wildlife; the player has elemental-bending combat and progression, with camera-relative WoW-style movement.",
   "scriptPaths": [
     "scripts/alchemy-bench.js",
     "scripts/alchemy-player.js",
@@ -413,13 +413,13 @@
   ],
   "places": [
     "places/main - forest world linking Spawn/home, lake and creek, farms/orchard, Mirror Tarn, Garden and Market squares, royal city/castle and hilltop village",
-    "places/main/cells/x0z0.scene - Spawn/home, Tower Gardens, paired east/west crop farms at (±46, 0.5, 28), orchard, and farm props",
+    "places/main/cells/x0z0.scene - Spawn/home, Tower Gardens, paired east/west crop farms at (±46, 0.5, 28), orchard and farm props",
     "places/main/cells/x-1z0.scene - west farm barn/windmill and Garden Market south gate; Mossback wolf den and pack at (-135,-45)",
     "places/main/cells/x0z-1.scene - lake/islet, maze, blossom walk, camps and Fernshade wolf den; wolf-pack manager anchors the local encounter region",
     "places/main/cells/x-1z-1.scene - Hollow wolf den and alpha pack at about (-105,-100)",
     "places/main/cells/x0z1.scene - market/royal district and Ember Roost tower, aqueduct and banners; Garden Market east gate",
     "places/main/cells/x-1z1.scene - Garden Market at (-82,78), rostered gardeners, north gate and Three Squares sign links",
-    "places/main/config.yaml - forest terrain, lake/water and vegetation; grades farm beds/yards, Mirror Tarn shore and connecting paths, and town routes"
+    "places/main/config.yaml - forest terrain, lake/water and vegetation; grades farm beds/yards, Mirror Tarn shore and connecting paths and town routes"
   ],
   "roots": [
     "world.config.yaml - world entry: main place, player/camera templates, arrival, input actions and UI",
@@ -439,11 +439,11 @@
     "scripts/lib/town-kit.js + scripts/lib/data/town-links.json - town builder helpers and shared lane/post/sign layout joining Market, Tarn and Garden squares",
     "scripts/lib/royal-kit.js and scripts/lib/village-mesh.js - geometry kits reused by royal district/castle and village/cottage/NPC builders",
     "scripts/lib/data/bending.js - elemental spell, combat, wolf, den, quest, HUD and tuning registry consumed by bender.js, wolf-pack.js and bend-hud.js",
-    "scripts/lib/wow-steer.js - shared camera-relative steering basis used by scripts/player.js and humanoid-locomotion.js"
+    "scripts/lib/wow-steer.js - captures per-entity WoW movement hands and shares camera-heading basis/turn logic between player.js, camera.js and humanoid-locomotion.js"
   ],
   "notableExports": [
     "scripts/forest-terrain.js - GROUND, SITES, LAKE, heightAt(ctx), materialAt(ctx)",
-    "scripts/player.js - onSpawn(ctx), onInput(ctx,input), update(ctx,dt); scripts/camera.js - onInput(ctx,input), update(ctx,dt)",
+    "scripts/player.js - onSpawn(ctx), onInput(ctx,input), update(ctx,dt); scripts/camera.js - finiteNumber, onInput(ctx,input), update(ctx,dt)",
     "scripts/ui.js - default(ctx, player), composes bendHud with travel, courier, secrets, alchemy, mushrooms, boat fishing and garden HUDs",
     "scripts/bender.js - onSpawn(ctx), onInput(ctx,input), update(ctx,dt), land(ctx,pl), aoe(ctx,pl), release(ctx,pl), zap(ctx,pl), maxHp(st), maxChi(st)",
     "scripts/bend-hud.js - bendHud(ctx,player), levelCol(mine,theirs); scripts/wolf-pack.js - scheduled update(ctx,dt), aggroRadius(mobLvl,plLvl)",
@@ -452,28 +452,28 @@
     "scripts/gen/dire-wolf.js, wolf-den.js, ember-roost.js - procedural wolf/den and roost geometry exports"
   ],
   "ownership": [
-    "scripts/player.js + scripts/lib/data/player.yml - movement intent, velocity, jump, flight, rope and camera mode; movement scratch remains in ctx.session",
+    "scripts/player.js + scripts/lib/data/player.yml - movement intent, velocity, jump, flight, rope and camera mode; movement scratch including cached speed/intent remains in ctx.session",
+    "scripts/camera.js - camera.state.heading is the body's WoW heading; camera.state.off is its separate orbit/look offset, and camera input updates heading/orbit",
     "scripts/bender.js + scripts/lib/data/bending.js - player.state bending level/XP, HP/chi, equipped stance/spells, cooldowns, target, combat and cast/channel status; per-tick aim/move/effect scratch is ctx.session",
     "scripts/wolf-pack.js - wild-wolf row HP, level, threat, target, status effects, death/respawn and combat behavior; publishes changed name/level/HP/target/position summaries to place.state.wolves",
     "scripts/bend-hud.js + scripts/ui.js - HUD is a reader of player.state and place.state.wolves; HUD actions send input back to player behavior",
     "scripts/farm-windmill.js - reads windmill state.sails and state.degPerSec, writes sail child rotation",
     "scripts/alchemy-player.js, scripts/pond-seed.js, fishing-tackle.js + activity data - harvest spending/buff, seeds/gotSeeds and legacy fishing state",
-    "scripts/rowboat.js + scripts/lib/data/rowboat.js; scripts/garden-plot.js + garden data - own boat/fishing phase and crop bed growth state respectively; garden inventory belongs to player.state.garden",
-    "scripts/folk-crowd.js, garden-crowd.js, village-crowd.js and their roster data - own NPC dialogue/route and animation state; manager scheduling scratch is transient"
+    "scripts/rowboat.js + scripts/lib/data/rowboat.js; scripts/garden-plot.js + garden data - own boat/fishing phase and crop bed growth state respectively; garden inventory belongs to player.state.garden"
   ],
   "flows": [
     "world input actions -> templates/player.js attaches scripts/bender.js onInput -> player.state casts/stance/target/progression; bender schedules release/land/aoe handlers and writes effects/damage to wild-wolf rows",
     "scripts/bender.js damage/status/threat writes -> scripts/wolf-pack.js scheduled update -> wolf combat, death/respawn and XP/kills/boss reward writes on player",
     "scripts/wolf-pack.js changed wolf summaries -> place.state.wolves -> scripts/bend-hud.js via scripts/ui.js renders wolf blips/nameplates, objectives, spell bars and combat panels; HUD buttons sendAction back to bender input",
-    "scripts/lib/data/bending.js SPELLS/BARS/RULES/DENS/WOLF/QUESTS -> bender combat handlers, wolf-pack encounter rules, and bend-hud displays; wolf den scene state and tags identify local groups",
+    "scripts/lib/data/bending.js SPELLS/BARS/RULES/DENS/WOLF/QUESTS -> bender combat handlers, wolf-pack encounter rules and bend-hud displays; wolf den scene state and tags identify local groups",
     "places/main/config.yaml terrain marks + seed -> scripts/forest-terrain.js heightAt/materialAt(ctx) -> engine terrain, river/water and forest material bands; farm/tarn marks grade and clear scene sites",
-    "player move/look/jump/camView -> scripts/player.js and shared wow-steer basis -> velocity/camera mode; humanoid-locomotion turns and animates the model",
+    "player move/look/jump/camView -> scripts/player.js and scripts/lib/wow-steer.js -> per-entity ctx.session.wowHands, camera heading and movement intent; A/D turns heading when right button is up, right-button A/D strafes, and W+A arcs with the turn",
+    "scripts/camera.js reads recorded hands -> updates shared heading and separate orbit offset; humanoid-locomotion.js reads wowBasis(ctx) -> body yaw and locomotion animation; right-button press aligns heading to camera look",
     "farm-west/windmill state.sails + degPerSec -> scripts/farm-windmill.js update -> rotating sail child; farm builders supply crop, fence, barn, mill and props geometry",
     "garden seed crate/pump -> garden-station -> player.state.garden; bed press -> garden-plot growth/harvest -> basket and HUD; greenhouse beds stay wet while growing",
     "dock rowboat controls/fishing phases -> rowboat and fish-pose/catch-fish children -> rider fish/fishGet -> scripts/ui.js; garden and boat state remain distinct",
     "folk/garden/village crowd roster data -> crowd managers and character builders/clip sets -> NPC position/dialogue/animation; press selects nearby dialogue",
-    "Z input -> horse-summon -> steed data and courier-horse geometry -> steed controls rider; dragon-rider coordinates shared mount and seat lifecycle",
-    "town-links.json layout + places/main/config.yaml path marks -> town-link builder and terrain paths -> signposted Market · Tarn · Garden walking links"
+    "Z input -> horse-summon -> steed data and courier-horse geometry -> steed controls rider; dragon-rider coordinates shared mount and seat lifecycle"
   ],
   "behaviorFamilies": [
     "places/main/config.yaml decoration layers + scripts/gen/forest-plant.js / valley-mesh.js - seeded forest flora varies by layer, kind and terrain",
@@ -496,7 +496,7 @@
     "Keep terrain material IDs, clear/flatten marks and decoration bindings coordinated with scene placements; terrain paths grade/clear sites while scene builders supply visible structures and paving.",
     "Farm roots use feet y=0.5; farm child coordinates and crop strips/fence points are local to parent roots, while config flatten marks use world x/z. Windmill sail is a child pivot; behavior writes its roll from degPerSec.",
     "Mirror Tarn is centered (82,78), water level 0.3 with depth 2.6; shore and north/south/west links in main config and Three Squares entries in town-links.json/scene signs describe the same routes.",
-    "Wolf den geometry and wolves are separately placed; wolf state includes mutable combat fields and place.state.wolves is the HUD-facing summary board. bender reads/writes wolf state directly, so preserve field compatibility across both scripts.",
+    "WoW steering records hands in ctx.session.wowHands per entity; camera.state.heading is body heading while camera.state.off is orbit, and player/camera turns must not double-apply A/D. humanoid-locomotion consumes wowBasis for yaw; the sit clip remains identified by humanoid-locomotion.js#sit.",
     "Tower Gardens beds/structures use ground feet y=0.5 and shared tower-gardens data datum; rowboat bow is local +Z, kinematic and bounded by terrain water/depth."
   ]
 }
