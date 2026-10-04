@@ -306,3 +306,10 @@ wild-mushroom-65:
   state: {kind: chanterelle, picked: false}
   tags: [interactable, wild-mushroom]
   visibleRange: {max: 70, min: 0}
+wolf-den-mossback:
+  feetPosition: {x: -135, y: {terrain: 0}, z: -45}
+  id: wolf-den-mossback
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 14, height: 3, kind: box, width: 14}
+  tags: [blueprint]

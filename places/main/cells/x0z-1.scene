@@ -851,3 +851,10 @@ wild-mushroom-69:
   state: {kind: agaric, picked: false}
   tags: [interactable, wild-mushroom]
   visibleRange: {max: 70, min: 0}
+wolf-den-fernshade:
+  feetPosition: {x: -30, y: {terrain: 0}, z: -145}
+  id: wolf-den-fernshade
+  material: {kind: scripted, script: engine/blueprint}
+  physics: none
+  primitive: {depth: 14, height: 3, kind: box, width: 14}
+  tags: [blueprint]
