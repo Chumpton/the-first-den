@@ -5,7 +5,7 @@ import { TRAVEL as TV } from './lib/data/travel.js';
 import { ALCHEMY } from './lib/data/alchemy.js';
 import { GARDEN as GD } from './lib/data/garden.js';
 import { MUSHROOMS } from './lib/data/mushrooms.js';
-import { bendHud } from './bend-hud.js';
+import { bendHud, SLATE } from './bend-hud.js';
 // Tomas the Courier: the city picker by his horse, the rider's line while riding, and 'on the road' for everyone else near his post.
 const CPILL = 'position:fixed;left:50%;transform:translateX(-50%);padding:8px 16px;border-radius:14px;background:rgba(40,28,14,.78);border:1px solid rgba(242,214,160,.45);color:#f7eedd;font-family:Georgia,serif;font-size:14px;white-space:nowrap';
 const CBTN = 'pointer-events:auto;cursor:pointer;margin:0 4px;padding:6px 12px;border-radius:10px;border:1px solid rgba(255,220,150,.6);background:rgba(120,78,30,.85);color:#fff3d8;font-family:Georgia,serif;font-size:14px';
@@ -29,13 +29,22 @@ function secretHint(player) {
   }
   return '';
 }
-function secretCount(player) {
-  const n = Array.isArray(player?.state?.secrets) ? player.state.secrets.length : 0;
-  return n ? `<div style="position:fixed;left:18px;bottom:18px;pointer-events:none;padding:5px 12px;border-radius:999px;background:rgba(40,28,10,.55);color:#ffe7a8;font-family:Georgia,serif;font-size:13px">✦ ${n}/${SEC.total} secrets</div>` : '';
+function secretCount(player) { return ''; }
+// the pickup dock: every carried thing as an icon chip with a count badge, one slate plate bottom-left
+function pickupDock(player) {
+  const st = player?.state || {}, m = st.mushrooms || {}, chips = [];
+  const chip = (ic, n, title, col) => `<div title="${title}" style="position:relative;width:34px;height:34px;border-radius:6px;background:radial-gradient(#3a3f48,#15171b);border:1px solid #7a5f30;display:flex;align-items:center;justify-content:center;font-size:18px;color:${col}">${ic}<span style="position:absolute;right:-4px;bottom:-4px;min-width:16px;height:16px;padding:0 3px;border-radius:8px;background:#b48a4c;color:#1a1206;font:700 10px/16px system-ui,sans-serif;text-align:center">${n}</span></div>`;
+  const mush = Object.values(m).reduce((a, n) => a + (n || 0), 0), sec = Array.isArray(st.secrets) ? st.secrets.length : 0;
+  if (mush) chips.push(chip('🍄', mush, 'mushrooms', '#fff'));
+  if ((st.fish ?? 0) > 0) chips.push(chip('🐟', st.fish, 'fish', '#fff'));
+  if ((st.harvest ?? 0) > 0) chips.push(chip('✿', st.harvest, 'crystal harvest', '#b9e08f'));
+  if ((st.seeds ?? 0) > 0) chips.push(chip('●', st.seeds, 'pond seeds', '#e6c77a'));
+  if (sec) chips.push(chip('✦', `${sec}/${SEC.total}`, 'secrets found', '#ffd76a'));
+  return chips.length ? `<div style="position:fixed;left:12px;bottom:12px;display:flex;gap:8px;padding:7px 10px 7px 8px;border-radius:8px;pointer-events:none;${SLATE}">${chips.join('')}</div>` : '';
 }
 function travelHud(player) {
   const st = player?.state || {};
-  if (!st.travelOpen) return `<div style="position:fixed;left:18px;top:128px;pointer-events:none;padding:4px 11px;border-radius:999px;background:rgba(40,28,14,.45);color:#f7eedd;font-family:Georgia,serif;font-size:12px;opacity:.8"><b style="color:#ffe2a8">J</b> travel</div>`;
+  if (!st.travelOpen) return `<div style="position:fixed;left:12px;top:118px;pointer-events:none;padding:3px 10px;border-radius:5px;${SLATE};color:#f3e3bd;font-family:'Palatino Linotype',Georgia,serif;font-size:12px;text-shadow:0 1px 2px #000"><b style="color:#ffe2a8">J</b> travel</div>`;
   const row = (t) => `<button onclick="sendAction('travelGo',{to:'${t.id}'})" style="pointer-events:auto;cursor:pointer;display:flex;align-items:center;gap:10px;width:100%;margin:5px 0;padding:8px 12px;border-radius:10px;border:1px solid rgba(255,220,150,.45);background:rgba(120,78,30,.72);color:#fff3d8;font-family:Georgia,serif;font-size:15px;text-align:left"><span style="display:inline-flex;width:22px;height:22px;border-radius:6px;align-items:center;justify-content:center;background:#ffd46a;color:#3a2508;font:700 13px system-ui">${t.key}</span><span style="flex:1">${t.name}</span><span style="font-size:12px;opacity:.7">${t.note}</span></button>`;
   return `<div style="position:fixed;left:24px;top:50%;transform:translateY(-50%);width:min(290px,80vw);padding:14px 14px 10px;border-radius:16px;background:rgba(40,28,14,.86);border:1px solid rgba(242,214,160,.5);box-shadow:0 8px 30px rgba(0,0,0,.35);pointer-events:auto"><div style="font-family:Georgia,serif;color:#ffe2a8;font-size:17px;margin-bottom:4px">Travel</div>${TV.spots.map(row).join('')}<div style="font-family:Georgia,serif;color:#f7eedd;opacity:.6;font-size:12px;margin-top:6px">J or Esc closes</div></div>`;
 }
@@ -43,12 +52,9 @@ function travelHud(player) {
 // Alchemy bench (scripts/alchemy-player.js): harvest + active buff chips bottom-left, a toast, and the brew panel while open.
 function alchemyHud(player) {
   const st = player?.state || {}, chips = [], F = "font-family:Georgia,serif";
-  if ((st.harvest ?? 0) > 0) chips.push(`<span style="color:#b9e08f">&#10047;</span> harvest ${st.harvest}`);
-  if ((st.seeds ?? 0) > 0) chips.push(`<span style="color:#e6c77a">&#9679;</span> seeds ${st.seeds}`);
-  if ((st.fish ?? 0) > 0) chips.push(`<span style="color:#8fd0d6">&#10148;</span> fish ${st.fish}`);
-  const bf = st.buff, br = bf && ALCHEMY.recipes[bf.kind];
+        const bf = st.buff, br = bf && ALCHEMY.recipes[bf.kind];
   if (bf && st.buffLeft > 0) { const c = bf.color ? `rgb(${bf.color.map((v) => Math.round(v * 255)).join(',')})` : br?.css; chips.push(`<span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${c};box-shadow:0 0 6px ${c}"></span> ${bf.name} · ${st.buffLeft}s`); }
-  let h = chips.length ? `<div style="position:fixed;left:18px;bottom:58px;display:flex;flex-direction:column;gap:5px;pointer-events:none">${chips.map((c) => `<div style="padding:4px 11px;border-radius:999px;background:rgba(40,28,14,.6);color:#f7eedd;${F};font-size:13px">${c}</div>`).join('')}</div>` : '';
+  let h = chips.length ? `<div style="position:fixed;left:12px;bottom:66px;display:flex;flex-direction:column;gap:5px;pointer-events:none">${chips.map((c) => `<div style="padding:4px 11px;border-radius:999px;background:rgba(40,28,14,.6);color:#f7eedd;${F};font-size:13px">${c}</div>`).join('')}</div>` : '';
   if (st.alchemyToast?.text) h += `<div style="position:fixed;left:50%;bottom:120px;transform:translateX(-50%);pointer-events:none;padding:7px 16px;border-radius:999px;background:rgba(40,28,14,.8);border:1px solid rgba(242,214,160,.45);color:#fff3d8;${F};font-size:14px;white-space:nowrap">${st.alchemyToast.text}</div>`;
   if (st.alchemyOpen) {
     const row = (k) => { const r = ALCHEMY.recipes[k]; return `<button onclick="sendAction('brew',{kind:'${k}'})" style="pointer-events:auto;cursor:pointer;display:flex;align-items:center;gap:9px;width:100%;margin:5px 0;padding:8px 11px;border-radius:10px;border:1px solid rgba(255,220,150,.45);background:rgba(90,62,34,.78);color:#fff3d8;${F};font-size:14px;text-align:left"><span style="width:12px;height:12px;border-radius:50%;background:${r.css};box-shadow:0 0 8px ${r.css}"></span><span style="flex:1">${r.name} <span style="opacity:.7">(${r.cost} harvest)</span></span><span style="font-size:12px;opacity:.75">${r.note}</span></button>`; };
@@ -58,7 +64,9 @@ function alchemyHud(player) {
 }
 
 // Wild mushrooms (scripts/wild-mushroom.js): one chip stacked above the alchemy chips, shown once any are picked.
-function mushroomHud(player) {
+function mushroomHud(player) { return '';
+}
+function mushroomHudOld(player) {
   const st = player?.state || {}, m = st.mushrooms || {}, total = Object.values(m).reduce((a, n) => a + (n || 0), 0);
   if (!total) return '';
   const below = ((st.harvest ?? 0) > 0) + ((st.seeds ?? 0) > 0) + ((st.fish ?? 0) > 0) + (st.buff && st.buffLeft > 0 ? 1 : 0);
@@ -88,7 +96,7 @@ function gardenHud(player) {
   return `<div style="position:fixed;right:78px;bottom:24px;display:flex;flex-direction:column;align-items:flex-end;gap:5px;pointer-events:none"><div style="font-family:Georgia,serif;font-size:12px;color:#ffe7a8;letter-spacing:.12em;text-shadow:0 1px 2px #0008">TOWER GARDENS · E seeds › plant › water › harvest</div>${rows.join('')}</div>`;
 }
 export default function (ctx, player) {
-  const hud = bendHud(ctx, player) + secretHint(player) + secretCount(player) + courierHud(ctx, player) + travelHud(player) + alchemyHud(player) + mushroomHud(player) + fishHud(player) + gardenHud(player);
+  const hud = bendHud(ctx, player) + pickupDock(player) + secretHint(player) + secretCount(player) + courierHud(ctx, player) + travelHud(player) + alchemyHud(player) + mushroomHud(player) + fishHud(player) + gardenHud(player);
   const c = player?.controlling;
   if (player?.state?.deleteMode) return `<div style="position:fixed;left:50%;top:50%;width:10px;height:10px;margin:-5px 0 0 -5px;border:2px solid #ff6b5b;border-radius:50%;pointer-events:none"></div><div style="position:fixed;left:50%;top:22px;transform:translateX(-50%);pointer-events:none;padding:7px 16px;border-radius:999px;background:rgba(120,24,18,.8);border:1px solid rgba(255,160,150,.5);color:#fff1ee;font-family:Georgia,serif;font-size:14px">delete mode · look at a thing · 9 removes it · 8 exits</div>`;
   if (c?.state?.kind === 'purple-dragon') {

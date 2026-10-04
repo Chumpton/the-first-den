@@ -3,35 +3,40 @@
 // den and wolf blips, the objective tracker, wolf nameplates over their heads, error line, toasts, spellbook (P), journal (L).
 // Reads player.state (scripts/bender.js) and place.state.wolves (scripts/wolf-pack.js). Every button is a sendAction.
 import { SPELLS, BARS, ELEMENTS, STANCES, ICONS, RULES, DENS, QUESTS, WOLF } from './lib/data/bending.js';
-const F = "font-family:Georgia,'Times New Roman',serif", GOLD = '#f2c86a', R = RULES;
+// one frame language: carved dark slate, a bronze rim, a display serif for names, a bold sans for numbers
+const F = "font-family:'Palatino Linotype','Book Antiqua',Palatino,Georgia,serif", N = "font-family:system-ui,'Segoe UI',Roboto,Arial,sans-serif;font-weight:700", GOLD = '#e9c37a', R = RULES;
+export const SLATE = 'background:linear-gradient(180deg,rgba(46,50,58,.94),rgba(20,22,27,.94));border:1px solid #b48a4c;box-shadow:inset 0 1px 0 rgba(255,235,190,.12),inset 0 0 0 1px rgba(0,0,0,.55),0 0 0 1px rgba(30,20,8,.9),0 4px 14px rgba(0,0,0,.5)';
+const SH = 'text-shadow:0 1px 2px rgba(0,0,0,.85),0 0 3px rgba(0,0,0,.75)';
 const RIGHT = 'calc(var(--spawn-chrome-reservation-right-inset, 50px) + 24px)';
 const icon = (ic, px, extra = '') => `<span style="display:block;width:${px}px;height:${px}px;background:url(${ICONS[ic[0]]}) ${(ic[1] % 4) * 33.333}% ${Math.floor(ic[1] / 4) * 33.333}%/400% 400%;${extra}"></span>`;
-const bar = (frac, col, h, text, bg = 'rgba(0,0,0,.6)') => `<div style="position:relative;height:${h}px;background:${bg};border:1px solid rgba(0,0,0,.8);border-radius:2px;overflow:hidden"><div style="height:100%;width:${Math.max(0, Math.min(1, frac)) * 100}%;background:${col};transition:width .15s"></div>${text ? `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:${h - 4}px;color:#fff;text-shadow:0 1px 2px #000,0 0 3px #000;${F}">${text}</div>` : ''}</div>`;
+const bar = (frac, col, h, text, bg = 'rgba(0,0,0,.6)') => `<div style="position:relative;height:${h}px;background:${bg};border:1px solid rgba(0,0,0,.85);border-radius:3px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.7)"><div style="height:100%;width:${Math.max(0, Math.min(1, frac)) * 100}%;background:${col};box-shadow:inset 0 1px 0 rgba(255,255,255,.35);transition:width .15s"></div>${text ? `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:${Math.max(9, h - 5)}px;color:#fff;${SH};${N}">${text}</div>` : ''}</div>`;
 export function levelCol(mine, theirs) { const d = theirs - mine; return d >= 5 ? '#ff2020' : d >= 3 ? '#ff8020' : d >= -2 ? '#ffff00' : d >= -6 ? '#40c040' : '#9d9d9d'; }
-const ARMOR = 'background:linear-gradient(#3b2a19,#20160c);border:2px solid #8a6a32;box-shadow:inset 0 0 0 1px #2a1c0c,0 3px 10px rgba(0,0,0,.55)';
-function aura(ic, t, col) { return `<div style="position:relative;width:22px;height:22px;border:1px solid ${col};border-radius:3px;overflow:hidden">${icon(ic, 20)}${t != null ? `<span style="position:absolute;bottom:-1px;right:1px;font-size:10px;color:#fff;text-shadow:0 0 2px #000,0 0 2px #000">${t}</span>` : ''}</div>`; }
+const ARMOR = SLATE;
+function aura(ic, t, col) { return `<div style="position:relative;width:22px;height:22px;border:1px solid ${col};border-radius:3px;overflow:hidden">${icon(ic, 20)}${t != null ? `<span style="position:absolute;bottom:-1px;right:1px;font-size:10px;color:#fff;${SH};${N}">${t}</span>` : ''}</div>`; }
 
+function ring(content, px, rim, glow) { return `<div style="position:relative;z-index:2;flex:none;width:${px}px;height:${px}px;border-radius:50%;overflow:hidden;background:#15171b;border:2px solid ${rim};box-shadow:0 0 0 2px #1a1206,inset 0 0 8px rgba(0,0,0,.8)${glow ? `,0 0 16px ${glow}` : ''}">${content}</div>`; }
+function badge(text, col, pos) { return `<div style="position:absolute;${pos};z-index:3;min-width:20px;height:20px;padding:0 3px;border-radius:10px;background:radial-gradient(#3a3f48,#15171b);border:1px solid #b48a4c;color:${col};font-size:11px;display:flex;align-items:center;justify-content:center;${N};${SH}">${text}</div>`; }
 function playerFrame(ctx, player, st, now) {
   const hpMax = R.hp(st.lvl ?? 1), chiMax = R.chiMax(st.lvl ?? 1), hp = Math.max(0, st.hp ?? hpMax), chi = st.chi ?? chiMax, el = ELEMENTS[st.stance ?? 'air'];
-  const combat = now < (st.combatUntil ?? 0), avatar = now < (st.avatarUntil ?? 0);
-  const pips = Array.from({ length: R.harmonyMax }, (_, i) => `<span style="width:11px;height:11px;border-radius:50%;border:1px solid #c9a24a;background:${i < (st.harmony ?? 0) ? 'radial-gradient(#fff6c8,#e0a920)' : 'rgba(0,0,0,.55)'};box-shadow:${i < (st.harmony ?? 0) ? '0 0 6px #ffd76a' : 'none'}"></span>`).join('');
+  const combat = now < (st.combatUntil ?? 0), avatar = now < (st.avatarUntil ?? 0), hm = st.harmony ?? 0;
+  const gems = Array.from({ length: R.harmonyMax }, (_, i) => { const on = i < hm; return `<span title="Harmony" style="width:10px;height:10px;transform:rotate(45deg);border:1px solid #b48a4c;background:${on ? 'radial-gradient(circle at 35% 35%,#fff8d8,#f0b830 60%,#8a5a10)' : 'linear-gradient(#20232a,#0e1013)'};box-shadow:${on ? '0 0 7px #ffcf5a' : 'inset 0 1px 2px #000'}"></span>`; }).join('');
   const auras = [];
   if ((st.shield ?? 0) > 0) auras.push(aura(SPELLS[st.shieldKind === 'earth' ? 'stone-armor' : st.shieldKind === 'water' ? 'octopus-form' : 'air-shield'].icon, Math.round(st.shield), '#7fd3ff'));
   if (st.speedUntil && now < st.speedUntil) auras.push(aura(SPELLS['air-scooter'].icon, Math.ceil((st.speedUntil - now) / 1000), '#7fd3ff'));
   if (avatar) auras.push(aura(SPELLS['avatar-state'].icon, Math.ceil((st.avatarUntil - now) / 1000), '#ffd76a'));
   if (now < (st.meditateUntil ?? 0)) auras.push(aura(SPELLS.meditate.icon, Math.ceil((st.meditateUntil - now) / 1000), '#ffd76a'));
-  const portrait = player.portraitUrl ? `<img src="${player.portraitUrl}" style="width:100%;height:100%;object-fit:cover">` : icon(el.icon, 58);
-  return `<div style="position:fixed;left:14px;top:14px;display:flex;align-items:center;pointer-events:none;${F}">
-    <div style="position:relative;z-index:2;width:66px;height:66px;border-radius:50%;overflow:hidden;border:3px solid ${avatar ? '#bfe4ff' : '#c9a24a'};box-shadow:0 0 0 2px #2a1c0c,0 0 ${avatar ? 18 : 8}px ${avatar ? '#bfe4ff' : 'rgba(0,0,0,.6)'};background:#1a120a">${portrait}</div>
-    <div style="position:absolute;left:46px;top:50px;z-index:3;width:24px;height:24px;border-radius:50%;background:#2a1c0c;border:2px solid #c9a24a;color:#ffe9a8;font-size:12px;display:flex;align-items:center;justify-content:center">${st.lvl ?? 1}</div>
-    ${combat ? `<div style="position:absolute;left:0;top:-4px;z-index:3;font-size:16px;filter:drop-shadow(0 0 3px #f00)">⚔️</div>` : ''}
-    <div style="margin-left:-14px;width:min(210px,42vw);padding:5px 8px 5px 18px;${ARMOR};border-radius:0 10px 10px 0">
-      <div style="display:flex;justify-content:space-between;font-size:12px;color:#ffe9a8;margin-bottom:2px"><span>${(player.displayName ?? 'You').slice(0, 16)}</span><span style="color:${el.color}">${el.name}</span></div>
-      ${bar(hp / hpMax, 'linear-gradient(#3fd03f,#178a17)', 14, `${Math.round(hp)} / ${hpMax}`)}
-      <div style="height:3px"></div>${bar(chi / chiMax, 'linear-gradient(#5aa8ff,#1f5fd0)', 11, `${Math.round(chi)} / ${chiMax} chi`)}
-      <div style="display:flex;gap:4px;margin-top:4px;align-items:center"><span style="font-size:10px;color:#c9a24a;margin-right:2px">HARMONY</span>${pips}</div>
-    </div></div>
-    ${auras.length ? `<div style="position:fixed;left:84px;top:96px;display:flex;gap:3px;pointer-events:none">${auras.join('')}</div>` : ''}`;
+  const portrait = player.portraitUrl ? `<img src="${player.portraitUrl}" style="width:100%;height:100%;object-fit:cover">` : icon(el.icon, 52);
+  return `<div style="position:fixed;left:12px;top:12px;pointer-events:none;${F}">
+    <div style="position:relative;display:flex;align-items:center">
+      ${ring(portrait, 56, avatar ? '#cfeaff' : '#c9a24a', avatar ? '#bfe4ff' : combat ? 'rgba(255,60,40,.55)' : '')}
+      ${badge(st.lvl ?? 1, '#ffe9a8', 'left:38px;top:40px')}${combat ? `<div style="position:absolute;left:-2px;top:-3px;z-index:3;font-size:14px;filter:drop-shadow(0 0 3px #f00)">⚔️</div>` : ''}
+      <div style="margin-left:-12px;width:min(196px,40vw);padding:4px 7px 5px 16px;${SLATE};border-radius:0 6px 6px 0">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;font-size:12px;line-height:14px;color:#f3e3bd;${SH}"><span>${(player.displayName ?? 'You').slice(0, 16)}</span><span style="color:${el.color};font-size:11px">${el.name}</span></div>
+        ${bar(hp / hpMax, 'linear-gradient(#4ee04e,#1a8f1a)', 16, `${Math.round(hp)} / ${hpMax}`)}
+        <div style="height:2px"></div>${bar(chi / chiMax, 'linear-gradient(#66b2ff,#1f5fd0)', 12, `${Math.round(chi)} / ${chiMax}`)}
+        <div style="display:flex;gap:7px;margin:4px 0 0 3px;align-items:center">${gems}</div>
+      </div></div>
+    ${auras.length ? `<div style="display:flex;gap:3px;margin:4px 0 0 58px">${auras.join('')}</div>` : ''}</div>`;
 }
 function targetFrame(ctx, player, st, W) {
   const t = st.tgt && W[st.tgt]; if (!t || t.d) return '';
@@ -39,49 +44,46 @@ function targetFrame(ctx, player, st, W) {
   const lvl = t.e === 2 ? '<span style="font-size:15px">💀</span>' : t.l;
   const deb = []; if (t.a & 1) deb.push(aura(SPELLS['fire-blast'].icon, null, '#ff4a2a')); if (t.a & 2) deb.push(aura(SPELLS['ice-prison'].icon, null, '#ff4a2a')); if (t.a & 4) deb.push(aura(SPELLS['ice-spears'].icon, null, '#ff4a2a'));
   const tt = t.t && ctx.place.players.find((p) => p.id === t.t);
-  const tot = tt ? `<div style="position:absolute;left:30px;top:78px;display:flex;align-items:center;gap:5px;padding:3px 7px;${ARMOR};border-radius:8px;font-size:11px;color:#ffe9a8"><span style="opacity:.7">▸</span>${tt.id === player.id ? 'You' : (tt.displayName ?? '').slice(0, 12)}<div style="width:60px">${bar((tt.state?.hp ?? 1) / R.hp(tt.state?.lvl ?? 1), '#2fb52f', 8)}</div></div>` : '';
-  return `<div style="position:fixed;left:min(310px,48vw);top:14px;pointer-events:none;${F}">
+  const tot = tt ? `<div style="position:absolute;left:24px;top:58px;display:flex;align-items:center;gap:5px;padding:2px 7px;${SLATE};border-radius:5px;font-size:11px;color:#f3e3bd;${SH}"><span style="opacity:.7">▸</span>${tt.id === player.id ? 'You' : (tt.displayName ?? '').slice(0, 12)}<div style="width:60px">${bar((tt.state?.hp ?? 1) / R.hp(tt.state?.lvl ?? 1), '#2fb52f', 8)}</div></div>` : '';
+  return `<div style="position:fixed;left:min(290px,46vw);top:12px;pointer-events:none;${F}">
     <div style="position:relative;display:flex;align-items:center">
-      <div style="width:min(200px,38vw);padding:5px 18px 5px 8px;${ARMOR};border-radius:10px 0 0 10px${t.e ? ';border-color:#e3b64a;box-shadow:0 0 12px rgba(255,200,80,.45)' : ''}">
-        <div style="display:flex;justify-content:space-between;font-size:12px;color:#ff6a5a;margin-bottom:2px"><span>${t.n}</span><span style="color:#c9a24a;font-size:10px">${tag}</span></div>
-        ${bar(t.hp / max, 'linear-gradient(#3fd03f,#178a17)', 14, `${t.hp} / ${max}`)}<div style="height:3px"></div>${bar(1, 'linear-gradient(#d04040,#801a1a)', 6, '')}
+      <div style="width:min(186px,36vw);padding:4px 16px 5px 7px;${SLATE};border-radius:6px 0 0 6px${t.e ? ';border-color:#f0c050;box-shadow:0 0 12px rgba(255,200,80,.4)' : ''}">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;font-size:12px;line-height:14px;color:#ff7a68;${SH}"><span>${t.n}</span><span style="color:#d9b26a;font-size:10px">${tag}</span></div>
+        ${bar(t.hp / max, 'linear-gradient(#4ee04e,#1a8f1a)', 16, `${t.hp} / ${max}`)}<div style="height:2px"></div>${bar(1, 'linear-gradient(#e05050,#801a1a)', 6, '')}
       </div>
-      <div style="margin-left:-12px;width:56px;height:56px;border-radius:50%;border:3px solid ${t.e ? '#e3b64a' : '#c9a24a'};background:radial-gradient(#5a4a3a,#1a120a);display:flex;align-items:center;justify-content:center;font-size:30px;box-shadow:0 0 0 2px #2a1c0c">🐺</div>
-      <div style="position:absolute;right:-4px;top:40px;width:24px;height:24px;border-radius:50%;background:#2a1c0c;border:2px solid #c9a24a;color:${lc};font-size:12px;display:flex;align-items:center;justify-content:center">${lvl}</div>
+      <div style="margin-left:-12px">${ring('<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:28px;background:radial-gradient(#4a4f58,#15171b)">🐺</div>', 52, t.e ? '#f0c050' : '#c9a24a', '')}</div>
+      ${badge(lvl, lc, 'right:-4px;top:36px')}
       ${tot}
-    </div>${deb.length ? `<div style="display:flex;gap:3px;margin-top:${tot ? 32 : 4}px">${deb.join('')}</div>` : ''}</div>`;
+    </div>${deb.length ? `<div style="display:flex;gap:3px;margin-top:${tot ? 26 : 4}px">${deb.join('')}</div>` : ''}</div>`;
 }
 function slot(id, key, st, now, big) {
   const S = SPELLS[id]; if (!S) return '';
   const px = big ? 56 : 46, cdEnd = st.cds?.[id] ?? 0, gEnd = S.off ? 0 : st.gcdAt ?? 0, end = Math.max(cdEnd, gEnd), left = end - now;
   const total = cdEnd >= gEnd ? (S.cd ?? 0) * 1000 : R.gcd * 1000;
   const avatar = now < (st.avatarUntil ?? 0), poor = !avatar && (st.chi ?? 0) < (S.chi ?? 0), locked = S.kind === 'avatar' && (st.harmony ?? 0) < S.harmony;
-  const sweep = left > 0 && total > 0 ? `<div id="cd-${id}-${end}" style="position:absolute;inset:0;background:conic-gradient(rgba(0,0,0,.7) var(--a),transparent 0);animation:cdsweep ${total}ms linear ${left - total}ms forwards"></div>${left > 1500 ? `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:${big ? 20 : 16}px;text-shadow:0 0 3px #000,0 0 3px #000">${Math.ceil(left / 1000)}</div>` : ''}` : '';
+  const sweep = left > 0 && total > 0 ? `<div id="cd-${id}-${end}" style="position:absolute;inset:0;background:conic-gradient(rgba(0,0,0,.7) var(--a),transparent 0);animation:cdsweep ${total}ms linear ${left - total}ms forwards"></div>${left > 1500 ? `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:${big ? 20 : 16}px;${SH};${N}">${Math.ceil(left / 1000)}</div>` : ''}` : '';
   const flash = st.lastCast?.id === id && now - st.lastCast.at < 250 ? 'box-shadow:0 0 12px #ffe48a,inset 0 0 10px #fff;' : '';
-  return `<button title="${S.name}: ${S.text}" onclick="sendAction('castSlot',{id:'${id}'})" style="pointer-events:auto;cursor:pointer;position:relative;width:${px}px;height:${px}px;padding:0;border:2px solid ${big ? '#e3b64a' : '#6b5228'};border-radius:5px;background:#000;overflow:hidden;${flash}">
+  return `<button title="${S.name}: ${S.text}" onclick="sendAction('castSlot',{id:'${id}'})" style="pointer-events:auto;cursor:pointer;position:relative;width:${px}px;height:${px}px;padding:0;border:1px solid ${big ? '#f0c050' : '#7a5f30'};border-radius:4px;background:#000;overflow:hidden;box-shadow:inset 0 0 0 1px #000;${flash}">
     ${icon(S.icon, px - 4, `${poor ? 'filter:saturate(.3) brightness(.55) sepia(.4) hue-rotate(180deg);' : ''}${locked ? 'filter:grayscale(1) brightness(.5);' : ''}`)}${sweep}
-    ${key ? `<span style="position:absolute;top:1px;right:3px;font-size:11px;color:#fff;text-shadow:0 0 2px #000,0 0 2px #000;${F}">${key}</span>` : ''}</button>`;
+    ${key ? `<span style="position:absolute;top:1px;right:3px;font-size:11px;color:#fff;${SH};${N}">${key}</span>` : ''}</button>`;
 }
 function bars(ctx, player, st, now) {
   const stance = st.stance ?? 'air', b = BARS[stance], coarse = typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches;
-  const stances = STANCES.map((e, i) => { const E = ELEMENTS[e], on = e === stance;
-    return `<button title="${E.name} stance" onclick="sendAction('stancePick',{el:'${e}'})" style="pointer-events:auto;cursor:pointer;position:relative;width:34px;height:34px;padding:0;border:2px solid ${on ? E.color : '#4a3820'};border-radius:5px;background:#000;overflow:hidden;box-shadow:${on ? `0 0 10px ${E.color}` : 'none'}">${icon(E.icon, 30, on ? '' : 'filter:brightness(.6)')}</button>`; }).join('');
+  const stances = STANCES.map((e) => { const E = ELEMENTS[e], on = e === stance;
+    return `<button title="${E.name} stance (R)" onclick="sendAction('stancePick',{el:'${e}'})" style="pointer-events:auto;cursor:pointer;position:relative;width:30px;height:30px;padding:0;border:1px solid ${on ? '#ffd76a' : '#5a4626'};border-radius:4px;background:#000;overflow:hidden;box-shadow:${on ? `0 0 8px ${E.color},inset 0 0 0 1px #000` : 'none'}">${icon(E.icon, 28, on ? '' : 'filter:saturate(.35) brightness(.55)')}</button>`; }).join('');
   const lvl = st.lvl ?? 1, need = R.xpNeed(lvl), xp = st.xp ?? 0;
-  const ticks = Array.from({ length: 19 }, (_, i) => `<span style="position:absolute;left:${(i + 1) * 5}%;top:0;bottom:0;width:1px;background:rgba(0,0,0,.6)"></span>`).join('');
-  const W = coarse ? 'min(96vw,560px)' : '560px';
+  const ticks = Array.from({ length: 19 }, (_, i) => `<span style="position:absolute;left:${(i + 1) * 5}%;top:0;bottom:0;width:1px;background:rgba(0,0,0,.55)"></span>`).join('');
+  const sep = '<span style="width:1px;align-self:stretch;margin:2px 6px;background:linear-gradient(transparent,#b48a4c,transparent)"></span>';
+  const drake = (flip) => `<span style="flex:none;align-self:flex-end;font-size:34px;line-height:34px;margin:0 2px -2px;${flip ? 'transform:scaleX(-1);' : ''}filter:sepia(1) saturate(2.2) hue-rotate(-12deg) brightness(.95) drop-shadow(0 1px 2px #000)">🐉</span>`;
   return `<style>@property --a{syntax:'<angle>';inherits:false;initial-value:360deg}@keyframes cdsweep{from{--a:360deg}to{--a:0deg}}</style>
-  <div style="position:fixed;left:50%;bottom:${coarse ? 150 : 10}px;transform:translateX(-50%) scale(${coarse ? 0.78 : 1});transform-origin:bottom center;width:${W};pointer-events:none;${F}">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:5px">
-      <div style="display:flex;gap:3px;padding:3px;${ARMOR};border-radius:8px">${stances}<span style="align-self:center;color:#c9a24a;font-size:10px;margin:0 4px">R</span></div>
-      <div style="display:flex;gap:6px;align-items:flex-end">${slot('meditate', 'X', st, now, false)}${slot('avatar-state', 'V', st, now, true)}</div>
+  <div style="position:fixed;left:50%;bottom:${coarse ? 140 : 0}px;transform:translateX(-50%) scale(${coarse ? 0.72 : 1});transform-origin:bottom center;pointer-events:none;${F}">
+    <div style="display:flex;align-items:center;padding:6px 8px 5px;${SLATE};border-bottom:0;border-radius:10px 10px 0 0">
+      ${drake(true)}<div style="display:grid;grid-template-columns:30px 30px;gap:3px">${stances}</div>${sep}
+      <div style="display:flex;gap:4px">${b.map((id, i) => slot(id, String(i + 1), st, now, false)).join('')}</div>${sep}
+      <div style="display:flex;gap:4px;align-items:center">${slot('meditate', 'X', st, now, false)}${slot('avatar-state', 'V', st, now, false)}</div>${drake(false)}
     </div>
-    <div style="position:relative;display:flex;justify-content:center;gap:4px;padding:7px 46px 6px;${ARMOR};border-radius:10px 10px 4px 4px">
-      <div style="position:absolute;left:-30px;bottom:-6px;font-size:56px;transform:scaleX(-1);filter:sepia(1) saturate(2.4) hue-rotate(-12deg) drop-shadow(0 2px 3px #000)">🐉</div>
-      ${b.map((id, i) => slot(id, String(i + 1), st, now, false)).join('')}
-      <div style="position:absolute;right:-30px;bottom:-6px;font-size:56px;filter:sepia(1) saturate(2.4) hue-rotate(-12deg) drop-shadow(0 2px 3px #000)">🐉</div>
-    </div>
-    <div title="${xp} / ${need} xp" style="position:relative;height:9px;margin-top:2px;background:#1a0f22;border:1px solid #000;border-radius:2px;overflow:hidden"><div style="height:100%;width:${Math.min(1, xp / need) * 100}%;background:linear-gradient(#b06ae0,#6a2aa8)"></div>${ticks}
-      <div style="position:absolute;inset:0;text-align:center;font-size:8px;line-height:9px;color:#fff;text-shadow:0 0 2px #000">${lvl >= R.maxLevel ? 'max level' : `level ${lvl} · ${xp} / ${need} xp`}</div></div>
+    <div title="${xp} / ${need} xp" style="position:relative;height:10px;background:#140c1c;border:1px solid #b48a4c;border-bottom:0;overflow:hidden"><div style="height:100%;width:${Math.min(1, xp / need) * 100}%;background:linear-gradient(#c07ef0,#6a2aa8)"></div>${ticks}
+      <div style="position:absolute;inset:0;text-align:center;font-size:8px;line-height:10px;color:#fff;${SH};${N}">${lvl >= R.maxLevel ? 'MAX LEVEL' : `LEVEL ${lvl} · ${xp} / ${need} XP`}</div></div>
   </div>`;
 }
 function minimap(ctx, player, st, W) {
@@ -93,16 +95,19 @@ function minimap(ctx, player, st, W) {
   for (const [id, w] of Object.entries(W)) if (!w.d) h += dot(w.x, w.z, `<span style="display:block;width:${id === st.tgt ? 8 : 6}px;height:${id === st.tgt ? 8 : 6}px;border-radius:50%;background:${w.t ? '#ff3030' : '#ffd040'};border:1px solid #000"></span>`);
   for (const p of ctx.place.players) if (p.id !== player.id && p.feetPosition) h += dot(p.feetPosition.x, p.feetPosition.z, '<span style="display:block;width:7px;height:7px;border-radius:50%;background:#4ad0ff;border:1px solid #000"></span>');
   const zone = Math.hypot(f.x, f.z + 3) < 60 ? 'The First Den' : Object.values(DENS).find((d) => Math.hypot(f.x - d.x, f.z - d.z) < 40)?.name ?? 'Whisperwood';
-  return `<div style="position:fixed;right:18px;top:12px;width:${S}px;pointer-events:none;${F}">
-    <div style="text-align:center;font-size:12px;color:#ffe9a8;text-shadow:0 1px 2px #000;margin-bottom:3px">${zone}</div>
-    <div style="position:relative;width:${S}px;height:${S}px;border-radius:50%;overflow:hidden;border:4px solid #8a6a32;box-shadow:0 0 0 2px #2a1c0c,0 4px 12px rgba(0,0,0,.6);background:radial-gradient(#4f6b3a,#2c4223)">
-      ${h}<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:13px solid #fff;filter:drop-shadow(0 0 2px #000)"></div>
-      <div style="position:absolute;left:50%;top:2px;transform:translateX(-50%);font-size:10px;color:#ffe9a8;text-shadow:0 0 2px #000">N</div></div></div>`;
+  const card = (t, pos) => `<div style="position:absolute;${pos};width:14px;height:14px;border-radius:50%;background:#15171b;border:1px solid #b48a4c;color:${t === 'N' ? '#ffd76a' : '#e8dcc0'};font-size:9px;line-height:13px;text-align:center;${N}">${t}</div>`;
+  return `<div style="position:fixed;right:16px;top:10px;width:${S + 10}px;pointer-events:none;${F}">
+    <div style="position:relative;width:${S + 10}px;height:${S + 10}px;border-radius:50%;background:conic-gradient(from 20deg,#8a6a32,#e9c37a,#7a5a2a,#d9b26a,#6a4a1a,#e9c37a,#8a6a32);box-shadow:0 0 0 1px #1a1206,0 4px 14px rgba(0,0,0,.6)">
+      <div style="position:absolute;inset:5px;border-radius:50%;overflow:hidden;box-shadow:inset 0 0 12px rgba(0,0,0,.8);background:radial-gradient(#56733f,#2c4223)">
+        ${h}<div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:0;height:0;border-left:6px solid transparent;border-right:6px solid transparent;border-bottom:13px solid #fff;filter:drop-shadow(0 0 2px #000)"></div></div>
+      ${card('N', 'left:50%;top:-4px;margin-left:-7px')}${card('E', 'right:-4px;top:50%;margin-top:-7px')}${card('S', 'left:50%;bottom:-4px;margin-left:-7px')}${card('W', 'left:-4px;top:50%;margin-top:-7px')}
+    </div>
+    <div style="margin:6px auto 0;width:max-content;max-width:170px;padding:2px 12px;${SLATE};border-radius:4px;text-align:center;font-size:12px;color:#f3e3bd;${SH}">${zone}</div></div>`;
 }
 function tracker(st) {
   const q = st.quests ?? {}, rows = QUESTS.map((Q) => { const done = !!q[Q.id], n = Math.min(Q.need, st[Q.stat] ?? 0);
-    return `<div style="margin-bottom:6px"><div style="color:${done ? '#7fdc6a' : '#ffd100'};font-size:13px">${Q.elite ? '💀 ' : ''}${Q.title}</div><div style="color:#e8e0d0;font-size:11px;padding-left:8px">${done ? 'Complete' : `- ${Q.stat === 'kills' ? 'Wolves slain' : 'Grimfang slain'}: ${n}/${Q.need}`}</div></div>`; }).join('');
-  return `<div style="position:fixed;right:${RIGHT};top:178px;width:200px;pointer-events:none;${F};text-shadow:0 1px 2px #000"><div style="color:#ffe9a8;font-size:12px;letter-spacing:.08em;border-bottom:1px solid rgba(201,162,74,.5);margin-bottom:5px">QUESTS <span style="opacity:.6;font-size:10px">· L journal</span></div>${rows}</div>`;
+    return `<div style="margin-bottom:6px"><div style="color:${done ? '#7fdc6a' : '#ffd100'};font-size:13px">${Q.elite ? '💀 ' : ''}${Q.title}</div><div style="color:#ece4d4;font-size:11px;padding-left:8px;${N};font-weight:600">${done ? 'Complete' : `- ${Q.stat === 'kills' ? 'Wolves slain' : 'Grimfang slain'}: ${n}/${Q.need}`}</div></div>`; }).join('');
+  return `<div style="position:fixed;right:${RIGHT};top:192px;width:196px;padding:7px 10px 3px;border-radius:6px;background:linear-gradient(90deg,rgba(14,16,20,0),rgba(14,16,20,.55) 25%,rgba(14,16,20,.62));pointer-events:none;${F};${SH}"><div style="color:#e9c37a;font-size:12px;letter-spacing:.12em;border-bottom:1px solid rgba(180,138,76,.6);margin-bottom:5px">QUESTS <span style="opacity:.7;font-size:10px;letter-spacing:0">· L journal</span></div>${rows}</div>`;
 }
 function plates(ctx, player, st, W) {
   const f = player.feetPosition; if (!f) return '';
@@ -111,7 +116,7 @@ function plates(ctx, player, st, W) {
     if (w.d || Math.hypot(w.x - f.x, w.z - f.z) > 50) continue;
     const tg = id === st.tgt, max = w.max || 1, lc = levelCol(st.lvl ?? 1, w.l);
     h += `<div data-world-anchor="${id}" data-anchor-offset="0 ${w.e === 2 ? 2.2 : 1.55} 0" style="pointer-events:auto;cursor:pointer;width:${tg ? 132 : 112}px;transform:translate(-50%,-100%);text-align:center;${F};opacity:calc(1 - var(--anchor-depth, 0) / 60)" onclick="sendAction('targetPick',{id:'${id}'})">
-      <div style="font-size:${tg ? 13 : 11}px;color:${w.t ? '#ff5040' : '#ffe14a'};text-shadow:0 0 3px #000,0 0 2px #000;white-space:nowrap">${w.n}</div>
+      <div style="font-size:${tg ? 13 : 11}px;color:${w.t ? '#ff5040' : '#ffe14a'};${SH};white-space:nowrap">${w.n}</div>
       <div style="display:flex;align-items:center;gap:3px"><span style="font-size:10px;color:${lc};text-shadow:0 0 2px #000;min-width:16px">${w.e === 2 ? '💀' : w.l}${w.e === 1 ? '+' : ''}</span>
       <div style="flex:1;height:${tg ? 9 : 7}px;background:rgba(0,0,0,.7);border:1px solid ${tg ? '#fff' : w.t ? '#ff4030' : '#000'};border-radius:2px;overflow:hidden${tg ? ';box-shadow:0 0 6px #fff' : ''}"><div style="height:100%;width:${(w.hp / max) * 100}%;background:${w.t ? '#d02a1a' : '#c8a020'}"></div></div></div></div>`;
   }
