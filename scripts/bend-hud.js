@@ -213,7 +213,7 @@ function fctLayer() {
     const text = f.c ? `${f.t}!` : f.t;
     const col = f.c && f.k === 'spell' ? '#ffe14a' : FCT_COL[f.k] ?? '#fff';
     const anim = f.c ? 'fctCrit' : f.k === 'taken' ? 'fctDown' : 'fctUp';
-    h += `<div data-world-anchor="${f.a}" data-anchor-offset="0 ${f.y ?? 1.45} 0" style="width:0;height:0;pointer-events:none;opacity:calc(1 - var(--anchor-depth, 0) / 70)"><div id="fct-${f.id}" style="position:absolute;left:0;top:0;white-space:nowrap;--x:${x}px;--dx:${dx}px;font-family:Impact,'Arial Black','Helvetica Neue',sans-serif;font-size:${size}px;letter-spacing:.5px;color:${col};-webkit-text-stroke:1.5px #000;paint-order:stroke fill;text-shadow:2px 2px 0 #000,-1px -1px 0 #000${f.c ? ',0 0 10px rgba(255,120,0,.7)' : ''};animation:${anim} ${life}ms ease-out -${Math.min(life, t - f.at)}ms forwards">${text}</div></div>`;
+    h += `<div data-world-anchor="${f.a}" data-anchor-offset="0 ${f.y ?? 1.45} 0" style="width:0;height:0;pointer-events:none;opacity:calc(1 - var(--anchor-depth, 0) / 70)"><div id="fct-${f.id}" style="position:absolute;left:0;top:0;white-space:nowrap;--x:${x}px;--dx:${dx}px;font-family:Impact,'Arial Black','Helvetica Neue',sans-serif;font-size:${size}px;letter-spacing:.5px;color:${col};-webkit-text-stroke:1.5px #000;paint-order:stroke fill;text-shadow:2px 2px 0 #000,-1px -1px 0 #000${f.c ? ',0 0 10px rgba(255,120,0,.7)' : ''};animation:${anim} ${life}ms ease-out forwards">${text}</div></div>`;
   }
   return h;
 }
