@@ -199,10 +199,12 @@ function finishCast(ctx, b) {
   st.cds = { ...(st.cds ?? {}), [c.id]: now + (S.cd ?? 0) * 1000 };
   st.lastCast = { id: c.id, at: now }; st.meditateUntil = 0;
   if (S.dmg && S.el) { if (S.el !== st.lastEl) st.harmony = Math.min(R.harmonyMax, (st.harmony ?? 0) + 1); st.lastEl = S.el; }
+  st.castEnd = { id: c.id, ok: true, at: now }; // the cast bar flashes full and fades, 1.12's CastingBarFrame
   release(ctx, { id: c.id, wid: c.wid });
 }
 function cancelCast(ctx, b, why) {
-  const st = ctx.self.state; st.casting = null; if (b.castFx) { ctx.destroy(b.castFx); b.castFx = null; }
+  const st = ctx.self.state; if (st.casting) st.castEnd = { id: st.casting.id, ok: false, at: ctx.now(), why: why ?? 'Interrupted' };
+  st.casting = null; if (b.castFx) { ctx.destroy(b.castFx); b.castFx = null; }
   if (why) err(ctx, why);
 }
 function startChannel(ctx, b, id, w) {
@@ -219,7 +221,8 @@ function startChannel(ctx, b, id, w) {
   me.state.channeling = { id, at: now, end: now + S.channel * 1000, wid: w?.id ?? null, pos: at, next: now + iv * 0.5, iv, left: S.ticks };
 }
 function stopChannel(ctx, b, why) {
-  ctx.self.state.channeling = null; if (b.chanFx) { ctx.destroy(b.chanFx); b.chanFx = null; }
+  const st = ctx.self.state; if (st.channeling) st.castEnd = { id: st.channeling.id, ok: !why, at: ctx.now(), why, ch: true };
+  st.channeling = null; if (b.chanFx) { ctx.destroy(b.chanFx); b.chanFx = null; }
   if (why) err(ctx, why);
 }
 function channelTick(ctx, b) {
@@ -356,7 +359,10 @@ export function onInput(ctx, input) {
   }
   if (p.bookToggle) { st.bookOpen = !st.bookOpen; st.journalOpen = false; }
   if (p.journalToggle) { st.journalOpen = !st.journalOpen; st.bookOpen = false; }
-  if (p.travelClose) { st.bookOpen = false; st.journalOpen = false; st.tgt = null; }
+  if (p.travelClose) { // Esc: a running cast aborts first (benilla's AbortCast); with nothing casting it closes windows and drops the target
+    if (st.casting) cancelCast(ctx, b, 'Interrupted'); else if (st.channeling) stopChannel(ctx, b, 'Interrupted');
+    else { st.bookOpen = false; st.journalOpen = false; st.tgt = null; }
+  }
   if (ctx.self.parent || ctx.self.controlling || st.dead || st.mountedOn || st.seatedOn) return;
   if (p.stanceNext) { st.stance = STANCES[(STANCES.indexOf(st.stance) + 1) % 4]; sound(ctx, SOUNDS.shield, ctx.self.feetPosition, 0.25, 1.6); }
   if (p.stancePick && STANCES.includes(input.actionData?.stancePick?.el)) st.stance = input.actionData.stancePick.el;
@@ -375,6 +381,14 @@ export function update(ctx, dt) {
   if (b.move) {
     if (now > b.move.until || st.dead) b.move = null;
     else { const v = me.velocity; me.velocity = b.move.kind === 'jet' ? { x: b.move.v.x, y: b.move.v.y, z: b.move.v.z } : b.move.kind === 'dash' ? { x: b.move.v.x, y: Math.max(0, v.y), z: b.move.v.z } : { x: b.move.v.x, y: v.y, z: b.move.v.z }; }
+  }
+  // the selection circle: a red ring on the ground under your target, on this screen alone (1.12's target ring)
+  if ((st.tgt ?? null) !== (b.ringFor ?? null)) {
+    if (b.ring) { ctx.destroy(b.ring); b.ring = null; }
+    b.ringFor = st.tgt ?? null;
+    if (st.tgt && wolfAt(ctx, st.tgt)) b.ring = ctx.spawn({ parent: st.tgt, feetPosition: { x: 0, y: 0.07, z: 0 }, rotation: { pitch: -90 }, audience: 'local', castShadow: false, receiveShadow: false,
+      primitive: { kind: 'ring', innerRadius: 0.92, outerRadius: 1.08, thetaSegments: 48 },
+      material: { color: '#ff3a22', emissive: '#ff2a10', emissiveIntensity: 1.6, transparent: true, opacity: 0.85, depthWrite: false } });
   }
   if (st.casting || st.channeling) { // standing still is the price: a step, a jump or a launch breaks it
     const f0 = b.castFrom, q = me.feetPosition, moved = !f0 || Math.hypot(q.x - f0.x, q.z - f0.z) > R.moveCancel || Math.abs(q.y - f0.y) > 0.6 || !!b.move;
