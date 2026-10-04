@@ -241,7 +241,7 @@ export function onInput(ctx, input) {
   if (p.castSlot && SPELLS[input.actionData?.castSlot?.id]) { cast(ctx, b, input.actionData.castSlot.id); return; }
   if (p.meditate) cast(ctx, b, 'meditate');
   if (p.avatar) cast(ctx, b, 'avatar-state');
-  if (st.travelOpen || st.courierPick || st.alchemyOpen) return; // the number row belongs to those menus while they stand
+  if (st.travelOpen || st.courierPick || st.alchemyOpen || ctx.now() - (st.travelAt ?? 0) < 400) return; // the number row belongs to those menus while they stand
   const bar = BARS[st.stance] ?? BARS.air;
   KEYS.forEach((k, i) => { if (p[k]) cast(ctx, b, bar[i]); });
 }

@@ -36,6 +36,21 @@ inputs:
     travelDock: {keys: ['5']}
     travelGate: {keys: ['6']}
     fish: {keys: ['2']}
+    cast1: {keys: ['1']}
+    cast2: {keys: ['2']}
+    cast3: {keys: ['3']}
+    cast4: {keys: ['4']}
+    cast5: {keys: ['5']}
+    cast6: {keys: ['6']}
+    stanceNext: {keys: [r]}
+    targetNext: {keys: [f]}
+    meditate: {keys: [x]}
+    avatar: {keys: [v]}
+    bookToggle: {keys: [p]}
+    journalToggle: {keys: [l]}
+    castSlot: {}
+    stancePick: {}
+    targetPick: {}
   axes:
     moveX:
       keys: a/d
