@@ -100,14 +100,21 @@ function hurt(ctx, wid, dmg, crit, S, from) {
   ws.threat = { ...(ws.threat ?? {}), [me.id]: Math.round((ws.threat?.[me.id] ?? 0) + Math.max(1, dmg)) };
   ws.hitBy = me.id; ws.hitAt = now + ctx.random();
   if (ctx.random() < miss) { ctx.emit('damageNumber', { position: top0, text: 'Miss', color: '#c8c8c8', size: 0.9 }); return; }
+  const frozen = now < (ws.rootUntil ?? 0);
+  if (frozen && S.lance) dmg *= 2;
+  if (frozen && !crit && dmg > 0 && ctx.random() < R.shatter) { crit = true; dmg = Math.round(dmg * R.critMul); } // shatter
+  if (frozen && !S.root && dmg > 0 && ctx.random() < R.rootBreak) ws.rootUntil = 0; // damage can crack the ice
+  if (ws.cc) { ws.cc = null; if (ws.ccFx) { ctx.destroy(ws.ccFx); ws.ccFx = null; } } // any damage frees a bound wolf
   ws.hp -= dmg; // roll 2 (the crit) was rolled with the damage
+  if (el === 'fire' && crit && dmg > 0) { const left = ws.ignite && now < ws.ignite.until ? ws.ignite.dps * (ws.ignite.until - now) / 1000 : 0;
+    ws.ignite = { dps: Math.max(1, Math.round((left + dmg * R.ignite) / 4)), until: now + 4000 }; }
   if (S.root) { // diminishing returns: 100 / 50 / 25 % then immune, inside 18 s of the last root ending
     const n = now < (ws.drRootUntil ?? 0) ? (ws.drRootN ?? 0) + 1 : 0, k = R.drSteps[Math.min(n, 3)];
     if (k > 0) { ws.rootUntil = now + S.root * 1000 * k; ws.drRootN = n; ws.drRootUntil = ws.rootUntil + R.drWindow; }
     else ctx.emit('damageNumber', { position: { x: top0.x, y: top0.y + 0.4, z: top0.z }, text: 'Immune', color: '#ffffff', size: 0.8 });
   }
   if (S.slow) ws.slowUntil = now + S.slow * 1000;
-  if (S.burn) { const base = 3000, left = ws.burn && now < ws.burn.until ? ws.burn.until - now : 0; // pandemic: carry up to 30 % over
+  if (S.burn) { const base = (S.burnDur ?? 3) * 1000, left = ws.burn && now < ws.burn.until ? ws.burn.until - now : 0; // pandemic: carry up to 30 % over
     ws.burn = { dps: Math.round(S.burn * (1 + R.dmgPerLevel * ((me.state.lvl ?? 1) - 1))), until: now + base + Math.min(left, base * R.pandemic) }; }
   const kbk = S.kb ?? 0, lift = S.lift ?? 0;
   if (kbk || lift) { const dx = p.x - from.x, dz = p.z - from.z, d = Math.hypot(dx, dz) || 1; ws.kb = { x: (dx / d) * kbk, y: lift, z: (dz / d) * kbk, at: now + ctx.random() }; }
@@ -138,14 +145,14 @@ function cast(ctx, b, id) {
   if (!S || st.dead) return;
   if (now < (st.cds?.[id] ?? 0) - R.queueMs) return err(ctx, 'That ability isn\'t ready yet');
   // the spell queue window: a press inside the last 400 ms of the GCD (or the gather) fires on the frame the lock ends
-  const lockEnd = Math.max(S.off ? 0 : st.gcdAt ?? 0, S.off ? 0 : st.windUntil ?? 0, st.cds?.[id] ?? 0);
+  const lockEnd = Math.max(S.off ? 0 : st.gcdAt ?? 0, S.off ? 0 : st.windUntil ?? 0, S.off ? 0 : st.casting?.end ?? 0, st.cds?.[id] ?? 0);
   if (now < lockEnd) { if (lockEnd - now <= R.queueMs) b.queued = { id, at: lockEnd }; return; }
   const avatar = now < (st.avatarUntil ?? 0), cost = avatar ? 0 : S.chi ?? 0;
   if ((st.chi ?? 0) < cost) return err(ctx, 'Not enough chi');
   if (S.kind === 'avatar' && (st.harmony ?? 0) < S.harmony) return err(ctx, 'Needs 5 Harmony: bend different elements in turn');
   const p = me.feetPosition, f = fwdOf(b), hand = { x: p.x + f.x * 0.6, y: p.y + 1.35, z: p.z + f.z * 0.6 };
   let w = null;
-  if (['bolt', 'lash', 'ground'].includes(S.kind)) {
+  if (['bolt', 'lash', 'ground', 'bind'].includes(S.kind)) {
     w = ensureTarget(ctx, b); if (!w) return err(ctx, 'No target: get near a wolf');
     const dx = w.feetPosition.x - p.x, dz = w.feetPosition.z - p.z, d = Math.hypot(dx, dz) || 0.01;
     const hit = WOLF.hitbox * (w.state?.boss ? 1.6 : 1); // reach counts to the edge of the target's hitbox
@@ -155,18 +162,76 @@ function cast(ctx, b, id) {
     const L = Math.hypot(mass.x - eye.x, mass.y - eye.y, mass.z - eye.z), ray = raycast(ctx, eye, { x: (mass.x - eye.x) / L, y: (mass.y - eye.y) / L, z: (mass.z - eye.z) / L }, { distance: L, ignoreEntities: [me.id, w.id], physicsOnly: true, bodies: 'static' });
     if (ray && ray.distance < L - hit - 0.3 && !String(ray.id ?? '').startsWith('wolf-')) return err(ctx, 'Target not in line of sight');
   }
-  st.chi = (st.chi ?? 0) - cost;
+  if (st.channeling && !S.off) stopChannel(ctx, b, null); // a new spell ends the channel, as it does in WoW
+  if (S.kind === 'bind' && w?.state?.boss) return err(ctx, 'Grimfang is immune');
+  if (S.cast) { // a hard cast: the bar fills while you stand still; chi is paid when it completes
+    if (!S.off) st.gcdAt = now + Math.max(R.gcdFloor, R.gcd / (1 + (st.haste ?? 0))) * 1000;
+    if (b.castFx) ctx.destroy(b.castFx);
+    b.castFx = ctx.spawn({ parent: me.id, feetPosition: { x: 0, y: 1.25, z: -0.55 }, lifetime: S.cast + 1.2, audience: 'near', fx: { script: GATHER[S.el ?? 'spirit'] ?? GATHER.spirit } });
+    b.castFrom = { x: p.x, y: p.y, z: p.z };
+    st.casting = { id, at: now, end: now + S.cast * 1000, wid: w?.id ?? null, pushes: 0 };
+    sound(ctx, SOUNDS.shield, hand, 0.35, 0.8);
+    return;
+  }
+  st.chi = (st.chi ?? 0) - cost; if (cost > 0) st.lastSpend = now;
   st.cds = { ...(st.cds ?? {}), [id]: now + (S.cd ?? 0) * 1000 };
   if (!S.off) st.gcdAt = now + Math.max(R.gcdFloor, R.gcd / (1 + (st.haste ?? 0))) * 1000;
   st.lastCast = { id, at: now };
   if (S.dmg && S.el) { if (S.el !== st.lastEl) st.harmony = Math.min(R.harmonyMax, (st.harmony ?? 0) + 1); st.lastEl = S.el; }
   if (S.meditateBreak !== false) st.meditateUntil = 0;
+  if (S.channel) { startChannel(ctx, b, id, w); return; }
   // the build-up: the element gathers at the hands, then lets go
   const wind = WIND[S.kind] ?? 0.45, gc = glowCol(S.el ?? 'air');
   st.windId = id; st.windUntil = now + wind * 1000;
   ctx.spawn({ parent: me.id, feetPosition: { x: 0, y: 1.25, z: -0.55 }, lifetime: wind + 0.1, audience: 'near', fx: { script: GATHER[S.el ?? 'spirit'] ?? GATHER.spirit } });
   sound(ctx, SOUNDS.shield, hand, 0.3, 1.5 - wind * 0.6);
   ctx.after(wind, 'release', { id, wid: w?.id ?? null });
+}
+function finishCast(ctx, b) {
+  const me = ctx.self, st = me.state, c = st.casting, now = ctx.now(); st.casting = null;
+  if (b.castFx) { ctx.destroy(b.castFx); b.castFx = null; }
+  const S = SPELLS[c.id]; if (!S) return;
+  const cost = now < (st.avatarUntil ?? 0) ? 0 : S.chi ?? 0;
+  if ((st.chi ?? 0) < cost) return err(ctx, 'Not enough chi');
+  if (c.wid && !wolfAt(ctx, c.wid)) return;
+  st.chi = (st.chi ?? 0) - cost; if (cost > 0) st.lastSpend = now;
+  st.cds = { ...(st.cds ?? {}), [c.id]: now + (S.cd ?? 0) * 1000 };
+  st.lastCast = { id: c.id, at: now }; st.meditateUntil = 0;
+  if (S.dmg && S.el) { if (S.el !== st.lastEl) st.harmony = Math.min(R.harmonyMax, (st.harmony ?? 0) + 1); st.lastEl = S.el; }
+  release(ctx, { id: c.id, wid: c.wid });
+}
+function cancelCast(ctx, b, why) {
+  const st = ctx.self.state; st.casting = null; if (b.castFx) { ctx.destroy(b.castFx); b.castFx = null; }
+  if (why) err(ctx, why);
+}
+function startChannel(ctx, b, id, w) {
+  const S = SPELLS[id], me = ctx.self, now = ctx.now(), p = me.feetPosition, iv = (S.channel / S.ticks) * 1000;
+  const at = w ? { x: w.feetPosition.x, y: w.feetPosition.y, z: w.feetPosition.z } : { x: p.x, y: p.y, z: p.z };
+  b.castFrom = { x: p.x, y: p.y, z: p.z };
+  if (S.kind === 'ground') {
+    const vis = S.hail
+      ? `fx\npop hail rate=110 on=disc(%r|8).c(9) life=.5..0.7 v=<0,-18,0>+sdir()*.6 size=.05..0.1 col=<1.6,2,2.6> a=1 floor=die r=sprite(droplet,add,velocity,.03)\npop mist rate=16 on=disc(%r|8).c(.3) life=1..1.6 v=up(.2) size=.8..1.4 acc=drag(1) col=<.7,.85,1> a=0>.25:.3>0 sz=$size*(.7>1.5) r=sprite(smoke-puff,alpha)\npop cloud rate=10 on=disc(%r|8).c(9.5) life=1.6..2.2 size=2..3 col=<.55,.62,.72> a=0>.45:.3>.45:.7>0 r=sprite(smoke-puff,alpha)`
+      : `fx\npop swirl rate=140 on=disc(1.2) life=.8..1.4 v=up(2.5..4) size=.4..0.8 acc=vortex(7)+radial(-1.5)+drag(.4) col=<1.3,1.5,1.7> a=0>.45:.2>.45:.7>0 sz=$size*(.6>1.8) rot=spin(.8) r=sprite(smoke-puff,add)\npop debris rate=30 on=disc(1.5) life=1..1.6 v=up(3..5) size=.05..0.1 spin=-9..9 acc=vortex(9)+drag(.3) col=<.4,.5,.3> a=1>0 rot=$age*$spin r=sprite(leaf,alpha)`;
+    b.chanFx = ctx.spawn({ feetPosition: at, lifetime: S.channel + 0.6, audience: 'near', fx: { script: vis, params: { r: S.radius } } });
+    sound(ctx, S.hail ? SOUNDS.ice : SOUNDS.air, at, 0.8, 0.7);
+  } else b.chanFx = ctx.spawn({ parent: me.id, feetPosition: { x: 0, y: 1.25, z: -0.55 }, lifetime: S.channel + 0.4, audience: 'near', fx: { script: GATHER[S.el] ?? GATHER.spirit } });
+  me.state.channeling = { id, at: now, end: now + S.channel * 1000, wid: w?.id ?? null, pos: at, next: now + iv * 0.5, iv, left: S.ticks };
+}
+function stopChannel(ctx, b, why) {
+  ctx.self.state.channeling = null; if (b.chanFx) { ctx.destroy(b.chanFx); b.chanFx = null; }
+  if (why) err(ctx, why);
+}
+function channelTick(ctx, b) {
+  const me = ctx.self, st = me.state, ch = st.channeling, S = SPELLS[ch.id], now = ctx.now();
+  st.channeling = { ...ch, next: now + ch.iv, left: ch.left - 1 };
+  if (S.kind === 'bolt') {
+    const w = wolfAt(ctx, ch.wid); if (!w) { stopChannel(ctx, b, null); return; }
+    const p = me.feetPosition, f = fwdOf(b), hand = { x: p.x + f.x * 0.6, y: p.y + 1.35, z: p.z + f.z * 0.6 }, to = { x: w.feetPosition.x, y: w.feetPosition.y + 0.7, z: w.feetPosition.z };
+    const r = roll(ctx, S), dmg = Math.round(r.dmg / S.ticks), t = Math.max(0.2, Math.hypot(to.x - hand.x, to.z - hand.z) / (S.speed * SLOW));
+    bolt(ctx, S.el, hand, to, t); sound(ctx, SOUNDS.air, hand, 0.35, 1.3 + ctx.random() * 0.2);
+    ctx.after(t, 'land', { sp: ch.id, wid: w.id, dmg, crit: r.crit, from: p, to });
+  } else aoe(ctx, { sp: ch.id, at: ch.pos, from: ch.pos, tick: true });
+  if (ch.left - 1 <= 0) stopChannel(ctx, b, null);
 }
 export function release(ctx, pl) {
   const id = pl.id, S = SPELLS[id], me = ctx.self, st = me.state, now = ctx.now(), b = sess(ctx);
@@ -206,6 +271,7 @@ export function release(ctx, pl) {
     case 'nova': {
       if (S.el === 'earth') { ctx.emit('shockwave', { position: p, speed: 20, thickness: 1.6, intensity: 0.6 }); ctx.emit('screenShake', { intensity: 0.45, duration: 0.4 }, { audience: { nearby: p, radius: 30 } });
         ctx.emit('fx', { position: p, script: `fx\npop dust burst=60 on=disc(1) life=.8..1.4 v=radial(9..13)+up(.5) size=.5..0.9 acc=drag(2.2) col=<.5,.43,.34> a=0>.55:.2>.5:.2>0 sz=$size*(.6>2) r=sprite(smoke-puff,alpha)\npop rock burst=30 on=disc(8) life=.6..1 v=up(3..5) size=.1..0.2 spin=-9..9 acc=grav() col=<.45,.38,.3> a=1 rot=$age*$spin floor=bounce(.2) r=sprite(chip,alpha)` }); sound(ctx, SOUNDS.impact, p, 0.9, 0.6); }
+      else if (S.root) { ctx.emit('fx', { position: p, script: `fx\npop shard burst=160 on=disc(.6) life=.4..0.7 v=radial(13..16)+up(.3) size=.08..0.16 acc=drag(2.5) col=<1.5,2,2.8> a=1>0 r=sprite(chip,add)\npop frost burst=70 on=disc(1) life=.8..1.3 v=radial(8..11) size=.6..1 acc=drag(2) col=<.8,.95,1.2> a=0>.5:.2>.4:.6>0 sz=$size*(.6>1.8) r=sprite(smoke-puff,alpha)\npop flash burst=1 life=.5 r=light(<.6,.8,1>,50,16)` }); sound(ctx, SOUNDS.ice, p, 0.9, 0.8); }
       else { ctx.emit('fx', { position: p, script: `fx\npop ring burst=220 on=disc(.8) life=.5..0.8 v=radial(12..15) size=.5..0.9 acc=drag(1.5)+buoy(1.5) col=hdr(4.6,2.2,.5)>hdr(1.4,.3,.05) a=1>0 sz=$size*(1>.5) rot=spin(.5) r=sprite(flame-wisp,add)\npop ember burst=60 on=disc(1) life=.6..1.1 v=radial(8..14)+up(2) size=.02..0.05 acc=grav()*.4 col=hdr(5,2.5,.6) a=1>0 r=sprite(ember,add,velocity,.02)\npop flash burst=1 life=.4 r=light(<1,.5,.2>,60,16)` }); sound(ctx, SOUNDS.fire, p, 0.9, 0.8); }
       aoe(ctx, { sp: id, at: p, from: p }); break; }
     case 'cone': {
@@ -217,6 +283,11 @@ export function release(ctx, pl) {
         const dx = t.feetPosition.x - p.x, dz = t.feetPosition.z - p.z, d = Math.hypot(dx, dz) || 0.01;
         if ((dx * f.x + dz * f.z) / d >= cosA) { const r = roll(ctx, S); hurt(ctx, t.id, r.dmg, r.crit, S, p); } }
       break; }
+    case 'bind': {
+      const ws = w.state; ws.cc = { kind: 'bind', until: now + S.bind * 1000, at: now };
+      ws.threat = { ...(ws.threat ?? {}), [me.id]: (ws.threat?.[me.id] ?? 0) + 5 };
+      ws.ccFx = ctx.spawn({ parent: w.id, feetPosition: { x: 0, y: 0, z: 0 }, lifetime: S.bind, audience: 'near', fx: { script: `fx\npop wind rate=70 on=disc(.9) life=.6..1 v=up(1..1.8) size=.25..0.45 acc=vortex(8)+radial(-1)+drag(.6) col=<1.4,1.6,1.9> a=0>.35:.25>.35:.7>0 sz=$size*(.6>1.4) rot=spin(.8) r=sprite(smoke-puff,add)` } });
+      sound(ctx, SOUNDS.air, to, 0.6, 1.2); emitFx(ctx, to, 'air'); break; }
     case 'self': {
       if (S.shield) { st.shield = S.shield; st.shieldUntil = now + S.dur * 1000; st.shieldKind = S.el; bubble(ctx, b, S.el, S.dur); sound(ctx, SOUNDS.shield, p, 0.6); }
       if (S.heal) { const h = Math.round(maxHp(st) * S.heal); st.hp = Math.min(maxHp(st), (st.hp ?? 0) + h); emitFx(ctx, p, 'heal'); sound(ctx, SOUNDS.heal, p, 0.6);
@@ -297,6 +368,12 @@ export function update(ctx, dt) {
     if (now > b.move.until || st.dead) b.move = null;
     else { const v = me.velocity; me.velocity = b.move.kind === 'jet' ? { x: b.move.v.x, y: b.move.v.y, z: b.move.v.z } : b.move.kind === 'dash' ? { x: b.move.v.x, y: Math.max(0, v.y), z: b.move.v.z } : { x: b.move.v.x, y: v.y, z: b.move.v.z }; }
   }
+  if (st.casting || st.channeling) { // standing still is the price: a step, a jump or a launch breaks it
+    const f0 = b.castFrom, q = me.feetPosition, moved = !f0 || Math.hypot(q.x - f0.x, q.z - f0.z) > R.moveCancel || Math.abs(q.y - f0.y) > 0.6 || !!b.move;
+    if (st.dead) { cancelCast(ctx, b, null); stopChannel(ctx, b, null); }
+    else if (st.casting) { if (moved) cancelCast(ctx, b, 'Interrupted'); else if (now >= st.casting.end) finishCast(ctx, b); }
+    else if (st.channeling) { if (moved) stopChannel(ctx, b, 'Interrupted'); else if (now >= st.channeling.next) channelTick(ctx, b); else if (now > st.channeling.end + 300) stopChannel(ctx, b, null); }
+  }
   if (b.queued && now >= b.queued.at) { const q = b.queued; b.queued = null; if (now - q.at < 600) cast(ctx, b, q.id); }
   // death: the world holds a beat, then you are back on your feet where you last stood safe
   const hpMax = maxHp(st), chiMax = maxChi(st);
@@ -315,11 +392,11 @@ export function update(ctx, dt) {
     ctx.emit('stat', { name: 'deaths to wolves' }, { audience: { player: me.id } }); return;
   }
   // a 4 Hz heartbeat for the slow numbers, so the bars move without a row a tick
-  b.acc += dt; if (b.acc < 0.25) { st.bendBusy = !!b.move; return; } const step = b.acc; b.acc = 0;
+  b.acc += dt; if (b.acc < 0.25) { st.bendBusy = !!b.move || !!st.casting || !!st.channeling; return; } const step = b.acc; b.acc = 0;
   const inCombat = now < (st.combatUntil ?? 0), med = now < (st.meditateUntil ?? 0);
   if (med && b.medAt && Math.hypot(me.feetPosition.x - b.medAt.x, me.feetPosition.z - b.medAt.z) > 0.4) st.meditateUntil = 0;
   let hp = st.hp ?? hpMax, chi = st.chi ?? chiMax;
-  chi = Math.min(chiMax, chi + (med ? 25 : R.chiRegen) * step);
+  chi = Math.min(chiMax, chi + (med ? 25 : R.chiRegen * (now - (st.lastSpend ?? 0) < R.fsr ? R.fsrRegen : 1)) * step); // the five-second rule
   if (med) hp += hpMax * 0.06 * step; else if (!inCombat) hp += hpMax * R.hpRegenOut * step;
   hp = Math.min(hpMax, hp);
   if (Math.abs(hp - (st.hp ?? 0)) >= 0.5) st.hp = Math.round(hp * 10) / 10;
@@ -343,5 +420,5 @@ export function update(ctx, dt) {
     st.quests = { ...done, [q.id]: now }; st.xp = (st.xp ?? 0) + q.xp; st.toast = { text: `${q.title} complete`, sub: `+${q.xp} xp`, at: now };
     sound(ctx, SOUNDS.quest, me.feetPosition, 0.8); break;
   }
-  st.bendBusy = !!b.move || !!b.queued || hp < hpMax || chi < chiMax || (st.shield ?? 0) > 0 || !!st.speedUntil || !!st.tgt || inCombat;
+  st.bendBusy = !!b.move || !!b.queued || !!st.casting || !!st.channeling || hp < hpMax || chi < chiMax || (st.shield ?? 0) > 0 || !!st.speedUntil || !!st.tgt || inCombat;
 }

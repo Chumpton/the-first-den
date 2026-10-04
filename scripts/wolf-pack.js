@@ -30,7 +30,7 @@ function vel(row, m, vx, vz, dt) {
 }
 function board(ctx, row, force) {
   const s = row.state, W = (ctx.place.state.wolves ??= {}), p = row.feetPosition, old = W[row.id];
-  const now = ctx.now(), a = (s.burn && now < s.burn.until ? 1 : 0) | (now < (s.rootUntil ?? 0) ? 2 : 0) | (now < (s.slowUntil ?? 0) ? 4 : 0);
+  const now = ctx.now(), a = (s.burn && now < s.burn.until || s.ignite && now < s.ignite.until ? 1 : 0) | (s.cc && now < s.cc.until ? 8 : 0) | (now < (s.rootUntil ?? 0) ? 2 : 0) | (now < (s.slowUntil ?? 0) ? 4 : 0);
   const e = { n: s.name, l: s.lvl, e: s.boss ? 2 : s.elite ? 1 : 0, a, hp: Math.max(0, Math.round(s.hp)), max: s.max, d: s.dead ? 1 : 0, t: s.tgt || null, v: s.evading ? 1 : 0, x: Math.round(p.x / 2) * 2, z: Math.round(p.z / 2) * 2 };
   if (force || !old || old.hp !== e.hp || old.a !== e.a || old.d !== e.d || old.t !== e.t || old.v !== e.v || old.x !== e.x || old.z !== e.z) W[row.id] = e;
 }
@@ -41,6 +41,7 @@ function hitPlayer(ctx, row, p, now) {
   if ((ps.shield ?? 0) > 0) { const a = Math.min(ps.shield, d); ps.shield -= a; d -= a; if (a) ctx.emit('damageNumber', { position: pos, text: `absorb ${a}`, color: '#cfe8ff', size: 0.8 }); }
   if (d > 0) { ps.hp -= d; ctx.emit('damageNumber', { position: pos, value: d, color: '#ff4a3a' }); }
   ps.combatUntil = now + RULES.combatMs; ps.lastHitBy = s.name;
+  if (d > 0 && ps.casting && (ps.casting.pushes ?? 0) < RULES.pushMax) ps.casting = { ...ps.casting, end: ps.casting.end + RULES.pushback, pushes: (ps.casting.pushes ?? 0) + 1 }; // pushback
   ctx.emit('playSound', { clip: SOUNDS.bite, position: pos, volume: 0.6, pitch: s.elite ? 0.75 : 0.95 + ctx.random() * 0.15, maxDistance: 25 });
   ctx.emit('cameraPunch', { direction: { x: p.feetPosition.x - row.feetPosition.x, y: 0, z: p.feetPosition.z - row.feetPosition.z }, intensity: s.elite ? 0.5 : 0.25 }, { audience: { player: p.id } });
   ctx.emit('fx', { position: pos, script: `fx\npop spark burst=6..9 life=.2..0.35 v=sdir()*(2..4) size=.05..0.09 acc=drag(3) col=<2.4,.3,.2> a=1>0 r=sprite(ember,add,velocity,.02)` });
@@ -125,6 +126,14 @@ function step(ctx, row, rows, players, now, dt) {
   if (s.hitAt && s.hitAt !== m.hitSeen) { m.hitSeen = s.hitAt; if (!s.evading) aggro(ctx, row, rows, s.hitBy, now, true); ctx.emit('playSound', { clip: SOUNDS.yelp, position: p, volume: 0.35, pitch: 1 + ctx.random() * 0.2, maxDistance: 22 }); }
   if (s.burn && now < s.burn.until && now >= m.nextBurn) { m.nextBurn = now + 1000; s.hp -= s.burn.dps; ctx.emit('damageNumber', { position: { x: p.x, y: p.y + 1.3, z: p.z }, value: s.burn.dps, color: '#ffe14a', size: 0.7 }); }
   else if (s.burn && now >= s.burn.until) s.burn = null;
+  if (s.ignite && now < s.ignite.until && now >= (m.nextIgnite ?? 0)) { m.nextIgnite = now + 1000; s.hp -= s.ignite.dps; ctx.emit('damageNumber', { position: { x: p.x + 0.3, y: p.y + 1.5, z: p.z }, value: s.ignite.dps, color: '#ff8a2a', size: 0.7 }); }
+  else if (s.ignite && now >= s.ignite.until) s.ignite = null;
+  if (s.cc) { // bound: it wanders in its cyclone, healing, until the bind ends or anything hurts it
+    if (now >= s.cc.until) s.cc = null;
+    else { s.hp = Math.min(s.max, s.hp + s.max * 0.1 * dt); m.windAt = 0;
+      if (!m.ccGoal || dist2(p, m.ccGoal) < 0.5) { const a = ctx.random() * 6.283; m.ccGoal = { x: p.x + Math.cos(a) * 2.5, z: p.z + Math.sin(a) * 2.5 }; }
+      steer(ctx, row, m, rows, m.ccGoal, 0.7, now, dt, 120); clip(ctx, row, m, 'walk', 0.5); return; }
+  }
   if (s.kb && s.kb.at !== m.kbSeen) { m.kbSeen = s.kb.at; m.kbUntil = now + 320; m.kbv = s.kb; if (s.kb.y) m.vy = s.kb.y; }
   if (now < (m.kbUntil ?? 0)) { vel(row, m, m.kbv.x, m.kbv.z, dt); return; }
   const rooted = now < (s.rootUntil ?? 0), slow = now < (s.slowUntil ?? 0) ? 0.5 : 1, hd = dist2(p, s.home);
