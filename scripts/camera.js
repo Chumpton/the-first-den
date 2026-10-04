@@ -39,7 +39,12 @@ function wowBoom(ctx, target, dt, mounted) {
   if (mounted) { // on a horse or a boat the heading is the hull's; the orbit still swings by hand
     const r = target.rotation ?? 0, q = (typeof r === 'number' ? r : (r.yaw ?? 0)) * Math.PI / 180
     s.heading = wrapRad(s.heading + wrapRad(q - s.heading) * (1 - Math.exp(-5 * dt)))
-  } else if (!hands.steer && hands.mx) s.heading = wrapRad(s.heading - hands.mx * C.keyTurn * dt) // A/D turn, stepped here at frame rate so the swing is smooth; the body reads it
+  } else {
+    // A/D turn, stepped here at frame rate so the swing is smooth. The keys are read from the body's own hands
+    // (wow-steer records them on this machine) or, failing that, the rig's; when neither reaches here the body turns itself.
+    const ph = ctx.session.wowHands?.[target.id], steer = ph ? ph.steer : hands.steer, mx = ph ? ph.mx : hands.mx
+    if (!steer && mx) { s.heading = wrapRad(s.heading - mx * C.keyTurn * dt); s.camTurnAt = ctx.now() }
+  }
   const moving = Math.hypot(target.velocity?.x ?? 0, target.velocity?.z ?? 0) > 0.5
   if (hands.steer) s.off = 0
   else if (!hands.orbit && (moving || mounted)) s.off = (s.off ?? 0) * Math.exp(-C.followRate * dt)

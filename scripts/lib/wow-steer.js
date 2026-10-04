@@ -38,7 +38,9 @@ export function wowTurn(ctx, dt) {
   const cam = ctx.self.camera, h = wowHands(ctx)
   if (!cam || typeof cam.state?.heading !== 'number' || !h) return null
   let heading = cam.state.heading
-  if (!h.steer && h.mx && !ctx.self.parent) {
+  // the camera rig turns the heading at frame rate when it can hear the keys; only when it has not, the body does
+  const camTurns = ctx.now() - (cam.state.camTurnAt ?? -1e9) < 250
+  if (!camTurns && !h.steer && h.mx && !ctx.self.parent) {
     heading = wrap(heading - h.mx * (CAM.keyTurn ?? 3.2) * dt)
     cam.state.heading = heading
   }
