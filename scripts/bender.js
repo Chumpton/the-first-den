@@ -341,7 +341,7 @@ function scooter(ctx, b, dur) {
 // ---------- hooks ----------
 export function onSpawn(ctx) {
   const st = ctx.self.state;
-  st.lvl ??= 1; st.xp ??= 0; st.stance ??= 'air'; st.harmony ??= 0; st.kills ??= 0;
+  st.lvl ??= 1; st.xp ??= 0; st.stance = 'fire'; st.harmony ??= 0; st.kills ??= 0;
   if (st.hp == null || st.hp <= 0 || st.dead) { st.hp = maxHp(st); st.dead = false; }
   st.chi ??= maxChi(st); st.shield = 0; st.tgt = null; st.meditateUntil = 0;
   if ((st.speedUntil ?? 0) && st.speedMul !== 1) { st.speedMul = 1; st.speedUntil = 0; }
@@ -364,15 +364,11 @@ export function onInput(ctx, input) {
     else { st.bookOpen = false; st.journalOpen = false; st.tgt = null; }
   }
   if (ctx.self.parent || ctx.self.controlling || st.dead || st.mountedOn || st.seatedOn) return;
-  if (p.stanceNext) { st.stance = STANCES[(STANCES.indexOf(st.stance) + 1) % 4]; sound(ctx, SOUNDS.shield, ctx.self.feetPosition, 0.25, 1.6); }
-  if (p.stancePick && STANCES.includes(input.actionData?.stancePick?.el)) st.stance = input.actionData.stancePick.el;
   if (p.targetNext) cycleTarget(ctx, b);
   if (p.targetPick) { const id = input.actionData?.targetPick?.id; if (wolfAt(ctx, id)) st.tgt = id; }
-  if (p.castSlot && SPELLS[input.actionData?.castSlot?.id]) { cast(ctx, b, input.actionData.castSlot.id); return; }
-  if (p.meditate) cast(ctx, b, 'meditate');
-  if (p.avatar) cast(ctx, b, 'avatar-state');
+  if (p.castSlot && BARS.fire.includes(input.actionData?.castSlot?.id)) { cast(ctx, b, input.actionData.castSlot.id); return; }
   if (st.travelOpen || st.courierPick || st.alchemyOpen || ctx.now() - (st.travelAt ?? 0) < 400) return; // the number row belongs to those menus while they stand
-  const bar = BARS[st.stance] ?? BARS.air;
+  const bar = BARS.fire;
   KEYS.forEach((k, i) => { if (p[k]) cast(ctx, b, bar[i]); });
 }
 export function update(ctx, dt) {

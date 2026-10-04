@@ -20,7 +20,8 @@ export const ELEMENTS = {
   earth: { name: 'Earth', icon: ['b', 12], color: '#b98a4e', glow: [1.6, 1.2, 0.6] },
   fire: { name: 'Fire', icon: ['b', 13], color: '#ff7a2a', glow: [3.4, 1.4, 0.3] },
 };
-export const STANCES = ['air', 'water', 'earth', 'fire'];
+// 2026-10-04: the creator cut the kit to simple spells, Fireball alone; more are added one row at a time
+export const STANCES = ['fire'];
 // kind: bolt (flies to the target) · lash (a whip, 14 m) · ground (lands at the target, radius) · nova (around you) · cone (in front)
 //       self (shield / heal / speed) · dash · blink · launch · jet. Damage is at level 1; it grows 12 % a level.
 export const SPELLS = {
@@ -54,10 +55,7 @@ export const SPELLS = {
   'avatar-state': { el: null, name: 'Avatar State', icon: ['b', 9], kind: 'avatar', dur: 12, cd: 90, chi: 0, harmony: 5, text: 'Needs 5 Harmony. 12 s: double damage, spells cost no chi.' },
 };
 export const BARS = {
-  air: ['air-blast', 'wind-darts', 'tornado', 'cyclone-bind', 'air-dash', 'air-shield'],
-  water: ['ice-spears', 'water-whip', 'ice-prison', 'hailstorm', 'mist-step', 'healing-waters'],
-  earth: ['rock-throw', 'stone-spike', 'earthquake', 'stone-armor', 'earth-launch', 'boulder-fall'],
-  fire: ['fireball', 'fire-blast', 'dragon-breath', 'lightning', 'fire-jet', 'ring-of-fire'],
+  fire: ['fireball'],
 };
 export const EXTRA = { meditate: 'meditate', avatar: 'avatar-state' };
 export const RULES = {
