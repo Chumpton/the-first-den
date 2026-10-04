@@ -20,7 +20,8 @@ export function geometry(ctx) {
   for (let i = 0; i < n; i++) { const z = -0.42 + i * (0.6 / n), y = 0.83 - Math.abs(z + 0.2) * 0.12, h = 0.07 + (i < 2 ? 0.03 : 0);
     ctx.tri(-0.035, y - 0.02, z - 0.05, 0.035, y - 0.02, z - 0.05, 0, y + h, z + 0.04); ctx.tri(0.035, y - 0.02, z - 0.05, -0.035, y - 0.02, z - 0.05, 0, y + h, z + 0.04); }
   if (ctx.params.coat === 'grim' || ctx.params.coat === 'dread') { // ember eyes over the dark coat
-    const [z, y, rx, ry] = P.head[P.eyeRing]; ctx.emissive?.(ctx.params.coat === 'grim' ? '#ff3a1a' : '#ffb23a', 2.2); ctx.color(ctx.params.coat === 'grim' ? '#ff4a24' : '#ffc04a');
+    const [z, y, rx, ry] = P.head[P.eyeRing]; if (ctx.params.coat === 'grim') ctx.emissive(3, 0.5, 0.15); else ctx.emissive(2.6, 1.4, 0.3); ctx.color(ctx.params.coat === 'grim' ? '#ff4a24' : '#ffc04a');
     for (const s of [-1, 1]) { const x = s * (rx * 0.86 + 0.008), yy = y + ry * 0.3, e = 0.02; ctx.quad(x, yy + e, z, x, yy, z - e * 1.2, x, yy - e, z, x, yy, z + e * 1.2); }
+    ctx.emissive(null);
   }
 }
