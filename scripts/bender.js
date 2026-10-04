@@ -3,6 +3,7 @@
 // A hit is judged here, on the caster's machine, and written to the wolf's row (scripts/wolf-pack.js answers it).
 // Owns player.state: lvl xp hp chi stance tgt cds gcdAt harmony lastEl shield shieldUntil speedMul avatarUntil
 // meditateUntil combatUntil dead lastSafe kills grimfang quests err toast.
+import { fct } from './lib/fct.js';
 import { SPELLS, BARS, ELEMENTS, STANCES, RULES, SOUNDS, QUESTS, WOLF } from './lib/data/bending.js';
 import { animate } from 'builtin/tween';
 import { raycast, getInputRay } from 'builtin/physics';
@@ -96,12 +97,12 @@ function hurt(ctx, wid, dmg, crit, S, from) {
   const w = wolfAt(ctx, wid); if (!w) return;
   const me = ctx.self, now = ctx.now(), ws = w.state, p = w.feetPosition, el = S.el, top0 = { x: p.x, y: p.y + 1.3, z: p.z };
   me.state.combatUntil = now + R.combatMs; if (!me.state.tgt) me.state.tgt = wid;
-  if (ws.evading) { ctx.emit('damageNumber', { position: top0, text: 'Evade', color: '#ffffff', size: 0.9 }); return; }
+  if (ws.evading) { fct(ctx, wid, 'Evade', 'miss', { to: me.id }); return; }
   // roll 1, contact: spells only miss (never dodged or parried); +3 levels and up the miss chance climbs steeply
   const diff = (ws.lvl ?? 1) - (me.state.lvl ?? 1), miss = diff <= 2 ? R.missBase + Math.max(0, diff) * 0.01 : Math.min(0.4, 0.06 + (diff - 2) * 0.11);
   ws.threat = { ...(ws.threat ?? {}), [me.id]: Math.round((ws.threat?.[me.id] ?? 0) + Math.max(1, dmg)) };
   ws.hitBy = me.id; ws.hitAt = now + ctx.random();
-  if (ctx.random() < miss) { ctx.emit('damageNumber', { position: top0, text: 'Miss', color: '#c8c8c8', size: 0.9 }); return; }
+  if (ctx.random() < miss) { fct(ctx, wid, 'Miss', 'miss', { to: me.id }); return; }
   const frozen = now < (ws.rootUntil ?? 0);
   if (frozen && S.lance) dmg *= 2;
   if (frozen && !crit && dmg > 0 && ctx.random() < R.shatter) { crit = true; dmg = Math.round(dmg * R.critMul); } // shatter
@@ -113,7 +114,7 @@ function hurt(ctx, wid, dmg, crit, S, from) {
   if (S.root) { // diminishing returns: 100 / 50 / 25 % then immune, inside 18 s of the last root ending
     const n = now < (ws.drRootUntil ?? 0) ? (ws.drRootN ?? 0) + 1 : 0, k = R.drSteps[Math.min(n, 3)];
     if (k > 0) { ws.rootUntil = now + S.root * 1000 * k; ws.drRootN = n; ws.drRootUntil = ws.rootUntil + R.drWindow; }
-    else ctx.emit('damageNumber', { position: { x: top0.x, y: top0.y + 0.4, z: top0.z }, text: 'Immune', color: '#ffffff', size: 0.8 });
+    else fct(ctx, wid, 'Immune', 'miss', { to: me.id });
   }
   if (S.slow) ws.slowUntil = now + S.slow * 1000;
   if (S.burn) { const base = (S.burnDur ?? 3) * 1000, left = ws.burn && now < ws.burn.until ? ws.burn.until - now : 0; // pandemic: carry up to 30 % over
@@ -121,7 +122,7 @@ function hurt(ctx, wid, dmg, crit, S, from) {
   const kbk = S.kb ?? 0, lift = S.lift ?? 0;
   if (kbk || lift) { const dx = p.x - from.x, dz = p.z - from.z, d = Math.hypot(dx, dz) || 1; ws.kb = { x: (dx / d) * kbk, y: lift, z: (dz / d) * kbk, at: now + ctx.random() }; }
   const top = { x: p.x, y: p.y + 1.3, z: p.z };
-  ctx.emit('damageNumber', { position: top, value: dmg, crit, color: '#ffe14a', size: crit ? 1.7 : 1 });
+  fct(ctx, wid, dmg, 'spell', { to: me.id, crit });
   ctx.emit('squash', { target: wid, axis: 'y', intensity: 0.25, duration: 0.18 });
   ctx.emit('flash', { target: wid, color: hex(el), duration: 0.1 });
 }
@@ -297,7 +298,7 @@ export function release(ctx, pl) {
     case 'self': {
       if (S.shield) { st.shield = S.shield; st.shieldUntil = now + S.dur * 1000; st.shieldKind = S.el; bubble(ctx, b, S.el, S.dur); sound(ctx, SOUNDS.shield, p, 0.6); }
       if (S.heal) { const h = Math.round(maxHp(st) * S.heal); st.hp = Math.min(maxHp(st), (st.hp ?? 0) + h); emitFx(ctx, p, 'heal'); sound(ctx, SOUNDS.heal, p, 0.6);
-        ctx.emit('damageNumber', { position: add(p, { x: 0, y: 2, z: 0 }), text: `+${h}`, color: '#5cff8a', size: 1.2 });
+        fct(ctx, me.id, `+${h}`, 'heal', { to: me.id, y: 2 });
         const foes = ctx.query({ tags: ['wild-wolf'], center: p, radius: 60 }).filter((x) => !x.state?.dead && x.state?.threat?.[me.id] != null);
         for (const x of foes) x.state.threat = { ...x.state.threat, [me.id]: Math.round(x.state.threat[me.id] + (h * R.healThreat) / foes.length) }; }
       if (S.speed) { st.speedMul = S.speed; st.speedUntil = now + S.dur * 1000; scooter(ctx, b, S.dur); sound(ctx, SOUNDS.dash, p, 0.6, 0.8); }

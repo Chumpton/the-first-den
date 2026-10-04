@@ -4,6 +4,7 @@
 // burn, slow, root and knockback as the spells wrote them, die, pay XP to the killer, rise again at the den.
 // The striker's spell writes the wolf's row (hp -= d, hitBy, rootUntil, slowUntil, kb, burn); this reads and answers.
 // place.state.wolves is the board every HUD reads: name, level, hp, target, coarse position. Written only on change.
+import { fct } from './lib/fct.js';
 import { play, clips } from 'builtin/anim';
 import { WOLF, DENS, SOUNDS, RULES } from './lib/data/bending.js';
 import { findPath } from 'builtin/nav';
@@ -38,8 +39,8 @@ function hitPlayer(ctx, row, p, now) {
   const s = row.state, ps = p.state;
   let d = Math.round(WOLF.bite(s.lvl) * (s.elite ? WOLF.eliteBite : 1) * (0.85 + ctx.random() * 0.3));
   const pos = { x: p.feetPosition.x, y: p.feetPosition.y + 1.6, z: p.feetPosition.z };
-  if ((ps.shield ?? 0) > 0) { const a = Math.min(ps.shield, d); ps.shield -= a; d -= a; if (a) ctx.emit('damageNumber', { position: pos, text: `absorb ${a}`, color: '#cfe8ff', size: 0.8 }); }
-  if (d > 0) { ps.hp -= d; ctx.emit('damageNumber', { position: pos, value: d, color: '#ff4a3a' }); }
+  if ((ps.shield ?? 0) > 0) { const a = Math.min(ps.shield, d); ps.shield -= a; d -= a; if (a) fct(ctx, p.id, `Absorb ${a}`, 'miss', { to: p.id, y: 1.9 }); }
+  if (d > 0) { ps.hp -= d; fct(ctx, p.id, d, 'taken', { to: p.id, y: 1.9 }); }
   ps.combatUntil = now + RULES.combatMs; ps.lastHitBy = s.name;
   ctx.emit('playSound', { clip: SOUNDS.bite, position: pos, volume: 0.6, pitch: s.elite ? 0.75 : 0.95 + ctx.random() * 0.15, maxDistance: 25 });
   ctx.emit('cameraPunch', { direction: { x: p.feetPosition.x - row.feetPosition.x, y: 0, z: p.feetPosition.z - row.feetPosition.z }, intensity: s.elite ? 0.5 : 0.25 }, { audience: { player: p.id } });
@@ -71,7 +72,7 @@ function die(ctx, row, m, now) {
   const xp = Math.round(WOLF.xp(s.lvl) * (s.elite ? WOLF.eliteXp : 1) * Math.max(0.2, 1 - Math.max(0, (killer.state.lvl ?? 1) - s.lvl) * 0.15));
   killer.state.xp = (killer.state.xp ?? 0) + xp; killer.state.kills = (killer.state.kills ?? 0) + 1;
   if (s.boss) killer.state.grimfang = 1;
-  ctx.emit('damageNumber', { position: { x: pos.x, y: pos.y + 1.2, z: pos.z }, text: `+${xp} xp`, color: '#c98cff', size: 1.1 });
+  fct(ctx, row.id, `+${xp} XP`, 'xp', { to: killer.id, y: 1.8 });
   ctx.emit('stat', { name: 'wolves slain' }, { audience: { player: killer.id } });
   if (s.boss) { ctx.emit('slowMo', { scale: 0.35, duration: 0.8 }, { audience: { player: killer.id } }); ctx.emit('shockwave', { position: pos, speed: 18, thickness: 1.5, intensity: 0.6 }); ctx.emit('milestone', { step: 2, name: 'slew Grimfang' }, { audience: { player: killer.id } }); }
 }
@@ -123,9 +124,9 @@ function step(ctx, row, rows, players, now, dt) {
   }
   if (s.hp <= 0) { die(ctx, row, m, now); board(ctx, row, true); return; }
   if (s.hitAt && s.hitAt !== m.hitSeen) { m.hitSeen = s.hitAt; if (!s.evading) aggro(ctx, row, rows, s.hitBy, now, true); ctx.emit('playSound', { clip: SOUNDS.yelp, position: p, volume: 0.35, pitch: 1 + ctx.random() * 0.2, maxDistance: 22 }); }
-  if (s.burn && now < s.burn.until && now >= m.nextBurn) { m.nextBurn = now + 1000; s.hp -= s.burn.dps; ctx.emit('damageNumber', { position: { x: p.x, y: p.y + 1.3, z: p.z }, value: s.burn.dps, color: '#ffe14a', size: 0.7 }); }
+  if (s.burn && now < s.burn.until && now >= m.nextBurn) { m.nextBurn = now + 1000; s.hp -= s.burn.dps; fct(ctx, row.id, s.burn.dps, 'dot', s.hitBy ? { to: s.hitBy } : { at: p }); }
   else if (s.burn && now >= s.burn.until) s.burn = null;
-  if (s.ignite && now < s.ignite.until && now >= (m.nextIgnite ?? 0)) { m.nextIgnite = now + 1000; s.hp -= s.ignite.dps; ctx.emit('damageNumber', { position: { x: p.x + 0.3, y: p.y + 1.5, z: p.z }, value: s.ignite.dps, color: '#ff8a2a', size: 0.7 }); }
+  if (s.ignite && now < s.ignite.until && now >= (m.nextIgnite ?? 0)) { m.nextIgnite = now + 1000; s.hp -= s.ignite.dps; fct(ctx, row.id, s.ignite.dps, 'dot', s.hitBy ? { to: s.hitBy } : { at: p }); }
   else if (s.ignite && now >= s.ignite.until) s.ignite = null;
   if (s.cc) { // bound: it wanders in its cyclone, healing, until the bind ends or anything hurts it
     if (now >= s.cc.until) s.cc = null;
@@ -163,7 +164,7 @@ function step(ctx, row, rows, players, now, dt) {
     if (m.windAt && now >= m.windAt) { m.windAt = 0;
       const fwd = (yawTo(q.x - p.x, q.z - p.z) - m.yaw), inCone = Math.abs(wrap(fwd)) <= WOLF.cone;
       if (d <= reach + 0.6 && inCone) hitPlayer(ctx, row, pl, now);
-      else ctx.emit('damageNumber', { position: { x: q.x, y: q.y + 1.8, z: q.z }, text: 'Miss', color: '#ffffff', size: 0.8 }); }
+      else fct(ctx, pl.id, 'Miss', 'miss', { to: pl.id, y: 1.9 }); }
     // FLEE: once a life, under 20 %, it runs for the pack yelping, then turns back
     if (!s.boss && !m.fled && s.hp < s.max * WOLF.fleeAt) { m.fled = true; m.fleeUntil = now + WOLF.fleeFor * 1000; ctx.emit('playSound', { clip: SOUNDS.yelp, position: p, volume: 0.6, pitch: 1.3, maxDistance: 30 });
       for (const o of rows) if (o !== row && !o.state.dead && !o.state.tgt && dist2(o.feetPosition, p) < WOLF.fleeCry) aggro(ctx, o, rows, pl.id, now, false);
