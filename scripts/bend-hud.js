@@ -85,7 +85,7 @@ function bars(ctx, player, st, now) {
   const slots = keys.map((k, i) => kit[i] ? slot(kit[i], k, st, now, false) : empty(k)).join('');
   const lvl = st.lvl ?? 1, need = R.xpNeed(lvl), xp = st.xp ?? 0;
   const ticks = Array.from({ length: 19 }, (_, i) => `<span style="position:absolute;left:${(i + 1) * 5}%;top:0;bottom:0;width:1px;background:rgba(0,0,0,.7)"></span>`).join('');
-  const cap = (flip) => `<img src="${GRIFFIN}" style="flex:none;align-self:flex-end;width:118px;height:118px;margin:0 ${flip ? '-34px 0 -6px' : '-6px 0 -34px'};${flip ? 'transform:scaleX(-1);' : ''}filter:drop-shadow(0 2px 3px #000);pointer-events:none">`;
+  const cap = (flip) => `<img src="${GRIFFIN}" style="flex:none;align-self:flex-end;width:124px;height:124px;margin:0 ${flip ? '0 -4px -26px' : '-26px -4px 0'};${flip ? 'transform:scaleX(-1);' : ''}filter:drop-shadow(0 2px 3px #000);pointer-events:none">`;
   return `<style>@property --a{syntax:'<angle>';inherits:false;initial-value:360deg}@keyframes cdsweep{from{--a:360deg}to{--a:0deg}}</style>
   <div style="position:fixed;left:50%;bottom:${coarse ? 140 : 0}px;transform:translateX(-50%) scale(${coarse ? 0.6 : 1});transform-origin:bottom center;pointer-events:none;display:flex;align-items:flex-end;${F}">
     ${cap(false)}
