@@ -5,6 +5,7 @@ import { TRAVEL as TV } from './lib/data/travel.js';
 import { ALCHEMY } from './lib/data/alchemy.js';
 import { GARDEN as GD } from './lib/data/garden.js';
 import { MUSHROOMS } from './lib/data/mushrooms.js';
+import { bendHud } from './bend-hud.js';
 // Tomas the Courier: the city picker by his horse, the rider's line while riding, and 'on the road' for everyone else near his post.
 const CPILL = 'position:fixed;left:50%;transform:translateX(-50%);padding:8px 16px;border-radius:14px;background:rgba(40,28,14,.78);border:1px solid rgba(242,214,160,.45);color:#f7eedd;font-family:Georgia,serif;font-size:14px;white-space:nowrap';
 const CBTN = 'pointer-events:auto;cursor:pointer;margin:0 4px;padding:6px 12px;border-radius:10px;border:1px solid rgba(255,220,150,.6);background:rgba(120,78,30,.85);color:#fff3d8;font-family:Georgia,serif;font-size:14px';
@@ -34,7 +35,7 @@ function secretCount(player) {
 }
 function travelHud(player) {
   const st = player?.state || {};
-  if (!st.travelOpen) return `<div style="position:fixed;left:18px;top:18px;pointer-events:none;padding:4px 11px;border-radius:999px;background:rgba(40,28,14,.45);color:#f7eedd;font-family:Georgia,serif;font-size:12px;opacity:.8"><b style="color:#ffe2a8">J</b> travel</div>`;
+  if (!st.travelOpen) return `<div style="position:fixed;left:18px;top:128px;pointer-events:none;padding:4px 11px;border-radius:999px;background:rgba(40,28,14,.45);color:#f7eedd;font-family:Georgia,serif;font-size:12px;opacity:.8"><b style="color:#ffe2a8">J</b> travel</div>`;
   const row = (t) => `<button onclick="sendAction('travelGo',{to:'${t.id}'})" style="pointer-events:auto;cursor:pointer;display:flex;align-items:center;gap:10px;width:100%;margin:5px 0;padding:8px 12px;border-radius:10px;border:1px solid rgba(255,220,150,.45);background:rgba(120,78,30,.72);color:#fff3d8;font-family:Georgia,serif;font-size:15px;text-align:left"><span style="display:inline-flex;width:22px;height:22px;border-radius:6px;align-items:center;justify-content:center;background:#ffd46a;color:#3a2508;font:700 13px system-ui">${t.key}</span><span style="flex:1">${t.name}</span><span style="font-size:12px;opacity:.7">${t.note}</span></button>`;
   return `<div style="position:fixed;left:24px;top:50%;transform:translateY(-50%);width:min(290px,80vw);padding:14px 14px 10px;border-radius:16px;background:rgba(40,28,14,.86);border:1px solid rgba(242,214,160,.5);box-shadow:0 8px 30px rgba(0,0,0,.35);pointer-events:auto"><div style="font-family:Georgia,serif;color:#ffe2a8;font-size:17px;margin-bottom:4px">Travel</div>${TV.spots.map(row).join('')}<div style="font-family:Georgia,serif;color:#f7eedd;opacity:.6;font-size:12px;margin-top:6px">J or Esc closes</div></div>`;
 }
@@ -87,7 +88,7 @@ function gardenHud(player) {
   return `<div style="position:fixed;right:78px;bottom:24px;display:flex;flex-direction:column;align-items:flex-end;gap:5px;pointer-events:none"><div style="font-family:Georgia,serif;font-size:12px;color:#ffe7a8;letter-spacing:.12em;text-shadow:0 1px 2px #0008">TOWER GARDENS · E seeds › plant › water › harvest</div>${rows.join('')}</div>`;
 }
 export default function (ctx, player) {
-  const hud = secretHint(player) + secretCount(player) + courierHud(ctx, player) + travelHud(player) + alchemyHud(player) + mushroomHud(player) + fishHud(player) + gardenHud(player);
+  const hud = bendHud(ctx, player) + secretHint(player) + secretCount(player) + courierHud(ctx, player) + travelHud(player) + alchemyHud(player) + mushroomHud(player) + fishHud(player) + gardenHud(player);
   const c = player?.controlling;
   if (player?.state?.deleteMode) return `<div style="position:fixed;left:50%;top:50%;width:10px;height:10px;margin:-5px 0 0 -5px;border:2px solid #ff6b5b;border-radius:50%;pointer-events:none"></div><div style="position:fixed;left:50%;top:22px;transform:translateX(-50%);pointer-events:none;padding:7px 16px;border-radius:999px;background:rgba(120,24,18,.8);border:1px solid rgba(255,160,150,.5);color:#fff1ee;font-family:Georgia,serif;font-size:14px">delete mode · look at a thing · 9 removes it · 8 exits</div>`;
   if (c?.state?.kind === 'purple-dragon') {

@@ -28,8 +28,9 @@ function vel(row, m, vx, vz, dt) {
 }
 function board(ctx, row, force) {
   const s = row.state, W = (ctx.place.state.wolves ??= {}), p = row.feetPosition, old = W[row.id];
-  const e = { n: s.name, l: s.lvl, e: s.elite ? 1 : 0, hp: Math.max(0, Math.round(s.hp)), max: s.max, d: s.dead ? 1 : 0, t: s.tgt || null, x: Math.round(p.x / 2) * 2, z: Math.round(p.z / 2) * 2 };
-  if (force || !old || old.hp !== e.hp || old.d !== e.d || old.t !== e.t || old.x !== e.x || old.z !== e.z) W[row.id] = e;
+  const now = ctx.now(), a = (s.burn && now < s.burn.until ? 1 : 0) | (now < (s.rootUntil ?? 0) ? 2 : 0) | (now < (s.slowUntil ?? 0) ? 4 : 0);
+  const e = { n: s.name, l: s.lvl, e: s.boss ? 2 : s.elite ? 1 : 0, a, hp: Math.max(0, Math.round(s.hp)), max: s.max, d: s.dead ? 1 : 0, t: s.tgt || null, x: Math.round(p.x / 2) * 2, z: Math.round(p.z / 2) * 2 };
+  if (force || !old || old.hp !== e.hp || old.a !== e.a || old.d !== e.d || old.t !== e.t || old.x !== e.x || old.z !== e.z) W[row.id] = e;
 }
 function hitPlayer(ctx, row, p, now) {
   const s = row.state, ps = p.state;
