@@ -271,3 +271,13 @@ wild-mushroom-57:
   state: {kind: deceiver, picked: false}
   tags: [interactable, wild-mushroom]
   visibleRange: {max: 70, min: 0}
+wolf-briar-3:
+  castShadow: true
+  feetPosition: {x: 131.06985236795472, y: {terrain: 0.05}, z: -61.38774364371757}
+  id: wolf-briar-3
+  physics: {body: character, collider: capsule}
+  primitive: {kind: scripted, params: {coat: rust}, script: scripts/gen/dire-wolf.js, seed: 6}
+  rotation: {yaw: 106}
+  scale: 1.15
+  state: {boss: false, den: wolf-den-briar, elite: false, home: {x: 131.1, z: -61.4}, hp: 199, lvl: 7, max: 199, name: Briarback Ravager, yaw: 106}
+  tags: [wild-wolf]

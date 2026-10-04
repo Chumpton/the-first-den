@@ -852,9 +852,56 @@ wild-mushroom-69:
   tags: [interactable, wild-mushroom]
   visibleRange: {max: 70, min: 0}
 wolf-den-fernshade:
-  feetPosition: {x: -30, y: {terrain: 0}, z: -145}
+  castShadow: true
+  feetPosition: {x: -30, y: 0.6425162148472315, z: -145}
   id: wolf-den-fernshade
-  material: {kind: scripted, script: engine/blueprint}
-  physics: none
-  primitive: {depth: 14, height: 3, kind: box, width: 14}
-  tags: [blueprint]
+  physics: static
+  primitive: {kind: scripted, params: {size: 1}, script: scripts/gen/wolf-den.js, seed: -355}
+  receiveShadow: true
+  rotation: {yaw: 10}
+  tags: [wolf-den]
+wolf-fernshade-0:
+  castShadow: true
+  feetPosition: {x: -33.43761293034011, y: {terrain: 0.05}, z: -145.32646503627382}
+  id: wolf-fernshade-0
+  physics: {body: character, collider: capsule}
+  primitive: {kind: scripted, params: {coat: grey}, script: scripts/gen/dire-wolf.js, seed: 3}
+  rotation: {yaw: 145}
+  scale: 1.15
+  state: {boss: false, den: wolf-den-fernshade, elite: false, home: {x: -33.4, z: -145.3}, hp: 111, lvl: 3, max: 111, name: Fernshade Prowler, yaw: 145}
+  tags: [wild-wolf]
+wolf-fernshade-1:
+  castShadow: true
+  feetPosition: {x: -35.470422419239114, y: {terrain: 0.05}, z: -149.46833104272216}
+  id: wolf-fernshade-1
+  physics: {body: character, collider: capsule}
+  primitive: {kind: scripted, params: {coat: grey}, script: scripts/gen/dire-wolf.js, seed: 4}
+  rotation: {yaw: 192}
+  scale: 1.21
+  state: {boss: false, den: wolf-den-fernshade, elite: false, home: {x: -35.5, z: -149.5}, hp: 133, lvl: 4, max: 133, name: Fernshade Prowler, yaw: 192}
+  tags: [wild-wolf]
+wolf-fernshade-2:
+  castShadow: true
+  feetPosition: {x: -30.955064977168117, y: {terrain: 0.05}, z: -150.41644264156713}
+  id: wolf-fernshade-2
+  physics: {body: character, collider: capsule}
+  primitive: {kind: scripted, params: {coat: grey}, script: scripts/gen/dire-wolf.js, seed: 5}
+  rotation: {yaw: 149}
+  scale: 1.27
+  state: {boss: false, den: wolf-den-fernshade, elite: false, home: {x: -31, z: -150.4}, hp: 155, lvl: 5, max: 155, name: Fernshade Prowler, yaw: 149}
+  tags: [wild-wolf]
+wolf-fernshade-3:
+  castShadow: true
+  feetPosition: {x: -26.387743643717577, y: {terrain: 0.05}, z: -151.06985236795472}
+  id: wolf-fernshade-3
+  physics: {body: character, collider: capsule}
+  primitive: {kind: scripted, params: {coat: grey}, script: scripts/gen/dire-wolf.js, seed: 6}
+  rotation: {yaw: 196}
+  scale: 1.15
+  state: {boss: false, den: wolf-den-fernshade, elite: false, home: {x: -26.4, z: -151.1}, hp: 111, lvl: 3, max: 111, name: Fernshade Prowler, yaw: 196}
+  tags: [wild-wolf]
+wolf-pack:
+  behavior: scripts/wolf-pack.js
+  feetPosition: {x: 0, y: {terrain: 0}, z: -70}
+  id: wolf-pack
+  visible: false
