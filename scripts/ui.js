@@ -5,7 +5,7 @@ import { TRAVEL as TV } from './lib/data/travel.js';
 import { ALCHEMY } from './lib/data/alchemy.js';
 import { GARDEN as GD } from './lib/data/garden.js';
 import { MUSHROOMS } from './lib/data/mushrooms.js';
-import { bendHud, SLATE } from './bend-hud.js';
+import { bendHud, SLATE, fctPush } from './bend-hud.js';
 // Tomas the Courier: the city picker by his horse, the rider's line while riding, and 'on the road' for everyone else near his post.
 const CPILL = 'position:fixed;left:50%;transform:translateX(-50%);padding:8px 16px;border-radius:14px;background:rgba(40,28,14,.78);border:1px solid rgba(242,214,160,.45);color:#f7eedd;font-family:Georgia,serif;font-size:14px;white-space:nowrap';
 const CBTN = 'pointer-events:auto;cursor:pointer;margin:0 4px;padding:6px 12px;border-radius:10px;border:1px solid rgba(255,220,150,.6);background:rgba(120,78,30,.85);color:#fff3d8;font-family:Georgia,serif;font-size:14px';
@@ -95,6 +95,10 @@ function gardenHud(player) {
   if (g?.total) rows.push(pill(`🧺 harvested ${g.total}${g.golden ? ` · <span style="color:#ffd24a">✨ ${g.golden} golden</span>` : ''}`));
   return `<div style="position:fixed;right:78px;bottom:24px;display:flex;flex-direction:column;align-items:flex-end;gap:5px;pointer-events:none"><div style="font-family:Georgia,serif;font-size:12px;color:#ffe7a8;letter-spacing:.12em;text-shadow:0 1px 2px #0008">TOWER GARDENS · E seeds › plant › water › harvest</div>${rows.join('')}</div>`;
 }
+// combat text arrives as uiEvents (scripts/lib/fct.js) and joins the HUD's pool
+let fctOff = null;
+export function onMount() { fctOff = window.spawn?.on?.('event', (name, payload) => { if (name === 'fct') fctPush(payload); }) ?? null; }
+export function onDestroy() { if (typeof fctOff === 'function') fctOff(); fctOff = null; }
 export default function (ctx, player) {
   const hud = bendHud(ctx, player) + pickupDock(player) + secretHint(player) + secretCount(player) + courierHud(ctx, player) + travelHud(player) + alchemyHud(player) + mushroomHud(player) + fishHud(player) + gardenHud(player);
   const c = player?.controlling;

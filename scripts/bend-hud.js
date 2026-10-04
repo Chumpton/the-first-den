@@ -192,10 +192,40 @@ function journal(st) {
     ${qs}<div style="font-size:14px;color:#3a2410;margin:8px 0 4px">Wolf dens of Whisperwood</div>${dens}
     <div style="font-size:11px;color:#6b4a22;margin-top:8px">Wolves (${WOLF.respawn}s to return) keep to their dens: lead one past ${WOLF.leash} m and it gives up and runs home.</div></div>`;
 }
+// Floating combat text (scripts/lib/fct.js sends it): a short page-side pool, each number pinned to the struck thing's
+// head by data-world-anchor (the engine projects it each frame and drops what is behind the camera); hits landing on one
+// head together fan left and right so they never blob.
+const FCT = [], FCT_LIFE = { c: 1700, taken: 1300, d: 1150 }; let fctSeq = 0;
+const FCT_COL = { spell: '#ffd100', dot: '#ff9a2a', melee: '#ffffff', heal: '#20ff20', taken: '#ff2020', miss: '#b0b0b0', resource: '#4080ff', xp: '#c98cff' };
+export function fctPush(e) {
+  if (!e || !e.a) return; const at = performance.now();
+  const live = FCT.filter((f) => f.a === e.a && at - f.at < 350).length;
+  FCT.push({ ...e, at, id: ++fctSeq, lane: live === 0 ? 0 : (live % 2 ? 1 : -1) * Math.ceil(live / 2) });
+  if (FCT.length > 40) FCT.splice(0, FCT.length - 40);
+}
+function fctLayer() {
+  const t = performance.now(); let h = '';
+  for (let i = FCT.length - 1; i >= 0; i--) { const f = FCT[i], life = f.c ? FCT_LIFE.c : f.k === 'taken' ? FCT_LIFE.taken : FCT_LIFE.d; if (t - f.at > life) FCT.splice(i, 1); }
+  for (const f of FCT) {
+    const life = f.c ? FCT_LIFE.c : f.k === 'taken' ? FCT_LIFE.taken : FCT_LIFE.d;
+    const x = f.lane * 46 + ((f.id * 37) % 17 - 8), dx = (f.lane || ((f.id % 2) ? 1 : -1)) * 14;
+    const size = f.c ? 34 : f.k === 'dot' ? 17 : f.k === 'miss' || f.k === 'xp' ? 18 : 22;
+    const text = f.c ? `${f.t}!` : f.t;
+    const col = f.c && f.k === 'spell' ? '#ffe14a' : FCT_COL[f.k] ?? '#fff';
+    const anim = f.c ? 'fctCrit' : f.k === 'taken' ? 'fctDown' : 'fctUp';
+    h += `<div data-world-anchor="${f.a}" data-anchor-offset="0 ${f.y ?? 1.45} 0" style="width:0;height:0;pointer-events:none;opacity:calc(1 - var(--anchor-depth, 0) / 70)"><div id="fct-${f.id}" style="position:absolute;left:0;top:0;white-space:nowrap;--x:${x}px;--dx:${dx}px;font-family:Impact,'Arial Black','Helvetica Neue',sans-serif;font-size:${size}px;letter-spacing:.5px;color:${col};-webkit-text-stroke:1.5px #000;paint-order:stroke fill;text-shadow:2px 2px 0 #000,-1px -1px 0 #000${f.c ? ',0 0 10px rgba(255,120,0,.7)' : ''};animation:${anim} ${life}ms ease-out -${Math.min(life, t - f.at)}ms forwards">${text}</div></div>`;
+  }
+  return h;
+}
+const FCT_CSS = `<style>
+@keyframes fctUp{0%{transform:translate(calc(-50% + var(--x)),0) scale(.5);opacity:0}8%{transform:translate(calc(-50% + var(--x)),-8px) scale(1.15);opacity:1}18%{transform:translate(calc(-50% + var(--x)),-14px) scale(1)}70%{opacity:1}100%{transform:translate(calc(-50% + var(--x) + var(--dx)),-78px) scale(.9);opacity:0}}
+@keyframes fctCrit{0%{transform:translate(calc(-50% + var(--x)),-10px) scale(1.8);opacity:1}9%{transform:translate(calc(-50% + var(--x)),-16px) scale(1.3)}45%{transform:translate(calc(-50% + var(--x)),-22px) scale(1.3);opacity:1}100%{transform:translate(calc(-50% + var(--x) + var(--dx)),-80px) scale(1.15);opacity:0}}
+@keyframes fctDown{0%{transform:translate(calc(-50% + var(--x)),-10px) scale(1.3);opacity:1}15%{transform:translate(calc(-50% + var(--x) + var(--dx)),0) scale(1)}100%{transform:translate(calc(-50% + var(--x) + var(--dx) * 4),70px) scale(.9);opacity:0}}
+</style>`;
 export function bendHud(ctx, player) {
   const st = player?.state; if (!st || st.lvl == null) return '';
   const now = ctx.now?.() ?? Date.now(), W = ctx.place.state?.wolves ?? {}, busy = !!player.controlling || !!st.mountedOn;
-  let h = CSS + minimap(ctx, player, st, W) + tracker(st) + plates(ctx, player, st, W) + micro(st);
+  let h = CSS + FCT_CSS + fctLayer() + minimap(ctx, player, st, W) + tracker(st) + plates(ctx, player, st, W) + micro(st);
   if (!busy) h += playerFrame(ctx, player, st, now) + targetFrame(ctx, player, st, W) + bars(ctx, player, st, now) + castBar(ctx, st, now, typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches);
   if (st.err && now - st.err.at < 1600) h += `<div id="err-${st.err.at}" style="position:fixed;left:50%;top:22%;transform:translateX(-50%);pointer-events:none;color:#ff2a2a;font-size:17px;text-shadow:0 0 3px #000,0 1px 2px #000;${F};animation:bfade 1.6s forwards">${st.err.text}</div>`;
   if (st.toast && now - st.toast.at < 3500) h += `<div id="toast-${st.toast.at}" style="position:fixed;left:50%;top:28%;transform:translateX(-50%);pointer-events:none;text-align:center;${F};animation:bfade 3.5s forwards"><div style="font-size:30px;color:#ffd100;text-shadow:0 0 10px #a06a00,0 2px 3px #000">${st.toast.text}</div><div style="font-size:14px;color:#fff3d8;text-shadow:0 1px 2px #000">${st.toast.sub ?? ''}</div></div>`;
