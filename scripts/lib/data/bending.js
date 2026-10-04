@@ -72,7 +72,7 @@ export const DENS = {
     boss: { name: 'Grimfang the Hollow Alpha', level: 12, coat: 'grim', scale: 1.55 } },
 };
 export const WOLF = {
-  hp: (l) => 45 + 22 * l, hitbox: 0.6, miss: 0.05, dodge: 0.05, crit: 0.05, crush: 0.15, threatMelee: 1.1, threatRanged: 1.3, rangedAt: 9, bite: (l) => 3 + 1.8 * l, biteEvery: 1.7, reach: 2.1, aggro: 13, assist: 18, leash: 46,
+  hp: (l) => 45 + 22 * l, hitbox: 0.6, miss: 0.05, dodge: 0.05, crit: 0.05, crush: 0.15, threatMelee: 1.1, threatRanged: 1.3, rangedAt: 9, bite: (l) => 3 + 1.8 * l, biteEvery: 1.7, reach: 2.1, aggro: 13, assist: 18, leash: 40, aggroBase: 20, aggroMin: 5, aggroMax: 45, social: 12, swing: 2.0, windup: 0.35, cone: 60, turn: 360, evadeSpeed: 1.4, evadeRegen: 0.2, rest: 1.5, unreachable: 5, fleeAt: 0.2, fleeFor: 4, fleeCry: 15, patrol: 5, repath: 0.8, sep: 1.5,
   run: 6.2, walk: 1.3, eliteHp: 3.2, eliteBite: 1.6, respawn: 40, xp: (l) => 25 + 12 * l, eliteXp: 4, corpse: 6,
 };
 export const QUESTS = [
