@@ -19,7 +19,7 @@ const CSS = `<style>@font-face{font-family:'DenCinzel';src:url(${FONT}) format('
 export const SLATE_OLD = 'background:linear-gradient(180deg,rgba(46,50,58,.94),rgba(20,22,27,.94));border:1px solid #b48a4c;box-shadow:inset 0 1px 0 rgba(255,235,190,.12),inset 0 0 0 1px rgba(0,0,0,.55),0 0 0 1px rgba(30,20,8,.9),0 4px 14px rgba(0,0,0,.5)';
 const SH = 'text-shadow:1px 1px 0 #000,-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000';
 const RIGHT = 'calc(var(--spawn-chrome-reservation-right-inset, 50px) + 24px)';
-const icon = (ic, px, extra = '') => `<span style="display:block;width:${px}px;height:${px}px;background:url(${ICONS[ic[0]]}) ${(ic[1] % 4) * 33.333}% ${Math.floor(ic[1] / 4) * 33.333}%/400% 400%;${extra}"></span>`;
+const icon = (ic, px, extra = '') => typeof ic === 'string' ? `<img src="${ic}" style="display:block;width:${px}px;height:${px}px;${extra}">` : `<span style="display:block;width:${px}px;height:${px}px;background:url(${ICONS[ic[0]]}) ${(ic[1] % 4) * 33.333}% ${Math.floor(ic[1] / 4) * 33.333}%/400% 400%;${extra}"></span>`;
 const bar = (frac, col, h, text, bg = 'rgba(0,0,0,.6)') => `<div style="position:relative;height:${h}px;background:${bg};border:1px solid rgba(0,0,0,.85);border-radius:3px;overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.7)"><div style="height:100%;width:${Math.max(0, Math.min(1, frac)) * 100}%;background:${col};box-shadow:inset 0 1px 0 rgba(255,255,255,.35);transition:width .15s"></div>${text ? `<div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:${Math.max(9, h - 5)}px;color:#fff;${SH};${N}">${text}</div>` : ''}</div>`;
 export function levelCol(mine, theirs) { const d = theirs - mine; return d >= 5 ? '#ff2020' : d >= 3 ? '#ff8020' : d >= -2 ? '#ffff00' : d >= -6 ? '#40c040' : '#9d9d9d'; }
 export const SLATE = METAL; const ARMOR = METAL;
@@ -52,7 +52,7 @@ function targetFrame(ctx, player, st, W) {
   const t = st.tgt && W[st.tgt]; if (!t || t.d) return '';
   const max = t.max || 1, lc = levelCol(st.lvl ?? 1, t.l), tag = t.e === 2 ? 'Boss' : t.e ? 'Elite' : '';
   const lvl = t.e === 2 || t.l - (st.lvl ?? 1) >= 10 ? '<span style="font-size:12px">💀</span>' : t.l;
-  const deb = []; if (t.a & 1) deb.push(aura(SPELLS.fireball.icon, null, '#ff4a2a'));
+  const deb = []; if (t.a & 1) deb.push(aura(SPELLS.fireball.icon, null, '#ff4a2a')); if (t.a & 16) deb.push(aura(SPELLS.curse.icon, null, '#b46cff'));
   const tt = t.t && ctx.place.players.find((p) => p.id === t.t);
   const tot = tt ? `<div style="position:absolute;left:30px;top:62px;display:flex;align-items:center;gap:5px;padding:2px 7px;${METAL};border-radius:3px;font-size:11px;color:${PARCH};${SH}">${tt.id === player.id ? 'You' : (tt.displayName ?? '').slice(0, 12)}<div style="width:60px">${bar((tt.state?.hp ?? 1) / R.hp(tt.state?.lvl ?? 1), '#1fb51f', 8)}</div></div>` : '';
   return `<div style="position:fixed;left:min(300px,46vw);top:14px;pointer-events:none;${F}">
@@ -81,7 +81,7 @@ function bars(ctx, player, st, now) {
   const coarse = typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches;
   const kit = BARS.fire;
   const empty = (k) => `<div style="position:relative;width:42px;height:42px;box-sizing:border-box;background:linear-gradient(#2a2a2d,#111113);border:2px solid #3c3c40;border-radius:6px;box-shadow:inset 0 0 8px rgba(0,0,0,.9),0 0 0 1px #000"><span style="position:absolute;top:1px;right:3px;font-size:12px;color:#777;${SH};${F}">${k}</span></div>`;
-  const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '='];
+  const keys = ['1', '2', '3', '4', '5', '6', 'Q', 'G', 'T', '0', '-', '='];
   const slots = keys.map((k, i) => kit[i] ? slot(kit[i], k, st, now, false) : empty(k)).join('');
   const lvl = st.lvl ?? 1, need = R.xpNeed(lvl), xp = st.xp ?? 0;
   const ticks = Array.from({ length: 19 }, (_, i) => `<span style="position:absolute;left:${(i + 1) * 5}%;top:0;bottom:0;width:1px;background:rgba(0,0,0,.7)"></span>`).join('');

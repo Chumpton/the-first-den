@@ -19,13 +19,15 @@ export const ELEMENTS = {
   water: { name: 'Water', icon: ['b', 11], color: '#4fb3ff', glow: [0.5, 1.4, 3] },
   earth: { name: 'Earth', icon: ['b', 12], color: '#b98a4e', glow: [1.6, 1.2, 0.6] },
   fire: { name: 'Fire', icon: ['b', 13], color: '#ff7a2a', glow: [3.4, 1.4, 0.3] },
+  storm: { name: 'Storm', icon: ['a', 15], color: '#9fc4ff', glow: [1.6, 2, 3.2] },
+  shadow: { name: 'Shadow', icon: ['b', 8], color: '#b46cff', glow: [1.8, 0.6, 3] },
 };
 // 2026-10-04: the creator cut the kit to simple spells, Fireball alone; more are added one row at a time
 export const STANCES = ['fire'];
 // kind: bolt (flies to the target) · lash (a whip, 14 m) · ground (lands at the target, radius) · nova (around you) · cone (in front)
 //       self (shield / heal / speed) · dash · blink · launch · jet. Damage is at level 1; it grows 12 % a level.
 export const SPELLS = {
-  'air-blast':    { el: 'air', name: 'Air Blast', icon: ['a', 0], kind: 'bolt', dmg: 16, range: 32, cd: 0, chi: 8, kb: 7, speed: 70, text: 'A punch of wind that hurls the target back.' },
+  'air-blast':    { el: 'air', name: 'Wind Gust', icon: ['a', 0], kind: 'bolt', dmg: 18, range: 30, cd: 6, chi: 10, kb: 13, lift: 4, speed: 70, text: 'Instant: a punch of wind that hurls the target back and off its feet.' },
   'wind-darts':   { el: 'air', name: 'Wind Darts', icon: ['a', 1], kind: 'bolt', dmg: 60, ticks: 4, channel: 3, range: 32, cd: 0, chi: 22, speed: 80, text: 'Channel 3 s: four darts of air seek the target. Moving ends it.' },
   'tornado':      { el: 'air', name: 'Tornado', icon: ['a', 2], kind: 'ground', dmg: 54, ticks: 6, channel: 6, radius: 6, range: 30, cd: 12, chi: 30, lift: 4, text: 'Channel 6 s: a twister on the target hits everything within 6 m each second.' },
   'air-shield':   { el: 'air', name: 'Air Shield', icon: ['a', 3], kind: 'self', shield: 45, dur: 10, cd: 20, chi: 20, text: 'A sphere of wind absorbs 45 damage.' },
@@ -34,8 +36,13 @@ export const SPELLS = {
   'air-scooter':  { el: 'air', name: 'Air Scooter', icon: ['b', 0], kind: 'self', speed: 2.1, dur: 8, cd: 25, chi: 15, off: true, text: 'Ride a ball of air: double speed for 8 s.' },
   'water-whip':   { el: 'water', name: 'Water Whip', icon: ['a', 4], kind: 'lash', dmg: 19, range: 15, cd: 0, chi: 8, lance: true, text: 'Instant. A lash of river water: double damage to a frozen target.' },
   'ice-spears':   { el: 'water', name: 'Ice Spears', icon: ['a', 5], kind: 'bolt', dmg: 48, cast: 2.5, range: 32, cd: 0, chi: 14, slow: 6, speed: 44, text: '2.5 s cast: a volley of ice spears that slows the target 6 s. Your bread and butter.' },
-  'ice-prison':   { el: 'water', name: 'Ice Prison', icon: ['a', 6], kind: 'nova', el2: 'ice', dmg: 8, radius: 8, cd: 25, chi: 15, root: 8, off: true, text: 'Instant, off the GCD: freeze everything within 8 m for 8 s. Frozen wolves shatter: +50 % crit. Damage may free them.' },
-  'healing-waters': { el: 'water', name: 'Healing Waters', icon: ['a', 7], kind: 'self', heal: 0.4, cast: 2, cd: 10, chi: 25, text: '2 s cast: restore 40 % of your health.' },
+  'ice-prison':   { el: 'water', name: 'Frost Pulse', icon: ['a', 6], kind: 'nova', el2: 'ice', dmg: 8, radius: 8, cd: 25, chi: 15, root: 8, off: true, text: 'Instant, off the GCD: freeze everything within 8 m for 8 s. Frozen wolves shatter: +50 % crit. Damage may free them.' },
+  'healing-waters': { el: 'water', name: 'Healing Surge', icon: ['a', 7], kind: 'self', heal: 0.3, cd: 10, chi: 20, text: 'Instant: restore 30 % of your health.' },
+  'chain-lightning': { el: 'storm', name: 'Chain Lightning', icon: ['a', 15], kind: 'chain', dmg: 46, cast: 2, range: 30, cd: 4, chi: 18, jumps: 3, falloff: 0.7, hop: 10, beam: true, text: '2 s cast: lightning strikes the target, then leaps to 3 more wolves within 10 m, 30 % weaker each jump.' },
+  'curse':        { el: 'shadow', name: 'Curse of Agony', icon: '/cdn/value.f30c21d57b9ed0e417549d1661aa2ba544e793af625a272f6e7e4080f7dc388b.png', kind: 'curse', dps: 6, dur: 18, range: 30, cd: 0, chi: 12, text: 'Instant: a curse that gnaws the target for 18 s, a tick every 2 s. Stacks with burns.' },
+  'disengage':    { el: 'air', name: 'Disengage', icon: '/cdn/value.5eb082a7476e6f24c78a452783c913590c6b54aa3d355ae261eec409e52bba5f.png', kind: 'disengage', back: 16, up: 9, cd: 12, chi: 0, off: true, text: 'Leap far backward out of the fight. Off the global cooldown.' },
+  'charge':       { el: 'earth', name: 'Charge', icon: '/cdn/value.95e7b6638a5c94c35257518159f87df0f609cd092e1fb4169fb82f14cf175a09.png', kind: 'charge', dmg: 14, range: 25, min: 5, speed: 34, root: 1.5, cd: 12, chi: 0, off: true, text: 'Rush to your target (5 to 25 m), hit it and stun it 1.5 s.' },
+  'leap-slam':    { el: 'earth', name: 'Skyfall Slam', icon: '/cdn/value.a5eb30ad748ac6c8d96ed54339590569632fb93c089dfaa05ad684d7917087d5.png', kind: 'slam', dmg: 40, radius: 6, range: 30, kb: 6, root: 1.5, cd: 18, chi: 20, text: 'Fly up into the air and crash down on your target: every wolf within 6 m is hit, thrown back and stunned.' },
   'hailstorm':    { el: 'water', name: 'Hailstorm', icon: ['b', 1], kind: 'ground', dmg: 60, ticks: 6, channel: 6, radius: 8, range: 30, cd: 0, chi: 35, slow: 3, hail: true, text: 'Channel 6 s: hail on the target, every wolf within 8 m hit and chilled each second.' },
   'mist-step':    { el: 'water', name: 'Mist Step', icon: ['b', 7], kind: 'blink', dist: 15, cd: 8, chi: 10, off: true, text: 'Dissolve into mist and reform 15 m ahead.' },
   'octopus-form': { el: 'water', name: 'Octopus Form', icon: ['b', 1], kind: 'self', shield: 70, dur: 10, cd: 30, chi: 25, text: 'Eight water tentacles absorb 70 damage.' },
@@ -55,7 +62,7 @@ export const SPELLS = {
   'avatar-state': { el: null, name: 'Avatar State', icon: ['b', 9], kind: 'avatar', dur: 12, cd: 90, chi: 0, harmony: 5, text: 'Needs 5 Harmony. 12 s: double damage, spells cost no chi.' },
 };
 export const BARS = {
-  fire: ['fireball'],
+  fire: ['fireball', 'chain-lightning', 'curse', 'air-blast', 'ice-prison', 'healing-waters', 'disengage', 'charge', 'leap-slam'],
 };
 export const EXTRA = { meditate: 'meditate', avatar: 'avatar-state' };
 export const RULES = {

@@ -31,7 +31,7 @@ function vel(row, m, vx, vz, dt) {
 }
 function board(ctx, row, force) {
   const s = row.state, W = (ctx.place.state.wolves ??= {}), p = row.feetPosition, old = W[row.id];
-  const now = ctx.now(), a = (s.burn && now < s.burn.until || s.ignite && now < s.ignite.until ? 1 : 0) | (s.cc && now < s.cc.until ? 8 : 0) | (now < (s.rootUntil ?? 0) ? 2 : 0) | (now < (s.slowUntil ?? 0) ? 4 : 0);
+  const now = ctx.now(), a = (s.burn && now < s.burn.until || s.ignite && now < s.ignite.until ? 1 : 0) | (s.cc && now < s.cc.until ? 8 : 0) | (now < (s.rootUntil ?? 0) ? 2 : 0) | (now < (s.slowUntil ?? 0) ? 4 : 0) | (s.curse && now < s.curse.until ? 16 : 0);
   const e = { n: s.name, l: s.lvl, e: s.boss ? 2 : s.elite ? 1 : 0, a, hp: Math.max(0, Math.round(s.hp)), max: s.max, d: s.dead ? 1 : 0, t: s.tgt || null, v: s.evading ? 1 : 0, x: Math.round(p.x / 2) * 2, z: Math.round(p.z / 2) * 2 };
   if (force || !old || old.hp !== e.hp || old.a !== e.a || old.d !== e.d || old.t !== e.t || old.v !== e.v || old.x !== e.x || old.z !== e.z) W[row.id] = e;
 }
@@ -58,11 +58,11 @@ function aggro(ctx, row, rows, pid, now, call) {
   for (const o of rows) if (o !== row && o.state.den === s.den && !o.state.dead && !o.state.tgt && !o.state.evading && dist2(o.feetPosition, row.feetPosition) < WOLF.social) aggro(ctx, o, rows, pid, now, false);
 }
 function evade(ctx, row, m, now) {
-  const s = row.state; s.mode = 'evade'; s.evading = true; s.tgt = null; s.threat = {}; s.burn = null; s.rootUntil = 0; s.slowUntil = 0;
+  const s = row.state; s.mode = 'evade'; s.evading = true; s.tgt = null; s.threat = {}; s.burn = null; s.curse = null; s.rootUntil = 0; s.slowUntil = 0;
   m.path = (m.trail ?? []).slice().reverse().concat([{ x: s.home.x, z: s.home.z }]); m.pi = 0; m.unreach = 0; m.restAt = 0; m.windAt = 0; m.fled = false;
 }
 function die(ctx, row, m, now) {
-  const s = row.state; s.dead = true; s.deadAt = now; s.mode = 'dead'; s.tgt = null; s.burn = null; s.threat = {};
+  const s = row.state; s.dead = true; s.deadAt = now; s.mode = 'dead'; s.tgt = null; s.burn = null; s.curse = null; s.threat = {};
   row.velocity = { x: 0, y: -4, z: 0 }; row.physics = 'none'; clip(ctx, row, m, 'die', 1, false); // the body stops blocking at once
   const killer = ctx.place.players.find((p) => p.id === s.hitBy), pos = { x: row.feetPosition.x, y: row.feetPosition.y + 1, z: row.feetPosition.z };
   ctx.emit('playSound', { clip: SOUNDS.die, position: pos, volume: 0.6, pitch: s.elite ? 0.7 : 1, maxDistance: 30 });
@@ -77,7 +77,7 @@ function die(ctx, row, m, now) {
   if (s.boss) { ctx.emit('slowMo', { scale: 0.35, duration: 0.8 }, { audience: { player: killer.id } }); ctx.emit('shockwave', { position: pos, speed: 18, thickness: 1.5, intensity: 0.6 }); ctx.emit('milestone', { step: 2, name: 'slew Grimfang' }, { audience: { player: killer.id } }); }
 }
 function respawn(ctx, row, m) {
-  const s = row.state; s.dead = false; s.hp = s.max; s.mode = 'idle'; s.tgt = null; s.hitBy = null; s.burn = null; s.rootUntil = 0; s.slowUntil = 0; s.threat = {}; s.evading = false;
+  const s = row.state; s.dead = false; s.hp = s.max; s.mode = 'idle'; s.tgt = null; s.hitBy = null; s.burn = null; s.curse = null; s.rootUntil = 0; s.slowUntil = 0; s.threat = {}; s.evading = false;
   row.physics = { body: 'character', collider: 'capsule' };
   row.feetPosition = { x: s.home.x, y: { terrain: 0.05 }, z: s.home.z }; row.visible = true; m.vy = -4; m.path = null; m.fled = false; clip(ctx, row, m, 'idle');
 }
@@ -126,6 +126,8 @@ function step(ctx, row, rows, players, now, dt) {
   if (s.hitAt && s.hitAt !== m.hitSeen) { m.hitSeen = s.hitAt; if (!s.evading) aggro(ctx, row, rows, s.hitBy, now, true); ctx.emit('playSound', { clip: SOUNDS.yelp, position: p, volume: 0.35, pitch: 1 + ctx.random() * 0.2, maxDistance: 22 }); }
   if (s.burn && now < s.burn.until && now >= m.nextBurn) { m.nextBurn = now + 1000; s.hp -= s.burn.dps; fct(ctx, row.id, s.burn.dps, 'dot', s.hitBy ? { to: s.hitBy } : { at: p }); }
   else if (s.burn && now >= s.burn.until) s.burn = null;
+  if (s.curse && now < s.curse.until && now >= (m.nextCurse ?? 0)) { if (m.nextCurse) { const d = s.curse.dps * 2; s.hp -= d; fct(ctx, row.id, d, 'dot', s.curse.by ? { to: s.curse.by } : { at: p }); } m.nextCurse = now + 2000; }
+  else if (s.curse && now >= s.curse.until) { s.curse = null; m.nextCurse = 0; }
   if (s.ignite && now < s.ignite.until && now >= (m.nextIgnite ?? 0)) { m.nextIgnite = now + 1000; s.hp -= s.ignite.dps; fct(ctx, row.id, s.ignite.dps, 'dot', s.hitBy ? { to: s.hitBy } : { at: p }); }
   else if (s.ignite && now >= s.ignite.until) s.ignite = null;
   if (s.cc) { // bound: it wanders in its cyclone, healing, until the bind ends or anything hurts it
