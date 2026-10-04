@@ -32,7 +32,7 @@ const TRAIL = {
   air: `fx\npop wind rate=90 on=sphere(.25) life=.25..0.45 v=sdir()*.7 size=.3..0.5 acc=drag(2) col=<1.5,1.8,2.1> a=.45>0 sz=$size*(.6>1.7) rot=spin(.6) r=sprite(smoke-puff,add)\npop core n=1 size=.55 col=<1.6,1.9,2.2> a=.6 sz=$size r=sprite(soft-disc,add)`,
   water: `fx\npop drop rate=110 on=sphere(.22) life=.3..0.55 v=sdir()*1.3 size=.06..0.12 acc=grav()*.7 col=<.6,1.5,2.8> a=1>0 r=sprite(droplet,add,velocity,.02)\npop core n=1 size=.6 col=<.5,1.3,2.6> a=.85 sz=$size r=sprite(soft-disc,add)`,
   earth: `fx\npop dust rate=50 on=sphere(.3) life=.4..0.7 v=sdir()*.5 size=.2..0.35 acc=drag(1.5) col=<.5,.42,.32> a=.45>0 sz=$size*(.6>1.6) r=sprite(smoke-puff,alpha)\npop grit rate=40 on=sphere(.3) life=.4..0.6 v=sdir()*1.5 size=.04..0.08 acc=grav() col=<.42,.35,.27> a=1 r=sprite(chip,alpha)`,
-  fire: `fx\npop flame rate=130 on=sphere(.18) life=.16..0.3 v=sdir()*.7 size=.3..0.55 col=hdr(4.4,2.2,.6)>hdr(1.6,.4,.08) a=1>0 sz=$size*(1>.3) rot=spin(.4) r=sprite(flame-wisp,add)\npop ember rate=30 on=sphere(.2) life=.3..0.6 v=sdir()*2 size=.02..0.04 acc=grav()*.3 col=hdr(5,2.5,.6) a=1>0 r=sprite(ember,add,velocity,.02)\npop glow n=1 r=light(<1,.5,.2>,8,7)`,
+  fire: `fx\npop core n=1 size=.75 col=hdr(6,4.2,1.6) a=.95 sz=$size*flick(9,.12) r=sprite(soft-disc,add)\npop corona rate=?low:90|180 on=sphere(.22) life=.12..0.22 v=sdir()*(.6..1.2) size=.35..0.6 col=hdr(5,3,.9)>hdr(2.6,.8,.12) a=1>0 sz=$size*(1>.4) rot=spin(.6) r=sprite(flame-wisp,add)\npop tail rate=?low:70|140 on=sphere(.18) life=.3..0.55 v=sdir()*.4+up(.6..1.1) size=.32..0.55 acc=drag(2)+buoy(1.2) col=hdr(4,1.8,.35)>.5:hdr(2,.5,.06)>hdr(.5,.1,.02) a=1>.6:.8>0 sz=$size*(1>.25) rot=spin(.4) r=sprite(flame-wisp,add)\npop spark rate=45 on=sphere(.2) life=.3..0.7 v=sdir()*(1.5..3) size=.02..0.04 acc=grav()*.35+drag(.8) col=hdr(6,3,.7) a=1>0 r=sprite(ember,add,velocity,.03)\npop smoke on=@tail?.25 life=.6..1.1 size=.25..0.4 acc=buoy(.8)+drag(1.4) col=<.16,.13,.12> a=0>.3:.25>0 sz=$size*(.7>2) r=sprite(smoke-puff,alpha)\npop glow n=1 r=light(<1,.55,.2>,14,10)`,
 };
 const IMPACT = {
   air: `fx\npop gust burst=16..22 life=.3..0.6 v=sdir()*(3..6) size=.4..0.7 acc=drag(3) col=<1.4,1.7,2> a=.5>0 sz=$size*(.5>1.8) rot=spin(.8) r=sprite(smoke-puff,add)\npop leaf burst=6..10 life=.6..1.1 v=sdir()*(2..4)+up(1.5) size=.06..0.1 spin=-8..8 acc=grav()*.4+drag(1.5) col=<.45,.6,.3> a=1>0 rot=$age*$spin r=sprite(leaf,alpha)`,
@@ -48,7 +48,8 @@ function emitFx(ctx, pos, key, n) { ctx.emit('fx', { position: pos, script: IMPA
 function sound(ctx, clip, pos, vol = 0.6, pitch = 1) { ctx.emit('playSound', { clip, position: pos, volume: vol, pitch, maxDistance: 40 }); }
 function bolt(ctx, el, from, to, t, rock) {
   const id = ctx.spawn({ feetPosition: from, lifetime: t + 0.6, audience: 'near', interpolation: null, fx: { script: TRAIL[el] },
-    ...(rock ? { primitive: { kind: 'icosahedron', radius: rock, detail: 0 }, material: { color: '#7a6a55', roughness: 0.95, flatShading: true } } : {}) });
+    ...(rock ? { primitive: { kind: 'icosahedron', radius: rock, detail: 0 }, material: { color: '#7a6a55', roughness: 0.95, flatShading: true } }
+      : el === 'fire' ? { pivot: 'center', primitive: { kind: 'sphere', radius: 0.24, widthSegments: 16, heightSegments: 12 }, material: { color: '#ffd27a', emissive: '#ff8a1a', emissiveIntensity: 6 }, castShadow: false } : {}) });
   for (const k of ['x', 'y', 'z']) animate(ctx, id, { [`feetPosition.${k}`]: to[k] }, { duration: t, easing: 'linear' });
   return id;
 }
@@ -199,6 +200,7 @@ function finishCast(ctx, b) {
   st.cds = { ...(st.cds ?? {}), [c.id]: now + (S.cd ?? 0) * 1000 };
   st.lastCast = { id: c.id, at: now }; st.meditateUntil = 0;
   if (S.dmg && S.el) { if (S.el !== st.lastEl) st.harmony = Math.min(R.harmonyMax, (st.harmony ?? 0) + 1); st.lastEl = S.el; }
+  st.castThrow = now; // the hands push forward: humanoid-locomotion plays the release
   st.castEnd = { id: c.id, ok: true, at: now }; // the cast bar flashes full and fades, 1.12's CastingBarFrame
   release(ctx, { id: c.id, wid: c.wid });
 }
@@ -249,7 +251,7 @@ export function release(ctx, pl) {
     case 'bolt': {
       const r = roll(ctx, S), d = Math.hypot(to.x - hand.x, to.y - hand.y, to.z - hand.z);
       if (S.beam) { beam(ctx, hand, to, '#cfe0ff', 0.09, 1.1, 7, 0.45); beam(ctx, hand, to, '#8fb4ff', 0.05, 1.6, 6, 0.35); ctx.after(0.12, 'zap', { a: hand, b: to }); land(ctx, { sp: id, wid: w.id, dmg: r.dmg, crit: r.crit, from: p, to }); break; }
-      const t = Math.max(0.25, d / (S.speed * SLOW));
+      const t = Math.max(0.2, d / (S.speed * (S.fast ? 1 : SLOW)));
       bolt(ctx, S.root || S.slow ? 'water' : S.el, hand, to, t, S.rock);
       sound(ctx, S.el === 'earth' ? SOUNDS.earth : SOUNDS[S.el], hand, 0.45, 1.05 + ctx.random() * 0.15);
       ctx.after(t, 'land', { sp: id, wid: w.id, dmg: r.dmg, crit: r.crit, from: p, to, n: { x: hand.x - to.x, y: 0.4, z: hand.z - to.z } });
@@ -389,8 +391,8 @@ export function update(ctx, dt) {
   if (st.casting || st.channeling) { // standing still is the price: a step, a jump or a launch breaks it
     const f0 = b.castFrom, q = me.feetPosition, moved = !f0 || Math.hypot(q.x - f0.x, q.z - f0.z) > R.moveCancel || Math.abs(q.y - f0.y) > 0.6 || !!b.move;
     if (st.dead) { cancelCast(ctx, b, null); stopChannel(ctx, b, null); }
-    else if (st.casting) { if (moved) cancelCast(ctx, b, 'Interrupted'); else if (now >= st.casting.end) finishCast(ctx, b); }
-    else if (st.channeling) { if (moved) stopChannel(ctx, b, 'Interrupted'); else if (now >= st.channeling.next) channelTick(ctx, b); else if (now > st.channeling.end + 300) stopChannel(ctx, b, null); }
+    else if (st.casting) { if (now >= st.casting.end) finishCast(ctx, b); } // 2026-10-04: the creator removed interrupts: casting on the move
+    else if (st.channeling) { if (now >= st.channeling.next) channelTick(ctx, b); else if (now > st.channeling.end + 300) stopChannel(ctx, b, null); }
   }
   if (b.queued && now >= b.queued.at) { const q = b.queued; b.queued = null; if (now - q.at < 600) cast(ctx, b, q.id); }
   // death: the world holds a beat, then you are back on your feet where you last stood safe

@@ -178,6 +178,15 @@ export function update(ctx, dt) {
   ctx.self.anim.idle = { clip: clips.idle || 'Idle', loop: 'loop', weight: Math.max(idle, 0.001), blendIn: 0.06 }
   ctx.self.anim.walk = { clip: clips.walk || 'Walk', loop: 'loop', weight: Math.max(walk, 0.001), speed: clipSpeed > 0.1 ? clipSpeed / 2.5 : 1, blendIn: 0.06 }
   ctx.self.anim.run = { clip: clips.run || 'Run', loop: 'loop', weight: Math.max(run, 0.001), speed: clipSpeed > 0.1 ? clipSpeed / 6 : 1, blendIn: 0.06 }
+  // Spellcasting (scripts/bender.js writes state.casting / state.castThrow): the upper body gathers the spell while
+  // the bar fills and thrusts it out on release; masked from the spine so a cast on the run keeps its stride.
+  const cst = ctx.self.state, nowMs = ctx.now(), throwing = nowMs - (cst.castThrow ?? -1e9) < 700
+  const castClip = cst.casting || cst.channeling ? 'cdn/clip-spell-casting-loop.glb' : throwing ? 'cdn/clip-cast.glb' : null
+  if (castClip !== gait.castClip) {
+    gait.castClip = castClip
+    ctx.self.anim.spell = castClip ? { clip: castClip, loop: castClip.endsWith('-loop.glb') ? 'loop' : 'once', weight: 4, mask: { from: 'Spine' }, blendIn: 0.12, speed: throwing && !cst.casting ? 1.6 : 1 } : null
+  }
+  if (castClip) return
   // Standing, facing where it was told to: the clips hold their weights until the body moves or onInput
   // writes a new heading — either wakes this update.
   if (speed === 0 && !W?.turning && !wowHandsSteer(ctx) && (typeof targetYaw !== 'number' || gait.bodyYaw === targetYaw)) ctx.sleep()

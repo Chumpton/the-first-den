@@ -41,7 +41,6 @@ function hitPlayer(ctx, row, p, now) {
   if ((ps.shield ?? 0) > 0) { const a = Math.min(ps.shield, d); ps.shield -= a; d -= a; if (a) ctx.emit('damageNumber', { position: pos, text: `absorb ${a}`, color: '#cfe8ff', size: 0.8 }); }
   if (d > 0) { ps.hp -= d; ctx.emit('damageNumber', { position: pos, value: d, color: '#ff4a3a' }); }
   ps.combatUntil = now + RULES.combatMs; ps.lastHitBy = s.name;
-  if (d > 0 && ps.casting && (ps.casting.pushes ?? 0) < RULES.pushMax) ps.casting = { ...ps.casting, end: ps.casting.end + RULES.pushback, pushes: (ps.casting.pushes ?? 0) + 1 }; // pushback
   ctx.emit('playSound', { clip: SOUNDS.bite, position: pos, volume: 0.6, pitch: s.elite ? 0.75 : 0.95 + ctx.random() * 0.15, maxDistance: 25 });
   ctx.emit('cameraPunch', { direction: { x: p.feetPosition.x - row.feetPosition.x, y: 0, z: p.feetPosition.z - row.feetPosition.z }, intensity: s.elite ? 0.5 : 0.25 }, { audience: { player: p.id } });
   ctx.emit('fx', { position: pos, script: `fx\npop spark burst=6..9 life=.2..0.35 v=sdir()*(2..4) size=.05..0.09 acc=drag(3) col=<2.4,.3,.2> a=1>0 r=sprite(ember,add,velocity,.02)` });
