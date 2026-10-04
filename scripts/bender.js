@@ -5,7 +5,8 @@
 // meditateUntil combatUntil dead lastSafe kills grimfang quests err toast.
 import { SPELLS, BARS, ELEMENTS, STANCES, RULES, SOUNDS, QUESTS, WOLF } from './lib/data/bending.js';
 import { animate } from 'builtin/tween';
-import { raycast } from 'builtin/physics';
+import { raycast, getInputRay } from 'builtin/physics';
+import { steerBasis } from './lib/wow-steer.js';
 const R = RULES;
 const sess = (ctx) => ((ctx.session.bend ??= {})[ctx.self.id] ??= { aim: { s: 0, c: 1 }, move: null, acc: 0, fx: {} });
 const fwdOf = (b) => ({ x: -b.aim.s, z: -b.aim.c });
@@ -345,7 +346,14 @@ export function onSpawn(ctx) {
 const KEYS = ['cast1', 'cast2', 'cast3', 'cast4', 'cast5', 'cast6'];
 export function onInput(ctx, input) {
   const b = sess(ctx), st = ctx.self.state, p = input.pressed || {};
-  b.aim = { s: input.axes.aimYawSin ?? b.aim.s, c: input.axes.aimYawCos ?? b.aim.c };
+  const B = steerBasis(ctx, input); b.aim = { s: B.sin ?? b.aim.s, c: B.cos ?? b.aim.c };
+  // a quick left click (no drag) on a wolf targets it, WoW's free cursor
+  if (p.orbit) b.clickAt = ctx.now();
+  if (input.released?.orbit && ctx.now() - (b.clickAt ?? 0) < 260) {
+    const ray = getInputRay(ctx, input);
+    if (ray) { const hit = raycast(ctx, ray.origin, ray.direction, { distance: RULES.targetRange + 20, tags: ['wild-wolf'], ignoreEntities: [ctx.self.id] });
+      if (hit?.id && wolfAt(ctx, hit.id)) { st.tgt = hit.id; sound(ctx, SOUNDS.shield, ctx.self.feetPosition, 0.2, 1.8); } }
+  }
   if (p.bookToggle) { st.bookOpen = !st.bookOpen; st.journalOpen = false; }
   if (p.journalToggle) { st.journalOpen = !st.journalOpen; st.bookOpen = false; }
   if (p.travelClose) { st.bookOpen = false; st.journalOpen = false; st.tgt = null; }
