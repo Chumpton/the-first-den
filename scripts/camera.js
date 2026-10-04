@@ -36,7 +36,7 @@ function wowBoom(ctx, target, dt, mounted) {
   if (mounted) { // on a horse or a boat the heading is the hull's; the orbit still swings by hand
     const r = target.rotation ?? 0, q = (typeof r === 'number' ? r : (r.yaw ?? 0)) * Math.PI / 180
     s.heading = wrapRad(s.heading + wrapRad(q - s.heading) * (1 - Math.exp(-5 * dt)))
-  } else if (!hands.steer && hands.mx) s.heading = wrapRad(s.heading - hands.mx * C.keyTurn * dt) // A/D turn the body
+  } // A/D turning is the body's own (scripts/lib/wow-steer.js wowTurn), stepped in player.js every tick
   const moving = Math.hypot(target.velocity?.x ?? 0, target.velocity?.z ?? 0) > 0.5
   if (hands.steer) s.off = (s.off ?? 0) * Math.exp(-C.steerSnap * dt)
   else if (!hands.orbit && (moving || mounted)) s.off = (s.off ?? 0) * Math.exp(-C.followRate * dt)

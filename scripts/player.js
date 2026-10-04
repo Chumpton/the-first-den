@@ -1,4 +1,4 @@
-import { steerBasis } from './lib/wow-steer.js'
+import { steerBasis, wowTurn } from './lib/wow-steer.js'
 // The player's own movement: WASD relative to the camera's aim, jump, gravity — on the
 // character controller. A body is three writes: feetPosition puts it there, velocity asks the
 // controller to take it there (held until the next write — it slides, steps and grounds), forces
@@ -57,6 +57,7 @@ export function onInput(ctx, input) {
   walk.ropeUp = input.held.jump || moveZ > 0.3
   walk.ropeDown = input.held.descend || moveZ < -0.3
   const speed = walk.flying ? PLAYER.flySpeed : PLAYER.walkSpeed * (ctx.self.state.speedMul || 1)
+  walk.speed = speed
   walk.moveIntent = {
     x: (facingCos * nx - facingSin * nz) * speed,
     z: -(facingSin * nx + facingCos * nz) * speed,
@@ -80,6 +81,14 @@ export function update(ctx, dt) {
   // walkSpeed / acceleration seconds and a release stops in walkSpeed / deceleration; a body stopped
   // by a wall reads 0 and pushes again from there.
   const walk = walkOf(ctx)
+  // WoW turn: A/D (right button up) swing the heading every tick they are held, and the stride
+  // re-aims along the new heading, so W+A runs an arc and A alone turns in place.
+  const B = wowTurn(ctx, dt)
+  if (B) {
+    const mag = Math.hypot(B.moveX, B.moveZ), nx = mag > 1 ? B.moveX / mag : B.moveX, nz = mag > 1 ? B.moveZ / mag : B.moveZ
+    const sp = walk.speed ?? PLAYER.walkSpeed
+    walk.moveIntent = { x: (B.cos * nx - B.sin * nz) * sp, z: -(B.sin * nx + B.cos * nz) * sp }
+  }
   const intent = walk.moveIntent ?? { x: 0, z: 0 }
   if (walk.flying) {
     // Sinking onto the ground lands you.
@@ -116,5 +125,5 @@ export function update(ctx, dt) {
   ctx.self.velocity = { x: vx, y: v.y + ctx.place.gravity.y * dt, z: vz }
   // Standing on the ground with no word to walk: nothing changes until something moves the body or a key
   // is pressed — both wake this update (a row of the body written, or onInput running).
-  if (ctx.self.grounded && vx === 0 && vz === 0 && intent.x === 0 && intent.z === 0 && !ctx.self.state.bendBusy) ctx.sleep()
+  if (ctx.self.grounded && vx === 0 && vz === 0 && intent.x === 0 && intent.z === 0 && !ctx.self.state.bendBusy && !B?.turning) ctx.sleep()
 }

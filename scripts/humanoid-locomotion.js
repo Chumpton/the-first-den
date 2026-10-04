@@ -1,4 +1,5 @@
-import { steerBasis } from './lib/wow-steer.js'
+import { steerBasis, wowBasis, wowHands } from './lib/wow-steer.js'
+const wowHandsSteer = (ctx) => !!wowHands(ctx)?.steer
 // Turns the humanoid avatar and blends its 3D GLB clips (Idle/Walk/Run) by movement speed, and
 // sits it when it is seated. turnTo picks the heading: the body's own state.turnTo when a script
 // wrote one (a world whose places differ writes it as the body changes place), else the world's
@@ -135,7 +136,10 @@ export function update(ctx, dt) {
     gait.clipSpeed = undefined // the channels were cleared for the seat: the next tick writes them whatever the speed
   }
 
-  const mode = turnTo(ctx)
+  // Under the WoW rig the body faces the live heading every tick (A/D turn it while held).
+  const W = wowBasis(ctx)
+  if (W) gait.targetYaw = (Math.atan2(W.sin, W.cos) * 180) / Math.PI
+  const mode = W ? 'camera' : turnTo(ctx)
   // turnTo 'none': this script turns nothing — another script (or nobody) owns the yaw.
   if (typeof gait.targetYaw === 'number' && mode !== 'none') {
     const target = gait.targetYaw
@@ -176,5 +180,5 @@ export function update(ctx, dt) {
   ctx.self.anim.run = { clip: clips.run || 'Run', loop: 'loop', weight: Math.max(run, 0.001), speed: clipSpeed > 0.1 ? clipSpeed / 6 : 1, blendIn: 0.06 }
   // Standing, facing where it was told to: the clips hold their weights until the body moves or onInput
   // writes a new heading — either wakes this update.
-  if (speed === 0 && (typeof targetYaw !== 'number' || gait.bodyYaw === targetYaw)) ctx.sleep()
+  if (speed === 0 && !W?.turning && !wowHandsSteer(ctx) && (typeof targetYaw !== 'number' || gait.bodyYaw === targetYaw)) ctx.sleep()
 }
