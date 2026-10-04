@@ -23,6 +23,9 @@ function wowInput(ctx, input) {
   hands.orbit = !!input.held?.orbit; hands.steer = !!input.held?.steer; hands.mx = input.axes?.moveX ?? 0
   hands.mz = input.axes?.moveZ ?? 0
   if (s.heading == null) s.heading = s.yaw ?? 0
+  const steerWas = hands.steerWas; hands.steerWas = hands.steer
+  // WoW: the moment the right button goes down the body snaps to face where the camera looks; the camera never moves
+  if (hands.steer && !steerWas) { s.heading = wrapRad(s.heading + (s.off ?? 0)); s.off = 0 }
   if (hands.steer) s.heading = wrapRad(s.heading - lx)
   else if (lx) s.off = wrapRad((s.off ?? 0) - lx)
   if (ly) s.pitch = Math.max(C.pitchMin, Math.min(C.pitchMax, (s.pitch ?? -0.3) - ly))
@@ -36,9 +39,9 @@ function wowBoom(ctx, target, dt, mounted) {
   if (mounted) { // on a horse or a boat the heading is the hull's; the orbit still swings by hand
     const r = target.rotation ?? 0, q = (typeof r === 'number' ? r : (r.yaw ?? 0)) * Math.PI / 180
     s.heading = wrapRad(s.heading + wrapRad(q - s.heading) * (1 - Math.exp(-5 * dt)))
-  } // A/D turning is the body's own (scripts/lib/wow-steer.js wowTurn), stepped in player.js every tick
+  } else if (!hands.steer && hands.mx) s.heading = wrapRad(s.heading - hands.mx * C.keyTurn * dt) // A/D turn, stepped here at frame rate so the swing is smooth; the body reads it
   const moving = Math.hypot(target.velocity?.x ?? 0, target.velocity?.z ?? 0) > 0.5
-  if (hands.steer) s.off = (s.off ?? 0) * Math.exp(-C.steerSnap * dt)
+  if (hands.steer) s.off = 0
   else if (!hands.orbit && (moving || mounted)) s.off = (s.off ?? 0) * Math.exp(-C.followRate * dt)
   const yaw = wrapRad(s.heading + (s.off ?? 0)), pitch = Math.max(C.pitchMin, Math.min(C.pitchMax, s.pitch ?? -0.3))
   s.yaw = yaw; s.pitch = pitch

@@ -1,4 +1,4 @@
-import { steerBasis, wowTurn } from './lib/wow-steer.js'
+import { steerBasis, wowBasis } from './lib/wow-steer.js'
 // The player's own movement: WASD relative to the camera's aim, jump, gravity — on the
 // character controller. A body is three writes: feetPosition puts it there, velocity asks the
 // controller to take it there (held until the next write — it slides, steps and grounds), forces
@@ -83,7 +83,7 @@ export function update(ctx, dt) {
   const walk = walkOf(ctx)
   // WoW turn: A/D (right button up) swing the heading every tick they are held, and the stride
   // re-aims along the new heading, so W+A runs an arc and A alone turns in place.
-  const B = wowTurn(ctx, dt)
+  const B = wowBasis(ctx)
   if (B) {
     const mag = Math.hypot(B.moveX, B.moveZ), nx = mag > 1 ? B.moveX / mag : B.moveX, nz = mag > 1 ? B.moveZ / mag : B.moveZ
     const sp = walk.speed ?? PLAYER.walkSpeed
