@@ -1,4 +1,15 @@
 eyeHeight: 1.6
-thirdDistance: 4.2
-thirdShoulder: 0.55
-thirdLift: 0.35
+# the WoW boom
+anchor: 1.75        # pivot over the feet (chest/eye)
+sens: 3             # look radians per engine look unit
+pitchMin: -1.38     # ~ -80°, looking down from above
+pitchMax: 1.04      # ~ +60°, looking up from the grass
+distStart: 7
+distMax: 28.5
+zoomStep: 1.6       # metres a wheel notch
+firstAt: 0.4        # under this the body hides: first person
+probe: 0.25         # the sphere cast's radius
+spring: 6           # outward recovery rate (1 - e^-k dt); inward is instant
+keyTurn: 3.2        # A/D turn rate, rad/s, when the right button is up
+followRate: 2.2     # "only when moving": the orbit swings back behind you
+steerSnap: 14       # how fast a right-drag pulls the orbit behind the body

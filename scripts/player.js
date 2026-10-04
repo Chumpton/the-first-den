@@ -1,3 +1,4 @@
+import { steerBasis } from './lib/wow-steer.js'
 // The player's own movement: WASD relative to the camera's aim, jump, gravity — on the
 // character controller. A body is three writes: feetPosition puts it there, velocity asks the
 // controller to take it there (held until the next write — it slides, steps and grounds), forces
@@ -27,11 +28,12 @@ export function onSpawn(ctx) {
 }
 
 export function onInput(ctx, input) {
-  const facingSin = input.axes.aimYawSin ?? 0
-  const facingCos = input.axes.aimYawCos ?? 1
+  const B = steerBasis(ctx, input)
+  const facingSin = B.sin ?? 0
+  const facingCos = B.cos ?? 1
 
-  const moveX = input.axes.moveX ?? 0
-  const moveZ = input.axes.moveZ ?? 0
+  const moveX = B.moveX
+  const moveZ = B.moveZ
   const mag = Math.hypot(moveX, moveZ)
   const nx = mag > 1 ? moveX / mag : moveX
   const nz = mag > 1 ? moveZ / mag : moveZ

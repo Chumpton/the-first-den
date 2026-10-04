@@ -49,6 +49,8 @@ inputs:
     bookToggle: {keys: [p]}
     journalToggle: {keys: [l]}
     castSlot: {}
+    orbit: {mouse: left}
+    steer: {mouse: right}
     stancePick: {}
     targetPick: {}
   axes:
@@ -56,6 +58,10 @@ inputs:
       keys: a/d
     moveZ:
       keys: s/w
+    strafe:
+      keys: q/e
+    zoomIn:
+      mouse: wheelY
   touch:
     surfaces: {default: {buttons: [{action: interact, label: USE, size: primary, slot: 1}, {action: jump, label: JUMP, slot: 2}, {action: descend, label: DOWN, slot: 3}, {action: travelMenu, label: TRAVEL, slot: 4}], look: true, orientation: any, pinch: false, sticks: [{x: moveX, y: moveZ, zone: left}]}}
 player: templates/player.js#player

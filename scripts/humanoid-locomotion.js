@@ -1,3 +1,4 @@
+import { steerBasis } from './lib/wow-steer.js'
 // Turns the humanoid avatar and blends its 3D GLB clips (Idle/Walk/Run) by movement speed, and
 // sits it when it is seated. turnTo picks the heading: the body's own state.turnTo when a script
 // wrote one (a world whose places differ writes it as the body changes place), else the world's
@@ -69,12 +70,13 @@ sit.duration = 0.1
 
 export function onInput(ctx, input) {
   if (ctx.self.sprite) return
-  const sin = input.axes.aimYawSin
-  const cos = input.axes.aimYawCos
+  const B = steerBasis(ctx, input)
+  const sin = B.sin
+  const cos = B.cos
   if (typeof sin !== 'number' || typeof cos !== 'number') return
-  const moveX = input.axes.moveX ?? 0
-  const moveZ = input.axes.moveZ ?? 0
-  const mode = turnTo(ctx)
+  const moveX = B.moveX
+  const moveZ = B.moveZ
+  const mode = B.wow ? 'camera' : turnTo(ctx) // under the WoW rig the body always faces its heading
   const gait = gaitOf(ctx)
   const walking = moveX || moveZ
   const viewYaw = (Math.atan2(sin, cos) * 180) / Math.PI

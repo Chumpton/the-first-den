@@ -15,6 +15,51 @@ import { rotate } from 'builtin/vec3'
 import { raycast } from 'builtin/physics'
 
 const RAD_TO_DEG = 180 / Math.PI
+const C = CAMERA
+const hands = { orbit: false, steer: false, mx: 0 }
+// the hands: mouse look only arrives while a button is held (pointerLock "drag")
+function wowInput(ctx, input) {
+  const s = ctx.self.state, lx = (input.axes?.lookX ?? 0) * C.sens, ly = (input.axes?.lookY ?? 0) * C.sens
+  hands.orbit = !!input.held?.orbit; hands.steer = !!input.held?.steer; hands.mx = input.axes?.moveX ?? 0
+  hands.mz = input.axes?.moveZ ?? 0
+  if (s.heading == null) s.heading = s.yaw ?? 0
+  if (hands.steer) s.heading = wrapRad(s.heading - lx)
+  else if (lx) s.off = wrapRad((s.off ?? 0) - lx)
+  if (ly) s.pitch = Math.max(C.pitchMin, Math.min(C.pitchMax, (s.pitch ?? -0.3) - ly))
+  const z = input.axes?.zoomIn ?? 0
+  if (z) s.dist = Math.max(0, Math.min(C.distMax, (s.dist ?? C.distStart) - z * C.zoomStep * 2))
+}
+// the spring-arm: an elevated anchor, a spherical boom, a sphere cast that snaps in at once and springs back out
+function wowBoom(ctx, target, dt, mounted) {
+  const s = ctx.self.state, pos = target.worldFeetPosition ?? target.feetPosition
+  if (s.heading == null) s.heading = s.yaw ?? 0
+  if (mounted) { // on a horse or a boat the heading is the hull's; the orbit still swings by hand
+    const r = target.rotation ?? 0, q = (typeof r === 'number' ? r : (r.yaw ?? 0)) * Math.PI / 180
+    s.heading = wrapRad(s.heading + wrapRad(q - s.heading) * (1 - Math.exp(-5 * dt)))
+  } else if (!hands.steer && hands.mx) s.heading = wrapRad(s.heading - hands.mx * C.keyTurn * dt) // A/D turn the body
+  const moving = Math.hypot(target.velocity?.x ?? 0, target.velocity?.z ?? 0) > 0.5
+  if (hands.steer) s.off = (s.off ?? 0) * Math.exp(-C.steerSnap * dt)
+  else if (!hands.orbit && (moving || mounted)) s.off = (s.off ?? 0) * Math.exp(-C.followRate * dt)
+  const yaw = wrapRad(s.heading + (s.off ?? 0)), pitch = Math.max(C.pitchMin, Math.min(C.pitchMax, s.pitch ?? -0.3))
+  s.yaw = yaw; s.pitch = pitch
+  const k = finiteNumber(target.effectiveScale?.y, 1) * (target.parent ? 0.85 : 1) * (target.state?.kind === 'horse' ? 1.5 : 1)
+  const anchor = { x: pos.x, y: pos.y + C.anchor * k, z: pos.z }
+  const cp = Math.cos(pitch), back = { x: Math.sin(yaw) * cp, y: -Math.sin(pitch), z: Math.cos(yaw) * cp }
+  const want = Math.max(0, s.dist ?? C.distStart) * (mounted ? 1.3 : 1)
+  let d = want
+  if (want > 0.05) {
+    const hit = raycast(ctx, anchor, back, { distance: want + 0.3, radius: C.probe, ignoreEntities: [target.id, ...(target.parent ? [target.parent.id] : [])], physicsOnly: true })
+    if (hit) d = Math.max(0.1, hit.distance - 0.2)
+  }
+  let a = s.actual ?? d
+  a = d < a ? d : a + (d - a) * (1 - Math.exp(-C.spring * dt)) // in at once, out on a spring
+  s.actual = a
+  const first = a < C.firstAt
+  ctx.self.hideLocalPlayer = first
+  const eye = first ? { x: pos.x, y: pos.y + C.eyeHeight * k, z: pos.z } : { x: anchor.x + back.x * a, y: anchor.y + back.y * a, z: anchor.z + back.z * a }
+  ctx.self.feetPosition = eye
+  ctx.self.rotation = { yaw: yaw * RAD_TO_DEG, pitch: pitch * RAD_TO_DEG }
+}
 
 export function finiteNumber(value, fallback) {
   return typeof value === 'number' && isFinite(value) ? value : fallback
@@ -23,7 +68,7 @@ export function finiteNumber(value, fallback) {
 const wrapRad = (a) => Math.atan2(Math.sin(a), Math.cos(a))
 // Riding Violet (kind 'purple-dragon', the controlled target): the hand's swing on the chase orbit, recentring once it rests.
 export function onInput(ctx, input) {
-  if (ctx.self.target?.state?.kind !== PD.kind) return
+  if (ctx.self.target?.state?.kind !== PD.kind) { wowInput(ctx, input); return }
   const s = ctx.self.state, lx = input.axes?.lookX ?? 0, ly = input.axes?.lookY ?? 0
   if (lx || ly) { s.pdYawOff = (s.pdYawOff ?? 0) - lx * PD.cam.sens; s.pdPitchOff = Math.max(-0.9, Math.min(0.6, (s.pdPitchOff ?? 0) - ly * PD.cam.sens)); s.pdRest = 0 }
 }
@@ -66,17 +111,5 @@ export function update(ctx, dt) {
     ctx.self.feetPosition = { x: pos.x + o.x, y: pos.y + o.y, z: pos.z + o.z }
   } else ctx.self.feetPosition = { x: pos.x, y: pos.y + eyeHeight, z: pos.z }
 
-  // The presented facing (radians) as the one rotation grammar (degrees) — undefined before the first frame.
-  const view = ctx.self.view
-  if (view) ctx.self.rotation = { yaw: view.yaw * RAD_TO_DEG, pitch: view.pitch * RAD_TO_DEG }
-  if (third && view) {
-    const head = ctx.self.feetPosition
-    const rot = { yaw: view.yaw * RAD_TO_DEG, pitch: view.pitch * RAD_TO_DEG }
-    const back = rotate(rot, { x: 0, y: 0, z: 1 }), side = rotate(view.yaw * RAD_TO_DEG, { x: 1, y: 0, z: 0 })
-    const want = finiteNumber(CAMERA.thirdDistance, 4.2), sh = finiteNumber(CAMERA.thirdShoulder, 0.55), lift = finiteNumber(CAMERA.thirdLift, 0.35)
-    const origin = { x: head.x + side.x * sh, y: head.y + lift, z: head.z + side.z * sh }
-    const hit = raycast(ctx, origin, back, { distance: want + 0.3, ignoreEntities: [target.id], physicsOnly: true })
-    const d = hit ? Math.max(0.4, hit.distance - 0.3) : want
-    ctx.self.feetPosition = { x: origin.x + back.x * d, y: origin.y + back.y * d, z: origin.z + back.z * d }
-  }
+  wowBoom(ctx, target, dt, riding || k === 'dragon')
 }
