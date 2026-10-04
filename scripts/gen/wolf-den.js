@@ -34,7 +34,9 @@ export function geometry(ctx) {
   ctx.color(DARK); ctx.quad(-1.3 * S, 0.06, 2.2 * S, 1.3 * S, 0.06, 2.2 * S, 1.1 * S, 1.9 * S, 2.6 * S, -1.1 * S, 1.9 * S, 2.6 * S);
   const heap = [[-2.6, 0, 2.4, 1.7, 0.9], [2.6, 0, 2.3, 1.8, 0.85], [-1.7, 0, 3.6, 1.6, 1.05], [1.6, 0, 3.7, 1.7, 1], [0, 0, 4.2, 2, 0.95],
     [-1.5, 1.4, 2.8, 1.25, 0.7], [1.4, 1.35, 2.9, 1.3, 0.7], [0, 2.1, 3.2, 1.6, 0.55], [-3.6, 0, 1.2, 1.1, 0.8], [3.5, 0, 1.0, 1.0, 0.85], [-4.3, 0, 3.1, 1.3, 0.8], [4.2, 0, 3.3, 1.2, 0.9]];
-  for (const [x, y, z, s, sq] of heap) rock(ctx, x * S, y * S, z * S, s * S, sq, y > 1.5);
+  const far = Number(ctx.lod ?? 1) >= 4;
+  for (const [x, y, z, s, sq] of far ? heap.slice(0, 8) : heap) rock(ctx, x * S, y * S, z * S, s * S, sq, y > 1.5);
+  if (far) return;
   // the fallen log the pack lies along, a gnawed bone pile, dead branches
   cyl(ctx, [-4.6 * S, 0.32, -1.2 * S], [-1.2 * S, 0.28, -3.6 * S], 0.32 * S, BARK[0], 7);
   cyl(ctx, [-3.6 * S, 0.5, -1.9 * S], [-3.9 * S, 1.1, -1.4 * S], 0.07 * S, BARK[1], 5);
@@ -46,4 +48,3 @@ export function geometry(ctx) {
   for (let i = 0; i < 6; i++) { const x = (ctx.random() - 0.5) * 9 * S, z = (ctx.random() - 0.8) * 6 * S, b = ctx.random() * 6.28;
     cyl(ctx, [x, 0.05, z], [x + Math.cos(b) * 1.2, 0.12, z + Math.sin(b) * 1.2], 0.04, BARK[i % 2], 5); }
 }
-export function collider(ctx) { const S = Number(ctx.params.size ?? 1); return { kind: 'box', width: 7 * S, height: 2.4 * S, depth: 2.6 * S, offset: [0, 0, 3.4 * S] }; }
