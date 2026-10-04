@@ -86,6 +86,34 @@ function bars(ctx, player, st, now) {
       <div style="position:absolute;inset:0;text-align:center;font-size:8px;line-height:10px;color:#fff;${SH};${N}">${lvl >= R.maxLevel ? 'MAX LEVEL' : `LEVEL ${lvl} · ${xp} / ${need} XP`}</div></div>
   </div>`;
 }
+// The cast bar, 1.12's CastingBarFrame: centred over the action bar, gold filling for a hard cast, green draining
+// for a channel, a white spark at the edge; a finished cast flashes full and fades, a broken one turns red and says why.
+// The fill is a CSS run keyed by the cast's start and end, so a pushback re-keys it and the bar jumps back.
+function castBar(ctx, st, now, coarse) {
+  const c = st.casting, ch = st.channeling, e = st.castEnd;
+  const shell = (key, S, inner, label, time, anim = '') => `<div id="${key}" style="position:fixed;left:50%;bottom:${coarse ? 230 : 104}px;transform:translateX(-50%);display:flex;align-items:center;gap:5px;pointer-events:none;${F};${anim}">
+    <div style="flex:none;border:1px solid #b48a4c;border-radius:3px;box-shadow:0 0 0 1px #000,0 2px 6px rgba(0,0,0,.6)">${icon(S.icon, 24)}</div>
+    <div style="position:relative;width:min(230px,52vw);height:18px;padding:2px;${SLATE};border-radius:4px">
+      <div style="position:relative;height:100%;background:rgba(0,0,0,.7);border-radius:2px;overflow:hidden">${inner}</div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 8px;font-size:11px;color:#fff;${SH};${N}"><span>${label}</span><span style="font-weight:400;opacity:.9">${time}</span></div>
+    </div></div>`;
+  if (c && SPELLS[c.id]) {
+    const S = SPELLS[c.id], total = Math.max(1, c.end - c.at), done = Math.min(total, Math.max(0, now - c.at));
+    const fill = `<div style="height:100%;width:0;background:linear-gradient(#ffe27a,#f0a800 55%,#b06e00);box-shadow:2px 0 6px #fff6c0,inset 0 1px 0 rgba(255,255,255,.5);animation:cbfill ${total}ms linear -${done}ms forwards"></div>`;
+    return shell(`cb-${c.at}-${c.end}`, S, fill, S.name, `${((c.end - c.at) / 1000).toFixed(1)}s`);
+  }
+  if (ch && SPELLS[ch.id]) {
+    const S = SPELLS[ch.id], total = Math.max(1, ch.end - ch.at), done = Math.min(total, Math.max(0, now - ch.at));
+    const fill = `<div style="height:100%;width:100%;background:linear-gradient(#9cff8a,#2ec22e 55%,#127a12);box-shadow:2px 0 6px #eaffd8,inset 0 1px 0 rgba(255,255,255,.5);animation:cbdrain ${total}ms linear -${done}ms forwards"></div>`;
+    return shell(`ch-${ch.at}`, S, fill, S.name, `${ch.left ?? ''} ticks`);
+  }
+  if (e && SPELLS[e.id] && now - e.at < 900) {
+    const S = SPELLS[e.id], ok = e.ok;
+    const fill = `<div style="height:100%;width:100%;background:${ok ? 'linear-gradient(#b8ffb0,#3ad83a 55%,#178a17)' : 'linear-gradient(#ff8a7a,#d02a1a 55%,#7a0c06)'}"></div>`;
+    return shell(`ce-${e.at}`, S, fill, ok ? S.name : (e.why ?? 'Interrupted'), '', `animation:bfade ${ok ? 600 : 900}ms forwards`);
+  }
+  return '';
+}
 function minimap(ctx, player, st, W) {
   const f = player.feetPosition; if (!f) return '';
   const S = 130, range = 170, k = S / 2 / range;
@@ -127,7 +155,7 @@ function book(st) {
   const col = (e) => { const E = ELEMENTS[e]; return `<div style="flex:1;min-width:150px"><div style="display:flex;align-items:center;gap:6px;color:${E.color};font-size:15px;margin-bottom:6px">${icon(E.icon, 22)}${E.name}bending</div>${BARS[e].map((id, i) => { const S = SPELLS[id];
     return `<div style="display:flex;gap:7px;margin-bottom:7px"><div style="flex:none;border:1px solid #6b5228;border-radius:4px">${icon(S.icon, 34)}</div><div><div style="color:#ffe9a8;font-size:13px">${S.name} <span style="color:#9c8a6a;font-size:10px">${i + 1} · ${S.chi} chi${S.cd ? ` · ${S.cd}s` : ''}${S.off ? ' · off GCD' : ''}</span></div><div style="color:#d8ccb0;font-size:11px;line-height:1.25">${S.text}</div></div></div>`; }).join('')}</div>`; };
   return `<div data-modal style="position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(760px,calc(100vw - 2 * ${RIGHT}));max-height:80vh;overflow:auto;padding:16px 18px;border-radius:12px;background:linear-gradient(#e9dcc0,#cdb68c);border:3px solid #6b4a22;box-shadow:0 10px 40px rgba(0,0,0,.6);pointer-events:auto;${F}">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="font-size:20px;color:#3a2410">Spellbook <span style="font-size:12px;color:#6b4a22">· every spell is instant · R swaps your element</span></div><button onclick="sendAction('bookToggle')" style="pointer-events:auto;cursor:pointer;background:#6b4a22;color:#ffe9a8;border:0;border-radius:6px;padding:4px 10px">✕</button></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><div style="font-size:20px;color:#3a2410">Spellbook <span style="font-size:12px;color:#6b4a22">· bars fill while you stand still · channels tick · instants on the run · R swaps your element</span></div><button onclick="sendAction('bookToggle')" style="pointer-events:auto;cursor:pointer;background:#6b4a22;color:#ffe9a8;border:0;border-radius:6px;padding:4px 10px">✕</button></div>
     <div style="display:flex;flex-wrap:wrap;gap:14px;background:rgba(40,24,10,.88);padding:12px;border-radius:8px">${STANCES.map(col).join('')}</div>
     <div style="display:flex;gap:14px;margin-top:10px;color:#3a2410;font-size:12px"><div><b>X · Meditate</b>: ${SPELLS.meditate.text}</div><div><b>V · Avatar State</b>: ${SPELLS['avatar-state'].text} Harmony builds each time you bend a different element than the last.</div></div></div>`;
 }
@@ -145,10 +173,10 @@ export function bendHud(ctx, player) {
   const st = player?.state; if (!st || st.lvl == null) return '';
   const now = ctx.now?.() ?? Date.now(), W = ctx.place.state?.wolves ?? {}, busy = !!player.controlling || !!st.mountedOn;
   let h = minimap(ctx, player, st, W) + tracker(st) + plates(ctx, player, st, W);
-  if (!busy) h += playerFrame(ctx, player, st, now) + targetFrame(ctx, player, st, W) + bars(ctx, player, st, now);
+  if (!busy) h += playerFrame(ctx, player, st, now) + targetFrame(ctx, player, st, W) + bars(ctx, player, st, now) + castBar(ctx, st, now, typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches);
   if (st.err && now - st.err.at < 1600) h += `<div id="err-${st.err.at}" style="position:fixed;left:50%;top:22%;transform:translateX(-50%);pointer-events:none;color:#ff2a2a;font-size:17px;text-shadow:0 0 3px #000,0 1px 2px #000;${F};animation:bfade 1.6s forwards">${st.err.text}</div>`;
   if (st.toast && now - st.toast.at < 3500) h += `<div id="toast-${st.toast.at}" style="position:fixed;left:50%;top:28%;transform:translateX(-50%);pointer-events:none;text-align:center;${F};animation:bfade 3.5s forwards"><div style="font-size:30px;color:#ffd100;text-shadow:0 0 10px #a06a00,0 2px 3px #000">${st.toast.text}</div><div style="font-size:14px;color:#fff3d8;text-shadow:0 1px 2px #000">${st.toast.sub ?? ''}</div></div>`;
   if (st.dead) h += `<div style="position:fixed;inset:0;pointer-events:none;background:radial-gradient(transparent 30%,rgba(60,0,0,.55));display:flex;align-items:center;justify-content:center;${F}"><div style="text-align:center"><div style="font-size:34px;color:#ff5a4a;text-shadow:0 2px 4px #000">You have fallen</div><div style="color:#fff3d8;text-shadow:0 1px 2px #000">${st.lastHitBy ? `slain by ${st.lastHitBy} · ` : ''}rising where you last stood safe…</div></div></div>`;
-  h += book(st) + journal(st) + `<style>@keyframes bfade{0%,70%{opacity:1}100%{opacity:0}}</style>`;
+  h += book(st) + journal(st) + `<style>@keyframes bfade{0%,70%{opacity:1}100%{opacity:0}}@keyframes cbfill{from{width:0}to{width:100%}}@keyframes cbdrain{from{width:100%}to{width:0}}</style>`;
   return h;
 }
