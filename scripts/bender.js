@@ -12,6 +12,18 @@ const fwdOf = (b) => ({ x: -b.aim.s, z: -b.aim.c });
 const add = (a, b, k = 1) => ({ x: a.x + b.x * k, y: a.y + (b.y ?? 0) * k, z: a.z + b.z * k });
 const glowCol = (el) => ELEMENTS[el]?.glow ?? [2, 2, 2];
 const hex = (el) => ELEMENTS[el]?.color ?? '#ffffff';
+
+// how long each kind gathers before it lets go, and how much slower everything flies than it used to
+const SLOW = 0.55;
+const WIND = { bolt: 0.45, lash: 0.4, ground: 0.6, nova: 0.65, cone: 0.6, self: 0.35, dash: 0.15, jet: 0.25, launch: 0.25, blink: 0.2, channel: 0.3, avatar: 0.9 };
+const GATHER = {
+  air: `fx\npop swirl rate=120 on=sphere(.55) life=.3..0.45 v=attract(4)+vortex(6) size=.12..0.22 col=<1.5,1.8,2.1> a=0>.6:.3>.6:.7>0 sz=$size*(1>.4) r=sprite(smoke-puff,add)\npop core n=1 size=.25 col=<1.6,1.9,2.2> a=.7 sz=$size*(.4>1.4) r=sprite(soft-disc,add)`,
+  water: `fx\npop drop rate=140 on=sphere(.5) life=.3..0.45 v=attract(5)+vortex(5) size=.05..0.09 col=<.6,1.5,2.8> a=0>1:.3>1:.7>0 r=sprite(droplet,add,velocity,.02)\npop core n=1 size=.3 col=<.5,1.3,2.6> a=.85 sz=$size*(.4>1.5) r=sprite(soft-disc,add)`,
+  earth: `fx\npop grit rate=90 on=disc(.8).c(-1.1) life=.35..0.5 v=attract(5)+up(1.5) size=.05..0.1 spin=-8..8 acc=drag(1) col=<.48,.4,.3> a=1 rot=$age*$spin r=sprite(chip,alpha)\npop dust rate=30 on=disc(.7).c(-1.1) life=.4..0.6 v=up(1.2) size=.2..0.35 acc=drag(1.5) col=<.52,.45,.36> a=0>.4:.3>0 sz=$size*(.6>1.5) r=sprite(smoke-puff,alpha)`,
+  fire: `fx\npop flame rate=150 on=sphere(.45) life=.2..0.35 v=attract(4)+up(.6) size=.15..0.3 col=hdr(4.4,2.2,.6)>hdr(1.6,.4,.08) a=1>0 sz=$size*(1>.4) rot=spin(.4) r=sprite(flame-wisp,add)\npop glow n=1 r=light(<1,.5,.2>,6,6)`,
+  spirit: `fx\npop motes rate=120 on=sphere(.9) life=.4..0.7 v=attract(4)+vortex(4) size=.04..0.08 col=hdr(2.6,3.2,4.6) a=0>1:.3>1:.7>0 r=sprite(mote,add)\npop glow n=1 r=light(<.7,.85,1>,8,6)`,
+};
+export function zap(ctx, pl) { beam(ctx, pl.a, pl.b, '#e6eeff', 0.07, 1.3, 7, 0.25); }
 export const maxHp = (st) => R.hp(st.lvl ?? 1), maxChi = (st) => R.chiMax(st.lvl ?? 1);
 
 // ---------- effects ----------
@@ -132,19 +144,33 @@ function cast(ctx, b, id) {
   st.lastCast = { id, at: now };
   if (S.dmg && S.el) { if (S.el !== st.lastEl) st.harmony = Math.min(R.harmonyMax, (st.harmony ?? 0) + 1); st.lastEl = S.el; }
   if (S.meditateBreak !== false) st.meditateUntil = 0;
+  // the build-up: the element gathers at the hands, then lets go
+  const wind = WIND[S.kind] ?? 0.45, gc = glowCol(S.el ?? 'air');
+  st.windId = id; st.windUntil = now + wind * 1000;
+  ctx.spawn({ parent: me.id, feetPosition: { x: 0, y: 1.25, z: -0.55 }, lifetime: wind + 0.1, audience: 'near', fx: { script: GATHER[S.el ?? 'spirit'] ?? GATHER.spirit } });
+  sound(ctx, SOUNDS.shield, hand, 0.3, 1.5 - wind * 0.6);
+  ctx.after(wind, 'release', { id, wid: w?.id ?? null });
+}
+export function release(ctx, pl) {
+  const id = pl.id, S = SPELLS[id], me = ctx.self, st = me.state, now = ctx.now(), b = sess(ctx);
+  if (!S || st.dead) return;
+  st.windId = null;
+  const p = me.feetPosition, f = fwdOf(b), hand = { x: p.x + f.x * 0.6, y: p.y + 1.35, z: p.z + f.z * 0.6 };
+  const w = pl.wid ? wolfAt(ctx, pl.wid) : null;
+  if (pl.wid && !w) return; // the target fell while it gathered
   const to = w && { x: w.feetPosition.x, y: w.feetPosition.y + 0.7, z: w.feetPosition.z };
   switch (S.kind) {
     case 'bolt': {
       const r = roll(ctx, S), d = Math.hypot(to.x - hand.x, to.y - hand.y, to.z - hand.z);
-      if (S.beam) { beam(ctx, hand, to, '#cfe0ff', 0.09, 1.1, 7, 0.2); beam(ctx, hand, to, '#8fb4ff', 0.05, 1.6, 6, 0.16); land(ctx, { sp: id, wid: w.id, dmg: r.dmg, crit: r.crit, from: p, to }); break; }
-      const t = Math.max(0.08, d / S.speed);
+      if (S.beam) { beam(ctx, hand, to, '#cfe0ff', 0.09, 1.1, 7, 0.45); beam(ctx, hand, to, '#8fb4ff', 0.05, 1.6, 6, 0.35); ctx.after(0.12, 'zap', { a: hand, b: to }); land(ctx, { sp: id, wid: w.id, dmg: r.dmg, crit: r.crit, from: p, to }); break; }
+      const t = Math.max(0.25, d / (S.speed * SLOW));
       bolt(ctx, S.root || S.slow ? 'water' : S.el, hand, to, t, S.rock);
       sound(ctx, S.el === 'earth' ? SOUNDS.earth : SOUNDS[S.el], hand, 0.45, 1.05 + ctx.random() * 0.15);
       ctx.after(t, 'land', { sp: id, wid: w.id, dmg: r.dmg, crit: r.crit, from: p, to, n: { x: hand.x - to.x, y: 0.4, z: hand.z - to.z } });
       break; }
     case 'lash': {
-      const r = roll(ctx, S); beam(ctx, hand, to, S.el === 'fire' ? '#ff8a2a' : '#5ab8ff', 0.16, 0.15, 6, 0.28);
-      sound(ctx, SOUNDS[S.el], hand, 0.5, 1.15); ctx.after(0.1, 'land', { sp: id, wid: w.id, dmg: r.dmg, crit: r.crit, from: p, to }); break; }
+      const r = roll(ctx, S); beam(ctx, hand, to, S.el === 'fire' ? '#ff8a2a' : '#5ab8ff', 0.16, 0.15, 6, 0.55);
+      sound(ctx, SOUNDS[S.el], hand, 0.5, 1.0); ctx.after(0.25, 'land', { sp: id, wid: w.id, dmg: r.dmg, crit: r.crit, from: p, to }); break; }
     case 'ground': {
       const at = { x: w.feetPosition.x, y: w.feetPosition.y, z: w.feetPosition.z };
       if (S.ticks) { // tornado
@@ -152,12 +178,12 @@ function cast(ctx, b, id) {
         sound(ctx, SOUNDS.air, at, 0.8, 0.7); ctx.after(0.3, 'aoe', { sp: id, at, from: at, left: S.ticks });
       } else if (S.spike) {
         const sid = ctx.spawn({ feetPosition: at, lifetime: 1.6, audience: 'near', scale: { x: 1, y: 0.05, z: 1 }, primitive: { kind: 'cone', radius: 0.9, height: 3.2, radialSegments: 6 }, material: { color: '#857a68', roughness: 0.95, flatShading: true } });
-        animate(ctx, sid, { 'scale.y': 1 }, { duration: 0.1, easing: 'easeOutBack' });
-        emitFx(ctx, at, 'earth'); sound(ctx, SOUNDS.earth, at, 0.8, 0.9); ctx.after(0.08, 'aoe', { sp: id, at, from: { x: at.x, y: at.y, z: at.z + 0.01 } });
+        animate(ctx, sid, { 'scale.y': 1 }, { duration: 0.3, easing: 'easeOutBack' });
+        emitFx(ctx, at, 'earth'); sound(ctx, SOUNDS.earth, at, 0.8, 0.9); ctx.after(0.25, 'aoe', { sp: id, at, from: { x: at.x, y: at.y, z: at.z + 0.01 } });
       } else if (S.boulder) {
-        const bid = ctx.spawn({ feetPosition: { x: at.x, y: at.y + 16, z: at.z }, lifetime: 2.6, audience: 'near', interpolation: null, primitive: { kind: 'icosahedron', radius: 2.1, detail: 1 }, material: { color: '#7d7466', roughness: 0.95, flatShading: true }, fx: { script: TRAIL.earth } });
-        animate(ctx, bid, { 'feetPosition.y': at.y - 0.6 }, { duration: 0.4, easing: 'easeInQuad' });
-        ctx.after(0.4, 'aoe', { sp: id, at, from: p });
+        const bid = ctx.spawn({ feetPosition: { x: at.x, y: at.y + 16, z: at.z }, lifetime: 3.4, audience: 'near', interpolation: null, primitive: { kind: 'icosahedron', radius: 2.1, detail: 1 }, material: { color: '#7d7466', roughness: 0.95, flatShading: true }, fx: { script: TRAIL.earth } });
+        animate(ctx, bid, { 'feetPosition.y': at.y - 0.6 }, { duration: 0.85, easing: 'easeInQuad' });
+        ctx.after(0.85, 'aoe', { sp: id, at, from: p });
       }
       break; }
     case 'nova': {
