@@ -114,5 +114,5 @@ export function update(ctx, dt) {
   ctx.self.velocity = { x: vx, y: v.y + ctx.place.gravity.y * dt, z: vz }
   // Standing on the ground with no word to walk: nothing changes until something moves the body or a key
   // is pressed — both wake this update (a row of the body written, or onInput running).
-  if (ctx.self.grounded && vx === 0 && vz === 0 && intent.x === 0 && intent.z === 0) ctx.sleep()
+  if (ctx.self.grounded && vx === 0 && vz === 0 && intent.x === 0 && intent.z === 0 && !ctx.self.state.bendBusy) ctx.sleep()
 }
