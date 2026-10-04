@@ -94,6 +94,7 @@ function hurt(ctx, wid, dmg, crit, S, from) {
   const w = wolfAt(ctx, wid); if (!w) return;
   const me = ctx.self, now = ctx.now(), ws = w.state, p = w.feetPosition, el = S.el, top0 = { x: p.x, y: p.y + 1.3, z: p.z };
   me.state.combatUntil = now + R.combatMs; if (!me.state.tgt) me.state.tgt = wid;
+  if (ws.evading) { ctx.emit('damageNumber', { position: top0, text: 'Evade', color: '#ffffff', size: 0.9 }); return; }
   // roll 1, contact: spells only miss (never dodged or parried); +3 levels and up the miss chance climbs steeply
   const diff = (ws.lvl ?? 1) - (me.state.lvl ?? 1), miss = diff <= 2 ? R.missBase + Math.max(0, diff) * 0.01 : Math.min(0.4, 0.06 + (diff - 2) * 0.11);
   ws.threat = { ...(ws.threat ?? {}), [me.id]: Math.round((ws.threat?.[me.id] ?? 0) + Math.max(1, dmg)) };
@@ -111,7 +112,7 @@ function hurt(ctx, wid, dmg, crit, S, from) {
   const kbk = S.kb ?? 0, lift = S.lift ?? 0;
   if (kbk || lift) { const dx = p.x - from.x, dz = p.z - from.z, d = Math.hypot(dx, dz) || 1; ws.kb = { x: (dx / d) * kbk, y: lift, z: (dz / d) * kbk, at: now + ctx.random() }; }
   const top = { x: p.x, y: p.y + 1.3, z: p.z };
-  ctx.emit('damageNumber', { position: top, value: dmg, crit, color: crit ? '#ffe14a' : hex(el), size: crit ? 1.5 : 1 });
+  ctx.emit('damageNumber', { position: top, value: dmg, crit, color: '#ffe14a', size: crit ? 1.7 : 1 });
   ctx.emit('squash', { target: wid, axis: 'y', intensity: 0.25, duration: 0.18 });
   ctx.emit('flash', { target: wid, color: hex(el), duration: 0.1 });
 }

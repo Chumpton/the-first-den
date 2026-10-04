@@ -1,3 +1,4 @@
+// WoW-shaped mob AI: IDLE/WANDER -> (aggro radius by level) -> COMBAT (threat table, pack call, flank, swing timer) -> EVADE home.
 // The one manager of every den wolf (rows tagged "wild-wolf"): idle and wander by the den, aggro on a player who comes
 // within reach or hits one, call the den-mates in, run you down and bite, leash home (WoW's evade) past the leash,
 // burn, slow, root and knockback as the spells wrote them, die, pay XP to the killer, rise again at the den.
@@ -5,6 +6,7 @@
 // place.state.wolves is the board every HUD reads: name, level, hp, target, coarse position. Written only on change.
 import { play, clips } from 'builtin/anim';
 import { WOLF, DENS, SOUNDS, RULES } from './lib/data/bending.js';
+import { findPath } from 'builtin/nav';
 export const updateSchedule = { every: 2, near: { radius: 600 } };
 const WAKE = 220, GRAV = 22;
 let CL = null;
@@ -29,8 +31,8 @@ function vel(row, m, vx, vz, dt) {
 function board(ctx, row, force) {
   const s = row.state, W = (ctx.place.state.wolves ??= {}), p = row.feetPosition, old = W[row.id];
   const now = ctx.now(), a = (s.burn && now < s.burn.until ? 1 : 0) | (now < (s.rootUntil ?? 0) ? 2 : 0) | (now < (s.slowUntil ?? 0) ? 4 : 0);
-  const e = { n: s.name, l: s.lvl, e: s.boss ? 2 : s.elite ? 1 : 0, a, hp: Math.max(0, Math.round(s.hp)), max: s.max, d: s.dead ? 1 : 0, t: s.tgt || null, x: Math.round(p.x / 2) * 2, z: Math.round(p.z / 2) * 2 };
-  if (force || !old || old.hp !== e.hp || old.a !== e.a || old.d !== e.d || old.t !== e.t || old.x !== e.x || old.z !== e.z) W[row.id] = e;
+  const e = { n: s.name, l: s.lvl, e: s.boss ? 2 : s.elite ? 1 : 0, a, hp: Math.max(0, Math.round(s.hp)), max: s.max, d: s.dead ? 1 : 0, t: s.tgt || null, v: s.evading ? 1 : 0, x: Math.round(p.x / 2) * 2, z: Math.round(p.z / 2) * 2 };
+  if (force || !old || old.hp !== e.hp || old.a !== e.a || old.d !== e.d || old.t !== e.t || old.v !== e.v || old.x !== e.x || old.z !== e.z) W[row.id] = e;
 }
 function hitPlayer(ctx, row, p, now) {
   const s = row.state, ps = p.state;
@@ -43,18 +45,28 @@ function hitPlayer(ctx, row, p, now) {
   ctx.emit('cameraPunch', { direction: { x: p.feetPosition.x - row.feetPosition.x, y: 0, z: p.feetPosition.z - row.feetPosition.z }, intensity: s.elite ? 0.5 : 0.25 }, { audience: { player: p.id } });
   ctx.emit('fx', { position: pos, script: `fx\npop spark burst=6..9 life=.2..0.35 v=sdir()*(2..4) size=.05..0.09 acc=drag(3) col=<2.4,.3,.2> a=1>0 r=sprite(ember,add,velocity,.02)` });
 }
+const dist2 = (a, b) => Math.hypot(a.x - b.x, a.z - b.z);
+export function aggroRadius(mobLvl, plLvl) { return Math.max(WOLF.aggroMin, Math.min(WOLF.aggroMax, WOLF.aggroBase + (mobLvl - plLvl))); }
+// enter combat on a player; a fresh pull calls same-den wolves within the social radius (seeded with 1 threat)
 function aggro(ctx, row, rows, pid, now, call) {
-  const s = row.state; if (s.dead || s.mode === 'evade') return;
-  if (s.tgt !== pid) { s.tgt = pid; s.mode = 'chase'; if (call) ctx.emit('playSound', { clip: SOUNDS.growl, position: row.feetPosition, volume: 0.55, pitch: s.elite ? 0.7 : 1, maxDistance: 30 }); }
+  const s = row.state; if (s.dead || s.evading || !pid) return;
+  s.threat = { ...(s.threat ?? {}), [pid]: Math.max(1, s.threat?.[pid] ?? 0) };
+  if (!s.tgt) { s.tgt = pid; s.mode = 'chase'; const m = scratch(ctx, row.id); m.combatAt = now; m.trail = [{ x: row.feetPosition.x, z: row.feetPosition.z }]; m.path = null;
+    if (call) ctx.emit('playSound', { clip: SOUNDS.growl, position: row.feetPosition, volume: 0.55, pitch: s.elite ? 0.7 : 1, maxDistance: 30 }); }
   if (!call) return;
-  for (const o of rows) if (o !== row && o.state.den === s.den && !o.state.dead && !o.state.tgt && Math.hypot(o.feetPosition.x - row.feetPosition.x, o.feetPosition.z - row.feetPosition.z) < WOLF.assist) aggro(ctx, o, rows, pid, now, false);
+  for (const o of rows) if (o !== row && o.state.den === s.den && !o.state.dead && !o.state.tgt && !o.state.evading && dist2(o.feetPosition, row.feetPosition) < WOLF.social) aggro(ctx, o, rows, pid, now, false);
+}
+function evade(ctx, row, m, now) {
+  const s = row.state; s.mode = 'evade'; s.evading = true; s.tgt = null; s.threat = {}; s.burn = null; s.rootUntil = 0; s.slowUntil = 0;
+  m.path = (m.trail ?? []).slice().reverse().concat([{ x: s.home.x, z: s.home.z }]); m.pi = 0; m.unreach = 0; m.restAt = 0; m.windAt = 0; m.fled = false;
 }
 function die(ctx, row, m, now) {
-  const s = row.state; s.dead = true; s.deadAt = now; s.mode = 'dead'; s.tgt = null; s.burn = null;
-  row.velocity = { x: 0, y: -4, z: 0 }; clip(ctx, row, m, 'die', 1, false);
+  const s = row.state; s.dead = true; s.deadAt = now; s.mode = 'dead'; s.tgt = null; s.burn = null; s.threat = {};
+  row.velocity = { x: 0, y: -4, z: 0 }; row.physics = 'none'; clip(ctx, row, m, 'die', 1, false); // the body stops blocking at once
   const killer = ctx.place.players.find((p) => p.id === s.hitBy), pos = { x: row.feetPosition.x, y: row.feetPosition.y + 1, z: row.feetPosition.z };
   ctx.emit('playSound', { clip: SOUNDS.die, position: pos, volume: 0.6, pitch: s.elite ? 0.7 : 1, maxDistance: 30 });
   ctx.emit('fx', { position: pos, script: `fx\npop dust burst=14..20 on=disc(.6) life=.7..1.2 v=up(.4..0.9)+sdir()*.6 size=.2..0.4 acc=buoy(.3)+drag(1.5) col=<.45,.4,.33> a=0>.35:.3>.7:.15>0 sz=$size*(.6>1.8) r=sprite(smoke-puff,alpha)` });
+  ctx.spawn({ parent: row.id, feetPosition: { x: 0, y: 0.4, z: 0 }, lifetime: WOLF.corpse, audience: 'near', fx: { script: `fx\npop glint rate=7 on=disc(.5) life=.8..1.3 v=up(.3..0.6) size=.05..0.09 col=hdr(3.4,2.8,1.2) a=0>1:.3>1:.7>0 sz=$size*flick(6,.4) r=sprite(mote,add)` } });
   if (!killer) return;
   const xp = Math.round(WOLF.xp(s.lvl) * (s.elite ? WOLF.eliteXp : 1) * Math.max(0.2, 1 - Math.max(0, (killer.state.lvl ?? 1) - s.lvl) * 0.15));
   killer.state.xp = (killer.state.xp ?? 0) + xp; killer.state.kills = (killer.state.kills ?? 0) + 1;
@@ -64,8 +76,42 @@ function die(ctx, row, m, now) {
   if (s.boss) { ctx.emit('slowMo', { scale: 0.35, duration: 0.8 }, { audience: { player: killer.id } }); ctx.emit('shockwave', { position: pos, speed: 18, thickness: 1.5, intensity: 0.6 }); ctx.emit('milestone', { step: 2, name: 'slew Grimfang' }, { audience: { player: killer.id } }); }
 }
 function respawn(ctx, row, m) {
-  const s = row.state; s.dead = false; s.hp = s.max; s.mode = 'idle'; s.tgt = null; s.hitBy = null; s.burn = null; s.rootUntil = 0; s.slowUntil = 0;
-  row.feetPosition = { x: s.home.x, y: { terrain: 0.05 }, z: s.home.z }; row.visible = true; m.vy = -4; clip(ctx, row, m, 'idle');
+  const s = row.state; s.dead = false; s.hp = s.max; s.mode = 'idle'; s.tgt = null; s.hitBy = null; s.burn = null; s.rootUntil = 0; s.slowUntil = 0; s.threat = {}; s.evading = false;
+  row.physics = { body: 'character', collider: 'capsule' };
+  row.feetPosition = { x: s.home.x, y: { terrain: 0.05 }, z: s.home.z }; row.visible = true; m.vy = -4; m.path = null; m.fled = false; clip(ctx, row, m, 'idle');
+}
+// pathing: a corridor from the engine's navigator, re-asked on a budget; stuck = no progress for a second
+let pathBudget = 0;
+function askPath(ctx, row, m, goal, now) {
+  if (pathBudget <= 0 || now < (m.pathAt ?? 0)) return;
+  pathBudget--; m.pathAt = now + WOLF.repath * 1000 * (0.8 + ctx.random() * 0.4); m.pathGoal = { x: goal.x, z: goal.z };
+  const set = (r) => { if (!r) return; if (r.partial) { m.pathAt = 0; return; } m.pathOk = !!r.ok; m.path = (r.points ?? []).map((q) => ({ x: q.x, z: q.z })); m.pi = m.path.length > 1 ? 1 : 0; };
+  try { const r = findPath(ctx, row.feetPosition, { x: goal.x, y: ctx.place.terrain.heightAt(goal.x, goal.z) ?? row.feetPosition.y, z: goal.z }, { radius: 0.5 }); if (r?.then) r.then(set); else set(r); } catch { m.path = null; m.pathOk = false; }
+}
+function steer(ctx, row, m, rows, goal, speed, now, dt, rate) {
+  const p = row.feetPosition; let tx = goal.x, tz = goal.z;
+  if (m.path && m.path.length) { // follow the corridor, cutting to the next corner when it is close
+    while (m.pi < m.path.length - 1 && dist2(p, m.path[m.pi]) < 0.9) m.pi++;
+    const w = m.path[m.pi] ?? goal; tx = w.x; tz = w.z;
+  }
+  let dx = tx - p.x, dz = tz - p.z, d = Math.hypot(dx, dz) || 1; dx /= d; dz /= d;
+  for (const o of rows) { if (o === row || o.state.dead) continue; const ox = p.x - o.feetPosition.x, oz = p.z - o.feetPosition.z, od = Math.hypot(ox, oz); // soft separation: k / d²
+    if (od > 0.01 && od < WOLF.sep) { const k = Math.min(1.2, 0.35 / (od * od)); dx += ox / od * k; dz += oz / od * k; } }
+  if (now < (m.sideUntil ?? 0)) { dx += m.side.x; dz += m.side.z; }
+  const n = Math.hypot(dx, dz) || 1, wet = (ctx.place.terrain.heightAt(p.x, p.z) ?? 1) < -0.15 ? 0.7 : 1;
+  face(row, m, yawTo(dx, dz), rate, dt); vel(row, m, dx / n * speed * wet, dz / n * speed * wet, dt);
+  if (now >= (m.progAt ?? 0)) { // a second without half a metre of progress is stuck: sidestep, re-ask the path
+    const moved = m.lastP ? dist2(p, m.lastP) : 9; m.lastP = { x: p.x, z: p.z }; m.progAt = now + 1000;
+    if (speed > 0.5 && moved < 0.45 * Math.min(1, speed)) { m.stuck = (m.stuck ?? 0) + 1; m.pathAt = 0; const sgn = m.stuck % 2 ? 1 : -1; m.side = { x: -dz / n * sgn * 1.2, z: dx / n * sgn * 1.2 }; m.sideUntil = now + 600; }
+    else m.stuck = 0;
+  }
+}
+function pickTarget(ctx, row, players) { // threat table: hold the current target until another passes 110 % (melee) / 130 % (ranged)
+  const s = row.state, T = s.threat ?? {}, p = row.feetPosition; let cur = players.find((x) => x.id === s.tgt && !x.state?.dead && !x.controlling);
+  let top = null, tv = -1; for (const pl of players) { const v = T[pl.id]; if (v == null || pl.state?.dead || pl.controlling) continue; if (v > tv) { tv = v; top = pl; } }
+  if (!cur) return top;
+  if (top && top !== cur) { const need = (T[cur.id] ?? 0) * (dist2(top.feetPosition, p) <= WOLF.rangedAt ? WOLF.threatMelee : WOLF.threatRanged); if (tv > need) return top; }
+  return cur;
 }
 function step(ctx, row, rows, players, now, dt) {
   const s = row.state, m = scratch(ctx, row.id), p = row.feetPosition;
@@ -76,62 +122,91 @@ function step(ctx, row, rows, players, now, dt) {
     return;
   }
   if (s.hp <= 0) { die(ctx, row, m, now); board(ctx, row, true); return; }
-  // what the spells wrote: a fresh hit pulls aggro (the pack comes too), burn ticks, a knock flies
-  if (s.hitAt && s.hitAt !== m.hitSeen) { m.hitSeen = s.hitAt; if (s.mode !== 'evade') aggro(ctx, row, rows, s.hitBy, now, true); ctx.emit('playSound', { clip: SOUNDS.yelp, position: p, volume: 0.35, pitch: 1 + ctx.random() * 0.2, maxDistance: 22 }); }
-  if (s.burn && now < s.burn.until && now >= m.nextBurn) { m.nextBurn = now + 1000; s.hp -= s.burn.dps; ctx.emit('damageNumber', { position: { x: p.x, y: p.y + 1.3, z: p.z }, value: s.burn.dps, color: '#ffa040', size: 0.7 }); }
+  if (s.hitAt && s.hitAt !== m.hitSeen) { m.hitSeen = s.hitAt; if (!s.evading) aggro(ctx, row, rows, s.hitBy, now, true); ctx.emit('playSound', { clip: SOUNDS.yelp, position: p, volume: 0.35, pitch: 1 + ctx.random() * 0.2, maxDistance: 22 }); }
+  if (s.burn && now < s.burn.until && now >= m.nextBurn) { m.nextBurn = now + 1000; s.hp -= s.burn.dps; ctx.emit('damageNumber', { position: { x: p.x, y: p.y + 1.3, z: p.z }, value: s.burn.dps, color: '#ffe14a', size: 0.7 }); }
   else if (s.burn && now >= s.burn.until) s.burn = null;
   if (s.kb && s.kb.at !== m.kbSeen) { m.kbSeen = s.kb.at; m.kbUntil = now + 320; m.kbv = s.kb; if (s.kb.y) m.vy = s.kb.y; }
   if (now < (m.kbUntil ?? 0)) { vel(row, m, m.kbv.x, m.kbv.z, dt); return; }
-  const rooted = now < (s.rootUntil ?? 0), slow = now < (s.slowUntil ?? 0) ? 0.5 : 1;
-  const hd = Math.hypot(p.x - s.home.x, p.z - s.home.z);
-  if (s.mode === 'evade') {
-    if (hd < 2.5) { s.mode = 'idle'; s.hp = s.max; s.hitBy = null; vel(row, m, 0, 0, dt); clip(ctx, row, m, 'idle'); return; }
-    const want = yawTo(s.home.x - p.x, s.home.z - p.z); face(row, m, want, 720, dt);
-    const sp = WOLF.run * 1.5; vel(row, m, (s.home.x - p.x) / hd * sp, (s.home.z - p.z) / hd * sp, dt); clip(ctx, row, m, 'run', 1.3);
-    if (s.hp < s.max) s.hp = s.max; return;
+  const rooted = now < (s.rootUntil ?? 0), slow = now < (s.slowUntil ?? 0) ? 0.5 : 1, hd = dist2(p, s.home);
+  // EVADE: untouchable, threat gone, 20 %/s back, home along the way it came at a run, a short rest, then pullable again
+  if (s.evading) {
+    if (s.hp < s.max) s.hp = Math.min(s.max, s.hp + s.max * WOLF.evadeRegen * dt);
+    if (hd < 1.6 || (m.path && m.pi >= m.path.length - 1 && hd < 3)) {
+      vel(row, m, 0, 0, dt); clip(ctx, row, m, 'idle');
+      if (!m.restAt) m.restAt = now + WOLF.rest * 1000;
+      if (now >= m.restAt) { s.evading = false; s.mode = 'idle'; s.hp = s.max; s.hitBy = null; m.restAt = 0; m.path = null; }
+      return;
+    }
+    if (!m.path || m.stuck > 2) { m.path = null; askPath(ctx, row, m, s.home, now); }
+    steer(ctx, row, m, rows, s.home, WOLF.run * WOLF.evadeSpeed, now, dt, 720); clip(ctx, row, m, 'run', 1.3); return;
   }
-  if (!s.tgt) { // idle: anyone close enough (and not far out-levelling us) draws the pack
-    for (const pl of players) { if (pl.state?.dead || (pl.state?.lvl ?? 1) >= s.lvl + 8) continue;
-      const q = pl.feetPosition; if (Math.hypot(q.x - p.x, q.z - p.z) < WOLF.aggro * (s.elite ? 1.25 : 1)) { aggro(ctx, row, rows, pl.id, now, true); clip(ctx, row, m, 'snarl'); m.busy = now + 450; break; } }
+  // IDLE → COMBAT: aggro radius 20 m ± a metre per level of difference, clamped 5..45
+  if (!s.tgt) {
+    for (const pl of players) { if (pl.state?.dead || pl.controlling) continue;
+      if (dist2(pl.feetPosition, p) < aggroRadius(s.lvl, pl.state?.lvl ?? 1) * (s.elite ? 1.1 : 1)) { aggro(ctx, row, rows, pl.id, now, true); clip(ctx, row, m, 'snarl'); m.busy = now + 450; break; } }
   }
   if (s.tgt) {
-    const pl = players.find((x) => x.id === s.tgt);
-    if (!pl || pl.state?.dead || pl.controlling || hd > WOLF.leash) { s.mode = 'evade'; s.tgt = null; return; }
-    const q = pl.feetPosition, dx = q.x - p.x, dz = q.z - p.z, d = Math.hypot(dx, dz);
-    face(row, m, yawTo(dx, dz), 900, dt);
-    if (now < m.busy) { vel(row, m, 0, 0, dt); return; }
-    if (d > WOLF.reach) {
+    const pl = pickTarget(ctx, row, players);
+    if (!pl || hd > WOLF.leash) { evade(ctx, row, m, now); return; }
+    if (pl.id !== s.tgt) { s.tgt = pl.id; ctx.emit('playSound', { clip: SOUNDS.growl, position: p, volume: 0.45, maxDistance: 25 }); }
+    if (!m.trail?.length || dist2(p, m.trail[m.trail.length - 1]) > 2) { (m.trail ??= []).push({ x: p.x, z: p.z }); if (m.trail.length > 40) m.trail.shift(); }
+    const q = pl.feetPosition, d = dist2(q, p), reach = WOLF.reach * (s.boss ? 1.4 : 1);
+    // the swing: a 0.35 s wind-up, then it lands only if you are still in reach and in front of it
+    if (m.windAt && now >= m.windAt) { m.windAt = 0;
+      const fwd = (yawTo(q.x - p.x, q.z - p.z) - m.yaw), inCone = Math.abs(wrap(fwd)) <= WOLF.cone;
+      if (d <= reach + 0.6 && inCone) hitPlayer(ctx, row, pl, now);
+      else ctx.emit('damageNumber', { position: { x: q.x, y: q.y + 1.8, z: q.z }, text: 'Miss', color: '#ffffff', size: 0.8 }); }
+    // FLEE: once a life, under 20 %, it runs for the pack yelping, then turns back
+    if (!s.boss && !m.fled && s.hp < s.max * WOLF.fleeAt) { m.fled = true; m.fleeUntil = now + WOLF.fleeFor * 1000; ctx.emit('playSound', { clip: SOUNDS.yelp, position: p, volume: 0.6, pitch: 1.3, maxDistance: 30 });
+      for (const o of rows) if (o !== row && !o.state.dead && !o.state.tgt && dist2(o.feetPosition, p) < WOLF.fleeCry) aggro(ctx, o, rows, pl.id, now, false);
+      let best = null, bd = 1e9; for (const o of rows) if (o !== row && !o.state.dead && !o.state.tgt) { const od = dist2(o.feetPosition, p); if (od < bd) { bd = od; best = o; } }
+      m.fleeTo = best ? { x: best.feetPosition.x, z: best.feetPosition.z } : { x: p.x + (p.x - q.x) * 3, z: p.z + (p.z - q.z) * 3 }; m.path = null; m.pathAt = 0; }
+    if (now < (m.fleeUntil ?? 0)) { askPath(ctx, row, m, m.fleeTo, now); steer(ctx, row, m, rows, m.fleeTo, rooted ? 0 : WOLF.run * 0.8 * slow, now, dt, WOLF.turn); clip(ctx, row, m, 'run', 1.1); return; }
+    if (now < m.busy || m.windAt) { vel(row, m, 0, 0, dt); face(row, m, yawTo(q.x - p.x, q.z - p.z), WOLF.turn, dt); return; }
+    if (d > reach) {
+      // flank: wolves on the same player take slots left and right of the line in
+      const mates = rows.filter((o) => o.state.tgt === pl.id && !o.state.dead).map((o) => o.id).sort(), k = mates.indexOf(row.id), off = [0, 55, -55, 110, -110, 160][k % 6] * Math.PI / 180;
+      const ax = p.x - q.x, az = p.z - q.z, an = Math.hypot(ax, az) || 1, c = Math.cos(off), sn = Math.sin(off);
+      const goal = d < 7 ? { x: q.x + (ax * c - az * sn) / an * (reach - 0.35), z: q.z + (ax * sn + az * c) / an * (reach - 0.35) } : { x: q.x, z: q.z };
+      const moved = !m.pathGoal || dist2(m.pathGoal, goal) > 1.5;
+      if (d > 4 && (moved || !m.path)) askPath(ctx, row, m, goal, now);
+      if (d <= 4) m.path = null; // close in: straight at the slot, separation does the rest
+      if (m.pathOk === false || m.stuck > 2) m.unreach = (m.unreach ?? 0) + dt; else m.unreach = Math.max(0, (m.unreach ?? 0) - dt * 0.5);
+      if (m.unreach > WOLF.unreachable) { // it cannot reach you: a beat of hesitation, then it gives up
+        if (!m.giveUpAt) m.giveUpAt = now + 1500; if (now >= m.giveUpAt) { m.giveUpAt = 0; evade(ctx, row, m, now); return; }
+        vel(row, m, 0, 0, dt); clip(ctx, row, m, 'snarl'); return; }
       const sp = rooted ? 0 : WOLF.run * slow * (s.elite ? 1.05 : 1);
-      vel(row, m, dx / d * sp, dz / d * sp, dt); clip(ctx, row, m, sp ? 'run' : 'snarl', sp ? Math.max(0.6, sp / 6.2) : 1);
+      steer(ctx, row, m, rows, goal, sp, now, dt, WOLF.turn); clip(ctx, row, m, sp ? 'run' : 'snarl', sp ? Math.max(0.6, sp / 6.2) : 1);
     } else {
-      vel(row, m, 0, 0, dt);
-      if (now >= m.nextBite) { m.nextBite = now + WOLF.biteEvery * 1000 * (0.9 + ctx.random() * 0.2); m.busy = now + 450; clip(ctx, row, m, 'bite', 1, false); m.clip = 'bite'; hitPlayer(ctx, row, pl, now); }
-      else if (m.clip !== 'bite' || now > m.busy) clip(ctx, row, m, 'snarl');
+      m.unreach = 0; m.path = null; vel(row, m, 0, 0, dt); face(row, m, yawTo(q.x - p.x, q.z - p.z), WOLF.turn, dt);
+      if (now >= m.nextBite) { m.nextBite = now + WOLF.swing * 1000; m.windAt = now + WOLF.windup * 1000; clip(ctx, row, m, 'bite', 1, false); m.clip = 'bite'; m.busy = now + 500; }
+      else if (now > m.busy) clip(ctx, row, m, 'snarl');
     }
     return;
   }
-  // wander by the den
+  // IDLE: 60 % breathe, 20 % look about, 20 % patrol a point within 5 m at 40 % pace, then pause 4–8 s
   if (now >= m.roamAt) {
-    m.roamAt = now + 4000 + ctx.random() * 6000;
-    if (ctx.random() < 0.45) { m.goal = null; } else { const a = ctx.random() * 6.283, r = 2 + ctx.random() * 7; m.goal = { x: s.home.x + Math.cos(a) * r, z: s.home.z + Math.sin(a) * r }; }
-    if (!m.goal && ctx.random() < 0.12) { clip(ctx, row, m, 'howl', 1, false); m.busy = now + 2400; ctx.emit('playSound', { clip: SOUNDS.howl, position: p, volume: 0.5, maxDistance: 120 }); }
+    m.roamAt = now + 4000 + ctx.random() * 4000; const r = ctx.random();
+    if (r < 0.6) { m.goal = null; m.look = false; }
+    else if (r < 0.8) { m.goal = null; m.look = true; m.lookYaw = m.yaw + (ctx.random() < 0.5 ? -70 : 70); if (ctx.random() < 0.15) { clip(ctx, row, m, 'howl', 1, false); m.busy = now + 2400; ctx.emit('playSound', { clip: SOUNDS.howl, position: p, volume: 0.5, maxDistance: 120 }); } }
+    else { const a = ctx.random() * 6.283, rr = 1.5 + ctx.random() * (WOLF.patrol - 1.5); m.goal = { x: s.home.x + Math.cos(a) * rr, z: s.home.z + Math.sin(a) * rr }; m.path = null; m.look = false; }
   }
   if (now < m.busy) { vel(row, m, 0, 0, dt); return; }
   if (m.goal) {
-    const dx = m.goal.x - p.x, dz = m.goal.z - p.z, d = Math.hypot(dx, dz);
-    if (d < 0.6) { m.goal = null; vel(row, m, 0, 0, dt); clip(ctx, row, m, 'idle'); return; }
-    face(row, m, yawTo(dx, dz), 200, dt); vel(row, m, dx / d * WOLF.walk, dz / d * WOLF.walk, dt); clip(ctx, row, m, 'walk', 0.9); return;
+    if (dist2(p, m.goal) < 0.6 || m.stuck > 3) { m.goal = null; m.stuck = 0; vel(row, m, 0, 0, dt); clip(ctx, row, m, 'idle'); return; }
+    steer(ctx, row, m, rows, m.goal, WOLF.run * 0.4 * 0.55, now, dt, 160); clip(ctx, row, m, 'walk', 0.8); return;
   }
-  vel(row, m, 0, 0, dt); clip(ctx, row, m, 'idle');
+  vel(row, m, 0, 0, dt); if (m.look) face(row, m, m.lookYaw, 90, dt); clip(ctx, row, m, 'idle', m.look ? 0.8 : 1);
 }
 export function update(ctx, dt) {
   const players = ctx.place.players, now = ctx.now();
   if (!players.length) return;
+  pathBudget = 3; // path queries per update, shared by the whole pack
   const rows = ctx.query({ tags: ['wild-wolf'], radius: 100000 });
   for (const row of rows) {
     if (!row.state?.home) continue;
-    let near = 1e9; for (const pl of players) near = Math.min(near, Math.hypot(pl.feetPosition.x - row.feetPosition.x, pl.feetPosition.z - row.feetPosition.z));
-    if (near > WAKE && !row.state.tgt && !row.state.dead) continue;
+    let near = 1e9; for (const pl of players) near = Math.min(near, dist2(pl.feetPosition, row.feetPosition));
+    if (near > WAKE && !row.state.tgt && !row.state.dead && !row.state.evading) continue;
     step(ctx, row, rows, players, now, dt); board(ctx, row, false);
   }
 }

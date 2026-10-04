@@ -116,9 +116,9 @@ function plates(ctx, player, st, W) {
     if (w.d || Math.hypot(w.x - f.x, w.z - f.z) > 50) continue;
     const tg = id === st.tgt, max = w.max || 1, lc = levelCol(st.lvl ?? 1, w.l);
     h += `<div data-world-anchor="${id}" data-anchor-offset="0 ${w.e === 2 ? 2.2 : 1.55} 0" style="pointer-events:auto;cursor:pointer;width:${tg ? 132 : 112}px;transform:translate(-50%,-100%);text-align:center;${F};opacity:calc(1 - var(--anchor-depth, 0) / 60)" onclick="sendAction('targetPick',{id:'${id}'})">
-      <div style="font-size:${tg ? 13 : 11}px;color:${w.t ? '#ff5040' : '#ffe14a'};${SH};white-space:nowrap">${w.n}</div>
-      <div style="display:flex;align-items:center;gap:3px"><span style="font-size:10px;color:${lc};text-shadow:0 0 2px #000;min-width:16px">${w.e === 2 ? '💀' : w.l}${w.e === 1 ? '+' : ''}</span>
-      <div style="flex:1;height:${tg ? 9 : 7}px;background:rgba(0,0,0,.7);border:1px solid ${tg ? '#fff' : w.t ? '#ff4030' : '#000'};border-radius:2px;overflow:hidden${tg ? ';box-shadow:0 0 6px #fff' : ''}"><div style="height:100%;width:${(w.hp / max) * 100}%;background:${w.t ? '#d02a1a' : '#c8a020'}"></div></div></div></div>`;
+      <div style="font-size:${tg ? 13 : 11}px;color:${w.v ? '#9a9a9a' : '#ff4a3a'};${SH};white-space:nowrap">${w.n}</div>
+      <div style="display:flex;align-items:center;gap:3px"><span style="font-size:10px;color:${lc};text-shadow:0 0 2px #000;min-width:16px">${w.e === 2 || w.l - (st.lvl ?? 1) >= 10 ? '💀' : w.l}${w.e === 1 ? '+' : ''}</span>
+      <div style="flex:1;height:${tg ? 9 : 7}px;background:rgba(0,0,0,.7);border:1px solid ${tg ? '#fff' : w.t ? '#ff4030' : '#000'};border-radius:2px;overflow:hidden${tg ? ';box-shadow:0 0 6px #fff' : ''}"><div style="height:100%;width:${(w.hp / max) * 100}%;background:${w.v ? '#7a7a7a' : '#d02a1a'}"></div></div></div></div>`;
   }
   return h;
 }
