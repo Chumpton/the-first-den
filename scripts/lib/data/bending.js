@@ -58,7 +58,7 @@ export const BARS = {
 };
 export const EXTRA = { meditate: 'meditate', avatar: 'avatar-state' };
 export const RULES = {
-  gcd: 1.0, crit: 0.1, critMul: 1.75, dmgPerLevel: 0.12, maxLevel: 20,
+  gcd: 1.5, gcdFloor: 0.75, queueMs: 400, facingDot: 0, missBase: 0.04, drWindow: 18000, drSteps: [1, 0.5, 0.25, 0], pandemic: 0.3, healThreat: 0.5, crit: 0.1, critMul: 1.75, dmgPerLevel: 0.12, maxLevel: 20,
   hp: (l) => 100 + 22 * (l - 1), chiMax: (l) => 100 + 5 * (l - 1), chiRegen: 6, hpRegenOut: 0.04,
   xpNeed: (l) => 80 + 60 * l, combatMs: 5000, respawnMs: 2500, harmonyMax: 5, avatarMul: 2, targetRange: 45,
 };
@@ -72,7 +72,7 @@ export const DENS = {
     boss: { name: 'Grimfang the Hollow Alpha', level: 12, coat: 'grim', scale: 1.55 } },
 };
 export const WOLF = {
-  hp: (l) => 45 + 22 * l, bite: (l) => 3 + 1.8 * l, biteEvery: 1.7, reach: 2.1, aggro: 13, assist: 18, leash: 46,
+  hp: (l) => 45 + 22 * l, hitbox: 0.6, miss: 0.05, dodge: 0.05, crit: 0.05, crush: 0.15, threatMelee: 1.1, threatRanged: 1.3, rangedAt: 9, bite: (l) => 3 + 1.8 * l, biteEvery: 1.7, reach: 2.1, aggro: 13, assist: 18, leash: 46,
   run: 6.2, walk: 1.3, eliteHp: 3.2, eliteBite: 1.6, respawn: 40, xp: (l) => 25 + 12 * l, eliteXp: 4, corpse: 6,
 };
 export const QUESTS = [

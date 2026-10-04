@@ -3,7 +3,7 @@
 // A hit is judged here, on the caster's machine, and written to the wolf's row (scripts/wolf-pack.js answers it).
 // Owns player.state: lvl xp hp chi stance tgt cds gcdAt harmony lastEl shield shieldUntil speedMul avatarUntil
 // meditateUntil combatUntil dead lastSafe kills grimfang quests err toast.
-import { SPELLS, BARS, ELEMENTS, STANCES, RULES, SOUNDS, QUESTS } from './lib/data/bending.js';
+import { SPELLS, BARS, ELEMENTS, STANCES, RULES, SOUNDS, QUESTS, WOLF } from './lib/data/bending.js';
 import { animate } from 'builtin/tween';
 import { raycast } from 'builtin/physics';
 const R = RULES;
@@ -92,19 +92,28 @@ function roll(ctx, S) {
 }
 function hurt(ctx, wid, dmg, crit, S, from) {
   const w = wolfAt(ctx, wid); if (!w) return;
-  const me = ctx.self, now = ctx.now(), ws = w.state, p = w.feetPosition, el = S.el;
-  ws.hp -= dmg; ws.hitBy = me.id; ws.hitAt = now + ctx.random();
-  if (S.root) ws.rootUntil = now + S.root * 1000;
+  const me = ctx.self, now = ctx.now(), ws = w.state, p = w.feetPosition, el = S.el, top0 = { x: p.x, y: p.y + 1.3, z: p.z };
+  me.state.combatUntil = now + R.combatMs; if (!me.state.tgt) me.state.tgt = wid;
+  // roll 1, contact: spells only miss (never dodged or parried); +3 levels and up the miss chance climbs steeply
+  const diff = (ws.lvl ?? 1) - (me.state.lvl ?? 1), miss = diff <= 2 ? R.missBase + Math.max(0, diff) * 0.01 : Math.min(0.4, 0.06 + (diff - 2) * 0.11);
+  ws.threat = { ...(ws.threat ?? {}), [me.id]: Math.round((ws.threat?.[me.id] ?? 0) + Math.max(1, dmg)) };
+  ws.hitBy = me.id; ws.hitAt = now + ctx.random();
+  if (ctx.random() < miss) { ctx.emit('damageNumber', { position: top0, text: 'Miss', color: '#c8c8c8', size: 0.9 }); return; }
+  ws.hp -= dmg; // roll 2 (the crit) was rolled with the damage
+  if (S.root) { // diminishing returns: 100 / 50 / 25 % then immune, inside 18 s of the last root ending
+    const n = now < (ws.drRootUntil ?? 0) ? (ws.drRootN ?? 0) + 1 : 0, k = R.drSteps[Math.min(n, 3)];
+    if (k > 0) { ws.rootUntil = now + S.root * 1000 * k; ws.drRootN = n; ws.drRootUntil = ws.rootUntil + R.drWindow; }
+    else ctx.emit('damageNumber', { position: { x: top0.x, y: top0.y + 0.4, z: top0.z }, text: 'Immune', color: '#ffffff', size: 0.8 });
+  }
   if (S.slow) ws.slowUntil = now + S.slow * 1000;
-  if (S.burn) ws.burn = { dps: Math.round(S.burn * (1 + R.dmgPerLevel * ((me.state.lvl ?? 1) - 1))), until: now + 3000 };
+  if (S.burn) { const base = 3000, left = ws.burn && now < ws.burn.until ? ws.burn.until - now : 0; // pandemic: carry up to 30 % over
+    ws.burn = { dps: Math.round(S.burn * (1 + R.dmgPerLevel * ((me.state.lvl ?? 1) - 1))), until: now + base + Math.min(left, base * R.pandemic) }; }
   const kbk = S.kb ?? 0, lift = S.lift ?? 0;
   if (kbk || lift) { const dx = p.x - from.x, dz = p.z - from.z, d = Math.hypot(dx, dz) || 1; ws.kb = { x: (dx / d) * kbk, y: lift, z: (dz / d) * kbk, at: now + ctx.random() }; }
   const top = { x: p.x, y: p.y + 1.3, z: p.z };
   ctx.emit('damageNumber', { position: top, value: dmg, crit, color: crit ? '#ffe14a' : hex(el), size: crit ? 1.5 : 1 });
   ctx.emit('squash', { target: wid, axis: 'y', intensity: 0.25, duration: 0.18 });
   ctx.emit('flash', { target: wid, color: hex(el), duration: 0.1 });
-  me.state.combatUntil = now + R.combatMs;
-  if (!me.state.tgt) me.state.tgt = wid;
 }
 export function land(ctx, pl) { // a projectile arrives
   const S = SPELLS[pl.sp], w = wolfAt(ctx, pl.wid);
@@ -126,8 +135,10 @@ export function aoe(ctx, pl) { // a ground/nova hit, possibly one of several tic
 function cast(ctx, b, id) {
   const S = SPELLS[id], me = ctx.self, st = me.state, now = ctx.now();
   if (!S || st.dead) return;
-  if (now < (st.cds?.[id] ?? 0)) return err(ctx, 'That ability isn\'t ready yet');
-  if (!S.off && now < (st.gcdAt ?? 0)) return; // the GCD swallows the press quietly, as WoW does
+  if (now < (st.cds?.[id] ?? 0) - R.queueMs) return err(ctx, 'That ability isn\'t ready yet');
+  // the spell queue window: a press inside the last 400 ms of the GCD (or the gather) fires on the frame the lock ends
+  const lockEnd = Math.max(S.off ? 0 : st.gcdAt ?? 0, S.off ? 0 : st.windUntil ?? 0, st.cds?.[id] ?? 0);
+  if (now < lockEnd) { if (lockEnd - now <= R.queueMs) b.queued = { id, at: lockEnd }; return; }
   const avatar = now < (st.avatarUntil ?? 0), cost = avatar ? 0 : S.chi ?? 0;
   if ((st.chi ?? 0) < cost) return err(ctx, 'Not enough chi');
   if (S.kind === 'avatar' && (st.harmony ?? 0) < S.harmony) return err(ctx, 'Needs 5 Harmony: bend different elements in turn');
@@ -135,12 +146,17 @@ function cast(ctx, b, id) {
   let w = null;
   if (['bolt', 'lash', 'ground'].includes(S.kind)) {
     w = ensureTarget(ctx, b); if (!w) return err(ctx, 'No target: get near a wolf');
-    const d = Math.hypot(w.feetPosition.x - p.x, w.feetPosition.z - p.z);
-    if (d > S.range) return err(ctx, 'Out of range');
+    const dx = w.feetPosition.x - p.x, dz = w.feetPosition.z - p.z, d = Math.hypot(dx, dz) || 0.01;
+    const hit = WOLF.hitbox * (w.state?.boss ? 1.6 : 1); // reach counts to the edge of the target's hitbox
+    if (d - hit > S.range) return err(ctx, 'Out of range');
+    if (d > hit + 0.5 && (dx * f.x + dz * f.z) / d < R.facingDot) return err(ctx, 'You must be facing your target');
+    const eye = { x: p.x, y: p.y + 1.6, z: p.z }, mass = { x: w.feetPosition.x, y: w.feetPosition.y + 0.6, z: w.feetPosition.z };
+    const L = Math.hypot(mass.x - eye.x, mass.y - eye.y, mass.z - eye.z), ray = raycast(ctx, eye, { x: (mass.x - eye.x) / L, y: (mass.y - eye.y) / L, z: (mass.z - eye.z) / L }, { distance: L, ignoreEntities: [me.id, w.id], physicsOnly: true, bodies: 'static' });
+    if (ray && ray.distance < L - hit - 0.3 && !String(ray.id ?? '').startsWith('wolf-')) return err(ctx, 'Target not in line of sight');
   }
   st.chi = (st.chi ?? 0) - cost;
   st.cds = { ...(st.cds ?? {}), [id]: now + (S.cd ?? 0) * 1000 };
-  if (!S.off) st.gcdAt = now + R.gcd * 1000;
+  if (!S.off) st.gcdAt = now + Math.max(R.gcdFloor, R.gcd / (1 + (st.haste ?? 0))) * 1000;
   st.lastCast = { id, at: now };
   if (S.dmg && S.el) { if (S.el !== st.lastEl) st.harmony = Math.min(R.harmonyMax, (st.harmony ?? 0) + 1); st.lastEl = S.el; }
   if (S.meditateBreak !== false) st.meditateUntil = 0;
@@ -203,7 +219,9 @@ export function release(ctx, pl) {
     case 'self': {
       if (S.shield) { st.shield = S.shield; st.shieldUntil = now + S.dur * 1000; st.shieldKind = S.el; bubble(ctx, b, S.el, S.dur); sound(ctx, SOUNDS.shield, p, 0.6); }
       if (S.heal) { const h = Math.round(maxHp(st) * S.heal); st.hp = Math.min(maxHp(st), (st.hp ?? 0) + h); emitFx(ctx, p, 'heal'); sound(ctx, SOUNDS.heal, p, 0.6);
-        ctx.emit('damageNumber', { position: add(p, { x: 0, y: 2, z: 0 }), text: `+${h}`, color: '#5cff8a', size: 1.2 }); }
+        ctx.emit('damageNumber', { position: add(p, { x: 0, y: 2, z: 0 }), text: `+${h}`, color: '#5cff8a', size: 1.2 });
+        const foes = ctx.query({ tags: ['wild-wolf'], center: p, radius: 60 }).filter((x) => !x.state?.dead && x.state?.threat?.[me.id] != null);
+        for (const x of foes) x.state.threat = { ...x.state.threat, [me.id]: Math.round(x.state.threat[me.id] + (h * R.healThreat) / foes.length) }; }
       if (S.speed) { st.speedMul = S.speed; st.speedUntil = now + S.dur * 1000; scooter(ctx, b, S.dur); sound(ctx, SOUNDS.dash, p, 0.6, 0.8); }
       break; }
     case 'dash': b.move = { kind: 'dash', until: now + 280, v: { x: f.x * S.dist / 0.28, z: f.z * S.dist / 0.28 } }; trail(ctx, 'air', 0.5); sound(ctx, SOUNDS.dash, p, 0.7); break;
@@ -278,6 +296,7 @@ export function update(ctx, dt) {
     if (now > b.move.until || st.dead) b.move = null;
     else { const v = me.velocity; me.velocity = b.move.kind === 'jet' ? { x: b.move.v.x, y: b.move.v.y, z: b.move.v.z } : b.move.kind === 'dash' ? { x: b.move.v.x, y: Math.max(0, v.y), z: b.move.v.z } : { x: b.move.v.x, y: v.y, z: b.move.v.z }; }
   }
+  if (b.queued && now >= b.queued.at) { const q = b.queued; b.queued = null; if (now - q.at < 600) cast(ctx, b, q.id); }
   // death: the world holds a beat, then you are back on your feet where you last stood safe
   const hpMax = maxHp(st), chiMax = maxChi(st);
   if (st.dead) {
@@ -323,5 +342,5 @@ export function update(ctx, dt) {
     st.quests = { ...done, [q.id]: now }; st.xp = (st.xp ?? 0) + q.xp; st.toast = { text: `${q.title} complete`, sub: `+${q.xp} xp`, at: now };
     sound(ctx, SOUNDS.quest, me.feetPosition, 0.8); break;
   }
-  st.bendBusy = !!b.move || hp < hpMax || chi < chiMax || (st.shield ?? 0) > 0 || !!st.speedUntil || !!st.tgt || inCombat;
+  st.bendBusy = !!b.move || !!b.queued || hp < hpMax || chi < chiMax || (st.shield ?? 0) > 0 || !!st.speedUntil || !!st.tgt || inCombat;
 }
