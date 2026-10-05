@@ -1,41 +1,39 @@
-// Every lit surface in this world is shaded by this one function. The engine hands it the surface
-// and the lights that reach it — the sun with its shadow, every placed light with its falloff and
-// shadow, the sky's ambient — and takes back a color. This file is the standard model (Cook-Torrance
-// GGX + Lambert, the math a PBR engine runs). Edit a line and every surface follows; delete one and
-// see what it did. Toon, flat, hatching: the "looks" skill shows each as a few edits of this file.
-import { dot, max, mix, normalize, pow, clamp, float, vec3, oneMinus, PI } from "builtin/tsl";
+// The den's light: soft 3-band cel steps under one warm amber sun and a cool periwinkle bounce, so every
+// faceted face reads in two colours, lit and shade. Plants (green-dominant albedo) let the sun bleed through
+// from behind, and inside the canopy's shadow small puddles of sun break through (dappling).
+// The old physically-based model lives in this file's history (before the 2026-10-05 style pass).
+import { dot, max, min, mix, normalize, pow, clamp, float, vec3, oneMinus, floor, fract, smoothstep, mx_noise_float } from "builtin/tsl";
+
+const SUN_TINT = vec3(1.08, 0.98, 0.82);   // pale amber key
+const SHADE_TINT = vec3(0.78, 0.86, 1.18); // periwinkle / slate fill
+const BANDS = 3;
+
+function cel(x) { // three soft steps: a hard read with a 15 % feathered edge between bands
+  const s = x.mul(BANDS);
+  return floor(s).add(smoothstep(0.42, 0.58, fract(s))).div(BANDS);
+}
 
 export function lighting(surface, lights) {
-  const { albedo, normal: N, view: V, roughness, metalness } = surface;
-  // f0: how much a surface reflects head-on — 4% for anything that is not metal, its own color for metal.
-  const f0 = mix(vec3(0.04), albedo, metalness);
+  const { albedo, normal: N, view: V, roughness, metalness, position: P } = surface;
+  const leafy = clamp(albedo.y.sub(max(albedo.x, albedo.z)).mul(6), 0, 1); // how much this surface is plant
+  // dapples: sun puddles that survive inside shadow, a 1.6 m noise field, hard-edged like light through leaves
+  const dap = smoothstep(0.35, 0.5, mx_noise_float(vec3(P.x.mul(0.6), P.y.mul(0.3), P.z.mul(0.6))));
 
-  // One call per light that reaches this point. light.direction points at the light; light.radiance is
-  // its color × intensity after falloff and shadow (light.color and light.shadow are the two halves).
   const direct = lights.each((light) => {
     const L = light.direction;
-    const NdotL = max(dot(N, L), 0);
+    const ndl = max(dot(N, L), 0);
+    const step3 = cel(ndl);
+    const lit = max(light.shadow, dap.mul(0.55).mul(smoothstep(0.2, 0.6, N.y)));
     const H = normalize(V.add(L));
-    const NdotV = max(dot(N, V), 1e-4);
-    const NdotH = max(dot(N, H), 0);
-    // D — how tight the highlight is (GGX).
-    const a = roughness.mul(roughness);
-    const a2 = a.mul(a);
-    const d = NdotH.mul(NdotH).mul(a2.sub(1)).add(1);
-    const D = a2.div(max(PI.mul(d).mul(d), 1e-6));
-    // G — the microfacets shadowing each other (Smith).
-    const r = roughness.add(1);
-    const k = r.mul(r).div(8);
-    const G = NdotV.div(NdotV.mul(oneMinus(k)).add(k)).mul(NdotL.div(NdotL.mul(oneMinus(k)).add(k)));
-    // F — more reflection at grazing angles (Schlick).
-    const F = f0.add(oneMinus(f0).mul(pow(clamp(oneMinus(max(dot(H, V), 0)), 0, 1), 5)));
-    const specular = D.mul(G).mul(F).div(max(float(4).mul(NdotV).mul(NdotL), 1e-4));
-    // What fresnel did not reflect scatters as diffuse; metal has no diffuse.
-    const diffuse = oneMinus(F).mul(oneMinus(metalness)).mul(albedo).div(PI);
-    return diffuse.add(specular).mul(light.radiance).mul(NdotL);
+    const spec = pow(max(dot(N, H), 0), float(8).add(oneMinus(roughness).mul(56))).mul(oneMinus(roughness).mul(0.25));
+    const diffuse = albedo.mul(oneMinus(metalness)).div(Math.PI).mul(step3).add(spec);
+    // translucency: the sun behind a leaf, seen through it
+    const back = pow(max(dot(V, L.negate()), 0), 3).mul(leafy).mul(0.45).mul(light.shadow.mul(0.6).add(0.4));
+    const through = albedo.mul(vec3(1.25, 1.15, 0.55)).mul(back).div(Math.PI);
+    return diffuse.add(through).mul(light.color).mul(SUN_TINT).mul(lit);
   });
 
-  // The sky and the ambient, on the diffuse and on f0; the environment reflection the engine folded for this surface.
-  const ambient = albedo.mul(oneMinus(metalness)).add(f0).mul(lights.ambient).mul(1 / Math.PI);
-  return direct.add(ambient.add(lights.environment).mul(surface.occlusion));
+  const f0 = mix(vec3(0.04), albedo, metalness);
+  const ambient = albedo.mul(oneMinus(metalness)).add(f0).mul(lights.ambient).mul(SHADE_TINT).mul(1 / Math.PI);
+  return direct.add(ambient.add(lights.environment.mul(SHADE_TINT)).mul(surface.occlusion));
 }
