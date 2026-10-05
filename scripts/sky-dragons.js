@@ -13,7 +13,7 @@ const R = Math.PI / 180, TAU = Math.PI * 2, KEYS = 16, NB = DRAGON.spine.bones;
 const lerp = (a, b, t) => a + (b - a) * t;
 const roll = (ctx, [a, b]) => lerp(a, b, ctx.random());
 function quat(yaw, pitch) { const cy = Math.cos(yaw * R / 2), sy = Math.sin(yaw * R / 2), cx = Math.cos(pitch * R / 2), sx = Math.sin(pitch * R / 2); return [cy * sx, sy * cx, -sy * sx, cy * cx]; }
-let CLIP = null;
+let CLIP = null, GROUND = 0; // the ground under this pose, sampled once a pose
 function waveClip() { // yaw per spine bone in a travelling S-wave, looping (a mixer channel costs no tick)
   if (CLIP) return CLIP;
   const w = SKY.wave, times = [], per = {};
@@ -32,12 +32,12 @@ pop glint rate=?mobile:2|4 on=sphere(.3) life=.5..0.9 size=.5..0.8 col=hdr(${c[0
 function at(ctx, p, t) {
   const u = t - 0.5, s = Math.sin(TAU * p.k * t + p.ph), sv = Math.sin(TAU * p.kv * t + p.ph * 1.7);
   const x = p.cx + p.dx * u * p.L + (-p.dz) * (p.A * s + p.side), z = p.cz + p.dz * u * p.L + p.dx * (p.A * s + p.side);
-  const g = p._g ?? 0;
+  const g = GROUND;
   const yy = Math.max(SKY.height[0], Math.min(SKY.height[1], p.y + p.rise + p.B * sv));
   return { x, y: Math.max(yy, g + SKY.clearance), z };
 }
 function pose(ctx, p, t) {
-  { const u = t - 0.5, s = Math.sin(TAU * p.k * t + p.ph); p._g = ctx.place.terrain.heightAt(p.cx + p.dx * u * p.L + (-p.dz) * (p.A * s + p.side), p.cz + p.dz * u * p.L + p.dx * (p.A * s + p.side)) ?? 0; }
+  { const u = t - 0.5, s = Math.sin(TAU * p.k * t + p.ph); GROUND = ctx.place.terrain.heightAt(p.cx + p.dx * u * p.L + (-p.dz) * (p.A * s + p.side), p.cz + p.dz * u * p.L + p.dx * (p.A * s + p.side)) ?? 0; }
   const a = at(ctx, p, t), e = 0.25 / p.dur, b = at(ctx, p, t + e), c = at(ctx, p, t - e);
   const dx = b.x - c.x, dy = b.y - c.y, dz = b.z - c.z, h = Math.hypot(dx, dz) || 1;
   // lateral acceleration (m/s², +left of travel) → bank into the turn
