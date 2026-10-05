@@ -19,7 +19,7 @@ hold: [witch, apprentice, fisher, shepherdess, watch]   # right hand keeps its p
 districts:
   market: { box: [-19, 19, 81, 119], avoid: market }
   magic: { at: [82, 78], r: 16 }
-  garden: { at: [-82, 78], r: 16 }
+  garden: { at: [0, 128], r: 12 }
   royal: { at: [0, 196], r: 14 }
 avoid:
   market:                    # from town-crowd.yml: fountain disc + the three market islands (+margin)
@@ -37,10 +37,10 @@ roster:
   - { id: folk-apprentice, who: apprentice, model: np-apprentice, name: Tobin, district: magic, at: [86, 82] }
   - { id: folk-alchemist, who: alchemist, model: np-alchemist, name: Vesper, district: magic, at: [88, 72] }
   - { id: folk-tinkerer, who: tinkerer, model: np-tinkerer, name: Cogsworth, district: magic, at: [76, 84] }
-  - { id: folk-beekeeper, who: beekeeper, model: np-beekeeper, name: Hester, district: garden, at: [-86, 72] }
-  - { id: folk-flowergirl, who: flowergirl, model: np-flowergirl, name: Posy, district: garden, at: [-78, 82] }
-  - { id: folk-gardener, who: gardener, model: np-gardener, name: Old Rook, district: garden, at: [-88, 84] }
-  - { id: folk-shepherdess, who: shepherdess, model: np-shepherdess, name: Elsie, district: garden, at: [-76, 72] }
+  - { id: folk-beekeeper, who: beekeeper, model: np-beekeeper, name: Hester, district: garden, at: [-8, 124] }
+  - { id: folk-flowergirl, who: flowergirl, model: np-flowergirl, name: Posy, district: garden, at: [8, 124] }
+  - { id: folk-gardener, who: gardener, model: np-gardener, name: Old Rook, district: garden, at: [-10, 152] }
+  - { id: folk-shepherdess, who: shepherdess, model: np-shepherdess, name: Elsie, district: garden, at: [10, 152] }
   - { id: folk-herald, who: herald, model: np-herald, name: Herald Quill, district: royal, at: [0, 188] }
   - { id: folk-knight, who: knight, model: np-knight, name: Sir Aldric, district: royal, at: [-6, 196] }
   - { id: folk-lady, who: lady, model: np-lady, name: Lady Rosalind, district: royal, at: [5, 200] }
