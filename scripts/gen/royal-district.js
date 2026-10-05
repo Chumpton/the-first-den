@@ -3,6 +3,7 @@
 // 'avenue' (white flagstone avenue, patterned plaza, lamps, planter trees, banner poles), 'fountain' (plaza fountain with the gold lion).
 // Every part but the fountain has its origin at world (0, 0.5, 190): local = world − (0, 0.5, 190). The fountain's origin is its centre.
 import { TAU, paint, XF, lathe, Q, T, box, ngon, prism, obox, beam, blob, RC, RT, stone, flat, gold, slate, glow, L, archWall, crenels, lancet, tower, planterTree, lampPost, bannerPole, faceOut } from '../lib/royal-kit.js';
+import { softened } from "./soften.js";
 const OZ = 190, z = (wz) => wz - OZ;
 const rng = (seed) => { let s = seed >>> 0 || 7; return () => ((s = (s * 1664525 + 1013904223) >>> 0) / 4294967296); };
 function top(P, x0, z0, x1, z1, y) { Q(P, [x0, y, z0], [x1, y, z0], [x1, y, z1], [x0, y, z1], [(x0 + x1) / 2, y - 1, (z0 + z1) / 2]); }
@@ -172,11 +173,11 @@ function fountain(ctx, P, col) {
   }
 }
 
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const { part = 'avenue' } = ctx.params;
   ctx.flat();
   ({ gate, walls, bridge, avenue, fountain })[part]?.(ctx, ctx, false);
-}
+});
 export function collider(ctx) {
   const { part = 'avenue' } = ctx.params;
   ({ gate, walls, bridge, avenue, fountain })[part]?.(ctx, ctx, true);

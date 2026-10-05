@@ -2,6 +2,7 @@
 // params.gaps, radians, local angle atan2(z, x)), a little hex hut around the trunk with its door at params.door,
 // crooked branches and a layered crown above. Feet at the trunk's base; the rope and bridge are their own rows.
 import { Q, solid, prism, box, ngon, gem } from "../lib/road-solid.js";
+import { softened } from "./soften.js";
 const BARK = "cdn/texture-rough-oak-bark-cozy.png", OAK = "cdn/texture-weathered-honey-oak-deck-planks.png",
   SHINGLE = "cdn/texture-mossy-wooden-shingles-cozy.png", MOSS = "cdn/texture-soft-green-moss-cozy.png";
 const bark = (c) => { c.albedo(BARK); c.color("oklch(0.72 0.04 60)"); c.roughness(0.95); c.emissive(null); };
@@ -73,10 +74,10 @@ function hut(c, D, door, lod, solidOnly, r) {
   c.albedo(null); c.color("oklch(0.92 0.1 80)");
   for (const s of [-1.15, 1.15]) { c.emissive(2.4, 1.6, 0.6); gem(c, dx + px * s, D + 2.1, dz + pz * s, 0.12, 0.2, 0.16, 6); c.emissive(null); }
 }
-export function geometry(c) {
+export const geometry = softened(function geometry(c) {
   c.flat(); const { D, R, gaps, door, seed, hutR } = P(c), lod = c.lod;
   trunk(c, D, lod); deck(c, D, R, gaps, lod); hut(c, D, door, lod, false, hutR); crown(c, D, seed, lod);
-}
+});
 export function collider(c) {
   const { D, R, gaps, door, hutR } = P(c);
   prism(c, ngon(8, 0.75), -0.3, D + 4);

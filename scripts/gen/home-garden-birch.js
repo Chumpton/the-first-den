@@ -1,6 +1,7 @@
 import { GARDEN as G } from '../../templates/home-garden.js';
 import { V, tube, face } from './home-garden-kit.js';
 import { add, scale, cross, normalize } from 'builtin/vec3';
+import { softened } from "./soften.js";
 // A folded pointed leaf costs two triangles, so whole sprays stay cheap.
 function birchLeaf(c,center,direction,length,width,roll){
   const a=normalize(direction),b=normalize(cross(a,V(0,1,0))),n=normalize(cross(b,a));
@@ -11,7 +12,7 @@ function birchLeaf(c,center,direction,length,width,roll){
 }
 function trunk(h){return[V(0,-.09,0),V(.035,h*.17,-.018),V(-.028,h*.37,.04),V(.085,h*.57,.035),V(.16,h*.77,-.03),V(.23,h*.95,.08),V(.31,h,0)];}
 function branchData(c,h,s){const result=[];for(let i=0;i<G.birch.branches;i++){const a=i*2.39996323+.22*c.random(),y=h*(.31+i*.071),len=s*(.69+c.random()*.28)*(1-i*.045),root=V(.02+i*.02,y,.02);result.push({a,len,root,end:V(root.x+Math.cos(a)*len,Math.min(h*.96,y+h*(.19+c.random()*.07)),root.z+Math.sin(a)*len)});}return result;}
-export function geometry(c){
+export const geometry = softened(function geometry(c){
   const h=c.params.height??6.7,s=c.params.spread??2.5;
   c.smooth();c.albedo('scripts/tex-garden-birch.js');c.color('#f4f0e5');c.roughness(.93);
   const t=trunk(h);tube(c,t,[.155,.116,.10,.079,.048,.022,.005],8);
@@ -43,5 +44,5 @@ export function geometry(c){
     c.color(G.leafColors[i%G.leafColors.length]);
     birchLeaf(c,V(.2+Math.cos(a)*r,y,Math.sin(a)*r),V(Math.cos(a),-.55-c.random(),Math.sin(a)),.24,.13,-1.1+c.random()*2.2);
   }
-}
+});
 export function collider(c){const h=c.params.height??6.7;tube(c,trunk(h).slice(0,4),[.15,.116,.1,.08],6);}

@@ -2,6 +2,7 @@
 // Feet at ground, front (toward the road) is −Z, metres. One merged mesh per stop, lod-gated.
 import { box, prism, ngon, gem, solid } from "../lib/road-solid.js";
 import { beam, lathe, blob } from "../lib/yard-kit.js";
+import { softened } from "./soften.js";
 const TX = {
   stone: "cdn/texture-pale-weathered-limestone-blocks.png", moss: "cdn/texture-soft-green-moss-cozy.png",
   oak: "cdn/texture-weathered-honey-oak-deck-planks.png", walnut: "cdn/texture-hand-joined-walnut-wood.png",
@@ -168,7 +169,7 @@ const B = {
     }
   },
 };
-export function geometry(ctx) { ctx.flat(); (B[ctx.params.kind] || B.milestone)(ctx, ctx.lod); ctx.emissive(null); }
+export const geometry = softened(function geometry(ctx) { ctx.flat(); (B[ctx.params.kind] || B.milestone)(ctx, ctx.lod); ctx.emissive(null); });
 export function collider(ctx) {
   const k = ctx.params.kind;
   if (k === "hitch") { box(ctx, -1.3, 0, -0.1, 1.3, 1.1, 0.1); box(ctx, -0.8, 0, 0.35, 0.8, 0.46, 0.85); box(ctx, 1.4, 0, 0.1, 2.3, 0.45, 0.6); return; }

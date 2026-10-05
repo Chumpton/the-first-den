@@ -2,6 +2,7 @@
 // params.drop), a round basin with a sitting ledge, four lion-head spouts on the pedestal, two tiers of bowls,
 // a verdigris leaping fish, planter beds in the dais corners and curved benches facing out. Water and spray are child rows.
 import { TAU, COL, FLOWERS, paint, XF, solid, box, obox, prism, ngon, lathe, loft, blob } from '../lib/town-kit.js';
+import { softened } from "./soften.js";
 export const DAIS = { steps: [8.5, 7.9, 7.3], rise: 0.15, planter: 6.3, planterHalf: 0.8, bench: [6.25, 6.8], benchSpan: 0.3 };
 export const SPOUT = { r: 0.78, y: 1.22, n: 4, a0: 0 };
 const hsh = (x, z) => { const s = Math.sin(x * 127.1 + z * 311.7) * 43758.5453; return s - Math.floor(s); };
@@ -63,7 +64,7 @@ function lion(ctx, P, a, lod) { // a lion mask on the pedestal, its mouth a bron
 }
 function beam(P, a, b, w, h) { obox(P, (a[0] + b[0]) / 2, Math.min(a[1], b[1]) - h / 2, (a[2] + b[2]) / 2, w, h + Math.abs(a[1] - b[1]), Math.hypot(b[0] - a[0], b[2] - a[2])); }
 export const MOUTH = [-0.62, 6.05, 0];
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const lod = ctx.lod || 1, P = ctx, n = lod <= 1 ? 48 : lod <= 2 ? 32 : lod <= 3 ? 20 : 12, m = Math.max(10, n / 2);
   dais(ctx, P, lod);
   paint(ctx, 'lime', COL.lime, 0.88);
@@ -85,7 +86,7 @@ export function geometry(ctx) {
   P.tri(0.45, 5.2, 0, 0.72, 5.55, 0, 0.3, 5.7, 0); P.tri(0.45, 5.2, 0, 0.3, 5.7, 0, 0.72, 5.55, 0);
   for (const s of [-1, 1]) { P.tri(0.1, 5.5, s * 0.14, -0.1, 5.25, s * 0.42, 0.25, 5.3, s * 0.16); P.tri(0.1, 5.5, s * 0.14, 0.25, 5.3, s * 0.16, -0.1, 5.25, s * 0.42); }
   if (lod <= 2) { paint(ctx, null, 'oklch(0.22 0.02 60)', 0.4); for (const s of [-1, 1]) obox(P, -0.42, 6.0, s * 0.09, 0.06, 0.06, 0.03); }
-}
+});
 export function collider(ctx) {
   const n = 24;
   for (let i = 0; i < n; i++) {

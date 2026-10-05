@@ -3,6 +3,7 @@
 //   path: [[x, y, z], …] the path's centreline (ground y per point), half: path half-width,
 //   drifts: [[s0, s1, side(+1 left / -1 right of travel), palette, depth]], curbs: [[s0, s1, side]]  (s = metres along the path)
 import { TAU, paint, obox, blob, gem } from '../lib/yard-kit.js';
+import { softened } from "./soften.js";
 const rnd = (seed) => { let s = (seed * 9301 + 49297) % 233280; return () => (s = (s * 9301 + 49297) % 233280) / 233280; };
 const PAL = {
   cottage: ['oklch(0.72 0.14 330)', 'oklch(0.96 0.02 95)', 'oklch(0.66 0.13 295)', 'oklch(0.84 0.12 80)'],
@@ -19,7 +20,7 @@ function at(path, s) {
     acc += L;
   }
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const pr = ctx.params || {}, lod = ctx.lod || 1, path = pr.path || [], half = pr.half ?? 0.8;
   if (path.length < 2) return;
   (pr.drifts || []).forEach(([s0, s1, side, pal = 'cottage', depth = 0.7], di) => {
@@ -46,5 +47,5 @@ export function geometry(ctx) {
       s += len;
     }
   });
-}
+});
 export function collider() { return null; }

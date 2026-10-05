@@ -2,6 +2,7 @@
 // floor, centred on the origin. Hanging pieces (hanging, herbs, lantern with drop) have their origin at the ceiling and hang down.
 // ctx.lod: 1–2 full detail, 3 drops small props, 4–5 one or two hull boxes.
 import { paint } from './den-furniture-mesh.js';
+import { softened } from "./soften.js";
 const TAU = Math.PI * 2;
 const P = (ctx, kind, tint) => paint({ ctx }, kind, tint);
 const glow = (ctx, r, g, b) => ctx.emissive(r, g, b);
@@ -493,7 +494,7 @@ const dims = (it, p) => ({
   arearug: [p.w, 0.013, p.l], sideboard: [p.w, p.h, p.d], mediaconsole: [p.w, p.h, p.d],
 })[it];
 const HULL_PAINT = { arearug: '#b98a60', counter: '#9baf84', stove: '#f0c9a0', jarshelf: '#8a6444', sofa: '#7d9a5a', sideboard: '#5a4030', mediaconsole: '#5a4030', planter: '#8aa672', pot: '#c97a52', crate: '#c9a27a', bed: '#9baf84', desk: '#8a6444', nightstand: '#8a6444', lamp: '#e9dcc0' };
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const it = ITEMS[ctx.params.item] ? ctx.params.item : 'crate', p = { ...DEFAULTS[it], ...ctx.params };
   ctx.flat(); ctx.roughness(0.8);
   if (ctx.lod >= 4) {
@@ -509,7 +510,7 @@ export function geometry(ctx) {
     return;
   }
   ITEMS[it](ctx, p, ctx.lod <= 2);
-}
+});
 export function collider(ctx) {
   const it = ctx.params.item, p = { ...DEFAULTS[it], ...ctx.params }, d = dims(it, p);
   if (it === 'roundrug') return null;

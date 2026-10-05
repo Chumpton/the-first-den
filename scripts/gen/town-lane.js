@@ -4,6 +4,7 @@
 // params.item === 'marker': one carved limestone mile-post; its words ride the row's ui on the front (−Z) face.
 import { paint, box, solid, XF, lathe, blob, FLOWERS, COL } from '../lib/town-kit.js';
 import { bench } from './town-square.js';
+import { softened } from "./soften.js";
 const D2R = Math.PI / 180;
 function up(ctx, a, b, c, d) { // a quad wound to face +y
   const ny = (b[2] - a[2]) * (c[0] - a[0]) - (b[0] - a[0]) * (c[2] - a[2]);
@@ -65,7 +66,7 @@ function marker(ctx, lod) { // carved limestone mile-post, front (−Z) takes th
   const rnd = () => ctx.random();
   for (const [x, zz] of [[-0.28, 0.18], [0.3, -0.12], [0.1, 0.24]]) blob(P, x, 0.14, zz, 0.12, 0.06, 0.1, 5, rnd);
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params, lod = ctx.lod || 1, rnd = () => ctx.random();
   ctx.flat();
   if (p.item === 'marker') return marker(ctx, lod);
@@ -76,7 +77,7 @@ export function geometry(ctx) {
     patch(ctx, XF(F, 1.75, 0, 0.05), lod, rnd);
     if (hasBin && lod <= 3) bin(ctx, XF(F, -1.45, 0, 0.1), lod);
   }
-}
+});
 export function collider(ctx) {
   const p = ctx.params;
   if (p.item === 'marker') return box(ctx, -0.3, 0, -0.24, 0.3, 1.2, 0.24);

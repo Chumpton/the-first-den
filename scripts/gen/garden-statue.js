@@ -2,6 +2,7 @@
 // on a pedestal), "fountain" (a round basin, the maiden standing in it pouring). Faces -Z. Colliders are the plinth/basin only.
 import { paint, obox, lathe, blob, TAU } from '../lib/yard-kit.js';
 import { box, prism, ngon } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 const LIME = (ctx) => `oklch(${(0.86 + ctx.random() * 0.05).toFixed(3)} 0.018 ${(80 + ctx.random() * 15).toFixed(0)})`;
 function plinth(ctx, s, h) { paint(ctx, 'stone', 'oklch(0.84 0.02 80)', 0.92); obox(ctx, 0, 0, 0, s + 0.14, 0.14, s + 0.14); paint(ctx, 'stone', LIME(ctx), 0.92); obox(ctx, 0, 0.14, 0, s, h - 0.28, s); paint(ctx, 'stone', 'oklch(0.9 0.018 85)', 0.9); obox(ctx, 0, h - 0.14, 0, s + 0.12, 0.14, s + 0.12); }
 function maiden(ctx, y0, lod, sc = 1) {
@@ -31,7 +32,7 @@ function fountain(ctx, lod) {
   paint(ctx, 'stone', 'oklch(0.88 0.02 85)', 0.92); lathe(ctx, [[0.34, 0.5], [0.3, 0.8], [0.22, 0.9], [0.4, 1.0], [0.4, 1.08]], lod <= 2 ? 12 : 6);
   maiden(ctx, 1.08, lod, 0.85);
 }
-export function geometry(ctx) { const p = ctx.params || {}, lod = ctx.lod || 1; ctx.flat();
+export const geometry = softened(function geometry(ctx) { const p = ctx.params || {}, lod = ctx.lod || 1; ctx.flat();
   if (p.kind === 'fountain') fountain(ctx, lod); else if (p.kind === 'urn') { plinth(ctx, 0.5, 0.75); urn(ctx, 0.75, lod); } else { plinth(ctx, 0.62, 0.9); maiden(ctx, 0.9, lod); }
-  ctx.albedo(null); }
+  ctx.albedo(null); });
 export function collider(ctx) { const k = ctx.params?.kind; if (k === 'fountain') prism(ctx, ngon(12, 1.8), 0, 0.66); else { const s = k === 'urn' ? 0.32 : 0.38; box(ctx, -s, 0, -s, s, k === 'urn' ? 1.7 : 2.4, s); } }

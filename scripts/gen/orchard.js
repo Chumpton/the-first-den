@@ -4,6 +4,7 @@
 // hoops [x,z,gy,yawDeg], pegs [x,z,gy], balls [x,z,gy,colourIndex], mallets [x,z,gy,yawDeg].
 import { TAU, paint, obox, beam, lathe, gem, box } from '../lib/yard-kit.js';
 import { tree } from './north-camp.js';
+import { softened } from "./soften.js";
 const rot = (x, z, cx, cz, c, s) => [cx + x * c + z * s, cz - x * s + z * c];
 const BALL = ['oklch(0.5 0.16 255)', 'oklch(0.55 0.2 28)', 'oklch(0.25 0.01 250)', 'oklch(0.85 0.16 95)'];
 function table(ctx, lod, [cx, cz, gy, yawDeg = 0, basket = 1], idx) {
@@ -66,7 +67,7 @@ function mallet(ctx, [x, z, gy, yawDeg = 0]) {
   obox(ctx, x, gy, z, 0.08, 0.09, 0.24, a);
   paint(ctx, null, BALL[1], 0.6); obox(ctx, x, gy + 0.03, z, 0.085, 0.02, 0.245, a);
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params || {}, lod = ctx.lod || 1;
   (p.trees || []).forEach((t, i) => tree(ctx, lod, t, i + 40));
   (p.tables || []).forEach((t, i) => table(ctx, lod, t, i));
@@ -75,7 +76,7 @@ export function geometry(ctx) {
   (p.pegs || []).forEach((g) => peg(ctx, g));
   for (const [x, z, gy, ci] of p.balls || []) { paint(ctx, null, BALL[ci % 4], 0.35); lathe(ctx, [[0, gy], [0.035, gy + 0.008], [0.048, gy + 0.048], [0.035, gy + 0.088], [0, gy + 0.096]], 8, x, z); }
   (p.mallets || []).forEach((m) => mallet(ctx, m));
-}
+});
 export function collider(ctx) {
   const p = ctx.params || {};
   for (const [x, z, gy, , sc = 1] of p.trees || []) box(ctx, x - 0.2 * sc, gy - 0.3, z - 0.2 * sc, x + 0.2 * sc, gy + 1.8, z + 0.2 * sc);

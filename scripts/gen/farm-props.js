@@ -2,6 +2,7 @@
 // Origin at the feet, front toward −Z. Honey oak and walnut, red barn boards, pale limestone, straw, linen.
 import { beam, obox, lathe, blob, TAU } from '../lib/yard-kit.js';
 import { solid, box, ngon, gem } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 const TX = {
   barn: 'cdn/texture-red-painted-barn-boards.png', oak: 'cdn/texture-honey-oak-barn-planks.png', walnut: 'cdn/texture-hand-joined-walnut-wood.png',
   stone: 'cdn/texture-pale-limestone-flagstone.png', shingle: 'cdn/texture-weathered-cedar-shingles.png', thatch: 'cdn/texture-thatched-straw-roof.png',
@@ -196,5 +197,5 @@ function ladder(ctx) {
   for (let y = 0.3; y < L; y += 0.3) beam(ctx, [-0.22, y, 0], [0.22, y, 0], 0.04, 0.04);
 }
 const K = { barn, mill, sails, scarecrow, wain, apple, barrels, cart, ladder };
-export function geometry(ctx) { ctx.flat(); (K[ctx.params.item] || barrels)(ctx, false); }
+export const geometry = softened(function geometry(ctx) { ctx.flat(); (K[ctx.params.item] || barrels)(ctx, false); });
 export function collider(ctx) { const it = ctx.params.item; if (it === 'sails' || it === 'ladder' || it === 'scarecrow') return null; (K[it] || barrels)(ctx, true); }

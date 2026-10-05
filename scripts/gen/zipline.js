@@ -5,6 +5,7 @@
 import { paint, obox, beam, TAU } from '../lib/yard-kit.js';
 import { prism, ngon, gem } from '../lib/road-solid.js';
 import { ZIP } from '../lib/data/zipline.js';
+import { softened } from "./soften.js";
 const SAG = (p) => ZIP.sag ?? p.sag;
 const IRON = 'oklch(0.3 0.015 60)', ROPE = 'oklch(0.7 0.06 75)', SAND = 'cdn/texture-soft-pale-beach-sand.png';
 function frames(p) {
@@ -97,10 +98,10 @@ function landing(ctx, p, f, lod, rnd) {
   paint(ctx, null, ROPE, 0.9); beam(ctx, [b[0], b[1] + 0.2, b[2]], [S[0], S[1] + 0.25, S[2]], 0.03, 0.03);
   paint(ctx, 'walnut', 'oklch(0.6 0.06 55)', 0.85); obox(ctx, S[0], S[1] - 0.2, S[2], 0.1, 0.5, 0.1);
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   ctx.flat(); const p = ctx.params, f = frames(p), lod = ctx.lod; let s = 11; const rnd = () => ((s = (s * 9301 + 49297) % 233280) / 233280);
   launch(ctx, p, f, lod); cable(ctx, p, lod); bunting(ctx, p, f, lod, rnd); landing(ctx, p, f, lod, rnd);
-}
+});
 export function collider(ctx) {
   const p = ctx.params, f = frames(p), { D, ob, oq } = f, Y = p.P[1];
   ob(ctx, 6.4, 0, D - 0.34, 2.8, 0.34, 3.0);

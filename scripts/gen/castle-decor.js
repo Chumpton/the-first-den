@@ -1,3 +1,4 @@
+import { softened } from "./soften.js";
 // Castle decor, one script, params.item picks the piece: teleport pads, carpets, painting frames, hanging and potted plants,
 // flower vases, candle chandeliers. Frame: back against +Z (the wall), front −Z (toward the keep's heart), feet on the floor.
 const box = (ctx, cx, y0, cz, w, h, d) => {
@@ -177,11 +178,11 @@ const items = {
   }
 };
 
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   ctx.flat(); ctx.roughness(0.85);
   if (Number(ctx.lod ?? 1) >= 4) { box(ctx, 0, 0, 0, 0.01, 0.01, 0.01); return; } // indoors: the far picture never sees it
   (items[ctx.params.item] || items.vase)(ctx);
-}
+});
 export function collider(ctx) {
   const it = ctx.params.item;
   if (it === "pad") return { kind: "box", width: 1.3, height: 1.6, depth: 1.3 };

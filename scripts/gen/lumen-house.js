@@ -2,6 +2,7 @@
 // glowing crystal finial. params: floors 1-3, width, depth, roof "gable"|"hip"|"dome", glow "teal"|"lilac", kind (inn, library,
 // shop, tea = ENTERABLE: an open doorway in the -Z face, a board floor, a ceiling and furnishings). Origin mid-floor at ground, door -Z.
 import { kit, C, TEX, GLOW, HUE } from "./lumen-kit.js";
+import { softened } from "./soften.js";
 const H = 3.1, B = 0.2, E = 0.45;
 function dims(p) { const w = +p.width || 8, d = +p.depth || 7, f = Math.max(1, Math.min(3, Math.round(+p.floors || 2))); return { w, d, f, top: B + f * H, dw: 1.4, dh: 2.5, t: 0.3, iw: w / 2 - 0.3, id: d / 2 - 0.3 }; }
 function roofDims(D, roof) { const m = Math.min(D.w, D.d), rh = roof === "hip" ? m * 0.4 : D.d * 0.42, half = roof === "hip" ? m / 2 : D.d / 2; return { rh, ye: D.top - E * rh / half, yr: D.top + rh }; }
@@ -128,7 +129,7 @@ function furnish(K, D, kind) {
     for (const px of [-iw + 0.5, iw - 0.5]) { P("oklch(0.6 0.08 40)"); K.prism(px, -id + 0.5, 0.22, 0.18, B, B + 0.4, 8); P(C.hedge); K.bipyr(px, B + 0.75, -id + 0.5, 0.35, 0.45, 0.35, 6); }
   }
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params, D = dims(p), { w, d, top, dw, dh } = D, K = kit(ctx), L = ctx.lod, enter = !!p.kind, roof = p.roof || "gable";
   const hue = p.glow === "lilac" ? "lilac" : "teal", glow = GLOW[hue], glowCol = HUE[hue];
   if (L >= 4) { K.tex(TEX.stone).paint(C.stone); K.box(-w / 2, 0, -d / 2, w / 2, top, d / 2, "b"); roofShape(ctx, K, D, roof, L, glow, glowCol); return; }
@@ -154,7 +155,7 @@ export function geometry(ctx) {
   }
   roofShape(ctx, K, D, roof, L, glow, glowCol);
   if (enter && L <= 2) furnish(K, D, p.kind);
-}
+});
 export function collider(ctx) {
   const p = ctx.params, D = dims(p), K = kit(ctx, true), { w, d } = D;
   K.box(-w / 2 - 0.25, 0, -d / 2 - 0.25, w / 2 + 0.25, B, d / 2 + 0.25, "b");

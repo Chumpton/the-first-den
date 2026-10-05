@@ -5,6 +5,7 @@
 // params.kind "bell" draws the swinging bell alone (origin = its hanger, the bell hangs below).
 import { paint, obox, beam, lathe, blob, leaf, nrm } from '../lib/yard-kit.js';
 import { gem, Q } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 const BURLAP = 'cdn/texture-coarse-burlap-sackcloth.png', IRON = 'oklch(0.3 0.015 60)', ROPE = 'oklch(0.74 0.06 75)';
 const burlap = (ctx, l = 0.93) => { ctx.albedo(BURLAP); ctx.color(`oklch(${l} 0.035 75)`); ctx.roughness(1); ctx.metalness(0); ctx.emissive(null); };
 function piece(ctx, it) {
@@ -94,12 +95,12 @@ function bell(ctx, lod) {
   if (lod <= 2) { beam(ctx, [0, -0.09, 0], [0, -0.3, 0], 0.015); gem(ctx, 0, -0.33, 0, 0.03, 0.025, 0.025, 6);
     paint(ctx, null, ROPE, 0.95); beam(ctx, [0, -0.34, 0], [0, -0.62, 0], 0.02); gem(ctx, 0, -0.63, 0, 0.03, 0.02, 0.03, 6); }
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   ctx.flat(); const p = ctx.params, lod = ctx.lod; let s = p.seed ?? 7; const rnd = () => ((s = (s * 9301 + 49297) % 233280) / 233280);
   if (p.kind === 'bell') return bell(ctx, lod);
   const I = p.items;
   desk(ctx, I.desk, lod, rnd); bale(ctx, lod, rnd); coil(ctx, I.coil, lod); sign(ctx, I.sign, lod, rnd); bellPost(ctx, I.bell, lod, rnd);
-}
+});
 export function collider(ctx) {
   const p = ctx.params; if (p.kind === 'bell') return null;
   const I = p.items, d = piece(ctx, I.desk), g = piece(ctx, I.sign), b = piece(ctx, I.bell);

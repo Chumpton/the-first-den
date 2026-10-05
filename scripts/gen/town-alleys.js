@@ -4,6 +4,7 @@
 //                = a wooden arched garden gate between two piers on segment seg at fraction t (side ±1 = which way it opens)
 // kind "alleys": params.items [{ t: hedge|shrub|pot|wood|barrel|bin|crates|ladder|lamp|path, … }] alley dressing
 import { TAU, TEX, paint, beam, obox, lathe, blob, solid, yawAlong } from '../lib/yard-kit.js';
+import { softened } from "./soften.js";
 const STONE = 'cdn/texture-coursed-pale-limestone-garden-wall.png';
 const HEDGE = 'cdn/texture-clipped-boxwood-hedge-leaves.png';
 const POT = 'cdn/texture-weathered-terracotta-clay.png';
@@ -183,11 +184,11 @@ const ITEMS = {
     for (let i = 0; i < k; i++) { const t = (i + 0.5) / k, j = (ctx.random() - 0.5) * 0.2; paint(ctx, null, ['oklch(0.86 0.02 80)', 'oklch(0.8 0.025 75)'][i % 2], 0.9); ctx.albedo(TEX.stone); obox(P, lerp(a[0], b[0], t) + j, lerp(a[2], b[2], t) - 0.05, lerp(a[1], b[1], t) - j, 0.55 + ctx.random() * 0.15, 0.1, 0.45 + ctx.random() * 0.12, ctx.random() * 3); }
   },
 };
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const lod = ctx.lod || 1, p = ctx.params;
   if (p.kind === 'wall') return stoneWall(ctx, ctx, p, lod);
   for (const it of p.items || []) ITEMS[it.t]?.(ctx, ctx, it, lod);
-}
+});
 export function collider(ctx) {
   const p = ctx.params;
   if (p.kind === 'wall') return wallCollider(ctx, p);

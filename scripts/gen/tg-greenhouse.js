@@ -2,6 +2,7 @@
 // brick aisle along z = -33, seedling shelves on the long walls, hanging baskets, a potting bench at the east end, gutters + downpipe.
 // World coordinates via origin(); feet at (58, 0.5, -33). Beds (Savi's) stand in the gravel between the shelves and the aisle.
 import { origin, Q, T, box, beam, lathe, gem, leaf, paint, PAL, rnd, TAU } from "../lib/tg-kit.js";
+import { softened } from "./soften.js";
 const X0 = 46, X1 = 70, ZC = -33, HW = 3.5, SIDE = 1.2, RISE = 2.6, DOOR = 0.8, DOORH = 2.0, BASE = 0.5;
 const BEDX = [49.6, 53.8, 58, 62.2, 66.4], BEDZ = [-34.8, -31.2];
 function arch(n) { const P = [[-HW, SIDE]]; for (let i = 1; i < n; i++) { const a = Math.PI - (i / n) * Math.PI; P.push([HW * Math.cos(a), SIDE + RISE * Math.sin(a)]); } P.push([HW, SIDE]); return P; }
@@ -25,7 +26,7 @@ function skin(ctx, A, doorStep, sill) {
     Q(ctx, [X, ba, ZC + za], [X, bb, ZC + zb], [X, tb, ZC + zb], [X, ta, ZC + za], [58, 1.5, ZC]);
   }
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   origin(58, 0, -33);
   const lod = ctx.lod, R = rnd(71);
   const A = arch(lod >= 4 ? 4 : lod >= 3 ? 6 : 10);
@@ -118,7 +119,7 @@ export function geometry(ctx) {
     for (let k = 0; k < 6; k++) { const a = R() * TAU, r = R() * 0.22; gem(ctx, [x + Math.cos(a) * r, rim + 0.1 + R() * 0.06, z + Math.sin(a) * r], 0.04, 0.03, 0.04, 4, R()); }
     for (let k = 0; k < 3; k++) { const a = R() * TAU; gem(ctx, [x + Math.cos(a) * 0.27, rim - 0.2 - R() * 0.25, z + Math.sin(a) * 0.27], 0.035, 0.03, 0.035, 3, R()); }
   }
-}
+});
 export function collider(ctx) {
   origin(58, 0, -33);
   const A = arch(6);

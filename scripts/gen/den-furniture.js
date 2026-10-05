@@ -1,5 +1,6 @@
 import {mesh,paint,solid,bevel,lathe,beam,rod,plankedDisc} from './den-furniture-mesh.js';
 import {blanket} from './den-blanket.js';
+import { softened } from "./soften.js";
 // A parameterized family, not room scenery baked into one mesh. Dimensions are in metres.
 export const DEFAULTS={
   table:{radius:.8,height:.74,wood:'oak'},chair:{width:.55,depth:.55,height:.995,seat:.479,wood:'oak',linen:'flax'},
@@ -236,10 +237,10 @@ function can(m,p){
   m.ctx.flat();
 }
 const BUILDERS={table,chair,shelf,hearth,pendant:lamp,rug,stool,blanket,box:gameBox,star,note,stake,plant,can};
-export function geometry(ctx){
+export const geometry = softened(function geometry(ctx){
   const item=ctx.params.item||'table',p={...DEFAULTS[item],...ctx.params},m=mesh(ctx);
   ctx.flat();(BUILDERS[item]||table)(m,p);return m.finish();
-}
+});
 export function collider(ctx){
   const item=ctx.params.item||'table',p={...DEFAULTS[item],...ctx.params},m=mesh(ctx);
   if(['rug','blanket','box','star','pendant','note','stake','plant','can'].includes(item))return null;

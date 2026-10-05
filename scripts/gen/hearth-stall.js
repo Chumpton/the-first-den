@@ -1,9 +1,10 @@
 import { TAU, face, box, frustum, orb, strut, paint, tint } from "./hearth-mesh.js";
+import { softened } from "./soften.js";
 // A Hearthmere market stall: counter, four posts, a striped sloping canopy with a scalloped valance, and its goods.
 // params: kind fruit | flowers | potions, stripe 0-3. Front (the customer side) is -Z.
 const STRIPES = [["oklch(0.62 0.17 25)", "oklch(0.96 0.02 85)"], ["oklch(0.6 0.12 245)", "oklch(0.96 0.02 85)"], ["oklch(0.66 0.13 150)", "oklch(0.95 0.03 90)"], ["oklch(0.8 0.14 85)", "oklch(0.62 0.16 20)"]];
 const W = 1.5, D = 0.75;
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const P = ctx.params, lod = ctx.lod, S = STRIPES[(+P.stripe || 0) % 4];
   const yF = 2.3, yB = 2.75, zF = -D - 0.55, zB = D + 0.15;
   paint(ctx, "timber"); box(ctx, -W, 0, -D, W, 0.95, D, "b");
@@ -42,5 +43,5 @@ export function geometry(ctx) {
     }
     paint(ctx, "magic"); orb(ctx, 1.2, 1.2, -0.3, 0.14, 0.14, 0.14, 6, 3);
   }
-}
+});
 export function collider(ctx) { box(ctx, -W, 0, -D, W, 1.02, D); }

@@ -3,6 +3,7 @@
 // params.part: 'tower' (origin = ground centre, params.top = perch floor height) | 'aqueduct' (same frame) | 'water' (strip).
 import { TAU, paint, XF, lathe, solid, box, ngon, prism, obox, beam } from '../lib/town-kit.js';
 import { gem } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 const ST = 'oklch(0.95 0.02 82)', ST2 = 'oklch(0.91 0.028 74)', ST3 = 'oklch(0.87 0.03 70)';
 const SCORCH = 'cdn/texture-soot-scorched-pale-limestone.png';
 const BRONZE = 'oklch(0.84 0.11 78)', IRON = 'oklch(0.26 0.012 60)';
@@ -182,5 +183,5 @@ function water(ctx) {
   B.quad(1.5, y, -0.95, 1.5, y, 0.95, 19.8, y, 0.95, 19.8, y, -0.95);
 }
 
-export function geometry(ctx) { const p = ctx.params.part || 'tower'; if (p === 'water') return water(ctx); if (p === 'aqueduct') return aqueduct(ctx, false); tower(ctx, false); }
+export const geometry = softened(function geometry(ctx) { const p = ctx.params.part || 'tower'; if (p === 'water') return water(ctx); if (p === 'aqueduct') return aqueduct(ctx, false); tower(ctx, false); });
 export function collider(ctx) { const p = ctx.params.part || 'tower'; if (p === 'water') return null; if (p === 'aqueduct') return aqueduct(ctx, true); tower(ctx, true); }

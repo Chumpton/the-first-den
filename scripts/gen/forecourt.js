@@ -5,6 +5,7 @@
 // "dummy": the straw training dummy on its post (its own row: it is pressed, see scripts/training-dummy.js).
 import { paint, obox, beam, lathe, blob, TAU } from '../lib/yard-kit.js';
 import { ngon, prism } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 const STRAW = 'cdn/texture-golden-straw-bundle.png', SAND = 'cdn/texture-trodden-sandy-training-ground.png';
 const C = {
   lime: (r) => `oklch(${(0.87 + r * 0.07).toFixed(3)} 0.022 ${(76 + r * 16).toFixed(0)})`, grout: 'oklch(0.66 0.02 70)',
@@ -205,10 +206,10 @@ function dummy(ctx, lod) {
   if (lod <= 2) { paint(ctx, null, C.rope, 0.9); lathe(ctx, [[0.1, 1.5], [0.115, 1.53], [0.1, 1.56]], 8); col(ctx, C.slate, 0.7); for (const x of [-0.06, 0.06]) { beam(ctx, [x - 0.03, 1.72, -0.162], [x + 0.03, 1.66, -0.162], 0.012, 0.01); beam(ctx, [x - 0.03, 1.66, -0.162], [x + 0.03, 1.72, -0.162], 0.012, 0.01); } }
   col(ctx, C.cream, 0.7); disc(ctx, 0, 1.15, -0.303, 0.17, n); col(ctx, C.terra, 0.7); disc(ctx, 0, 1.15, -0.306, 0.11, n); col(ctx, C.cream, 0.7); disc(ctx, 0, 1.15, -0.309, 0.04, 8);
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params || {}, lod = ctx.lod || 1; ctx.flat();
   if (p.kind === 'yard') yard(ctx, p, lod); else if (p.kind === 'dummy') dummy(ctx, lod); else market(ctx, p, lod);
-}
+});
 export function collider(ctx) {
   const p = ctx.params || {};
   if (p.kind === 'dummy') { obox(ctx, 0, 0, 0, 0.55, 1.85, 0.55); return; }

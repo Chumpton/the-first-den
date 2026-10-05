@@ -1,3 +1,4 @@
+import { softened } from "./soften.js";
 // The home: a hexagonal three-storey cob house around a living tree. Origin = outside ground at the centre,
 // front door in the +Z face. Levels (local y): cellar B, ground G, attic A, roof deck D. A spiral stair winds round
 // the trunk from the cellar floor to the roof in one helix, 19 steps a storey.
@@ -662,5 +663,5 @@ function roofBloom(ctx) {
     }
   }
 }
-export function geometry(ctx) { if (ctx.params?.part === "roofbloom") return roofBloom(ctx); if (ctx.params?.part === "greenery") return greenery(ctx); build(ctx, false); }
+export const geometry = softened(function geometry(ctx) { if (ctx.params?.part === "roofbloom") return roofBloom(ctx); if (ctx.params?.part === "greenery") return greenery(ctx); build(ctx, false); });
 export function collider(ctx) { if (ctx.params?.part === "greenery" || ctx.params?.part === "roofbloom") return; build(ctx, true); }

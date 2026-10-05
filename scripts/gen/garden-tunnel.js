@@ -1,6 +1,7 @@
 // A walk-through garden tunnel: iron hoops on oak footings, oak runners, climbing vines in leaf,
 // hanging wisteria and white roses. Length runs along local Z; feet at ground, centred.
 import { beam, paint, box, gem, Q, T } from '../lib/garden-kit.js';
+import { softened } from "./soften.js";
 const LEN = 9, HW = 1.3, LEG = 1.15, N = 7, LTOT = 2 * LEG + Math.PI * HW;
 const GREENS = ['oklch(0.52 0.11 135)', 'oklch(0.6 0.12 128)', 'oklch(0.45 0.09 140)', 'oklch(0.66 0.12 122)', 'oklch(0.56 0.1 145)'];
 function S(u) { // arc-length along the hoop profile → [x, y], outward normal
@@ -17,7 +18,7 @@ function shell(ctx, segs, slices, off) {
     for (let i = 0; i < P.length - 1; i++) Q(ctx, [P[i][0], P[i][1], z0], [P[i + 1][0], P[i + 1][1], z0], [P[i + 1][0], P[i + 1][1], z1], [P[i][0], P[i][1], z1], o);
   }
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const lod = ctx.lod || 1, rnd = () => ctx.random(); ctx.flat();
   if (lod >= 5) { paint(ctx, null, GREENS[0], 0.9); shell(ctx, 3, 1, 0.1); return; }
   // hoops
@@ -78,7 +79,7 @@ export function geometry(ctx) {
     if (lod <= 1) { ctx.color('oklch(0.93 0.05 90)'); gem(ctx, c[0] + nx * 0.02, c[1] + 0.02, c[2], 0.038, 0.04, 0.01, 5); }
   }
   ctx.albedo(null);
-}
+});
 export function collider(ctx) {
   for (let i = 0; i < N; i++) for (const sx of [-1, 1]) { const x = sx * HW, z = hz(i); box(ctx, x - 0.09, 0, z - 0.09, x + 0.09, LEG + 0.2, z + 0.09); }
 }

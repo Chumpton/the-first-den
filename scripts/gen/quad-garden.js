@@ -3,6 +3,7 @@
 // params: { rx, rz, path, hub, gates: ["w","n","e"] }
 import { paint, obox, beam, lathe, Q, T, TAU } from '../lib/yard-kit.js';
 import { triangulate } from './home-garden-kit.js';
+import { softened } from "./soften.js";
 
 const P0 = (p) => ({ rx: p.rx ?? 7.4, rz: p.rz ?? 5, pw: (p.path ?? 1.2) / 2, hr: p.hub ?? 1.6, gates: p.gates ?? ['w', 'n', 'e'] });
 const GATE = { w: Math.PI, e: 0, n: -Math.PI / 2, s: Math.PI / 2 }; // angle in (x, z) plane, z = -north
@@ -118,7 +119,7 @@ function crops(ctx, kind, lod) {
 function ringXZ(g, a, k) { return [Math.cos(a) * g.rx * k, Math.sin(a) * g.rz * k]; }
 function gateOpen(g, a) { return g.gates.some((n) => { let d = Math.abs(a - GATE[n]); d = Math.min(d, TAU - d); return d * (g.rx + g.rz) / 2 < 0.95; }); }
 
-export function geometry(ctx0) {
+export const geometry = softened(function geometry(ctx0) {
   const ctx = lifted(ctx0, LIFT);
   const p = ctx.params || {}, g = P0(p), lod = ctx.lod || 1; ctx.flat();
   // lawn-coloured underlay so the old ground never shows through: a soft mulch oval
@@ -182,7 +183,7 @@ export function geometry(ctx0) {
     for (const sx of [-0.65, 0.65]) { obox(ctx, sx, 0, bz - 0.15, 0.07, 0.42, 0.07); obox(ctx, sx, 0, bz + 0.18, 0.07, 0.95, 0.07); }
   }
   ctx.albedo(null); ctx.emissive(null);
-}
+});
 
 export function collider(ctx0) {
   const ctx = lifted(ctx0, LIFT);

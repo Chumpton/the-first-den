@@ -2,6 +2,7 @@
 // World coordinates via origin(params.ox, 0, params.oz); feet on the ground (y 0.5).
 import { origin, Q, T, box, beam, lathe, gem, leaf, prism, paint, PAL, rnd, TAU, nrm } from "../lib/tg-kit.js";
 import { TG } from "../lib/data/tower-gardens.js";
+import { softened } from "./soften.js";
 const F = (x, y, z) => [x, y, z];
 function xf(cx, cz, yaw) { const r = (yaw * Math.PI) / 180, c = Math.cos(r), s = Math.sin(r); return (lx, ly, lz) => [cx + lx * c + lz * s, ly, cz - lx * s + lz * c]; }
 function lboxy(ctx, P, x0, y0, z0, x1, y1, z1) { const [a, b] = [P(x0, y0, (z0 + z1) / 2), P(x1, y0, (z0 + z1) / 2)]; beam(ctx, [a[0], (y0 + y1) / 2, a[2]], [b[0], (y0 + y1) / 2, b[2]], Math.abs(z1 - z0), Math.abs(y1 - y0)); }
@@ -151,10 +152,10 @@ function dressing(ctx) {
     paint(ctx, PAL.wire); for (const [a, b] of wire) beam(ctx, a, b, 0.015, 0.015, false);
     paint(ctx, { col: 'oklch(0.95 0.08 85)', rough: 0.4, em: [2.6, 1.7, 0.7] }); for (const p of bulbs) gem(ctx, p, 0.045, 0.06, 0.045, 4, 0.4); }
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params; origin(p.ox ?? 0, 0, p.oz ?? 0);
   ({ paths, fence, border, dressing })[p.item]?.(ctx);
-}
+});
 export function collider(ctx) {
   const p = ctx.params; origin(p.ox ?? 0, 0, p.oz ?? 0);
   if (p.item === "fence") {

@@ -1,4 +1,5 @@
 import { TAU, face, box, prism, frustum, orb, strut, ngon, annulus, ringPts, paint, tint } from "./hearth-mesh.js";
+import { softened } from "./soften.js";
 // Hearthmere's one-of-a-kind pieces, one family by params.kind: tree | fountain | windmill | sails | temple | bell | gatehouse | wall | pond | plot.
 const LEAF = ["oklch(0.5 0.12 145)", "oklch(0.6 0.14 128)", "oklch(0.72 0.15 108)", "oklch(0.82 0.14 95)"];
 function leaves(ctx) { ctx.albedo(null); ctx.roughness(0.9); ctx.metalness(0); ctx.emissive(0.22, 0.2, 0.04); }
@@ -179,7 +180,7 @@ function plot(ctx, P, lod) {
   }
 }
 const KINDS = { tree, fountain, windmill, sails, temple, bell, gatehouse, wall, pond, plot };
-export function geometry(ctx) { (KINDS[ctx.params.kind] || wall)(ctx, ctx.params, ctx.lod); }
+export const geometry = softened(function geometry(ctx) { (KINDS[ctx.params.kind] || wall)(ctx, ctx.params, ctx.lod); });
 export function collider(ctx) {
   const P = ctx.params;
   switch (P.kind) {

@@ -1,3 +1,4 @@
+import { softened } from "./soften.js";
 // The high-tech art studio under the cob house. One script, params.item picks the piece; every piece's origin is
 // its feet on the studio floor, its front facing -Z (wall pieces: back against the wall at z = 0 … +depth).
 const STEEL = "oklch(0.3 0.01 250)", ALU = "oklch(0.82 0.01 250)", WHITE = "oklch(0.97 0.005 250)", WALNUT = "oklch(0.62 0.07 55)";
@@ -378,13 +379,13 @@ function partition(ctx, p) {
   paint(ctx, STEEL, 0.35, 0.8); box(ctx, -W / 2, Hh, -0.035, W / 2, Hh + 0.03, 0.035);
   ctx.albedo(null); ctx.color(LEAF[1]); for (let i = 0; i < 10; i++) leaf(ctx, [-W / 2 + 0.1 + i * 0.17, Hh + 0.03, 0], [0.2, -0.8, (i % 2 ? 1 : -1) * 0.4], 0.14);
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params ?? {}, item = p.item;
   ctx.flat();
   const fn = { shell, screenwall, easel, frame, robotarm, holo, desk, shelf, lounge, rug, planters, mat, cable, pothos, floatshelf, toolrack, bench, paintcorner, arclamp, neon, partition }[item];
   if (!fn) return;
   fn(ctx, p);
-}
+});
 export function collider(ctx) {
   const item = ctx.params?.item, p2w = () => ctx.params?.w ?? 2.4;
   if (item === "planters") { const r1 = ctx.params?.r1 ?? 1.9, H = ctx.params?.h ?? 0.7; for (let k = 0; k < 6; k++) { const a = k * Math.PI / 3, b = (k + 1) * Math.PI / 3, m = a + Math.PI / 6; Q(ctx, [Math.cos(a) * r1, 0, Math.sin(a) * r1], [Math.cos(b) * r1, 0, Math.sin(b) * r1], [Math.cos(b) * r1, H, Math.sin(b) * r1], [Math.cos(a) * r1, H, Math.sin(a) * r1], [Math.cos(m), 0, Math.sin(m)]); T(ctx, [0, H, 0], [Math.cos(a) * r1, H, Math.sin(a) * r1], [Math.cos(b) * r1, H, Math.sin(b) * r1], [0, 1, 0]); } return; }

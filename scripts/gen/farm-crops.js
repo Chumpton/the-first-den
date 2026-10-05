@@ -2,6 +2,7 @@
 // params: crop (wheat|cabbage|lavender), w (planted depth), strip (tilled depth), x0a/x0b (west edge at local z 0 / z W), x1a/x1b (east edge).
 import { blob, leaf, TAU } from '../lib/yard-kit.js';
 import { solid, prism, gem } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 const SOIL = 'cdn/texture-dark-garden-soil-with-mulch.png';
 const CROPS = {
   wheat: { gap: 0.5, step: 0.38, h: 0.95, body: ['oklch(0.84 0.13 86)', 'oklch(0.78 0.14 76)', 'oklch(0.89 0.11 95)'], top: 'oklch(0.9 0.14 84)' },
@@ -9,7 +10,7 @@ const CROPS = {
   lavender: { gap: 0.82, step: 0.7, h: 0.62, body: ['oklch(0.62 0.05 145)', 'oklch(0.57 0.05 150)', 'oklch(0.67 0.04 135)'], top: 'oklch(0.6 0.16 300)' },
 };
 function paint(ctx, tex, col, r = 0.9) { ctx.albedo(tex); ctx.color(col); ctx.roughness(r); ctx.metalness(0); ctx.emissive(null); }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params, lod = ctx.lod || 1, crop = CROPS[p.crop] ? p.crop : 'wheat', C = CROPS[crop], R = () => ctx.random();
   const w = p.w ?? 2.6, strip = p.strip ?? 0.9, W = w + strip;
   const xa = (z) => p.x0a + (p.x0b - p.x0a) * z / W, xb = (z) => p.x1a + (p.x1b - p.x1a) * z / W;
@@ -58,5 +59,5 @@ export function geometry(ctx) {
       for (let k = 0; k < 7; k++) { const b = a + k * TAU / 7, rr = k === 6 ? 0 : 0.18 * s; gem(ctx, x + Math.cos(b) * rr, 0.3 * s + (k === 6 ? 0.08 : 0), z + Math.sin(b) * rr, 0.04, 0.17, 0.08, 3); }
     } else blob(ctx, x, 0.26 * s, z, 0.24 * s, 0.14, 0.24 * s, 5, R);
   }
-}
+});
 export function collider() { return null; }

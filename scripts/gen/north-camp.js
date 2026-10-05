@@ -2,6 +2,7 @@
 // A-frame tent, lantern pole, firewood) and a timber boardwalk lookout over the water. Origin = row feet (5, 0.5, -100);
 // local y 0 = world 0.5 = the deck top. Seats are their own firepit.js rows (E-sit), the flame + light the north-fire row.
 import { TAU, paint, obox, beam, solid, prism, ngon, Q, T, box, gem } from '../lib/yard-kit.js';
+import { softened } from "./soften.js";
 const rnd = (seed) => { let s = (seed * 9301 + 49297) % 233280; return () => (s = (s * 9301 + 49297) % 233280) / 233280; };
 const STONE = ['oklch(0.95 0.02 85)', 'oklch(0.91 0.025 80)', 'oklch(0.97 0.015 90)'];
 const BLOSSOM = { cherry: ['oklch(0.86 0.09 356)', 'oklch(0.92 0.06 350)', 'oklch(0.8 0.11 358)'], apple: ['oklch(0.97 0.02 30)', 'oklch(0.91 0.06 5)', 'oklch(0.76 0.1 132)'] };
@@ -102,11 +103,11 @@ function lookout(ctx, lod) {
     paint(ctx, null, 'oklch(0.95 0.1 85)', 0.3); ctx.emissive('oklch(0.86 0.15 75)'); obox(ctx, x, RH + 0.09, zS, 0.13, 0.24, 0.13); ctx.emissive(null);
   }
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params || {}, lod = ctx.lod || 1; ctx.flat();
   (p.trees || []).forEach((t, i) => tree(ctx, lod, t, i));
   camp(ctx, lod); lookout(ctx, lod);
-}
+});
 export function collider(ctx) {
   const p = ctx.params || {}, W = D.walk, K = D.deck, X = W.x;
   for (const [x, z, gy] of p.trees || []) box(ctx, x - 0.2, gy - 0.3, z - 0.2, x + 0.2, gy + 1.8, z + 0.2);

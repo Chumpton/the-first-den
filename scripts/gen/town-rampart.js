@@ -4,6 +4,7 @@
 // pts [x, z, y, post, open]: open = 1 leaves the segment from this point to the next unbuilt (a lane gap).
 // params: { h, t, pts: [[x, z, y, pier?], …] (one open run), items: [{ k, x, z, y, yaw, … }] }
 import { TEX } from "../lib/town-kit.js";
+import { softened } from "./soften.js";
 const STONE = ["#ddd4c2", "#d2c9b5", "#c6bca7", "#d8cfbb", "#bdb39e"], MOSS = "#98a473", MORTAR = "#a89e8a";
 const WOOD = "#c79a66", WOOD_D = "#8a6440", IRON = "#5a524a", HAY = "#e6c77a", HAY_D = "#c9a458", GRAIN = "#d9b98a";
 const HAYTEX = "cdn/texture-golden-straw-hay-bale.png";
@@ -141,7 +142,7 @@ function dock(ctx, it, lod) {
   if (lod <= 2 && it.cargo !== false) { crate(ctx, { y: it.y + h, s: 0.6 }, lod); }
 }
 const ITEMS = { barrel, crate, bales, haystore, woodpile, dock };
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const lod = Number(ctx.lod ?? 1), p = ctx.params;
   wall(ctx, p, lod);
   if (lod >= 4) return;
@@ -149,7 +150,7 @@ export function geometry(ctx) {
     const f = ITEMS[it.k]; if (!f) continue;
     frame(it.x, 0, it.z, it.yaw || 0); f(ctx, it, lod); ctx.albedo(null);
   }
-}
+});
 export function collider(ctx) {
   const p = ctx.params, H = Number(p.h ?? 0.95), T = Number(p.t ?? 0.55), pts = p.pts || [];
   for (let i = 0; i + 1 < pts.length; i++) {

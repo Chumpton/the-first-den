@@ -3,6 +3,7 @@
 // every piece shares its mesh. Feet at the waterline (y 0 = water), front toward −Z, metres. Parts branch on ctx.lod.
 import { paint, obox, beam, TAU } from '../lib/yard-kit.js';
 import { Q, T, solid, prism, ngon } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 
 const COL = {
   stone: ['oklch(0.74 0.015 80)', 'oklch(0.68 0.018 70)', 'oklch(0.79 0.012 90)'],
@@ -203,11 +204,11 @@ function boathouseCollider(ctx, p) {
 }
 const B = { rim, reeds: rim, lilies, stones, lanterns: dockLanterns, boathouse };
 const C = { stones: stonesCollider, boathouse: boathouseCollider };
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params || {}; ctx.flat();
   const f = B[p.kind]; if (f) f(ctx, p, ctx.lod || 1);
   ctx.albedo(null); ctx.emissive(null);
-}
+});
 export function collider(ctx) {
   const p = ctx.params || {}; const f = C[p.kind]; if (!f) return null; f(ctx, p);
 }

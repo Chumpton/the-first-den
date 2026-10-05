@@ -1,7 +1,8 @@
+import { softened } from "./soften.js";
 // A clump of wildflowers for the understory: thin stems, a few leaves, star-petalled heads in one colour family.
 // params: hue (oklch hue of the petals), chroma, light, height (m), heads (count), petals (count per head). Feet on the ground.
 const TAU = Math.PI * 2;
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   ctx.flat();
   const p = ctx.params, hue = p.hue ?? 320, ch = p.chroma ?? 0.16, L = p.light ?? 0.72, H = p.height ?? 0.4, heads = p.heads ?? 7, np = p.petals ?? 5;
   const lod = ctx.lod ?? 1, n = lod >= 4 ? Math.ceil(heads / 2) : heads;
@@ -27,4 +28,4 @@ export function geometry(ctx) {
     ctx.tri(tx - c, h + 0.016, tz, tx + c, h + 0.016, tz - c, tx + c, h + 0.016, tz + c);
     ctx.tri(tx - c, h + 0.013, tz, tx + c, h + 0.013, tz + c, tx + c, h + 0.013, tz - c);
   }
-}
+});

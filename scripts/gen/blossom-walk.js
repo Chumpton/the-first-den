@@ -3,6 +3,7 @@
 // two smooth stone benches. part "shrine": the vermilion torii over pathMaze and a Kasuga stone toro with a glowing firebox.
 import { TAU, paint, obox, solid, ngon, Q, T, box, gem } from '../lib/yard-kit.js';
 import { tree } from './north-camp.js';
+import { softened } from "./soften.js";
 const rnd = (seed) => { let s = (seed * 9301 + 49297) % 233280; return () => (s = (s * 9301 + 49297) % 233280) / 233280; };
 const PINK = ['oklch(0.9 0.07 352)', 'oklch(0.84 0.1 356)', 'oklch(0.95 0.04 345)', 'oklch(0.78 0.12 358)'];
 const VERM = 'oklch(0.6 0.19 33)', INK = 'oklch(0.26 0.015 250)', STONE = 'oklch(0.9 0.02 95)';
@@ -83,7 +84,7 @@ function patch(ctx, lod, [x, z, r, gy], k) {
     paint(ctx, null, PINK[i % 4], 0.95); ctx.quad(cx - c, y, cz - e, cx - e, y, cz + c, cx + c, y, cz + e, cx + e, y, cz - c); }
 }
 const loc = (p, o) => { const q = p.slice(); q[0] -= o[0]; q[1] -= o[1]; return q; };
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params, o = p.o || [0, 0], oy = p.oy ?? 0.5, lod = ctx.lod;
   if (p.part === 'shrine') {
     if (p.torii) { const t = p.torii; torii(ctx, lod, { ...t, c: [t.c[0] - o[0], t.c[1] - o[1]], gy: t.gy - oy }); }
@@ -93,7 +94,7 @@ export function geometry(ctx) {
   (p.patches || []).forEach((q, k) => { const l = loc(q, o); l[3] -= oy; patch(ctx, lod, l, k); });
   (p.trees || []).forEach((q, k) => { const l = loc(q, o); l[2] -= oy; tree(ctx, lod, l, 40 + k); });
   (p.benches || []).forEach((q) => { const l = loc(q, o); l[2] -= oy; bench(ctx, lod, l); });
-}
+});
 export function collider(ctx) {
   const p = ctx.params, o = p.o || [0, 0], oy = p.oy ?? 0.5;
   if (p.part === 'shrine') {

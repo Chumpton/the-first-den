@@ -6,6 +6,7 @@
 //  "willow":  stout leaning trunk, arching limbs and a leafy crown.   "curtain": the willow's hanging strands (material-willow-sway).
 //  "rushes":  bulrush clusters, merged (material-shore-sway).
 import { paint, TEX, beam, nrm, crs, Q, T, solid, prism, box, ngon } from '../lib/yard-kit.js';
+import { softened } from "./soften.js";
 const WICKER = 'cdn/texture-woven-honey-rattan-wicker.png', LINEN = 'cdn/texture-woven-linen-canvas.png';
 const ROCK = 'cdn/texture-weathered-pale-grey-limestone-rock.png', BARK = 'cdn/texture-willow-bark-deep-furrowed.png';
 const DECK = 'cdn/texture-weathered-honey-oak-deck-planks.png', ASHLAR = 'cdn/texture-weathered-pale-limestone-ashlar-blocks.png';
@@ -275,7 +276,7 @@ function rushes(ctx, W, spots, lod) {
   }
 }
 
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const P = ctx.params || {}, kind = P.kind || 'main', lod = ctx.lod || 1, o = P.o || [0, 0, 0], W = shift(ctx, o);
   ctx.flat();
   if (kind === 'wheel') return wheel(ctx, lod);
@@ -292,7 +293,7 @@ export function geometry(ctx) {
   lantern(ctx, W, 13.98, DY, 1.32, lod);
   pier(ctx, W, lod);
   rocks(ctx, W, P.rocks || [], lod);
-}
+});
 export function collider(ctx) {
   const P = ctx.params || {}, kind = P.kind || 'main', o = P.o || [0, 0, 0], W = shift(ctx, o);
   if (kind === 'wheel' || kind === 'curtain' || kind === 'rushes') return null;

@@ -4,6 +4,7 @@
 // params.part: 'gate' | 'plaque' (a 2.5 × 0.46 m board, origin at its centre; its ui carries the words).
 import { TAU, paint, XF, lathe, box, ngon, prism, obox, beam } from '../lib/town-kit.js';
 import { gem } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 const IRON = 'oklch(0.24 0.012 60)', LIME = 'oklch(0.95 0.02 82)', LIME2 = 'oklch(0.9 0.028 74)', GILT = 'oklch(0.84 0.11 80)';
 const PIER = 3.6, HINGE = 3.05, LEAF = 2.9, LAMP = [6.5, -0.4];
 const OPEN = { d: [0.866, -0.5], yaw: Math.PI / 6 }; // 150° open: along the front, clear of the pier
@@ -82,5 +83,5 @@ function plaque(ctx) {
   paint(ctx, null, 'oklch(0.22 0.015 60)', 0.6, 0.4);
   box(ctx, -1.25, -0.23, -0.02, 1.25, 0.23, 0.02);
 }
-export function geometry(ctx) { if (ctx.params.part === 'plaque') return plaque(ctx); gate(ctx, false); }
+export const geometry = softened(function geometry(ctx) { if (ctx.params.part === 'plaque') return plaque(ctx); gate(ctx, false); });
 export function collider(ctx) { if (ctx.params.part === 'plaque') return null; gate(ctx, true); }

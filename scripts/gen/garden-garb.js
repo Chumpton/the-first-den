@@ -1,3 +1,4 @@
+import { softened } from "./soften.js";
 // Garden-princess garb, worn on a humanoid's bones: params.item = crown (a ring of blooms and leaves, origin = the head
 // bone, sitting params.y above it) | skirt (a layered petal skirt, origin = the hips) | sash (a trailing vine of leaves).
 const V = (a, r, y) => [Math.cos(a) * r, y, Math.sin(a) * r];
@@ -14,7 +15,7 @@ function leaf(ctx, p, d, s, col) { ctx.color(col); const side = [-d[2], 0, d[0]]
   tri(ctx, p, [m[0] + sd[0] * s * 0.3, m[1], m[2] + sd[2] * s * 0.3], tip); tri(ctx, p, tip, [m[0] - sd[0] * s * 0.3, m[1], m[2] - sd[2] * s * 0.3]); }
 const PET = ['oklch(0.85 0.1 350)', 'oklch(0.95 0.03 90)', 'oklch(0.8 0.12 20)', 'oklch(0.78 0.1 300)', 'oklch(0.9 0.1 85)'];
 const HEART = 'oklch(0.85 0.15 90)', LEAF = ['oklch(0.55 0.12 145)', 'oklch(0.65 0.13 135)'];
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params || {}, item = p.item || 'crown';
   ctx.metalness(0); ctx.albedo(null);
   if (item === 'crown') {
@@ -41,4 +42,4 @@ export function geometry(ctx) {
     for (const [dx, col] of [[-0.05, PET[0]], [0, PET[4]], [0.05, PET[1]]]) blossom(ctx, [dx, y0 + 0.02, -0.15], 0, 0.03, col, HEART);
     return;
   }
-}
+});

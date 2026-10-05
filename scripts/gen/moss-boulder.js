@@ -1,6 +1,7 @@
+import { softened } from "./soften.js";
 // A mossy forest boulder: one lumpy flat-shaded stone, moss on its crown. params: { size, squash, moss }. Feet at the ground.
 const STONE = ["#8d8a80", "#9c988c", "#aba699"], MOSS = ["#5f7f3c", "#6e8f44", "#7f9d4d"];
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const lod = Number(ctx.lod ?? 1), s = Number(ctx.params.size ?? 1), sq = Number(ctx.params.squash ?? 0.62), mossy = Number(ctx.params.moss ?? 0.45);
   const seg = lod >= 4 ? 5 : lod >= 3 ? 6 : 9, lat = lod >= 4 ? 3 : lod >= 3 ? 4 : 6, rows = [];
   ctx.albedo(lod <= 2 ? "cdn/texture-weathered-pale-limestone-surface.png" : null); ctx.roughness(0.95); ctx.flat();
@@ -20,5 +21,5 @@ export function geometry(ctx) {
     ctx.color(i / lat < mossy ? MOSS[(i + j) % 3] : STONE[(i * 3 + j) % 3]);
     ctx.quad(...a, ...d, ...c, ...b);
   }
-}
+});
 export function collider(ctx) { const s = Number(ctx.params.size ?? 1), sq = Number(ctx.params.squash ?? 0.62); return { kind: "box", width: s * 1.6, height: s * sq * 1.8, depth: s * 1.4 }; }

@@ -2,6 +2,7 @@
 // leading into a small mossy stone hideout (z 2.4..6.2) with an open top screened by arching ferns, glowing mushrooms and a
 // fairy lantern. "chest": the egg chest's body (front -Z); "lid": its lid, origin on the back hinge, pitch opens it.
 import { TAU, paint, obox, beam, solid, prism, ngon, Q, T, box } from '../lib/yard-kit.js';
+import { softened } from "./soften.js";
 const LOG = { cy: 0.9, R: 1.35, r: 1.15, z1: 2.4 };
 const CH = { x: 1.8, z0: 2.4, z1: 6.2, t: 0.45, h: 1.7 };
 function rnd(seed) { let s = (seed * 9301 + 49297) % 233280; return () => (s = (s * 9301 + 49297) % 233280) / 233280; }
@@ -114,12 +115,12 @@ function lid(ctx, lod) {
   paint(ctx, null, 'oklch(0.33 0.01 250)', 0.45, 0.8);
   for (const x of [-0.2, 0.2]) { const A = loop(x - 0.025).map(p => [p[0], p[1] * 1.06 + 0.003, (p[2] + rr) * 1.03 - rr]), B = loop(x + 0.025).map(p => [p[0], p[1] * 1.06 + 0.003, (p[2] + rr) * 1.03 - rr]); solid(ctx, A, B); }
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params || {}, lod = ctx.lod || 1; ctx.flat();
   if (p.kind === 'chest') return chest(ctx, lod);
   if (p.kind === 'lid') return lid(ctx, lod);
   log(ctx, lod); if (lod <= 4) chamber(ctx, lod);
-}
+});
 export function collider(ctx) {
   const p = ctx.params || {};
   if (p.kind === 'chest') { box(ctx, -0.31, 0, -0.21, 0.31, 0.3, 0.21); return; }

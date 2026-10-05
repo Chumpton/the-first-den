@@ -1,3 +1,4 @@
+import { softened } from "./soften.js";
 // Mirror Tarn: one family for every made thing at the tarn (82,78). params.part picks the piece; params.v seeds variants.
 // Frames: feet at y 0, front -Z. Knoll/falls frame: the water runs toward +Z (the object is yawed so +Z faces the lake).
 const TEX = {
@@ -305,7 +306,7 @@ function rockItem(e, p) {
     ? { x: 0, z: 0, rx: 1.1 + R() * 0.6, rz: 0.6 + R() * 0.3, h: 0.3 + R() * 0.15, sink: 0.25, seed: p.v || 5, n: 8, flat: true, moss: 0.97 }
     : { x: 0, z: 0, rx: 0.7 + R() * 0.3, rz: 0.6 + R() * 0.3, h: 0.7 + R() * 0.4, sink: 0.3, seed: p.v || 5, n: 8, moss: 0.4 });
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params || {}, lod = ctx.lod || 1, e = emitter(ctx, true);
   ctx.flat();
   switch (p.part) {
@@ -321,7 +322,7 @@ export function geometry(ctx) {
     case "plaque": plaque(e); break;
     case "rock": rockItem(e, p); break;
   }
-}
+});
 export function collider(ctx) {
   const p = ctx.params || {}, e = emitter(ctx, false);
   switch (p.part) {

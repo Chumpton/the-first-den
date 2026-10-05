@@ -3,6 +3,7 @@
 // params.kind "leaf": one wrought-iron door, hinge at the origin, running params.w along local X * params.dir.
 import { paint, obox, beam, TAU } from '../lib/yard-kit.js';
 import { box, prism, ngon, gem } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 const LIME = () => 'oklch(0.9 0.025 85)', IRON = 'oklch(0.3 0.015 60)';
 function pier(ctx, x, s, h, lod, rnd) {
   paint(ctx, 'stone', 'oklch(0.86 0.025 80)', 0.9); obox(ctx, x, 0, 0, s + 0.16, 0.35, s + 0.16);           // plinth
@@ -62,7 +63,7 @@ function leaf(ctx, p, lod) { // wrought iron: stiles, three rails, spear-topped 
     obox(ctx, X(w - 0.2), 1.0, -0.07, 0.06, 0.3, 0.05); obox(ctx, X(w - 0.2), 1.0, 0.07, 0.06, 0.3, 0.05);          // pull rings, both faces
   }
 }
-export function geometry(ctx) { const p = ctx.params || {}, lod = ctx.lod || 1; ctx.flat(); if (p.kind === 'leaf') leaf(ctx, p, lod); else frame(ctx, p, lod); ctx.albedo(null); }
+export const geometry = softened(function geometry(ctx) { const p = ctx.params || {}, lod = ctx.lod || 1; ctx.flat(); if (p.kind === 'leaf') leaf(ctx, p, lod); else frame(ctx, p, lod); ctx.albedo(null); });
 export function collider(ctx) {
   const p = ctx.params || {};
   if (p.kind === 'leaf') { const w = p.w ?? 2.2, d = p.dir ?? 1; box(ctx, Math.min(0, w * d), 0, -0.07, Math.max(0, w * d), (p.h ?? 2.7) + 0.2, 0.07); return; }

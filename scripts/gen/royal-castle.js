@@ -3,6 +3,7 @@
 // | keep (row 0,14,277, the throne hall, spire and courtyard fountain) | tower (a corner tower, origin at its foot).
 // Castle parts stand on the plateau (terrain flatten at y 14). −Z faces south, toward the market.
 import { paint, crs } from '../lib/town-kit.js';
+import { softened } from "./soften.js";
 const TAU = Math.PI * 2;
 const LIME = 'oklch(0.96 0.012 85)', STONE = 'oklch(0.93 0.015 80)', GOLD = 'oklch(0.82 0.13 85)', IRON = 'oklch(0.3 0.012 260)';
 const SLIT = 'oklch(0.22 0.015 260)', ROOFT = 'oklch(0.97 0.02 262)', CARPET = 'oklch(0.42 0.14 262)';
@@ -379,7 +380,7 @@ function keepCollider(P) {
   for (const x of [-6, 6]) for (const z of [-4.5, -0.5, 3.2]) box(P, x - 0.7, 0, z - 0.7, x + 0.7, 15, z + 0.7);
   cyl(P, 0, FZ, -0.5, 0.8, 3.4, 3.4, 8, true);
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const L = ctx.lod || 1, part = ctx.params.part || 'keep';
   if (part === 'cliff') { cliffFaces(ctx, L); if (L <= 3) rimParapet(ctx, L); }
   else if (part === 'stair') stair(ctx, L);
@@ -388,7 +389,7 @@ export function geometry(ctx) {
   else if (part === 'tower') tower(ctx, L, { r: 5.5, H: 24, cone: 16 });
   else keep(ctx, L);
   return { uvProjection: 'triplanar' };
-}
+});
 export function collider(ctx) {
   const part = ctx.params.part || 'keep';
   if (part === 'cliff') { cliffFaces(ctx, 4); rimParapet(ctx, 4); }

@@ -2,6 +2,7 @@
 // leafy core, sunflowers nodding out of the rows (thick on the outer border, a few inside). Origin = maze centre at ground.
 import { mazeWalls } from '../lib/maze.js';
 import { box } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 const TAU = Math.PI * 2;
 function stalk(ctx, x, z, h, r0, lx, lz, n) {
   const ring = (y, r, t) => { const a = []; for (let i = 0; i < n; i++) { const q = (i / n) * TAU; a.push([x + lx * t + Math.cos(q) * r, y, z + lz * t + Math.sin(q) * r]); } return a; };
@@ -60,7 +61,7 @@ function sunflower(ctx, x, z, lod, face) {
     ctx.tri(...P(a - w, R * 0.95), ...P(a + w, R * 0.95), ...P(a, R * 2.1, -0.03));
   }
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = { n: 11, cell: 3, seed: 7, ...ctx.params }, lod = ctx.lod ?? 1, M = mazeWalls(p);
   ctx.flat(); ctx.roughness(0.9);
   // the leafy core every wall has: you never see daylight through a row
@@ -83,7 +84,7 @@ export function geometry(ctx) {
       else corn(ctx, x, z, lod);
     }
   }
-}
+});
 export function collider(ctx) {
   const p = { n: 11, cell: 3, seed: 7, ...ctx.params }, M = mazeWalls(p), t = 0.4;
   for (const [x0, z0, x1, z1] of M.walls) box(ctx, Math.min(x0, x1) - t, -0.3, Math.min(z0, z1) - t, Math.max(x0, x1) + t, 3.2, Math.max(z0, z1) + t);

@@ -1,5 +1,6 @@
 // Lumenvale's civic pieces, one family by params.kind: plaza, spire, shards, canal, bridge, garden, fountain, wall, lamp, banner, books.
 import { kit, C, TEX, GLOW, HUE, yawToward } from "./lumen-kit.js";
+import { softened } from "./soften.js";
 const R2 = Math.PI / 180, pol = (r, a, y = 0) => [Math.cos(a * R2) * r, y, Math.sin(a * R2) * r];
 const SPIRE = "oklch(0.9 0.07 200)", SPIRE_GLOW = [0.22, 0.7, 0.78], WATER = "oklch(0.6 0.08 212)", CLOTH = { lilac: "oklch(0.7 0.13 305)", teal: "oklch(0.72 0.1 195)" };
 function sector(K, r0, r1, a0, a1, y0, y1, n, sides = true) {
@@ -145,10 +146,10 @@ const B = {
     K.at();
   },
 };
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params, K = kit(ctx), rnd = () => ctx.random();
   B[p.kind]?.(K, ctx.lod, rnd, false, p);
-}
+});
 export function collider(ctx) {
   const p = ctx.params, K = kit(ctx, true), rnd = () => 0.5, k = p.kind;
   if (k === "shards" || k === "books") return null;

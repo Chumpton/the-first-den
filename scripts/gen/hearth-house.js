@@ -1,4 +1,5 @@
 import { TAU, face, box, prism, frustum, orb, strut, ngon, annulus, ringPts, paint } from "./hearth-mesh.js";
+import { softened } from "./soften.js";
 // Hearthmere's houses, one family: cream plaster over honey timber framing, round amber windows, deep thatch or red tile.
 // params: width (x), depth (z), floors 1-3, roof thatch|tile, interior "" | tavern | bakery | workshop | home (enterable: door hole, floor, furnishings).
 // Origin mid-floor at ground, door centred in the -Z face, ridge along X.
@@ -126,7 +127,7 @@ function storey(ctx, D, hx, hz, y0, y1, ground, lod, wins) {
     }
   }
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const D = dims(ctx.params), lod = ctx.lod, { w, d, F, top, ew, ed, kind } = D;
   if (lod >= 4) {
     paint(ctx, "plaster"); box(ctx, -w / 2, 0, -d / 2, w / 2, H, d / 2, "b"); if (F > 1) box(ctx, -ew, H, -ed, ew, top, ed, "b");
@@ -183,7 +184,7 @@ export function geometry(ctx) {
     paint(ctx, "stone"); box(ctx, cx - 0.42, top - 0.6, cz - 0.42, cx + 0.42, ytop, cz + 0.42, "b"); box(ctx, cx - 0.52, ytop, cz - 0.52, cx + 0.52, ytop + 0.14, cz + 0.52);
   }
   if (kind && lod <= 2) for (const it of interior(D)) drawItem(ctx, it, false);
-}
+});
 export function collider(ctx) {
   const D = dims(ctx.params), { w, d, F, top, ew, ed, kind } = D;
   if (!kind) { box(ctx, -w / 2, 0, -d / 2, w / 2, top, d / 2, "b"); return; }

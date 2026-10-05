@@ -3,6 +3,7 @@
 // params.kind "gate": an open gateway params.w wide along local X (centred), two tall posts, a timber lintel with a lantern
 // hook, and two wire leaves swung open outward. Every gap in the ring is a gate so roads and the maze path stay open.
 import { Q, solid, box } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 const WOOD = 'cdn/texture-weathered-silver-grey-fence-timber.png';
 const H = 2.5, STRANDS = [0.12, 0.4, 0.7, 1.0, 1.3, 1.6, 1.9, 2.2];
 function tint(ctx, base = 0.86) { const l = base + ctx.random() * 0.08; ctx.color(`oklch(${l.toFixed(3)} 0.014 ${Math.round(55 + ctx.random() * 35)})`); }
@@ -166,11 +167,11 @@ function stonePiers(ctx, hw) {
   }
   ctx.albedo(null);
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params || {}, lod = ctx.lod ?? 1;
   ctx.flat(); ctx.roughness(0.9);
   if (p.kind === 'gate') { if (p.style === 'stone') stonePiers(ctx, p.w ?? 9); else gate(ctx, p.w ?? 9, lod); } else if (p.style === 'stone') stoneRun(ctx, p.pts || [], lod, p); else run(ctx, p.pts || [], lod);
-}
+});
 export function collider(ctx) {
   const p = ctx.params || {};
   if (p.kind === 'gate' && p.style === 'stone') { const hw = (p.w ?? 9) / 2; for (const s of [-1, 1]) box(ctx, s * (hw + 0.45) - 0.5, -0.4, -0.5, s * (hw + 0.45) + 0.5, 4.1, 0.5); return; }

@@ -2,6 +2,7 @@
 // (rise 0.25, tread 0.25 rad ≈ 0.6 m at mid-step, 44 steps) up to a timber lookout at 11 m under a living moss roof.
 // Origin: ground at the shaft axis; the arched door faces −Z. params.part "crystal" draws the floating rune crystal alone.
 import { Q, T, solid, prism, ngon, gem, paint, beam, lathe, blob, leaf, TAU } from '../lib/yard-kit.js';
+import { softened } from "./soften.js";
 
 export const PLAT = 11;            // platform floor top
 export const RISE = 0.25, STEP_A = 0.25, STEPS = 44;
@@ -40,7 +41,7 @@ function crystal(ctx) {
   ctx.emissive(null);
 }
 
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   if (ctx.params?.part === 'crystal') return crystal(ctx);
   const lod = ctx.lod ?? 1, rnd = () => ctx.random();
   ctx.flat();
@@ -232,7 +233,7 @@ export function geometry(ctx) {
     }
   }
   ctx.albedo(null); ctx.emissive(null);
-}
+});
 
 export function collider(ctx) {
   if (ctx.params?.part === 'crystal') return null;

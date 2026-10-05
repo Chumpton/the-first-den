@@ -2,6 +2,7 @@
 // tree (with rope swing) · well · firepit (+ log benches) · garden · oven · notice · washline · flowers {beds} ·
 // stones {pts} · trail {L, R, skip, rails, lamps, bench} · crags {rocks} · post (finger-post) · pine · boulder
 import { TX, TAU, paint, box, cyl, sph, rock, annulus, oct, add, sub, mul, norm } from '../lib/village-mesh.js'
+import { softened } from "./soften.js";
 const WALNUT = 'oklch(0.72 0.05 55)', OAK = 'oklch(0.9 0.06 75)', BARK = 'oklch(0.62 0.05 55)', STONE = 'oklch(0.93 0.02 80)'
 const GREENS = ['oklch(0.52 0.12 140)', 'oklch(0.58 0.13 135)', 'oklch(0.66 0.14 128)', 'oklch(0.74 0.14 120)']
 const FLOWERS = ['oklch(0.8 0.14 20)', 'oklch(0.9 0.14 95)', 'oklch(0.78 0.1 300)', 'oklch(0.97 0.02 90)', 'oklch(0.75 0.15 45)', 'oklch(0.72 0.14 350)']
@@ -188,11 +189,11 @@ const B = {
   },
   boulder(ctx, p, lod) { ctx.albedo(TX.stone); ctx.roughness(1); rock(ctx, 0, 0.35, 0, 0.9, 0.7, 0.75, lod <= 2 ? 7 : 5, lod <= 2 ? 5 : 3, 'oklch(0.88 0.015 80)', 'oklch(0.7 0.11 130)') },
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params ?? {}
   ctx.flat()
   ;(B[p.item] ?? B.boulder)(ctx, p, ctx.lod)
-}
+});
 export function collider(ctx) {
   const p = ctx.params ?? {}
   switch (p.item) {

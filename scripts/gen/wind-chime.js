@@ -3,7 +3,8 @@
 // params: tubes (count, default 6), drop (cord length m, default 0.35), tint (sail hue). No collider: it hangs out of reach.
 import { paint, obox, beam, lathe, TAU } from '../lib/yard-kit.js';
 import { prism, ngon, gem } from '../lib/road-solid.js';
-export function geometry(ctx) {
+import { softened } from "./soften.js";
+export const geometry = softened(function geometry(ctx) {
   ctx.flat();
   const p = ctx.params, lod = ctx.lod ?? 1, n = p.tubes ?? 6, drop = p.drop ?? 0.35, rnd = () => ctx.random();
   const seg = lod <= 2 ? 10 : 6;
@@ -29,5 +30,5 @@ export function geometry(ctx) {
   paint(ctx, 'oak', `oklch(0.95 0.03 ${p.tint ?? 75})`, 0.8);
   const sy = top - 0.62; obox(ctx, 0, sy - 0.17, 0, 0.1, 0.17, 0.012);
   if (lod <= 2) { paint(ctx, null, 'oklch(0.55 0.09 195)', 0.8); obox(ctx, 0, sy - 0.12, 0, 0.06, 0.03, 0.016); gem(ctx, 0, sy - 0.175, 0, 0.02, 0.01, 0.015, 4); }
-}
+});
 export function collider() { return null; }

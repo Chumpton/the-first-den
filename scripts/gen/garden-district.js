@@ -6,6 +6,7 @@ import { TAU, COL, FLOWERS, paint, XF, solid, obox, beam, blob, prism, ngon, lat
 import { gem } from '../lib/yard-kit.js';
 import { raceme } from '../lib/bloom-kit.js';
 import G from '../lib/data/garden-district.json';
+import { softened } from "./soften.js";
 const LEAF = ['oklch(0.62 0.12 138)', 'oklch(0.55 0.11 146)', 'oklch(0.68 0.13 128)'];
 const ROSE = ['oklch(0.7 0.15 8)', 'oklch(0.88 0.07 45)', 'oklch(0.6 0.17 12)', 'oklch(0.82 0.1 355)'];
 const BLOOM = [...FLOWERS, 'oklch(0.68 0.13 300)', 'oklch(0.7 0.12 250)'];
@@ -361,14 +362,14 @@ function dressing(ctx, lod, R) {
   if (lod <= 3) for (const s of G.strands) strand(ctx, ctx, s, 0.3, lod);
 }
 function pondwater(ctx) { const p = G.pond, n = 24; for (let i = 0; i < n; i++) { const a = i / n * TAU, b = (i + 1) / n * TAU; T(ctx, [p.x, 0.12, p.z], [p.x + Math.cos(a) * (p.rx + 0.1), 0.12, p.z + Math.sin(a) * (p.rz + 0.1)], [p.x + Math.cos(b) * (p.rx + 0.1), 0.12, p.z + Math.sin(b) * (p.rz + 0.1)], [p.x, -1, p.z]); } }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const it = ctx.params.item || 'ground', lod = ctx.lod || 1, R = () => ctx.random();
   if (it === 'ground') ground(ctx, lod, R);
   else if (it === 'fountain') fountain(ctx, lod, R);
   else if (it === 'stalls') for (const s of G.stalls) stall(ctx, s, lod, R);
   else if (it === 'dressing') dressing(ctx, lod, R);
   else if (it === 'pondwater') pondwater(ctx);
-}
+});
 export function collider(ctx) {
   const it = ctx.params.item || 'ground', P = ctx;
   if (it === 'pondwater') return null;

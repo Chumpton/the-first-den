@@ -3,6 +3,13 @@
 // belongs to, so canopies, hedges and bushes light as soft pillows; smooth faces stay smooth; flat stay flat.
 // Wrap: export const geometry = softened(function (ctx) { ... });
 const parseHex = (s) => { if (typeof s !== "string" || s[0] !== "#") return null; let h = s.slice(1); if (h.length === 3) h = [...h].map((c) => c + c).join(""); const n = parseInt(h.slice(0, 6), 16); return [(n >> 16 & 255) / 255, (n >> 8 & 255) / 255, (n & 255) / 255]; };
+function parseColor(s) {
+  if (typeof s !== "string") return null;
+  const m = s.match(/oklch\(\s*([\d.]+)(%?)\s+([\d.]+)\s+([\d.]+)/);
+  if (m) { const L = Number(m[1]) / (m[2] ? 100 : 1), C = Number(m[3]), H = Number(m[4]); return { L, C, H }; }
+  const c = parseHex(s); return c ? { rgb: c } : null;
+}
+const leafyAny = (c) => !c ? false : c.rgb ? leafy(c.rgb) : (c.C > 0.04 && c.H >= 105 && c.H <= 165 && c.L > 0.2);
 const leafy = (c) => c && c[1] > c[0] * 1.08 && c[1] > c[2] * 1.05 && c[1] > 0.12;
 const MAXRUN = 7; // metres: a leaf mass wider than this starts a new mass
 export function softened(geometry) {
@@ -11,13 +18,13 @@ export function softened(geometry) {
     const real = { tri: ctx.tri.bind(ctx), smooth: ctx.smooth.bind(ctx), flat: ctx.flat.bind(ctx), color: ctx.color.bind(ctx) };
     const over = {};
     const proxy = new Proxy(ctx, { get(t, k) { if (k in over) return over[k]; const v = t[k]; return typeof v === "function" ? v.bind(t) : v; } });
-    over.color = (...a) => { col = a.length >= 3 && typeof a[0] === "number" ? [a[0], a[1], a[2]] : parseHex(a[0]); return real.color(...a); };
+    over.color = (...a) => { col = a.length >= 3 && typeof a[0] === "number" ? { rgb: [a[0], a[1], a[2]] } : parseColor(a[0]); return real.color(...a); };
     over.smooth = () => { mode = "smooth"; return real.smooth(); };
     over.flat = () => { mode = "flat"; return real.flat(); };
     const emit = (a, b, c) => {
       real.tri(...a, ...b, ...c);
       let kind = mode, mass = null;
-      if (leafy(col)) {
+      if (leafyAny(col)) {
         const cx = (a[0] + b[0] + c[0]) / 3, cy = (a[1] + b[1] + c[1]) / 3, cz = (a[2] + b[2] + c[2]) / 3;
         if (!run || Math.hypot(cx - run.o[0], cy - run.o[1], cz - run.o[2]) > MAXRUN) run = { o: [cx, cy, cz], s: [0, 0, 0], n: 0 };
         run.s[0] += cx; run.s[1] += cy; run.s[2] += cz; run.n++; kind = "leaf"; mass = run;

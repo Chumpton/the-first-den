@@ -2,6 +2,7 @@
 // params: { shape: "rect"|"round", w, d, edge: "stone"|"timber", palette: name | { back: [[kind,color],...], front: [...] } }
 // local -Z is the bed's front (the side people see); for a round bed the centre is "back"
 import { paint, beam, obox, blob, leaf, prism, ngon, gem, nrm, crs, TAU } from '../lib/yard-kit.js';
+import { softened } from "./soften.js";
 export const PALETTES = {
   cool: { back: [['foxglove', 'oklch(0.76 0.12 350)'], ['cosmos', 'oklch(0.93 0.03 340)'], ['foxglove', 'oklch(0.94 0.02 95)']], front: [['lavender', 'oklch(0.6 0.13 295)'], ['coneflower', 'oklch(0.72 0.13 350)'], ['lavender', 'oklch(0.64 0.12 290)']] },
   warm: { back: [['cosmos', 'oklch(0.76 0.16 55)'], ['coneflower', 'oklch(0.74 0.15 50)'], ['cosmos', 'oklch(0.86 0.15 90)']], front: [['marigold', 'oklch(0.72 0.18 55)'], ['marigold', 'oklch(0.85 0.16 85)'], ['marigold', 'oklch(0.7 0.17 45)']] },
@@ -55,7 +56,7 @@ function plant(ctx, lod, kind, col, x, z, s, rnd) {
     for (let i = 0; i < n; i++) { const a = i / n * TAU + rnd(), r = 0.1 * s * (0.4 + rnd() * 0.6); gem(ctx, x + Math.cos(a) * r, (0.2 + rnd() * 0.06) * s, z + Math.sin(a) * r, 0.05, 0.035, 0.02, lod <= 2 ? 6 : 4); }
   }
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params || {}, lod = ctx.lod || 1, round = p.shape === 'round', w = p.w ?? 2.4, d = round ? w : (p.d ?? 0.9), R = w / 2;
   const pal = typeof p.palette === 'object' && p.palette ? p.palette : PALETTES[p.palette || 'cool'] || PALETTES.cool;
   const edge = p.edge || 'stone', rnd = () => ctx.random();
@@ -104,5 +105,5 @@ export function geometry(ctx) {
     }
   }
   ctx.albedo(null);
-}
+});
 export function collider() { return null; }

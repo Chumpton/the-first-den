@@ -6,6 +6,7 @@
 import { Q } from '../lib/road-solid.js';
 import { lathe } from '../lib/garden-kit.js';
 import { BARK, rng, mossPad, fernClump, mushroom } from '../lib/bloom-kit.js';
+import { softened } from "./soften.js";
 const bark = (c) => { c.albedo(BARK); c.color('oklch(0.72 0.04 60)'); c.roughness(0.95); c.metalness(0); c.emissive(null); };
 function root(ctx, a, reach, w, r0, lod, R) {
   const N = lod <= 1 ? 8 : lod <= 3 ? 5 : 3, d = [Math.cos(a), Math.sin(a)], s = [-d[1], d[0]], bend = (R() - 0.5) * 0.7;
@@ -22,7 +23,7 @@ function root(ctx, a, reach, w, r0, lod, R) {
   for (let i = 0; i < N; i++) { const o = [ridge[i][0], -0.3, ridge[i][2]]; for (let k = 0; k < 4; k++) Q(ctx, secs[i][k], secs[i][k + 1], secs[i + 1][k + 1], secs[i + 1][k], o); }
   return ridge;
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const lod = ctx.lod || 1, p = ctx.params, R = rng(ctx.seed || 3), TR = p.trunkR ?? 1.35; ctx.flat();
   // collar: hides the prism footing and the shelf where the trunk steps in
   bark(ctx);
@@ -43,5 +44,5 @@ export function geometry(ctx) {
     mushroom(ctx, Math.cos(aa) * rr, 0, Math.sin(aa) * rr, h, h * (0.7 + R() * 0.4), lod, mi++);
   }
   ctx.albedo(null);
-}
+});
 export function collider() { return null; }

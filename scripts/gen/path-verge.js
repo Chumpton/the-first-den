@@ -2,6 +2,7 @@
 // path's edge. The positions are chosen at spawn (where the ground is grass, never paving) and ride in params.items as
 // [x, y, z, kind, size, yaw] local to the row's feet: kind 0 = clover patch, 1 = pebble cluster. One merged mesh per path.
 import { gem } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 const LEAF = ['oklch(0.58 0.12 140)', 'oklch(0.52 0.11 145)', 'oklch(0.64 0.12 135)'];
 const STONE = ['oklch(0.88 0.02 85)', 'oklch(0.78 0.02 75)', 'oklch(0.68 0.02 65)', 'oklch(0.92 0.015 90)'];
 function clover(ctx, x, y, z, s, lod, rnd) {
@@ -28,11 +29,11 @@ function pebbles(ctx, x, y, z, s, lod, rnd) {
     gem(ctx, x + Math.cos(a) * r, y + w * 0.1, z + Math.sin(a) * r, w, w * (0.35 + rnd() * 0.3), w * 0.25, lod <= 2 ? 6 : 4);
   }
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   ctx.flat();
   const lod = ctx.lod ?? 1, items = ctx.params.items ?? [], rnd = () => ctx.random();
   if (lod >= 4) { ctx.color(STONE[1]); const far = items.filter(it => it[3]).slice(0, 6); (far.length ? far : [items[0] ?? [0, 0, 0]]).forEach(([x, y, z, k, sz]) => gem(ctx, x, y, z, 0.07 * (sz ?? 1), 0.03, 0.02, 4)); return; }
   if (!items.length) { gem(ctx, 0, 0, 0, 0.05, 0.02, 0.015, 4); return; }
   items.forEach(([x, y, z, k, s], i) => { if (lod === 3 && i % 2) return; (k ? pebbles : clover)(ctx, x, y, z, s, lod, rnd); });
-}
+});
 export function collider() { return null; }

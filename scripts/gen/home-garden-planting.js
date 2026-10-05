@@ -1,5 +1,6 @@
 import { GARDEN as G } from '../../templates/home-garden.js';
 import { V, tube, leaf, face } from './home-garden-kit.js';
+import { softened } from "./soften.js";
 function grass(c,x,y,z,h){
   for(let i=0;i<7;i++){const a=i*2.39996323+c.random()*.6,l=h*(.5+c.random()*.7),r=.06+c.random()*.08,dx=Math.cos(a),dz=Math.sin(a),w=.008+c.random()*.01;c.color(G.meadowColors[i%G.meadowColors.length]);face(c,[V(x-dz*w,y,z+dx*w),V(x+dz*w,y,z-dx*w),V(x+dx*r*.55,y+l*.62,z+dz*r*.55),V(x+dx*r,y+l,z+dz*r)],V(-dz,.3,dx));}
 }
@@ -21,7 +22,7 @@ function fern(c){
     }
   }
 }
-export function geometry(c){
+export const geometry = softened(function geometry(c){
   c.flat();c.roughness(.92);
   if(c.params.kind==='fern'){fern(c);return;}
   c.albedo('scripts/tex-garden-leaf.js');
@@ -33,5 +34,5 @@ export function geometry(c){
     const a=c.random()*Math.PI*2,r=Math.sqrt(c.random()),x=Math.cos(a)*r*rx,z=Math.sin(a)*r*rz,y=c.groundY(x,z)-.026;
     if(i<tufts){c.albedo('scripts/tex-garden-leaf.js');grass(c,x,y,z,grassHeight+c.random()*grassVariation);}else daisy(c,x,y,z,flowerHeight+c.random()*flowerVariation);
   }
-}
+});
 export function collider(){return null;}

@@ -1,6 +1,7 @@
 // A wild mushroom cluster: a moss pad with leaf litter and 2-5 caps of one kind. Origin = the pad's centre on the ground.
 // params { kind, count }, seed varies the layout. No collider: bodies walk through.
 import { MUSHROOMS as M } from '../lib/data/mushrooms.js';
+import { softened } from "./soften.js";
 const TAU = Math.PI * 2;
 function lathe(ctx, prof, n, cx, cy, cz, wob = 0, ph = 0) {
   const ring = (k) => { const [r, y] = prof[k]; const pts = []; for (let i = 0; i <= n; i++) { const a = (i / n) * TAU, rr = r * (1 + wob * Math.sin(a * 5 + ph)); pts.push([cx + Math.cos(a) * rr, cy + y, cz + Math.sin(a) * rr]); } return pts; };
@@ -45,7 +46,7 @@ function cap(ctx, K, x, y, z, s, lod, R) {
     }
   }
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const K = M.kinds[ctx.params.kind] || M.kinds.bolete, lod = ctx.lod ?? 1, R = () => ctx.random();
   const count = Math.max(2, Math.min(5, ctx.params.count ?? 3)), P = M.pad.radius;
   ctx.flat();
@@ -78,5 +79,5 @@ export function geometry(ctx) {
     const a = R() * TAU, d = i === 0 ? R() * 0.06 : 0.1 + R() * 0.2, s = S * (i === 0 ? 1.1 : 0.6 + R() * 0.45);
     cap(ctx, K, Math.cos(a) * d, 0.02, Math.sin(a) * d, s, lod, R);
   }
-}
+});
 export function collider() { return null; }

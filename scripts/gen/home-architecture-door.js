@@ -1,7 +1,8 @@
 import { ARCH } from './home-architecture-data.js';
 import { builder,paint,beam,box } from './home-architecture-kit.js';
+import { softened } from "./soften.js";
 function pin(e,x,y,z,rad=.012){const p=[];for(let i=0;i<8;i++){const t=i*Math.PI/4;p.push([x+rad*Math.cos(t),y+rad*Math.sin(t),z]);}e.face(p,[0,0,z<0?-1:1]);}
-export function geometry(ctx){const e=builder(ctx),w=ctx.params.width||1.06,h=ctx.params.height||2.32,lo=.035,hi=lo+h,t=.074;
+export const geometry = softened(function geometry(ctx){const e=builder(ctx),w=ctx.params.width||1.06,h=ctx.params.height||2.32,lo=.035,hi=lo+h,t=.074;
  paint(e,ARCH.textures.oak,'#f5e0b9',.79);box(e,-w,lo,-t/2, 0,hi,t/2);
  const count=6;for(let i=0;i<count;i++){const a=-w+.014+i*(w-.028)/count,b=a+(w-.028)/count-.003;beam(e,[(a+b)/2,lo+.028,0],[(a+b)/2,hi-.028,0],(w-.028)/count-.004,t+.006,.004);}
  paint(e,ARCH.textures.oak,'#fff2d4',.74);for(const z of [-.061,.061]){
@@ -22,5 +23,5 @@ export function geometry(ctx){const e=builder(ctx),w=ctx.params.width||1.06,h=ct
   beam(e,[.006,y-.10,0],[.006,y+.10,0],.037,.040,.009);
  }
  for(const z of [-.101,.101]){const x=-w+.215;box(e,x-.035,1.012,z-.009,x+.035,1.197,z+.009);beam(e,[x,1.14,z],[x,1.14,z+Math.sign(z)*.054],.03,.03,.006);beam(e,[x,1.14,z+Math.sign(z)*.054],[x+.132,1.14,z+Math.sign(z)*.054],.031,.031,.007);pin(e,x,1.044,z+Math.sign(z)*.012,.006);pin(e,x,1.177,z+Math.sign(z)*.012,.006);}
- return e.finish();}
+ return e.finish();});
 export function collider(ctx){const e=builder(ctx),w=ctx.params.width||1.06,h=ctx.params.height||2.32;box(e,-w,.035,-.038,0,.035+h,.038);}

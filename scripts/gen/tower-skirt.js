@@ -3,6 +3,7 @@
 // Spawned at the tower's own feet and yaw, so angles are the tower's local polar frame (door at DOOR_A, left clear).
 // params.gnd: 32 ground heights (local y) at angle i/32·TAU, radius 5.
 import { Q, T, solid, TAU, paint, beam, blob, leaf, nrm, crs } from '../lib/yard-kit.js';
+import { softened } from "./soften.js";
 const LIME = 'cdn/texture-weathered-pale-limestone-surface.png';
 const DOOR_A = -Math.PI / 2, H = 17.5, R0 = 3.85, R1 = 2.95;
 const rad = (y) => { const t = Math.min(Math.max(y, 0), H) / H; return R0 + (R1 - R0) * t + 0.14 * Math.sin(Math.PI * t); };
@@ -38,7 +39,7 @@ function ivy(ctx, pts, fine, leaves) {
       leaves[(i + s) % 3].push([q, d, w, sz]); }
   });
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   ctx.flat();
   const L = ctx.lod, hi = L <= 2, fine = L === 1, p = ctx.params || {};
   let gmin = 0; for (const g of p.gnd || [0]) gmin = Math.min(gmin, g); const bot = gmin - 0.25;
@@ -77,7 +78,7 @@ export function geometry(ctx) {
   leaves.forEach((ls, ci) => { paint(ctx, null, LEAVES[ci], 0.8); for (const [q, d, w, sz] of ls) leaf(ctx, q, d, w, sz, sz * 0.42); });
   paint(ctx, null, LEAVES[2], 0.85);
   for (const c of clumps) blob(ctx, c[0], c[1] - 0.05, c[2], 0.32 + ctx.random() * 0.12, 0.26, 0.3, 5, () => ctx.random());
-}
+});
 export function collider(ctx) {
   const p = ctx.params || {}; let gmin = 0; for (const g of p.gnd || [0]) gmin = Math.min(gmin, g); const bot = gmin - 0.25, n = 14;
   for (let i = 0; i < n; i++) arcProf(ctx, sA + (i / n) * (sE - sA), sA + ((i + 1) / n) * (sE - sA), [[RI, bot], [RO, bot], [RO, TOPY], [RI, TOPY]]);

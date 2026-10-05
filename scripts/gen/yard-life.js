@@ -3,6 +3,7 @@
 // Parts branch on ctx.lod: <=2 every leaf and log, 3 the big forms, >=4 a few boxes.
 import { paint, obox, beam, lathe, blob, TEX, TAU } from '../lib/yard-kit.js';
 import { solid, T, gem } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 const C = {
   oak: 'oklch(0.93 0.04 75)', walnut: 'oklch(0.86 0.04 55)', clay: 'oklch(0.74 0.11 45)', stone: 'oklch(0.96 0.02 85)',
   teal: 'oklch(0.66 0.08 195)', sage: 'oklch(0.72 0.07 132)', leaf: 'oklch(0.58 0.11 140)', cream: 'oklch(0.94 0.035 85)',
@@ -208,13 +209,13 @@ const B = {
 };
 const HITS = { bench: [1.6, 0.9, 0.6], urn: [0.46, 0.8, 0.46], barrow: [0.72, 0.62, 1.3], herbrack: [2.0, 1.6, 0.4], apiary: [3.0, 1.1, 0.56], woodshed: [2.6, 1.9, 1.1] };
 function items(ctx) { return (ctx.params && ctx.params.items) || []; }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   ctx.flat();
   const lod = ctx.lod ?? 1;
   let seed = (ctx.seed ?? 7) * 9301 + 49297;
   const rnd = () => ((seed = (seed * 9301 + 49297) % 233280) / 233280);
   for (const [kind, x, z, yaw = 0, dy = 0, o = {}] of items(ctx)) { const b = B[kind]; if (b) b(ctx, frame(x, dy, z, yaw * Math.PI / 180), lod, rnd, o); }
-}
+});
 export function collider(ctx) {
   for (const [kind, x, z, yaw = 0, dy = 0, o = {}] of items(ctx)) {
     const f = frame(x, dy, z, yaw * Math.PI / 180);

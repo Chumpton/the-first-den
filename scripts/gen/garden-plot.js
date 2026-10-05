@@ -1,3 +1,4 @@
+import { softened } from "./soften.js";
 // Tower Gardens builder: params.item = bed (w, d) | crop (kind, stage 0..3, w, d, golden) | crate (kind) | stall | pump | veg (kind).
 // Beds face -Z; a crop lays its plants on the bed's soil (origin = soil top centre).
 const COL = { wood: 'oklch(0.55 0.08 60)', woodD: 'oklch(0.42 0.06 55)', soil: 'oklch(0.36 0.05 50)', leaf: 'oklch(0.58 0.14 140)', leafD: 'oklch(0.47 0.12 145)', stem: 'oklch(0.55 0.12 130)' };
@@ -71,7 +72,7 @@ function pump(ctx) { // a cast-iron hand pump on a limestone plinth, a bucket an
   ctx.color('oklch(0.55 0.08 60)'); cyl(ctx, 0, 0.3, -0.25, 0.5, 0.14, 0.16, 8); ctx.color('oklch(0.6 0.08 210)'); ctx.quad(-0.13, 0.48, -0.37, -0.13, 0.48, -0.13, 0.13, 0.48, -0.13, 0.13, 0.48, -0.37);
   ctx.color('oklch(0.55 0.1 150)'); cyl(ctx, 0.75, 0, 0.1, 0.25, 0.12, 0.12, 8); box(ctx, 0.85, 0.12, 0.08, 1.12, 0.15, 0.12);
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params || {}; L = ctx.lod ?? 1; ctx.metalness(0);
   if (p.item === 'bed') return bed(ctx, p.w ?? 3, p.d ?? 1.4);
   if (p.item === 'crate') return crate(ctx, p.kind || 'carrot');
@@ -79,4 +80,4 @@ export function geometry(ctx) {
   if (p.item === 'pump') return pump(ctx);
   if (p.item === 'veg') { ctx.roughness(0.6); plant(ctx, p.kind, 3, 0, 0, 0.7, p.golden); return; }
   if (p.item === 'crop') { ctx.roughness(0.75); const pts = spots(p.w ?? 3, p.d ?? 1.4, p.kind); pts.forEach(([x, z], i) => plant(ctx, p.kind, p.stage ?? 0, x, z, i * 1.7 + 0.3, p.golden)); }
-}
+});

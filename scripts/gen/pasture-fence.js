@@ -2,6 +2,7 @@
 // on the +Z side at gateX, with tall gateposts and a crossbeam). params.kind "gate": the swinging leaf, hinge at the origin,
 // leaf running +X for params.w metres. Weathered silver timber.
 import { Q, solid, box } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 const WOOD = 'cdn/texture-weathered-silver-grey-fence-timber.png';
 const IRON = 'oklch(0.3 0.01 60)';
 function tint(ctx, base = 0.93) { const l = base + ctx.random() * 0.06; ctx.color(`oklch(${l.toFixed(3)} 0.012 ${Math.round(60 + ctx.random() * 40)})`); }
@@ -87,7 +88,7 @@ function gate(ctx) {
     ctx.metalness(0);
   }
 }
-export function geometry(ctx) { if (ctx.params.kind === 'gate') gate(ctx); else loop(ctx); }
+export const geometry = softened(function geometry(ctx) { if (ctx.params.kind === 'gate') gate(ctx); else loop(ctx); });
 export function collider(ctx) {
   if (ctx.params.kind === 'gate') { const w = ctx.params.w ?? 2.9; box(ctx, 0.02, 0.1, -0.07, w, 1.35, 0.07); return; }
   const p = { w: 28, d: 20, gateX: 8, gateW: 3.2, gatepostH: 3.1, ...ctx.params }, hd = p.d / 2, g0 = p.gateX - p.gateW / 2, g1 = p.gateX + p.gateW / 2, t = 0.13, y0 = -0.5, y1 = 1.45;

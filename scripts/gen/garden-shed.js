@@ -2,6 +2,7 @@
 // a window over the potting bench, pegboard of tools, wheelbarrow, watering can, coiled hose, soil sacks, lantern.
 // Feet at floor-base centre; 3 m along X, 2.5 m along Z.
 import { beam, lathe, lantern, paint, prism, box, gem, Q, T, solid } from '../lib/garden-kit.js';
+import { softened } from "./soften.js";
 const W = 1.5, D = 1.25, F = 0.12, EV = 2.22, RG = 2.84, TH = 0.07, OH = 0.3, OX = 0.25;
 const DOOR = [-0.35, 0.65], DH = 2.16, WIN = [-0.95, -0.15], WY = [1.25, 1.85];
 const SAGE = 'oklch(0.94 0.03 140)', CREAM = 'oklch(0.93 0.025 90)', OAK = 'oklch(0.94 0.03 75)', IRON = 'oklch(0.32 0.01 250)', STEEL = 'oklch(0.72 0.01 240)';
@@ -87,7 +88,7 @@ function barrow(ctx, lod) {
   paint(ctx, 'oak', OAK, 0.8);
   for (const s of [-1, 1]) { beam(ctx, [x + s * 0.18, 0.4, -1.02], [x + s * 0.27, 0.64, 0.58], 0.045); beam(ctx, [x + s * 0.2, 0.44, 0.05], [x + s * 0.2, F, 0.1], 0.04); }
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const lod = ctx.lod || 1; ctx.flat();
   const g = Math.min(ctx.groundY(-W, -D), ctx.groundY(W, -D), ctx.groundY(W, D), ctx.groundY(-W, D), 0) - 0.1;
   const fs = slope(-1), bs = slope(1);
@@ -151,7 +152,7 @@ export function geometry(ctx) {
   }
   if (lod <= 3) { paint(ctx, null, IRON, 0.6, 0.6); beam(ctx, [0, RG - 0.05, 0], [0, 2.38, 0], 0.018); lantern(ctx, [0, 1.96, 0], lod); }
   ctx.albedo(null);
-}
+});
 export function collider(ctx) {
   box(ctx, -W, -0.1, -D, W, F, D);
   for (const b of wallBoxes()) box(ctx, ...b);

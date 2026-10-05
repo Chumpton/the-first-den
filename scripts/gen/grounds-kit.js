@@ -1,3 +1,4 @@
+import { softened } from "./soften.js";
 // The home grounds kit: one generator for the dock, the camp and the garden. params.kind picks the piece; feet at y 0,
 // front toward −Z, metres. Parts branch on ctx.lod (4–5 = a handful of boxes). Shared builders: rbox, cyl, blob, disc.
 const D = Math.PI / 180;
@@ -732,11 +733,11 @@ const C = {
   fishspot: (ctx) => rbox(ctx, [0, 0.15, 0.3], 0.4, 0.3, 0.4),
   lantern: (ctx, p) => rbox(ctx, [0, (p.h ?? 0.62) / 2, 0], 0.08, p.h ?? 0.62, 0.08),
 };
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params || {}; XF = null; ctx.flat();
   const f = B[p.kind]; if (f) f(ctx, p, ctx.lod || 1);
   ctx.albedo(null); ctx.emissive(null);
-}
+});
 export function collider(ctx) {
   const p = ctx.params || {}; XF = null;
   const f = C[p.kind]; if (!f) return null;

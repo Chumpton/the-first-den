@@ -3,6 +3,7 @@
 // Origin = ground at the site centre, front (gate, nest box) toward +Z. The flock walks inside RUN (homestead.yml).
 import { box, solid, Q } from '../lib/road-solid.js';
 import { bar, cyl, wires, paint, TX, INK } from './coop-kit.js';
+import { softened } from "./soften.js";
 export const C = { x0: -3.5, x1: -1.5, hz: 1.1, fy: 0.72, wt: 1.95, ridge: 2.65, R: { x0: -1.5, x1: 3.5, z0: -2, z1: 2, h: 2.1 } };
 const SIDES = () => { const R = C.R; return [
   { pts: [-1.5, -0.5, 0.5, 1.7, 2.6, 3.5], fix: R.z1, alongX: true, gap: [0.5, 1.7] },
@@ -10,7 +11,7 @@ const SIDES = () => { const R = C.R; return [
   { pts: [-2, -0.67, 0.67, 2], fix: R.x1, alongX: false },
   { pts: [-2, -1.1], fix: R.x0, alongX: false }, { pts: [1.1, 2], fix: R.x0, alongX: false },
 ]; };
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const L = ctx.lod, { x0, x1, hz, fy, wt, ridge, R } = C, slope = (ridge - wt) / hz, ov = 0.25, ex0 = x0 - 0.18, ex1 = x1 + 0.18;
   ctx.flat();
   // hen-house body: one pentagon prism, sage boards
@@ -97,7 +98,7 @@ export function geometry(ctx) {
   paint(ctx, TX.timber, INK.wood);
   for (const x of [0.75, 1.95]) box(ctx, x - 0.03, 0, -1.48, x + 0.03, 0.4, -1.42);
   bar(ctx, [0.6, 0.43, -1.45], [2.1, 0.43, -1.45], 0.06);
-}
+});
 export function collider(ctx) {
   const { x0, x1, hz, ridge, R } = C, t = 0.05;
   box(ctx, x0 - 0.05, 0, -hz - 0.05, x1, ridge, hz + 0.05);

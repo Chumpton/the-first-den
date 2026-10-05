@@ -2,6 +2,7 @@
 // 0.45 m) · fairydoor (a mossy stump with a tiny arched door facing -Z) · frog (a mossy stone frog) · bottle (a corked green
 // bottle lying in the sand) · mushrooms (a ring of red-capped toadstools, 1.6 m across). Origin at the ground.
 import { solid, box } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 const TAU = Math.PI * 2;
 const ring = (cx, cy, cz, r, n, rot = 0, sy = 1) => Array.from({ length: n }, (_, i) => { const t = rot + i / n * TAU; return [cx + Math.cos(t) * r, cy, cz + Math.sin(t) * r * sy]; });
 function blob(ctx, cx, cy, cz, rx, ry, rz, n = 8, m = 5) {
@@ -65,5 +66,5 @@ const K = {
     }
   },
 };
-export function geometry(ctx) { ctx.flat(); ctx.roughness(0.85); (K[ctx.params.kind] ?? K.nest)(ctx, ctx.lod ?? 1); }
+export const geometry = softened(function geometry(ctx) { ctx.flat(); ctx.roughness(0.85); (K[ctx.params.kind] ?? K.nest)(ctx, ctx.lod ?? 1); });
 export function collider() { return null; }

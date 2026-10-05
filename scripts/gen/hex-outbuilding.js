@@ -2,6 +2,7 @@
 // Feet at ground centre, door on local -Z (the side facing the home). Plinth, walls with a door gap, and
 // stacked hex roof tiers — each style its own stuff and its own crown.
 import { Q, solid, prism, box, ngon, gem } from "../lib/road-solid.js";
+import { softened } from "./soften.js";
 const TX = {
   stone: "cdn/texture-pale-weathered-limestone-blocks.png", moss: "cdn/texture-soft-green-moss-cozy.png",
   oak: "cdn/texture-weathered-honey-oak-deck-planks.png", shingle: "cdn/texture-mossy-wooden-shingles-cozy.png",
@@ -89,7 +90,7 @@ const STYLE = {
     }
   },
 };
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   ctx.flat();
   const st = ctx.params.style in S ? ctx.params.style : "workshop", s = S[st], lod = ctx.lod;
   mat(ctx, ...s.base); prism(ctx, corners(s.R + 0.35), -0.4, 0.2); prism(ctx, corners(s.R + 0.2), 0.2, 0.35);
@@ -100,7 +101,7 @@ export function geometry(ctx) {
   const y = roof(ctx, s, lod);
   if (lod <= 3) { glow(ctx); gem(ctx, 0.95, 2.35, -s.R - 0.25, 0.12, 0.18, 0.14, 6); ctx.emissive(null); }
   STYLE[st](ctx, s, lod, y);
-}
+});
 export function collider(ctx) {
   const st = ctx.params.style in S ? ctx.params.style : "workshop", s = S[st];
   prism(ctx, corners(s.R + 0.2), -0.4, 0.35);

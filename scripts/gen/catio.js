@@ -2,6 +2,7 @@
 // "door" (the screen-door leaf, origin at its hinge). Local frame and layout: ./catio-layout.js. Faces wound by road-solid.
 import { Q, solid, box, ngon, gem } from '../lib/road-solid.js';
 import { C, roofY, SHELVES, RAMP, TREE, HAMMOCK, CUSHIONS, POTS, BOWL } from './catio-layout.js';
+import { softened } from "./soften.js";
 const XW = 2.455, ZW = 1.955;
 const TX = { wood: 'cdn/texture-weathered-honey-oak-planks.png', stone: 'cdn/texture-pale-limestone-pavers.png' };
 const COL = {
@@ -252,7 +253,7 @@ function door(ctx, sp, lod) {
   ctx.color(COL.iron); for (const y of [0.3, h - 0.3]) box(ctx, -t - 0.004, y, -0.12, t + 0.004, y + 0.05, 0.01);
 }
 
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const part = ctx.params.part || 'shell', lod = ctx.lod ?? 1, sp = lod === 1 ? 0.12 : lod === 2 ? 0.2 : 0;
   ctx.roughness(0.85);
   if (part === 'door') { door(ctx, sp, lod); return; }
@@ -262,7 +263,7 @@ export function geometry(ctx) {
   for (const c of CUSHIONS) cushion(ctx, c.at, c.r, c.col, lod);
   const rnd = rng(ctx); for (const p of POTS) pot(ctx, p.at, p.kind, lod, rnd);
   bowl(ctx, lod);
-}
+});
 export function collider(ctx) {
   if ((ctx.params.part || 'shell') === 'door') { box(ctx, -0.03, 0, -C.door.leaf, 0.03, C.door.leafH, 0); return; }
   const L = ctx.params.tunLen ?? 4.5, { x0: tx0, x1: tx1, y0: ty0, y1: ty1 } = C.tunnel, d = C.door, hb = roofY(ZW) + 0.05, t = 0.05;

@@ -3,6 +3,7 @@
 //   lush: true (ivy masses, climbing roses, drooping wisteria), lanterns: N (small hanging lanterns along the crown, emissive only) }
 // the lantern's light is a child row at y = lanternY(params) (see LANTERN_DROP)
 import { paint, beam, obox, blob, leaf, gem, lathe, box, nrm, crs, TAU } from '../lib/yard-kit.js';
+import { softened } from "./soften.js";
 export const LANTERN_DROP = 0.55;
 export const dims = (p = {}) => { const span = p.span ?? 2.4, height = p.height ?? 2.7, rise = Math.min(0.55, span * 0.22); return { span, height, depth: p.depth ?? 0.55, rise, spring: height - rise }; };
 export const lanternY = (p) => { const d = dims(p); return d.height - LANTERN_DROP; };
@@ -10,7 +11,7 @@ const POST = 0.16;
 function crown(d, t) { // point on the arch curve, t 0..1 from -x post to +x post
   const a = Math.PI * (1 - t); return [Math.cos(a) * d.span / 2, d.spring + Math.sin(a) * d.rise];
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params || {}, lod = ctx.lod || 1, d = dims(p), stone = p.frame === 'stone', rnd = () => ctx.random();
   const blossom = p.blossom || 'oklch(0.9 0.07 350)';
   ctx.flat();
@@ -129,7 +130,7 @@ export function geometry(ctx) {
   ctx.emissive(2.4, 1.35, 0.5);
   lathe(ctx, [[0, ly - 0.1], [0.085, ly - 0.09], [0.095, ly + 0.02], [0.085, ly + 0.13], [0, ly + 0.14]], n);
   ctx.emissive(null);
-}
+});
 export function collider(ctx) {
   const d = dims(ctx.params || {}), hx = d.span / 2, hz = d.depth / 2 + 0.09, w = POST / 2 + 0.09;
   for (const sx of [-1, 1]) box(ctx, sx * hx - w, 0, -hz, sx * hx + w, d.spring, hz);

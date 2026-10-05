@@ -6,6 +6,7 @@ import { GZ } from './garden-gazebo.js';
 import { lathe } from '../lib/garden-kit.js';
 import { gem } from '../lib/yard-kit.js';
 import { tube, raceme, rose, leafCard, fernClump, flat, rng } from '../lib/bloom-kit.js';
+import { softened } from "./soften.js";
 const { R, POST, EAVE, ENT } = GZ;
 const ang = (k) => k * Math.PI / 3;
 const V = (r, k, y = 0) => [Math.cos(ang(k)) * r, y, Math.sin(ang(k)) * r];
@@ -17,7 +18,7 @@ function helix(k, turns, r, y0, y1, n, ph) {
   for (let i = 0; i <= n; i++) { const t = i / n, a = ph + t * turns * Math.PI * 2; out.push([px + Math.cos(a) * r, y0 + (y1 - y0) * t, pz + Math.sin(a) * r]); }
   return out;
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const lod = ctx.lod || 1, Rn = rng(ctx.seed || 5); ctx.flat();
   // wisteria: gnarled trunks up the back posts, then a rope along the eaves
   if (lod <= 3) {
@@ -71,5 +72,5 @@ export function geometry(ctx) {
     fernClump(ctx, [ux, 0.6, uz], 0.62, lod, rng(Math.round(ux * 10 + 50)));
   }
   ctx.albedo(null);
-}
+});
 export function collider() { return null; }

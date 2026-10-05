@@ -3,6 +3,7 @@
 // sampled when the row was laid. kind: 0 bed stone (half-sunk, wet-dark), 1 bank boulder (mossy crown),
 // 2 reed / cattail clump, 3 fern, 4 grass tuft, 5 wildflower (forget-me-not / marsh marigold), 6 pebble cluster.
 import { solid, ngon } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 const STONE = 'cdn/texture-pale-limestone-flagstone.png', MOSS = 'cdn/texture-soft-green-moss-carpet.png';
 function rock(ctx, x, y, z, s, yaw, wet, moss, lod) {
   const n = lod <= 2 ? 7 : 5, R = () => 0.78 + ctx.random() * 0.4;
@@ -70,7 +71,7 @@ function flower(ctx, x, y, z, s, yaw) {
 function pebbles(ctx, x, y, z, s, yaw) {
   for (let i = 0; i < 5; i++) { const a = yaw + i * 1.3, r = ctx.random() * 0.3 * s; rock(ctx, x + Math.cos(a) * r, y, z + Math.sin(a) * r, 0.05 + ctx.random() * 0.06, a, true, false, 3); }
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const lod = ctx.lod ?? 1; ctx.flat();
   for (const [k, x, y, z, s, yaw] of (ctx.params?.items || [])) {
     if (k === 0) rock(ctx, x, y, z, s, yaw, true, false, lod);
@@ -84,5 +85,5 @@ export function geometry(ctx) {
     else if (k === 6) pebbles(ctx, x, y, z, s, yaw);
   }
   ctx.albedo(null);
-}
+});
 export function collider() {}

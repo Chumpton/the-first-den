@@ -5,6 +5,7 @@
 // "market": linen-awning stalls (params.stalls [{ x, z, awn, goods, hang, fx, fz }], each turned to face (fx, fz), default the centre)
 //           and island dressing (params.props [{ k: rugs | barrels | sacks | stack, x, z, yaw, goods }])
 import { TAU, COL, FLOWERS, paint, XF, solid, box, obox, beam, blob, prism, ngon, slab, lathe, lantern } from '../lib/town-kit.js';
+import { softened } from "./soften.js";
 const BUNT = ['oklch(0.62 0.13 40)', 'oklch(0.62 0.08 195)', 'oklch(0.95 0.03 88)', 'oklch(0.7 0.08 130)', 'oklch(0.8 0.12 85)', 'oklch(0.66 0.11 10)'];
 const GOODS = {
   apples: ['oklch(0.58 0.17 25)', 0.09], oranges: ['oklch(0.72 0.16 55)', 0.09], lemons: ['oklch(0.88 0.15 100)', 0.08], plums: ['oklch(0.42 0.1 330)', 0.07],
@@ -267,7 +268,7 @@ function floor(ctx, P, p, lod) {
     });
   }
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params, lod = ctx.lod || 1, P = ctx, rnd = () => ctx.random();
   if (p.kind === 'lane') {
     for (const [x, z, s, y] of p.lamps || []) lamp(ctx, P, x, z, lod, s, y);
@@ -284,7 +285,7 @@ export function geometry(ctx) {
     for (const [x, z] of p.poles || []) pole(ctx, P, x, z, H, lod);
     for (const [i, j] of p.strings || []) bunting(ctx, P, p.poles[i], p.poles[j], H - 0.1, lod);
   }
-}
+});
 export function collider(ctx) {
   const p = ctx.params, C = ctx;
   if (p.kind === 'lane') {

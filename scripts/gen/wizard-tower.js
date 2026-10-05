@@ -3,6 +3,7 @@
 // a crooked shingled witch-hat roof with a brass star, and a portal room on the ground floor.
 // params.part: "rune" draws one orbiting rune stone instead. Origin: tower axis at ground level.
 import { Q, T, solid, gem, TAU, paint, beam, obox, lathe, leaf, nrm, crs } from '../lib/yard-kit.js';
+import { softened } from "./soften.js";
 
 export const TOWER = { H: 17.5, R0: 3.85, R1: 2.95, RIN: 3.2, CEIL: 3.6, DRUM_R: 2.35, DRUM_H: 2.3, BAL_R: 4.0, EAVE: 3.05, HAT: 6.2, LEAN: [0.28, -0.08], DOOR_A: -Math.PI / 2, WALK_R: 3.1 };
 const { H, R0, R1, RIN, CEIL, DRUM_R, DRUM_H, BAL_R, EAVE, HAT, DOOR_A } = TOWER;
@@ -363,7 +364,7 @@ function rune(ctx, L) {
   }
 }
 
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const L = ctx.lod ?? 1;
   if (ctx.params?.part === 'rune') return rune(ctx, L);
   if (L >= 4) return far(ctx, L);
@@ -371,7 +372,7 @@ export function geometry(ctx) {
   for (const w of WIN) dormer(ctx, w, L);
   balcony(ctx, L); drum(ctx, L); hat(ctx, L); topPortal(ctx, L);
   if (L <= 2) { interior(ctx, L); vines(ctx, L); }
-}
+});
 
 export function collider(ctx) {
   if (ctx.params?.part === 'rune') return null;

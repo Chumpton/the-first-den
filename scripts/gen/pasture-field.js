@@ -3,6 +3,7 @@
 // open-front lean-to barn (front toward its own −Z, yaw in degrees). Feet at ground, metres.
 import { Q, T, solid } from '../lib/road-solid.js';
 import { obox, beam, lathe, blob, yawAlong } from '../lib/yard-kit.js';
+import { softened } from "./soften.js";
 const TIMBER = 'cdn/texture-weathered-silver-grey-fence-timber.png';
 const OAK = 'cdn/texture-honey-oak-barn-planks.png';
 const WALNUT = 'cdn/texture-hand-joined-walnut-wood.png';
@@ -136,12 +137,12 @@ function barn(c, it) {
   }
 }
 const ITEMS = { trough, rick, barn };
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const P = ctx.params; ctx.flat();
   fence(ctx, P);
   for (const it of P.items || []) ITEMS[it.k]?.(frameAt(ctx, it.x, it.z, it.yaw || 0), it);
   ctx.albedo(null);
-}
+});
 export function collider(ctx) {
   const P = ctx.params, { out, gate } = runs(P);
   for (const [a, b] of out) { const L = Math.hypot(b[0] - a[0], b[1] - a[1]); obox(ctx, (a[0] + b[0]) / 2, 0, (a[1] + b[1]) / 2, L, 1.25, 0.16, yawAlong(b[0] - a[0], b[1] - a[1])); }

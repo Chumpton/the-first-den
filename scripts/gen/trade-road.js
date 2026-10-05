@@ -8,6 +8,7 @@
 // "banner": one heraldic banner, feet at its hem, top at params.drop; worn with scripts/material-den-sway.js (vertex paint).
 import { paint, obox, beam, lathe, blob, TAU } from '../lib/yard-kit.js';
 import { Q, T, solid, ngon, prism, box, gem } from '../lib/road-solid.js';
+import { softened } from "./soften.js";
 const STRAW = 'cdn/texture-golden-rolled-hay-bale-straw.png', CANVAS = 'cdn/texture-woven-linen-canvas.png';
 const C = {
   oak: 'oklch(0.93 0.04 75)', walnut: 'oklch(0.85 0.03 60)', iron: 'oklch(0.3 0.015 60)', cream: 'oklch(0.95 0.03 88)',
@@ -238,7 +239,7 @@ function banner(ctx, p, lod) {
   };
   face(0.004); face(-0.004);
 }
-export function geometry(ctx) {
+export const geometry = softened(function geometry(ctx) {
   const p = ctx.params || {}, lod = ctx.lod || 1;
   if (p.kind === 'gate') return gate(ctx, p, lod);
   if (p.kind === 'banner') return banner(ctx, p, lod);
@@ -246,7 +247,7 @@ export function geometry(ctx) {
     if (!ITEM[k] || (k === 'patch' && lod > 3) || (lod >= 5 && k !== 'wagon' && k !== 'crates')) continue;
     ITEM[k](ctx, XF(ctx, x, y, z, yaw * Math.PI / 180), lod, k === 'mule' ? (x > 15 ? C.mule2 : C.mule) : rng(x * 13.1 + z));
   }
-}
+});
 export function collider(ctx) {
   const p = ctx.params || {};
   if (p.kind === 'banner') return null;
