@@ -87,7 +87,7 @@ function seed(ctx) {
 }
 export function update(ctx, dt) {
   const S = (ctx.session.folk ??= { m: {}, seeded: false }), now = ctx.now()
-  if (!S.seeded) { seed(ctx); S.seeded = true }
+  if (!S.seeded || now - (S.seedAt ?? 0) > 10000) { S.seedAt = now; if (!S.seeded || F.roster.some((e) => !ctx.getObject(e.id))) seed(ctx); S.seeded = true }
   const players = ctx.place.players
   const awake = {}
   let any = false
