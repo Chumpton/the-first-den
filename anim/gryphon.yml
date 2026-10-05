@@ -50,10 +50,10 @@ speed:
 landed:
   duration: 3.2
   tracks:
-    wingL: { roll: [55, 55, 52, 55], yaw: [80, 80, 78, 80] }
-    wingR: { roll: [-55, -55, -52, -55], yaw: [-80, -80, -78, -80] }
-    wingL2: { yaw: [8, 8, 6, 8], roll: [5, 5, 6, 5] }
-    wingR2: { yaw: [-8, -8, -6, -8], roll: [-5, -5, -6, -5] }
+    wingL: { roll: [24, 24, 22, 24], yaw: [86, 86, 84, 86] }
+    wingR: { roll: [-24, -24, -22, -24], yaw: [-86, -86, -84, -86] }
+    wingL2: { yaw: [4, 4, 3, 4], roll: [-6, -6, -5, -6] }
+    wingR2: { yaw: [-4, -4, -3, -4], roll: [6, 6, 5, 6] }
     root: { y: [0, 0.01, 0, 0] }
     neck: { pitch: [0, -4, 2, 0] }
     head: { pitch: [0, 4, -2, 0], yaw: [0, 18, 18, 0] }
@@ -62,10 +62,10 @@ landed:
 walk:
   duration: 1.0
   tracks:
-    wingL: { roll: [55, 50, 55], yaw: [80, 78, 80] }
-    wingR: { roll: [-55, -50, -55], yaw: [-80, -78, -80] }
-    wingL2: { yaw: [8, 6, 8], roll: [5, 6, 5] }
-    wingR2: { yaw: [-8, -6, -8], roll: [-5, -6, -5] }
+    wingL: { roll: [24, 21, 24], yaw: [86, 84, 86] }
+    wingR: { roll: [-24, -21, -24], yaw: [-86, -84, -86] }
+    wingL2: { yaw: [4, 3, 4], roll: [-6, -5, -6] }
+    wingR2: { yaw: [-4, -3, -4], roll: [6, 5, 6] }
     root: { y: [0, 0.05, 0, 0.05, 0], pitch: [0, 1.5, 0, -1.5, 0], roll: [-1.5, 0, 1.5, 0, -1.5] }
     legFL: { pitch: [28, -28, 28] }
     legBR: { pitch: [28, -28, 28] }
