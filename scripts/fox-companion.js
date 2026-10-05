@@ -9,6 +9,7 @@ const isWunix = (self) => self.displayName === 'wunix' || self.name === 'wunix' 
 function dress(ctx) {
   if (ctx.self.model) ctx.self.model = null
   if (ctx.self.primitive?.script !== FOX) ctx.self.primitive = { kind: 'scripted', params: {}, script: FOX }
+  for (const ch of ['idle', 'walk', 'run', 'spell', 'sit']) if (ctx.self.anim?.[ch]) ctx.self.anim[ch] = null
 }
 
 export function onSpawn(ctx) {
