@@ -4,7 +4,7 @@ const cr=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
 const dot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
 export function Q(ctx,a,b,c,d,o){
   const n=cr(sub(b,a),sub(c,a)), m=[(a[0]+c[0])/2,(a[1]+c[1])/2,(a[2]+c[2])/2];
-  if(dot(n,sub(m,o))>=0) ctx.quad(...a,...b,...c,...d); else ctx.quad(...a,...d,...c,...b);
+  if(dot(n,sub(m,o))>=0){ctx.tri(...a,...b,...c);ctx.tri(...a,...c,...d);} else {ctx.tri(...a,...d,...c);ctx.tri(...a,...c,...b);}
 }
 export function T(ctx,a,b,c,o){
   const n=cr(sub(b,a),sub(c,a)), m=[(a[0]+b[0]+c[0])/3,(a[1]+b[1]+c[1])/3,(a[2]+b[2]+c[2])/3];
