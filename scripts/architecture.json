@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "basedOnSpecVersion": 870,
-  "updatedAt": "2026-10-05T00:05:09.734Z",
-  "summary": "The First Den is a forest world centered on Spawn and its home, with lake and creek activities, farms, Mirror Tarn, Garden and Market districts, a royal city/castle and hilltop village. Authored cell scenes combine interactive systems, procedural structure families, animated NPCs and wildlife; the player uses a fire-led bending kit, wolf encounters and camera-relative WoW-style movement with a classic MMO HUD.",
+  "basedOnSpecVersion": 884,
+  "updatedAt": "2026-10-05T00:34:39.848Z",
+  "summary": "The First Den is a forest world centered on Spawn and its home, with lake and creek activities, farms, Mirror Tarn, Garden and Market districts, a royal city/castle and hilltop village. Authored cell scenes combine interactive systems, procedural structure families, animated NPCs and wildlife; the player uses fire-led bending, wolf encounters and WoW-style camera-relative movement, now with a summoned flight gryphon.",
   "scriptPaths": [
     "scripts/alchemy-bench.js",
     "scripts/alchemy-player.js",
@@ -123,6 +123,7 @@
     "scripts/gen/grotto.js",
     "scripts/gen/grounds-flags.js",
     "scripts/gen/grounds-kit.js",
+    "scripts/gen/gryphon.js",
     "scripts/gen/haze-ring.js",
     "scripts/gen/hearth-city.js",
     "scripts/gen/hearth-civic.js",
@@ -255,6 +256,7 @@
     "scripts/grand-gate-leaf.js",
     "scripts/grotto-chest.js",
     "scripts/grounds-fishing.js",
+    "scripts/gryphon-mount.js",
     "scripts/hearth-bell.js",
     "scripts/hearth-folk.js",
     "scripts/hearth-spin.js",
@@ -283,6 +285,7 @@
     "scripts/lib/data/dragon.js",
     "scripts/lib/data/fauna-small.js",
     "scripts/lib/data/garden.js",
+    "scripts/lib/data/gryphon.js",
     "scripts/lib/data/hearth-city.js",
     "scripts/lib/data/hearth-folk.js",
     "scripts/lib/data/hillside.js",
@@ -424,8 +427,8 @@
   ],
   "roots": [
     "world.config.yaml - world entry: main place, player/camera templates, arrival behavior, input actions, multiplayer and UI theme",
-    "templates/player.js#player - player root attaches movement, locomotion, home/travel/activity handlers and scripts/bender.js",
-    "templates/camera.js#camera - custom camera behavior for the player, controlled mounts and seated rowboat",
+    "templates/player.js#player - player root attaches movement, humanoid locomotion, home/travel/activity handlers, gryphon mount and bender",
+    "templates/camera.js#camera - custom WoW camera rig; reads player/mount state and declares orbit offsets and collision distance",
     "places/main/config.yaml + scripts/forest-terrain.js - configured terrain height/material interface, water, paths, clearings and seeded vegetation",
     "places/main/cells/x0z0.scene#farm-east / farm-west - authored crop plots, fences and shared farm-props pieces around Spawn",
     "places/main/cells/x0z1.scene#ember-roost - tower/aqueduct landmark with animated town banners",
@@ -437,44 +440,44 @@
     "scripts/lib/road-solid.js + scripts/lib/solid-kit.js - shared solid/collider construction for road and site builders",
     "scripts/lib/home-interaction.js + scripts/lib/data/home-feel.js - player press targeting and home interaction tuning",
     "scripts/lib/dragon-rider.js - mount/seat/dismount coordination shared by Violet, rowboat, courier horse and zipline trolley",
+    "scripts/lib/data/gryphon.js - GRY flight, mount-clearance, boost and sound tuning shared by gryphon-mount, player and camera",
     "scripts/lib/town-kit.js + scripts/lib/data/town-links.json - town builder helpers and shared lane/post/sign layout joining Market, Tarn and Garden squares",
     "scripts/lib/royal-kit.js + scripts/lib/village-mesh.js - geometry kits reused by royal district/castle and village/cottage/NPC builders",
-    "scripts/lib/data/bending.js - spell/bar, combat, wolf, den, quest, HUD and tuning registry read by bender.js, wolf-pack.js and bend-hud.js",
-    "scripts/lib/fct.js - fct() routes combat text as uiEvents for scripts/ui.js and the floating-text layer in scripts/bend-hud.js"
+    "scripts/lib/data/bending.js + scripts/lib/fct.js - bending/combat registry and combat-text uiEvent helper used by bender, wolf-pack and HUD"
   ],
   "notableExports": [
     "scripts/forest-terrain.js - GROUND, SITES, LAKE, heightAt(ctx), materialAt(ctx)",
     "scripts/player.js - onSpawn(ctx), onInput(ctx,input), update(ctx,dt); scripts/camera.js - finiteNumber, onInput(ctx,input), update(ctx,dt)",
+    "scripts/humanoid-locomotion.js - ride() mounted pose, onInput(ctx,input), update(ctx,dt)",
+    "scripts/gryphon-mount.js - update(ctx,dt) mount lifecycle; scripts/lib/data/gryphon.js - GRY tuning registry",
     "scripts/ui.js - onMount(), onDestroy(), default(ctx, player); composes bendHud with travel, courier, secrets, alchemy, mushrooms, boat fishing and garden HUDs",
     "scripts/bender.js - zap, maxHp, land, aoe, release, onSpawn, onInput, update",
     "scripts/bend-hud.js - SLATE_OLD, levelCol, SLATE, fctPush, bendHud; scripts/wolf-pack.js - updateSchedule, aggroRadius, update",
-    "scripts/lib/fct.js - fct(ctx, target, value, kind, options) combat-text event helper",
-    "scripts/farm-windmill.js - scheduled update(ctx); scripts/pasture-flock.js - update(ctx)",
     "scripts/gen/farm-crops.js, farm-fence.js, farm-props.js, garden-gate.js, mountain-tarn.js - procedural farm, gate and tarn geometry exports"
   ],
   "ownership": [
-    "scripts/player.js + scripts/lib/data/player.yml - movement intent, velocity, jump, flight, rope and camera mode; movement scratch and cached intent remain in ctx.session",
-    "scripts/camera.js - camera.state.heading is body WoW heading; camera.state.off is separate orbit/look offset",
+    "scripts/player.js + scripts/lib/data/player.yml - movement intent, velocity, jump, flight, rope and camera mode; flyBoost scales flight speed; movement scratch and cached intent remain in ctx.session",
+    "scripts/camera.js - camera.state.heading is body WoW heading; camera.state.off is separate orbit/look offset; publishes native orbit height/look/lateral/distance and collision distances",
     "scripts/bender.js + scripts/lib/data/bending.js - player.state bending level/XP, HP/chi, stance/spells, cooldowns, target, combat, casts/channels and castEnd/castThrow; tick aim/move/effect scratch is ctx.session",
+    "scripts/gryphon-mount.js - player.state.riding and flyBoost; gryphon entity animation/audio/effects and summon/land/park/leave lifecycle; per-player mount scratch lives in ctx.session.gry",
     "scripts/wolf-pack.js - wild-wolf row HP, level, threat, target, status effects including curse, death/respawn and combat behavior; publishes changed summaries to place.state.wolves",
     "scripts/bend-hud.js + scripts/ui.js - read player.state and place.state.wolves and render HUD; UI mount listener forwards fct uiEvents to the HUD text pool",
     "scripts/farm-windmill.js - reads windmill state.sails and state.degPerSec, writes sail child rotation",
-    "scripts/alchemy-player.js, scripts/pond-seed.js, scripts/fishing-tackle.js + activity data - harvest spending/buff, seeds/gotSeeds and legacy fishing state",
-    "scripts/rowboat.js + scripts/lib/data/rowboat.js; scripts/garden-plot.js + garden data - own boat/fishing phase and crop-bed growth; garden inventory belongs to player.state.garden"
+    "scripts/alchemy-player.js, scripts/pond-seed.js, scripts/fishing-tackle.js + activity data - harvest spending/buff, seeds/gotSeeds and legacy fishing state; rowboat and garden-plot own their activity state"
   ],
   "flows": [
     "world input actions -> templates/player.js attaches scripts/bender.js onInput -> player.state casts/stance/target/progression; bender schedules release/land/aoe handlers and writes effects/damage to wild-wolf rows",
     "scripts/bender.js starts/completes casts or channels -> player.state.casting/channeling/castEnd/castThrow; scripts/bend-hud.js reads spell IDs/timestamps for cast-bar feedback",
-    "scripts/humanoid-locomotion.js reads player.state.casting/channeling/castThrow -> masked upper-body casting loop and release animation while preserving locomotion",
+    "scripts/humanoid-locomotion.js reads player.state.casting/channeling/castThrow -> masked upper-body casting loop and release animation while preserving locomotion; riding='gryphon' switches to ride pose and WoW heading",
     "scripts/bender.js target selection -> local red ground-ring child under selected wolf; ring is recreated when target changes",
     "scripts/bender.js damage/status/threat writes -> scripts/wolf-pack.js scheduled update -> wolf combat, death/respawn and XP/kills/boss rewards on player",
     "scripts/lib/fct.js fct() -> uiEvent named fct to relevant players -> scripts/ui.js onMount listener -> bend-hud.js fctPush/fctLayer renders hit, crit, taken, heal, miss, DoT and XP text",
     "scripts/wolf-pack.js changed wolf summaries -> place.state.wolves -> scripts/bend-hud.js through scripts/ui.js renders blips/nameplates, objectives and combat panels; HUD buttons sendAction back to bender input",
     "scripts/lib/data/bending.js SPELLS/BARS/RULES/DENS/WOLF/QUESTS -> bender handlers, wolf-pack encounter rules and bend-hud displays; wolf den scene tags/state identify local groups",
     "places/main/config.yaml terrain marks + seed -> scripts/forest-terrain.js heightAt/materialAt(ctx) -> engine terrain, water and forest material bands; farm/tarn marks grade and clear scene sites",
-    "player move/look/jump/camView -> scripts/player.js and scripts/lib/wow-steer.js -> per-entity ctx.session.wowHands, camera heading and movement intent; A/D turns heading without right mouse, right-mouse A/D strafes",
-    "scripts/camera.js reads recorded hands -> shared heading and separate orbit offset; humanoid-locomotion.js reads wowBasis(ctx) -> body yaw and locomotion animation",
-    "farm-west/windmill state.sails + degPerSec -> scripts/farm-windmill.js update -> rotating sail child; farm builders supply crop, fence, barn, mill and props geometry"
+    "player move/look/jump/camView -> scripts/player.js and scripts/lib/wow-steer.js -> per-entity ctx.session.wowHands, camera heading and movement intent; camera.js declares orbit from the drawn body pose and humanoid-locomotion consumes wowBasis(ctx)",
+    "flying player.state.flying -> scripts/gryphon-mount.js spawns child scripts/gen/gryphon.js, sets riding='gryphon' and selects hover/fly/speed clips from anim/gryphon.yml; forward flight writes flyBoost for player.js speed, and humanoid-locomotion holds the ride pose",
+    "player sinks to terrain / stops flying -> player.js clears flight and boost; gryphon-mount lands beside player, clears riding, then parks and leaves after GRY.linger; farm windmill state.sails + degPerSec -> farm-windmill.js rotating sail child"
   ],
   "behaviorFamilies": [
     "places/main/config.yaml decoration layers + scripts/gen/forest-plant.js / valley-mesh.js - seeded forest flora varies by layer, kind and terrain",
@@ -484,7 +487,7 @@
     "scripts/gen/farm-crops.js, farm-fence.js, farm-props.js - paired farm rows, orchard props, animal pens, barns/mill and scarecrows vary by crop, points, style, item and seed",
     "scripts/gen/garden-gate.js and mountain-tarn.js - reusable Garden Market gate/plaque pieces and authored Mirror Tarn basin/shore forms vary by part and site data",
     "scripts/gen/dire-wolf.js + wolf-den.js + wolf-pack.js + anim/wildwolf.yml - den-based animated combat wolves vary by coat, level, elite/boss state and den rules; combat tuning is in bending.js",
-    "scripts/gen/folk.js / gen/villager.js with crowd rosters/clips; scripts/gen/royal-house.js, royal-castle.js and village-kit.js - animated people and district structures vary by role, outfit, route, palette and authored layout"
+    "scripts/gen/folk.js / gen/villager.js with crowd rosters/clips; royal-house.js, royal-castle.js and village-kit.js vary by role, outfit, route, palette and authored layout; gen/gryphon.js varies through gryphon animation clips and mount modes"
   ],
   "probableOrphans": [
     "scripts/flat-terrain.js - no current place config selects it; main uses forest-terrain",
@@ -497,7 +500,7 @@
     "Keep terrain material IDs, clear/flatten marks and decoration bindings coordinated with scene placements; terrain paths grade/clear sites while scene builders supply visible structures and paving.",
     "Farm roots use feet y=0.5; farm child coordinates and crop strips/fence points are local to parent roots, while config flatten marks use world x/z. Windmill sail is a child pivot; behavior writes its roll from degPerSec.",
     "Mirror Tarn is centered (82,78), water level 0.3 with depth 2.6; shore and Three Squares links in main config, town-links.json and scene signs describe the same routes.",
-    "WoW steering records hands in ctx.session.wowHands per entity; camera.state.heading is body heading and camera.state.off orbit. Avoid double-applying A/D turns across player.js and camera.js; humanoid locomotion consumes wowBasis(ctx).",
-    "Bender cast timing drives castEnd HUD feedback and castThrow release pose; casting loop/release clips are upper-body masked. wolf-pack no longer pushes casts back on damage, and fireball bolts use the faster fast path."
+    "WoW steering records hands in ctx.session.wowHands per entity; camera.state.heading is body heading and camera.state.off orbit. Camera orbit declarations follow the drawn body pose; avoid double-applying A/D turns; humanoid locomotion consumes wowBasis(ctx).",
+    "Gryphon origin is the rider's feet, saddle near y=0.42 and paws hang 1.15 m below; player.js landing clearance, GRY.paws and gen/gryphon.js geometry are coupled. Mount speed boost, riding pose, and anim/gryphon.yml modes must remain coordinated."
   ]
 }
