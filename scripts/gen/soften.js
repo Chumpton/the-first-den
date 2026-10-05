@@ -29,7 +29,7 @@ export function softened(geometry) {
         if (!run || Math.hypot(cx - run.o[0], cy - run.o[1], cz - run.o[2]) > MAXRUN) run = { o: [cx, cy, cz], s: [0, 0, 0], n: 0, lo: [1e9, 1e9, 1e9], hi: [-1e9, -1e9, -1e9] };
         run.s[0] += cx; run.s[1] += cy; run.s[2] += cz; run.n++; for (const q of [a, b, c]) for (let i = 0; i < 3; i++) { run.lo[i] = Math.min(run.lo[i], q[i]); run.hi[i] = Math.max(run.hi[i], q[i]); } kind = "leaf"; mass = run;
       } else run = null;
-      faces.push({ v: [a, b, c], kind, mass });
+      faces.push({ v: [a, b, c], kind, mass, orig: mode });
     };
     over.tri = (ax, ay, az, bx, by, bz, cx, cy, cz) => emit([ax, ay, az], [bx, by, bz], [cx, cy, cz]);
     over.quad = (ax, ay, az, bx, by, bz, cx, cy, cz, dx, dy, dz) => { emit([ax, ay, az], [bx, by, bz], [cx, cy, cz]); emit([ax, ay, az], [cx, cy, cz], [dx, dy, dz]); };
@@ -39,13 +39,13 @@ export function softened(geometry) {
       const n = [u[1] * w[2] - u[2] * w[1], u[2] * w[0] - u[0] * w[2], u[0] * w[1] - u[1] * w[0]], l = Math.hypot(...n) || 1; return [n[0] / l, n[1] / l, n[2] / l]; };
     const key = (p) => p.map((x) => Math.round(x * 1000)).join(",");
     const acc = new Map();
-    for (const f of faces) if (f.kind === "smooth") { const n = fn(f); for (const p of f.v) { const k = key(p), s = acc.get(k) || [0, 0, 0]; s[0] += n[0]; s[1] += n[1]; s[2] += n[2]; acc.set(k, s); } }
+    for (const f of faces) if (f.kind === "smooth" || (f.kind === "leaf" && f.orig === "smooth")) { const n = fn(f); for (const p of f.v) { const k = key(p), s = acc.get(k) || [0, 0, 0]; s[0] += n[0]; s[1] += n[1]; s[2] += n[2]; acc.set(k, s); } }
     const N = [];
     for (const f of faces) {
       if (f.kind === "flat") { const n = fn(f); N.push(...n, ...n, ...n); continue; }
       if (f.kind === "smooth") { for (const p of f.v) { const s = acc.get(key(p)), l = Math.hypot(...s) || 1; N.push(s[0] / l, s[1] / l, s[2] / l); } continue; }
       const m = f.mass, ex = m.hi[1] - m.lo[1], wide = Math.max(m.hi[0] - m.lo[0], m.hi[2] - m.lo[2]);
-      if (ex < 0.3 * wide && wide > 0.6) { const n = fn(f); N.push(...n, ...n, ...n); continue; } // a lawn, a leaf card, a flat mat: keep it as authored
+      if (ex < 0.3 * wide && wide > 0.6) { if (f.orig === "smooth") { for (const p of f.v) { const q = acc.get(key(p)), l = Math.hypot(...q) || 1; N.push(q[0] / l, q[1] / l, q[2] / l); } } else { const n = fn(f); N.push(...n, ...n, ...n); } continue; } // a lawn, a leaf card, a flat mat: keep it as authored
       const c = [m.s[0] / m.n, m.s[1] / m.n - 0.15, m.s[2] / m.n], fnn = fn(f);
       for (const p of f.v) { const d = [p[0] - c[0], p[1] - c[1], p[2] - c[2]], l = Math.hypot(...d) || 1;
         const v = [d[0] / l * 0.8 + fnn[0] * 0.2, d[1] / l * 0.8 + fnn[1] * 0.2, d[2] / l * 0.8 + fnn[2] * 0.2], k = Math.hypot(...v) || 1; N.push(v[0] / k, v[1] / k, v[2] / k); }
