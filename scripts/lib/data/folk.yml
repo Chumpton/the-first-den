@@ -26,26 +26,26 @@ avoid:
     circle: [0, 100, 7.2]
     rects: [[-16.2, 100.3, 8.4, 13.4], [15.8, 99.6, 8.4, 17.4], [-14.2, 85.5, 10.4, 11.4]]
 roster:
-  - { id: folk-smith, who: smith, name: Brom the Smith, district: market, at: [-6, 112] }
-  - { id: folk-baker, who: baker, name: Dora the Baker, district: market, at: [6, 90] }
-  - { id: folk-merchant, who: merchant, name: Master Pell, district: market, at: [8, 116] }
-  - { id: folk-kid, who: kid, name: Scamp, district: market, at: [-4, 84] }
-  - { id: folk-ranger, who: ranger, name: Wren, district: market, at: [3, 110] }
-  - { id: folk-bard, who: bard, name: Lark the Bard, district: fountain, at: [-5.5, 102], y: 0.45, faceAway: [0, 100] }
-  - { id: folk-fisher, who: fisher, name: Old Gill, district: dock, at: [4.3, -60], y: 0.92, faceWater: true }
-  - { id: folk-witch, who: witch, name: Granny Nettle, district: magic, at: [78, 72] }
-  - { id: folk-apprentice, who: apprentice, name: Tobin, district: magic, at: [86, 82] }
-  - { id: folk-alchemist, who: alchemist, name: Vesper, district: magic, at: [88, 72] }
-  - { id: folk-tinkerer, who: tinkerer, name: Cogsworth, district: magic, at: [76, 84] }
-  - { id: folk-beekeeper, who: beekeeper, name: Hester, district: garden, at: [-86, 72] }
-  - { id: folk-flowergirl, who: flowergirl, name: Posy, district: garden, at: [-78, 82] }
-  - { id: folk-gardener, who: gardener, name: Old Rook, district: garden, at: [-88, 84] }
-  - { id: folk-shepherdess, who: shepherdess, name: Elsie, district: garden, at: [-76, 72] }
-  - { id: folk-herald, who: herald, name: Herald Quill, district: royal, at: [0, 188] }
-  - { id: folk-knight, who: knight, name: Sir Aldric, district: royal, at: [-6, 196] }
-  - { id: folk-lady, who: lady, name: Lady Rosalind, district: royal, at: [5, 200] }
-  - { id: folk-cleric, who: cleric, name: Brother Anselm, district: royal, at: [-3, 204] }
-  - { id: folk-watch, who: watch, name: Warden Hobb, district: royal, at: [8, 190] }
+  - { id: folk-smith, who: smith, model: np-smith, name: Brom the Smith, district: market, at: [-6, 112] }
+  - { id: folk-baker, who: baker, model: np-baker, name: Dora the Baker, district: market, at: [6, 90] }
+  - { id: folk-merchant, who: merchant, model: np-merchant, name: Master Pell, district: market, at: [8, 116] }
+  - { id: folk-kid, who: kid, model: np-kid, name: Scamp, district: market, at: [-4, 84] }
+  - { id: folk-ranger, who: ranger, model: np-ranger, name: Wren, district: market, at: [3, 110] }
+  - { id: folk-bard, who: bard, model: np-bard, name: Lark the Bard, district: fountain, at: [-5.5, 102], y: 0.45, faceAway: [0, 100] }
+  - { id: folk-fisher, who: fisher, model: np-fisher, name: Old Gill, district: dock, at: [4.3, -60], y: 0.92, faceWater: true }
+  - { id: folk-witch, who: witch, model: np-witch, name: Granny Nettle, district: magic, at: [78, 72] }
+  - { id: folk-apprentice, who: apprentice, model: np-apprentice, name: Tobin, district: magic, at: [86, 82] }
+  - { id: folk-alchemist, who: alchemist, model: np-alchemist, name: Vesper, district: magic, at: [88, 72] }
+  - { id: folk-tinkerer, who: tinkerer, model: np-tinkerer, name: Cogsworth, district: magic, at: [76, 84] }
+  - { id: folk-beekeeper, who: beekeeper, model: np-beekeeper, name: Hester, district: garden, at: [-86, 72] }
+  - { id: folk-flowergirl, who: flowergirl, model: np-flowergirl, name: Posy, district: garden, at: [-78, 82] }
+  - { id: folk-gardener, who: gardener, model: np-gardener, name: Old Rook, district: garden, at: [-88, 84] }
+  - { id: folk-shepherdess, who: shepherdess, model: np-shepherdess, name: Elsie, district: garden, at: [-76, 72] }
+  - { id: folk-herald, who: herald, model: np-herald, name: Herald Quill, district: royal, at: [0, 188] }
+  - { id: folk-knight, who: knight, model: np-knight, name: Sir Aldric, district: royal, at: [-6, 196] }
+  - { id: folk-lady, who: lady, model: np-lady, name: Lady Rosalind, district: royal, at: [5, 200] }
+  - { id: folk-cleric, who: cleric, model: np-cleric, name: Brother Anselm, district: royal, at: [-3, 204] }
+  - { id: folk-watch, who: watch, model: np-watch, name: Warden Hobb, district: royal, at: [8, 190] }
 lines:
   smith: ["Mind the sparks, friend.", "A good hinge outlives the door.", "Bring me iron and I'll bring you a blade."]
   herald: ["Hear ye! The crown bids you welcome!", "Proclamation: the fair runs all week.", "The King's road is open to all."]

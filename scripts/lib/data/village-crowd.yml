@@ -11,6 +11,7 @@ restSecs: [3, 8]
 stuckSecs: 2.5
 roster:
   - id: villager-bram
+    model: vl-bram
     name: Old Bram
     role: stand
     at: [161.5, 91]
@@ -22,6 +23,7 @@ roster:
       - "Every lantern on that path was lit by a neighbour. We take turns."
       - "The notice board says bread at noon. It always says bread at noon."
   - id: villager-nell
+    model: vl-nell
     name: Mossy Nell
     role: garden
     at: [163.3, 106.4]
@@ -32,6 +34,7 @@ roster:
       - "Take a carrot on your way. The garden's everyone's."
       - "The scarecrow's name is Gerald. He is useless and we love him."
   - id: villager-pip
+    model: vl-pip
     name: Pip
     role: wander
     kid: true
@@ -44,6 +47,7 @@ roster:
       - "Don't tell Nell, but Gerald's hat was my idea."
       - "Race you to the well! ...I'm already here."
   - id: villager-hazel
+    model: vl-hazel
     name: Hazel
     role: sit
     at: [179.37, 84.3]
@@ -54,6 +58,7 @@ roster:
       - "I'm knitting Bram a new scarf. Don't tell him it's orange again."
       - "On a clear night you can see the lake glitter from here."
   - id: villager-tomas
+    model: vl-tomas
     name: Tomas the Baker
     role: stand
     at: [163.2, 74.3]
@@ -64,6 +69,7 @@ roster:
       - "Oven's hot since dawn. Seeded loaf, honey buns, and one burnt one for me."
       - "Bread tastes better when the whole hill queues for it."
   - id: villager-wren
+    model: vl-wren
     name: Wren
     role: wander
     at: [180, 97]
