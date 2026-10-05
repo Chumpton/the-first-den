@@ -1,0 +1,37 @@
+# spawn-scene v2 yaml x-1z4
+sw-stockade-entrance:
+  id: sw-stockade-entrance
+  feetPosition:
+    x: -87.7
+    y: 0.55
+    z: 431.5
+  physics: static
+  visibleRange:
+    max: 700
+  rotation:
+    yaw: 55
+  primitive:
+    depth: 8
+    height: 8
+    kind: box
+    width: 10
+  material:
+    color: oklch(0.3 0.012 260)
+    roughness: 0.9
+  children:
+    - castShadow: false
+      feetPosition:
+        x: 0
+        y: 3.5
+        z: -4.1
+      id: plaque-stockade
+      material:
+        color: oklch(0.32 0.1 262)
+      primitive:
+        depth: 0.06
+        height: 0.6
+        kind: box
+        width: 4
+      ui: '<div face="front" class="w-full h-full flex items-center justify-center text-center" style="background:#2a1b18;border:3px solid #b84030;color:#f0b090;font-family:serif;font-size:160px;font-weight:bold;letter-spacing:4px">THE STOCKADE</div>'
+      visibleRange:
+        max: 80

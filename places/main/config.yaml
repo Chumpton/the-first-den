@@ -59,9 +59,9 @@ terrain:
     violetRest: {kind: flatten, center: {x: 30.5, z: -7.6}, height: 0.55, falloff: 3, shape: {kind: circle, radius: 5}}
     violetClear: {kind: clear-scatter, center: {x: 30.5, z: -7.6}, shape: {kind: circle, radius: 7.5}}
     spawnClear: {kind: clear-scatter, center: {x: 0, z: -3}, shape: {kind: circle, radius: 7}}
-    stormwindCityClear: {kind: clear-scatter, center: {x: 0, z: 220}, shape: {kind: rectangle, width: 300, depth: 320}}
-    stormwindKeepPlateau: {kind: flatten, center: {x: 65, z: 330}, height: 13.5, shape: {kind: rectangle, width: 95, depth: 85}, falloff: 4, falloffCurve: cliff, material: cobblepale, edgeMaterial: cobblepale}
-    stormwindCityFlat: {kind: flatten, center: {x: 0, z: 190}, height: 0.55, shape: {kind: rectangle, width: 280, depth: 210}, falloff: 5, material: cobblepale, edgeMaterial: cobblepale}
+    stormwindCityClear: {kind: clear-scatter, center: {x: 100, z: 380}, shape: {kind: rectangle, width: 1000, depth: 850}}
+    stormwindKeepPlateau: {kind: flatten, center: {x: 520, z: 360}, height: 26.0, shape: {kind: rectangle, width: 180, depth: 220}, falloff: 6, falloffCurve: cliff, material: cobblepale, edgeMaterial: cobblepale}
+    stormwindCityFlat: {kind: flatten, center: {x: 60, z: 380}, height: 0.55, shape: {kind: rectangle, width: 850, depth: 650}, falloff: 8, material: cobblepale, edgeMaterial: cobblepale}
     homeSite: {center: {x: 0, z: -27}, falloff: 8, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 18}, edgeMaterial: yard}
     grounds-lawn-front: {kind: path, grade: false, material: lawn, edgeMaterial: yard, falloff: 3, points: [[0, -6], [0, 4.4]], width: 30}
     grounds-lawn-frontClear: {kind: clear-scatter, center: {x: 0, z: -1}, shape: {kind: path, points: [[0, -6], [0, 4.4]], width: 28}}
@@ -184,16 +184,16 @@ terrain:
     link-arch-west: {clearScatter: true, edgeMaterial: gravel, falloff: 2, grade: false, kind: path, material: cobblepale, noise: 0.4, points: [[-2.5, 24], [-12, 25.5], [-26, 29], [-42, 34], [-58, 40.5], [-71, 47], [-78, 51.5], [-82, 55]], width: 4.5}
     link-arch-west-bed: {center: {x: 0, z: 0}, falloff: 4, height: 0.5, kind: flatten, shape: {kind: path, points: [[-2.5, 24], [-12, 25.5], [-26, 29], [-42, 34], [-58, 40.5], [-71, 47], [-78, 51.5], [-82, 55]], width: 6}}
     link-arch-west-clear: {center: {x: 0, z: 0}, kind: clear-scatter, shape: {kind: path, points: [[-2.5, 24], [-12, 25.5], [-26, 29], [-42, 34], [-58, 40.5], [-71, 47], [-78, 51.5], [-82, 55]], width: 10}}
-    stormwindMoatSouth: {kind: sea, level: 0, reach: {shape: rectangle, width: 102, depth: 12, center: {x: 0, z: 86}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.8, caustics: 0.4, refraction: 0.3, shoreFoam: 0.15, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
-    stormwindMoatCross: {kind: sea, level: 0, reach: {shape: rectangle, width: 240, depth: 12, center: {x: 0, z: 180}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.8, caustics: 0.4, refraction: 0.3, shoreFoam: 0.15, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
-    stormwindMoatWest: {kind: sea, level: 0, reach: {shape: rectangle, width: 12, depth: 160, center: {x: -42, z: 180}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.8, caustics: 0.4, refraction: 0.3, shoreFoam: 0.15, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
-    stormwindMoatEast: {kind: sea, level: 0, reach: {shape: rectangle, width: 12, depth: 160, center: {x: 42, z: 180}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.8, caustics: 0.4, refraction: 0.3, shoreFoam: 0.15, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
-    stormwindMoatKeep: {kind: sea, level: 0, reach: {shape: rectangle, width: 120, depth: 18, center: {x: 55, z: 280}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.8, caustics: 0.4, refraction: 0.3, shoreFoam: 0.15, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
-    stormwindCanalBedSouth: {kind: flatten, center: {x: 0, z: 86}, height: -1.6, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 100, depth: 10}, material: pebbles, edgeMaterial: cobblepale}
-    stormwindCanalBedCross: {kind: flatten, center: {x: 0, z: 180}, height: -1.6, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 236, depth: 10}, material: pebbles, edgeMaterial: cobblepale}
-    stormwindCanalBedWest: {kind: flatten, center: {x: -42, z: 180}, height: -1.6, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 10, depth: 150}, material: pebbles, edgeMaterial: cobblepale}
-    stormwindCanalBedEast: {kind: flatten, center: {x: 42, z: 180}, height: -1.6, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 10, depth: 150}, material: pebbles, edgeMaterial: cobblepale}
-    stormwindCanalBedKeep: {kind: flatten, center: {x: 55, z: 280}, height: -1.6, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 116, depth: 14}, material: pebbles, edgeMaterial: cobblepale}
+    stormwindMoatSouth: {kind: sea, level: 0, reach: {shape: rectangle, width: 340, depth: 20, center: {x: 0, z: 90}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.8, caustics: 0.4, refraction: 0.3, shoreFoam: 0.15, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
+    stormwindMoatCross: {kind: sea, level: 0, reach: {shape: rectangle, width: 500, depth: 24, center: {x: 100, z: 390}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.8, caustics: 0.4, refraction: 0.3, shoreFoam: 0.15, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
+    stormwindMoatWest: {kind: sea, level: 0, reach: {shape: rectangle, width: 24, depth: 350, center: {x: -85, z: 350}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.8, caustics: 0.4, refraction: 0.3, shoreFoam: 0.15, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
+    stormwindMoatEast: {kind: sea, level: 0, reach: {shape: rectangle, width: 24, depth: 320, center: {x: 140, z: 350}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.8, caustics: 0.4, refraction: 0.3, shoreFoam: 0.15, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
+    stormwindMoatKeep: {kind: sea, level: 0, reach: {shape: rectangle, width: 45, depth: 250, center: {x: 420, z: 360}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.8, caustics: 0.4, refraction: 0.3, shoreFoam: 0.15, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
+    stormwindCanalBedSouth: {kind: flatten, center: {x: 0, z: 90}, height: -1.6, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 336, depth: 18}, material: pebbles, edgeMaterial: cobblepale}
+    stormwindCanalBedCross: {kind: flatten, center: {x: 100, z: 390}, height: -1.6, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 496, depth: 22}, material: pebbles, edgeMaterial: cobblepale}
+    stormwindCanalBedWest: {kind: flatten, center: {x: -85, z: 350}, height: -1.6, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 22, depth: 346}, material: pebbles, edgeMaterial: cobblepale}
+    stormwindCanalBedEast: {kind: flatten, center: {x: 140, z: 350}, height: -1.6, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 22, depth: 316}, material: pebbles, edgeMaterial: cobblepale}
+    stormwindCanalBedKeep: {kind: flatten, center: {x: 420, z: 360}, height: -1.6, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 42, depth: 246}, material: pebbles, edgeMaterial: cobblepale}
     garden-flat: {center: {x: 57, z: -26}, falloff: 3, height: 0.5, kind: flatten, material: yard, shape: {kind: path, points: [[43, -26], [71, -26]], width: 26}}
     garden-clear: {center: {x: 57, z: -26}, kind: clear-scatter, shape: {kind: path, points: [[41, -26], [73, -26]], width: 30}}
     villagePlateau: {kind: flatten, center: {x: 172, z: 90}, height: 20, falloff: 35, falloffCurve: linear, shape: {kind: circle, radius: 27}, material: lawn, edgeMaterial: lawn}

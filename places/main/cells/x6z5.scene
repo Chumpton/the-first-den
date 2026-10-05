@@ -1,0 +1,18 @@
+# spawn-scene v2 yaml x6z5
+sw-bastion-keep-ne:
+  id: sw-bastion-keep-ne
+  feetPosition:
+    x: 610
+    y: 26
+    z: 480
+  material:
+    color: oklch(0.93 0.015 80)
+    roughness: 0.85
+  physics: static
+  primitive:
+    height: 26
+    kind: cylinder
+    radiusBottom: 7
+    radiusTop: 6.5
+  visibleRange:
+    max: 900

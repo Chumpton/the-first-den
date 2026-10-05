@@ -1,0 +1,119 @@
+# spawn-scene v2 yaml x3z5
+sw-great-anvil:
+  id: sw-great-anvil
+  feetPosition:
+    x: 308.6
+    y: 0.55
+    z: 537.3
+  physics: static
+  visibleRange:
+    max: 350
+  primitive:
+    kind: scripted
+    script: scripts/gen/stormwind-anvil.js
+  children:
+    - castShadow: false
+      feetPosition:
+        x: 0
+        y: 4.8
+        z: 0
+      id: anvil-light
+      light:
+        color: "#ff7b2b"
+        distance: 22
+        intensity: 25
+        kind: point
+    - castShadow: false
+      feetPosition:
+        x: 0
+        y: 1.2
+        z: -3.8
+      id: plaque-anvil
+      material:
+        color: oklch(0.32 0.1 262)
+      primitive:
+        depth: 0.06
+        height: 0.5
+        kind: box
+        width: 3.5
+      ui: '<div face="front" class="w-full h-full flex items-center justify-center text-center" style="background:#241d18;border:3px solid #c88a38;color:#f4c26b;font-family:serif;font-size:160px;font-weight:bold;letter-spacing:4px">THE GREAT ANVIL</div>'
+      visibleRange:
+        max: 70
+sw-golden-keg:
+  id: sw-golden-keg
+  feetPosition:
+    x: 275
+    y: 0.55
+    z: 505
+  physics: static
+  visibleRange:
+    max: 700
+  rotation:
+    yaw: 45
+  primitive:
+    kind: scripted
+    params:
+      color: granite
+      d: 20
+      floors: 3
+      h: 10.5
+      roofStyle: gable
+      w: 22
+    script: scripts/gen/stormwind-building.js
+    seed: 3255
+  children:
+    - castShadow: false
+      feetPosition:
+        x: 0
+        y: 4.7250000000000005
+        z: -10.1
+      id: plaque
+      material:
+        color: oklch(0.32 0.1 262)
+      primitive:
+        depth: 0.08
+        height: 0.7
+        kind: box
+        width: 5.5
+      ui: '<div face="front" class="w-full h-full flex items-center justify-center text-center" style="background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:160px;font-weight:bold;letter-spacing:4px">THE GOLDEN KEG · DWARVEN ALE & ROASTS</div>'
+      visibleRange:
+        max: 90
+sw-thunderbrew-smithy:
+  id: sw-thunderbrew-smithy
+  feetPosition:
+    x: 311.9
+    y: 0.55
+    z: 531.2
+  physics: static
+  visibleRange:
+    max: 700
+  rotation:
+    yaw: -90
+  primitive:
+    kind: scripted
+    params:
+      color: granite
+      d: 18
+      floors: 2
+      h: 9.5
+      roofStyle: gable
+      w: 20
+    script: scripts/gen/stormwind-building.js
+    seed: 3650
+  children:
+    - castShadow: false
+      feetPosition:
+        x: 0
+        y: 4.275
+        z: -9.1
+      id: plaque
+      material:
+        color: oklch(0.32 0.1 262)
+      primitive:
+        depth: 0.08
+        height: 0.7
+        kind: box
+        width: 5.5
+      ui: '<div face="front" class="w-full h-full flex items-center justify-center text-center" style="background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:160px;font-weight:bold;letter-spacing:4px">THUNDERBREW SMITHY & WEAPONS</div>'
+      visibleRange:
+        max: 90

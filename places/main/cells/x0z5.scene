@@ -1,0 +1,40 @@
+# spawn-scene v2 yaml x0z5
+sw-city-hall:
+  id: sw-city-hall
+  feetPosition:
+    x: 35
+    y: 0.55
+    z: 508.7
+  physics: static
+  visibleRange:
+    max: 700
+  rotation:
+    yaw: 90
+  primitive:
+    kind: scripted
+    params:
+      color: limestone
+      d: 20
+      floors: 3
+      h: 12
+      roofStyle: gable
+      w: 26
+    script: scripts/gen/stormwind-building.js
+    seed: 858
+  children:
+    - castShadow: false
+      feetPosition:
+        x: 0
+        y: 5.4
+        z: -10.1
+      id: plaque
+      material:
+        color: oklch(0.32 0.1 262)
+      primitive:
+        depth: 0.08
+        height: 0.7
+        kind: box
+        width: 5.5
+      ui: '<div face="front" class="w-full h-full flex items-center justify-center text-center" style="background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:160px;font-weight:bold;letter-spacing:4px">STORMWIND CITY COUNCIL & ARCHIVES</div>'
+      visibleRange:
+        max: 90

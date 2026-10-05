@@ -1,453 +1,57 @@
 # spawn-scene v2 yaml x0z2
-# ==============================================================================
-# STORMWIND CITY - NORTHERN DISTRICTS (Cathedral Square, Dwarven District, Keep)
-# ==============================================================================
-
-# ==========================================
-# 1. CATHEDRAL SQUARE (x: -55..20, z: 200..275)
-# ==========================================
-sw-cathedral-of-light:
+sw-bank-of-stormwind:
+  id: sw-bank-of-stormwind
+  feetPosition:
+    x: 8
+    y: 0.55
+    z: 232.6
+  physics: static
+  visibleRange:
+    max: 700
+  rotation:
+    yaw: -90
+  primitive:
+    kind: scripted
+    params:
+      color: limestone
+      d: 26
+      floors: 3
+      h: 12
+      roofStyle: flat
+      w: 22
+    script: scripts/gen/stormwind-building.js
+    seed: 312
   children:
     - castShadow: false
-      feetPosition: {x: 0, y: 5, z: 10.5}
-      id: sw-altar-light
-      light: {color: "#ffc98a", distance: 22, intensity: 25, kind: point}
-    - castShadow: false
-      feetPosition: {x: 0, y: 12, z: 0}
-      id: sw-nave-light
-      light: {color: "#fff1d8", distance: 34, intensity: 30, kind: point}
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.5, z: -16.2}
-      id: plaque-cathedral
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.08, height: 0.8, kind: box, width: 4.8}
-      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:6px\">CATHEDRAL OF LIGHT</div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: -16, y: 0.55, z: 255}
-  id: sw-cathedral-of-light
+      feetPosition:
+        x: 0
+        y: 5.4
+        z: -13.1
+      id: plaque
+      material:
+        color: oklch(0.32 0.1 262)
+      primitive:
+        depth: 0.08
+        height: 0.7
+        kind: box
+        width: 5.5
+      ui: '<div face="front" class="w-full h-full flex items-center justify-center text-center" style="background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:160px;font-weight:bold;letter-spacing:4px">BANK OF STORMWIND</div>'
+      visibleRange:
+        max: 90
+sw-bridge-trade-oldtown:
+  id: sw-bridge-trade-oldtown
+  feetPosition:
+    x: 20.5
+    y: 0.55
+    z: 248.7
   physics: static
-  primitive: {kind: scripted, script: scripts/gen/royal-cathedral.js, seed: 1}
-  rotation: {yaw: 0}
-  tags: [stormwind, cathedral]
-  visibleRange: {max: 900}
-
-sw-cathedral-square-fountain:
-  audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-stone-fountain-splash-loop.mp3, gain: 0.15, loop: true, maxDistance: 30, spatial: true}
-  feetPosition: {x: -16, y: 0.55, z: 220}
-  id: sw-cathedral-square-fountain
-  physics: static
-  primitive: {kind: scripted, params: {part: fountain}, script: scripts/gen/royal-district.js, seed: 3}
-  tags: [stormwind, cathedral, fountain]
-  visibleRange: {max: 250}
-
-sw-city-hall:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.8, z: -7.1}
-      id: plaque-city-hall
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.08, height: 0.7, kind: box, width: 4.6}
-      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:160px;font-weight:bold;letter-spacing:4px\">STORMWIND CITY COUNCIL</div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: -46, y: 0.55, z: 235}
-  id: sw-city-hall
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 14, floors: 3, h: 10, roofStyle: gable, w: 18}, script: scripts/gen/stormwind-building.js, seed: 101}
-  rotation: {yaw: 90}
-  tags: [stormwind, cathedral, civic]
-  visibleRange: {max: 500}
-
-sw-cathedral-orphanage:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.2, z: -6.1}
-      id: plaque-orphanage
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.08, height: 0.65, kind: box, width: 4.2}
-      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:170px;font-weight:bold;letter-spacing:4px\">STORMWIND ORPHANAGE</div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: -46, y: 0.55, z: 260}
-  id: sw-cathedral-orphanage
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 12, floors: 2, h: 8.5, roofStyle: gable, w: 14}, script: scripts/gen/stormwind-building.js, seed: 102}
-  rotation: {yaw: 90}
-  tags: [stormwind, cathedral, orphanage]
-  visibleRange: {max: 500}
-
-sw-cathedral-library:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.5, z: -6.6}
-      id: plaque-cathedral-library
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.08, height: 0.7, kind: box, width: 4.4}
-      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:160px;font-weight:bold;letter-spacing:4px\">HALL OF FELLOWSHIP</div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: 14, y: 0.55, z: 235}
-  id: sw-cathedral-library
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 13, floors: 3, h: 9.5, roofStyle: gable, w: 16}, script: scripts/gen/stormwind-building.js, seed: 103}
-  rotation: {yaw: -90}
-  tags: [stormwind, cathedral, library]
-  visibleRange: {max: 500}
-
-sw-cathedral-rectory:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.2, z: -6.1}
-      id: plaque-rectory
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.08, height: 0.65, kind: box, width: 4.0}
-      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:170px;font-weight:bold;letter-spacing:4px\">CLERGY RECTORY</div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: 14, y: 0.55, z: 260}
-  id: sw-cathedral-rectory
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 12, floors: 2, h: 8.5, roofStyle: gable, w: 14}, script: scripts/gen/stormwind-building.js, seed: 104}
-  rotation: {yaw: -90}
-  tags: [stormwind, cathedral]
-  visibleRange: {max: 500}
-
-# ==========================================
-# 2. DWARVEN DISTRICT (x: 50..120, z: 200..275)
-# ==========================================
-sw-tram-portal:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 15.5, z: -2.2}
-      id: plaque-tram
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.08, height: 0.9, kind: box, width: 6.8}
-      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#241d18;border:4px solid #c88a38;color:#f4c26b;font-family:serif;font-size:190px;font-weight:bold;letter-spacing:6px\">DEEPRUN TRAMWAY · TO IRONFORGE</div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: 85, y: 0.55, z: 270}
-  id: sw-tram-portal
-  physics: static
-  primitive: {kind: scripted, script: scripts/gen/stormwind-tram-portal.js}
-  rotation: {yaw: 0}
-  tags: [stormwind, dwarven, tram]
-  visibleRange: {max: 600}
-
-sw-great-anvil:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.8, z: 0}
-      id: anvil-light
-      light: {color: "#ff7b2b", distance: 20, intensity: 22, kind: point}
-    - castShadow: false
-      feetPosition: {x: 0, y: 1.2, z: -3.8}
-      id: plaque-anvil
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.06, height: 0.5, kind: box, width: 3.2}
-      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#241d18;border:3px solid #c88a38;color:#f4c26b;font-family:serif;font-size:160px;font-weight:bold;letter-spacing:4px\">THE GREAT ANVIL</div>"
-      visibleRange: {max: 70}
-  feetPosition: {x: 85, y: 0.55, z: 235}
-  id: sw-great-anvil
-  physics: static
-  primitive: {kind: scripted, script: scripts/gen/stormwind-anvil.js}
-  tags: [stormwind, dwarven, forge]
-  visibleRange: {max: 300}
-
-sw-golden-keg:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.6, z: -7.1}
-      id: plaque-golden-keg
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.08, height: 0.7, kind: box, width: 4.4}
-      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#241d18;border:4px solid #c88a38;color:#f4c26b;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:4px\">THE GOLDEN KEG</div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: 62, y: 0.55, z: 215}
-  id: sw-golden-keg
-  physics: static
-  primitive: {kind: scripted, params: {color: granite, d: 14, floors: 3, h: 9.5, roofStyle: gable, w: 16}, script: scripts/gen/stormwind-building.js, seed: 105}
-  rotation: {yaw: 45}
-  tags: [stormwind, dwarven, tavern]
-  visibleRange: {max: 500}
-
-sw-dwarf-blacksmith:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.2, z: -6.1}
-      id: plaque-blacksmith
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.08, height: 0.65, kind: box, width: 4.4}
-      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#241d18;border:4px solid #c88a38;color:#f4c26b;font-family:serif;font-size:160px;font-weight:bold;letter-spacing:3px\">THUNDERBREW SMITHY</div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: 106, y: 0.55, z: 225}
-  id: sw-dwarf-blacksmith
-  physics: static
-  primitive: {kind: scripted, params: {color: granite, d: 12, floors: 2, h: 8.5, roofStyle: gable, w: 14}, script: scripts/gen/stormwind-building.js, seed: 106}
-  rotation: {yaw: -90}
-  tags: [stormwind, dwarven, weapons]
-  visibleRange: {max: 500}
-
-sw-dwarf-gunsmith:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.2, z: -6.1}
-      id: plaque-gunsmith
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.08, height: 0.65, kind: box, width: 4.5}
-      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#241d18;border:4px solid #c88a38;color:#f4c26b;font-family:serif;font-size:150px;font-weight:bold;letter-spacing:3px\">DWARVEN ENGINEERING</div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: 106, y: 0.55, z: 250}
-  id: sw-dwarf-gunsmith
-  physics: static
-  primitive: {kind: scripted, params: {color: granite, d: 12, floors: 2, h: 8.5, roofStyle: gable, w: 14}, script: scripts/gen/stormwind-building.js, seed: 107}
-  rotation: {yaw: -90}
-  tags: [stormwind, dwarven, guns]
-  visibleRange: {max: 500}
-
-sw-dwarf-bank:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.2, z: -6.1}
-      id: plaque-dwarf-bank
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.08, height: 0.65, kind: box, width: 4.4}
-      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#241d18;border:4px solid #c88a38;color:#f4c26b;font-family:serif;font-size:160px;font-weight:bold;letter-spacing:3px\">IRONFORGE BANK VAULT</div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: 64, y: 0.55, z: 252}
-  id: sw-dwarf-bank
-  physics: static
-  primitive: {kind: scripted, params: {color: granite, d: 12, floors: 2, h: 8.5, roofStyle: gable, w: 14}, script: scripts/gen/stormwind-building.js, seed: 108}
-  rotation: {yaw: 90}
-  tags: [stormwind, dwarven, bank]
-  visibleRange: {max: 500}
-
-# ==========================================
-# 3. CANAL BRIDGES & CROSSWAYS
-# ==========================================
-sw-bridge-cathedral-dwarven:
-  feetPosition: {x: 35, y: 0.55, z: 235}
-  id: sw-bridge-cathedral-dwarven
-  physics: static
-  primitive: {kind: scripted, params: {len: 16, w: 9}, script: scripts/gen/stormwind-bridge.js}
-  rotation: {yaw: 90}
-  tags: [stormwind, bridge]
-  visibleRange: {max: 350}
-
-sw-bridge-oldtown-dwarven:
-  feetPosition: {x: 85, y: 0.55, z: 190}
-  id: sw-bridge-oldtown-dwarven
-  physics: static
-  primitive: {kind: scripted, params: {len: 16, w: 9}, script: scripts/gen/stormwind-bridge.js}
-  rotation: {yaw: 0}
-  tags: [stormwind, bridge]
-  visibleRange: {max: 350}
-
-sw-bridge-dwarven-keep:
-  feetPosition: {x: 65, y: 0.55, z: 278}
-  id: sw-bridge-dwarven-keep
-  physics: static
-  primitive: {kind: scripted, params: {len: 18, w: 10}, script: scripts/gen/stormwind-bridge.js}
-  rotation: {yaw: 0}
-  tags: [stormwind, bridge]
-  visibleRange: {max: 350}
-
-# ==========================================
-# 4. STORMWIND KEEP (x: 25..105, z: 290..365, elevated on cliff at y: 13.5)
-# ==========================================
-sw-keep-stair:
-  feetPosition: {x: 65, y: 0.55, z: 295}
-  id: sw-keep-stair
-  physics: static
-  primitive: {kind: scripted, params: {part: stair}, script: scripts/gen/royal-castle.js}
-  tags: [stormwind, keep, stair]
-  visibleRange: {max: 450}
-
-sw-keep-gatehouse:
-  children:
-    - castShadow: false
-      feetPosition: {x: -4.4, y: 16.2, z: -5.4}
-      id: keep-banner-l
-      material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.1}, script: scripts/material-banner-wave.js}
-      primitive: {kind: scripted, params: {beast: lion, field: "oklch(0.38 0.14 262)", field2: "oklch(0.31 0.12 262)", h: 7, kind: drape, point: 0.5, trim: "oklch(0.82 0.13 85)", w: 1.6}, script: scripts/gen/town-banner.js}
-      visibleRange: {max: 250}
-    - castShadow: false
-      feetPosition: {x: 4.4, y: 16.2, z: -5.4}
-      id: keep-banner-r
-      material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.1}, script: scripts/material-banner-wave.js}
-      primitive: {kind: scripted, params: {beast: lion, field: "oklch(0.38 0.14 262)", field2: "oklch(0.31 0.12 262)", h: 7, kind: drape, point: 0.5, trim: "oklch(0.82 0.13 85)", w: 1.6}, script: scripts/gen/town-banner.js}
-      visibleRange: {max: 250}
-    - castShadow: false
-      feetPosition: {x: 0, y: 8.5, z: -5.8}
-      id: plaque-keep-gate
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.08, height: 0.9, kind: box, width: 5.5}
-      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:220px;font-weight:bold;letter-spacing:6px\">STORMWIND KEEP</div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: 65, y: 13.5, z: 312}
-  id: sw-keep-gatehouse
-  physics: static
-  primitive: {kind: scripted, params: {part: gatehouse}, script: scripts/gen/royal-castle.js}
-  tags: [stormwind, keep, gate]
-  visibleRange: {max: 800}
-
-sw-keep-throne-hall:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 9, z: 1}
-      id: throne-light
-      light: {color: "oklch(0.88 0.08 75)", distance: 26, intensity: 30, kind: point}
-    - castShadow: true
-      feetPosition: {x: 0, y: 40.5, z: -3.3}
-      id: keep-spire-banner
-      material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.1}, script: scripts/material-banner-wave.js}
-      primitive: {kind: scripted, params: {beast: lion, field: "oklch(0.38 0.14 262)", field2: "oklch(0.31 0.12 262)", h: 10, kind: drape, point: 0.5, trim: "oklch(0.82 0.13 85)", w: 3.5}, script: scripts/gen/town-banner.js}
-      visibleRange: {max: 600}
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.8, z: -11.5}
-      id: plaque-throne-room
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.08, height: 0.8, kind: box, width: 5.6}
-      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:200px;font-weight:bold;letter-spacing:6px\">ROYAL THRONE ROOM</div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: 65, y: 13.5, z: 339}
-  id: sw-keep-throne-hall
-  physics: static
-  primitive: {kind: scripted, params: {part: keep}, script: scripts/gen/royal-castle.js}
-  tags: [stormwind, keep, throne]
-  visibleRange: {max: 900}
-
-sw-keep-walls:
-  feetPosition: {x: 65, y: 13.5, z: 330}
-  id: sw-keep-walls
-  physics: static
-  primitive: {kind: scripted, params: {part: wall}, script: scripts/gen/royal-castle.js}
-  tags: [stormwind, keep, wall]
-  visibleRange: {max: 800}
-
-sw-keep-tower-se:
-  feetPosition: {x: 101, y: 13.5, z: 312}
-  id: sw-keep-tower-se
-  physics: static
-  primitive: {kind: scripted, params: {part: tower}, script: scripts/gen/royal-castle.js}
-  tags: [stormwind, keep, tower]
-  visibleRange: {max: 900}
-
-sw-keep-tower-sw:
-  feetPosition: {x: 29, y: 13.5, z: 312}
-  id: sw-keep-tower-sw
-  physics: static
-  primitive: {kind: scripted, params: {part: tower}, script: scripts/gen/royal-castle.js}
-  tags: [stormwind, keep, tower]
-  visibleRange: {max: 900}
-
-sw-keep-tower-ne:
-  feetPosition: {x: 101, y: 13.5, z: 348}
-  id: sw-keep-tower-ne
-  physics: static
-  primitive: {kind: scripted, params: {part: tower}, script: scripts/gen/royal-castle.js}
-  tags: [stormwind, keep, tower]
-  visibleRange: {max: 900}
-
-sw-keep-tower-nw:
-  feetPosition: {x: 29, y: 13.5, z: 348}
-  id: sw-keep-tower-nw
-  physics: static
-  primitive: {kind: scripted, params: {part: tower}, script: scripts/gen/royal-castle.js}
-  tags: [stormwind, keep, tower]
-  visibleRange: {max: 900}
-
-sw-keep-library:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.5, z: -6.1}
-      id: plaque-keep-library
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.08, height: 0.65, kind: box, width: 4.6}
-      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:160px;font-weight:bold;letter-spacing:4px\">ROYAL LIBRARY</div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: 88, y: 13.5, z: 330}
-  id: sw-keep-library
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 12, floors: 2, h: 9.0, roofStyle: gable, w: 16}, script: scripts/gen/stormwind-building.js, seed: 109}
-  rotation: {yaw: -90}
-  tags: [stormwind, keep, library]
-  visibleRange: {max: 500}
-
-sw-keep-war-room:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.5, z: -6.1}
-      id: plaque-war-room
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.08, height: 0.65, kind: box, width: 4.6}
-      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:160px;font-weight:bold;letter-spacing:4px\">ALLIANCE WAR ROOM</div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: 42, y: 13.5, z: 330}
-  id: sw-keep-war-room
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 12, floors: 2, h: 9.0, roofStyle: gable, w: 16}, script: scripts/gen/stormwind-building.js, seed: 110}
-  rotation: {yaw: 90}
-  tags: [stormwind, keep, war-room]
-  visibleRange: {max: 500}
-
-# ==========================================
-# 5. NORTH PERIMETER FORTRESS WALLS & BASTIONS
-# ==========================================
-sw-wall-north-cathedral:
-  feetPosition: {x: -45, y: 0.55, z: 285}
-  id: sw-wall-north-cathedral
-  physics: static
-  primitive: {depth: 3.5, height: 16, kind: box, width: 60}
-  material: {color: "oklch(0.93 0.015 80)", roughness: 0.85}
-  visibleRange: {max: 700}
-
-sw-bastion-nw:
-  feetPosition: {x: -75, y: 0.55, z: 285}
-  id: sw-bastion-nw
-  physics: static
-  primitive: {height: 22, kind: cylinder, radiusBottom: 5.5, radiusTop: 5.0}
-  material: {color: "oklch(0.93 0.015 80)", roughness: 0.85}
-  visibleRange: {max: 800}
-
-sw-bastion-cathedral-flank:
-  feetPosition: {x: -75, y: 0.55, z: 210}
-  id: sw-bastion-cathedral-flank
-  physics: static
-  primitive: {height: 22, kind: cylinder, radiusBottom: 5.5, radiusTop: 5.0}
-  material: {color: "oklch(0.93 0.015 80)", roughness: 0.85}
-  visibleRange: {max: 800}
-
-sw-wall-west-cathedral:
-  feetPosition: {x: -75, y: 0.55, z: 247.5}
-  id: sw-wall-west-cathedral
-  physics: static
-  primitive: {depth: 75, height: 16, kind: box, width: 3.5}
-  material: {color: "oklch(0.93 0.015 80)", roughness: 0.85}
-  visibleRange: {max: 700}
-
-sw-wall-north-dwarven:
-  feetPosition: {x: 105, y: 0.55, z: 285}
-  id: sw-wall-north-dwarven
-  physics: static
-  primitive: {depth: 3.5, height: 16, kind: box, width: 40}
-  material: {color: "oklch(0.93 0.015 80)", roughness: 0.85}
-  visibleRange: {max: 700}
-
-sw-bastion-ne:
-  feetPosition: {x: 125, y: 0.55, z: 285}
-  id: sw-bastion-ne
-  physics: static
-  primitive: {height: 22, kind: cylinder, radiusBottom: 5.5, radiusTop: 5.0}
-  material: {color: "oklch(0.93 0.015 80)", roughness: 0.85}
-  visibleRange: {max: 800}
-
-sw-bastion-dwarven-flank:
-  feetPosition: {x: 125, y: 0.55, z: 210}
-  id: sw-bastion-dwarven-flank
-  physics: static
-  primitive: {height: 22, kind: cylinder, radiusBottom: 5.5, radiusTop: 5.0}
-  material: {color: "oklch(0.93 0.015 80)", roughness: 0.85}
-  visibleRange: {max: 800}
-
-sw-wall-east-dwarven:
-  feetPosition: {x: 125, y: 0.55, z: 247.5}
-  id: sw-wall-east-dwarven
-  physics: static
-  primitive: {depth: 75, height: 16, kind: box, width: 3.5}
-  material: {color: "oklch(0.93 0.015 80)", roughness: 0.85}
-  visibleRange: {max: 700}
+  visibleRange:
+    max: 400
+  rotation:
+    yaw: 90
+  primitive:
+    kind: scripted
+    params:
+      len: 24
+      w: 12
+    script: scripts/gen/stormwind-bridge.js

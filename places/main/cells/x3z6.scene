@@ -1,0 +1,30 @@
+# spawn-scene v2 yaml x3z6
+sw-deeprun-tram:
+  id: sw-deeprun-tram
+  feetPosition:
+    x: 341.2
+    y: 0.55
+    z: 587.9
+  physics: static
+  visibleRange:
+    max: 650
+  primitive:
+    kind: scripted
+    script: scripts/gen/stormwind-tram-portal.js
+  children:
+    - castShadow: false
+      feetPosition:
+        x: 0
+        y: 15.5
+        z: -2.2
+      id: plaque-tram
+      material:
+        color: oklch(0.32 0.1 262)
+      primitive:
+        depth: 0.08
+        height: 0.9
+        kind: box
+        width: 7
+      ui: '<div face="front" class="w-full h-full flex items-center justify-center text-center" style="background:#241d18;border:4px solid #c88a38;color:#f4c26b;font-family:serif;font-size:190px;font-weight:bold;letter-spacing:6px">DEEPRUN TRAMWAY · TO IRONFORGE</div>'
+      visibleRange:
+        max: 90

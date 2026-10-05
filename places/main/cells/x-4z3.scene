@@ -1,0 +1,18 @@
+# spawn-scene v2 yaml x-4z3
+sw-curtain-west-mage:
+  id: sw-curtain-west-mage
+  feetPosition:
+    x: -370
+    y: 0.55
+    z: 320
+  material:
+    color: oklch(0.93 0.015 80)
+    roughness: 0.85
+  physics: static
+  primitive:
+    depth: 260
+    height: 22
+    kind: box
+    width: 4
+  visibleRange:
+    max: 850

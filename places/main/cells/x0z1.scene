@@ -1,92 +1,115 @@
 # spawn-scene v2 yaml x0z1
-corridor-road-bp/marker-2:
-  castShadow: false
-  feetPosition: {x: -5.21, y: 0.05, z: 31.56}
-  id: corridor-road-bp/marker-2
-  material: {pbr: true}
-  parent: corridor-road-bp
-  physics: static
-  primitive: {kind: scripted, params: {item: marker}, script: scripts/gen/town-lane.js, seed: 22}
-  rotation: {yaw: -115.09}
-  tags: [town-lane, mile-marker]
-  ui: "<div face=\"front\" at=\"0.5 0.52\" width=\"0.32m\" style=\"height:560px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:#1f2f6b;border:10px solid #d9b24c;border-radius:26px;color:#f2d27a;font-family:serif;font-weight:700;text-align:center\"><div style=\"width:0;height:0;border-left:46px solid transparent;border-right:46px solid transparent;border-bottom:64px solid #f2d27a\"></div><div style=\"font-size:42px;letter-spacing:4px;line-height:1.05\">STORMWIND</div><div style=\"font-size:100px;letter-spacing:4px;line-height:1.05\">GATE</div><div style=\"font-size:36px;letter-spacing:4px;line-height:1.05\">60 m</div></div>"
-  visibleRange: {max: 70}
+# ==============================================================================
+# STORMWIND CITY - VALLEY OF HEROES & THE GREAT GATES
+# ==============================================================================
 
-# ==========================================
-# 1. VALLEY OF HEROES (z: 55..92)
-# ==========================================
+# Valley of Heroes Causeway across the Moat
 sw-causeway:
-  feetPosition: {x: 0, y: 0.5, z: 74}
+  feetPosition: {x: 0, y: 0.55, z: 50}
   id: sw-causeway
   physics: static
-  primitive: {depth: 38, height: 1.2, kind: box, width: 14}
+  primitive: {depth: 90, height: 1.2, kind: box, width: 16}
   material: {color: "oklch(0.92 0.015 80)", roughness: 0.85}
-  visibleRange: {max: 500}
+  visibleRange: {max: 600}
 
 sw-causeway-parapet-w:
-  feetPosition: {x: -7, y: 1.1, z: 74}
+  feetPosition: {x: -8, y: 1.15, z: 50}
   id: sw-causeway-parapet-w
   physics: static
-  primitive: {depth: 38, height: 1.2, kind: box, width: 0.8}
+  primitive: {depth: 90, height: 1.2, kind: box, width: 0.9}
   material: {color: "oklch(0.95 0.01 85)", roughness: 0.8}
-  visibleRange: {max: 400}
+  visibleRange: {max: 450}
 
 sw-causeway-parapet-e:
-  feetPosition: {x: 7, y: 1.1, z: 74}
+  feetPosition: {x: 8, y: 1.15, z: 50}
   id: sw-causeway-parapet-e
   physics: static
-  primitive: {depth: 38, height: 1.2, kind: box, width: 0.8}
+  primitive: {depth: 90, height: 1.2, kind: box, width: 0.9}
   material: {color: "oklch(0.95 0.01 85)", roughness: 0.8}
-  visibleRange: {max: 400}
+  visibleRange: {max: 450}
 
+# 5 Hero Monuments
 sw-hero-turalyon:
-  children: [{castShadow: false, feetPosition: {x: 0, y: 2.2, z: -1.62}, id: plaque, material: {color: "oklch(0.32 0.1 262)"}, primitive: {depth: 0.06, height: 0.55, kind: box, width: 2.8}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:6px\">GENERAL TURALYON</div>", visibleRange: {max: 80}}]
-  feetPosition: {x: -5.5, y: 0.5, z: 62}
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 2.2, z: -1.62}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.55, kind: box, width: 2.8}
+      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:6px\">GENERAL TURALYON</div>"
+      visibleRange: {max: 80}
+  feetPosition: {x: -6.5, y: 0.55, z: 25}
   id: sw-hero-turalyon
   physics: static
   primitive: {kind: scripted, params: {hero: turalyon}, script: scripts/gen/stormwind-monument.js}
   rotation: {yaw: 25}
-  visibleRange: {max: 450}
+  visibleRange: {max: 500}
 
 sw-hero-danath:
-  children: [{castShadow: false, feetPosition: {x: 0, y: 2.2, z: -1.62}, id: plaque, material: {color: "oklch(0.32 0.1 262)"}, primitive: {depth: 0.06, height: 0.55, kind: box, width: 2.8}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:6px\">DANATH TROLLBANE</div>", visibleRange: {max: 80}}]
-  feetPosition: {x: 5.5, y: 0.5, z: 62}
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 2.2, z: -1.62}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.55, kind: box, width: 2.8}
+      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:6px\">DANATH TROLLBANE</div>"
+      visibleRange: {max: 80}
+  feetPosition: {x: 6.5, y: 0.55, z: 25}
   id: sw-hero-danath
   physics: static
   primitive: {kind: scripted, params: {hero: danath}, script: scripts/gen/stormwind-monument.js}
   rotation: {yaw: -25}
-  visibleRange: {max: 450}
+  visibleRange: {max: 500}
 
 sw-hero-alleria:
-  children: [{castShadow: false, feetPosition: {x: 0, y: 2.2, z: -1.62}, id: plaque, material: {color: "oklch(0.32 0.1 262)"}, primitive: {depth: 0.06, height: 0.55, kind: box, width: 2.8}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:6px\">ALLERIA WINDRUNNER</div>", visibleRange: {max: 80}}]
-  feetPosition: {x: -5.5, y: 0.5, z: 74}
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 2.2, z: -1.62}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.55, kind: box, width: 2.8}
+      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:6px\">ALLERIA WINDRUNNER</div>"
+      visibleRange: {max: 80}
+  feetPosition: {x: -6.5, y: 0.55, z: 50}
   id: sw-hero-alleria
   physics: static
   primitive: {kind: scripted, params: {hero: alleria}, script: scripts/gen/stormwind-monument.js}
   rotation: {yaw: 20}
-  visibleRange: {max: 450}
+  visibleRange: {max: 500}
 
 sw-hero-kurdran:
-  children: [{castShadow: false, feetPosition: {x: 0, y: 2.2, z: -1.62}, id: plaque, material: {color: "oklch(0.32 0.1 262)"}, primitive: {depth: 0.06, height: 0.55, kind: box, width: 2.8}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:6px\">KURDRAN WILDHAMMER</div>", visibleRange: {max: 80}}]
-  feetPosition: {x: 5.5, y: 0.5, z: 74}
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 2.2, z: -1.62}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.55, kind: box, width: 2.8}
+      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:6px\">KURDRAN WILDHAMMER</div>"
+      visibleRange: {max: 80}
+  feetPosition: {x: 6.5, y: 0.55, z: 50}
   id: sw-hero-kurdran
   physics: static
   primitive: {kind: scripted, params: {hero: kurdran}, script: scripts/gen/stormwind-monument.js}
   rotation: {yaw: -20}
-  visibleRange: {max: 450}
+  visibleRange: {max: 500}
 
 sw-hero-khadgar:
-  children: [{castShadow: false, feetPosition: {x: 0, y: 2.2, z: -1.62}, id: plaque, material: {color: "oklch(0.32 0.1 262)"}, primitive: {depth: 0.06, height: 0.55, kind: box, width: 2.8}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:6px\">ARCHMAGE KHADGAR</div>", visibleRange: {max: 80}}]
-  feetPosition: {x: 0, y: 0.5, z: 86}
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 2.2, z: -1.62}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.55, kind: box, width: 2.8}
+      ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:6px\">ARCHMAGE KHADGAR</div>"
+      visibleRange: {max: 80}
+  feetPosition: {x: 0, y: 0.55, z: 75}
   id: sw-hero-khadgar
   physics: static
   primitive: {kind: scripted, params: {hero: khadgar}, script: scripts/gen/stormwind-monument.js}
   rotation: {yaw: 0}
-  visibleRange: {max: 450}
+  visibleRange: {max: 500}
 
-# ==========================================
-# 2. THE GREAT GATES OF STORMWIND (z: 95)
-# ==========================================
+# The Great Gates of Stormwind (z = 95)
 sw-gates:
   children:
     - castShadow: false
@@ -98,391 +121,35 @@ sw-gates:
       visibleRange: {max: 250}
     - castShadow: false
       feetPosition: {x: -8.5, y: 20, z: -4.8}
-      id: banner-west
+      id: gate-banner-l
       material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.1}, script: scripts/material-banner-wave.js}
-      primitive: {kind: scripted, params: {beast: lion, field: "oklch(0.38 0.14 262)", field2: "oklch(0.31 0.12 262)", h: 7, kind: drape, point: 0.5, trim: "oklch(0.82 0.13 85)", w: 1.8}, script: scripts/gen/town-banner.js}
-      visibleRange: {max: 300}
+      primitive: {kind: scripted, params: {beast: lion, field: "oklch(0.38 0.14 262)", field2: "oklch(0.31 0.12 262)", h: 8, kind: drape, point: 0.5, trim: "oklch(0.82 0.13 85)", w: 1.8}, script: scripts/gen/town-banner.js}
+      visibleRange: {max: 250}
     - castShadow: false
       feetPosition: {x: 8.5, y: 20, z: -4.8}
-      id: banner-east
+      id: gate-banner-r
       material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.1}, script: scripts/material-banner-wave.js}
-      primitive: {kind: scripted, params: {beast: lion, field: "oklch(0.38 0.14 262)", field2: "oklch(0.31 0.12 262)", h: 7, kind: drape, point: 0.5, trim: "oklch(0.82 0.13 85)", w: 1.8}, script: scripts/gen/town-banner.js}
-      visibleRange: {max: 300}
-  feetPosition: {x: 0, y: 0.5, z: 95}
+      primitive: {kind: scripted, params: {beast: lion, field: "oklch(0.38 0.14 262)", field2: "oklch(0.31 0.12 262)", h: 8, kind: drape, point: 0.5, trim: "oklch(0.82 0.13 85)", w: 1.8}, script: scripts/gen/town-banner.js}
+      visibleRange: {max: 250}
+  feetPosition: {x: 0, y: 0.55, z: 95}
   id: sw-gates
   physics: static
   primitive: {kind: scripted, script: scripts/gen/stormwind-gates.js}
-  visibleRange: {max: 700}
+  visibleRange: {max: 950}
 
-# ==========================================
-# 3. TRADE DISTRICT (z: 105..175, x: -35..35)
-# ==========================================
-sw-trade-fountain:
-  audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-stone-fountain-splash-loop.mp3, gain: 0.16, loop: true, maxDistance: 28, spatial: true}
-  feetPosition: {x: 0, y: 0.5, z: 140}
-  id: sw-trade-fountain
-  physics: static
-  primitive: {kind: scripted, params: {part: fountain}, script: scripts/gen/royal-district.js, seed: 7}
-  visibleRange: {max: 250}
-
-sw-bank:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 6.8, z: -7.06}
-      id: plaque
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.06, height: 0.9, kind: box, width: 8.5}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:320px;letter-spacing:14px\">BANK OF STORMWIND</div><div style=\"font-size:130px;letter-spacing:6px;opacity:.9\">VAULT & COMMERCE</div></div>"
-      visibleRange: {max: 100}
-  feetPosition: {x: -24, y: 0.5, z: 140}
-  id: sw-bank
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 14, floors: 3, h: 10, hasChimney: true, hasPorch: true, w: 18}, script: scripts/gen/stormwind-building.js}
-  rotation: {yaw: 90}
-  visibleRange: {max: 500}
-
-sw-auction:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 6.8, z: -7.06}
-      id: plaque
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.06, height: 0.9, kind: box, width: 8.5}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:300px;letter-spacing:12px\">AUCTION HOUSE</div><div style=\"font-size:130px;letter-spacing:6px;opacity:.9\">STORMWIND TRADING GUILD</div></div>"
-      visibleRange: {max: 100}
-  feetPosition: {x: 24, y: 0.5, z: 140}
-  id: sw-auction
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 14, floors: 3, h: 10, hasChimney: true, hasPorch: true, w: 18}, script: scripts/gen/stormwind-building.js}
-  rotation: {yaw: -90}
-  visibleRange: {max: 500}
-
-sw-inn-gilded-rose:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 5.6, z: -6.06}
-      id: plaque
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.06, height: 0.75, kind: box, width: 6.2}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:5px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:260px;letter-spacing:8px\">THE GILDED ROSE</div><div style=\"font-size:120px;letter-spacing:4px;opacity:.9\">INN & TAVERN</div></div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: -22, y: 0.5, z: 165}
-  id: sw-inn-gilded-rose
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 12, floors: 3, h: 9, hasChimney: true, hasPorch: true, w: 14}, script: scripts/gen/stormwind-building.js}
-  rotation: {yaw: 45}
-  visibleRange: {max: 450}
-
-sw-gryphon-roost:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 5.6, z: -6.06}
-      id: plaque
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.06, height: 0.75, kind: box, width: 6.5}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:5px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:240px;letter-spacing:8px\">GRYPHON ROOST</div><div style=\"font-size:120px;letter-spacing:4px;opacity:.9\">FLIGHT MASTER DUNGAR</div></div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: 22, y: 0.5, z: 165}
-  id: sw-gryphon-roost
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 12, floors: 2, h: 8, hasChimney: false, hasPorch: true, roofStyle: flat, w: 14}, script: scripts/gen/stormwind-building.js}
-  rotation: {yaw: -45}
-  visibleRange: {max: 450}
-
-sw-trade-weaponsmith:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.8, z: -5.06}
-      id: plaque
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.06, height: 0.65, kind: box, width: 5.2}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:240px;letter-spacing:6px\">WELL-ARMED</div><div style=\"font-size:110px;opacity:.9\">WEAPONS & ARMOR</div></div>"
-      visibleRange: {max: 80}
-  feetPosition: {x: 22, y: 0.5, z: 115}
-  id: sw-trade-weaponsmith
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 10, floors: 2, h: 7.5, hasChimney: true, hasPorch: false, w: 12}, script: scripts/gen/stormwind-building.js}
-  rotation: {yaw: -90}
-  visibleRange: {max: 400}
-
-sw-trade-clothier:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.8, z: -5.06}
-      id: plaque
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.06, height: 0.65, kind: box, width: 5.2}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:230px;letter-spacing:6px\">FINE CLOTHIER</div><div style=\"font-size:110px;opacity:.9\">SILKS & THREADS</div></div>"
-      visibleRange: {max: 80}
-  feetPosition: {x: -22, y: 0.5, z: 115}
-  id: sw-trade-clothier
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 10, floors: 2, h: 7.5, hasChimney: false, hasPorch: false, w: 12}, script: scripts/gen/stormwind-building.js}
-  rotation: {yaw: 90}
-  visibleRange: {max: 400}
-
-sw-trade-general:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.5, z: -5.06}
-      id: plaque
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.06, height: 0.6, kind: box, width: 4.6}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:220px;letter-spacing:6px\">GENERAL SUPPLIES</div><div style=\"font-size:110px;opacity:.9\">PROVISIONS & PACKS</div></div>"
-      visibleRange: {max: 80}
-  feetPosition: {x: -8, y: 0.5, z: 172}
-  id: sw-trade-general
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 10, floors: 2, h: 7.2, hasChimney: true, hasPorch: false, w: 10}, script: scripts/gen/stormwind-building.js}
-  rotation: {yaw: 0}
-  visibleRange: {max: 400}
-
-# ==========================================
-# 4. MAGE QUARTER (x: -115..-45, z: 115..185)
-# ==========================================
-sw-wizards-sanctum:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 7.5, z: -11.6}
-      id: plaque
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.06, height: 0.9, kind: box, width: 7.2}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:280px;letter-spacing:10px\">THE WIZARD'S SANCTUM</div><div style=\"font-size:130px;letter-spacing:6px;opacity:.9\">KIRIN TOR CONCLAVE</div></div>"
-      visibleRange: {max: 120}
-  feetPosition: {x: -85, y: 0.5, z: 150}
-  id: sw-wizards-sanctum
-  physics: static
-  primitive: {kind: scripted, script: scripts/gen/stormwind-mage-tower.js}
-  visibleRange: {max: 800}
-
-sw-blue-recluse:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 5.6, z: -6.06}
-      id: plaque
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.06, height: 0.75, kind: box, width: 6.2}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:5px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:260px;letter-spacing:8px\">THE BLUE RECLUSE</div><div style=\"font-size:120px;letter-spacing:4px;opacity:.9\">ALES & ARCANE BREWS</div></div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: -62, y: 0.5, z: 125}
-  id: sw-blue-recluse
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 12, floors: 3, h: 9, hasChimney: true, hasPorch: true, w: 14}, script: scripts/gen/stormwind-building.js}
-  rotation: {yaw: 45}
-  visibleRange: {max: 450}
-
-sw-slaughtered-lamb:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 5.2, z: -5.56}
-      id: plaque
-      material: {color: "oklch(0.2 0.05 30)"}
-      primitive: {depth: 0.06, height: 0.7, kind: box, width: 5.6}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#2b1810;border:4px solid #8c5332;color:#d9a566;font-family:serif;font-weight:bold\"><div style=\"font-size:240px;letter-spacing:6px\">THE SLAUGHTERED LAMB</div><div style=\"font-size:110px;opacity:.85\">TAVERN & CELLAR</div></div>"
-      visibleRange: {max: 80}
-  feetPosition: {x: -108, y: 0.5, z: 130}
-  id: sw-slaughtered-lamb
-  physics: static
-  primitive: {kind: scripted, params: {color: timber, d: 11, floors: 2, h: 8, hasChimney: true, hasPorch: false, w: 12}, script: scripts/gen/stormwind-building.js}
-  rotation: {yaw: -60}
-  visibleRange: {max: 400}
-
-sw-mage-alchemy:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.8, z: -5.06}
-      id: plaque
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.06, height: 0.65, kind: box, width: 5.4}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:240px;letter-spacing:6px\">ALCHEMY & HERBS</div><div style=\"font-size:110px;opacity:.9\">ELIXIRS & VIALS</div></div>"
-      visibleRange: {max: 80}
-  feetPosition: {x: -108, y: 0.5, z: 165}
-  id: sw-mage-alchemy
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 10, floors: 2, h: 8, hasChimney: true, hasPorch: false, w: 12}, script: scripts/gen/stormwind-building.js}
-  rotation: {yaw: -90}
-  visibleRange: {max: 400}
-
-sw-mage-enchanting:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.8, z: -5.56}
-      id: plaque
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.06, height: 0.65, kind: box, width: 5.4}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:230px;letter-spacing:6px\">ENCHANTER'S STUDY</div><div style=\"font-size:110px;opacity:.9\">DUSTS & ESSENCES</div></div>"
-      visibleRange: {max: 80}
-  feetPosition: {x: -65, y: 0.5, z: 172}
-  id: sw-mage-enchanting
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 11, floors: 2, h: 8, hasChimney: false, hasPorch: false, w: 11}, script: scripts/gen/stormwind-building.js}
-  rotation: {yaw: 90}
-  visibleRange: {max: 400}
-
-# ==========================================
-# 5. OLD TOWN (x: 45..115, z: 110..185)
-# ==========================================
-sw-pig-and-whistle:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 5.6, z: -6.06}
-      id: plaque
-      material: {color: "oklch(0.28 0.08 40)"}
-      primitive: {depth: 0.06, height: 0.75, kind: box, width: 6.5}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#3a2016;border:5px solid #a66a38;color:#e8be89;font-family:serif;font-weight:bold\"><div style=\"font-size:260px;letter-spacing:8px\">PIG AND WHISTLE</div><div style=\"font-size:120px;letter-spacing:4px;opacity:.9\">OLD TOWN TAVERN</div></div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: 75, y: 0.5, z: 130}
-  id: sw-pig-and-whistle
-  physics: static
-  primitive: {kind: scripted, params: {color: timber, d: 12, floors: 3, h: 9, hasChimney: true, hasPorch: true, w: 15}, script: scripts/gen/stormwind-building.js}
-  rotation: {yaw: -30}
-  visibleRange: {max: 450}
-
-sw-command-center:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 6.8, z: -7.06}
-      id: plaque
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.06, height: 0.9, kind: box, width: 8.5}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:280px;letter-spacing:10px\">CHAMPIONS' HALL</div><div style=\"font-size:130px;letter-spacing:6px;opacity:.9\">MILITARY COMMAND & BARRACKS</div></div>"
-      visibleRange: {max: 100}
-  feetPosition: {x: 65, y: 0.5, z: 165}
-  id: sw-command-center
-  physics: static
-  primitive: {kind: scripted, params: {color: limestone, d: 14, floors: 3, h: 10, hasChimney: true, hasPorch: true, w: 18}, script: scripts/gen/stormwind-building.js}
-  rotation: {yaw: 0}
-  visibleRange: {max: 500}
-
-sw-si7-hq:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 5.5, z: -6.56}
-      id: plaque
-      material: {color: "oklch(0.2 0.01 40)"}
-      primitive: {depth: 0.06, height: 0.75, kind: box, width: 6.8}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1a1a1a;border:4px solid #666;color:#ccc;font-family:serif;font-weight:bold\"><div style=\"font-size:280px;letter-spacing:12px\">SI:7 HEADQUARTERS</div><div style=\"font-size:120px;letter-spacing:6px;opacity:.8\">RESTRICTED ENTRY</div></div>"
-      visibleRange: {max: 90}
-  feetPosition: {x: 105, y: 0.5, z: 155}
-  id: sw-si7-hq
-  physics: static
-  primitive: {kind: scripted, params: {color: timber, d: 13, floors: 2, h: 8.5, hasChimney: true, hasPorch: false, w: 16}, script: scripts/gen/stormwind-building.js}
-  rotation: {yaw: -90}
-  visibleRange: {max: 450}
-
-sw-oldtown-armory:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.8, z: -5.06}
-      id: plaque
-      material: {color: "oklch(0.32 0.1 262)"}
-      primitive: {depth: 0.06, height: 0.65, kind: box, width: 5.4}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:240px;letter-spacing:6px\">OLD TOWN WEAPONS</div><div style=\"font-size:110px;opacity:.9\">SWORDS & SHIELDS</div></div>"
-      visibleRange: {max: 80}
-  feetPosition: {x: 95, y: 0.5, z: 125}
-  id: sw-oldtown-armory
-  physics: static
-  primitive: {kind: scripted, params: {color: timber, d: 10, floors: 2, h: 8, hasChimney: true, hasPorch: false, w: 12}, script: scripts/gen/stormwind-building.js}
-  rotation: {yaw: -45}
-  visibleRange: {max: 400}
-
-# ==========================================
-# 6. CANAL BRIDGES & THE STOCKADE
-# ==========================================
-sw-bridge-trade-mage:
-  feetPosition: {x: -42, y: 0.5, z: 140}
-  id: sw-bridge-trade-mage
-  physics: static
-  primitive: {kind: scripted, params: {len: 16, w: 9}, script: scripts/gen/stormwind-bridge.js}
-  rotation: {yaw: 90}
-  visibleRange: {max: 350}
-
-sw-bridge-trade-oldtown:
-  feetPosition: {x: 42, y: 0.5, z: 140}
-  id: sw-bridge-trade-oldtown
-  physics: static
-  primitive: {kind: scripted, params: {len: 16, w: 9}, script: scripts/gen/stormwind-bridge.js}
-  rotation: {yaw: 90}
-  visibleRange: {max: 350}
-
-sw-bridge-trade-cathedral:
-  feetPosition: {x: 0, y: 0.5, z: 180}
-  id: sw-bridge-trade-cathedral
-  physics: static
-  primitive: {kind: scripted, params: {len: 16, w: 10}, script: scripts/gen/stormwind-bridge.js}
-  rotation: {yaw: 0}
-  visibleRange: {max: 350}
-
-sw-stockade-entrance:
-  children:
-    - castShadow: false
-      feetPosition: {x: 0, y: 4.8, z: -0.15}
-      id: plaque
-      material: {color: "oklch(0.2 0.01 40)"}
-      primitive: {depth: 0.06, height: 0.7, kind: box, width: 5.6}
-      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1a1a1a;border:4px solid #888;color:#eee;font-family:serif;font-weight:bold\"><div style=\"font-size:260px;letter-spacing:10px\">THE STOCKADE</div><div style=\"font-size:110px;opacity:.85\">DUNGEON & PRISON</div></div>"
-      visibleRange: {max: 80}
-    - feetPosition: {x: -2.8, y: 3.2, z: -0.2}
-      id: torch-l
-      light: {color: "oklch(0.8 0.18 55)", distance: 10, intensity: 4, kind: point}
-    - feetPosition: {x: 2.8, y: 3.2, z: -0.2}
-      id: torch-r
-      light: {color: "oklch(0.8 0.18 55)", distance: 10, intensity: 4, kind: point}
-  feetPosition: {x: 44, y: 0.5, z: 175}
-  id: sw-stockade-entrance
-  physics: static
-  primitive: {depth: 3, height: 6, kind: box, width: 8}
-  material: {color: "oklch(0.45 0.02 55)", roughness: 0.9}
-  rotation: {yaw: -90}
-  visibleRange: {max: 300}
-
-# ==========================================
-# 7. PERIMETER CURTAIN WALLS & BASTION TOWERS
-# ==========================================
+# South Curtain Walls flanking the Gates
 sw-wall-south-w:
-  feetPosition: {x: -65, y: 0.5, z: 95}
+  feetPosition: {x: -55, y: 0.55, z: 95}
   id: sw-wall-south-w
   physics: static
-  primitive: {depth: 5, height: 11, kind: box, width: 100}
-  material: {color: "oklch(0.92 0.015 80)", roughness: 0.85}
-  visibleRange: {max: 600}
+  primitive: {depth: 4, height: 22, kind: box, width: 85}
+  material: {color: "oklch(0.93 0.015 80)", roughness: 0.85}
+  visibleRange: {max: 850}
 
 sw-wall-south-e:
-  feetPosition: {x: 65, y: 0.5, z: 95}
+  feetPosition: {x: 55, y: 0.55, z: 95}
   id: sw-wall-south-e
   physics: static
-  primitive: {depth: 5, height: 11, kind: box, width: 100}
-  material: {color: "oklch(0.92 0.015 80)", roughness: 0.85}
-  visibleRange: {max: 600}
-
-sw-wall-west:
-  feetPosition: {x: -120, y: 0.5, z: 145}
-  id: sw-wall-west
-  physics: static
-  primitive: {depth: 95, height: 11, kind: box, width: 5}
-  material: {color: "oklch(0.92 0.015 80)", roughness: 0.85}
-  visibleRange: {max: 600}
-
-sw-wall-east:
-  feetPosition: {x: 120, y: 0.5, z: 145}
-  id: sw-wall-east
-  physics: static
-  primitive: {depth: 95, height: 11, kind: box, width: 5}
-  material: {color: "oklch(0.92 0.015 80)", roughness: 0.85}
-  visibleRange: {max: 600}
-
-sw-tower-sw:
-  feetPosition: {x: -120, y: 0.5, z: 95}
-  id: sw-tower-sw
-  physics: static
-  primitive: {height: 18, kind: cylinder, radiusBottom: 5.5, radiusTop: 5.5}
-  material: {color: "oklch(0.94 0.012 85)", roughness: 0.8}
-  visibleRange: {max: 600}
-
-sw-tower-se:
-  feetPosition: {x: 120, y: 0.5, z: 95}
-  id: sw-tower-se
-  physics: static
-  primitive: {height: 18, kind: cylinder, radiusBottom: 5.5, radiusTop: 5.5}
-  material: {color: "oklch(0.94 0.012 85)", roughness: 0.8}
-  visibleRange: {max: 600}
+  primitive: {depth: 4, height: 22, kind: box, width: 85}
+  material: {color: "oklch(0.93 0.015 80)", roughness: 0.85}
+  visibleRange: {max: 850}

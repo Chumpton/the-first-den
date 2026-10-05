@@ -1,0 +1,18 @@
+# spawn-scene v2 yaml x2z5
+sw-bridge-cathedral-dwarven:
+  id: sw-bridge-cathedral-dwarven
+  feetPosition:
+    x: 180.3
+    y: 0.55
+    z: 501.8
+  physics: static
+  visibleRange:
+    max: 400
+  rotation:
+    yaw: 90
+  primitive:
+    kind: scripted
+    params:
+      len: 26
+      w: 12
+    script: scripts/gen/stormwind-bridge.js

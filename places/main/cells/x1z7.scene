@@ -1,0 +1,18 @@
+# spawn-scene v2 yaml x1z7
+sw-curtain-north-cathedral:
+  id: sw-curtain-north-cathedral
+  feetPosition:
+    x: 60
+    y: 0.55
+    z: 700
+  material:
+    color: oklch(0.93 0.015 80)
+    roughness: 0.85
+  physics: static
+  primitive:
+    depth: 4
+    height: 24
+    kind: box
+    width: 260
+  visibleRange:
+    max: 850

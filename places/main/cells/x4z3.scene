@@ -1,0 +1,17 @@
+# spawn-scene v2 yaml x4z3
+sw-keep-stair:
+  id: sw-keep-stair
+  feetPosition:
+    x: 430
+    y: 0.55
+    z: 326.8
+  physics: static
+  visibleRange:
+    max: 550
+  rotation:
+    yaw: 90
+  primitive:
+    kind: scripted
+    params:
+      part: stair
+    script: scripts/gen/royal-castle.js

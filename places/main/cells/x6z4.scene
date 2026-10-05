@@ -1,0 +1,18 @@
+# spawn-scene v2 yaml x6z4
+sw-curtain-east-keep:
+  id: sw-curtain-east-keep
+  feetPosition:
+    x: 610
+    y: 26
+    z: 370
+  material:
+    color: oklch(0.93 0.015 80)
+    roughness: 0.85
+  physics: static
+  primitive:
+    depth: 220
+    height: 18
+    kind: box
+    width: 4
+  visibleRange:
+    max: 850

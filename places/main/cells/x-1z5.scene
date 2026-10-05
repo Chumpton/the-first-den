@@ -1,0 +1,18 @@
+# spawn-scene v2 yaml x-1z5
+sw-bridge-cathedral-mage:
+  id: sw-bridge-cathedral-mage
+  feetPosition:
+    x: -69.2
+    y: 0.55
+    z: 513.6
+  physics: static
+  visibleRange:
+    max: 400
+  rotation:
+    yaw: -90
+  primitive:
+    kind: scripted
+    params:
+      len: 26
+      w: 12
+    script: scripts/gen/stormwind-bridge.js

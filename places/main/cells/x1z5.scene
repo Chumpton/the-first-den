@@ -1,0 +1,61 @@
+# spawn-scene v2 yaml x1z5
+sw-cathedral-fountain:
+  id: sw-cathedral-fountain
+  feetPosition:
+    x: 68.4
+    y: 0.55
+    z: 540
+  physics: static
+  visibleRange:
+    max: 300
+  primitive:
+    kind: scripted
+    params:
+      part: fountain
+    script: scripts/gen/royal-district.js
+    seed: 3
+  audio:
+    clip: /cdn/moodboard-lowpoly-cozy/sfx-stone-fountain-splash-loop.mp3
+    gain: 0.15
+    loop: true
+    maxDistance: 35
+    spatial: true
+sw-orphanage:
+  id: sw-orphanage
+  feetPosition:
+    x: 95
+    y: 0.55
+    z: 488.3
+  physics: static
+  visibleRange:
+    max: 700
+  rotation:
+    yaw: -90
+  primitive:
+    kind: scripted
+    params:
+      color: limestone
+      d: 16
+      floors: 2
+      h: 9.5
+      roofStyle: gable
+      w: 18
+    script: scripts/gen/stormwind-building.js
+    seed: 1438
+  children:
+    - castShadow: false
+      feetPosition:
+        x: 0
+        y: 4.275
+        z: -8.1
+      id: plaque
+      material:
+        color: oklch(0.32 0.1 262)
+      primitive:
+        depth: 0.08
+        height: 0.7
+        kind: box
+        width: 5.5
+      ui: '<div face="front" class="w-full h-full flex items-center justify-center text-center" style="background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:160px;font-weight:bold;letter-spacing:4px">STORMWIND ORPHANAGE</div>'
+      visibleRange:
+        max: 90

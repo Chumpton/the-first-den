@@ -1,0 +1,52 @@
+# spawn-scene v2 yaml x5z4
+sw-royal-library:
+  id: sw-royal-library
+  feetPosition:
+    x: 526.8
+    y: 26
+    z: 428.1
+  physics: static
+  visibleRange:
+    max: 700
+  primitive:
+    kind: scripted
+    params:
+      color: limestone
+      d: 24
+      floors: 3
+      h: 14
+      roofStyle: gable
+      w: 28
+    script: scripts/gen/stormwind-building.js
+    seed: 5696
+  children:
+    - castShadow: false
+      feetPosition:
+        x: 0
+        y: 6.3
+        z: -12.1
+      id: plaque
+      material:
+        color: oklch(0.32 0.1 262)
+      primitive:
+        depth: 0.08
+        height: 0.7
+        kind: box
+        width: 5.5
+      ui: '<div face="front" class="w-full h-full flex items-center justify-center text-center" style="background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:160px;font-weight:bold;letter-spacing:4px">ROYAL LIBRARY OF STORMWIND</div>'
+      visibleRange:
+        max: 90
+sw-keep-walls:
+  id: sw-keep-walls
+  feetPosition:
+    x: 510
+    y: 26
+    z: 375
+  physics: static
+  visibleRange:
+    max: 850
+  primitive:
+    kind: scripted
+    params:
+      part: wall
+    script: scripts/gen/royal-castle.js
