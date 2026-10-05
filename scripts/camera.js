@@ -110,7 +110,7 @@ export function update(ctx, dt) {
   // Riding anything that asks for it (the summoned horse, Tomas's horse, the rowboat) pulls the eye back over the shoulder too,
   // whether the camera follows the mount (it holds the controls) or the rider sitting on it.
   const mount = target.parent ?? null, k = target.state?.kind
-  const riding = k === 'boat' || k === 'horse' || !!target.state?.thirdPerson || !!mount?.state?.thirdPerson || mount?.state?.kind === 'horse'
+  const riding = k === 'boat' || k === 'horse' || target.state?.riding === 'gryphon' || !!target.state?.thirdPerson || !!mount?.state?.thirdPerson || mount?.state?.kind === 'horse'
   const third = (target.state?.camMode === 'third' || riding) && k !== 'dragon'
   ctx.self.hideLocalPlayer = !third
 

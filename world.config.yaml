@@ -25,7 +25,7 @@ inputs:
     courierHearth: {keys: ['2']}
     courierCancel: {keys: ['3']}
     travelMenu: {keys: [j]}
-    horse: {keys: [z]}
+    mount: {keys: [z]}
     travelClose: {keys: [escape]}
     travelGo: {}
     brew: {}

@@ -8,6 +8,7 @@ import { steerBasis, wowTurn } from './lib/wow-steer.js'
 // moment you step in.
 import PLAYER from './lib/data/player.yml'
 import { ROPES } from './lib/data/ropes.js'
+import { raycast } from 'builtin/physics'
 
 // The keys' intent is this machine's alone: onInput writes it, update() reads it, nobody else does —
 // and a value written to state rides the wire and the save on every tick it changes (the intent turns
@@ -57,7 +58,10 @@ export function onInput(ctx, input) {
   walk.climb = (input.held.jump ? 1 : 0) - (input.held.descend ? 1 : 0)
   walk.ropeUp = input.held.jump || moveZ > 0.3
   walk.ropeDown = input.held.descend || moveZ < -0.3
-  const speed = walk.flying ? PLAYER.flySpeed * (ctx.self.state.flyBoost ? GRY.boost : 1) : PLAYER.walkSpeed * (ctx.self.state.speedMul || 1)
+  const onWynx = ctx.self.state.riding === 'gryphon'
+  const speed = walk.flying ? PLAYER.flySpeed * (ctx.self.state.flyBoost ? GRY.boost : 1) : PLAYER.walkSpeed * (onWynx ? GRY.groundMul : (ctx.self.state.speedMul || 1))
+  // On Wynx's back on the ground, a single space is a pounce (two quick ones still take off).
+  if (onWynx && !walk.flying && input.pressed.jump && walk.hopV == null) walk.hopV = GRY.hop
   walk.speed = speed
   walk.moveIntent = {
     x: (facingCos * nx - facingSin * nz) * speed,
@@ -91,6 +95,7 @@ export function update(ctx, dt) {
     walk.moveIntent = { x: (B.cos * nx - B.sin * nz) * sp, z: -(B.sin * nx + B.cos * nz) * sp }
   }
   const intent = walk.moveIntent ?? { x: 0, z: 0 }
+  if (walk.flying && !ctx.self.state.flying) walk.flying = false // a hop off Wynx (Z) ends flight
   if (walk.flying) {
     // Sinking onto the ground lands you.
     // On the gryphon its talons touch first: sinking within its reach of the ground lands it.
@@ -102,6 +107,19 @@ export function update(ctx, dt) {
       ctx.self.velocity = { x: v.x + (intent.x - v.x) * e, y: v.y + (vy - v.y) * e, z: v.z + (intent.z - v.z) * e }
       return
     }
+  }
+  // On Wynx's back: the body rides at her saddle height over whatever is under her talons, steered like flight.
+  if (ctx.self.state.riding === 'gryphon') {
+    const p0 = ctx.self.feetPosition
+    const hit = raycast(ctx, { x: p0.x, y: p0.y + 0.5, z: p0.z }, { x: 0, y: -1, z: 0 }, { distance: 12, physicsOnly: true })
+    const gnd = Math.max(hit ? hit.position.y : -1e9, ctx.place.terrain.heightAt(p0.x, p0.z) ?? -1e9)
+    const want = gnd + GRY.paws
+    let vy
+    if (walk.hopV != null) { vy = walk.hopV; walk.hopV -= GRY.hopFall * dt; if (walk.hopV < 0 && p0.y <= want + 0.05) walk.hopV = null }
+    else vy = Math.max(-14, Math.min(10, (want - p0.y) * 10))
+    const e = Math.min(1, 7 * dt)
+    ctx.self.velocity = { x: v.x + (intent.x - v.x) * e, y: vy, z: v.z + (intent.z - v.z) * e }
+    return
   }
   // A rope: stand in reach and hold W or space to climb, S or shift to slide; at the top you step in onto the deck.
   const p = ctx.self.feetPosition
