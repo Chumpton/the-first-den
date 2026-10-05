@@ -32,11 +32,12 @@ pop glint rate=?mobile:2|4 on=sphere(.3) life=.5..0.9 size=.5..0.8 col=hdr(${c[0
 function at(ctx, p, t) {
   const u = t - 0.5, s = Math.sin(TAU * p.k * t + p.ph), sv = Math.sin(TAU * p.kv * t + p.ph * 1.7);
   const x = p.cx + p.dx * u * p.L + (-p.dz) * (p.A * s + p.side), z = p.cz + p.dz * u * p.L + p.dx * (p.A * s + p.side);
-  const g = ctx.place.terrain.heightAt(x, z) ?? 0;
+  const g = p._g ?? 0;
   const yy = Math.max(SKY.height[0], Math.min(SKY.height[1], p.y + p.rise + p.B * sv));
   return { x, y: Math.max(yy, g + SKY.clearance), z };
 }
 function pose(ctx, p, t) {
+  { const u = t - 0.5, s = Math.sin(TAU * p.k * t + p.ph); p._g = ctx.place.terrain.heightAt(p.cx + p.dx * u * p.L + (-p.dz) * (p.A * s + p.side), p.cz + p.dz * u * p.L + p.dx * (p.A * s + p.side)) ?? 0; }
   const a = at(ctx, p, t), e = 0.25 / p.dur, b = at(ctx, p, t + e), c = at(ctx, p, t - e);
   const dx = b.x - c.x, dy = b.y - c.y, dz = b.z - c.z, h = Math.hypot(dx, dz) || 1;
   // lateral acceleration (m/s², +left of travel) → bank into the turn
@@ -93,15 +94,15 @@ export const ears = { 'sky-dragons:launch': (ctx, p) => { launchFlight(ctx, p?.c
 export function update(ctx) {
   const s = ctx.self.state, now = ctx.now();
   if ((s.launchReq ?? 0) !== (s.launchDone ?? 0)) { s.launchDone = s.launchReq ?? 0; launchFlight(ctx); }
-  const rows = ctx.query({ tags: ['sky-dragon'], radius: 5000 });
-  let alive = 0;
-  for (const r of rows) {
-    const p = r.state?.path; if (!p) continue;
+  // the manager knows its own flight by id (s.live): no world-wide query (3.9k rows cost ~12 ms a tick)
+  let alive = 0; const keep = [];
+  for (const id of s.live ?? []) {
+    const d = ctx.getObject(id), p = d?.state?.path; if (!p) continue;
     const t = (now - p.t0) / (p.dur * 1000);
-    if (t > 1.02) { ctx.destroy(r.id); continue; }
-    const o = pose(ctx, p, t), d = ctx.getObject(r.id); if (!d) continue;
-    d.feetPosition = o.pos; d.rotation = o.rot; alive++;
+    if (t > 1.02) { ctx.destroy(id); continue; }
+    const o = pose(ctx, p, t); d.feetPosition = o.pos; d.rotation = o.rot; alive++; keep.push(id);
   }
+  if (keep.length !== (s.live ?? []).length) s.live = keep;
   if (!alive) {
     if (!s.nextAt || s.nextAt < now - 5000) schedule(ctx);
     ctx.sleep(Math.max(1, (s.nextAt - now) / 1000));
