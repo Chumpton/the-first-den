@@ -88,7 +88,7 @@ function bar(ctx, a, b, z, w) {
 }
 
 export function geometry(ctx) {
-  ctx.flat();
+  ctx.smooth();
   const lod = ctx.lod, fine = lod < 3, k = ctx.params?.glow ?? 1.2;
   const cream = 'oklch(0.94 0.03 85)', pink = 'oklch(0.8 0.09 350)', sky = 'oklch(0.78 0.08 240)';
 

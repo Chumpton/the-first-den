@@ -64,7 +64,7 @@ export function spots(ctx, P, list, size, colour) {
 }
 export function build(ctx, P) {
   const lod = ctx.lod ?? 1, D = detail(lod), C = P.col;
-  ctx.flat(); ctx.roughness(0.92);
+  ctx.smooth(); ctx.roughness(0.92);
   // body
   ctx.bone('root');
   tube(ctx, pick(P.body, lod).map(([z, y, rx, ry]) => ({ c: [0, y, z], rx, ry })), {

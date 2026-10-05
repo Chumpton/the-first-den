@@ -11,7 +11,7 @@ export function skeleton() {
 }
 export function geometry(ctx) {
   const L = LOOKS[ctx.params.variant] ?? LOOKS.robin, lo = ctx.lod >= 4, s = ctx.lod >= 3 ? 5 : 6;
-  ctx.flat(); ctx.roughness(0.8);
+  ctx.smooth(); ctx.roughness(0.8);
   ctx.bone('root'); ctx.color(L.back); blob(ctx, [0, 0.06, 0], [0.035, 0.035, 0.06], { seg: lo ? 4 : s, rings: 3, pitch: 8 });
   ctx.bone('head'); blob(ctx, [0, 0.095, -0.045], [0.026, 0.026, 0.026], { seg: lo ? 4 : 5, rings: 3 });
   ctx.color(L.beak); cone(ctx, [0, 0.093, -0.066], [0, 0.09, -0.092], 0.008, 3);

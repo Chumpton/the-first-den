@@ -15,7 +15,7 @@ export function skeleton() {
 }
 export function geometry(ctx) {
   const V = ctx.params.variant || 'buff', K = LOOKS[V] || LOOKS.buff, roo = V === 'rooster', lo = ctx.lod >= 4, seg = lo ? 4 : 6, rings = lo ? 3 : 4;
-  ctx.flat(); ctx.roughness(0.9);
+  ctx.smooth(); ctx.roughness(0.9);
   ctx.bone('body'); ctx.color(K.body); blob(ctx, [0, 0.24, 0.02], [0.105, 0.1, 0.15], { seg, rings, pitch: -12 });
   ctx.color(K.hack); blob(ctx, [0, 0.25, -0.08], [0.085, 0.09, 0.07], { seg, rings: 3 });
   ctx.bone('head'); blob(ctx, [0, 0.33, -0.1], [0.045, 0.07, 0.045], { seg: lo ? 4 : 5, rings: 3, pitch: 15 });

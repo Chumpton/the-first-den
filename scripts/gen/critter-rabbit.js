@@ -7,7 +7,7 @@ export function skeleton() {
 export function geometry(ctx) {
   const lo = ctx.lod >= 4, s = ctx.lod >= 3 ? 5 : 7;
   const FUR = 'oklch(0.66 0.05 62)', BELLY = 'oklch(0.95 0.015 85)', PINK = 'oklch(0.82 0.08 10)', DARK = 'oklch(0.18 0.02 40)';
-  ctx.flat(); ctx.roughness(0.95);
+  ctx.smooth(); ctx.roughness(0.95);
   ctx.bone('root'); ctx.color(FUR); blob(ctx, [0, 0.13, 0.03], [0.085, 0.09, 0.13], { seg: s, rings: lo ? 3 : 4, pitch: 10 });
   ctx.bone('head'); blob(ctx, [0, 0.22, -0.1], [0.055, 0.055, 0.07], { seg: lo ? 4 : s, rings: 3, pitch: -10 });
   for (const [b, x] of [['earL', -1], ['earR', 1]]) { ctx.bone(b); ctx.color(FUR); blob(ctx, [x * 0.032, 0.33, -0.07], [0.022, 0.08, 0.012], { seg: lo ? 4 : 5, rings: 3, yaw: x * 12 }); }

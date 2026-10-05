@@ -7,7 +7,7 @@ export function skeleton() {
 export function geometry(ctx) {
   const lo = ctx.lod >= 4, s = ctx.lod >= 3 ? 5 : 7;
   const RUST = 'oklch(0.6 0.15 44)', CREAM = 'oklch(0.94 0.04 85)', DARK = 'oklch(0.2 0.02 40)', TAIL = 'oklch(0.55 0.15 40)';
-  ctx.flat(); ctx.roughness(0.9);
+  ctx.smooth(); ctx.roughness(0.9);
   ctx.bone('root'); ctx.color(RUST);
   blob(ctx, [0, 0.12, 0.02], [0.07, 0.075, 0.11], { seg: s, rings: lo ? 3 : 4, pitch: 20 });
   ctx.bone('head'); blob(ctx, [0, 0.2, -0.1], [0.05, 0.05, 0.06], { seg: lo ? 4 : s, rings: 3 });

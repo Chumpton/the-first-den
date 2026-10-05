@@ -7,7 +7,7 @@ const LOOKS = {
 export function skeleton() { return { root: { pivot: [0, 0.06, -0.02] }, head: { parent: 'root', pivot: [0, 0.12, -0.13] }, tail: { parent: 'root', pivot: [0, 0.09, 0.17] } }; }
 export function geometry(ctx) {
   const L = LOOKS[ctx.params.sex] ?? LOOKS.drake, lo = ctx.lod >= 4, s = ctx.lod >= 3 ? 6 : 8;
-  ctx.flat(); ctx.roughness(0.7);
+  ctx.smooth(); ctx.roughness(0.7);
   ctx.bone('root'); ctx.color(L.body); blob(ctx, [0, 0.05, 0.02], [0.11, 0.08, 0.2], { seg: lo ? 5 : s, rings: lo ? 3 : 4 });
   ctx.bone('head'); ctx.color(L.head); blob(ctx, [0, 0.24, -0.17], [0.045, 0.05, 0.06], { seg: lo ? 4 : 6, rings: 3 });
   ctx.color(L.bill); blob(ctx, [0, 0.228, -0.24], [0.025, 0.012, 0.045], { seg: lo ? 4 : 5, rings: 2 });

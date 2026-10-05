@@ -1,128 +1,84 @@
+// wunix plays as a red fox: the body wears scripts/gen/animal-fox.js and this script turns it to its travel,
+// picks idle / trot / gallop / leap from how it moves (anim/fox.yml), and lights a foxfire wisp when it flies.
 import { play, clips } from 'builtin/anim'
 
+const FOX = 'scripts/gen/animal-fox.js'
 let foxClips = null
+const isWunix = (self) => self.displayName === 'wunix' || self.name === 'wunix' || self.state?.displayName === 'wunix'
 
-function getClips(ctx) {
-  if (!foxClips) {
-    foxClips = clips(ctx, 'anim/fox.yml')
-  }
-  return foxClips
+function dress(ctx) {
+  if (ctx.self.model) ctx.self.model = null
+  if (ctx.self.primitive?.script !== FOX) ctx.self.primitive = { kind: 'scripted', params: {}, script: FOX }
 }
 
 export function onSpawn(ctx) {
-  const isWunix = ctx.self.displayName === 'wunix' || ctx.self.name === 'wunix' || ctx.self.state?.displayName === 'wunix'
-  if (!isWunix) return
-
-  ctx.self.model = null
-  ctx.self.primitive = { kind: 'scripted', params: {}, script: 'scripts/gen/animal-fox.js' }
+  if (!isWunix(ctx.self)) return
+  dress(ctx)
   ctx.self.material = null
   ctx.self.castShadow = true
 }
 
 export function update(ctx, dt) {
-  const isWunix = ctx.self.displayName === 'wunix' || ctx.self.name === 'wunix' || ctx.self.state?.displayName === 'wunix'
-  if (!isWunix) return
-
-  // Keep fox appearance intact
-  if (ctx.self.model) ctx.self.model = null
-  if (!ctx.self.primitive || ctx.self.primitive.script !== 'scripts/gen/animal-fox.js') {
-    ctx.self.primitive = { kind: 'scripted', params: {}, script: 'scripts/gen/animal-fox.js' }
-  }
-
-  const p = ctx.self.feetPosition || ctx.self.worldFeetPosition
+  if (!isWunix(ctx.self)) return
+  dress(ctx)
+  const p = ctx.self.feetPosition
   if (!p) return
-
-  const s = (ctx.self.state ??= {})
-  const mem = (ctx.session.foxState ??= {
-    lastX: p.x,
-    lastY: p.y,
-    lastZ: p.z,
-    lastT: ctx.now(),
-    currentClip: '',
-    currentSpeed: 1,
-    sniffTimer: 0,
-    soundTimer: 0,
-    idlePhase: 0,
-  })
-
+  const s = ctx.self.state ?? {}
   const now = ctx.now()
-  const dx = p.x - mem.lastX
-  const dz = p.z - mem.lastZ
-  const movedDist = Math.hypot(dx, dz)
-  const moveSpeed = movedDist / realDt
+  const mem = (ctx.session.foxState ??= { x: p.x, z: p.z, speed: 0, yaw: null, clip: '', rate: 1, idleT: 0, phase: 0, yipAt: 0 })
 
-  if (movedDist > 0.03) {
-    const wantYaw = Math.atan2(-dx, -dz) * 180 / Math.PI
-    ctx.self.rotation = { yaw: Math.round(wantYaw * 10) / 10 }
+  // speed from what the body actually travelled, eased so one stuttered frame never flips the gait
+  const step = Math.max(dt, 1 / 120)
+  const dx = p.x - mem.x, dz = p.z - mem.z, moved = Math.hypot(dx, dz)
+  mem.x = p.x; mem.z = p.z
+  const raw = moved > 3 ? 0 : moved / step // a teleport is no sprint
+  mem.speed += (raw - mem.speed) * Math.min(1, step * 8)
+
+  // turn toward travel, rate-limited (nose is -Z)
+  if (moved > 0.01 && moved < 3) {
+    const want = Math.atan2(-dx, -dz) * 180 / Math.PI
+    if (mem.yaw == null) mem.yaw = want
+    const diff = ((want - mem.yaw + 540) % 360) - 180
+    mem.yaw += Math.sign(diff) * Math.min(Math.abs(diff), 540 * step)
+    ctx.self.rotation = { yaw: mem.yaw }
   }
 
-  mem.lastX = p.x
-  mem.lastY = p.y
-  mem.lastZ = p.z
-  mem.lastT = now
+  const ground = ctx.place?.terrain?.heightAt ? ctx.place.terrain.heightAt(p.x, p.z) : null
+  const above = ground != null ? p.y - ground : 0
+  const flying = !!s.flying
+  const airborne = flying || (ctx.self.grounded === false && above > 0.35)
 
-  // Check terrain height to know if airborne
-  const terrainH = ctx.place?.terrain?.heightAt ? ctx.place.terrain.heightAt(p.x, p.z) : null
-  const heightAboveGround = terrainH != null ? (p.y - terrainH) : 0
-  const isAirborne = s.flying || (heightAboveGround > 1.8)
+  // foxfire when flying
+  if (flying && !ctx.self.wisp) {
+    ctx.self.wisp = { color: '#ff6622', shape: 'slender', burnStyle: 'pulse', size: 0.5 }
+    ctx.self.light = { kind: 'point', color: '#ffaa44', intensity: 2.2, distance: 6 }
+  } else if (!flying && ctx.self.wisp) { ctx.self.wisp = null; ctx.self.light = null }
 
-  // Floating & flying magical visual effects (celestial foxfire wisp and warm ember light)
-  if (isAirborne) {
-    if (!ctx.self.wisp) {
-      ctx.self.wisp = { color: '#ff6622', shape: 'slender', burnStyle: 'pulse', size: 1.1 }
-      ctx.self.light = { kind: 'point', color: '#ffaa44', intensity: 2.2, distance: 6 }
-    }
-  } else {
-    if (ctx.self.wisp) {
-      ctx.self.wisp = null
-      ctx.self.light = null
-    }
-  }
-
-  // Animation selection
-  const c = getClips(ctx)
+  const c = (foxClips ??= clips(ctx, 'anim/fox.yml'))
   if (!c) return
-
-  let wantClip = 'walk'
-  let animSpeed = 1.0
-
-  if (isAirborne) {
-    wantClip = 'walk'
-    animSpeed = 0.95
-  } else if (moveSpeed > 0.35) {
-    wantClip = 'walk'
-    animSpeed = Math.min(2.2, Math.max(0.8, moveSpeed * 0.45))
-  } else {
-    // Idle on ground: roam/sniff behavior
-    mem.sniffTimer += dt
-    if (mem.sniffTimer > 8.0) {
-      mem.sniffTimer = 0
-      mem.idlePhase = (mem.idlePhase + 1) % 4
-      if (mem.idlePhase === 0 && now - mem.soundTimer > 15000) {
-        mem.soundTimer = now
-        ctx.emit('playSound', {
-          clip: '/cdn/moodboard-lowpoly-cozy/sfx-cute-fox-happy-chirp-yip.mp3',
-          position: p,
-          volume: 0.35
-        })
+  let want = 'idle', rate = 1
+  if (airborne) { want = flying && mem.speed > 1 ? 'gallop' : 'leap'; rate = flying ? 0.7 : 1 }
+  else if (mem.speed > 4.2) { want = 'gallop'; rate = Math.min(1.6, Math.max(0.85, mem.speed / 7)) }
+  else if (mem.speed > 1.6) { want = 'trot'; rate = Math.min(1.5, Math.max(0.8, mem.speed / 3)) }
+  else if (mem.speed > 0.3) { want = 'walk'; rate = Math.min(1.6, Math.max(0.7, mem.speed / 1.2)) }
+  else {
+    mem.idleT += step
+    if (mem.idleT > 6) {
+      mem.idleT = 0; mem.phase = (mem.phase + 1) % 4
+      if (mem.phase === 1 && now - mem.yipAt > 15000) {
+        mem.yipAt = now
+        ctx.emit('playSound', { clip: '/cdn/moodboard-lowpoly-cozy/sfx-cute-fox-happy-chirp-yip.mp3', position: p, volume: 0.35 })
       }
     }
-
-    if (mem.idlePhase === 2) {
-      wantClip = 'alert'
-      animSpeed = 1.0
-    } else {
-      wantClip = 'sniff'
-      animSpeed = 1.0
-    }
+    want = mem.phase === 2 ? 'sniff' : mem.phase === 3 ? 'alert' : 'idle'
   }
+  if (want !== 'idle' && want !== 'sniff' && want !== 'alert') mem.idleT = 0
 
-  if (mem.currentClip !== wantClip || Math.abs(mem.currentSpeed - animSpeed) > 0.25) {
-    const clip = c[wantClip]
+  if (mem.clip !== want || Math.abs(mem.rate - rate) > 0.2) {
+    const clip = c[want]
     if (clip) {
-      play(ctx, ctx.self, clip, { channel: 'body', loop: true, speed: animSpeed, blendIn: 0.25 })
-      mem.currentClip = wantClip
-      mem.currentSpeed = animSpeed
+      play(ctx, ctx.self, clip, { channel: 'body', loop: true, speed: rate, blendIn: 0.18 })
+      mem.clip = want; mem.rate = rate
     }
   }
 }

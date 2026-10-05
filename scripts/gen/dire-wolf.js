@@ -12,6 +12,7 @@ const COATS = {
 const PARAM = (coat) => ({ ...BASE, col: { ...BASE.col, ...(COATS[coat] || {}) } });
 export function skeleton() { return rig(BASE); }
 export function geometry(ctx) {
+  ctx.smooth();
   const P = PARAM(ctx.params.coat || 'grey');
   build(ctx, P);
   // a scar of hackles: a ridge of darker fur tufts along the spine, thicker on the big ones

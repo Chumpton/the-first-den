@@ -21,6 +21,7 @@ const COATS = {
 const P_OF = (coat) => { const K = COATS[coat] || COATS.ginger; return { ...BASE, col: K.col, tailTipFrom: K.tipFrom ?? 9 }; };
 export function skeleton() { return rig(BASE); }
 export function geometry(ctx) {
+  ctx.smooth();
   const coat = ctx.params.coat || 'ginger', K = COATS[coat] || COATS.ginger, P = P_OF(coat), lod = ctx.lod ?? 1;
   build(ctx, P);
   if (lod <= 2) {

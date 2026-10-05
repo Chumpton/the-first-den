@@ -67,7 +67,7 @@ export function skeleton() {
 export function geometry(ctx) {
   const C = { ...DEF, ...(ctx.params.palette ?? {}) }, lod = ctx.lod ?? 1;
   N = lod >= 4 ? 6 : lod >= 2 ? 8 : 12;
-  ctx.flat(); ctx.roughness(0.85);
+  ctx.smooth(); ctx.roughness(0.85);
   // ---- body: eagle chest forward, lion barrel and haunch aft
   const furCol = (s) => (s < -0.35 ? C.belly : C.body);
   tube(ctx, [

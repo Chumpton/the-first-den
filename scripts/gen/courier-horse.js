@@ -4,6 +4,7 @@
 import { horse, horseRig, human, saddle, shifted, rod, box, PAL } from './traveller-kit.js';
 export function skeleton() { return horseRig([0, 0, 0]); }
 export function geometry(ctx) {
+  ctx.smooth();
   const p = ctx.params || {}, lod = ctx.lod ?? 1;
   horse(ctx, p.coat || 'chestnut', [0, 0, 0]);
   saddle(ctx, p.blanket, lod);

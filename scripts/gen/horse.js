@@ -28,6 +28,7 @@ function strip(ctx, pts, lift, back, col) {
   }
 }
 export function geometry(ctx) {
+  ctx.smooth();
   const C = COATS[ctx.params.coat] || COATS.bay;
   const { lod, D } = build(ctx, { ...P, col: C, sock: C.sock ?? P.sock });
   // mane: a jagged ridge standing along the crest, forelock over the brow
