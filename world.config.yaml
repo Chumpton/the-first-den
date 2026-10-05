@@ -42,7 +42,7 @@ inputs:
     cast4: {keys: ['4']}
     cast5: {keys: ['5']}
     cast6: {keys: ['6']}
-    cast7: {keys: [q]}
+    cast7: {keys: [c]}
     cast8: {keys: [g]}
     cast9: {keys: [t]}
     stanceNext: {keys: [r]}

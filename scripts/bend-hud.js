@@ -81,7 +81,7 @@ function bars(ctx, player, st, now) {
   const coarse = typeof matchMedia === 'function' && matchMedia('(pointer: coarse)').matches;
   const kit = BARS.fire;
   const empty = (k) => `<div style="position:relative;width:42px;height:42px;box-sizing:border-box;background:linear-gradient(#2a2a2d,#111113);border:2px solid #3c3c40;border-radius:6px;box-shadow:inset 0 0 8px rgba(0,0,0,.9),0 0 0 1px #000"><span style="position:absolute;top:1px;right:3px;font-size:12px;color:#777;${SH};${F}">${k}</span></div>`;
-  const keys = ['1', '2', '3', '4', '5', '6', 'Q', 'G', 'T', '0', '-', '='];
+  const keys = ['1', '2', '3', '4', '5', '6', 'C', 'G', 'T', '0', '-', '='];
   const slots = keys.map((k, i) => kit[i] ? slot(kit[i], k, st, now, false) : empty(k)).join('');
   const lvl = st.lvl ?? 1, need = R.xpNeed(lvl), xp = st.xp ?? 0;
   const ticks = Array.from({ length: 19 }, (_, i) => `<span style="position:absolute;left:${(i + 1) * 5}%;top:0;bottom:0;width:1px;background:rgba(0,0,0,.7)"></span>`).join('');
