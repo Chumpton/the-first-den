@@ -8,7 +8,10 @@ export function update(ctx, dt) {
   const g = ctx.self, s = g.state;
   if (s.ridden || g.parent) { ctx.sleep(1); return; }
   const o = s.owner && ctx.getObject(s.owner);
-  if (!o) { ctx.sleep(2); return; }
+  if (!o || o.displayName === 'wunix' || o.name === 'wunix' || o.id?.includes('wunix') || o.state?.displayName === 'wunix') {
+    if (o) ctx.destroy(g.id);
+    ctx.sleep(2); return;
+  }
   const F = GRY.follow, op = o.feetPosition, gp = g.feetPosition;
   const oy = (o.rotation && typeof o.rotation === 'object' && 'w' in o.rotation)
     ? Math.atan2(2 * (o.rotation.x * o.rotation.z + o.rotation.w * o.rotation.y), 1 - 2 * (o.rotation.x ** 2 + o.rotation.y ** 2)) : ((o.rotation?.yaw ?? o.rotation ?? 0) * Math.PI / 180);

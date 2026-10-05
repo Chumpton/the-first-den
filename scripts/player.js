@@ -24,13 +24,12 @@ export function onSpawn(ctx) {
   const isWunix = ctx.self.displayName === 'wunix' || ctx.self.name === 'wunix' || ctx.self.state?.displayName === 'wunix'
   if (isWunix) {
     ctx.self.model = null
+    ctx.self.state.riding = null
+    ctx.self.state.flying = false
     ctx.self.primitive = { kind: 'sphere', radius: 0.35 }
     ctx.self.material = { color: '#e8eff5', metalness: 0.9, roughness: 0.15 }
     ctx.self.light = { kind: 'point', color: '#00f0ff', intensity: 3, distance: 5 }
     ctx.self.wisp = { color: '#00f0ff', state: 'idle', shape: 'slender', burnStyle: 'pulse', size: 1.2 }
-    ctx.self.state.flying = true
-    const walk = walkOf(ctx)
-    walk.flying = true
     return
   }
   // The body arrives dressed: in the model templates/player.js names, or — when the template names none — in the

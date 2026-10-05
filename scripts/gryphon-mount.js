@@ -16,7 +16,13 @@ function findWynx(ctx) {
   return row ? ctx.getObject(row.id) : null;
 }
 
+function isRobot(me) {
+  if (!me) return false;
+  return me.displayName === 'wunix' || me.name === 'wunix' || me.state?.displayName === 'wunix' || me.id?.includes('wunix');
+}
+
 function mount(ctx) {
+  if (isRobot(ctx.self)) return;
   const me = ctx.self, w = W(ctx), p = me.feetPosition;
   let g = findWynx(ctx);
   const far = !g || Math.hypot(g.feetPosition.x - p.x, g.feetPosition.z - p.z) > 6;
@@ -60,6 +66,7 @@ function dismount(ctx) {
 }
 
 export function onInput(ctx, input) {
+  if (isRobot(ctx.self)) return;
   if (!input.pressed?.[GRY.action]) return;
   const me = ctx.self;
   if (me.state.riding === 'gryphon') dismount(ctx);
@@ -68,6 +75,14 @@ export function onInput(ctx, input) {
 
 export function update(ctx, dt) {
   const me = ctx.self, w = W(ctx), s = me.state;
+  if (isRobot(me)) {
+    if (w.id && ctx.getObject(w.id)) { ctx.destroy(w.id); w.id = null; }
+    const row = ctx.query({ tags: ['wynx'], radius: 5000 }).find((r) => r.state?.owner === me.id);
+    if (row && ctx.getObject(row.id)) ctx.destroy(row.id);
+    s.riding = null;
+    ctx.sleep();
+    return;
+  }
   const riding = s.riding === 'gryphon';
   if (!riding) {
     if (s.flying && !me.parent) { mount(ctx); return; }
