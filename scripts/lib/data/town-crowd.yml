@@ -75,25 +75,25 @@ lines:
 kidLines: ["You can't catch me!", "Wanna play tag?", "I saw the dragon blink!"]
 roster:
   # adults
-  - {id: crowd-pip, model: campton, name: Pip, role: busker, at: [4.5, 84.5], face: [0, 100], scale: 1.0, audio: busker}
-  - {id: crowd-marta, model: rikki, name: Marta, role: vendor, at: [-14.7, 97], face: [0, 97], scale: 0.98}
-  - {id: crowd-bram, model: campton, name: Bram, role: vendor, at: [14.7, 104], face: [0, 104], scale: 1.04}
-  - {id: crowd-hild, model: rikki, name: Hild, role: vendor, at: [-11.6, 86], face: [0, 86], scale: 1.0}
-  - {id: crowd-a1, model: rikki, role: chat, group: g1, slot: 0, scale: 0.96}
-  - {id: crowd-a2, model: campton, role: chat, group: g1, slot: 180, scale: 1.02}
-  - {id: crowd-wren, model: rikki, name: Wren, role: chat, group: g2, slot: 90, scale: 0.95}
-  - {id: crowd-a4, model: campton, role: chat, group: g2, slot: 210, scale: 1.05}
-  - {id: crowd-a5, model: rikki, role: chat, group: g2, slot: 330, scale: 1.0}
-  - {id: crowd-a6, model: campton, role: sit, angle: -112, scale: 0.97}
-  - {id: crowd-a7, model: rikki, role: sit, angle: -72, scale: 0.99}
-  - {id: crowd-a8, model: rikki, role: walk, at: [-16, 112], scale: 1.01}
-  - {id: crowd-a9, model: campton, role: walk, at: [15, 88], scale: 0.95}
-  - {id: crowd-a10, model: rikki, role: walk, at: [-4, 118], scale: 0.97}
-  - {id: crowd-a11, model: campton, role: walk, at: [12, 118], scale: 1.03}
+  - {id: crowd-pip, model: tw-pip, name: Pip, role: busker, at: [4.5, 84.5], face: [0, 100], scale: 1.0, audio: busker}
+  - {id: crowd-marta, model: tw-marta, name: Marta, role: vendor, at: [-14.7, 97], face: [0, 97], scale: 0.98}
+  - {id: crowd-bram, model: tw-bram, name: Bram, role: vendor, at: [14.7, 104], face: [0, 104], scale: 1.04}
+  - {id: crowd-hild, model: tw-hild, name: Hild, role: vendor, at: [-11.6, 86], face: [0, 86], scale: 1.0}
+  - {id: crowd-a1, model: pool-a, role: chat, group: g1, slot: 0, scale: 0.96}
+  - {id: crowd-a2, model: pool-b, role: chat, group: g1, slot: 180, scale: 1.02}
+  - {id: crowd-wren, model: pool-e, name: Wren, role: chat, group: g2, slot: 90, scale: 0.95}
+  - {id: crowd-a4, model: pool-c, role: chat, group: g2, slot: 210, scale: 1.05}
+  - {id: crowd-a5, model: pool-d, role: chat, group: g2, slot: 330, scale: 1.0}
+  - {id: crowd-a6, model: pool-f, role: sit, angle: -112, scale: 0.97}
+  - {id: crowd-a7, model: pool-g, role: sit, angle: -72, scale: 0.99}
+  - {id: crowd-a8, model: tv-traveller, role: walk, at: [-16, 112], scale: 1.01}
+  - {id: crowd-a9, model: pool-a, role: walk, at: [15, 88], scale: 0.95}
+  - {id: crowd-a10, model: pool-b, role: walk, at: [-4, 118], scale: 0.97}
+  - {id: crowd-a11, model: pool-c, role: walk, at: [12, 118], scale: 1.03}
   # kids
-  - {id: crowd-tobi, model: campton, name: Tobi, kid: true, role: tag, angle: 0, scale: 0.62}
-  - {id: crowd-k2, model: rikki, kid: true, role: tag, angle: 120, scale: 0.6}
-  - {id: crowd-k3, model: campton, kid: true, role: tag, angle: 240, scale: 0.64}
-  - {id: crowd-k4, model: rikki, kid: true, role: walk, at: [-6, 82], scale: 0.62}
-  - {id: crowd-k5, model: campton, kid: true, role: walk, at: [10, 92], scale: 0.6}
-  - {id: crowd-k6, model: rikki, kid: true, role: sit, angle: -40, scale: 0.63}
+  - {id: crowd-tobi, model: pool-h, name: Tobi, kid: true, role: tag, angle: 0, scale: 0.62}
+  - {id: crowd-k2, model: vl-pip, kid: true, role: tag, angle: 120, scale: 0.6}
+  - {id: crowd-k3, model: pool-d, kid: true, role: tag, angle: 240, scale: 0.64}
+  - {id: crowd-k4, model: pool-f, kid: true, role: walk, at: [-6, 82], scale: 0.62}
+  - {id: crowd-k5, model: pool-g, kid: true, role: walk, at: [10, 92], scale: 0.6}
+  - {id: crowd-k6, model: wd-warden, kid: true, role: sit, angle: -40, scale: 0.63}

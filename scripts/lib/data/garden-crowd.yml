@@ -59,7 +59,7 @@ lines: ["Lovely day in the garden, isn't it?"]
 kidLines: ["Hello!"]
 roster:
   - id: garden-rosie
-    model: rikki
+    model: gd-rosie
     name: Rosie
     role: vendor
     at: [-89, 67.5]
@@ -68,7 +68,7 @@ roster:
     wear: [{item: hat, col: "oklch(0.7 0.15 8)", flower: "oklch(0.88 0.07 45)"}, {item: apron, col: "oklch(0.84 0.07 350)"}]
     lines: ["Sweet peas, peonies, a bit of lavender: take a sniff, it's free.", "I pick them at dawn, before the bees wake up.", "A posy for the house? The den could use some colour."]
   - id: garden-hob
-    model: campton
+    model: gd-hob
     name: Hob
     role: vendor
     at: [-75.2, 66.8]
@@ -77,7 +77,7 @@ roster:
     wear: [{item: hat, col: "oklch(0.55 0.1 140)"}, {item: apron, col: "oklch(0.6 0.08 60)"}]
     lines: ["Carrots this long, and I didn't even sing to them. Much.", "Cabbages keep all winter if you're kind to them.", "Soil's rich down here. The river does half the work."]
   - id: garden-mabel
-    model: rikki
+    model: gd-mabel
     name: Mabel
     role: vendor
     at: [-64, 79.2]
@@ -86,7 +86,7 @@ roster:
     wear: [{item: hat, col: "oklch(0.8 0.13 85)", flower: "oklch(0.97 0.03 90)"}, {item: apron, col: "oklch(0.88 0.08 90)"}]
     lines: ["Clover honey, straight from the hives in the corner.", "The bees are friendly if you move slow. Mostly.", "One jar for your tea, one for your toast, that's the rule."]
   - id: garden-fern
-    model: campton
+    model: gd-fern
     name: Fern
     role: walk
     at: [-78, 72]
@@ -94,7 +94,7 @@ roster:
     wear: [{item: hat, col: "oklch(0.62 0.11 150)"}, {item: basket, col: "oklch(0.68 0.13 128)"}]
     lines: ["I keep these beds. Weeds don't stand a chance.", "Mind the lily pads, the frogs are napping.", "The wisteria takes years to bloom like that. Worth it."]
   - id: garden-tansy
-    model: rikki
+    model: gd-tansy
     name: Tansy
     role: chat
     group: g1
@@ -103,7 +103,7 @@ roster:
     wear: [{item: hat, col: "oklch(0.68 0.13 300)", flower: "oklch(0.7 0.15 8)"}, {item: basket, col: "oklch(0.7 0.14 45)"}]
     lines: ["I came for one pumpkin. I have four apples and a fern now.", "The flower-house is warm as a kitten inside.", "Have you tried Mabel's honey? Don't. You'll never stop."]
   - id: garden-olwen
-    model: campton
+    model: gd-olwen
     name: Olwen
     role: chat
     group: g1

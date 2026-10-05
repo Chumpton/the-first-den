@@ -6,6 +6,7 @@
 // Poses ride the body's "sit" channel so the locomotion script stands its gait down while they play; walking and
 // running are its gait, read off the velocity this manager writes. Scratch lives in ctx.session (this machine's).
 import C from './lib/data/garden-crowd.yml'
+import NPC from './lib/data/npc-models.yml'
 export const updateSchedule = { every: 2 }
 const TAU = Math.PI * 2
 const wrap = (a) => ((((a + 180) % 360) + 360) % 360) - 180
@@ -29,18 +30,18 @@ function homeYaw(e, h) {
 function seed(ctx, have) {
   for (const e of C.roster) {
     if (have.has(e.id) || ctx.getObject(e.id)) continue
-    const M = C.models[e.model], h = home(e), y = (ctx.place.terrain.heightAt(h[0], h[1]) ?? 0.5) + 0.25 + (e.role === 'sit' ? (C.fountainDais?.rise ?? 0) : 0)
+    const N = NPC[e.model], M = N ? { model: N.model, layout: { minExtents: { y: N.h }, maxExtents: { y: N.h } }, top: N.h - 0.06 } : C.models[e.model], h = home(e), y = (ctx.place.terrain.heightAt(h[0], h[1]) ?? 0.5) + 0.25 + (e.role === 'sit' ? (C.fountainDais?.rise ?? 0) : 0)
     const spec = {
       id: e.id, tags: ['garden-crowd', 'npc', 'interactable'], behavior: ['scripts/humanoid-locomotion.js'],
-      feetPosition: { x: h[0], y, z: h[1] }, rotation: { yaw: homeYaw(e, h) }, scale: e.scale ?? 1,
+      feetPosition: { x: h[0], y, z: h[1] }, rotation: { yaw: homeYaw(e, h) }, scale: N ? (N.h < 1.4 ? 1 : (e.scale ?? 1)) : e.scale ?? 1,
       physics: 'character', model: M.model, visibleRange: { max: C.visibleRange },
       state: { name: e.name ?? null, role: e.role, kid: !!e.kid, turnTo: 'none', pressTo: 'garden-crowd' },
     }
     if (M.layout) spec.layout = M.layout
     if (e.audio) spec.audio = C.audio[e.audio]
     spec.children = []
-    if (e.name) spec.children.push({ id: 'tag', feetPosition: { x: 0, y: 2.15, z: 0 }, text: { content: e.name, color: e.kid ? '#ffd9a8' : '#fff1d6', size: 0.22 } })
-    for (const w of e.wear ?? []) spec.children.push({ id: w.item, castShadow: false, visibleRange: { max: 60 }, material: { pbr: true }, primitive: { kind: 'scripted', script: 'scripts/gen/garden-wear.js', params: { ...w, top: w.top ?? M.top } } })
+    if (e.name) spec.children.push({ id: 'tag', feetPosition: { x: 0, y: N ? N.h + 0.3 : 2.15, z: 0 }, text: { content: e.name, color: e.kid ? '#ffd9a8' : '#fff1d6', size: 0.22 } })
+    for (const w of N ? [] : e.wear ?? []) spec.children.push({ id: w.item, castShadow: false, visibleRange: { max: 60 }, material: { pbr: true }, primitive: { kind: 'scripted', script: 'scripts/gen/garden-wear.js', params: { ...w, top: w.top ?? M.top } } })
     ctx.spawn(spec)
   }
 }
