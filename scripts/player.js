@@ -1,3 +1,4 @@
+import { GRY } from './lib/data/gryphon.js'
 import { steerBasis, wowTurn } from './lib/wow-steer.js'
 // The player's own movement: WASD relative to the camera's aim, jump, gravity — on the
 // character controller. A body is three writes: feetPosition puts it there, velocity asks the
@@ -56,7 +57,7 @@ export function onInput(ctx, input) {
   walk.climb = (input.held.jump ? 1 : 0) - (input.held.descend ? 1 : 0)
   walk.ropeUp = input.held.jump || moveZ > 0.3
   walk.ropeDown = input.held.descend || moveZ < -0.3
-  const speed = walk.flying ? PLAYER.flySpeed : PLAYER.walkSpeed * (ctx.self.state.speedMul || 1)
+  const speed = walk.flying ? PLAYER.flySpeed * (ctx.self.state.flyBoost ? GRY.boost : 1) : PLAYER.walkSpeed * (ctx.self.state.speedMul || 1)
   walk.speed = speed
   walk.moveIntent = {
     x: (facingCos * nx - facingSin * nz) * speed,
@@ -92,7 +93,10 @@ export function update(ctx, dt) {
   const intent = walk.moveIntent ?? { x: 0, z: 0 }
   if (walk.flying) {
     // Sinking onto the ground lands you.
-    if (ctx.self.grounded && (walk.climb ?? 0) < 0) { walk.flying = false; ctx.self.state.flying = false }
+    // On the gryphon its talons touch first: sinking within its reach of the ground lands it.
+    const gnd = ctx.self.state.riding === 'gryphon' && (walk.climb ?? 0) < 0 ? ctx.place.terrain.heightAt(ctx.self.feetPosition.x, ctx.self.feetPosition.z) : null
+    const touch = gnd != null && ctx.self.feetPosition.y - gnd < GRY.paws + 0.1
+    if ((ctx.self.grounded || touch) && (walk.climb ?? 0) < 0) { walk.flying = false; ctx.self.state.flying = false; ctx.self.state.flyBoost = false }
     else {
       const e = Math.min(1, PLAYER.flyEase * dt), vy = (walk.climb ?? 0) * PLAYER.flyClimb
       ctx.self.velocity = { x: v.x + (intent.x - v.x) * e, y: v.y + (vy - v.y) * e, z: v.z + (intent.z - v.z) * e }

@@ -68,6 +68,23 @@ export function sit() {
 }
 sit.units = 'hips'
 sit.duration = 0.1
+// Astride a mount: thighs splayed over the barrel, knees bent, hands forward on the reins.
+export function ride() {
+  return {
+    Hips: { position: [0, -0.42, 0] },
+    Spine02: { rotation: [12, 0, 0] },
+    LeftUpLeg: { rotation: [-55, 0, -28] },
+    RightUpLeg: { rotation: [-55, 0, 28] },
+    LeftLeg: { rotation: [75, 0, 0] },
+    RightLeg: { rotation: [75, 0, 0] },
+    LeftArm: { rotation: [55, 0, 25] },
+    RightArm: { rotation: [55, 0, -25] },
+    LeftForeArm: { rotation: [50, 0, 40] },
+    RightForeArm: { rotation: [50, 0, -40] },
+  }
+}
+ride.units = 'hips'
+ride.duration = 0.1
 
 export function onInput(ctx, input) {
   if (ctx.self.sprite) return
@@ -105,6 +122,16 @@ export function onInput(ctx, input) {
 
 export function update(ctx, dt) {
   if (ctx.self.sprite) return // sprites animate via the 2D mixer, never these GLB clips
+  // Riding the flight gryphon (scripts/gryphon-mount.js): astride the saddle, the body still turning with the WoW heading.
+  if (ctx.self.state.riding === 'gryphon') {
+    const g = gaitOf(ctx)
+    if (!g.gryphon) { g.gryphon = true; ctx.self.anim.idle = null; ctx.self.anim.walk = null; ctx.self.anim.run = null; ctx.self.anim.spell = null; g.castClip = null
+      ctx.self.anim.sit = { clip: ride, loop: 'loop', weight: 1, blendIn: 0.2 }; ctx.self.ik = { ...(ctx.self.ik ?? {}), feet: false } }
+    const W = wowBasis(ctx)
+    if (W) { g.bodyYaw = (Math.atan2(W.sin, W.cos) * 180) / Math.PI; ctx.self.yaw = g.bodyYaw + (PLAYER.modelYaw || 0) }
+    return
+  }
+  { const g = gaitOf(ctx); if (g.gryphon) { g.gryphon = false; ctx.self.anim.sit = null; ctx.self.ik = { ...(ctx.self.ik ?? {}), feet: true }; g.clipSpeed = undefined } }
 
   const clips = PLAYER.clips || {}
   // Seated: attached to a hull, a mount, a chair — or a sit someone else wrote on the sit channel

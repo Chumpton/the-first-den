@@ -53,7 +53,7 @@ function wowBoom(ctx, target, dt, mounted) {
   const k = finiteNumber(target.effectiveScale?.y, 1) * (target.parent ? 0.85 : 1) * (target.state?.kind === 'horse' ? 1.5 : 1)
   const anchor = { x: pos.x, y: pos.y + C.anchor * k, z: pos.z }
   const cp = Math.cos(pitch), back = { x: Math.sin(yaw) * cp, y: -Math.sin(pitch), z: Math.cos(yaw) * cp }
-  const want = Math.max(0, s.dist ?? C.distStart) * (mounted ? 1.3 : 1)
+  const want = Math.max(0, s.dist ?? C.distStart) * (mounted || target.state?.riding === 'gryphon' ? 1.35 : 1)
   let d = want
   if (want > 0.05) {
     const hit = raycast(ctx, anchor, back, { distance: want + 0.3, radius: C.probe, ignoreEntities: [target.id, ...(target.parent ? [target.parent.id] : [])], physicsOnly: true })
