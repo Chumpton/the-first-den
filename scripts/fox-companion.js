@@ -46,9 +46,15 @@ export function update(ctx, dt) {
   })
 
   const now = ctx.now()
-  const realDt = Math.max(0.001, Math.min(1.0, (now - mem.lastT) / 1000))
-  const movedDist = Math.hypot(p.x - mem.lastX, p.z - mem.lastZ)
+  const dx = p.x - mem.lastX
+  const dz = p.z - mem.lastZ
+  const movedDist = Math.hypot(dx, dz)
   const moveSpeed = movedDist / realDt
+
+  if (movedDist > 0.03) {
+    const wantYaw = Math.atan2(-dx, -dz) * 180 / Math.PI
+    ctx.self.rotation = { yaw: Math.round(wantYaw * 10) / 10 }
+  }
 
   mem.lastX = p.x
   mem.lastY = p.y
