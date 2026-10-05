@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "basedOnSpecVersion": 950,
-  "updatedAt": "2026-10-05T01:18:31.897Z",
-  "summary": "The First Den is a forest world centered on Spawn and its home, extending through farms, Mirror Tarn, Garden and Market districts, a royal city/castle and a hilltop village. Authored scenes combine terrain-driven procedural structures, activity systems, crowds and wildlife; the player uses WoW-style movement, bending combat, and Wynx the rideable/following gryphon. A player whose identity is wunix is specially rendered and animated as a red fox instead of using the regular avatar/mount presentation.",
+  "basedOnSpecVersion": 1033,
+  "updatedAt": "2026-10-05T01:30:24.904Z",
+  "summary": "The First Den is a forest world centered on Spawn and the owner's home, extending through farms, Mirror Tarn, Garden and Market districts, a royal city/castle and a hilltop village. Authored scenes combine seeded terrain, reusable procedural builders, activities, crowds and wildlife; the player uses WoW-style movement, bending combat and Wynx the rideable/following gryphon. The wunix identity is presented as an animated red fox, and shared mesh kits now give forest trees and many hand-built scene models softer foliage lighting.",
   "scriptPaths": [
     "scripts/alchemy-bench.js",
     "scripts/alchemy-player.js",
@@ -208,6 +208,7 @@
     "scripts/gen/royal-statue.js",
     "scripts/gen/secret-trinket.js",
     "scripts/gen/shore-kit.js",
+    "scripts/gen/soften.js",
     "scripts/gen/stone-golem.js",
     "scripts/gen/tg-greenhouse.js",
     "scripts/gen/tg-grounds.js",
@@ -229,6 +230,7 @@
     "scripts/gen/traveller-kit.js",
     "scripts/gen/traveller-rider.js",
     "scripts/gen/traveller-walker.js",
+    "scripts/gen/tree-kit.js",
     "scripts/gen/tree-roots.js",
     "scripts/gen/treehouse-interior.js",
     "scripts/gen/treehouse.js",
@@ -419,76 +421,76 @@
     "scripts/zipline.js"
   ],
   "places": [
-    "places/main/config.yaml - one seeded forest terrain, water/marks/material bands and fog/look settings for the world",
-    "places/main/cells/x0z0.scene - Spawn, The First Den/home, farms and many authored activities/landmarks",
-    "places/main/cells/x0z-1.scene - lake/creek approaches and wolf-pack combat encounters",
+    "places/main/config.yaml - the single seeded forest place: terrain, water, site marks, material bands, fog and environment",
+    "places/main/cells/x0z0.scene - Spawn, The First Den/home, farms, sky-dragon manager and many authored landmarks/activities",
+    "places/main/cells/x0z-1.scene - lake/creek approaches and wolf-pack encounter manager",
     "places/main/cells/x0z1.scene - Ember Roost, folk and town-square crowd roots",
-    "places/main/cells/x1z1.scene - hilltop village and its village-crowd root",
-    "places/main/cells/x-1z1.scene - Garden Market crowd and district activities",
-    "places/main/cells/objects.scene - shared or separately authored placed objects across the main place"
+    "places/main/cells/x1z1.scene - hilltop village and village-crowd root",
+    "places/main/cells/x-1z1.scene - Garden Market district and garden-crowd root",
+    "places/main/cells/objects.scene - separately authored/shared placed objects across the main place"
   ],
   "roots": [
-    "templates/player.js#player - player entity behavior stack: movement, locomotion, home/travel/activity, gryphon mount, bending and fox-companion special handling",
-    "templates/camera.js#camera - custom WoW camera root; computes body heading/orbit and riding-aware third-person presentation",
-    "places/main/config.yaml - main place terrain, material, water, fog and environment root",
-    "places/main/cells/x0z0.scene#sky-dragons - scheduled sky-dragon flight manager root",
+    "templates/player.js#player - player entity behavior stack for movement, locomotion, home/travel/activity, gryphon mount, bending and fox presentation",
+    "templates/camera.js#camera - WoW-style camera root; body heading and look orbit with riding-aware third-person presentation",
+    "places/main/config.yaml - main place terrain, site marks, water, material and environment root",
+    "places/main/cells/x0z0.scene#sky-dragons - scheduled sky-dragon launch/live-entity manager",
     "places/main/cells/x0z-1.scene#wolf-pack - local wolf encounter manager and den population",
     "places/main/cells/x0z1.scene#folk-crowd / #town-crowd - district and square population managers",
     "places/main/cells/x1z1.scene#village-crowd and places/main/cells/x-1z1.scene#garden-crowd - village and Garden Market population managers"
   ],
   "shared": [
-    "scripts/forest-terrain.js - main heightAt(ctx)/materialAt(ctx) contract used by terrain and terrain-relative placements",
+    "scripts/forest-terrain.js - heightAt(ctx)/materialAt(ctx) contract used by terrain and terrain-relative placements",
     "scripts/lib/wow-steer.js - camera-relative WoW steering shared by player and camera/locomotion behavior",
-    "scripts/lib/data/gryphon.js + scripts/lib/wynx-kit.js - Wynx movement/flight tuning, animation/audio modes and FX shared by mount and follower behavior",
-    "scripts/lib/data/npc-models.yml - model and rig-height registry reused by folk, town, garden and village crowd managers",
-    "scripts/lib/road-solid.js + scripts/lib/solid-kit.js - shared solid/collider construction for road and site builders",
-    "scripts/lib/home-interaction.js + scripts/lib/data/home-feel.js - player press targeting and home interaction tuning",
+    "scripts/lib/data/gryphon.js + scripts/lib/wynx-kit.js - Wynx tuning, modes, animation/audio and FX shared by mount and follower",
+    "scripts/lib/data/npc-models.yml - model/rig-height registry reused by folk, town, garden and village crowd managers",
+    "scripts/lib/road-solid.js + scripts/lib/solid-kit.js - solid and collider construction shared by road/site builders",
+    "scripts/lib/home-interaction.js + scripts/lib/data/home-feel.js - player press targeting and home-interaction tuning",
     "scripts/lib/data/bending.js + scripts/lib/fct.js - bending/combat rules and combat-text event helper used by bender, wolf-pack and HUD",
-    "scripts/lib/town-kit.js + scripts/lib/data/town-links.json - civic builder helpers and named route/sign layout shared across town districts"
+    "scripts/gen/soften.js + scripts/gen/tree-kit.js - foliage-normal wrapper for dozens of procedural builders; tree mesh/ramp/spine kit used by forest and valley trees"
   ],
   "notableExports": [
-    "scripts/player.js - onSpawn(ctx), onInput(ctx,input), update(ctx,dt); handles identity presentation, movement and gryphon ground-riding clearance",
+    "scripts/player.js - onSpawn(ctx), onInput(ctx,input), update(ctx,dt); movement, identity presentation and gryphon ground-riding clearance",
     "scripts/camera.js - finiteNumber, onInput(ctx,input), update(ctx,dt); scripts/humanoid-locomotion.js - ride(), onInput(ctx,input), update(ctx,dt)",
     "scripts/gryphon-mount.js - onInput(ctx,input), update(ctx,dt); scripts/wynx.js - updateSchedule, update(ctx,dt); scripts/lib/wynx-kit.js - FEATHERS, DUST, setMode, yawOf",
-    "scripts/fox-companion.js - onSpawn(ctx), update(ctx,dt); applies the wunix fox model, movement-facing, ambient animation and effects",
-    "scripts/forest-terrain.js - GROUND, SITES, LAKE, heightAt(ctx), materialAt(ctx)",
+    "scripts/fox-companion.js - onSpawn(ctx), update(ctx,dt); wunix fox model, travel-facing, locomotion clips and airborne foxfire",
+    "scripts/forest-terrain.js - GROUND, SITES, LAKE, heightAt(ctx), materialAt(ctx); scripts/gen/soften.js - softened(geometry)",
+    "scripts/gen/tree-kit.js - hex, ramp, mesher, spine; scripts/gen/forest-plant.js - geometry(ctx), collider(ctx)",
     "scripts/folk-crowd.js, garden-crowd.js, town-crowd.js, village-crowd.js - crowd update managers; scripts/sky-dragons.js - onSpawn, launch, roar, ears, update",
-    "scripts/bender.js - zap, maxHp, land, aoe, release, onSpawn, onInput, update; scripts/wolf-pack.js - updateSchedule, aggroRadius, update",
-    "scripts/ui.js - onMount(), onDestroy(), default(ctx,player); scripts/bend-hud.js - fctPush, fctLayer, bendHud"
+    "scripts/bender.js - zap, maxHp, land, aoe, release, onSpawn, onInput, update; scripts/wolf-pack.js - updateSchedule, aggroRadius, update; scripts/ui.js - onMount, onDestroy, default"
   ],
   "ownership": [
-    "scripts/player.js + scripts/lib/data/player.yml - player movement intent, velocity, jump, flight, rope and camera mode; flyBoost scales flight speed; movement scratch/cached intent remain in ctx.session",
-    "scripts/camera.js - camera.state.heading is body WoW heading and camera.state.off is separate orbit/look offset; publishes native orbit and collision distances",
-    "scripts/gryphon-mount.js + scripts/wynx.js - mount behavior owns player riding/flyBoost transitions; Wynx owns her unmounted follow position, yaw and animation mode; per-player mount scratch is in ctx.session.gry",
-    "scripts/fox-companion.js - for the wunix player only, sets fox appearance and owns animation/facing/effect selection; fox timing scratch is in ctx.session.foxState",
-    "scripts/bender.js + scripts/lib/data/bending.js - player bending level/XP, HP/chi, stance/spells, cooldowns, target, combat and cast/channel state; tick scratch is in ctx.session",
-    "scripts/wolf-pack.js - wild-wolf HP, level, threat, target, status, death/respawn and combat; publishes changed summaries to place.state.wolves",
-    "scripts/folk-crowd.js, garden-crowd.js, town-crowd.js, village-crowd.js - each manager owns its roster's NPC spawn/route/pose and scheduling; per-manager scratch remains in ctx.session",
-    "scripts/sky-dragons.js - manager state owns scheduled flight requests/live dragon IDs and flight poses; dragon entities carry their path/time state"
+    "scripts/player.js + scripts/lib/data/player.yml - movement intent, velocity, jump, flight, rope and camera mode; flyBoost scales flight speed; movement scratch/cached intent in ctx.session",
+    "scripts/camera.js - camera.state.heading is body WoW heading; camera.state.off is separate orbit/look offset; publishes native orbit and collision distances",
+    "scripts/gryphon-mount.js + scripts/wynx.js - mount behavior owns player riding/flyBoost transitions; Wynx owns unmounted follow position, yaw and animation mode; per-player mount scratch in ctx.session.gry",
+    "scripts/fox-companion.js - wunix-only fox appearance, animation/facing/effect selection; fox timing and travel samples in ctx.session.foxState",
+    "scripts/bender.js + scripts/lib/data/bending.js - bending level/XP, HP/chi, stance/spells, cooldowns, target, combat and cast/channel state; tick scratch in ctx.session",
+    "scripts/wolf-pack.js - wild-wolf HP, level, threat, target, status, death/respawn and combat; publishes summaries to place.state.wolves",
+    "scripts/folk-crowd.js, garden-crowd.js, town-crowd.js, village-crowd.js - each manager owns its roster's NPC spawn/route/pose and scheduling; scratch in ctx.session",
+    "scripts/sky-dragons.js - manager owns scheduled flight requests/live dragon IDs and flight poses; dragon entities carry path/time state"
   ],
   "flows": [
-    "templates/player.js behavior stack -> player.js input/update -> player movement/flying state; humanoid-locomotion reads casting/riding and provides the corresponding animation pose",
-    "player Z/mount action -> gryphon-mount.js finds or spawns the tagged Wynx, seats/dismounts rider and updates riding/flyBoost; scripts/wynx.js follows the owner when unmounted",
+    "templates/player.js behavior stack -> player.js input/update -> player movement/flying state; humanoid-locomotion reads casting/riding and supplies the corresponding pose",
+    "player Z/mount action -> gryphon-mount.js finds or spawns tagged Wynx, seats/dismounts rider and updates riding/flyBoost; wynx.js follows owner when unmounted",
     "player movement/flying + player.state.riding='gryphon' -> player.js ground saddle-height raycast/terrain clearance and hop; camera.js detects riding for third-person orbit",
-    "gryphon-mount.js / wynx.js mode changes -> lib/wynx-kit.js setMode -> anim/gryphon.yml clips, spatial audio and speed FX; scripts/lib/data/gryphon.js supplies mount/follow tuning",
-    "templates/player.js -> fox-companion.js; player.js detects wunix and switches their entity to scripts/gen/animal-fox.js while fox-companion drives fox animation/facing and airborne effects",
-    "player inputs -> scripts/bender.js -> player bending/cast state and scheduled release/land/aoe handlers -> wild-wolf effects/damage",
+    "gryphon-mount.js / wynx.js mode changes -> lib/wynx-kit.js setMode -> anim/gryphon.yml clips, spatial audio and speed FX; lib/data/gryphon.js supplies movement/follow tuning",
+    "templates/player.js -> fox-companion.js; wunix detection dresses entity with scripts/gen/animal-fox.js and fox-companion selects anim/fox.yml clips from travel speed/airborne state",
+    "player inputs -> scripts/bender.js -> player bending/cast state and scheduled release/land/aoe handlers -> wild-wolf effects and damage",
     "bender damage/status/threat writes -> scripts/wolf-pack.js scheduled update -> combat, death/respawn and player rewards; summaries flow through place.state.wolves to bend-hud via ui.js",
     "scripts/lib/fct.js fct() -> uiEvent named fct -> scripts/ui.js onMount -> bend-hud text pool renders hit/heal/XP feedback",
-    "places/main/config.yaml marks/seed -> forest-terrain heightAt/materialAt -> terrain, water and material bands; site marks coordinate terrain clearing/grading with scene structures",
-    "folk/town/garden/village crowd roots -> manager scripts read their roster YAML and npc-models.yml -> spawned NPC model/rig or procedural actor, movement and pose",
-    "x0z0.scene sky-dragons root -> sky-dragons scheduled launch/live-ID update -> moving sky-dragon entities; `sky-dragons:launch` ears requests additional launches",
-    "farm windmill state.sails/degPerSec -> farm-windmill.js rotates sail child; alchemy/fishing/garden/boat handlers keep their separate activity state"
+    "places/main/config.yaml marks/seed -> forest-terrain heightAt/materialAt -> terrain, water and material bands; site marks coordinate terrain clearing/grading with structures",
+    "folk/town/garden/village crowd roots -> managers read roster YAML and npc-models.yml -> spawned model/rig or procedural actor, movement and pose",
+    "x0z0.scene sky-dragons root -> scheduled launch/live-ID updates -> moving dragon entities; sky-dragons:launch ears requests launches",
+    "generator geometry(ctx) -> softened wrapper captures authored faces and returns rebuilt normals (unless custom normals/UVs); forest-plant/valley-tree use tree-kit mesher for explicit canopy/trunk normals"
   ],
   "behaviorFamilies": [
-    "places/main/config.yaml + scripts/gen/forest-plant.js / valley-mesh.js - seeded forest flora varies by layer, kind and terrain; main terrain now uses painted low-poly texture bands and height fog",
+    "scripts/gen/tree-kit.js + forest-plant.js + valley-tree.js - seeded forest broadleaf, sapling, shrub and valley trees vary by kind, leaf palette, dimensions and LOD; bent trunks, root flares and puff canopies use gradient lighting",
+    "scripts/gen/soften.js - reused by dozens of scripts/gen builders; foliage-color faces get rounded mass normals while authored smooth/flat faces and broad flat surfaces retain their lighting",
     "scripts/gen/cob-house.js + cob-furnish.js - multilevel tree-centered home/furnishing varies by item, dimensions, palette and seed",
     "scripts/gen/road-bridge.js + scripts/lib/road-solid.js; town-lane.js + town-rampart.js - bridge and town-road/boundary geometry vary by dimensions, route, gaps and seed",
     "scripts/gen/town-square.js + town-kit/town-link.js - civic pieces, lamps, directional posts and named links vary by kind, layout and placed text",
     "scripts/gen/farm-crops.js, farm-fence.js, farm-props.js - crop rows, orchard props, pens, barns/mill and scarecrows vary by crop, points, style, item and seed",
-    "scripts/folk-crowd.js, garden-crowd.js, town-crowd.js, village-crowd.js + npc-models.yml - rosters share model-backed player-style NPC bodies and poses with procedural fallback and per-district routes/wardrobe",
-    "scripts/gen/dire-wolf.js + wolf-den.js + wolf-pack.js + anim/wildwolf.yml - den-based animated combat wolves vary by coat, level, elite/boss state and den rules",
-    "scripts/gryphon-mount.js + scripts/wynx.js + scripts/gen/gryphon.js + anim/gryphon.yml - Wynx is summoned/ridden, then follows on foot or in flight; movement and animation modes vary by rider state, distance and speed"
+    "folk-crowd.js, garden-crowd.js, town-crowd.js, village-crowd.js + npc-models.yml - model-backed NPC bodies/poses with procedural fallback and per-district routes/wardrobe",
+    "scripts/gryphon-mount.js + wynx.js + gen/gryphon.js + anim/gryphon.yml; fox-companion.js + gen/animal-fox.js + anim/fox.yml - companion locomotion varies by rider/travel state; fox has idle, walk, trot, gallop and leap clips"
   ],
   "probableOrphans": [
     "scripts/flat-terrain.js - no current place config selects it; main uses forest-terrain",
@@ -497,11 +499,11 @@
     "scripts/gen/royal-cathedral.js and scripts/gen/royal-statue.js - earlier map found no current scene attachments"
   ],
   "migrationNotes": [
-    "forest-terrain heightAt/materialAt take a context object; main river is at sea level y=0, ground around y=0.5, and Spawn clearing near (0,-3); keep material IDs, terrain marks and decoration bindings coordinated.",
-    "Gryphon origin is the rider's feet; GRY.paws sets saddle/ground clearance. player.js raycast + terrain height, GRY.paws, mount geometry and unmounted Wynx ground-follow behavior are coupled.",
-    "Wynx's mount lifecycle is keyed by player.state.riding='gryphon' and tagged `wynx` entity ownership; keep mount state, companion owner/ridden flags, camera detection and locomotion ride pose aligned.",
-    "npc-models.yml supplies model heights for roster NPCs, with procedural folk/villager fallback; model-backed poses use humanoid-locomotion, so retain the height/layout and animation-channel assumptions across crowd managers.",
-    "Sky dragons are tracked by manager state.live IDs rather than a world-wide query; flight posing samples terrain once per pose into GROUND, not once per sampled point.",
-    "Mirror Tarn is centered (82,78), water level 0.3 with depth 2.6; shore and Three Squares links in main config, town-links.json and scene signs describe the same routes."
+    "forest-terrain heightAt/materialAt take a context object; main river is at sea level y=0, ground around y=0.5, and Spawn clearing near (0,-3); coordinate material IDs, terrain marks and decoration bindings.",
+    "Gryphon origin is rider feet; GRY.paws sets saddle/ground clearance. player.js terrain raycast/height, GRY.paws, mount geometry and unmounted Wynx ground-follow behavior are coupled.",
+    "Wynx lifecycle is keyed by player.state.riding='gryphon' and tagged wynx entity ownership; keep mount state, companion owner/ridden flags, camera detection and locomotion ride pose aligned.",
+    "npc-models.yml supplies model heights for roster NPCs, with procedural fallback; model-backed poses use humanoid-locomotion, so keep height/layout and animation-channel assumptions aligned across crowd managers.",
+    "softened(geometry) returns explicit normals after intercepting tri/quad/color/smooth/flat; preserve builder-authored UV/custom-normal results and note that broad flat foliage-color faces are intentionally not puffed. tree-kit mesher returns normals alongside ctx-emitted geometry.",
+    "Sky dragons track manager state.live IDs rather than world-wide queries; Mirror Tarn is centered (82,78), water level 0.3/depth 2.6, with shore and Three Squares routes described in main config, town-links.json and scene signs."
   ]
 }
