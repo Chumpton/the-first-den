@@ -1,0 +1,9 @@
+{"contentHash":"824:a5b08d32","duration":1,"fps":30,"identity":"anim/fox.yml#leap","tracks":[
+{"bone":"legFL","prop":"rotation","times":[0,1],"values":[-0.46175,0,0,0.88701,-0.46175,0,0,0.88701]},
+{"bone":"legFR","prop":"rotation","times":[0,1],"values":[-0.42262,0,0,0.90631,-0.42262,0,0,0.90631]},
+{"bone":"legBL","prop":"rotation","times":[0,1],"values":[0.46175,0,0,0.88701,0.46175,0,0,0.88701]},
+{"bone":"legBR","prop":"rotation","times":[0,1],"values":[0.42262,0,0,0.90631,0.42262,0,0,0.90631]},
+{"bone":"root","prop":"rotation","times":[0,0.5,1],"values":[-0.06976,0,0,0.99756,-0.01745,0,0,0.99985,-0.06976,0,0,0.99756]},
+{"bone":"neck","prop":"rotation","times":[0,1],"values":[0.10453,0,0,0.99452,0.10453,0,0,0.99452]},
+{"bone":"tail","prop":"rotation","times":[0,0.5,1],"values":[0.30029,-0.04991,-0.01574,0.95241,0.34155,0.04918,0.0179,0.9384,0.30029,-0.04991,-0.01574,0.95241]}
+]}
