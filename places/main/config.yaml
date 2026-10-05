@@ -34,6 +34,8 @@ gravity:
   y: -24
   z: 0
 mode: 3d
+arrivalBudget:
+  bytes: 5000000
 terrain:
   kind: heightmap
   generator: scripts/forest-terrain.js
