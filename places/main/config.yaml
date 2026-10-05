@@ -38,15 +38,15 @@ terrain:
   generator: scripts/forest-terrain.js
   seed: 2207
   materials:
-    - {albedo: cdn/texture-terrain-forest-floor-leaf-litter-realistic.png, antiTiling: stochastic, id: litter, macro: {hue: 0.015, scale: 40, value: 0.08}, normalStrength: 0.4, pbr: true, roughnessIntensity: 0.9, textureScale: 3, tint: oklch(0.95 0.02 80)}
-    - {albedo: cdn/texture-terrain-forest-moss-and-grass-realistic.png, antiTiling: stochastic, id: moss, macro: {hue: 0.012, scale: 50, value: 0.07}, normalStrength: 0.35, pbr: true, roughnessIntensity: 0.9, textureScale: 3.5, tint: oklch(0.95 0.03 135)}
-    - {albedo: cdn/texture-terrain-wet-riverbank-mud-realistic.png, antiTiling: stochastic, id: mud, normalStrength: 0.4, pbr: true, roughnessIntensity: 0.6, textureScale: 2.5, tint: oklch(0.95 0.02 70)}
+    - {albedo: cdn/texture-terrain-stylized-painted-forest-floor-big-soft-leaf-clumps-lowpoly.png, antiTiling: stochastic, id: litter, macro: {hue: 0.015, scale: 40, value: 0.08}, normalStrength: 0.4, pbr: true, roughnessIntensity: 0.9, textureScale: 3, tint: oklch(0.95 0.02 80)}
+    - {albedo: cdn/texture-terrain-stylized-painted-moss-grass-broad-brush-clumps-lowpoly.png, antiTiling: stochastic, id: moss, macro: {hue: 0.012, scale: 50, value: 0.07}, normalStrength: 0.35, pbr: true, roughnessIntensity: 0.9, textureScale: 3.5, tint: oklch(0.95 0.03 135)}
+    - {albedo: cdn/texture-terrain-stylized-painted-riverbank-mud-soft-brush-lowpoly.png, antiTiling: stochastic, id: mud, normalStrength: 0.4, pbr: true, roughnessIntensity: 0.6, textureScale: 2.5, tint: oklch(0.95 0.02 70)}
     - {albedo: cdn/texture-terrain-river-pebbles-realistic.png, antiTiling: stochastic, id: pebbles, normalStrength: 0.6, pbr: true, roughnessIntensity: 0.55, textureScale: 2, tint: oklch(0.97 0.01 80)}
     - {albedo: cdn/texture-terrain-mossy-cobblestone-road-realistic.png, antiTiling: stochastic, id: cobble, normalStrength: 0.6, pbr: true, roughnessIntensity: 0.8, textureScale: 2.5, tint: oklch(0.95 0.01 80)}
     - {albedo: cdn/texture-terrain-garden-gravel-path-realistic.png, antiTiling: stochastic, id: gravel, normalStrength: 0.5, pbr: true, roughnessIntensity: 0.85, textureScale: 2, tint: oklch(0.96 0.02 80)}
-    - {albedo: cdn/texture-terrain-forest-moss-and-grass-realistic.png, antiTiling: stochastic, id: yard, macro: {hue: 0.012, scale: 50, value: 0.07}, normalStrength: 0.35, pbr: true, roughnessIntensity: 0.9, textureScale: 3.5, tint: oklch(0.95 0.03 135)}
-    - {albedo: cdn/texture-terrain-shredded-bark-garden-mulch-realistic.png, antiTiling: stochastic, id: mulch, macro: {hue: 0.012, scale: 50, value: 0.07}, normalStrength: 0.35, pbr: true, roughnessIntensity: 0.9, textureScale: 2.2, tint: oklch(0.92 0.03 60)}
-    - {albedo: cdn/texture-terrain-short-fine-mown-lawn-grass-realistic.png, antiTiling: stochastic, id: lawn, macro: {hue: 0.012, scale: 50, value: 0.07}, normalStrength: 0.35, pbr: true, roughnessIntensity: 0.9, textureScale: 2.2, tint: oklch(0.96 0.02 130)}
+    - {albedo: cdn/texture-terrain-stylized-painted-moss-grass-broad-brush-clumps-lowpoly.png, antiTiling: stochastic, id: yard, macro: {hue: 0.012, scale: 50, value: 0.07}, normalStrength: 0.35, pbr: true, roughnessIntensity: 0.9, textureScale: 3.5, tint: oklch(0.95 0.03 135)}
+    - {albedo: cdn/texture-terrain-stylized-painted-garden-mulch-large-brush-chunks-lowpoly.png, antiTiling: stochastic, id: mulch, macro: {hue: 0.012, scale: 50, value: 0.07}, normalStrength: 0.35, pbr: true, roughnessIntensity: 0.9, textureScale: 2.2, tint: oklch(0.92 0.03 60)}
+    - {albedo: cdn/texture-terrain-stylized-painted-mown-lawn-soft-gradient-strokes-lowpoly.png, antiTiling: stochastic, id: lawn, macro: {hue: 0.012, scale: 50, value: 0.07}, normalStrength: 0.35, pbr: true, roughnessIntensity: 0.9, textureScale: 2.2, tint: oklch(0.96 0.02 130)}
     - {albedo: cdn/texture-terrain-pale-limestone-cobblestone-road.png, antiTiling: stochastic, id: cobblepale, normalStrength: 0.6, pbr: true, roughnessIntensity: 0.8, textureScale: 2.5, tint: oklch(0.97 0.01 85)}
   marks:
     # the sea stands everywhere but a dry 20x20 m square round the cob house, so the sunk studio under it stays dry

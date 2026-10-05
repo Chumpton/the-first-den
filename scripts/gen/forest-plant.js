@@ -37,7 +37,7 @@ const kinds = {
     const base = ring(0, 0, 0, tr * 1.9, tr * 1.9, n), a = ring(0, 0.8, 0, tr * 1.15, tr * 1.15, n), b = ring(0, bole, 0, tr * 0.8, tr * 0.8, n), c = ring(0, h * 0.8, 0, tr * 0.35, tr * 0.35, n);
     cap(ctx, base, false); loft(ctx, base, a); loft(ctx, a, b); loft(ctx, b, c);
     if (lod < 3) for (let i = 0; i < 4; i++) { const th = i / 4 * TAU + ctx.random(), y0 = bole * (0.95 + i * 0.08), L = r * 0.75; limb(ctx, [0, y0, 0], [Math.cos(th) * L, y0 + L * 0.7, Math.sin(th) * L], tr * 0.45, tr * 0.12, 5); }
-    ctx.albedo("scripts/tex-valley-canopy.js"); ctx.flat(); ctx.roughness(0.9);
+    ctx.albedo("scripts/tex-valley-canopy.js"); ctx.smooth(); ctx.roughness(0.9);
     const clumps = lod >= 4 ? 3 : lod >= 3 ? 6 : 10;
     blob(ctx, 0, h - r * 0.55, 0, r * 0.7, r * 0.55, r * 0.7, seg, [L4[1], L4[2], L4[3], SUN]);
     for (let i = 0; i < clumps; i++) {
@@ -50,14 +50,14 @@ const kinds = {
     const h = Number(ctx.params.height ?? 6), seg = lod >= 3 ? 5 : 7;
     bark(ctx); ctx.color("#9a8a74");
     const a = ring(0, 0, 0, 0.07, 0.07, 5), b = ring(0.1, h * 0.7, 0, 0.03, 0.03, 5); cap(ctx, a, false); loft(ctx, a, b);
-    ctx.albedo("scripts/tex-valley-canopy.js"); ctx.flat();
+    ctx.albedo("scripts/tex-valley-canopy.js"); ctx.smooth();
     const c = lod >= 4 ? 1 : 4;
     for (let i = 0; i < c; i++) { const th = i / c * TAU + ctx.random(), d = i ? h * 0.12 : 0, y = h * (0.6 + (i ? ctx.random() * 0.25 : 0.2)), s = h * (0.16 + ctx.random() * 0.06);
       blob(ctx, 0.1 + Math.cos(th) * d, y, Math.sin(th) * d, s, s * 0.8, s, seg, [LEAF[1], LEAF[2], LEAF[3], SUNLIT]); }
   },
   shrub(ctx, lod) {
     const h = Number(ctx.params.height ?? 1.3), seg = lod >= 3 ? 5 : 6, c = lod >= 3 ? 2 : 6;
-    ctx.albedo("scripts/tex-valley-canopy.js"); ctx.flat(); ctx.roughness(0.95);
+    ctx.albedo("scripts/tex-valley-canopy.js"); ctx.smooth(); ctx.roughness(0.95);
     const pal = ctx.params.berry ? ["#2d5230", "#3b6936", "#4e7f3e", "#5e8d44"] : [LEAF[0], LEAF[1], LEAF[2], LEAF[3]];
     for (let i = 0; i < c; i++) { const th = i / c * TAU + ctx.random(), d = i ? h * 0.35 : 0, s = h * (0.38 + ctx.random() * 0.15);
       blob(ctx, Math.cos(th) * d, s * 0.7, Math.sin(th) * d, s, s * 0.8, s, seg, pal); }
