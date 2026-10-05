@@ -4,7 +4,7 @@ import { box, lathe, flat, stone, gold, glow, L, RC } from '../lib/royal-kit.js'
 export function geometry(ctx) {
   const { len = 16, w = 9 } = ctx.params || {};
   const lod = L(ctx);
-  const P = [0, 0, 0];
+  const P = ctx;
   const hw = w / 2;
   const hl = len / 2;
 

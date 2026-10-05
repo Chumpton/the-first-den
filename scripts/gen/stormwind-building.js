@@ -14,7 +14,7 @@ export function geometry(ctx) {
   } = ctx.params || {};
 
   const lod = L(ctx);
-  const P = [0, 0, 0];
+  const P = ctx;
   const hw = w / 2;
   const hd = d / 2;
 

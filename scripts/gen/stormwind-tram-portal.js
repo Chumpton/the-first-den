@@ -3,7 +3,7 @@ import { box, lathe, flat, stone, gold, glow, L, RC } from '../lib/royal-kit.js'
 
 export function geometry(ctx) {
   const lod = L(ctx);
-  const P = [0, 0, 0];
+  const P = ctx;
 
   // Heavy Granite Portal Facade
   stone(ctx, 'oklch(0.55 0.02 60)'); // Dark granite

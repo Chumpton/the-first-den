@@ -3,7 +3,7 @@ import { TAU, lathe, box, beam, stone, flat, gold, slate, glow, L, RC } from '..
 
 export function geometry(ctx) {
   const lod = L(ctx);
-  const P = [0, 0, 0];
+  const P = ctx;
 
   // Base circular citadel
   stone(ctx);

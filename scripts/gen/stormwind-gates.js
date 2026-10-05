@@ -3,7 +3,7 @@ import { TAU, XF, box, lathe, obox, beam, stone, flat, gold, slate, crenels, L, 
 
 export function geometry(ctx) {
   const lod = L(ctx);
-  const P = [0, 0, 0];
+  const P = ctx;
 
   // Materials
   stone(ctx);

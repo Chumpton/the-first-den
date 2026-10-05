@@ -4,7 +4,7 @@ import { TAU, box, lathe, beam, stone, flat, gold, L, RC } from '../lib/royal-ki
 export function geometry(ctx) {
   const { hero = 'turalyon' } = ctx.params || {};
   const lod = L(ctx);
-  const P = [0, 0, 0];
+  const P = ctx;
 
   // Stepped Plinth
   flat(ctx, RC.stone2);
