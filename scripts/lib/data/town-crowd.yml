@@ -93,7 +93,7 @@ roster:
   # kids
   - {id: crowd-tobi, model: pool-h, name: Tobi, kid: true, role: tag, angle: 0, scale: 0.62}
   - {id: crowd-k2, model: vl-pip, kid: true, role: tag, angle: 120, scale: 0.6}
-  - {id: crowd-k3, model: pool-d, kid: true, role: tag, angle: 240, scale: 0.64}
-  - {id: crowd-k4, model: pool-f, kid: true, role: walk, at: [-6, 82], scale: 0.62}
-  - {id: crowd-k5, model: pool-g, kid: true, role: walk, at: [10, 92], scale: 0.6}
-  - {id: crowd-k6, model: wd-warden, kid: true, role: sit, angle: -40, scale: 0.63}
+  - {id: crowd-k3, model: np-kid, kid: true, role: tag, angle: 240, scale: 0.64}
+  - {id: crowd-k4, model: np-flowergirl, kid: true, role: walk, at: [-6, 82], scale: 0.62}
+  - {id: crowd-k5, model: np-apprentice, kid: true, role: walk, at: [10, 92], scale: 0.6}
+  - {id: crowd-k6, model: pool-h, kid: true, role: sit, angle: -40, scale: 0.63}
