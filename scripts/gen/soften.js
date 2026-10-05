@@ -9,10 +9,11 @@ export function softened(geometry) {
   return function (ctx) {
     const faces = []; let mode = "flat", col = null, run = null;
     const real = { tri: ctx.tri.bind(ctx), smooth: ctx.smooth.bind(ctx), flat: ctx.flat.bind(ctx), color: ctx.color.bind(ctx) };
-    const proxy = Object.create(ctx);
-    proxy.color = (...a) => { col = a.length >= 3 && typeof a[0] === "number" ? [a[0], a[1], a[2]] : parseHex(a[0]); return real.color(...a); };
-    proxy.smooth = () => { mode = "smooth"; return real.smooth(); };
-    proxy.flat = () => { mode = "flat"; return real.flat(); };
+    const over = {};
+    const proxy = new Proxy(ctx, { get(t, k) { if (k in over) return over[k]; const v = t[k]; return typeof v === "function" ? v.bind(t) : v; } });
+    over.color = (...a) => { col = a.length >= 3 && typeof a[0] === "number" ? [a[0], a[1], a[2]] : parseHex(a[0]); return real.color(...a); };
+    over.smooth = () => { mode = "smooth"; return real.smooth(); };
+    over.flat = () => { mode = "flat"; return real.flat(); };
     const emit = (a, b, c) => {
       real.tri(...a, ...b, ...c);
       let kind = mode, mass = null;
@@ -23,8 +24,8 @@ export function softened(geometry) {
       } else run = null;
       faces.push({ v: [a, b, c], kind, mass });
     };
-    proxy.tri = (ax, ay, az, bx, by, bz, cx, cy, cz) => emit([ax, ay, az], [bx, by, bz], [cx, cy, cz]);
-    proxy.quad = (ax, ay, az, bx, by, bz, cx, cy, cz, dx, dy, dz) => { emit([ax, ay, az], [bx, by, bz], [cx, cy, cz]); emit([ax, ay, az], [cx, cy, cz], [dx, dy, dz]); };
+    over.tri = (ax, ay, az, bx, by, bz, cx, cy, cz) => emit([ax, ay, az], [bx, by, bz], [cx, cy, cz]);
+    over.quad = (ax, ay, az, bx, by, bz, cx, cy, cz, dx, dy, dz) => { emit([ax, ay, az], [bx, by, bz], [cx, cy, cz]); emit([ax, ay, az], [cx, cy, cz], [dx, dy, dz]); };
     const out = geometry(proxy) || {};
     if (out.normals || out.uvs) return out; // the script speaks its own normals / per-vertex rows: leave it whole
     const fn = (f) => { const [a, b, c] = f.v, u = [b[0] - a[0], b[1] - a[1], b[2] - a[2]], w = [c[0] - a[0], c[1] - a[1], c[2] - a[2]];
