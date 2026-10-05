@@ -1,8 +1,8 @@
 {
   "schemaVersion": 1,
-  "basedOnSpecVersion": 1154,
-  "updatedAt": "2026-10-05T01:55:04.669Z",
-  "summary": "The First Den is a seeded forest world around Spawn, with farms, Mirror Tarn, Garden and Market districts, a hilltop village, and now an expanding Stormwind capital along the King's Road. Authored cell scenes combine terrain-marked sites, reusable procedural architecture, activities, crowds and wildlife; the player uses WoW-style movement, bending combat and Wynx the rideable/following gryphon, while Wunix switches between fox and owl forms.",
+  "basedOnSpecVersion": 1167,
+  "updatedAt": "2026-10-05T02:00:24.038Z",
+  "summary": "The First Den is a seeded forest world around Spawn, with farms, Garden Market, hilltop village and an expanding Stormwind capital north along the King's Road. Authored scenes sit on terrain-marked sites and combine reusable procedural architecture, activities, crowds and wildlife; the player uses WoW-style movement, bending combat and Wynx the rideable/following gryphon, while Wunix shifts between fox and owl forms.",
   "scriptPaths": [
     "scripts/alchemy-bench.js",
     "scripts/alchemy-player.js",
@@ -429,74 +429,74 @@
     "scripts/zipline.js"
   ],
   "places": [
-    "places/main/config.yaml - single seeded forest place; terrain, site clearings/grades, paths, water and material/environment bands; Stormwind city flat, raised keep plateau, causeway, canals and moat marks are centered north of Spawn.",
-    "places/main/cells/x0z0.scene - Spawn, The First Den/home, farms and many authored landmarks, activities and manager roots; King's Road signs point north toward Stormwind.",
-    "places/main/cells/x0z1.scene - Ember Roost and square crowds, plus Stormwind's southern approach, monumental gate, Alliance-hero statues, bridges, mage tower and first commercial/residential blocks.",
-    "places/main/cells/x0z2.scene - Stormwind's northern districts: cathedral square/civic and residential buildings, tram portal, Dwarven forge/anvil and canal bridges, with Stormwind tags on district pieces.",
-    "places/main/cells/x0z-1.scene - lake/creek approaches, road/farm dressing and the wolf-pack encounter manager.",
-    "places/main/cells/x-1z1.scene - western Garden Market region and garden-crowd population root, with authored wild mushrooms.",
-    "places/main/cells/x1z1.scene - hilltop village and village-crowd population root.",
-    "places/main/cells/objects.scene - separately authored/shared placed objects within the main place."
+    "places/main/config.yaml - sole seeded forest place; owns terrain/site marks, paths, water, materials and environment, including Stormwind's graded city, canals and moat north of Spawn.",
+    "places/main/cells/x0z0.scene - Spawn and The First Den, farms, home/portal, activities and landmark roots; King's Road signs direct north to Stormwind.",
+    "places/main/cells/x0z1.scene - Ember Roost and square crowds, plus Stormwind's southern approach, gate, bridges, mage tower and first commercial/residential blocks.",
+    "places/main/cells/x0z2.scene - Stormwind's northern districts: cathedral/civic and residential buildings, tram portal, Dwarven forge and canal bridges.",
+    "places/main/cells/x0z-1.scene - lake and creek approaches, road/farm dressing and wolf-pack encounter.",
+    "places/main/cells/x-1z1.scene - western Garden Market and its garden-crowd root; authored wild mushrooms.",
+    "places/main/cells/x1z1.scene - hilltop village and village-crowd root.",
+    "places/main/cells/objects.scene - separately authored shared placed objects in the main place."
   ],
   "roots": [
     "templates/player.js#player - composed player behavior stack for movement, locomotion, home/travel/activity, gryphon mount, bending and fox/owl presentation.",
     "templates/camera.js#camera - WoW-style camera root; body heading and look orbit with riding-aware third-person presentation.",
-    "places/main/config.yaml - main place terrain, site marks, water, materials and environment root.",
-    "places/main/cells/x0z0.scene#sky-dragons - scheduled sky-dragon launch/live-entity manager.",
+    "places/main/config.yaml - main terrain, site marks, water, materials and environment root.",
+    "places/main/cells/x0z0.scene#sky-dragons - scheduled sky-dragon launch and live-entity manager.",
     "places/main/cells/x0z-1.scene#wolf-pack - local wolf encounter manager and den population.",
-    "places/main/cells/x0z1.scene#folk-crowd / #town-crowd - district and square population managers; Stormwind scenery itself is static placed geometry, not a manager.",
+    "places/main/cells/x0z1.scene#folk-crowd / #town-crowd - district and square population managers; Stormwind scenery is static placed geometry.",
     "places/main/cells/x1z1.scene#village-crowd and places/main/cells/x-1z1.scene#garden-crowd - village and Garden Market population managers."
   ],
   "shared": [
     "scripts/forest-terrain.js - heightAt(ctx)/materialAt(ctx) contract used by terrain and terrain-relative placements.",
-    "scripts/lib/wow-steer.js - camera-relative WoW steering shared by player and camera/locomotion behavior.",
-    "scripts/lib/data/gryphon.js + scripts/lib/wynx-kit.js - Wynx tuning, modes, animation/audio and FX shared by mount and follower; FEATHERS also drives Wunix's fox/owl transformations.",
-    "scripts/lib/data/npc-models.yml - model/rig-height registry reused by folk, town, garden and village crowd managers.",
-    "scripts/lib/road-solid.js + scripts/lib/solid-kit.js - solid/collider mesh construction shared by road and site builders; road-solid exports winding-safe polygon/prism helpers.",
+    "scripts/lib/wow-steer.js - camera-relative WoW steering shared by player and camera/locomotion behaviors.",
+    "scripts/lib/data/gryphon.js + scripts/lib/wynx-kit.js - Wynx movement/follow tuning, modes, animation/audio and FX shared by mount and follower; FEATHERS also drives Wunix transformations.",
+    "scripts/lib/data/npc-models.yml - model and rig-height registry reused by folk, town, garden and village crowd managers.",
+    "scripts/lib/road-solid.js + scripts/lib/solid-kit.js - solid/collider mesh construction shared by road and site builders; road-solid provides winding-safe polygon/prism helpers.",
     "scripts/lib/royal-kit.js - geometry/material helpers reused by royal and Stormwind procedural architecture builders.",
     "scripts/lib/home-interaction.js + scripts/lib/data/home-feel.js - player press targeting and home-interaction tuning.",
     "scripts/lib/data/bending.js + scripts/lib/fct.js - bending/combat rules and combat-text event helper used by bender, wolf-pack and HUD."
   ],
   "notableExports": [
-    "scripts/player.js - onSpawn(ctx), onInput(ctx,input), update(ctx,dt); movement, identity presentation and gryphon ground-riding clearance.",
+    "scripts/player.js - onSpawn(ctx), onInput(ctx,input), update(ctx,dt); movement, presentation and gryphon ground-riding clearance.",
     "scripts/camera.js - finiteNumber, onInput(ctx,input), update(ctx,dt); scripts/humanoid-locomotion.js - ride(), onInput(ctx,input), update(ctx,dt).",
     "scripts/gryphon-mount.js - onInput(ctx,input), update(ctx,dt); scripts/wynx.js - updateSchedule, update(ctx,dt); scripts/lib/wynx-kit.js - FEATHERS, DUST, setMode, yawOf.",
-    "scripts/fox-companion.js - onSpawn(ctx), update(ctx,dt); changes Wunix's fox/owl form and selects travel/flying animation clips.",
+    "scripts/fox-companion.js - onSpawn(ctx), update(ctx,dt); changes Wunix's fox/owl form and selects travel/flying clips.",
     "scripts/forest-terrain.js - GROUND, SITES, LAKE, heightAt(ctx), materialAt(ctx); scripts/gen/soften.js - softened(geometry).",
-    "scripts/gen/stormwind-building.js - geometry(ctx); parameterized city block/building geometry; scripts/gen/stormwind-gates.js, stormwind-bridge.js, stormwind-monument.js, stormwind-mage-tower.js, stormwind-tram-portal.js and stormwind-anvil.js provide distinct city landmarks.",
+    "scripts/gen/stormwind-building.js - geometry(ctx); parameterized city building geometry; gate, bridge, monument, mage-tower, tram-portal and anvil generators provide landmarks.",
     "scripts/lib/road-solid.js - Q, T, solid, prism, box, ngon, gem; winding-aware solid geometry helpers.",
     "scripts/folk-crowd.js, garden-crowd.js, town-crowd.js, village-crowd.js - crowd managers; scripts/sky-dragons.js - onSpawn, launch, roar, ears, update."
   ],
   "ownership": [
-    "scripts/player.js + scripts/lib/data/player.yml - movement intent, velocity, jump, flight, rope and camera mode; flyBoost scales flight speed; movement scratch/cached intent in ctx.session.",
+    "scripts/player.js + scripts/lib/data/player.yml - movement intent, velocity, jump, flight, rope and camera mode; flyBoost scales flight speed; movement scratch/cached intent is in ctx.session.",
     "scripts/camera.js - camera.state.heading is body WoW heading; camera.state.off is separate orbit/look offset; publishes native orbit and collision distances.",
-    "scripts/gryphon-mount.js + scripts/wynx.js - mount behavior owns player riding/flyBoost transitions; Wynx owns unmounted follow position, yaw and animation mode; per-player mount scratch in ctx.session.gry.",
-    "scripts/fox-companion.js - Wunix-only form, animation and facing; fox/owl clip selection and travel samples in ctx.session.foxState.",
-    "scripts/bender.js + scripts/lib/data/bending.js - bending level/XP, HP/chi, stance/spells, cooldowns, target, combat and cast/channel state; tick scratch in ctx.session.",
+    "scripts/gryphon-mount.js + scripts/wynx.js - mount transitions own player riding/flyBoost; Wynx owns unmounted follow position, yaw and mode; per-player mount scratch is in ctx.session.gry.",
+    "scripts/fox-companion.js - Wunix-only form, animation and facing; fox/owl clip selection and travel samples are in ctx.session.foxState.",
+    "scripts/bender.js + scripts/lib/data/bending.js - bending level/XP, HP/chi, stance/spells, cooldowns, target, combat and cast/channel state; tick scratch is in ctx.session.",
     "scripts/wolf-pack.js - wild-wolf HP, level, threat, target, status, death/respawn and combat; publishes summaries to place.state.wolves.",
-    "scripts/folk-crowd.js, garden-crowd.js, town-crowd.js, village-crowd.js - each manager owns its roster NPC spawn/route/pose and scheduling; scripts/lib/data/folk.yml owns shared district tuning, roster entries and dialogue.",
+    "scripts/folk-crowd.js, garden-crowd.js, town-crowd.js, village-crowd.js - each manager owns its roster NPC spawn/route/pose and scheduling; scripts/lib/data/folk.yml owns shared district tuning, rosters and dialogue.",
     "scripts/sky-dragons.js - manager owns scheduled flight requests/live dragon IDs and flight poses; dragon entities carry path/time state."
   ],
   "flows": [
     "templates/player.js behavior stack -> player.js input/update -> player movement/flying state; humanoid-locomotion reads casting/riding and supplies the corresponding pose.",
-    "player Z/mount action -> gryphon-mount.js finds or spawns tagged Wynx, seats/dismounts rider and updates riding/flyBoost; wynx.js follows owner when unmounted.",
-    "player movement/flying + player.state.riding='gryphon' -> player.js ground saddle-height raycast/terrain clearance and hop; camera.js detects riding for third-person orbit.",
+    "player Z/mount action -> gryphon-mount.js finds or spawns tagged Wynx, seats/dismounts rider and updates riding/flyBoost; wynx.js follows its owner when unmounted.",
+    "player movement/flying + player.state.riding='gryphon' -> player.js saddle-height terrain clearance and hop; camera.js detects riding for third-person orbit.",
     "gryphon-mount.js / wynx.js mode changes -> lib/wynx-kit.js setMode -> anim/gryphon.yml clips, spatial audio and speed FX; lib/data/gryphon.js supplies movement/follow tuning.",
     "templates/player.js -> fox-companion.js; Wunix detection selects scripts/gen/animal-fox.js on ground or scripts/gen/owl.js while flying, with anim/fox.yml or anim/owl.yml clips.",
-    "fox-companion form transition -> lib/wynx-kit.js FEATHERS FX and transform sound; flying selects owl fly/glide/hover clips, landing returns to fox clips.",
-    "player movement/update -> fox/owl primitive-aware gentle flight bob; fox-companion reads player flying/velocity and travel speed to choose the current form and clip.",
+    "fox-companion form transition -> lib/wynx-kit.js FEATHERS FX and transform sound; flying selects owl clips, landing restores fox clips.",
+    "player movement/update -> fox/owl primitive-aware flight bob; fox-companion reads player flying/velocity and travel speed to choose form and clip.",
     "player inputs -> scripts/bender.js -> player bending/cast state and scheduled release/land/aoe handlers -> wild-wolf effects and damage.",
-    "bender damage/status/threat writes -> scripts/wolf-pack.js scheduled update -> combat, death/respawn and player rewards; summaries flow through place.state.wolves to bend-hud via ui.js.",
+    "bender damage/status/threat writes -> scripts/wolf-pack.js scheduled update -> combat, death/respawn and rewards; place.state.wolves -> bend-hud via ui.js.",
     "scripts/lib/fct.js fct() -> uiEvent named fct -> scripts/ui.js onMount -> bend-hud text pool renders hit/heal/XP feedback.",
-    "places/main/config.yaml marks/seed -> forest-terrain heightAt/materialAt -> terrain, water and material bands; city grading/moat/canal/causeway marks coordinate Stormwind's placed scenes with the ground.",
-    "crowd roots -> district managers read roster YAML and npc-models.yml -> spawned model/rig or procedural actor, movement and pose; scripts/lib/data/folk.yml now includes royal-district roster and dialogue."
+    "places/main/config.yaml marks/seed -> forest-terrain heightAt/materialAt -> terrain, water and material bands; city grading/moat/canal/causeway marks align the placed city scenes.",
+    "crowd roots -> district managers read roster YAML and npc-models.yml -> model/rig or procedural actor, movement and pose."
   ],
   "behaviorFamilies": [
-    "scripts/gen/tree-kit.js + forest-plant.js + valley-tree.js - seeded forest broadleaf, sapling, shrub and valley trees vary by kind, leaf palette, dimensions and LOD; bent trunks, root flares and puff canopies use gradient lighting.",
-    "scripts/gen/soften.js - reused by many scripts/gen builders; foliage-color faces get rounded mass normals while authored smooth/flat faces and broad flat surfaces retain their lighting.",
+    "scripts/gen/tree-kit.js + forest-plant.js + valley-tree.js - seeded forest broadleaf, sapling, shrub and valley trees vary by kind, palette, dimensions and LOD; bent trunks, root flares and puff canopies use gradient lighting.",
+    "scripts/gen/soften.js - reused by scripts/gen builders; foliage-color faces get rounded mass normals while authored smooth/flat faces and broad surfaces retain their lighting.",
     "scripts/gen/cob-house.js + cob-furnish.js - multilevel tree-centered home/furnishing varies by item, dimensions, palette and seed.",
     "scripts/gen/road-bridge.js + scripts/lib/road-solid.js; town-lane.js + town-rampart.js - bridge and town-road/boundary geometry vary by dimensions, route, gaps and seed.",
-    "scripts/gen/stormwind-building.js + stormwind-gates.js / bridge.js / monument.js / mage-tower.js / tram-portal.js / anvil.js - Stormwind pale-stone/slate/timber city blocks and landmarks reuse royal-kit geometry; building shape, floors, dimensions, roof, color and detail vary by placed params/seed.",
+    "scripts/gen/stormwind-building.js + stormwind-gates.js / bridge.js / monument.js / mage-tower.js / tram-portal.js / anvil.js - pale-stone/slate/timber city blocks and landmarks reuse royal-kit geometry, varied by building form and parameters.",
     "scripts/gen/town-square.js + town-kit/town-link.js - civic pieces, lamps, directional posts and named links vary by kind, layout and placed text.",
     "scripts/gen/farm-crops.js, farm-fence.js, farm-props.js - crop rows, orchard props, pens, barns/mill and scarecrows vary by crop, points, style, item and seed.",
     "folk-crowd.js, garden-crowd.js, town-crowd.js, village-crowd.js + npc-models.yml - model-backed NPC bodies/poses with procedural fallback and per-district routes/wardrobe."
@@ -510,9 +510,9 @@
   "migrationNotes": [
     "forest-terrain heightAt/materialAt take a context object; main river is at sea level y=0, ground around y=0.5, and Spawn clearing near (0,-3); coordinate material IDs, terrain marks and decoration bindings.",
     "Stormwind terrain marks are coupled to the scene layout: city floor near (0,190) at y=0.55, keep plateau near (65,330) at y=13.5, moats/canal beds at level 0/-1.6, and the causeway runs north from Spawn.",
-    "scripts/lib/road-solid.js Q/T orient each face away from an interior point; solid builds between equal-count loops and prism scales its top xz loop. Preserve convex loops and consistent vertex counts when changing callers.",
+    "scripts/lib/road-solid.js Q/T orient each face away from an interior point; solid builds between equal-count loops and prism scales its top xz loop. Preserve convex loops and consistent vertex counts in callers.",
     "Gryphon origin is rider feet; GRY.paws sets saddle/ground clearance. player.js terrain raycast/height, GRY.paws, mount geometry and unmounted Wynx ground-follow behavior are coupled.",
     "Wynx lifecycle is keyed by player.state.riding='gryphon' and tagged wynx entity ownership; keep mount state, companion owner/ridden flags, camera detection and locomotion ride pose aligned.",
-    "Wunix flying swaps its primitive to scripts/gen/owl.js and anim/owl.yml; landing restores scripts/gen/animal-fox.js and anim/fox.yml. npc-models.yml supplies crowd actor heights, and model-backed poses use humanoid-locomotion."
+    "docs/forest-recipe.md is a from-scratch visual/build recipe, not the current implementation; keep actual terrain config, scripts and placed scenes authoritative."
   ]
 }
