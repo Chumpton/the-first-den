@@ -5,12 +5,20 @@
 import { play } from 'builtin/anim'
 import { clips } from 'builtin/anim'
 import F from './lib/data/folk.yml'
-import { heightOf } from './gen/folk.js'
+import { heightOf as rigHeight } from './gen/folk.js'
+import NPC from './lib/data/npc-models.yml'
+const POSE = { idle: null, walk: null, talk: 'cdn/clip-talk-loop.glb', wave: 'cdn/clip-waving-single-hand-loop.glb', sit: 'cdn/clip-sit-loop.glb', sitTalk: 'cdn/clip-sitting-talking-loop.glb', garden: 'cdn/clip-pick-fruit-loop.glb' }
+function modelPose(row, key) { // a model body: the gait is humanoid-locomotion's, read off velocity; a pose rides the "sit" channel over it
+  const c = POSE[key.replace(/Hold$/, '')] ?? null
+  row.anim.sit = c ? { clip: c, loop: /-loop\.glb$/.test(c) ? 'loop' : 'once', weight: 1, blendIn: 0.3 } : null
+}
 export const updateSchedule = { every: 3 }
 const wrap = (a) => ((((a + 180) % 360) + 360) % 360) - 180
 const yawOf = (dx, dz) => (Math.atan2(-dx, -dz) * 180) / Math.PI
 const rnd = (ctx, [a, b]) => a + ctx.random() * (b - a)
 const HOLD = new Set(F.hold)
+const byWho = Object.fromEntries(F.roster.map((e) => [e.who, e]))
+const heightOf = (who) => NPC[byWho[who]?.model]?.h ?? rigHeight(who)
 let CL = null
 
 function groundY(ctx, x, z) { return ctx.place.terrain.heightAt(x, z) ?? 0.5 }
@@ -38,8 +46,9 @@ function pickGoal(ctx, D, from) {
   return null
 }
 function clip(ctx, row, e, name) {
-  const key = name + (HOLD.has(e.who) ? 'Hold' : '')
+  const N = NPC[e.model], key = name + (!N && HOLD.has(e.who) ? 'Hold' : '')
   if (row.state.clip === key) return
+  if (N) { modelPose(row, key); row.state.clip = key; return }
   CL ??= clips(ctx, F.clips)
   if (!CL[key]) return
   play(ctx, row, CL[key], { loop: true, channel: 'body', blendIn: 0.25 })
@@ -67,7 +76,9 @@ function seed(ctx) {
     const [x, z] = e.at, y = e.district === 'dock' ? e.y : groundY(ctx, x, z) + (e.y ?? 0) + F.spawnLift
     ctx.spawn({
       id: e.id, tags: ['folk', 'npc', 'interactable'], feetPosition: { x, y, z }, rotation: { yaw: homeYaw(ctx, e) },
-      physics: 'character', primitive: { kind: 'scripted', script: 'scripts/gen/folk.js', params: { who: e.who } },
+      physics: 'character', ...(NPC[e.model]
+        ? { model: NPC[e.model].model, layout: { minExtents: { y: NPC[e.model].h }, maxExtents: { y: NPC[e.model].h } }, behavior: ['scripts/humanoid-locomotion.js'] }
+        : { primitive: { kind: 'scripted', script: 'scripts/gen/folk.js', params: { who: e.who } } }),
       visibleRange: { max: F.visibleRange },
       state: { name: e.name, who: e.who, district: e.district, pressTo: 'folk-crowd' },
       children: [{ id: 'tag', feetPosition: { x: 0, y: heightOf(e.who) + F.nameLift, z: 0 }, visibleRange: { max: F.visibleRange * 0.4 }, text: { content: e.name, color: '#fff1d6', size: F.nameSize } }],

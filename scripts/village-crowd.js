@@ -4,6 +4,12 @@
 // and says one of their own lines. Scratch lives in ctx.session (this machine's).
 import C from './lib/data/village-crowd.yml'
 import { play, clips } from 'builtin/anim'
+import NPC from './lib/data/npc-models.yml'
+const POSE = { idle: null, walk: null, talk: 'cdn/clip-talk-loop.glb', wave: 'cdn/clip-waving-single-hand-loop.glb', sit: 'cdn/clip-sit-loop.glb', sitTalk: 'cdn/clip-sitting-talking-loop.glb', garden: 'cdn/clip-pick-fruit-loop.glb' }
+function modelPose(row, key) { // a model body: the gait is humanoid-locomotion's, read off velocity; a pose rides the "sit" channel over it
+  const c = POSE[key.replace(/Hold$/, '')] ?? null
+  row.anim.sit = c ? { clip: c, loop: /-loop\.glb$/.test(c) ? 'loop' : 'once', weight: 1, blendIn: 0.3 } : null
+}
 export const updateSchedule = { every: 2 }
 const wrap = (a) => ((((a + 180) % 360) + 360) % 360) - 180
 const yawOf = (dx, dz) => (Math.atan2(-dx, -dz) * 180) / Math.PI
@@ -16,17 +22,20 @@ function seed(ctx, have) {
     const [x, z] = e.at, f = e.face ?? [172, 90]
     ctx.spawn({
       id: e.id, tags: ['village-crowd', 'npc', 'interactable'], physics: 'character',
-      primitive: { kind: 'scripted', script: 'scripts/gen/villager.js', params: e.params ?? {} },
-      feetPosition: { x, y: groundY(ctx, x, z) + 0.05, z }, rotation: { yaw: yawOf(f[0] - x, f[1] - z) }, scale: e.scale ?? 1,
+      ...(NPC[e.model]
+        ? { model: NPC[e.model].model, layout: { minExtents: { y: NPC[e.model].h }, maxExtents: { y: NPC[e.model].h } }, behavior: ['scripts/humanoid-locomotion.js'] }
+        : { primitive: { kind: 'scripted', script: 'scripts/gen/villager.js', params: e.params ?? {} } }),
+      feetPosition: { x, y: groundY(ctx, x, z) + 0.05, z }, rotation: { yaw: yawOf(f[0] - x, f[1] - z) }, scale: NPC[e.model] ? 1 : e.scale ?? 1,
       visibleRange: { max: C.visibleRange }, castShadow: true,
-      state: { name: e.name, role: e.role, pressTo: ctx.self.id, act: 'Talk' },
-      children: [{ id: 'tag', feetPosition: { x: 0, y: 2.1, z: 0 }, visibleRange: { max: 20 }, text: { content: e.name, color: e.kid ? '#ffd9a8' : '#fff1d6', size: 0.22 } }],
+      state: { name: e.name, role: e.role, pressTo: ctx.self.id, act: 'Talk', body: NPC[e.model] ? 'model' : 'rig' },
+      children: [{ id: 'tag', feetPosition: { x: 0, y: (NPC[e.model]?.h ?? 1.8) + 0.3, z: 0 }, visibleRange: { max: 20 }, text: { content: e.name, color: e.kid ? '#ffd9a8' : '#fff1d6', size: 0.22 } }],
     })
   }
 }
 function clip(ctx, row, m, name, speed = 1) {
   if (m.clip === name) return
   m.clip = name
+  if (row.state.body === 'model') { modelPose(row, name); return }
   play(ctx, row, { name: `villager-${name}`, ...ctx.session.villageClips[name] }, { channel: 'body', loop: true, speed, blendIn: 0.35 })
 }
 function face(row, m, target, dt) {
@@ -88,6 +97,6 @@ export const ears = {
     const S = (ctx.session.villageCrowd ??= { m: {}, seedAt: 0 }), m = (S.m[e.id] ??= {}), p = best.feetPosition
     m.pressUntil = ctx.now() + C.pressSecs * 1000; m.pressYaw = yawOf(q.x - p.x, q.z - p.z); m.goal = null
     let i = Math.floor(ctx.random() * e.lines.length); if (i === m.last) i = (i + 1) % e.lines.length; m.last = i
-    ctx.emit('damageNumber', { position: { x: p.x, y: p.y + 2.3 * (e.scale ?? 1), z: p.z }, text: `${e.name}: ${e.lines[i]}`, color: '#ffe2a0', lifetime: 4.5, size: 0.55 })
+    ctx.emit('damageNumber', { position: { x: p.x, y: p.y + (NPC[e.model] ? NPC[e.model].h + 0.5 : 2.3 * (e.scale ?? 1)), z: p.z }, text: `${e.name}: ${e.lines[i]}`, color: '#ffe2a0', lifetime: 4.5, size: 0.55 })
   },
 }
