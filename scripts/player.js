@@ -117,9 +117,9 @@ export function update(ctx, dt) {
     if ((ctx.self.grounded || touch) && (walk.climb ?? 0) < 0) { walk.flying = false; ctx.self.state.flying = false; ctx.self.state.flyBoost = false }
     else {
       // the fox (wunix) floats: a slow bob on top of her climb, so hovering reads as paddling in place
-      const fox = ctx.self.primitive?.script === 'scripts/gen/animal-fox.js'
+      const fox = ctx.self.primitive?.script === 'scripts/gen/owl.js' || ctx.self.primitive?.script === 'scripts/gen/animal-fox.js'
       const bob = fox && !walk.climb ? Math.sin(ctx.now() / 650) * 0.45 : 0
-      const e = Math.min(1, PLAYER.flyEase * dt), vy = (walk.climb ?? 0) * PLAYER.flyClimb * (fox ? 0.6 : 1) + bob
+      const e = Math.min(1, PLAYER.flyEase * dt), vy = (walk.climb ?? 0) * PLAYER.flyClimb + bob
       ctx.self.velocity = { x: v.x + (intent.x - v.x) * e, y: v.y + (vy - v.y) * e, z: v.z + (intent.z - v.z) * e }
       return
     }

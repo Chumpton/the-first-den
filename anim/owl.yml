@@ -1,0 +1,24 @@
+fly:
+  duration: 0.8
+  tracks:
+    wingL: { roll: [-48, -20, 38, 14, -48] }
+    wingR: { roll: [48, 20, -38, -14, 48] }
+    root: { y: [0.03, 0.0, -0.035, 0.0, 0.03], pitch: [2, 0, -2, 0, 2] }
+    head: { pitch: [-2, 1, 2, 1, -2] }
+    tail: { pitch: [0, -4, 0, 4, 0] }
+glide:
+  duration: 3
+  tracks:
+    wingL: { roll: [-6, -2, -8, -6], pitch: [0, 2, 0, 0] }
+    wingR: { roll: [6, 8, 2, 6], pitch: [0, 0, 2, 0] }
+    root: { roll: [0, 4, -4, 0], y: [0, 0.01, 0, 0] }
+    head: { yaw: [0, 0, 28, 28, 0, -25, -25, 0] }
+    tail: { yaw: [0, 5, -5, 0] }
+hover:
+  duration: 0.5
+  tracks:
+    root: { pitch: [32, 30, 32], y: [0, 0.03, 0] }
+    head: { pitch: [-26, -24, -26], yaw: [0, 0, 0, 20, 20, 0, 0, -20, -20, 0] }
+    wingL: { roll: [-62, -10, 50, -10, -62], yaw: [-10, 0, 10, 0, -10] }
+    wingR: { roll: [62, 10, -50, 10, 62], yaw: [10, 0, -10, 0, 10] }
+    tail: { pitch: [-30, -26, -30] }
