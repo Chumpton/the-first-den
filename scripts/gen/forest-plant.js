@@ -66,23 +66,28 @@ const kinds = {
     return m.done();
   },
   sapling(ctx, lod) {
-    const h = Number(ctx.params.height ?? 6), seg = lod >= 3 ? 5 : 7;
-    bark(ctx); ctx.color("#9a8a74");
-    const a = ring(0, 0, 0, 0.07, 0.07, 5), b = ring(0.1, h * 0.7, 0, 0.03, 0.03, 5); cap(ctx, a, false); loft(ctx, a, b);
-    ctx.albedo("scripts/tex-valley-canopy.js"); ctx.smooth();
-    const c = lod >= 4 ? 1 : 4;
-    for (let i = 0; i < c; i++) { const th = i / c * TAU + ctx.random(), d = i ? h * 0.12 : 0, y = h * (0.6 + (i ? ctx.random() * 0.25 : 0.2)), s = h * (0.16 + ctx.random() * 0.06);
-      blob(ctx, 0.1 + Math.cos(th) * d, y, Math.sin(th) * d, s, s * 0.8, s, seg, [LEAF[1], LEAF[2], LEAF[3], SUNLIT]); }
+    const h = Number(ctx.params.height ?? 6), seg = lod >= 3 ? 6 : 9, m = mesher(ctx);
+    bark(ctx); ctx.color("#7a6450");
+    const tk = spine(ctx, [0, 0, 0], [0.1, h * 0.7, 0], h * 0.03, 3);
+    m.tube(tk, tk.map((_, i) => 0.08 - i * 0.015), 5, 0, 0.6);
+    ctx.albedo("scripts/tex-valley-canopy.js");
+    const G = ["#24422a", "#3d6a3c", "#64944a", "#a2c564"], c = lod >= 4 ? 1 : 3;
+    const piv = [0.1, h * 0.68, 0], col = (p, nn) => ramp(G, (p[1] - h * 0.45) / (h * 0.5) * 0.7 + nn[1] * 0.25 + 0.05);
+    for (let i = 0; i < c; i++) { const th = i / c * TAU + ctx.random(), d = i ? h * 0.1 : 0, y = h * (0.66 + (i ? ctx.random() * 0.12 : 0.12)), s = h * (0.17 + ctx.random() * 0.05);
+      m.puff([0.1 + Math.cos(th) * d, y, Math.sin(th) * d], s, s * 0.8, s, seg, piv, col); }
+    return m.done();
   },
   shrub(ctx, lod) {
-    const h = Number(ctx.params.height ?? 1.3), seg = lod >= 3 ? 5 : 6, c = lod >= 3 ? 2 : 6;
-    ctx.albedo("scripts/tex-valley-canopy.js"); ctx.smooth(); ctx.roughness(0.95);
-    const pal = ctx.params.berry ? ["#2d5230", "#3b6936", "#4e7f3e", "#5e8d44"] : [LEAF[0], LEAF[1], LEAF[2], LEAF[3]];
-    for (let i = 0; i < c; i++) { const th = i / c * TAU + ctx.random(), d = i ? h * 0.35 : 0, s = h * (0.38 + ctx.random() * 0.15);
-      blob(ctx, Math.cos(th) * d, s * 0.7, Math.sin(th) * d, s, s * 0.8, s, seg, pal); }
-    if (ctx.params.berry && lod < 3) { const bc = ctx.params.berryColor || "#c02a3e"; ctx.albedo(null); ctx.color(bc); ctx.emissive(null);
-      for (let i = 0; i < 14; i++) { const th = ctx.random() * TAU, e = ctx.random() * 1.2, R = h * 0.62; const x = Math.cos(th) * Math.cos(e) * R, y = h * 0.4 + Math.sin(e) * R * 0.7, z = Math.sin(th) * Math.cos(e) * R;
-        blob(ctx, x, y, z, 0.035, 0.035, 0.035, 4, [bc]); } }
+    const h = Number(ctx.params.height ?? 1.3), seg = lod >= 3 ? 6 : 9, c = lod >= 3 ? 2 : 4, m = mesher(ctx);
+    ctx.albedo("scripts/tex-valley-canopy.js"); ctx.roughness(0.95);
+    const G = ctx.params.berry ? ["#1d3622", "#2f5530", "#4b7a3c", "#79a04f"] : ["#21402a", "#36643a", "#5c8f48", "#98bf5e"];
+    const piv = [0, h * 0.25, 0], col = (p, nn) => ramp(G, p[1] / h * 0.6 + nn[1] * 0.3 + 0.1);
+    for (let i = 0; i < c; i++) { const th = i / c * TAU + ctx.random(), d = i ? h * 0.32 : 0, s = h * (0.42 + ctx.random() * 0.14);
+      m.puff([Math.cos(th) * d, s * 0.68, Math.sin(th) * d], s, s * 0.8, s, seg, piv, col); }
+    if (ctx.params.berry && lod < 3) { const bc = ctx.params.berryColor || "#c02a3e"; ctx.albedo(null); ctx.color(bc);
+      for (let i = 0; i < 12; i++) { const th = ctx.random() * TAU, e = ctx.random() * 1.2, R = h * 0.6; const x = Math.cos(th) * Math.cos(e) * R, y = h * 0.4 + Math.sin(e) * R * 0.7, z = Math.sin(th) * Math.cos(e) * R;
+        m.puff([x, y, z], 0.04, 0.04, 0.04, 4, [x, y, z], () => [0.75, 0.16, 0.24]); } }
+    return m.done();
   },
   fern(ctx, lod) {
     const L0 = Number(ctx.params.size ?? 0.9), fronds = lod >= 3 ? 5 : 10, segs = lod >= 3 ? 3 : 6;
