@@ -25,14 +25,14 @@ function ink(ctx) {
     dz = max(dz, ctx.viewZAt(uv).negate().sub(zc)); // >0: neighbour is farther: this pixel is the near edge
     dn = max(dn, float(1).sub(ctx.normal(uv).dot(nc)));
   });
-  const edge = max(smoothstep(0.035, 0.08, dz.div(zc.max(1))), smoothstep(0.25, 0.55, dn).mul(0.7));
-  return edge.mul(smoothstep(140, 25, zc)).mul(ctx.param('inkStrength', 0.55));
+  const edge = max(smoothstep(0.035, 0.08, dz.div(zc.max(1))), smoothstep(0.35, 0.7, dn).mul(0.35));
+  return edge.mul(smoothstep(140, 25, zc)).mul(ctx.param('inkStrength', 0.85));
 }
 export function look(ctx) {
   ctx.param('bloomStrength', 0.32); ctx.param('bloomRadius', 0.85); ctx.param('bloomThreshold', 1.0);
   let s = ctx.scene;
   if (ctx.quality === 'high' || ctx.quality === 'ultra') s = s.mul(contact(ctx));
   const c = grade(s, { exposure: ctx.param('exposure', 1.02), saturation: 1.02, contrast: 1.04, temperature: 0.04, haze: 0.07, hazeColor: 'oklch(0.86 0.04 245)' });
-  const inked = mix(c, vec3(0.13, 0.11, 0.10), ink(ctx));
+  const inked = c.mul(mix(vec3(1), vec3(0.32, 0.28, 0.26), ink(ctx))); // multiply: always darker than its surface, never gray
   return vignette(inked, 0.10, { color: '#302e2a' });
 }
