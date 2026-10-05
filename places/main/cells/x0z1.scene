@@ -9,988 +9,480 @@ corridor-road-bp/marker-2:
   primitive: {kind: scripted, params: {item: marker}, script: scripts/gen/town-lane.js, seed: 22}
   rotation: {yaw: -115.09}
   tags: [town-lane, mile-marker]
-  ui: "<div face=\"front\" at=\"0.5 0.52\" width=\"0.32m\" style=\"height:560px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:#e4d9c1;border:10px solid #cbbd9e;border-radius:26px;color:#5a4330;font-family:serif;font-weight:700;text-align:center\"><div style=\"width:0;height:0;border-left:46px solid transparent;border-right:46px solid transparent;border-bottom:64px solid #5a4330\"></div><div style=\"font-size:70px;letter-spacing:6px;line-height:1.05;text-shadow:0 4px 0 rgba(255,250,235,.7)\">DEN</div><div style=\"font-size:120px;letter-spacing:6px;line-height:1.05;text-shadow:0 4px 0 rgba(255,250,235,.7)\">1</div><div style=\"font-size:40px;letter-spacing:6px;line-height:1.05;text-shadow:0 4px 0 rgba(255,250,235,.7)\">mile</div></div>"
+  ui: "<div face=\"front\" at=\"0.5 0.52\" width=\"0.32m\" style=\"height:560px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;background:#1f2f6b;border:10px solid #d9b24c;border-radius:26px;color:#f2d27a;font-family:serif;font-weight:700;text-align:center\"><div style=\"width:0;height:0;border-left:46px solid transparent;border-right:46px solid transparent;border-bottom:64px solid #f2d27a\"></div><div style=\"font-size:42px;letter-spacing:4px;line-height:1.05\">STORMWIND</div><div style=\"font-size:100px;letter-spacing:4px;line-height:1.05\">GATE</div><div style=\"font-size:36px;letter-spacing:4px;line-height:1.05\">60 m</div></div>"
   visibleRange: {max: 70}
-ember-roost:
-  feetPosition: {x: 0, y: 0.5, z: 141.4}
-  id: ember-roost
+
+# ==========================================
+# 1. VALLEY OF HEROES (z: 55..92)
+# ==========================================
+sw-causeway:
+  feetPosition: {x: 0, y: 0.5, z: 74}
+  id: sw-causeway
   physics: static
-  primitive: {kind: scripted, params: {part: tower, top: 21.5}, script: scripts/gen/ember-roost.js, seed: 7}
-  tags: [town, roost]
+  primitive: {depth: 38, height: 1.2, kind: box, width: 14}
+  material: {color: "oklch(0.92 0.015 80)", roughness: 0.85}
   visibleRange: {max: 500}
-ember-roost/aqueduct:
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: ember-roost/aqueduct
-  parent: ember-roost
+
+sw-causeway-parapet-w:
+  feetPosition: {x: -7, y: 1.1, z: 74}
+  id: sw-causeway-parapet-w
   physics: static
-  primitive: {kind: scripted, params: {part: aqueduct}, script: scripts/gen/ember-roost.js, seed: 11}
+  primitive: {depth: 38, height: 1.2, kind: box, width: 0.8}
+  material: {color: "oklch(0.95 0.01 85)", roughness: 0.8}
+  visibleRange: {max: 400}
+
+sw-causeway-parapet-e:
+  feetPosition: {x: 7, y: 1.1, z: 74}
+  id: sw-causeway-parapet-e
+  physics: static
+  primitive: {depth: 38, height: 1.2, kind: box, width: 0.8}
+  material: {color: "oklch(0.95 0.01 85)", roughness: 0.8}
+  visibleRange: {max: 400}
+
+sw-hero-turalyon:
+  children: [{castShadow: false, feetPosition: {x: 0, y: 2.2, z: -1.62}, id: plaque, material: {color: "oklch(0.32 0.1 262)"}, primitive: {depth: 0.06, height: 0.55, kind: box, width: 2.8}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:6px\">GENERAL TURALYON</div>", visibleRange: {max: 80}}]
+  feetPosition: {x: -5.5, y: 0.5, z: 62}
+  id: sw-hero-turalyon
+  physics: static
+  primitive: {kind: scripted, params: {hero: turalyon}, script: scripts/gen/stormwind-monument.js}
+  rotation: {yaw: 25}
   visibleRange: {max: 450}
-ember-roost/banner-aq:
-  feetPosition: {x: 24, y: 9.8, z: -1.86}
-  id: ember-roost/banner-aq
-  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.3}, script: scripts/material-banner-wave.js}
-  parent: ember-roost
-  primitive: {kind: scripted, params: {h: 3, kind: drape, point: 0.45, w: 1.1}, script: scripts/gen/town-banner.js}
-  tags: [banner]
+
+sw-hero-danath:
+  children: [{castShadow: false, feetPosition: {x: 0, y: 2.2, z: -1.62}, id: plaque, material: {color: "oklch(0.32 0.1 262)"}, primitive: {depth: 0.06, height: 0.55, kind: box, width: 2.8}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:6px\">DANATH TROLLBANE</div>", visibleRange: {max: 80}}]
+  feetPosition: {x: 5.5, y: 0.5, z: 62}
+  id: sw-hero-danath
+  physics: static
+  primitive: {kind: scripted, params: {hero: danath}, script: scripts/gen/stormwind-monument.js}
+  rotation: {yaw: -25}
+  visibleRange: {max: 450}
+
+sw-hero-alleria:
+  children: [{castShadow: false, feetPosition: {x: 0, y: 2.2, z: -1.62}, id: plaque, material: {color: "oklch(0.32 0.1 262)"}, primitive: {depth: 0.06, height: 0.55, kind: box, width: 2.8}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:6px\">ALLERIA WINDRUNNER</div>", visibleRange: {max: 80}}]
+  feetPosition: {x: -5.5, y: 0.5, z: 74}
+  id: sw-hero-alleria
+  physics: static
+  primitive: {kind: scripted, params: {hero: alleria}, script: scripts/gen/stormwind-monument.js}
+  rotation: {yaw: 20}
+  visibleRange: {max: 450}
+
+sw-hero-kurdran:
+  children: [{castShadow: false, feetPosition: {x: 0, y: 2.2, z: -1.62}, id: plaque, material: {color: "oklch(0.32 0.1 262)"}, primitive: {depth: 0.06, height: 0.55, kind: box, width: 2.8}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:6px\">KURDRAN WILDHAMMER</div>", visibleRange: {max: 80}}]
+  feetPosition: {x: 5.5, y: 0.5, z: 74}
+  id: sw-hero-kurdran
+  physics: static
+  primitive: {kind: scripted, params: {hero: kurdran}, script: scripts/gen/stormwind-monument.js}
+  rotation: {yaw: -20}
+  visibleRange: {max: 450}
+
+sw-hero-khadgar:
+  children: [{castShadow: false, feetPosition: {x: 0, y: 2.2, z: -1.62}, id: plaque, material: {color: "oklch(0.32 0.1 262)"}, primitive: {depth: 0.06, height: 0.55, kind: box, width: 2.8}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:180px;font-weight:bold;letter-spacing:6px\">ARCHMAGE KHADGAR</div>", visibleRange: {max: 80}}]
+  feetPosition: {x: 0, y: 0.5, z: 86}
+  id: sw-hero-khadgar
+  physics: static
+  primitive: {kind: scripted, params: {hero: khadgar}, script: scripts/gen/stormwind-monument.js}
+  rotation: {yaw: 0}
+  visibleRange: {max: 450}
+
+# ==========================================
+# 2. THE GREAT GATES OF STORMWIND (z: 95)
+# ==========================================
+sw-gates:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 15.5, z: -3.8}
+      id: plaque-welcome
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.08, height: 1.2, kind: box, width: 7.5}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold;padding:10px\"><div style=\"font-size:320px;letter-spacing:14px;line-height:1\">STORMWIND CITY</div><div style=\"font-size:140px;letter-spacing:8px;margin-top:10px;opacity:.9\">CAPITAL OF THE ALLIANCE</div></div>"
+      visibleRange: {max: 250}
+    - castShadow: false
+      feetPosition: {x: -8.5, y: 20, z: -4.8}
+      id: banner-west
+      material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.1}, script: scripts/material-banner-wave.js}
+      primitive: {kind: scripted, params: {beast: lion, field: "oklch(0.38 0.14 262)", field2: "oklch(0.31 0.12 262)", h: 7, kind: drape, point: 0.5, trim: "oklch(0.82 0.13 85)", w: 1.8}, script: scripts/gen/town-banner.js}
+      visibleRange: {max: 300}
+    - castShadow: false
+      feetPosition: {x: 8.5, y: 20, z: -4.8}
+      id: banner-east
+      material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.1}, script: scripts/material-banner-wave.js}
+      primitive: {kind: scripted, params: {beast: lion, field: "oklch(0.38 0.14 262)", field2: "oklch(0.31 0.12 262)", h: 7, kind: drape, point: 0.5, trim: "oklch(0.82 0.13 85)", w: 1.8}, script: scripts/gen/town-banner.js}
+      visibleRange: {max: 300}
+  feetPosition: {x: 0, y: 0.5, z: 95}
+  id: sw-gates
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/stormwind-gates.js}
+  visibleRange: {max: 700}
+
+# ==========================================
+# 3. TRADE DISTRICT (z: 105..175, x: -35..35)
+# ==========================================
+sw-trade-fountain:
+  audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-stone-fountain-splash-loop.mp3, gain: 0.16, loop: true, maxDistance: 28, spatial: true}
+  feetPosition: {x: 0, y: 0.5, z: 140}
+  id: sw-trade-fountain
+  physics: static
+  primitive: {kind: scripted, params: {part: fountain}, script: scripts/gen/royal-district.js, seed: 7}
   visibleRange: {max: 250}
-ember-roost/banner-e:
-  feetPosition: {x: 3.06, y: 18, z: 0}
-  id: ember-roost/banner-e
-  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.3}, script: scripts/material-banner-wave.js}
-  parent: ember-roost
-  primitive: {kind: scripted, params: {h: 5, kind: drape, point: 0.6, w: 1.8}, script: scripts/gen/town-banner.js}
-  rotation: {yaw: -90}
-  tags: [banner]
-  visibleRange: {max: 300}
-ember-roost/banner-n:
-  feetPosition: {x: 0, y: 18, z: 3.06}
-  id: ember-roost/banner-n
-  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.3}, script: scripts/material-banner-wave.js}
-  parent: ember-roost
-  primitive: {kind: scripted, params: {h: 5, kind: drape, point: 0.6, w: 1.8}, script: scripts/gen/town-banner.js}
-  rotation: {yaw: 180}
-  tags: [banner]
-  visibleRange: {max: 300}
-ember-roost/banner-w:
-  feetPosition: {x: -3.06, y: 18, z: 0}
-  id: ember-roost/banner-w
-  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.3}, script: scripts/material-banner-wave.js}
-  parent: ember-roost
-  primitive: {kind: scripted, params: {h: 5, kind: drape, point: 0.6, w: 1.8}, script: scripts/gen/town-banner.js}
+
+sw-bank:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 6.8, z: -7.06}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.9, kind: box, width: 8.5}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:320px;letter-spacing:14px\">BANK OF STORMWIND</div><div style=\"font-size:130px;letter-spacing:6px;opacity:.9\">VAULT & COMMERCE</div></div>"
+      visibleRange: {max: 100}
+  feetPosition: {x: -24, y: 0.5, z: 140}
+  id: sw-bank
+  physics: static
+  primitive: {kind: scripted, params: {color: limestone, d: 14, floors: 3, h: 10, hasChimney: true, hasPorch: true, w: 18}, script: scripts/gen/stormwind-building.js}
   rotation: {yaw: 90}
-  tags: [banner]
-  visibleRange: {max: 300}
-ember-roost/water:
-  castShadow: false
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: ember-roost/water
-  material: {color: oklch(0.66 0.09 195), kind: water, opacity: 0.85, waveIntensity: 0.4}
-  parent: ember-roost
-  primitive: {kind: scripted, params: {part: water}, script: scripts/gen/ember-roost.js}
-  visibleRange: {max: 250}
-farm-alpaca-1:
-  feetPosition: {x: -48, y: 0.5, z: 68}
-  id: farm-alpaca-1
-  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-alpaca.js, seed: 25}
+  visibleRange: {max: 500}
+
+sw-auction:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 6.8, z: -7.06}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.9, kind: box, width: 8.5}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:300px;letter-spacing:12px\">AUCTION HOUSE</div><div style=\"font-size:130px;letter-spacing:6px;opacity:.9\">STORMWIND TRADING GUILD</div></div>"
+      visibleRange: {max: 100}
+  feetPosition: {x: 24, y: 0.5, z: 140}
+  id: sw-auction
+  physics: static
+  primitive: {kind: scripted, params: {color: limestone, d: 14, floors: 3, h: 10, hasChimney: true, hasPorch: true, w: 18}, script: scripts/gen/stormwind-building.js}
+  rotation: {yaw: -90}
+  visibleRange: {max: 500}
+
+sw-inn-gilded-rose:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 5.6, z: -6.06}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.75, kind: box, width: 6.2}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:5px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:260px;letter-spacing:8px\">THE GILDED ROSE</div><div style=\"font-size:120px;letter-spacing:4px;opacity:.9\">INN & TAVERN</div></div>"
+      visibleRange: {max: 90}
+  feetPosition: {x: -22, y: 0.5, z: 165}
+  id: sw-inn-gilded-rose
+  physics: static
+  primitive: {kind: scripted, params: {color: limestone, d: 12, floors: 3, h: 9, hasChimney: true, hasPorch: true, w: 14}, script: scripts/gen/stormwind-building.js}
+  rotation: {yaw: 45}
+  visibleRange: {max: 450}
+
+sw-gryphon-roost:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 5.6, z: -6.06}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.75, kind: box, width: 6.5}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:5px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:240px;letter-spacing:8px\">GRYPHON ROOST</div><div style=\"font-size:120px;letter-spacing:4px;opacity:.9\">FLIGHT MASTER DUNGAR</div></div>"
+      visibleRange: {max: 90}
+  feetPosition: {x: 22, y: 0.5, z: 165}
+  id: sw-gryphon-roost
+  physics: static
+  primitive: {kind: scripted, params: {color: limestone, d: 12, floors: 2, h: 8, hasChimney: false, hasPorch: true, roofStyle: flat, w: 14}, script: scripts/gen/stormwind-building.js}
+  rotation: {yaw: -45}
+  visibleRange: {max: 450}
+
+sw-trade-weaponsmith:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 4.8, z: -5.06}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.65, kind: box, width: 5.2}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:240px;letter-spacing:6px\">WELL-ARMED</div><div style=\"font-size:110px;opacity:.9\">WEAPONS & ARMOR</div></div>"
+      visibleRange: {max: 80}
+  feetPosition: {x: 22, y: 0.5, z: 115}
+  id: sw-trade-weaponsmith
+  physics: static
+  primitive: {kind: scripted, params: {color: limestone, d: 10, floors: 2, h: 7.5, hasChimney: true, hasPorch: false, w: 12}, script: scripts/gen/stormwind-building.js}
+  rotation: {yaw: -90}
+  visibleRange: {max: 400}
+
+sw-trade-clothier:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 4.8, z: -5.06}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.65, kind: box, width: 5.2}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:230px;letter-spacing:6px\">FINE CLOTHIER</div><div style=\"font-size:110px;opacity:.9\">SILKS & THREADS</div></div>"
+      visibleRange: {max: 80}
+  feetPosition: {x: -22, y: 0.5, z: 115}
+  id: sw-trade-clothier
+  physics: static
+  primitive: {kind: scripted, params: {color: limestone, d: 10, floors: 2, h: 7.5, hasChimney: false, hasPorch: false, w: 12}, script: scripts/gen/stormwind-building.js}
+  rotation: {yaw: 90}
+  visibleRange: {max: 400}
+
+sw-trade-general:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 4.5, z: -5.06}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.6, kind: box, width: 4.6}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:220px;letter-spacing:6px\">GENERAL SUPPLIES</div><div style=\"font-size:110px;opacity:.9\">PROVISIONS & PACKS</div></div>"
+      visibleRange: {max: 80}
+  feetPosition: {x: -8, y: 0.5, z: 172}
+  id: sw-trade-general
+  physics: static
+  primitive: {kind: scripted, params: {color: limestone, d: 10, floors: 2, h: 7.2, hasChimney: true, hasPorch: false, w: 10}, script: scripts/gen/stormwind-building.js}
+  rotation: {yaw: 0}
+  visibleRange: {max: 400}
+
+# ==========================================
+# 4. MAGE QUARTER (x: -115..-45, z: 115..185)
+# ==========================================
+sw-wizards-sanctum:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 7.5, z: -11.6}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.9, kind: box, width: 7.2}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:280px;letter-spacing:10px\">THE WIZARD'S SANCTUM</div><div style=\"font-size:130px;letter-spacing:6px;opacity:.9\">KIRIN TOR CONCLAVE</div></div>"
+      visibleRange: {max: 120}
+  feetPosition: {x: -85, y: 0.5, z: 150}
+  id: sw-wizards-sanctum
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/stormwind-mage-tower.js}
+  visibleRange: {max: 800}
+
+sw-blue-recluse:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 5.6, z: -6.06}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.75, kind: box, width: 6.2}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:5px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:260px;letter-spacing:8px\">THE BLUE RECLUSE</div><div style=\"font-size:120px;letter-spacing:4px;opacity:.9\">ALES & ARCANE BREWS</div></div>"
+      visibleRange: {max: 90}
+  feetPosition: {x: -62, y: 0.5, z: 125}
+  id: sw-blue-recluse
+  physics: static
+  primitive: {kind: scripted, params: {color: limestone, d: 12, floors: 3, h: 9, hasChimney: true, hasPorch: true, w: 14}, script: scripts/gen/stormwind-building.js}
+  rotation: {yaw: 45}
+  visibleRange: {max: 450}
+
+sw-slaughtered-lamb:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 5.2, z: -5.56}
+      id: plaque
+      material: {color: "oklch(0.2 0.05 30)"}
+      primitive: {depth: 0.06, height: 0.7, kind: box, width: 5.6}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#2b1810;border:4px solid #8c5332;color:#d9a566;font-family:serif;font-weight:bold\"><div style=\"font-size:240px;letter-spacing:6px\">THE SLAUGHTERED LAMB</div><div style=\"font-size:110px;opacity:.85\">TAVERN & CELLAR</div></div>"
+      visibleRange: {max: 80}
+  feetPosition: {x: -108, y: 0.5, z: 130}
+  id: sw-slaughtered-lamb
+  physics: static
+  primitive: {kind: scripted, params: {color: timber, d: 11, floors: 2, h: 8, hasChimney: true, hasPorch: false, w: 12}, script: scripts/gen/stormwind-building.js}
   rotation: {yaw: -60}
-  state: {species: alpaca, yaw: -60}
-  tags: [farm-flock-alpaca, alpaca, farm-animal]
-  visibleRange: {max: 110}
-farm-alpaca-2:
-  feetPosition: {x: -50.5, y: 0.5, z: 72}
-  id: farm-alpaca-2
-  primitive: {kind: scripted, params: {coat: oklch(0.91 0.03 82), snout: oklch(0.6 0.04 60)}, script: scripts/gen/animal-alpaca.js, seed: 26}
-  rotation: {yaw: 150}
-  state: {species: alpaca, yaw: 150}
-  tags: [farm-flock-alpaca, alpaca, farm-animal]
-  visibleRange: {max: 110}
-farm-alpaca-3:
-  feetPosition: {x: -45.5, y: 0.5, z: 71}
-  id: farm-alpaca-3
-  primitive: {kind: scripted, params: {}, script: scripts/gen/animal-alpaca.js, seed: 27}
-  rotation: {yaw: 30}
-  state: {species: alpaca, yaw: 30}
-  tags: [farm-flock-alpaca, alpaca, farm-animal]
-  visibleRange: {max: 110}
-folk-crowd:
-  behavior: scripts/folk-crowd.js
-  feetPosition: {x: 0, y: 0.4140134773960745, z: 128}
-  id: folk-crowd
-  state: {}
-garden-gates/gate-e:
-  feetPosition: {x: 22.5, y: 0, z: 8}
-  id: garden-gates/gate-e
-  parent: garden-gates
+  visibleRange: {max: 400}
+
+sw-mage-alchemy:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 4.8, z: -5.06}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.65, kind: box, width: 5.4}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:240px;letter-spacing:6px\">ALCHEMY & HERBS</div><div style=\"font-size:110px;opacity:.9\">ELIXIRS & VIALS</div></div>"
+      visibleRange: {max: 80}
+  feetPosition: {x: -108, y: 0.5, z: 165}
+  id: sw-mage-alchemy
   physics: static
-  primitive: {kind: scripted, params: {part: gate}, script: scripts/gen/garden-gate.js, seed: 3}
+  primitive: {kind: scripted, params: {color: limestone, d: 10, floors: 2, h: 8, hasChimney: true, hasPorch: false, w: 12}, script: scripts/gen/stormwind-building.js}
   rotation: {yaw: -90}
-  visibleRange: {max: 260}
-garden-gates/gate-e/plaque-in:
-  feetPosition: {x: 0, y: 3.93, z: 0.03}
-  id: garden-gates/gate-e/plaque-in
-  parent: garden-gates/gate-e
-  primitive: {kind: scripted, params: {part: plaque}, script: scripts/gen/garden-gate.js}
-  rotation: {yaw: 180}
-  ui: "<div face=\"front\" emissive style=\"width:2500px;height:460px;display:flex;align-items:center;justify-content:center;font-family:serif;font-size:250px;letter-spacing:40px;color:#e8c872;font-weight:bold\">GARDEN MARKET</div>"
-  visibleRange: {max: 120}
-garden-gates/gate-e/plaque-out:
-  feetPosition: {x: 0, y: 3.93, z: -0.03}
-  id: garden-gates/gate-e/plaque-out
-  parent: garden-gates/gate-e
-  primitive: {kind: scripted, params: {part: plaque}, script: scripts/gen/garden-gate.js}
-  ui: "<div face=\"front\" emissive style=\"width:2500px;height:460px;display:flex;align-items:center;justify-content:center;font-family:serif;font-size:250px;letter-spacing:40px;color:#e8c872;font-weight:bold\">GARDEN MARKET</div>"
-  visibleRange: {max: 120}
-link-east:
-  castShadow: false
-  feetPosition: {x: 22, y: 0, z: 104.25}
-  id: link-east
-  material: {pbr: true}
+  visibleRange: {max: 400}
+
+sw-mage-enchanting:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 4.8, z: -5.56}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.65, kind: box, width: 5.4}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:230px;letter-spacing:6px\">ENCHANTER'S STUDY</div><div style=\"font-size:110px;opacity:.9\">DUSTS & ESSENCES</div></div>"
+      visibleRange: {max: 80}
+  feetPosition: {x: -65, y: 0.5, z: 172}
+  id: sw-mage-enchanting
   physics: static
-  primitive: {kind: scripted, params: {kind: lane, lamps: [[27.12, 0.5, -3.96, -1]]}, script: scripts/gen/town-link.js}
-  tags: [town, town-link]
-  visibleRange: {max: 110}
-link-east/light:
-  feetPosition: {x: 26.37, y: 4.5, z: -3.96}
-  id: link-east/light
-  light: {color: oklch(0.85 0.1 70), distance: 11, intensity: 3, kind: point}
-  parent: link-east
-link-ring/light:
-  feetPosition: {x: -93.42, y: 4.5, z: 48.16}
-  id: link-ring/light
-  light: {color: oklch(0.85 0.1 70), distance: 11, intensity: 3, kind: point}
-  parent: link-ring
-link-west:
-  castShadow: false
-  feetPosition: {x: -22, y: 0, z: 105}
-  id: link-west
-  material: {pbr: true}
+  primitive: {kind: scripted, params: {color: limestone, d: 11, floors: 2, h: 8, hasChimney: false, hasPorch: false, w: 11}, script: scripts/gen/stormwind-building.js}
+  rotation: {yaw: 90}
+  visibleRange: {max: 400}
+
+# ==========================================
+# 5. OLD TOWN (x: 45..115, z: 110..185)
+# ==========================================
+sw-pig-and-whistle:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 5.6, z: -6.06}
+      id: plaque
+      material: {color: "oklch(0.28 0.08 40)"}
+      primitive: {depth: 0.06, height: 0.75, kind: box, width: 6.5}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#3a2016;border:5px solid #a66a38;color:#e8be89;font-family:serif;font-weight:bold\"><div style=\"font-size:260px;letter-spacing:8px\">PIG AND WHISTLE</div><div style=\"font-size:120px;letter-spacing:4px;opacity:.9\">OLD TOWN TAVERN</div></div>"
+      visibleRange: {max: 90}
+  feetPosition: {x: 75, y: 0.5, z: 130}
+  id: sw-pig-and-whistle
   physics: static
-  primitive: {kind: scripted, params: {kind: lane, lamps: [[-22.82, 0.5, -9.67, -1]]}, script: scripts/gen/town-link.js}
-  tags: [town, town-link]
-  visibleRange: {max: 110}
-link-west/light:
-  feetPosition: {x: -23.57, y: 4.5, z: -9.67}
-  id: link-west/light
-  light: {color: oklch(0.85 0.1 70), distance: 11, intensity: 3, kind: point}
-  parent: link-west
-orchard-east:
-  feetPosition: {x: 41, y: 0.5, z: 70}
-  id: orchard-east
-  rotation: {yaw: 0}
-  state: {piece: orchard-east}
-  tags: [farm, orchard]
-orchard-east/apple-11:
-  feetPosition: {x: -11.13, y: -0.18, z: -4.88}
-  id: orchard-east/apple-11
-  parent: orchard-east
-  physics: static
-  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 4}
-  rotation: {yaw: 17}
-  tags: [apple-tree]
-  visibleRange: {max: 240}
-orchard-east/apple-12:
-  feetPosition: {x: -4.5, y: -0.29, z: -5}
-  id: orchard-east/apple-12
-  parent: orchard-east
-  physics: static
-  primitive: {kind: scripted, params: {item: apple, s: 1.1, windfall: 7}, script: scripts/gen/farm-props.js, seed: 1}
-  rotation: {yaw: 84}
-  tags: [apple-tree]
-  visibleRange: {max: 240}
-orchard-east/apple-13:
-  feetPosition: {x: 2.13, y: -0.38, z: -3.88}
-  id: orchard-east/apple-13
-  parent: orchard-east
-  physics: static
-  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 2}
-  rotation: {yaw: 151}
-  tags: [apple-tree]
-  visibleRange: {max: 240}
-orchard-east/apple-14:
-  feetPosition: {x: 8.75, y: -0.24, z: -4}
-  id: orchard-east/apple-14
-  parent: orchard-east
-  physics: static
-  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 3}
-  rotation: {yaw: 218}
-  tags: [apple-tree]
-  visibleRange: {max: 240}
-orchard-east/apple-15:
-  feetPosition: {x: -11.25, y: -0.11, z: 2}
-  id: orchard-east/apple-15
-  parent: orchard-east
-  physics: static
-  primitive: {kind: scripted, params: {item: apple, s: 1.1, windfall: 7}, script: scripts/gen/farm-props.js, seed: 4}
-  rotation: {yaw: 285}
-  tags: [apple-tree]
-  visibleRange: {max: 240}
-orchard-east/apple-16:
-  feetPosition: {x: -4.63, y: -0.22, z: 1.88}
-  id: orchard-east/apple-16
-  parent: orchard-east
-  physics: static
-  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 1}
-  rotation: {yaw: 352}
-  tags: [apple-tree]
-  visibleRange: {max: 240}
-orchard-east/apple-17:
-  feetPosition: {x: 2, y: -0.25, z: 1.75}
-  id: orchard-east/apple-17
-  parent: orchard-east
-  physics: static
-  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 2}
-  rotation: {yaw: 59}
-  tags: [apple-tree]
-  visibleRange: {max: 240}
-orchard-east/apple-18:
-  feetPosition: {x: 8.63, y: -0.15, z: 1.63}
-  id: orchard-east/apple-18
-  parent: orchard-east
-  physics: static
-  primitive: {kind: scripted, params: {item: apple, s: 1.1, windfall: 7}, script: scripts/gen/farm-props.js, seed: 3}
-  rotation: {yaw: 126}
-  tags: [apple-tree]
-  visibleRange: {max: 240}
-orchard-east/apple-19:
-  feetPosition: {x: -11.38, y: -0.11, z: 8.88}
-  id: orchard-east/apple-19
-  parent: orchard-east
-  physics: static
-  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 4}
-  rotation: {yaw: 193}
-  tags: [apple-tree]
-  visibleRange: {max: 240}
-orchard-east/apple-20:
-  feetPosition: {x: -4.75, y: -0.15, z: 8.75}
-  id: orchard-east/apple-20
-  parent: orchard-east
-  physics: static
-  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 1}
-  rotation: {yaw: 260}
-  tags: [apple-tree]
-  visibleRange: {max: 240}
-orchard-east/apple-21:
-  feetPosition: {x: 1.88, y: -0.13, z: 8.63}
-  id: orchard-east/apple-21
-  parent: orchard-east
-  physics: static
-  primitive: {kind: scripted, params: {item: apple, s: 1.1, windfall: 7}, script: scripts/gen/farm-props.js, seed: 2}
-  rotation: {yaw: 327}
-  tags: [apple-tree]
-  visibleRange: {max: 240}
-orchard-east/apple-22:
-  feetPosition: {x: 8.5, y: -0.15, z: 8.5}
-  id: orchard-east/apple-22
-  parent: orchard-east
-  physics: static
-  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 3}
-  rotation: {yaw: 34}
-  tags: [apple-tree]
-  visibleRange: {max: 240}
-orchard-east/apple-23:
-  feetPosition: {x: -11.5, y: -0.01, z: 14.5}
-  id: orchard-east/apple-23
-  parent: orchard-east
-  physics: static
-  primitive: {kind: scripted, params: {item: apple, s: 0.95, windfall: 7}, script: scripts/gen/farm-props.js, seed: 4}
-  rotation: {yaw: 101}
-  tags: [apple-tree]
-  visibleRange: {max: 240}
-orchard-east/cider-barrels-2:
-  castShadow: false
-  feetPosition: {x: -11.5, y: -0.12, z: 6}
-  id: orchard-east/cider-barrels-2
-  parent: orchard-east
-  physics: static
-  primitive: {kind: scripted, params: {item: barrels, n: 3}, script: scripts/gen/farm-props.js, seed: 2}
+  primitive: {kind: scripted, params: {color: timber, d: 12, floors: 3, h: 9, hasChimney: true, hasPorch: true, w: 15}, script: scripts/gen/stormwind-building.js}
   rotation: {yaw: -30}
-  visibleRange: {max: 140}
-pasture-west:
-  feetPosition: {x: -41, y: 0.5, z: 70}
-  id: pasture-west
+  visibleRange: {max: 450}
+
+sw-command-center:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 6.8, z: -7.06}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.9, kind: box, width: 8.5}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:280px;letter-spacing:10px\">CHAMPIONS' HALL</div><div style=\"font-size:130px;letter-spacing:6px;opacity:.9\">MILITARY COMMAND & BARRACKS</div></div>"
+      visibleRange: {max: 100}
+  feetPosition: {x: 65, y: 0.5, z: 165}
+  id: sw-command-center
+  physics: static
+  primitive: {kind: scripted, params: {color: limestone, d: 14, floors: 3, h: 10, hasChimney: true, hasPorch: true, w: 18}, script: scripts/gen/stormwind-building.js}
   rotation: {yaw: 0}
-  state: {piece: pasture-west}
-  tags: [farm, pasture]
-pasture-west/chimney-smoke:
-  feetPosition: {x: 9.83, y: 5.35, z: -2.68}
-  fx: {script: "fx\npop smoke rate=?mobile:3|5 on=disc(.12) life=3..5 v=up(.7..1.1)+sdir()*.1 size=.35..0.55 acc=buoy(.25)+curl(.3)*.4+drag(.5) sz=$size*(.6>3) col=<.84,.82,.8>><.62,.62,.64> a=0>.3:.4>.7:.2>0 rot=spin(.15) r=sprite(smoke-puff,alpha)"}
-  id: pasture-west/chimney-smoke
-  parent: pasture-west
-  visibleRange: {max: 200}
-pasture-west/farmhouse:
-  castShadow: true
-  feetPosition: {x: 8, y: 0, z: -4}
-  id: pasture-west/farmhouse
-  parent: pasture-west
-  physics: static
-  primitive: {kind: scripted, params: {h: 2.6, hue: 25, r: 3.4, roof: 1.6, sx: 1.25, trim: 130}, script: scripts/gen/hex-cottage.js, seed: 31}
-  rotation: {yaw: 90}
-  visibleRange: {max: 260}
-pasture-west/farmhouse-barrels:
-  castShadow: false
-  feetPosition: {x: 3.2, y: 0, z: 0.5}
-  id: pasture-west/farmhouse-barrels
-  parent: pasture-west
-  physics: static
-  primitive: {kind: scripted, params: {item: barrels, n: 2}, script: scripts/gen/farm-props.js, seed: 4}
-  rotation: {yaw: 0}
-  visibleRange: {max: 140}
-pasture-west/feed-rack:
-  castShadow: false
-  feetPosition: {x: -10, y: 0, z: 4.5}
-  id: pasture-west/feed-rack
-  parent: pasture-west
-  physics: static
-  primitive: {kind: scripted, params: {kind: rack}, script: scripts/gen/pasture-yard.js}
-  rotation: {yaw: 90}
-  visibleRange: {max: 140}
-pasture-west/pen-alpaca:
-  behavior: scripts/pasture-flock.js
-  castShadow: false
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: pasture-west/pen-alpaca
-  parent: pasture-west
-  physics: static
-  primitive: {kind: scripted, params: {closed: true, flockTag: farm-flock-alpaca, gates: [{open: 0, seg: 1, t: 0.5, w: 2.4}], items: [{k: rack, x: -10, z: 4.5}, {k: trough, x: -4, z: 5}], points: [[-12, -5], [-2, -5], [-2, 7], [-12, 7]], post: 2.5, style: pen}, script: scripts/gen/farm-fence.js}
-  visibleRange: {max: 160}
-pasture-west/pen-sheep:
-  behavior: scripts/pasture-flock.js
-  castShadow: false
-  feetPosition: {x: 0, y: 0, z: 0}
-  id: pasture-west/pen-sheep
-  parent: pasture-west
-  physics: static
-  primitive: {kind: scripted, params: {closed: true, flockTag: farm-flock-sheep, gates: [{open: 0, seg: 1, t: 0.5, w: 2.4}], items: [{k: trough, x: -4, z: -17.5}], points: [[-12, -20], [-2, -20], [-2, -9], [-12, -9]], post: 2.5, style: pen}, script: scripts/gen/farm-fence.js}
-  visibleRange: {max: 160}
-pasture-west/trough-b:
-  castShadow: false
-  feetPosition: {x: -4, y: 0, z: 5}
-  id: pasture-west/trough-b
-  parent: pasture-west
-  physics: static
-  primitive: {kind: scripted, params: {kind: trough}, script: scripts/gen/pasture-yard.js}
-  rotation: {yaw: 0}
-  visibleRange: {max: 140}
-royal-armoury:
-  children: [{castShadow: false, feetPosition: {x: 0, y: 4.3, z: -4.72}, id: plaque, material: {color: oklch(0.32 0.1 262)}, primitive: {depth: 0.06, height: 0.62, kind: box, width: 3.4}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:300px;letter-spacing:12px\">ROYAL ARMOURY</div>", visibleRange: {max: 90}}]
-  feetPosition: {x: 16.5, y: 0.5, z: 169.5}
-  id: royal-armoury
-  physics: static
-  primitive: {kind: scripted, params: {d: 9, floors: 3, kind: armoury, w: 10}, script: scripts/gen/royal-house.js, seed: 2}
-  rotation: {yaw: 90}
   visibleRange: {max: 500}
-royal-avenue:
-  castShadow: false
-  feetPosition: {x: 0, y: 0.5, z: 190}
-  id: royal-avenue
+
+sw-si7-hq:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 5.5, z: -6.56}
+      id: plaque
+      material: {color: "oklch(0.2 0.01 40)"}
+      primitive: {depth: 0.06, height: 0.75, kind: box, width: 6.8}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1a1a1a;border:4px solid #666;color:#ccc;font-family:serif;font-weight:bold\"><div style=\"font-size:280px;letter-spacing:12px\">SI:7 HEADQUARTERS</div><div style=\"font-size:120px;letter-spacing:6px;opacity:.8\">RESTRICTED ENTRY</div></div>"
+      visibleRange: {max: 90}
+  feetPosition: {x: 105, y: 0.5, z: 155}
+  id: sw-si7-hq
   physics: static
-  primitive: {kind: scripted, params: {part: avenue}, script: scripts/gen/royal-district.js, seed: 3}
-  visibleRange: {max: 300}
-royal-bridge:
-  feetPosition: {x: 0, y: 0.5, z: 190}
-  id: royal-bridge
+  primitive: {kind: scripted, params: {color: timber, d: 13, floors: 2, h: 8.5, hasChimney: true, hasPorch: false, w: 16}, script: scripts/gen/stormwind-building.js}
+  rotation: {yaw: -90}
+  visibleRange: {max: 450}
+
+sw-oldtown-armory:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 4.8, z: -5.06}
+      id: plaque
+      material: {color: "oklch(0.32 0.1 262)"}
+      primitive: {depth: 0.06, height: 0.65, kind: box, width: 5.4}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-weight:bold\"><div style=\"font-size:240px;letter-spacing:6px\">OLD TOWN WEAPONS</div><div style=\"font-size:110px;opacity:.9\">SWORDS & SHIELDS</div></div>"
+      visibleRange: {max: 80}
+  feetPosition: {x: 95, y: 0.5, z: 125}
+  id: sw-oldtown-armory
   physics: static
-  primitive: {kind: scripted, params: {part: bridge}, script: scripts/gen/royal-district.js, seed: 3}
+  primitive: {kind: scripted, params: {color: timber, d: 10, floors: 2, h: 8, hasChimney: true, hasPorch: false, w: 12}, script: scripts/gen/stormwind-building.js}
+  rotation: {yaw: -45}
   visibleRange: {max: 400}
-royal-gate:
-  feetPosition: {x: 0, y: 0.5, z: 190}
-  id: royal-gate
+
+# ==========================================
+# 6. CANAL BRIDGES & THE STOCKADE
+# ==========================================
+sw-bridge-trade-mage:
+  feetPosition: {x: -42, y: 0.5, z: 140}
+  id: sw-bridge-trade-mage
   physics: static
-  primitive: {kind: scripted, params: {part: gate}, script: scripts/gen/royal-district.js, seed: 3}
-  visibleRange: {max: 900}
-royal-guard-1:
-  behavior: [scripts/royal-guard.js]
-  children: [{feetPosition: {x: 0, y: 2.2, z: 0}, id: tag, text: {color: "#ffe39a", content: Sergeant Aldric, size: 0.22}}]
-  feetPosition: {x: -4.4, y: 0.61, z: 159.2}
-  id: royal-guard-1
-  layout: {maxExtents: {y: 1.9}, minExtents: {y: 1.9}}
-  model: "https://www.spawn.co/magic/character-character-54ug69f6.glb?animations=Idle,Walk,Run"
-  physics: character
-  rotation: {yaw: 0}
-  state: {lines: [Welcome to the royal city. Keep to the avenue., The King holds court on the hill beyond the plaza.], name: Sergeant Aldric}
-  tags: [npc, interactable, royal-guard]
-  visibleRange: {max: 120}
-royal-guard-2:
-  behavior: [scripts/royal-guard.js]
-  children: [{feetPosition: {x: 0, y: 2.2, z: 0}, id: tag, text: {color: "#ffe39a", content: Guardsman Tomas, size: 0.22}}]
-  feetPosition: {x: 4.4, y: 0.61, z: 159.2}
-  id: royal-guard-2
-  layout: {maxExtents: {y: 1.9}, minExtents: {y: 1.9}}
-  model: "https://www.spawn.co/magic/character-character-54ug69f6.glb?animations=Idle,Walk,Run"
-  physics: character
-  rotation: {yaw: 0}
-  state: {lines: ["Mind the moat, friend. The swans bite.", The Golden Lion pours the best ale inside the walls.], name: Guardsman Tomas}
-  tags: [npc, interactable, royal-guard]
-  visibleRange: {max: 120}
-royal-guard-3:
-  behavior: [scripts/royal-guard.js]
-  children: [{feetPosition: {x: 0, y: 2.2, z: 0}, id: tag, text: {color: "#ffe39a", content: Guardswoman Elsbeth, size: 0.22}}]
-  feetPosition: {x: -4.4, y: 0.61, z: 151.4}
-  id: royal-guard-3
-  layout: {maxExtents: {y: 1.9}, minExtents: {y: 1.9}}
-  model: "https://www.spawn.co/magic/character-character-54ug69f6.glb?animations=Idle,Walk,Run"
-  physics: character
-  rotation: {yaw: 0}
-  state: {lines: [Those two in stone? Heroes of the old wars., "No blades drawn past the bridge, by order of the crown."], name: Guardswoman Elsbeth}
-  tags: [npc, interactable, royal-guard]
-  visibleRange: {max: 120}
-royal-guard-4:
-  behavior: [scripts/royal-guard.js]
-  children: [{feetPosition: {x: 0, y: 2.2, z: 0}, id: tag, text: {color: "#ffe39a", content: Guardsman Piet, size: 0.22}}]
-  feetPosition: {x: 4.4, y: 0.61, z: 151.4}
-  id: royal-guard-4
-  layout: {maxExtents: {y: 1.9}, minExtents: {y: 1.9}}
-  model: "https://www.spawn.co/magic/character-character-54ug69f6.glb?animations=Idle,Walk,Run"
-  physics: character
-  rotation: {yaw: 0}
-  state: {lines: [The cathedral bells ring at noon. Worth hearing., "Bank of the Crown is on the plaza, east side."], name: Guardsman Piet}
-  tags: [npc, interactable, royal-guard]
-  visibleRange: {max: 120}
-royal-hall-mages:
-  children: [{castShadow: false, feetPosition: {x: 0, y: 4.3, z: -5.22}, id: plaque, material: {color: oklch(0.32 0.1 262)}, primitive: {depth: 0.06, height: 0.62, kind: box, width: 3.4}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:300px;letter-spacing:12px\">MAGES' GUILD</div>", visibleRange: {max: 90}}]
-  feetPosition: {x: 33, y: 0.5, z: 172}
-  id: royal-hall-mages
-  physics: static
-  primitive: {kind: scripted, params: {d: 10, floors: 4, kind: hall, w: 14}, script: scripts/gen/royal-house.js, seed: 5}
-  rotation: {yaw: 180}
-  visibleRange: {max: 500}
-royal-hall-masons:
-  children: [{castShadow: false, feetPosition: {x: 0, y: 4.3, z: -5.22}, id: plaque, material: {color: oklch(0.32 0.1 262)}, primitive: {depth: 0.06, height: 0.62, kind: box, width: 3.4}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:300px;letter-spacing:12px\">GUILD OF MASONS</div>", visibleRange: {max: 90}}]
-  feetPosition: {x: -33, y: 0.5, z: 172}
-  id: royal-hall-masons
-  physics: static
-  primitive: {kind: scripted, params: {d: 10, floors: 4, kind: hall, w: 14}, script: scripts/gen/royal-house.js, seed: 3}
-  rotation: {yaw: 180}
-  visibleRange: {max: 500}
-royal-hero-east:
-  feetPosition: {x: 8.6, y: 3.7, z: 149.5}
-  id: royal-hero-east
-  physics: static
-  primitive: {kind: scripted, params: {side: 1}, script: scripts/gen/royal-statue.js, seed: 2}
-  rotation: {yaw: 0}
-  visibleRange: {max: 900}
-royal-hero-west:
-  feetPosition: {x: -8.6, y: 3.7, z: 149.5}
-  id: royal-hero-west
-  physics: static
-  primitive: {kind: scripted, params: {side: -1}, script: scripts/gen/royal-statue.js, seed: 1}
-  rotation: {yaw: 0}
-  visibleRange: {max: 900}
-royal-house-sw:
-  children: []
-  feetPosition: {x: -48, y: 0.5, z: 172}
-  id: royal-house-sw
-  physics: static
-  primitive: {kind: scripted, params: {d: 10, floors: 3, kind: house, turret: 1, w: 10}, script: scripts/gen/royal-house.js, seed: 4}
-  rotation: {yaw: 180}
-  visibleRange: {max: 500}
-royal-tavern:
-  children: [{castShadow: false, feetPosition: {x: 0, y: 4.3, z: -4.72}, id: plaque, material: {color: oklch(0.32 0.1 262)}, primitive: {depth: 0.06, height: 0.62, kind: box, width: 3.4}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:300px;letter-spacing:12px\">THE GOLDEN LION</div>", visibleRange: {max: 90}}]
-  feetPosition: {x: -16.5, y: 0.5, z: 169.5}
-  id: royal-tavern
-  physics: static
-  primitive: {kind: scripted, params: {d: 9, floors: 3, kind: tavern, w: 10}, script: scripts/gen/royal-house.js, seed: 1}
-  rotation: {yaw: -90}
-  visibleRange: {max: 500}
-royal-walls:
-  feetPosition: {x: 0, y: 0.5, z: 190}
-  id: royal-walls
-  physics: static
-  primitive: {kind: scripted, params: {part: walls}, script: scripts/gen/royal-district.js, seed: 3}
-  visibleRange: {max: 900}
-sign-link-east:
-  castShadow: false
-  feetPosition: {x: 44, y: 0.5847130529688586, z: 108}
-  id: sign-link-east
-  material: {pbr: true}
-  physics: static
-  primitive: {kind: scripted, params: {kind: post}, script: scripts/gen/town-link.js}
-  tags: [town, town-link, signpost]
-  visibleRange: {max: 70}
-sign-link-east/finger-0:
-  castShadow: false
-  feetPosition: {x: 0, y: 2.72, z: 0}
-  id: sign-link-east/finger-0
-  material: {pbr: true}
-  parent: sign-link-east
-  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
-  rotation: {yaw: 168.6900675259798}
-  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Market Square &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Market Square</div>"
-  visibleRange: {max: 45}
-sign-link-east/finger-1:
-  castShadow: false
-  feetPosition: {x: 0, y: 2.3200000000000003, z: 0}
-  id: sign-link-east/finger-1
-  material: {pbr: true}
-  parent: sign-link-east
-  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
-  rotation: {yaw: 59.03624346792648}
-  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Mirror Tarn &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Mirror Tarn</div>"
-  visibleRange: {max: 45}
-sign-link-east/finger-2:
-  castShadow: false
-  feetPosition: {x: 0, y: 1.9200000000000002, z: 0}
-  id: sign-link-east/finger-2
-  material: {pbr: true}
-  parent: sign-link-east
-  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
-  rotation: {yaw: 168.6900675259798}
-  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Garden Market &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Garden Market</div>"
-  visibleRange: {max: 45}
-sign-link-west:
-  castShadow: false
-  feetPosition: {x: -44, y: 0.3134496893616706, z: 108.5}
-  id: sign-link-west
-  material: {pbr: true}
-  physics: static
-  primitive: {kind: scripted, params: {kind: post}, script: scripts/gen/town-link.js}
-  tags: [town, town-link, signpost]
-  visibleRange: {max: 70}
-sign-link-west/finger-0:
-  castShadow: false
-  feetPosition: {x: 0, y: 2.72, z: 0}
-  id: sign-link-west/finger-0
-  material: {pbr: true}
-  parent: sign-link-west
-  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
-  rotation: {yaw: 11.309932474020213}
-  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Market Square &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Market Square</div>"
-  visibleRange: {max: 45}
-sign-link-west/finger-1:
-  castShadow: false
-  feetPosition: {x: 0, y: 2.3200000000000003, z: 0}
-  id: sign-link-west/finger-1
-  material: {pbr: true}
-  parent: sign-link-west
-  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
-  rotation: {yaw: 120.96375653207352}
-  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Garden Market &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Garden Market</div>"
-  visibleRange: {max: 45}
-sign-link-west/finger-2:
-  castShadow: false
-  feetPosition: {x: 0, y: 1.9200000000000002, z: 0}
-  id: sign-link-west/finger-2
-  material: {pbr: true}
-  parent: sign-link-west
-  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
-  rotation: {yaw: 11.309932474020213}
-  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Mirror Tarn &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Mirror Tarn</div>"
-  visibleRange: {max: 45}
-town-alleys:
-  feetPosition: {x: 0, y: 0, z: 100}
-  id: town-alleys
-  material: {pbr: true}
-  physics: static
-  primitive: {kind: scripted, params: {items: [{h: 1.8, pts: [[-9, -34.5, 0.495], [-20.5, -34.5, 0.45], [-35.8, -20, 0.677], [-35.8, 2, 0.6]], t: hedge, w: 1}, {h: 1.8, pts: [[-35.8, 8, 0.6], [-35.8, 34, 0.463], [-13, 34, 0.574], [-13, 38.8, 0.56], [13, 38.8, 0.379], [13, 34, 0.267], [35.8, 34, 0.608], [35.8, 7.25, 0.45]], t: hedge, w: 1}, {h: 1.8, pts: [[35.8, 1.25, 0.45], [35.8, -20, 0.369], [20.5, -34.5, 0.358], [9, -34.5, 0.238]], t: hedge, w: 1}, {a: [-21.3, -20.1, 0.55], b: [-25, -22.9, 0.554], t: path}, {a: [24.1, 19, 0.498], b: [28.6, 19.4, 0.324], t: path}, {g: 0.55, t: pot, x: -22.6, z: 17.3}, {flowers: oklch(0.8 0.12 85), g: 0.55, r: 0.7, t: shrub, x: -22.5, z: 21.9}, {g: 0.55, t: pot, x: -18.9, z: -20.7}, {flowers: oklch(0.72 0.14 350), g: 0.55, r: 0.8, t: shrub, x: -21.2, z: -17.2}, {g: 0.55, lid: true, t: barrel, x: -22.4, z: -14.8}, {g: 0.55, len: 2.4, t: wood, x: 20.5, yaw: -0.96, z: -19.35}, {g: 0.55, t: bin, x: 19.1, yaw: -0.96, z: -21.2}, {g: 0.55, t: pot, x: 21.7, z: -17.4}, {g: 0.55, t: bin, x: 22.5, yaw: 1.57, z: 16.4}, {g: 0.55, t: barrel, x: 22.6, z: 21.9}, {g: 0.55, r: 0.7, t: shrub, v: 1, x: -12.8, z: 23}, {flowers: oklch(0.95 0.03 88), g: 0.55, r: 0.7, t: shrub, v: 2, x: 12.8, z: 23}, {g: 0.543, r: 1, t: shrub, x: -24.8, z: -19.5}, {g: 0.569, r: 1.1, t: shrub, v: 1, x: -21.5, z: -25.5}, {g: 0.54, r: 0.9, t: shrub, v: 2, x: -26.5, z: -23}, {g: 0.503, r: 1, t: shrub, x: 24.8, z: -19.5}, {g: 0.468, r: 1.1, t: shrub, v: 3, x: 21.5, z: -25.5}, {g: 0.429, r: 0.9, t: shrub, x: 26.5, z: -23}, {flowers: oklch(0.72 0.14 350), g: 0.538, r: 0.7, t: shrub, v: 1, x: 23.8, z: -22}, {g: 0.417, r: 0.9, t: shrub, v: 2, x: 25.3, z: 16.6}, {g: 0.354, r: 0.9, t: shrub, x: 25.3, z: 22}, {g: 0.485, r: 0.9, t: shrub, v: 1, x: -25, z: 17.5}, {g: 0.473, r: 1, t: shrub, x: -25.3, z: 21.3}, {g: 0.355, r: 0.8, t: shrub, v: 3, x: -27, z: 19.5}, {g: 0.518, r: 1, t: shrub, x: -12.8, z: 26.6}, {g: 0.332, r: 1, t: shrub, v: 1, x: 12.8, z: 26.6}, {g: 0.417, len: 2, t: wood, x: -26.2, yaw: 0, z: 21.3}, {g: 0.515, t: crates, x: -7.9, yaw: 1.5708, z: -31.5}, {g: 0.536, t: barrel, x: -7.95, z: -24.1}, {g: 0.54, stack: [[0, 0, 0.1], [0.62, 0, -0.05]], t: crates, x: 7.9, yaw: 1.5708, z: -24.3}, {g: 0.315, stack: [[0, 0, 0.2], [0, 1, -0.1]], t: crates, x: 7.9, yaw: 1.5708, z: -31.6}, {g: 0.502, h: 3.6, nx: 1, nz: 0, t: ladder, x: -8.45, z: -27.8}, {g: 0.452, h: 4.4, nx: -1, nz: 0, t: ladder, x: 8.45, z: -27.6}, {g: 0.509, nx: 1, nz: 0, t: lamp, x: -8.5, y: 3.81, z: -30.5}, {g: 0.515, nx: 1, nz: 0, t: lamp, x: -8.5, y: 3.81, z: -25}, {g: 0.353, nx: -1, nz: 0, t: lamp, x: 8.5, y: 3.65, z: -30.5}, {g: 0.526, nx: -1, nz: 0, t: lamp, x: 8.5, y: 3.83, z: -25}], kind: alleys}, script: scripts/gen/town-alleys.js, seed: 22}
-  tags: [town-alleys]
-town-apothecary:
-  feetPosition: {x: 28, y: 0.5302985096870096, z: 88}
-  id: town-apothecary
-  physics: static
-  primitive: {kind: scripted, params: {barrels: 2, d: 9, dormers: 1, eave: 0.9, floors: 2, lamp: true, plaster: oklch(0.93 0.04 130), roof: {kind: gz, pitch: 56, tex: teal, tint: oklch(0.97 0.01 190)}, seed: 4, shop: true, sign: apothecary, trim: oklch(0.55 0.08 195), vane: fish, w: 8}, script: scripts/gen/town-house.js, seed: 4}
+  primitive: {kind: scripted, params: {len: 16, w: 9}, script: scripts/gen/stormwind-bridge.js}
   rotation: {yaw: 90}
-  tags: [town, building]
-  visibleRange: {max: 170}
-town-apothecary/smoke:
-  feetPosition: {x: -2.06, y: 11.45, z: 2.7}
-  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
-  id: town-apothecary/smoke
-  parent: town-apothecary
-  tags: [town, chimney-smoke]
-  visibleRange: {max: 120}
-town-bakery:
-  feetPosition: {x: -28, y: 0.7724079094924621, z: 88.5}
-  id: town-bakery
+  visibleRange: {max: 350}
+
+sw-bridge-trade-oldtown:
+  feetPosition: {x: 42, y: 0.5, z: 140}
+  id: sw-bridge-trade-oldtown
   physics: static
-  primitive: {kind: scripted, params: {awning: oklch(0.62 0.13 40), barrels: -3, base: stone, chimney: [2.5, 2], d: 9, dormers: 2, eave: 0.85, floors: 2, plaster: oklch(0.96 0.045 88), roof: {kind: gx, pitch: 42, tex: clay, tint: oklch(0.95 0.03 45)}, seed: 1, shop: true, sign: bakery, trim: oklch(0.62 0.08 195), vane: rooster, w: 9}, script: scripts/gen/town-house.js, seed: 1}
+  primitive: {kind: scripted, params: {len: 16, w: 9}, script: scripts/gen/stormwind-bridge.js}
+  rotation: {yaw: 90}
+  visibleRange: {max: 350}
+
+sw-bridge-trade-cathedral:
+  feetPosition: {x: 0, y: 0.5, z: 180}
+  id: sw-bridge-trade-cathedral
+  physics: static
+  primitive: {kind: scripted, params: {len: 16, w: 10}, script: scripts/gen/stormwind-bridge.js}
+  rotation: {yaw: 0}
+  visibleRange: {max: 350}
+
+sw-stockade-entrance:
+  children:
+    - castShadow: false
+      feetPosition: {x: 0, y: 4.8, z: -0.15}
+      id: plaque
+      material: {color: "oklch(0.2 0.01 40)"}
+      primitive: {depth: 0.06, height: 0.7, kind: box, width: 5.6}
+      ui: "<div face=\"front\" class=\"w-full h-full flex flex-col items-center justify-center text-center\" style=\"background:#1a1a1a;border:4px solid #888;color:#eee;font-family:serif;font-weight:bold\"><div style=\"font-size:260px;letter-spacing:10px\">THE STOCKADE</div><div style=\"font-size:110px;opacity:.85\">DUNGEON & PRISON</div></div>"
+      visibleRange: {max: 80}
+    - feetPosition: {x: -2.8, y: 3.2, z: -0.2}
+      id: torch-l
+      light: {color: "oklch(0.8 0.18 55)", distance: 10, intensity: 4, kind: point}
+    - feetPosition: {x: 2.8, y: 3.2, z: -0.2}
+      id: torch-r
+      light: {color: "oklch(0.8 0.18 55)", distance: 10, intensity: 4, kind: point}
+  feetPosition: {x: 44, y: 0.5, z: 175}
+  id: sw-stockade-entrance
+  physics: static
+  primitive: {depth: 3, height: 6, kind: box, width: 8}
+  material: {color: "oklch(0.45 0.02 55)", roughness: 0.9}
   rotation: {yaw: -90}
-  tags: [town, building]
-  visibleRange: {max: 170}
-town-bakery/smoke:
-  feetPosition: {x: 2.5, y: 10.35, z: 2}
-  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
-  id: town-bakery/smoke
-  parent: town-bakery
-  tags: [town, chimney-smoke]
-  visibleRange: {max: 120}
-town-cheese:
-  feetPosition: {x: -13.5, y: 0.45989450915449076, z: 72.25}
-  id: town-cheese
-  physics: static
-  primitive: {kind: scripted, params: {awning: oklch(0.7 0.08 130), barrels: 2, d: 8.5, dormers: 2, floors: 2, plaster: oklch(0.97 0.02 85), roof: {kind: hip, pitch: 30, tex: teal, tint: oklch(0.95 0.02 190)}, seed: 7, shop: true, sign: cheese, trim: oklch(0.62 0.13 40), w: 10}, script: scripts/gen/town-house.js, seed: 7}
-  rotation: {yaw: 180}
-  tags: [town, building]
-  visibleRange: {max: 170}
-town-cheese/smoke:
-  feetPosition: {x: 3.72, y: 8.75, z: 2.65}
-  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
-  id: town-cheese/smoke
-  parent: town-cheese
-  tags: [town, chimney-smoke]
-  visibleRange: {max: 120}
-town-crowd:
-  audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-town-square-crowd-murmur-loop.mp3, gain: 0.15, loop: true, maxDistance: 40, spatial: true}
-  behavior: scripts/town-crowd.js
-  feetPosition: {x: 0, y: {terrain: 0}, z: 100}
-  id: town-crowd
-  physics: none
-  state: {}
-  tags: [manager]
-town-dragon:
-  behavior: scripts/town-dragon.js
-  children: [{feetPosition: {x: 0.2, y: 3.2, z: -1.2}, id: ember-tag, text: {color: oklch(0.92 0.12 80), content: Ember, size: 0.8}}]
-  feetPosition: {x: 0, y: 22, z: 130}
-  id: town-dragon
-  physics: none
-  primitive: {kind: scripted, script: scripts/gen/roost-dragon.js}
-  rotation: {yaw: 0}
-  scale: 4
-  state: {}
-  tags: [dragon, town]
-  visibleRange: {max: 170}
-town-festoon:
-  feetPosition: {x: 0, y: 0, z: 100}
-  id: town-festoon
-  material: {pbr: true}
-  primitive: {kind: scripted, params: {lines: [{a: [-4.1, 17.5, 26.3], b: [-20.5, 9.1, -16], kind: bulbs, lanterns: [0.4, 0.72]}, {a: [4.1, 17.5, 26.3], b: [20.5, 9.1, -16], kind: bulbs, lanterns: [0.4, 0.72]}, {a: [-4.1, 17.5, 26.3], b: [-20.5, 9.1, 16], kind: flags}, {a: [4.1, 17.5, 26.3], b: [20.5, 9.1, 16], kind: flags}, {a: [-4.1, 17.5, 26.3], b: [-23.4, 7.5, 0.5], kind: bulbs, lanterns: [0.55]}, {a: [4.1, 17.5, 26.3], b: [23.4, 7.5, -0.5], kind: bulbs, lanterns: [0.55]}, {a: [-4.1, 17.5, 26.3], b: [-23.4, 7.5, -11.5], kind: flags}, {a: [4.1, 17.5, 26.3], b: [23.4, 7.5, -12], kind: flags}, {a: [4.1, 17.5, 26.3], b: [-13.5, 7.5, -23.4], kind: bulbs, lanterns: [0.3, 0.62]}, {a: [-4.1, 17.5, 26.3], b: [13.5, 7.5, -23.4], kind: bulbs, lanterns: [0.3, 0.62]}, {a: [-23.4, 7.5, 12.5], b: [23.4, 7.5, 11], kind: flags}, {a: [-10, 7.5, -23.4], b: [10, 7.5, -23.4], kind: bulbs, lanterns: [0.5]}, {a: [-20.5, 8.95, -16], b: [20.5, 8.95, -16], kind: glow, sag: 2.0500000000000003}, {a: [-20.5, 8.95, 16], b: [20.5, 8.95, 16], kind: glow, sag: 2.0500000000000003}, {a: [-20.5, 8.95, -16], b: [20.5, 8.95, 16], kind: glow, sag: 2.2}, {a: [20.5, 8.95, -16], b: [-20.5, 8.95, 16], kind: glow, sag: 2.2}]}, script: scripts/gen/town-festoon.js, seed: 23}
-  tags: [town-festoon]
-town-fountain:
-  audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-town-fountain-splash-loop.mp3, gain: 0.18, loop: true, maxDistance: 25, spatial: true}
-  feetPosition: {x: 0, y: 0.55, z: 100}
-  fx: {script: "fx\npop sheetA rate=?mobile:18|28 on=arc(3.02,360).c(2.36) life=.7..0.85 v=radial(1.1)*(.8..1.2) size=.07..0.12 acc=grav()+drag(.3) col=<.82,.93,1> a=.75>.5:.6>.15 sz=$size r=sprite(droplet,alpha,velocity,.06)\npop sheetB rate=?mobile:10|16 on=arc(1.76,360).c(3.7) life=.55..0.7 v=radial(.9)*(.8..1.2) size=.06..0.1 acc=grav()+drag(.3) col=<.82,.93,1> a=.75>.5:.6>.15 sz=$size r=sprite(droplet,alpha,velocity,.06)"}
-  id: town-fountain
-  physics: static
-  primitive: {kind: scripted, script: scripts/gen/town-fountain.js, seed: 14}
-  tags: [town]
-  visibleRange: {max: 170}
-town-fountain/glow:
-  feetPosition: {x: 0, y: 1.2, z: 0}
-  id: town-fountain/glow
-  light: {color: oklch(0.9 0.05 200), distance: 10, intensity: 3, kind: point}
-  parent: town-fountain
-town-fountain/jet:
-  feetPosition: {x: -0.66, y: 6, z: 0}
-  fx: {script: "fx\npop jet rate=?mobile:8|12 on=point() life=.95..1.15 v=<-1.6,2.2,0>*(.9..1.1)+sdir()*.12 size=.06..0.1 acc=grav() col=<.85,.95,1> a=.8>.6:.7>.2 sz=$size r=sprite(droplet,alpha,velocity,.05)"}
-  id: town-fountain/jet
-  parent: town-fountain
-town-fountain/spout-0:
-  feetPosition: {x: 0.7919595949289333, y: 1.19, z: 0.7919595949289332}
-  fx: {script: "fx\npop arc rate=?mobile:9|16 on=point() life=.42..0.5 v=<0.88,.35,0.88>*(.92..1.08)+sdir()*.05 size=.05..0.08 acc=grav() col=<.85,.95,1> a=.8>.6:.7>.2 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop splash on=@arc life=.25..0.4 v=up(.6..1)+sdir()*.4 size=.03..0.05 acc=grav() col=<.9,.97,1> a=.7>0 sz=$size r=sprite(droplet,alpha)"}
-  id: town-fountain/spout-0
-  parent: town-fountain
-town-fountain/spout-1:
-  feetPosition: {x: -0.7919595949289332, y: 1.19, z: 0.7919595949289333}
-  fx: {script: "fx\npop arc rate=?mobile:9|16 on=point() life=.42..0.5 v=<-0.88,.35,0.88>*(.92..1.08)+sdir()*.05 size=.05..0.08 acc=grav() col=<.85,.95,1> a=.8>.6:.7>.2 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop splash on=@arc life=.25..0.4 v=up(.6..1)+sdir()*.4 size=.03..0.05 acc=grav() col=<.9,.97,1> a=.7>0 sz=$size r=sprite(droplet,alpha)"}
-  id: town-fountain/spout-1
-  parent: town-fountain
-town-fountain/spout-2:
-  feetPosition: {x: -0.7919595949289335, y: 1.19, z: -0.7919595949289332}
-  fx: {script: "fx\npop arc rate=?mobile:9|16 on=point() life=.42..0.5 v=<-0.88,.35,-0.88>*(.92..1.08)+sdir()*.05 size=.05..0.08 acc=grav() col=<.85,.95,1> a=.8>.6:.7>.2 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop splash on=@arc life=.25..0.4 v=up(.6..1)+sdir()*.4 size=.03..0.05 acc=grav() col=<.9,.97,1> a=.7>0 sz=$size r=sprite(droplet,alpha)"}
-  id: town-fountain/spout-2
-  parent: town-fountain
-town-fountain/spout-3:
-  feetPosition: {x: 0.7919595949289331, y: 1.19, z: -0.7919595949289335}
-  fx: {script: "fx\npop arc rate=?mobile:9|16 on=point() life=.42..0.5 v=<0.88,.35,-0.88>*(.92..1.08)+sdir()*.05 size=.05..0.08 acc=grav() col=<.85,.95,1> a=.8>.6:.7>.2 sz=$size r=sprite(droplet,alpha,velocity,.03)\npop splash on=@arc life=.25..0.4 v=up(.6..1)+sdir()*.4 size=.03..0.05 acc=grav() col=<.9,.97,1> a=.7>0 sz=$size r=sprite(droplet,alpha)"}
-  id: town-fountain/spout-3
-  parent: town-fountain
-town-fountain/water-basin:
-  feetPosition: {x: 0, y: 0.5, z: 0}
-  id: town-fountain/water-basin
-  material: {color: oklch(0.72 0.08 200), kind: water, opacity: 0.75, waveIntensity: 0.25}
-  parent: town-fountain
-  primitive: {height: 0.04, kind: cylinder, radialSegments: 40, radiusBottom: 4.56, radiusTop: 4.56}
-town-fountain/water-tier1:
-  feetPosition: {x: 0, y: 2.34, z: 0}
-  id: town-fountain/water-tier1
-  material: {color: oklch(0.72 0.08 200), kind: water, opacity: 0.75, waveIntensity: 0.3}
-  parent: town-fountain
-  primitive: {height: 0.03, kind: cylinder, radialSegments: 32, radiusBottom: 2.85, radiusTop: 2.85}
-town-fountain/water-tier2:
-  feetPosition: {x: 0, y: 3.68, z: 0}
-  id: town-fountain/water-tier2
-  material: {color: oklch(0.72 0.08 200), kind: water, opacity: 0.75, waveIntensity: 0.3}
-  parent: town-fountain
-  primitive: {height: 0.03, kind: cylinder, radialSegments: 24, radiusBottom: 1.61, radiusTop: 1.61}
-town-hall:
-  feetPosition: {x: 0, y: 0.4156158529396462, z: 130}
-  id: town-hall
-  physics: static
-  primitive: {kind: scripted, params: {roostY: 21.584}, script: scripts/gen/town-hall.js, seed: 15}
-  tags: [town, roost]
-  visibleRange: {max: 400}
-town-hall/drape-l:
-  feetPosition: {x: -5.1, y: 7.98, z: -6.35}
-  id: town-hall/drape-l
-  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.3}, script: scripts/material-banner-wave.js}
-  parent: town-hall
-  primitive: {kind: scripted, params: {h: 3.4, kind: drape, point: 0.45, w: 1.1}, script: scripts/gen/town-banner.js}
-  tags: [town, banner]
-  visibleRange: {max: 250}
-town-hall/drape-r:
-  feetPosition: {x: 5.1, y: 7.98, z: -6.35}
-  id: town-hall/drape-r
-  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.3}, script: scripts/material-banner-wave.js}
-  parent: town-hall
-  primitive: {kind: scripted, params: {h: 3.4, kind: drape, point: 0.45, w: 1.1}, script: scripts/gen/town-banner.js}
-  tags: [town, banner]
-  visibleRange: {max: 250}
-town-hall/flag:
-  castShadow: true
-  feetPosition: {x: 7.59, y: 14.15, z: -8.6}
-  id: town-hall/flag
-  material: {kind: scripted, params: {ax: 0.28, ay: 0, k: 4, reach: 0.32, speed: 2.6}, script: scripts/material-banner-wave.js}
-  parent: town-hall
-  primitive: {kind: scripted, params: {L: 3.6, h: 2.3, kind: flag}, script: scripts/gen/town-banner.js}
-  rotation: {yaw: 0}
-  tags: [town, banner]
   visibleRange: {max: 300}
-town-house-e:
-  feetPosition: {x: 28, y: 0.4311763555940418, z: 111}
-  id: town-house-e
+
+# ==========================================
+# 7. PERIMETER CURTAIN WALLS & BASTION TOWERS
+# ==========================================
+sw-wall-south-w:
+  feetPosition: {x: -65, y: 0.5, z: 95}
+  id: sw-wall-south-w
   physics: static
-  primitive: {kind: scripted, params: {barrels: -2, chimney: [-2.5, 2.5], d: 9, dormers: 1, floors: 3, plaster: oklch(0.94 0.035 190), roof: {kind: gx, pitch: 34, tex: clay, tint: oklch(0.9 0.05 40)}, seed: 6, sign: smith, trim: oklch(0.55 0.07 135), w: 9}, script: scripts/gen/town-house.js, seed: 6}
-  rotation: {yaw: 90}
-  tags: [town, building]
-  visibleRange: {max: 170}
-town-house-e/smoke:
-  feetPosition: {x: -2.5, y: 12.14, z: 2.5}
-  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
-  id: town-house-e/smoke
-  parent: town-house-e
-  tags: [town, chimney-smoke]
-  visibleRange: {max: 120}
-town-house-ne:
-  feetPosition: {x: 19, y: 0.1803013263502008, z: 127}
-  id: town-house-ne
+  primitive: {depth: 5, height: 11, kind: box, width: 100}
+  material: {color: "oklch(0.92 0.015 80)", roughness: 0.85}
+  visibleRange: {max: 600}
+
+sw-wall-south-e:
+  feetPosition: {x: 65, y: 0.5, z: 95}
+  id: sw-wall-south-e
   physics: static
-  primitive: {kind: scripted, params: {awning: oklch(0.66 0.11 10), d: 9, dormers: 1, floors: 2, plaster: oklch(0.93 0.04 130), roof: {kind: hip, pitch: 52, tex: clay, tint: oklch(0.95 0.04 55)}, seed: 10, shop: true, sign: lantern, trim: oklch(0.6 0.12 40), w: 9}, script: scripts/gen/town-house.js, seed: 10}
-  rotation: {yaw: 0}
-  tags: [town, building]
-  visibleRange: {max: 170}
-town-house-ne/smoke:
-  feetPosition: {x: -3.22, y: 10.34, z: 2.9}
-  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
-  id: town-house-ne/smoke
-  parent: town-house-ne
-  tags: [town, chimney-smoke]
-  visibleRange: {max: 120}
-town-house-nw:
-  feetPosition: {x: -19, y: 0.5489051862959411, z: 127}
-  id: town-house-nw
+  primitive: {depth: 5, height: 11, kind: box, width: 100}
+  material: {color: "oklch(0.92 0.015 80)", roughness: 0.85}
+  visibleRange: {max: 600}
+
+sw-wall-west:
+  feetPosition: {x: -120, y: 0.5, z: 145}
+  id: sw-wall-west
   physics: static
-  primitive: {kind: scripted, params: {chimney: [2.5, 2], d: 9, dormers: 1, eave: 0.85, floors: 2, plaster: oklch(0.94 0.04 40), roof: {kind: gx, pitch: 55, tex: cedar, tint: oklch(0.92 0.03 60)}, seed: 9, sign: key, trim: oklch(0.62 0.08 195), vane: rooster, w: 9}, script: scripts/gen/town-house.js, seed: 9}
-  rotation: {yaw: 0}
-  tags: [town, building]
-  visibleRange: {max: 170}
-town-house-nw/smoke:
-  feetPosition: {x: 2.5, y: 11.93, z: 2}
-  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
-  id: town-house-nw/smoke
-  parent: town-house-nw
-  tags: [town, chimney-smoke]
-  visibleRange: {max: 120}
-town-house-se:
-  feetPosition: {x: 13.5, y: 0.407376225462724, z: 72.25}
-  id: town-house-se
+  primitive: {depth: 95, height: 11, kind: box, width: 5}
+  material: {color: "oklch(0.92 0.015 80)", roughness: 0.85}
+  visibleRange: {max: 600}
+
+sw-wall-east:
+  feetPosition: {x: 120, y: 0.5, z: 145}
+  id: sw-wall-east
   physics: static
-  primitive: {kind: scripted, params: {barrels: 2, chimney: [3, 2], d: 8.5, dormers: 1, floors: 3, plaster: oklch(0.96 0.045 88), roof: {kind: gz, pitch: 38, tex: slate, tint: oklch(0.93 0.015 250)}, seed: 8, sign: lantern, trim: oklch(0.62 0.08 195), w: 10}, script: scripts/gen/town-house.js, seed: 8}
-  rotation: {yaw: 180}
-  tags: [town, building]
-  visibleRange: {max: 170}
-town-house-se/smoke:
-  feetPosition: {x: 3, y: 12.59, z: 2}
-  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
-  id: town-house-se/smoke
-  parent: town-house-se
-  tags: [town, chimney-smoke]
-  visibleRange: {max: 120}
-town-house-w:
-  feetPosition: {x: -28, y: 0.42423883697257864, z: 112.5}
-  id: town-house-w
+  primitive: {depth: 95, height: 11, kind: box, width: 5}
+  material: {color: "oklch(0.92 0.015 80)", roughness: 0.85}
+  visibleRange: {max: 600}
+
+sw-tower-sw:
+  feetPosition: {x: -120, y: 0.5, z: 95}
+  id: sw-tower-sw
   physics: static
-  primitive: {kind: scripted, params: {d: 9, dormers: 1, eave: 0.9, floors: 3, plaster: oklch(0.97 0.02 85), roof: {kind: hip, pitch: 40, tex: slate, tint: oklch(0.95 0.01 250)}, seed: 3, sign: lantern, trim: oklch(0.6 0.12 40), w: 8}, script: scripts/gen/town-house.js, seed: 3}
-  rotation: {yaw: -90}
-  tags: [town, building]
-  visibleRange: {max: 170}
-town-house-w/smoke:
-  feetPosition: {x: 2.84, y: 12.21, z: 2.9}
-  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
-  id: town-house-w/smoke
-  parent: town-house-w
-  tags: [town, chimney-smoke]
-  visibleRange: {max: 120}
-town-market:
-  feetPosition: {x: 0, y: 0.55, z: 100}
-  id: town-market
+  primitive: {height: 18, kind: cylinder, radiusBottom: 5.5, radiusTop: 5.5}
+  material: {color: "oklch(0.94 0.012 85)", roughness: 0.8}
+  visibleRange: {max: 600}
+
+sw-tower-se:
+  feetPosition: {x: 120, y: 0.5, z: 95}
+  id: sw-tower-se
   physics: static
-  primitive: {kind: scripted, params: {kind: market, props: [{k: rugs, x: -16.3, yaw: 0, z: -5.6}, {k: barrels, x: -16.8, yaw: 20, z: 5.2}, {k: sacks, x: -16, yaw: -30, z: -1.8}, {goods: [cabbage, bread, apples, apples], k: stack, x: -11, yaw: 90, z: 0.5}, {k: rugs, x: 16.3, yaw: 0, z: 6.6}, {k: barrels, x: 16.4, yaw: 200, z: -2.2}, {k: sacks, x: 16.6, yaw: 150, z: 3.2}, {goods: [apples, cabbage, bread, apples], k: stack, x: 11, yaw: -90, z: 0.5}, {goods: [bread, apples, cabbage, apples], k: stack, x: -13.8, yaw: 0, z: -15.4}, {k: barrels, x: -11.5, yaw: 60, z: -18.6}, {k: sacks, x: -17.6, yaw: 10, z: -12.2}, {k: rugs, x: -7.8, yaw: 90, z: -10.8}], stalls: [{awn: oklch(0.58 0.16 28), fx: 0, fz: -3, goods: [apples, apples, pumpkin], hang: oklch(0.72 0.14 50), x: -13.5, z: -3}, {awn: oklch(0.6 0.09 195), fx: 0, fz: 4, goods: [bread, cheese, jars], x: -13.5, z: 4}, {awn: oklch(0.76 0.14 85), fx: -30, fz: 0.5, goods: [flowers, flowers, cabbage], hang: oklch(0.66 0.15 350), x: -19, z: 0.5}, {awn: oklch(0.6 0.09 195), fx: 0, fz: -3, goods: [cabbage, carrots, apples], x: 13.5, z: -3}, {awn: oklch(0.76 0.14 85), fx: 0, fz: 4, goods: [bread, bread, jars], hang: oklch(0.6 0.12 30), x: 13.5, z: 4}, {awn: oklch(0.58 0.16 28), fx: 30, fz: 0.5, goods: [cheese, jars, flowers], x: 19, z: 0.5}, {awn: oklch(0.58 0.16 28), fx: 16, fz: -30, goods: [pumpkin, apples, carrots], x: 16, z: -8}, {awn: oklch(0.76 0.14 85), fx: 0, fz: -14, goods: [apples, cabbage, bread], x: -10.5, z: -14}, {awn: oklch(0.58 0.16 28), fx: -14.5, fz: 10, goods: [carrots, pumpkin, cabbage], hang: oklch(0.8 0.1 85), x: -14.5, z: -10.5}, {awn: oklch(0.6 0.09 195), fx: -30, fz: -16, goods: [jars, cheese, bread], x: -17.5, z: -16}]}, script: scripts/gen/town-square.js, seed: 13}
-  tags: [town, market]
-  visibleRange: {max: 170}
-town-rampart:
-  castShadow: true
-  feetPosition: {x: 0, y: 0, z: 100}
-  id: town-rampart
-  material: {pbr: true}
-  physics: static
-  primitive: {kind: scripted, params: {h: 0.95, items: [{k: woodpile, len: 2.6, x: -37.65, y: 0.77, yaw: -90, z: -14}, {k: dock, len: 3.4, x: -37.6, y: 0.6, yaw: -90, z: -3}, {k: barrel, x: -37.6, y: 0.344, yaw: 0, z: 8.5}, {k: barrel, x: -37.15, y: 0.338, yaw: 0, z: 9.05}, {h: 0.8, k: barrel, x: -37.800000000000004, y: 0.326, yaw: 0, z: 9.22}, {k: crate, s: 0.7, x: -37.6, y: 0.244, yaw: -90, z: 12.6}, {k: crate, s: 0.55, x: -37.8, y: 0.219, yaw: -80, z: 13.5}, {k: haystore, len: 3, x: -37.55, y: 0.17, yaw: -90, z: 24}, {k: bales, n: 3, x: -37.7, y: 0.339, yaw: -90, z: 30.5}, {k: barrel, x: 37.6, y: 0.396, yaw: 0, z: -12}, {k: barrel, x: 38.050000000000004, y: 0.391, yaw: 0, z: -11.45}, {h: 0.8, k: barrel, x: 37.4, y: 0.399, yaw: 0, z: -11.28}, {k: dock, len: 3.4, x: 37.6, y: 0.463, yaw: 90, z: -4}, {k: bales, n: 4, x: 37.7, y: 0.523, yaw: 90, z: 9}, {k: woodpile, len: 2.8, x: 37.65, y: 0.677, yaw: 90, z: 18}, {k: haystore, len: 3, x: 37.55, y: 0.684, yaw: 90, z: 27}, {k: crate, s: 0.7, x: -31, y: 0.647, yaw: 0, z: 35.85}, {k: woodpile, len: 2.8, x: -26, y: 0.744, yaw: 0, z: 35.9}, {k: barrel, x: -20.5, y: 0.703, yaw: 0, z: 35.4}, {k: barrel, x: -20.05, y: 0.693, yaw: 0, z: 35.949999999999996}, {h: 0.8, k: barrel, x: -20.7, y: 0.707, yaw: 0, z: 36.12}, {k: crate, s: 0.65, x: 20, y: 0.255, yaw: 10, z: 35.85}, {k: haystore, len: 3, x: 26, y: 0.358, yaw: 0, z: 35.75}, {k: bales, n: 2, x: 32.2, y: 0.536, yaw: 0, z: 35.9}, {k: crate, s: 0.7, x: -11, y: 0.555, yaw: 0, z: 40.6}, {k: crate, s: 0.5, x: -10.2, y: 0.549, yaw: 15, z: 40.5}, {k: barrel, x: -7.5, y: 0.528, yaw: 0, z: 40.2}, {k: barrel, x: -7.05, y: 0.516, yaw: 0, z: 40.75}, {h: 0.8, k: barrel, x: -7.7, y: 0.522, yaw: 0, z: 40.92}, {k: dock, len: 3.4, x: 2, y: 0.392, yaw: 0, z: 40.6}, {k: woodpile, len: 2.4, x: -16.6, y: 0.404, yaw: 180, z: -36.3}, {k: barrel, x: 15.3, y: 0.269, yaw: 0, z: -36.8}, {k: barrel, x: 15.75, y: 0.275, yaw: 0, z: -36.25}, {h: 0.8, k: barrel, x: 15.100000000000001, y: 0.261, yaw: 0, z: -36.08}, {k: crate, s: 0.7, x: 18.4, y: 0.334, yaw: 180, z: -36.3}, {k: barrel, x: -29.6, y: 0.47, yaw: 0, z: -28.9}, {k: barrel, x: -29.150000000000002, y: 0.479, yaw: 0, z: -28.349999999999998}, {h: 0.8, k: barrel, x: -29.8, y: 0.467, yaw: 0, z: -28.18}, {k: crate, s: 0.7, x: -26.9, y: 0.508, yaw: -136.6, z: -31.4}, {k: bales, n: 3, x: -32.3, y: 0.471, yaw: -136.6, z: -25.8}, {k: bales, n: 3, x: 29.6, y: 0.395, yaw: 136.6, z: -28.7}, {k: crate, s: 0.7, x: 27, y: 0.418, yaw: 136.6, z: -31.2}, {k: barrel, x: 32.3, y: 0.338, yaw: 0, z: -25.9}], pts: [[-13, -38, 0.411, 1], [-17.45, -38, 0.393, 0], [-21.9, -38, 0.421, 1], [-27.7, -32.5, 0.487, 0], [-33.5, -27, 0.462, 0], [-39.3, -21.5, 0.721, 1], [-39.3, -14.13, 0.77, 0], [-39.3, -6.75, 0.682, 0], [-39.3, 0.63, 0.449, 0], [-39.3, 1.8, 0.4, 1, 1], [-39.3, 7.6, 0.3, 1], [-39.3, 8, 0.333, 0], [-39.3, 15.38, 0.182, 0], [-39.3, 22.75, 0.131, 0], [-39.3, 30.13, 0.28, 0], [-39.3, 37.5, 0.37, 1], [-31.7, 37.5, 0.663, 0], [-24.1, 37.5, 0.762, 0], [-16.5, 37.5, 0.603, 1], [-16.5, 42.3, 0.629, 1], [-9.9, 42.3, 0.547, 0], [-3.3, 42.3, 0.442, 0], [3.3, 42.3, 0.359, 0], [9.9, 42.3, 0.386, 0], [16.5, 42.3, 0.455, 1], [16.5, 37.5, 0.32, 1], [24.1, 37.5, 0.341, 0], [31.7, 37.5, 0.548, 0], [39.3, 37.5, 0.688, 1], [39.3, 30.13, 0.693, 0], [39.3, 22.75, 0.757, 0], [39.3, 15.38, 0.671, 0], [39.3, 8, 0.541, 0], [39.3, 7.3, 0.5, 1, 1], [39.3, 1.2, 0.5, 1], [39.3, 0.63, 0.521, 0], [39.3, -6.75, 0.404, 0], [39.3, -14.13, 0.386, 0], [39.3, -21.5, 0.363, 1], [33.5, -27, 0.32, 0], [27.7, -32.5, 0.394, 0], [21.9, -38, 0.397, 1], [17.45, -38, 0.333, 0], [13, -38, 0.237, 1]], t: 0.55}, script: scripts/gen/town-rampart.js, seed: 7}
-  receiveShadow: true
-  state: {does: low limestone wall and service yards wrapping the town}
-  tags: [town-rampart]
-  visibleRange: {max: 320}
-town-square:
-  feetPosition: {x: 0, y: 0.55, z: 100}
-  id: town-square
-  physics: static
-  primitive: {kind: scripted, params: {benches: [[-20.5, 10, -90], [20.5, 10, 90], [20.5, -14, 90]], floor: {band: 1.6, dais: 8.5, ring: 12.3}, fronts: [[x, -23.5, -16, -7], [x, -23.5, -5, 6], [x, 23.5, -16, -8], [x, 23.5, -5.5, 4.5], [z, -23.5, -18.5, -8.5], [z, 22.5, 14.5, 23.5]], kind: square, planters: [[-6, -20.5, 3, 90], [6, -20.5, 3, 90], [-8, 19.5, 3, 0], [8, 19.5, 3, 0]], poleH: 8.5, poles: [[-20.5, -16], [20.5, -16], [-20.5, 16], [20.5, 16]], strings: [[0, 1], [2, 3], [0, 3], [1, 2]], trees: [[-17, 18.5], [17, 18.5]], wear: [[-13.5, -3, 2.8], [-13.5, 4, 2.8], [-19, 0.5, 2.8], [13.5, -3, 2.8], [13.5, 4, 2.8], [19, 0.5, 2.8], [16, -8, 2.8], [-10.5, -14, 2.8], [-14.5, -10.5, 2.8], [-17.5, -16, 2.8], [-16.3, -5.6, 1.8], [-16.8, 5.2, 1.8], [-16, -1.8, 1.8], [-11, 0.5, 1.8], [16.3, 6.6, 1.8], [16.4, -2.2, 1.8], [16.6, 3.2, 1.8], [11, 0.5, 1.8], [-13.8, -15.4, 1.8], [-11.5, -18.6, 1.8], [-17.6, -12.2, 1.8], [-7.8, -10.8, 1.8], [-23.5, -11.5, 2.3], [-23.5, 0.5, 2.3], [23.5, -12, 2.3], [23.5, -0.5, 2.3], [-13.5, -23.5, 2.3], [19, 22.5, 2.3], [-23.5, 12.5, 1.8], [23.5, 11, 1.8], [13.5, -23.5, 1.8], [-19, 22.5, 1.8]]}, script: scripts/gen/town-square.js, seed: 12}
-  tags: [town]
-  visibleRange: {max: 170}
-town-tailor:
-  feetPosition: {x: 28, y: 0.4220246443605373, z: 98.25}
-  id: town-tailor
-  physics: static
-  primitive: {kind: scripted, params: {awning: oklch(0.62 0.08 195), d: 9, dormers: 1, eave: 0.85, floors: 2, plaster: oklch(0.96 0.045 88), roof: {kind: salt, pitch: 45, ridge: 0.38, tex: gold, tint: oklch(0.96 0.02 80)}, seed: 5, shop: true, sign: tailor, trim: oklch(0.66 0.11 10), w: 6.5}, script: scripts/gen/town-house.js, seed: 5}
-  rotation: {yaw: 90}
-  tags: [town, building]
-  visibleRange: {max: 170}
-town-tailor/smoke:
-  feetPosition: {x: 3.72, y: 8.89, z: 2.9}
-  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
-  id: town-tailor/smoke
-  parent: town-tailor
-  tags: [town, chimney-smoke]
-  visibleRange: {max: 120}
-town-tavern:
-  feetPosition: {x: -28.5, y: 0.6568747900200451, z: 98.5}
-  id: town-tavern
-  physics: static
-  primitive: {kind: scripted, params: {barrels: 3, d: 10, dormers: 2, eave: 0.9, floors: 3, lamp: true, plaster: oklch(0.94 0.04 40), roof: {kind: gz, pitch: 38, tex: cedar, tint: oklch(0.95 0.02 70)}, seed: 2, shop: true, sign: tavern, trim: oklch(0.55 0.07 135), vane: dragon, w: 7}, script: scripts/gen/town-house.js, seed: 2}
-  rotation: {yaw: -90}
-  tags: [town, building]
-  visibleRange: {max: 170}
-town-tavern/smoke:
-  feetPosition: {x: -2.87, y: 13.08, z: 3.2}
-  fx: {script: "fx\npop smoke rate=flick(.3,.4)*3.2 n=12 on=disc(.12) life=2.6..3.8 v=up(.5..0.8)+cone(14)*(.1..0.25) size=.22..0.36 acc=buoy(.35)+curl(.45)*.7+wind()*.25+drag(.7) sz=$size*(.7>3.2) col=<.72,.7,.68>><.55,.55,.57> a=0>.1:.38>.6:.24>0 rot=spin(.12) r=sprite(smoke-puff,alpha)"}
-  id: town-tavern/smoke
-  parent: town-tavern
-  tags: [town, chimney-smoke]
-  visibleRange: {max: 120}
-town-wall-e1:
-  feetPosition: {x: 0, y: 0, z: 100}
-  id: town-wall-e1
-  material: {pbr: true}
-  physics: static
-  primitive: {kind: scripted, params: {h: 1.6, kind: wall, pts: [[23.5, -8.2, 0.546], [23.5, -5.3, 0.544]]}, script: scripts/gen/town-alleys.js, seed: 21}
-  tags: [town-wall]
-town-wall-n1:
-  feetPosition: {x: 0, y: 0, z: 100}
-  id: town-wall-n1
-  material: {pbr: true}
-  physics: static
-  primitive: {kind: scripted, params: {h: 1.6, kind: wall, pts: [[-14.7, 24, 0.542], [-10.8, 24, 0.541]]}, script: scripts/gen/town-alleys.js, seed: 21}
-  tags: [town-wall]
-town-wall-n2:
-  feetPosition: {x: 0, y: 0, z: 100}
-  id: town-wall-n2
-  material: {pbr: true}
-  physics: static
-  primitive: {kind: scripted, params: {h: 1.6, kind: wall, pts: [[10.8, 24, 0.523], [14.7, 24, 0.511]]}, script: scripts/gen/town-alleys.js, seed: 21}
-  tags: [town-wall]
-town-wall-ne:
-  feetPosition: {x: 0, y: 0, z: 100}
-  id: town-wall-ne
-  material: {pbr: true}
-  physics: static
-  primitive: {kind: scripted, params: {gate: {open: true, seg: 0, side: -1, t: 0.5, w: 1.3}, h: 1.6, kind: wall, pts: [[23.5, 15.3, 0.542], [23.5, 22.7, 0.535]]}, script: scripts/gen/town-alleys.js, seed: 21}
-  tags: [town-wall]
-town-wall-nw:
-  feetPosition: {x: 0, y: 0, z: 100}
-  id: town-wall-nw
-  material: {pbr: true}
-  physics: static
-  primitive: {kind: scripted, params: {gate: {open: false, seg: 0, t: 0.5, w: 1.3}, h: 1.6, kind: wall, pts: [[-23.5, 16.3, 0.547], [-23.5, 22.7, 0.547]]}, script: scripts/gen/town-alleys.js, seed: 21}
-  tags: [town-wall]
-town-wall-se:
-  feetPosition: {x: 0, y: 0, z: 100}
-  id: town-wall-se
-  material: {pbr: true}
-  physics: static
-  primitive: {kind: scripted, params: {h: 1.6, kind: wall, pts: [[18.3, -23.6, 0.54], [23.7, -15.8, 0.544]]}, script: scripts/gen/town-alleys.js, seed: 21}
-  tags: [town-wall]
-town-wall-sw:
-  feetPosition: {x: 0, y: 0, z: 100}
-  id: town-wall-sw
-  material: {pbr: true}
-  physics: static
-  primitive: {kind: scripted, params: {gate: {open: true, seg: 0, side: 1, t: 0.5, w: 1.3}, h: 1.6, kind: wall, pts: [[-18.3, -23.6, 0.55], [-23.7, -15.8, 0.551]]}, script: scripts/gen/town-alleys.js, seed: 21}
-  tags: [town-wall]
-town-wall-w1:
-  feetPosition: {x: 0, y: 0, z: 100}
-  id: town-wall-w1
-  material: {pbr: true}
-  physics: static
-  primitive: {kind: scripted, params: {h: 1.6, kind: wall, pts: [[-23.5, -7.2, 0.563], [-23.5, -4.8, 0.564]]}, script: scripts/gen/town-alleys.js, seed: 21}
-  tags: [town-wall]
-wild-mushroom-01:
-  behavior: scripts/wild-mushroom.js
-  castShadow: false
-  feetPosition: {x: 57.81, y: 0.706, z: 172.85}
-  id: wild-mushroom-01
-  material: {pbr: true}
-  primitive: {kind: scripted, params: {count: 2, kind: chanterelle}, script: scripts/gen/wild-mushroom.js, seed: 1}
-  receiveShadow: true
-  rotation: {yaw: 265}
-  state: {kind: chanterelle, picked: false}
-  tags: [interactable, wild-mushroom]
-  visibleRange: {max: 70, min: 0}
-wild-mushroom-02:
-  behavior: scripts/wild-mushroom.js
-  castShadow: false
-  feetPosition: {x: -42.15, y: 0.485, z: 65.76}
-  id: wild-mushroom-02
-  material: {pbr: true}
-  primitive: {kind: scripted, params: {count: 2, kind: agaric}, script: scripts/gen/wild-mushroom.js, seed: 3}
-  receiveShadow: true
-  rotation: {yaw: 324}
-  state: {kind: agaric, picked: false}
-  tags: [interactable, wild-mushroom]
-  visibleRange: {max: 70, min: 0}
-wild-mushroom-07:
-  behavior: scripts/wild-mushroom.js
-  castShadow: false
-  feetPosition: {x: 53.47, y: 0.558, z: 114.4}
-  id: wild-mushroom-07
-  material: {pbr: true}
-  primitive: {kind: scripted, params: {count: 2, kind: bolete}, script: scripts/gen/wild-mushroom.js, seed: 2}
-  receiveShadow: true
-  rotation: {yaw: 60}
-  state: {kind: bolete, picked: false}
-  tags: [interactable, wild-mushroom]
-  visibleRange: {max: 70, min: 0}
-wild-mushroom-22:
-  behavior: scripts/wild-mushroom.js
-  castShadow: false
-  feetPosition: {x: -13.32, y: 0.721, z: 149.35}
-  id: wild-mushroom-22
-  material: {pbr: true}
-  primitive: {kind: scripted, params: {count: 4, kind: chanterelle}, script: scripts/gen/wild-mushroom.js, seed: 4}
-  receiveShadow: true
-  rotation: {yaw: 146}
-  state: {kind: chanterelle, picked: false}
-  tags: [interactable, wild-mushroom]
-  visibleRange: {max: 70, min: 0}
-wild-mushroom-27:
-  behavior: scripts/wild-mushroom.js
-  castShadow: false
-  feetPosition: {x: -37.88, y: 0.701, z: 157.58}
-  id: wild-mushroom-27
-  material: {pbr: true}
-  primitive: {kind: scripted, params: {count: 2, kind: chanterelle}, script: scripts/gen/wild-mushroom.js, seed: 2}
-  receiveShadow: true
-  rotation: {yaw: 44}
-  state: {kind: chanterelle, picked: false}
-  tags: [interactable, wild-mushroom]
-  visibleRange: {max: 70, min: 0}
-wild-mushroom-38:
-  behavior: scripts/wild-mushroom.js
-  castShadow: false
-  feetPosition: {x: -55.3, y: 0.362, z: 84.84}
-  id: wild-mushroom-38
-  material: {pbr: true}
-  primitive: {kind: scripted, params: {count: 2, kind: agaric}, script: scripts/gen/wild-mushroom.js, seed: 3}
-  receiveShadow: true
-  rotation: {yaw: 5}
-  state: {kind: agaric, picked: false}
-  tags: [interactable, wild-mushroom]
-  visibleRange: {max: 70, min: 0}
-wild-mushroom-66:
-  behavior: scripts/wild-mushroom.js
-  castShadow: false
-  feetPosition: {x: 44.79, y: 0.644, z: 110.81}
-  id: wild-mushroom-66
-  material: {pbr: true}
-  primitive: {kind: scripted, params: {count: 2, kind: bolete}, script: scripts/gen/wild-mushroom.js, seed: 4}
-  receiveShadow: true
-  rotation: {yaw: 201}
-  state: {kind: bolete, picked: false}
-  tags: [interactable, wild-mushroom]
-  visibleRange: {max: 70, min: 0}
+  primitive: {height: 18, kind: cylinder, radiusBottom: 5.5, radiusTop: 5.5}
+  material: {color: "oklch(0.94 0.012 85)", roughness: 0.8}
+  visibleRange: {max: 600}
