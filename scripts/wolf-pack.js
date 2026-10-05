@@ -209,11 +209,14 @@ function step(ctx, row, rows, players, now, dt) {
   }
   vel(row, m, 0, 0, dt); if (m.look) face(row, m, m.lookYaw, 90, dt); clip(ctx, row, m, 'idle', m.look ? 0.8 : 1);
 }
+let WOLF_IDS = null, wolfScanAt = 0;
 export function update(ctx, dt) {
   const players = ctx.place.players, now = ctx.now();
   if (!players.length) return;
   pathBudget = 3; // path queries per update, shared by the whole pack
-  const rows = ctx.query({ tags: ['wild-wolf'], radius: 100000 });
+  // the pack's ids from one world scan every 3 s (the scan walks ~3.9k rows); handles read fresh each tick
+  if (!WOLF_IDS || now >= wolfScanAt) { WOLF_IDS = ctx.query({ tags: ['wild-wolf'], radius: 100000, select: 'ids' }); wolfScanAt = now + 3000; }
+  const rows = []; for (const id of WOLF_IDS) { const r = ctx.getObject(id); if (r) rows.push(r); }
   for (const row of rows) {
     if (!row.state?.home) continue;
     let near = 1e9; for (const pl of players) near = Math.min(near, dist2(pl.feetPosition, row.feetPosition));
