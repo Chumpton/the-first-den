@@ -1,0 +1,61 @@
+# the flight gryphon (scripts/gen/gryphon.js): left wing up = negative roll, right wing up = positive roll; yaw + on the left sweeps it back
+hover:
+  duration: 1.25
+  tracks:
+    wingL: { roll: [-55, -20, 38, 10, -55], yaw: [-6, 0, 10, 4, -6] }
+    wingR: { roll: [55, 20, -38, -10, 55], yaw: [6, 0, -10, -4, 6] }
+    wingL2: { roll: [-25, -30, 18, 25, -25] }
+    wingR2: { roll: [25, 30, -18, -25, 25] }
+    root: { y: [0.14, 0.1, -0.08, -0.04, 0.14], pitch: [6, 6, 8, 7, 6] }
+    neck: { pitch: [10, 8, 4, 8, 10] }
+    head: { pitch: [-10, -8, -4, -8, -10], yaw: [0, 6, 0, -6, 0] }
+    legFL: { pitch: [-25, -30, -20, -25, -25] }
+    legFR: { pitch: [-22, -28, -18, -22, -22] }
+    legBL: { pitch: [-20, -28, -16, -20, -20] }
+    legBR: { pitch: [-24, -30, -18, -24, -24] }
+    tail: { pitch: [-10, -14, -6, -10, -10], yaw: [-6, 0, 6, 0, -6] }
+    tail2: { pitch: [-8, -2, -10, -4, -8] }
+fly:
+  duration: 0.95
+  tracks:
+    wingL: { roll: [-45, -10, 32, 5, -45], yaw: [6, 8, 14, 10, 6] }
+    wingR: { roll: [45, 10, -32, -5, 45], yaw: [-6, -8, -14, -10, -6] }
+    wingL2: { roll: [-18, -28, 14, 22, -18] }
+    wingR2: { roll: [18, 28, -14, -22, 18] }
+    root: { y: [0.08, 0.04, -0.06, -0.02, 0.08], pitch: [-2, -2, 0, -1, -2] }
+    neck: { pitch: [-6, -7, -4, -6, -6] }
+    head: { pitch: [8, 9, 6, 8, 8] }
+    legFL: { pitch: [-70, -72, -68, -70, -70] }
+    legFR: { pitch: [-70, -72, -68, -70, -70] }
+    legBL: { pitch: [-60, -62, -58, -60, -60] }
+    legBR: { pitch: [-60, -62, -58, -60, -60] }
+    tail: { pitch: [-14, -16, -12, -14, -14], yaw: [-4, 0, 4, 0, -4] }
+    tail2: { pitch: [-6, -2, -8, -4, -6] }
+speed:
+  duration: 0.6
+  tracks:
+    wingL: { roll: [-6, 2, -6], yaw: [38, 40, 38] }
+    wingR: { roll: [6, -2, 6], yaw: [-38, -40, -38] }
+    wingL2: { roll: [4, -4, 4], yaw: [22, 24, 22] }
+    wingR2: { roll: [-4, 4, -4], yaw: [-22, -24, -22] }
+    root: { y: [0, 0.015, 0], pitch: [-9, -8, -9], roll: [-1, 1, -1] }
+    neck: { pitch: [-14, -14, -14] }
+    head: { pitch: [12, 12, 12] }
+    legFL: { pitch: [-85, -85, -85] }
+    legFR: { pitch: [-85, -85, -85] }
+    legBL: { pitch: [-75, -75, -75] }
+    legBR: { pitch: [-75, -75, -75] }
+    tail: { pitch: [-4, -4, -4], yaw: [-2, 2, -2] }
+    tail2: { pitch: [0, 2, 0] }
+landed:
+  duration: 3.2
+  tracks:
+    wingL: { roll: [-18, -18, -16, -18], yaw: [78, 78, 76, 78] }
+    wingR: { roll: [18, 18, 16, 18], yaw: [-78, -78, -76, -78] }
+    wingL2: { yaw: [100, 100, 98, 100], roll: [10, 10, 12, 10] }
+    wingR2: { yaw: [-100, -100, -98, -100], roll: [-10, -10, -12, -10] }
+    root: { y: [0, 0.01, 0, 0] }
+    neck: { pitch: [0, -4, 2, 0] }
+    head: { pitch: [0, 4, -2, 0], yaw: [0, 18, 18, 0] }
+    tail: { pitch: [8, 12, 8, 8], yaw: [-10, 10, -10, -10] }
+    tail2: { pitch: [10, 4, 10, 10] }
