@@ -1,4 +1,5 @@
 import { ring, loft, cap } from "./valley-mesh.js";
+import { mesher, ramp, spine } from "./tree-kit.js";
 // The forest's plant kit, one script: params.kind = broadleaf | sapling | shrub | fern | reed | log. Feet at the ground, +Y up.
 const TAU = Math.PI * 2;
 const LEAF = ["#2f5a2e", "#3c6e34", "#4f8a3c", "#6a9f45"], SUNLIT = "#8fbf55";
@@ -30,21 +31,39 @@ function limb(ctx, a, b, r0, r1, n) {
 }
 const kinds = {
   broadleaf(ctx, lod) {
-    const h = Number(ctx.params.height ?? 26), r = Number(ctx.params.radius ?? 6), n = lod >= 4 ? 5 : 8, seg = lod >= 4 ? 5 : lod >= 3 ? 6 : 8;
-    const bole = h * (0.5 + ctx.random() * 0.1), tr = h * 0.022;
-    const pal = LEAVES[ctx.params.leaf], L4 = pal ? pal.leaf : LEAF, SUN = pal ? pal.sun : SUNLIT;
-    bark(ctx); ctx.color(pal ? pal.bark : "#8b7a66");
-    const base = ring(0, 0, 0, tr * 1.9, tr * 1.9, n), a = ring(0, 0.8, 0, tr * 1.15, tr * 1.15, n), b = ring(0, bole, 0, tr * 0.8, tr * 0.8, n), c = ring(0, h * 0.8, 0, tr * 0.35, tr * 0.35, n);
-    cap(ctx, base, false); loft(ctx, base, a); loft(ctx, a, b); loft(ctx, b, c);
-    if (lod < 3) for (let i = 0; i < 4; i++) { const th = i / 4 * TAU + ctx.random(), y0 = bole * (0.95 + i * 0.08), L = r * 0.75; limb(ctx, [0, y0, 0], [Math.cos(th) * L, y0 + L * 0.7, Math.sin(th) * L], tr * 0.45, tr * 0.12, 5); }
-    ctx.albedo("scripts/tex-valley-canopy.js"); ctx.smooth(); ctx.roughness(0.9);
-    const clumps = lod >= 4 ? 3 : lod >= 3 ? 6 : 10;
-    blob(ctx, 0, h - r * 0.55, 0, r * 0.7, r * 0.55, r * 0.7, seg, [L4[1], L4[2], L4[3], SUN]);
-    for (let i = 0; i < clumps; i++) {
-      const th = i / clumps * TAU * 1.6 + ctx.random() * 0.8, t = ctx.random(), d = r * (0.45 + t * 0.45), y = bole + r * 0.35 + (h - bole - r * 0.9) * ctx.random();
-      const s = r * (0.42 + ctx.random() * 0.2);
-      blob(ctx, Math.cos(th) * d, y, Math.sin(th) * d, s, s * 0.72, s, seg, [L4[0], L4[1], L4[2], L4[3]]);
+    // a bent trunk with a root flare forks into heavy limbs, each carrying one of 3-5 pillowy canopy masses;
+    // windows of sky between the masses; deep shade green underneath to sunlit lime on top
+    const h = Number(ctx.params.height ?? 26), r = Number(ctx.params.radius ?? 6), m = mesher(ctx);
+    const spring = ctx.params.leaf === "spring";
+    const GRAD = spring ? ["#2f4a22", "#4d7a32", "#78a744", "#b4d36a"] : ["#1f3a24", "#34603a", "#5a8c45", "#9cc160"];
+    const n = lod >= 4 ? 5 : lod >= 3 ? 6 : 9, seg = lod >= 4 ? 6 : lod >= 3 ? 8 : 11, tr = h * 0.03;
+    const fork = h * (0.42 + ctx.random() * 0.08);
+    bark(ctx); ctx.color(spring ? "#8d7a63" : "#6e5a48");
+    const trunk = spine(ctx, [0, 0, 0], [0, fork, 0], h * 0.04, lod >= 4 ? 2 : 5);
+    m.tube(trunk, trunk.map((_, i) => tr * (1.5 - i / (trunk.length - 1) * 0.65)), n, ctx.random() * 6, lod >= 4 ? 0 : 0.9);
+    const top = trunk[trunk.length - 1], masses = lod >= 4 ? 3 : 3 + Math.floor(ctx.random() * 3);
+    const crownLo = fork + r * 0.1, crownHi = h;
+    const centers = [];
+    for (let i = 0; i < masses; i++) {
+      const lead = i === 0, th = i / masses * Math.PI * 2 + ctx.random() * 0.9, d = lead ? r * 0.12 : r * (0.5 + ctx.random() * 0.3);
+      const s = lead ? r * 0.62 : r * (0.42 + ctx.random() * 0.14);
+      const y = lead ? h - s * 0.8 : fork + (h - fork) * (0.35 + ctx.random() * 0.3);
+      centers.push({ c: [top[0] + Math.cos(th) * d, y, top[2] + Math.sin(th) * d], s });
     }
+    if (lod < 4) for (const { c, s } of centers) { // heavy limb from the fork into the mass's heart
+      const mid = [(top[0] + c[0]) * 0.5 + (ctx.random() - 0.5) * r * 0.2, top[1] + (c[1] - top[1]) * 0.45, (top[2] + c[2]) * 0.5];
+      m.tube([top, mid, [c[0], c[1] - s * 0.2, c[2]]], [tr * 0.75, tr * 0.5, tr * 0.25], lod >= 3 ? 4 : 6);
+    }
+    ctx.albedo("scripts/tex-valley-canopy.js"); ctx.roughness(0.9);
+    const col = (p, nn) => ramp(GRAD, ((p[1] - crownLo) / (crownHi - crownLo)) * 0.8 + nn[1] * 0.25 + 0.05);
+    for (const { c, s } of centers) {
+      const pivot = [c[0], c[1] - s * 0.25, c[2]];
+      m.puff(c, s, s * 0.74, s, seg, pivot, col);
+      const bumps = lod >= 4 ? 0 : lod >= 3 ? 1 : 3;
+      for (let b = 0; b < bumps; b++) { const a = ctx.random() * Math.PI * 2, e = 0.3 + ctx.random() * 0.5, bs = s * (0.45 + ctx.random() * 0.15);
+        m.puff([c[0] + Math.cos(a) * Math.cos(e) * s * 0.6, c[1] + Math.sin(e) * s * 0.5, c[2] + Math.sin(a) * Math.cos(e) * s * 0.6], bs, bs * 0.78, bs, Math.max(6, seg - 3), pivot, col); }
+    }
+    return m.done();
   },
   sapling(ctx, lod) {
     const h = Number(ctx.params.height ?? 6), seg = lod >= 3 ? 5 : 7;
@@ -103,7 +122,7 @@ const kinds = {
 };
 export function geometry(ctx) {
   const lod = Number(ctx.lod ?? 1);
-  (kinds[ctx.params.kind] || kinds.shrub)(ctx, lod);
+  return (kinds[ctx.params.kind] || kinds.shrub)(ctx, lod);
 }
 export function collider(ctx) {
   const k = ctx.params.kind;
