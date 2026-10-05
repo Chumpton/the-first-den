@@ -7,8 +7,8 @@ const GRAD = ["#183424", "#2b5235", "#4a7a3f", "#86a957"], UNDER = "#14281c";
 export function geometry(ctx) {
   const h = Number(ctx.params.height ?? 10), r = Number(ctx.params.radius ?? 2.6), full = ctx.params.crown === "pine";
   const lod = Number(ctx.lod ?? 1), m = mesher(ctx);
-  const tiers = lod >= 4 ? 3 : lod >= 3 ? 5 : (full ? 6 : 7), pts = lod >= 4 ? 6 : lod >= 3 ? 8 : 12, n = lod >= 4 ? 5 : 7;
-  const base = h * (full ? 0.12 : 0.17), rr = r * (full ? 1.08 : 0.88);
+  const tiers = lod >= 4 ? 3 : lod >= 3 ? 5 : (full ? 5 : 6), pts = lod >= 4 ? 6 : lod >= 3 ? 8 : 12, n = lod >= 4 ? 5 : 7;
+  const base = h * (full ? 0.12 : 0.17), rr = r * (full ? 1.3 : 1.15);
   ctx.albedo("scripts/tex-valley-bark.js"); ctx.color("#6b5543"); ctx.roughness(0.96);
   const tk = spine(ctx, [0, 0, 0], [0, h * 0.92, 0], h * 0.025, lod >= 4 ? 2 : 4);
   m.tube(tk, tk.map((_, i) => h * 0.03 * (1 - i / (tk.length - 1) * 0.85) + 0.02), n, ctx.random() * 6, lod >= 4 ? 0 : 1.1);

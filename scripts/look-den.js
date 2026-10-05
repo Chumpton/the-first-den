@@ -22,11 +22,11 @@ function ink(ctx) {
   let dz = float(0), dn = float(0);
   INK.forEach(([x, y]) => {
     const uv = screenUV.add(vec2(x, y).mul(px));
-    dz = max(dz, ctx.viewZAt(uv).negate().sub(zc)); // >0: neighbour is farther: this pixel is the near edge
+    dz = max(dz, ctx.viewZAt(screenUV.add(vec2(x, y).mul(px).mul(2))).negate().sub(zc)); // silhouettes 2 px wide: >0 = neighbour farther, this pixel is the near edge
     dn = max(dn, float(1).sub(ctx.normal(uv).dot(nc)));
   });
   const edge = max(smoothstep(0.035, 0.08, dz.div(zc.max(1))), smoothstep(0.35, 0.7, dn).mul(0.35));
-  return edge.mul(smoothstep(140, 25, zc)).mul(ctx.param('inkStrength', 0.85));
+  return edge.mul(smoothstep(140, 25, zc)).mul(ctx.param('inkStrength', 0.95));
 }
 export function look(ctx) {
   ctx.param('bloomStrength', 0.32); ctx.param('bloomRadius', 0.85); ctx.param('bloomThreshold', 1.0);

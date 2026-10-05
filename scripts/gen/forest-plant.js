@@ -45,8 +45,8 @@ const kinds = {
     const crownLo = fork + r * 0.1, crownHi = h;
     const centers = [];
     for (let i = 0; i < masses; i++) {
-      const lead = i === 0, th = i / masses * Math.PI * 2 + ctx.random() * 0.9, d = lead ? r * 0.12 : r * (0.5 + ctx.random() * 0.3);
-      const s = lead ? r * 0.62 : r * (0.42 + ctx.random() * 0.14);
+      const lead = i === 0, th = i / masses * Math.PI * 2 + ctx.random() * 0.9, d = lead ? r * 0.1 : r * (0.4 + ctx.random() * 0.22);
+      const s = lead ? r * 0.66 : r * (0.48 + ctx.random() * 0.14);
       const y = lead ? h - s * 0.8 : fork + (h - fork) * (0.35 + ctx.random() * 0.3);
       centers.push({ c: [top[0] + Math.cos(th) * d, y, top[2] + Math.sin(th) * d], s });
     }
@@ -59,9 +59,9 @@ const kinds = {
     for (const { c, s } of centers) {
       const pivot = [c[0], c[1] - s * 0.25, c[2]];
       m.puff(c, s, s * 0.74, s, seg, pivot, col);
-      const bumps = lod >= 4 ? 0 : lod >= 3 ? 1 : 3;
-      for (let b = 0; b < bumps; b++) { const a = ctx.random() * Math.PI * 2, e = 0.3 + ctx.random() * 0.5, bs = s * (0.45 + ctx.random() * 0.15);
-        m.puff([c[0] + Math.cos(a) * Math.cos(e) * s * 0.6, c[1] + Math.sin(e) * s * 0.5, c[2] + Math.sin(a) * Math.cos(e) * s * 0.6], bs, bs * 0.78, bs, Math.max(6, seg - 3), pivot, col); }
+      const bumps = lod >= 4 ? 0 : lod >= 3 ? 2 : 4;
+      for (let b = 0; b < bumps; b++) { const a = ctx.random() * Math.PI * 2, e = 0.3 + ctx.random() * 0.5, bs = s * (0.52 + ctx.random() * 0.16);
+        m.puff([c[0] + Math.cos(a) * Math.cos(e) * s * 0.7, c[1] + Math.sin(e) * s * 0.45, c[2] + Math.sin(a) * Math.cos(e) * s * 0.7], bs, bs * 0.78, bs, Math.max(6, seg - 3), pivot, col); }
     }
     return m.done();
   },

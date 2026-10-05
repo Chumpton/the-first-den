@@ -10,7 +10,7 @@ const BANDS = 3;
 
 function cel(x) { // three soft steps: a hard read with a 15 % feathered edge between bands
   const s = x.mul(BANDS);
-  return floor(s).add(smoothstep(0.42, 0.58, fract(s))).div(BANDS);
+  return floor(s).add(smoothstep(0.2, 0.8, fract(s))).div(BANDS);
 }
 
 export function lighting(surface, lights) {
