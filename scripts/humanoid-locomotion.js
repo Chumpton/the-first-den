@@ -87,7 +87,7 @@ ride.units = 'hips'
 ride.duration = 0.1
 
 export function onInput(ctx, input) {
-  if (ctx.self.sprite) return
+  if (ctx.self.sprite || ctx.self.primitive || !ctx.self.model) return
   const B = steerBasis(ctx, input)
   const sin = B.sin
   const cos = B.cos
@@ -121,7 +121,7 @@ export function onInput(ctx, input) {
 }
 
 export function update(ctx, dt) {
-  if (ctx.self.sprite) return // sprites animate via the 2D mixer, never these GLB clips
+  if (ctx.self.sprite || ctx.self.primitive || !ctx.self.model) return
   // Riding the flight gryphon (scripts/gryphon-mount.js): astride the saddle, the body still turning with the WoW heading.
   if (ctx.self.state.riding === 'gryphon') {
     const g = gaitOf(ctx)
