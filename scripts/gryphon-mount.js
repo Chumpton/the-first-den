@@ -8,7 +8,9 @@ import { FEATHERS, DUST, setMode, yawOf } from './lib/wynx-kit.js';
 const W = (ctx) => (ctx.session.gry ??= { id: null, fwd: 0 });
 function findWynx(ctx) {
   const w = W(ctx), me = ctx.self;
-  if (w.id && ctx.getObject(w.id)) return ctx.getObject(w.id);
+  const had = w.id && ctx.getObject(w.id);
+  if (had && had.tags?.includes('wynx')) return had;
+  if (had) { ctx.destroy(w.id); w.id = null; } // a gryphon from before Wynx had a name
   const row = ctx.query({ tags: ['wynx'], radius: 5000 }).find((r) => r.state?.owner === me.id);
   w.id = row ? row.id : null;
   return row ? ctx.getObject(row.id) : null;
