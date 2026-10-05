@@ -69,3 +69,14 @@ leap:
     root: { pitch: [-8, -2, -8] }
     neck: { pitch: [12, 12] }
     tail: { pitch: [35, 40, 35], yaw: [-6, 6, -6] }
+swim:
+  duration: 1.1
+  tracks:
+    root: { pitch: [17, 19, 17, 19, 17], y: [0, 0.02, 0, 0.02, 0] }
+    legFL: { pitch: [-70, -35, 5, -30, -70] }
+    legFR: { pitch: [5, -30, -70, -35, 5] }
+    legBL: { pitch: [25, 45, 60, 40, 25] }
+    legBR: { pitch: [60, 40, 25, 45, 60] }
+    neck: { pitch: [-14, -11, -14, -11, -14] }
+    head: { pitch: [-8, -6, -8], roll: [0, 3, 0, -3, 0] }
+    tail: { pitch: [42, 46, 42], yaw: [-14, 14, -14] }

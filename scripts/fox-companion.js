@@ -58,7 +58,8 @@ export function update(ctx, dt) {
   const c = (foxClips ??= clips(ctx, 'anim/fox.yml'))
   if (!c) return
   let want = 'idle', rate = 1
-  if (airborne) { want = flying && mem.speed > 1 ? 'gallop' : 'leap'; rate = flying ? 0.7 : 1 }
+  if (flying) { want = 'swim'; rate = Math.min(1.5, Math.max(0.7, 0.7 + mem.speed / 16)) }
+  else if (airborne) { want = 'leap'; rate = 1 }
   else if (mem.speed > 4.2) { want = 'gallop'; rate = Math.min(1.6, Math.max(0.85, mem.speed / 7)) }
   else if (mem.speed > 1.6) { want = 'trot'; rate = Math.min(1.5, Math.max(0.8, mem.speed / 3)) }
   else if (mem.speed > 0.3) { want = 'walk'; rate = Math.min(1.6, Math.max(0.7, mem.speed / 1.2)) }
