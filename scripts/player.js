@@ -20,16 +20,17 @@ function walkOf(ctx) {
 }
 
 export function onSpawn(ctx) {
-  // If wunix is in the room, dress as a floating orb robot!
+  // If wunix is in the room, dress as a red fox!
   const isWunix = ctx.self.displayName === 'wunix' || ctx.self.name === 'wunix' || ctx.self.state?.displayName === 'wunix'
   if (isWunix) {
     ctx.self.model = null
     ctx.self.state.riding = null
     ctx.self.state.flying = false
-    ctx.self.primitive = { kind: 'sphere', radius: 0.35 }
-    ctx.self.material = { color: '#e8eff5', metalness: 0.9, roughness: 0.15 }
-    ctx.self.light = { kind: 'point', color: '#00f0ff', intensity: 3, distance: 5 }
-    ctx.self.wisp = { color: '#00f0ff', state: 'idle', shape: 'slender', burnStyle: 'pulse', size: 1.2 }
+    ctx.self.primitive = { kind: 'scripted', params: {}, script: 'scripts/gen/animal-fox.js' }
+    ctx.self.material = null
+    ctx.self.light = null
+    ctx.self.wisp = null
+    ctx.self.castShadow = true
     return
   }
   // The body arrives dressed: in the model templates/player.js names, or — when the template names none — in the
