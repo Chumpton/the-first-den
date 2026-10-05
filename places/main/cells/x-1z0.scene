@@ -73,6 +73,29 @@ farm-west/windmill/sails:
   pivot: feet
   primitive: {kind: scripted, params: {item: sails}, script: scripts/gen/farm-props.js, seed: 6}
   visibleRange: {max: 320}
+garden-gates/gate-s:
+  feetPosition: {x: 0, y: 0, z: -22.5}
+  id: garden-gates/gate-s
+  parent: garden-gates
+  physics: static
+  primitive: {kind: scripted, params: {part: gate}, script: scripts/gen/garden-gate.js, seed: 3}
+  rotation: {yaw: 0}
+  visibleRange: {max: 260}
+garden-gates/gate-s/plaque-in:
+  feetPosition: {x: 0, y: 3.93, z: 0.03}
+  id: garden-gates/gate-s/plaque-in
+  parent: garden-gates/gate-s
+  primitive: {kind: scripted, params: {part: plaque}, script: scripts/gen/garden-gate.js}
+  rotation: {yaw: 180}
+  ui: "<div face=\"front\" emissive style=\"width:2500px;height:460px;display:flex;align-items:center;justify-content:center;font-family:serif;font-size:250px;letter-spacing:40px;color:#e8c872;font-weight:bold\">GARDEN MARKET</div>"
+  visibleRange: {max: 120}
+garden-gates/gate-s/plaque-out:
+  feetPosition: {x: 0, y: 3.93, z: -0.03}
+  id: garden-gates/gate-s/plaque-out
+  parent: garden-gates/gate-s
+  primitive: {kind: scripted, params: {part: plaque}, script: scripts/gen/garden-gate.js}
+  ui: "<div face=\"front\" emissive style=\"width:2500px;height:460px;display:flex;align-items:center;justify-content:center;font-family:serif;font-size:250px;letter-spacing:40px;color:#e8c872;font-weight:bold\">GARDEN MARKET</div>"
+  visibleRange: {max: 120}
 hw-west-fence-l-2:
   castShadow: false
   feetPosition: {x: -151.18, y: 0.38, z: 11.24}

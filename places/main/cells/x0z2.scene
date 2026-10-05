@@ -1,57 +1,173 @@
 # spawn-scene v2 yaml x0z2
-sw-bank-of-stormwind:
-  id: sw-bank-of-stormwind
-  feetPosition:
-    x: 8
-    y: 0.55
-    z: 232.6
+royal-bank:
+  children: [{castShadow: false, feetPosition: {x: 0, y: 8.15, z: -10.06}, id: plaque, material: {color: oklch(0.32 0.1 262)}, primitive: {depth: 0.06, height: 0.62, kind: box, width: 6}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:300px;letter-spacing:12px\">BANK OF THE CROWN</div>", visibleRange: {max: 90}}]
+  feetPosition: {x: 33.5, y: 0.5, z: 196}
+  id: royal-bank
   physics: static
-  visibleRange:
-    max: 700
-  rotation:
-    yaw: -90
-  primitive:
-    kind: scripted
-    params:
-      color: limestone
-      d: 26
-      floors: 3
-      h: 12
-      roofStyle: flat
-      w: 22
-    script: scripts/gen/stormwind-building.js
-    seed: 312
-  children:
-    - castShadow: false
-      feetPosition:
-        x: 0
-        y: 5.4
-        z: -13.1
-      id: plaque
-      material:
-        color: oklch(0.32 0.1 262)
-      primitive:
-        depth: 0.08
-        height: 0.7
-        kind: box
-        width: 5.5
-      ui: '<div face="front" class="w-full h-full flex items-center justify-center text-center" style="background:#1f2f6b;border:4px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:160px;font-weight:bold;letter-spacing:4px">BANK OF STORMWIND</div>'
-      visibleRange:
-        max: 90
-sw-bridge-trade-oldtown:
-  id: sw-bridge-trade-oldtown
-  feetPosition:
-    x: 20.5
-    y: 0.55
-    z: 248.7
+  primitive: {kind: scripted, params: {d: 13, floors: 3, kind: bank, w: 18}, script: scripts/gen/royal-house.js, seed: 6}
+  rotation: {yaw: 90}
+  visibleRange: {max: 500}
+royal-castle-banner-gate-l:
+  castShadow: false
+  feetPosition: {x: -4.4, y: 30.2, z: 244.6}
+  id: royal-castle-banner-gate-l
+  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.1}, script: scripts/material-banner-wave.js}
+  primitive: {kind: scripted, params: {beast: lion, field: oklch(0.38 0.14 262), field2: oklch(0.31 0.12 262), h: 7, kind: drape, point: 0.5, trim: oklch(0.82 0.13 85), w: 1.6}, script: scripts/gen/town-banner.js}
+  tags: [royal, castle, banner]
+  visibleRange: {max: 250}
+royal-castle-banner-gate-r:
+  castShadow: false
+  feetPosition: {x: 4.4, y: 30.2, z: 244.6}
+  id: royal-castle-banner-gate-r
+  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.1}, script: scripts/material-banner-wave.js}
+  primitive: {kind: scripted, params: {beast: lion, field: oklch(0.38 0.14 262), field2: oklch(0.31 0.12 262), h: 7, kind: drape, point: 0.5, trim: oklch(0.82 0.13 85), w: 1.6}, script: scripts/gen/town-banner.js}
+  tags: [royal, castle, banner]
+  visibleRange: {max: 250}
+royal-castle-banner-keep-l:
+  castShadow: false
+  feetPosition: {x: -5.6, y: 30.5, z: 267.6}
+  id: royal-castle-banner-keep-l
+  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.1}, script: scripts/material-banner-wave.js}
+  primitive: {kind: scripted, params: {beast: lion, field: oklch(0.38 0.14 262), field2: oklch(0.31 0.12 262), h: 9, kind: drape, point: 0.5, trim: oklch(0.82 0.13 85), w: 2.2}, script: scripts/gen/town-banner.js}
+  tags: [royal, castle, banner]
+  visibleRange: {max: 300}
+royal-castle-banner-keep-r:
+  castShadow: false
+  feetPosition: {x: 5.6, y: 30.5, z: 267.6}
+  id: royal-castle-banner-keep-r
+  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.1}, script: scripts/material-banner-wave.js}
+  primitive: {kind: scripted, params: {beast: lion, field: oklch(0.38 0.14 262), field2: oklch(0.31 0.12 262), h: 9, kind: drape, point: 0.5, trim: oklch(0.82 0.13 85), w: 2.2}, script: scripts/gen/town-banner.js}
+  tags: [royal, castle, banner]
+  visibleRange: {max: 300}
+royal-castle-banner-spire:
+  castShadow: true
+  feetPosition: {x: 0, y: 54.5, z: 273.7}
+  id: royal-castle-banner-spire
+  material: {kind: scripted, params: {ax: 0, ay: -0.25, k: 2, reach: 0.06, speed: 1.1}, script: scripts/material-banner-wave.js}
+  primitive: {kind: scripted, params: {beast: lion, field: oklch(0.38 0.14 262), field2: oklch(0.31 0.12 262), h: 11, kind: drape, point: 0.5, trim: oklch(0.82 0.13 85), w: 4}, script: scripts/gen/town-banner.js}
+  tags: [royal, castle, banner]
+  visibleRange: {max: 600}
+royal-castle-cliff:
+  feetPosition: {x: 0, y: 0, z: 263.5}
+  id: royal-castle-cliff
   physics: static
-  visibleRange:
-    max: 400
-  rotation:
-    yaw: 90
-  primitive:
-    kind: scripted
-    params:
-      len: 24
-      w: 12
-    script: scripts/gen/stormwind-bridge.js
+  primitive: {kind: scripted, params: {part: cliff}, script: scripts/gen/royal-castle.js}
+  tags: [royal, castle]
+  visibleRange: {max: 900}
+royal-castle-gatehouse:
+  feetPosition: {x: 0, y: 14, z: 250}
+  id: royal-castle-gatehouse
+  physics: static
+  primitive: {kind: scripted, params: {part: gatehouse}, script: scripts/gen/royal-castle.js}
+  tags: [royal, castle]
+  visibleRange: {max: 800}
+royal-castle-hall-light:
+  feetPosition: {x: 0, y: 23, z: 278}
+  id: royal-castle-hall-light
+  light: {color: oklch(0.88 0.08 75), distance: 26, intensity: 30, kind: point}
+  tags: [royal, castle]
+  visibleRange: {max: 80}
+royal-castle-keep:
+  feetPosition: {x: 0, y: 14, z: 277}
+  id: royal-castle-keep
+  physics: static
+  primitive: {kind: scripted, params: {part: keep}, script: scripts/gen/royal-castle.js}
+  tags: [royal, castle]
+  visibleRange: {max: 900}
+royal-castle-stair:
+  feetPosition: {x: 0, y: 0, z: 233}
+  id: royal-castle-stair
+  physics: static
+  primitive: {kind: scripted, params: {part: stair}, script: scripts/gen/royal-castle.js}
+  tags: [royal, castle]
+  visibleRange: {max: 450}
+royal-castle-tower-ne:
+  feetPosition: {x: 36, y: 14, z: 286}
+  id: royal-castle-tower-ne
+  physics: static
+  primitive: {kind: scripted, params: {part: tower}, script: scripts/gen/royal-castle.js}
+  tags: [royal, castle]
+  visibleRange: {max: 900}
+royal-castle-tower-nw:
+  feetPosition: {x: -36, y: 14, z: 286}
+  id: royal-castle-tower-nw
+  physics: static
+  primitive: {kind: scripted, params: {part: tower}, script: scripts/gen/royal-castle.js}
+  tags: [royal, castle]
+  visibleRange: {max: 900}
+royal-castle-tower-se:
+  feetPosition: {x: 36, y: 14, z: 250}
+  id: royal-castle-tower-se
+  physics: static
+  primitive: {kind: scripted, params: {part: tower}, script: scripts/gen/royal-castle.js}
+  tags: [royal, castle]
+  visibleRange: {max: 900}
+royal-castle-tower-sw:
+  feetPosition: {x: -36, y: 14, z: 250}
+  id: royal-castle-tower-sw
+  physics: static
+  primitive: {kind: scripted, params: {part: tower}, script: scripts/gen/royal-castle.js}
+  tags: [royal, castle]
+  visibleRange: {max: 900}
+royal-castle-walls:
+  feetPosition: {x: 0, y: 14, z: 268}
+  id: royal-castle-walls
+  physics: static
+  primitive: {kind: scripted, params: {part: wall}, script: scripts/gen/royal-castle.js}
+  tags: [royal, castle]
+  visibleRange: {max: 800}
+royal-cathedral-nave:
+  children: [{feetPosition: {x: 0, y: 5, z: 10.5}, id: altar-light, light: {color: "#ffc98a", distance: 22, intensity: 25, kind: point}}, {feetPosition: {x: 0, y: 12, z: 0}, id: nave-light, light: {color: "#fff1d8", distance: 34, intensity: 30, kind: point}}]
+  feetPosition: {x: -34, y: 0.5, z: 196}
+  id: royal-cathedral-nave
+  physics: static
+  primitive: {kind: scripted, script: scripts/gen/royal-cathedral.js, seed: 1}
+  rotation: {yaw: -90}
+  visibleRange: {max: 900}
+royal-fountain:
+  audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-stone-fountain-splash-loop.mp3, gain: 0.15, loop: true, maxDistance: 30, spatial: true}
+  feetPosition: {x: 0, y: 0.5, z: 196}
+  id: royal-fountain
+  physics: static
+  primitive: {kind: scripted, params: {part: fountain}, script: scripts/gen/royal-district.js, seed: 3}
+  visibleRange: {max: 250}
+royal-hall-knights:
+  children: [{castShadow: false, feetPosition: {x: 0, y: 4.3, z: -4.22}, id: plaque, material: {color: oklch(0.32 0.1 262)}, primitive: {depth: 0.06, height: 0.62, kind: box, width: 3.4}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center\" style=\"background:#1f2f6b;border:6px solid #d9b24c;color:#f2d27a;font-family:serif;font-size:300px;letter-spacing:12px\">KNIGHTS' HALL</div>", visibleRange: {max: 90}}]
+  feetPosition: {x: 48, y: 0.5, z: 217}
+  id: royal-hall-knights
+  physics: static
+  primitive: {kind: scripted, params: {d: 8, floors: 3, kind: hall, w: 12}, script: scripts/gen/royal-house.js, seed: 11}
+  rotation: {yaw: 0}
+  visibleRange: {max: 500}
+royal-house-ne1:
+  children: []
+  feetPosition: {x: 16, y: 0.5, z: 217.5}
+  id: royal-house-ne1
+  physics: static
+  primitive: {kind: scripted, params: {d: 8, floors: 3, kind: house, turret: 1, w: 10}, script: scripts/gen/royal-house.js, seed: 9}
+  rotation: {yaw: 0}
+  visibleRange: {max: 500}
+royal-house-ne2:
+  children: []
+  feetPosition: {x: 32, y: 0.5, z: 217}
+  id: royal-house-ne2
+  physics: static
+  primitive: {kind: scripted, params: {d: 8, floors: 4, kind: house, w: 12}, script: scripts/gen/royal-house.js, seed: 10}
+  rotation: {yaw: 0}
+  visibleRange: {max: 500}
+royal-house-nw1:
+  children: []
+  feetPosition: {x: -16, y: 0.5, z: 217.5}
+  id: royal-house-nw1
+  physics: static
+  primitive: {kind: scripted, params: {d: 8, floors: 3, kind: house, turret: -1, w: 10}, script: scripts/gen/royal-house.js, seed: 7}
+  rotation: {yaw: 0}
+  visibleRange: {max: 500}
+royal-house-nw2:
+  children: []
+  feetPosition: {x: -32, y: 0.5, z: 217}
+  id: royal-house-nw2
+  physics: static
+  primitive: {kind: scripted, params: {d: 8, floors: 4, kind: house, w: 12}, script: scripts/gen/royal-house.js, seed: 8}
+  rotation: {yaw: 0}
+  visibleRange: {max: 500}

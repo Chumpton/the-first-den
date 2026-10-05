@@ -1,4 +1,131 @@
 # spawn-scene v2 yaml x-1z1
+garden-crowd:
+  audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-town-square-crowd-murmur-loop.mp3, gain: 0.12, loop: true, maxDistance: 30, spatial: true}
+  behavior: scripts/garden-crowd.js
+  feetPosition: {x: -82, y: {terrain: 0}, z: 74}
+  id: garden-crowd
+  physics: none
+  state: {}
+  tags: [manager]
+garden-district:
+  castShadow: false
+  feetPosition: {x: -82, y: 0.5, z: 78}
+  id: garden-district
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {item: ground}, script: scripts/gen/garden-district.js, seed: 7}
+  tags: [garden-district, district]
+  visibleRange: {max: 250}
+garden-dressing:
+  castShadow: true
+  feetPosition: {x: -82, y: 0.5, z: 78}
+  id: garden-dressing
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {item: dressing}, script: scripts/gen/garden-district.js, seed: 7}
+  tags: [garden-district, garden-prop]
+  visibleRange: {max: 150}
+garden-florist:
+  children: [{castShadow: false, feetPosition: {x: -1.6, y: 2.75, z: -2.87}, id: plaque, material: {color: oklch(0.45 0.06 60)}, primitive: {depth: 0.05, height: 0.42, kind: box, width: 1.7}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center bg-amber-50 text-emerald-900 font-bold text-[150px] tracking-widest border-[20px] border-amber-900\">FLORIST</div>", visibleRange: {max: 60}}]
+  feetPosition: {x: -97, y: 0.5, z: 95}
+  id: garden-florist
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {awning: oklch(0.72 0.12 350), base: stone, chimney: [1.8, 1.5], d: 5.5, doorX: -1.6, dormers: 1, eave: 0.7, floors: 2, plaster: oklch(0.95 0.04 20), roof: {kind: gx, pitch: 44, tex: clay, tint: oklch(0.95 0.03 45)}, seed: 11, shop: true, sign: null, trim: oklch(0.6 0.1 350), w: 6.5}, script: scripts/gen/town-house.js, seed: 11}
+  tags: [town, building, garden-district]
+  visibleRange: {max: 250}
+garden-fountain:
+  castShadow: true
+  feetPosition: {x: -82, y: 0.5, z: 78}
+  id: garden-fountain
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {item: fountain}, script: scripts/gen/garden-district.js, seed: 7}
+  tags: [garden-district, garden-prop]
+  visibleRange: {max: 180}
+garden-gates:
+  feetPosition: {x: -82, y: 0.5, z: 78}
+  id: garden-gates
+  tags: [garden]
+garden-gates/gate-n:
+  feetPosition: {x: 0, y: 0, z: 22.5}
+  id: garden-gates/gate-n
+  parent: garden-gates
+  physics: static
+  primitive: {kind: scripted, params: {part: gate}, script: scripts/gen/garden-gate.js, seed: 3}
+  rotation: {yaw: 180}
+  visibleRange: {max: 260}
+garden-gates/gate-n/plaque-in:
+  feetPosition: {x: 0, y: 3.93, z: 0.03}
+  id: garden-gates/gate-n/plaque-in
+  parent: garden-gates/gate-n
+  primitive: {kind: scripted, params: {part: plaque}, script: scripts/gen/garden-gate.js}
+  rotation: {yaw: 180}
+  ui: "<div face=\"front\" emissive style=\"width:2500px;height:460px;display:flex;align-items:center;justify-content:center;font-family:serif;font-size:250px;letter-spacing:40px;color:#e8c872;font-weight:bold\">GARDEN MARKET</div>"
+  visibleRange: {max: 120}
+garden-gates/gate-n/plaque-out:
+  feetPosition: {x: 0, y: 3.93, z: -0.03}
+  id: garden-gates/gate-n/plaque-out
+  parent: garden-gates/gate-n
+  primitive: {kind: scripted, params: {part: plaque}, script: scripts/gen/garden-gate.js}
+  ui: "<div face=\"front\" emissive style=\"width:2500px;height:460px;display:flex;align-items:center;justify-content:center;font-family:serif;font-size:250px;letter-spacing:40px;color:#e8c872;font-weight:bold\">GARDEN MARKET</div>"
+  visibleRange: {max: 120}
+garden-greengrocer:
+  children: [{castShadow: false, feetPosition: {x: 1.6, y: 2.75, z: -2.87}, id: plaque, material: {color: oklch(0.45 0.06 60)}, primitive: {depth: 0.05, height: 0.42, kind: box, width: 1.7}, ui: "<div face=\"front\" class=\"w-full h-full flex items-center justify-center bg-amber-50 text-emerald-900 font-bold text-[150px] tracking-widest border-[20px] border-amber-900\">GREENGROCER</div>", visibleRange: {max: 60}}]
+  feetPosition: {x: -66.5, y: 0.5, z: 95}
+  id: garden-greengrocer
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {awning: oklch(0.62 0.11 150), barrels: 2, base: plaster, chimney: [-1.8, 1.5], d: 5.5, doorX: 1.6, dormers: 1, eave: 0.7, floors: 2, plaster: oklch(0.96 0.05 100), roof: {kind: gx, pitch: 42, tex: clay, tint: oklch(0.93 0.04 40)}, seed: 12, shop: true, sign: null, trim: oklch(0.55 0.1 145), vane: rooster, w: 6.5}, script: scripts/gen/town-house.js, seed: 12}
+  tags: [town, building, garden-district]
+  visibleRange: {max: 250}
+garden-pond:
+  castShadow: false
+  feetPosition: {x: -82, y: 0.5, z: 78}
+  id: garden-pond
+  material: {color: oklch(0.62 0.07 190), kind: water, opacity: 0.85, waveIntensity: 0.15}
+  physics: none
+  primitive: {kind: scripted, params: {item: pondwater}, script: scripts/gen/garden-district.js, seed: 7}
+  tags: [garden-district, garden-prop]
+  visibleRange: {max: 100}
+garden-stalls:
+  castShadow: true
+  feetPosition: {x: -82, y: 0.5, z: 78}
+  id: garden-stalls
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {item: stalls}, script: scripts/gen/garden-district.js, seed: 7}
+  tags: [garden-district, garden-prop]
+  visibleRange: {max: 150}
+sign-ring-west:
+  castShadow: false
+  feetPosition: {x: -87, y: 0.42651934244879447, z: 104}
+  id: sign-ring-west
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: post}, script: scripts/gen/town-link.js}
+  tags: [town, town-link, signpost]
+  visibleRange: {max: 70}
+sign-ring-west/finger-0:
+  castShadow: false
+  feetPosition: {x: 0, y: 2.72, z: 0}
+  id: sign-ring-west/finger-0
+  material: {pbr: true}
+  parent: sign-ring-west
+  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
+  rotation: {yaw: -63.43494882292201}
+  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Mirror Tarn &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Mirror Tarn</div>"
+  visibleRange: {max: 45}
+sign-ring-west/finger-1:
+  castShadow: false
+  feetPosition: {x: 0, y: 2.3200000000000003, z: 0}
+  id: sign-ring-west/finger-1
+  material: {pbr: true}
+  parent: sign-ring-west
+  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
+  rotation: {yaw: 30.96375653207352}
+  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Garden Market &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Garden Market</div>"
+  visibleRange: {max: 45}
 wild-mushroom-18:
   behavior: scripts/wild-mushroom.js
   castShadow: false

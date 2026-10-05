@@ -45,6 +45,15 @@ hill-village:
   id: hill-village
   state: {name: Hilltop Village}
   tags: [village]
+link-ring:
+  castShadow: false
+  feetPosition: {x: 82, y: 0, z: 101}
+  id: link-ring
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: lane, lamps: [[-5.17, 0.5, 8.07, 1], [-8.84, 0.5, 26.5, -1], [-26.23, 0.5, 34.57, 1], [-38.01, 0.5, 48.56, -1], [-57.62, 0.5, 46.76, 1], [-74.69, 0.5, 54.94, -1], [-92.67, 0.5, 48.16, -1], [-111.3, 0.5, 52.51, 1], [-126.01, 0.5, 41, -1], [-145.04, 0.49, 36.62, 1], [-152.14, 0.49, 19.6, -1], [-166.07, 0.47, 5.9, 1]]}, script: scripts/gen/town-link.js}
+  tags: [town, town-link]
+  visibleRange: {max: 110}
 mountain-tarn:
   audio: {clip: /cdn/moodboard-lowpoly-cozy/sfx-mountain-lake-water-lapping-loop.mp3, gain: 0.12, loop: true, maxDistance: 40, spatial: true}
   castShadow: false
@@ -54,6 +63,35 @@ mountain-tarn:
   primitive: {kind: scripted, params: {part: lilies, wy: -0.19}, script: scripts/gen/mountain-tarn.js}
   state: {name: Mirror Tarn}
   tags: [mountain-tarn]
+sign-ring-east:
+  castShadow: false
+  feetPosition: {x: 87, y: 0.5458947365269218, z: 104}
+  id: sign-ring-east
+  material: {pbr: true}
+  physics: static
+  primitive: {kind: scripted, params: {kind: post}, script: scripts/gen/town-link.js}
+  tags: [town, town-link, signpost]
+  visibleRange: {max: 70}
+sign-ring-east/finger-0:
+  castShadow: false
+  feetPosition: {x: 0, y: 2.72, z: 0}
+  id: sign-ring-east/finger-0
+  material: {pbr: true}
+  parent: sign-ring-east
+  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
+  rotation: {yaw: -116.56505117707799}
+  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Garden Market &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Garden Market</div>"
+  visibleRange: {max: 45}
+sign-ring-east/finger-1:
+  castShadow: false
+  feetPosition: {x: 0, y: 2.3200000000000003, z: 0}
+  id: sign-ring-east/finger-1
+  material: {pbr: true}
+  parent: sign-ring-east
+  primitive: {kind: scripted, params: {kind: finger}, script: scripts/gen/town-link.js}
+  rotation: {yaw: 149.03624346792648}
+  ui: "<div face=\"front\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">Mirror Tarn &#8594;</div><div face=\"back\" width=\"1.15m\" class=\"flex items-center justify-center\" style=\"height:220px;color:#4f3828;font-family:serif;font-weight:700;font-size:118px;white-space:nowrap\">&#8592; Mirror Tarn</div>"
+  visibleRange: {max: 45}
 village-crowd:
   behavior: scripts/village-crowd.js
   feetPosition: {x: 172, y: 20, z: 90}

@@ -34,8 +34,6 @@ gravity:
   y: -24
   z: 0
 mode: 3d
-arrivalBudget:
-  bytes: 5000000
 terrain:
   kind: heightmap
   generator: scripts/forest-terrain.js
@@ -57,13 +55,18 @@ terrain:
     river-s: {kind: sea, level: 0, reach: {shape: rectangle, width: 8000, depth: 4000, center: {x: 0, z: 1984}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
     river-w: {kind: sea, level: 0, reach: {shape: rectangle, width: 3990, depth: 20, center: {x: -2005, z: -26}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
     river-e: {kind: sea, level: 0, reach: {shape: rectangle, width: 3990, depth: 20, center: {x: 2005, z: -26}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
+    gardenDistrictFlat: {kind: flatten, center: {x: -82, z: 78}, height: 0.5, falloff: 4, shape: {kind: path, points: [[-82, 54], [-82, 102]], width: 48}, material: lawn}
+    gardenDistrictClear: {kind: clear-scatter, center: {x: -82, z: 78}, shape: {kind: path, points: [[-82, 52], [-82, 104]], width: 54}}
     spawnClearing: {kind: flatten, center: {x: 0, z: -3}, height: 0.5, falloff: 6, shape: {kind: circle, radius: 9}, material: lawn}
     violetRest: {kind: flatten, center: {x: 30.5, z: -7.6}, height: 0.55, falloff: 3, shape: {kind: circle, radius: 5}}
     violetClear: {kind: clear-scatter, center: {x: 30.5, z: -7.6}, shape: {kind: circle, radius: 7.5}}
     spawnClear: {kind: clear-scatter, center: {x: 0, z: -3}, shape: {kind: circle, radius: 7}}
-    stormwindCityClear: {kind: clear-scatter, center: {x: 100, z: 380}, shape: {kind: rectangle, width: 1000, depth: 850}}
-    stormwindKeepPlateau: {kind: flatten, center: {x: 520, z: 360}, height: 26.0, shape: {kind: rectangle, width: 180, depth: 220}, falloff: 6, falloffCurve: cliff, material: cobblepale, edgeMaterial: cobblepale}
-    stormwindCityFlat: {kind: flatten, center: {x: 60, z: 380}, height: 0.55, shape: {kind: rectangle, width: 850, depth: 650}, falloff: 8, material: cobblepale, edgeMaterial: cobblepale}
+    castlePlateau: {kind: flatten, center: {x: 0, z: 263.5}, height: 14, shape: {kind: rectangle, width: 86, depth: 61}, falloff: 3, falloffCurve: cliff, material: cobblepale, edgeMaterial: cobblepale}
+    castleStairCut: {kind: hole, points: [[-8.3, 229], [8.3, 229], [8.3, 245.5], [-8.3, 245.5]]}
+    castleClear: {kind: clear-scatter, center: {x: 0, z: 258}, shape: {kind: rectangle, width: 100, depth: 80}}
+    townClear: {kind: clear-scatter, center: {x: 0, z: 108}, shape: {kind: circle, radius: 40}}
+    townLaneClear: {kind: clear-scatter, center: {x: 0, z: 45}, shape: {kind: path, points: [[0, 12], [0, 17], [1.33, 26.4], [4.0, 32.8], [5.19, 37.8], [3.95, 42.8], [0, 48.5], [-3.95, 54.2], [-5.19, 59.2], [-4.0, 64.2], [-1.33, 70.5], [0, 80]], width: 14}}
+    townEdgeClear: {kind: clear-scatter, center: {x: 0, z: 100}, shape: {kind: path, points: [[-9, 65.5], [-20.5, 65.5], [-35.8, 80], [-35.8, 134], [-13, 134], [-13, 138.8], [13, 138.8], [13, 134], [35.8, 134], [35.8, 80], [20.5, 65.5], [9, 65.5]], width: 7}}
     homeSite: {center: {x: 0, z: -27}, falloff: 8, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 18}, edgeMaterial: yard}
     grounds-lawn-front: {kind: path, grade: false, material: lawn, edgeMaterial: yard, falloff: 3, points: [[0, -6], [0, 4.4]], width: 30}
     grounds-lawn-frontClear: {kind: clear-scatter, center: {x: 0, z: -1}, shape: {kind: path, points: [[0, -6], [0, 4.4]], width: 28}}
@@ -179,23 +182,29 @@ terrain:
     corral-flatten: {center: {x: -50, z: -50}, falloff: 3, height: 0.5, kind: flatten, material: yard, shape: {kind: circle, radius: 14}}
     corral-clear: {center: {x: -50, z: -50}, kind: clear-scatter, shape: {kind: circle, radius: 16}}
     path-corral: {clearScatter: true, edgeMaterial: pebbles, falloff: 2, grade: true, kind: path, material: gravel, noise: 0.4, points: [[-26.2, -62.2], [-30, -61.3], [-35, -60.2], [-40, -58.5], [-43, -56.8]], width: 2.2}
-    stormwind-causeway: {clearScatter: true, edgeMaterial: pebbles, falloff: 2.5, grade: true, kind: path, material: cobblepale, noise: 0.4, points: [[0, 12], [0, 25], [0, 45], [0, 70], [0, 95]], width: 14}
+    town-lane: {clearScatter: true, edgeMaterial: gravel, falloff: 3.5, grade: true, kind: path, material: cobblepale, noise: 0.5, points: [[0, 12], [0, 17], [1.33, 26.4], [4.0, 32.8], [5.19, 37.8], [3.95, 42.8], [0, 48.5], [-3.95, 54.2], [-5.19, 59.2], [-4.0, 64.2], [-1.33, 70.5], [0, 80]], width: 7}
+    town-square: {center: {x: 0, z: 100}, edgeMaterial: gravel, falloff: 4, height: 0.55, kind: flatten, material: cobblepale, shape: {depth: 46, kind: rectangle, width: 46}}
+    town-clear: {center: {x: 0, z: 110}, kind: clear-scatter, shape: {depth: 70, kind: rectangle, width: 80}}
+    link-east: {clearScatter: true, edgeMaterial: gravel, falloff: 2, grade: false, kind: path, material: cobblepale, noise: 0.4, points: [[22, 104.25], [30, 104.25], [40, 103], [48, 97], [55, 89], [59, 86]], width: 4.5}
+    link-east-bed: {center: {x: 0, z: 0}, falloff: 4, height: 0.5, kind: flatten, shape: {kind: path, points: [[22, 104.25], [30, 104.25], [40, 103], [48, 97], [55, 89], [59, 86]], width: 6}}
+    link-east-clear: {center: {x: 0, z: 0}, kind: clear-scatter, shape: {kind: path, points: [[22, 104.25], [30, 104.25], [40, 103], [48, 97], [55, 89], [59, 86]], width: 10}}
+    link-west: {clearScatter: true, edgeMaterial: gravel, falloff: 2, grade: false, kind: path, material: cobblepale, noise: 0.4, points: [[-22, 105], [-30, 105], [-40, 103.5], [-48, 97], [-55, 89], [-59, 86]], width: 4.5}
+    link-west-bed: {center: {x: 0, z: 0}, falloff: 4, height: 0.5, kind: flatten, shape: {kind: path, points: [[-22, 105], [-30, 105], [-40, 103.5], [-48, 97], [-55, 89], [-59, 86]], width: 6}}
+    link-west-clear: {center: {x: 0, z: 0}, kind: clear-scatter, shape: {kind: path, points: [[-22, 105], [-30, 105], [-40, 103.5], [-48, 97], [-55, 89], [-59, 86]], width: 10}}
     link-arch-east: {clearScatter: true, edgeMaterial: gravel, falloff: 2, grade: false, kind: path, material: cobblepale, noise: 0.4, points: [[2.5, 24], [12, 25.5], [26, 29], [42, 34], [58, 40.5], [71, 47], [78, 51.5], [82, 55]], width: 4.5}
     link-arch-east-bed: {center: {x: 0, z: 0}, falloff: 4, height: 0.5, kind: flatten, shape: {kind: path, points: [[2.5, 24], [12, 25.5], [26, 29], [42, 34], [58, 40.5], [71, 47], [78, 51.5], [82, 55]], width: 6}}
     link-arch-east-clear: {center: {x: 0, z: 0}, kind: clear-scatter, shape: {kind: path, points: [[2.5, 24], [12, 25.5], [26, 29], [42, 34], [58, 40.5], [71, 47], [78, 51.5], [82, 55]], width: 10}}
     link-arch-west: {clearScatter: true, edgeMaterial: gravel, falloff: 2, grade: false, kind: path, material: cobblepale, noise: 0.4, points: [[-2.5, 24], [-12, 25.5], [-26, 29], [-42, 34], [-58, 40.5], [-71, 47], [-78, 51.5], [-82, 55]], width: 4.5}
     link-arch-west-bed: {center: {x: 0, z: 0}, falloff: 4, height: 0.5, kind: flatten, shape: {kind: path, points: [[-2.5, 24], [-12, 25.5], [-26, 29], [-42, 34], [-58, 40.5], [-71, 47], [-78, 51.5], [-82, 55]], width: 6}}
     link-arch-west-clear: {center: {x: 0, z: 0}, kind: clear-scatter, shape: {kind: path, points: [[-2.5, 24], [-12, 25.5], [-26, 29], [-42, 34], [-58, 40.5], [-71, 47], [-78, 51.5], [-82, 55]], width: 10}}
-    stormwindMoatSouth: {kind: sea, level: 0, reach: {shape: rectangle, width: 340, depth: 20, center: {x: 0, z: 90}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.8, caustics: 0.4, refraction: 0.3, shoreFoam: 0.15, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
-    stormwindMoatCross: {kind: sea, level: 0, reach: {shape: rectangle, width: 500, depth: 24, center: {x: 100, z: 390}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.8, caustics: 0.4, refraction: 0.3, shoreFoam: 0.15, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
-    stormwindMoatWest: {kind: sea, level: 0, reach: {shape: rectangle, width: 24, depth: 350, center: {x: -85, z: 350}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.8, caustics: 0.4, refraction: 0.3, shoreFoam: 0.15, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
-    stormwindMoatEast: {kind: sea, level: 0, reach: {shape: rectangle, width: 24, depth: 320, center: {x: 140, z: 350}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.8, caustics: 0.4, refraction: 0.3, shoreFoam: 0.15, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
-    stormwindMoatKeep: {kind: sea, level: 0, reach: {shape: rectangle, width: 45, depth: 250, center: {x: 420, z: 360}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.8, caustics: 0.4, refraction: 0.3, shoreFoam: 0.15, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
-    stormwindCanalBedSouth: {kind: flatten, center: {x: 0, z: 90}, height: -1.6, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 336, depth: 18}, material: pebbles, edgeMaterial: cobblepale}
-    stormwindCanalBedCross: {kind: flatten, center: {x: 100, z: 390}, height: -1.6, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 496, depth: 22}, material: pebbles, edgeMaterial: cobblepale}
-    stormwindCanalBedWest: {kind: flatten, center: {x: -85, z: 350}, height: -1.6, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 22, depth: 346}, material: pebbles, edgeMaterial: cobblepale}
-    stormwindCanalBedEast: {kind: flatten, center: {x: 140, z: 350}, height: -1.6, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 22, depth: 316}, material: pebbles, edgeMaterial: cobblepale}
-    stormwindCanalBedKeep: {kind: flatten, center: {x: 420, z: 360}, height: -1.6, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 42, depth: 246}, material: pebbles, edgeMaterial: cobblepale}
+    link-ring: {clearScatter: true, edgeMaterial: gravel, falloff: 2, grade: false, kind: path, material: cobblepale, noise: 0.4, points: [[82, 101], [80, 110], [72, 124], [58, 138], [40, 148], [20, 146.5], [0, 147], [-20, 146.5], [-40, 148], [-58, 138], [-72, 124], [-80, 110], [-82, 101]], width: 4.5}
+    link-ring-bed: {center: {x: 0, z: 0}, falloff: 4, height: 0.5, kind: flatten, shape: {kind: path, points: [[82, 101], [80, 110], [72, 124], [58, 138], [40, 148], [20, 146.5], [0, 147], [-20, 146.5], [-40, 148], [-58, 138], [-72, 124], [-80, 110], [-82, 101]], width: 6}}
+    link-ring-clear: {center: {x: 0, z: 0}, kind: clear-scatter, shape: {kind: path, points: [[82, 101], [80, 110], [72, 124], [58, 138], [40, 148], [20, 146.5], [0, 147], [-20, 146.5], [-40, 148], [-58, 138], [-72, 124], [-80, 110], [-82, 101]], width: 10}}
+    royalDistrict: {kind: flatten, center: {x: 0, z: 186}, height: 0.5, falloff: 4, shape: {kind: rectangle, width: 118, depth: 72}}
+    royalDistrictClear: {kind: clear-scatter, center: {x: 0, z: 186}, shape: {kind: rectangle, width: 120, depth: 76}}
+    royalMoat: {kind: flatten, center: {x: 0, z: 155.8}, height: -1.8, falloff: 0.6, falloffCurve: cliff, shape: {kind: rectangle, width: 124, depth: 9.2}}
+    royalMoatWater: {kind: sea, level: 0, reach: {shape: rectangle, width: 124, depth: 9.4, center: {x: 0, z: 155.8}}, liquid: {kind: water, color: oklch(0.55 0.08 175), clarity: 0.78, caustics: 0.35, refraction: 0.3, shoreFoam: 0.12, crestFoam: 0.02, turbulence: 0.06, waves: 0.05}}
+    royalAvenue: {kind: path, points: [[0, 144], [0, 150]], width: 11, grade: false, material: cobblepale, clearScatter: true, falloff: 1}
     garden-flat: {center: {x: 57, z: -26}, falloff: 3, height: 0.5, kind: flatten, material: yard, shape: {kind: path, points: [[43, -26], [71, -26]], width: 26}}
     garden-clear: {center: {x: 57, z: -26}, kind: clear-scatter, shape: {kind: path, points: [[41, -26], [73, -26]], width: 30}}
     villagePlateau: {kind: flatten, center: {x: 172, z: 90}, height: 20, falloff: 35, falloffCurve: linear, shape: {kind: circle, radius: 27}, material: lawn, edgeMaterial: lawn}
@@ -215,6 +224,7 @@ terrain:
     tarnClear: {center: {x: 82, z: 78}, kind: clear-scatter, shape: {kind: circle, radius: 25}}
     tarnShore: {clearScatter: true, edgeMaterial: pebbles, falloff: 1.2, grade: true, kind: path, material: gravel, noise: 0.3, points: [[95.79, 89.57], [92.32, 92.74], [88.16, 94.91], [83.57, 95.93], [78.87, 95.73], [74.39, 94.31], [70.43, 91.79], [67.26, 88.32], [65.09, 84.16], [64.07, 79.57], [64.27, 74.87], [65.69, 70.39], [68.21, 66.43], [71.68, 63.26], [75.84, 61.09], [80.43, 60.07], [85.13, 60.27], [89.61, 61.69], [92.32, 63.26]], width: 2.5}
     tarnLinkNorth: {clearScatter: true, edgeMaterial: pebbles, falloff: 1.2, grade: true, kind: path, material: gravel, noise: 0.3, points: [[82, 55], [82, 58], [82, 60]], width: 2.5}
+    tarnLinkSouth: {clearScatter: true, edgeMaterial: pebbles, falloff: 1.2, grade: true, kind: path, material: gravel, noise: 0.3, points: [[82, 101], [82, 98], [82, 96]], width: 2.5}
     tarnLinkWest: {clearScatter: true, edgeMaterial: pebbles, falloff: 1.2, grade: true, kind: path, material: gravel, noise: 0.3, points: [[59, 86], [62, 85.3], [65.09, 84.16]], width: 2.5}
     farm-east-bed-0: {center: {x: 0, z: 0}, falloff: 2.5, height: 0.5, kind: flatten, shape: {kind: path, points: [[45.61, 17.67], [68.26, 26.73]], width: 4.7}}
     farm-east-bed-1: {center: {x: 0, z: 0}, falloff: 2.5, height: 0.5, kind: flatten, shape: {kind: path, points: [[36.19, 17.67], [68.13, 30.44]], width: 4.7}}
@@ -235,10 +245,10 @@ terrain:
       lawn: [lawngrass, lawnflowers]
     layers:
       lawngrass:
-        density: 1.7
+        density: 2.5
         constraints: {heightRange: [0.3, 5]}
         items:
-          - {kind: scripted, script: scripts/gen/valley-meadow.js, params: {height: 0.07}, seed: 8, scale: [0.8, 1.15], randomRotation: true, maxDistance: 22, colorJitter: {hue: 0.01, value: 0.06}, wind: {force: 0.05, scale: 1.3, speed: 0.7}}
+          - {kind: scripted, script: scripts/gen/valley-meadow.js, params: {height: 0.07}, seed: 8, scale: [0.8, 1.15], randomRotation: true, maxDistance: 28, colorJitter: {hue: 0.01, value: 0.06}, wind: {force: 0.05, scale: 1.3, speed: 0.7}}
       lawnflowers:
         density: 0.07
         constraints: {heightRange: [0.3, 5], slopeRange: [0, 0.35]}
@@ -278,18 +288,18 @@ terrain:
           - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: shrub, height: 1.3}, seed: 21, weight: 0.6, scale: [0.7, 1.5], randomRotation: true, maxDistance: 90, colorJitter: {hue: 0.02, value: 0.1}, wind: {force: 0.3, scale: 1, speed: 0.8}}
           - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: shrub, height: 1.1, berry: true}, seed: 22, weight: 0.4, scale: [0.7, 1.3], randomRotation: true, maxDistance: 90, colorJitter: {hue: 0.015, value: 0.08}, wind: {force: 0.3, scale: 1, speed: 0.8}}
       ferns:
-        density: 0.15
+        density: 0.2
         constraints: {heightRange: [0.25, 5]}
         items:
           - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: fern, size: 0.9}, seed: 31, weight: 0.6, scale: [0.6, 1.4], randomRotation: true, maxDistance: 45, colorJitter: {hue: 0.02, value: 0.12}, wind: {force: 0.35, scale: 1, speed: 1}}
           - {kind: scripted, script: scripts/gen/forest-plant.js, params: {kind: fern, size: 0.6}, seed: 32, weight: 0.4, scale: [0.7, 1.3], randomRotation: true, maxDistance: 45, colorJitter: {hue: 0.02, value: 0.12}, wind: {force: 0.35, scale: 1, speed: 1}}
       ground:
-        density: 2
+        density: 3
         constraints: {heightRange: [0.3, 5]}
         items:
-          - {kind: scripted, script: scripts/gen/valley-meadow.js, params: {height: 0.22}, seed: 7, scale: [0.8, 1.2], randomRotation: true, maxDistance: 26, colorJitter: {hue: 0.012, value: 0.08}, wind: {force: 0.08, scale: 1.3, speed: 0.7}}
+          - {kind: scripted, script: scripts/gen/valley-meadow.js, params: {height: 0.22}, seed: 7, scale: [0.8, 1.2], randomRotation: true, maxDistance: 32, colorJitter: {hue: 0.012, value: 0.08}, wind: {force: 0.08, scale: 1.3, speed: 0.7}}
       wildflowers:
-        density: 0.6
+        density: 0.9
         constraints: {heightRange: [0.25, 5], slopeRange: [0, 0.35]}
         noise: {scale: 0.07, threshold: 0.55, seed: 19}
         items:
