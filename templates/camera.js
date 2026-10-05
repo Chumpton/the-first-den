@@ -3,7 +3,7 @@
 export const camera = {
   behavior: ["scripts/camera.js"],
   kind: "custom",
-  orientation: { source: "script" },
+  orientation: { source: "look" },
   pointerLock: "drag",
   fov: 72,
   clip: { near: 0.06, far: 9000 },

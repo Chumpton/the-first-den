@@ -64,6 +64,10 @@ function wowBoom(ctx, target, dt, mounted) {
   s.actual = a
   const first = a < C.firstAt
   ctx.self.hideLocalPlayer = first
+  // the engine presents this orbit around the body's DRAWN pose every frame (no tick-rate stutter, no lag behind the body);
+  // the rig only declares it: yaw/pitch written are shown exactly, the arm is ours (in at once, out on the spring)
+  s.heightOffset = first ? C.eyeHeight * k : C.anchor * k; s.lookOffsetY = s.heightOffset; s.lateralOffset = 0
+  s.desiredDist = first ? 0 : want; s.collisionDist = first ? 0 : a
   const eye = first ? { x: pos.x, y: pos.y + C.eyeHeight * k, z: pos.z } : { x: anchor.x + back.x * a, y: anchor.y + back.y * a, z: anchor.z + back.z * a }
   ctx.self.feetPosition = eye
   ctx.self.rotation = { yaw: yaw * RAD_TO_DEG, pitch: pitch * RAD_TO_DEG }
@@ -90,6 +94,7 @@ function dragonChase(ctx, target, dt) {
   s.yaw = yaw; s.pitch = pitch
   const pos = target.worldFeetPosition ?? target.feetPosition, seat = rotate(r, PD.seat)
   const aim = { x: pos.x + seat.x, y: pos.y + seat.y + C.aimUp, z: pos.z + seat.z }, cp = Math.cos(pitch)
+  s.heightOffset = seat.y + C.aimUp; s.lookOffsetY = s.heightOffset; s.lateralOffset = 0; s.desiredDist = C.dist; s.collisionDist = C.dist
   ctx.self.feetPosition = { x: aim.x + Math.sin(yaw) * cp * C.dist, y: aim.y - Math.sin(pitch) * C.dist, z: aim.z + Math.cos(yaw) * cp * C.dist }
   ctx.self.rotation = { yaw: yaw * RAD_TO_DEG, pitch: pitch * RAD_TO_DEG }
   ctx.self.hideLocalPlayer = false
