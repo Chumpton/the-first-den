@@ -201,6 +201,7 @@ function chainNext(ctx, from, hit, hop) {
 function slamDown(ctx, b) {
   const me = ctx.self, p = me.feetPosition, at = { x: p.x, y: p.y, z: p.z }, mv = b.move; b.move = null;
   me.velocity = { x: 0, y: 0, z: 0 };
+  ctx.log('slam-down', { at, n: ctx.query({ tags: ['wild-wolf'], center: at, radius: 6 }).length });
   aoe(ctx, { sp: mv.sp, at, from: at });
   emitFx(ctx, at, 'earth'); emitFx(ctx, { x: at.x, y: at.y + 0.3, z: at.z }, 'fire');
   ctx.emit('fx', { position: at, script: `fx\npop dust burst=70 on=disc(1) life=.8..1.4 v=radial(10..14)+up(.6) size=.5..1 acc=drag(2.2) col=<.5,.43,.34> a=0>.55:.2>.5:.2>0 sz=$size*(.6>2) r=sprite(smoke-puff,alpha)\npop rock burst=34 on=disc(5) life=.6..1 v=up(4..7)+sdir()*1.5 size=.1..0.22 acc=grav() col=<.42,.38,.33> a=1 floor=die r=sprite(chip,alpha)\npop flash n=1 life=.3 r=light(<1,.6,.3>,40*(1>0),14)` });
