@@ -1,0 +1,4 @@
+{"contentHash":"299:75636fd4","duration":2.5,"fps":30,"identity":"anim/bear.yml#alert","tracks":[
+{"bone":"neck","prop":"rotation","times":[0,1.25,2.5],"values":[0.10453,0,0,0.99452,0.13917,0,0,0.99027,0.10453,0,0,0.99452]},
+{"bone":"head","prop":"rotation","times":[0,1.25,2.5],"values":[0.06976,0,0,0.99756,0.1217,0.05195,0.00638,0.99119,0.06976,0,0,0.99756]}
+]}
