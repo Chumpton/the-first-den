@@ -76,11 +76,14 @@ export function onInput(ctx, input) {
 export function update(ctx, dt) {
   const me = ctx.self, w = W(ctx), s = me.state;
   if (isRobot(me)) {
+    // the fox never rides: clear any old gryphon once, then rest (the body's row moves every tick and would wake us)
+    if (w.foxClean) { ctx.sleep(60); return; }
+    w.foxClean = true;
     if (w.id && ctx.getObject(w.id)) { ctx.destroy(w.id); w.id = null; }
     const row = ctx.query({ tags: ['wynx'], radius: 5000 }).find((r) => r.state?.owner === me.id);
     if (row && ctx.getObject(row.id)) ctx.destroy(row.id);
-    s.riding = null;
-    ctx.sleep();
+    if (s.riding) s.riding = null;
+    ctx.sleep(60);
     return;
   }
   const riding = s.riding === 'gryphon';
